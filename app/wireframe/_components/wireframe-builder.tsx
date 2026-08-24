@@ -72,6 +72,32 @@ interface CanvasItem {
   slug: string
 }
 
+/** beforeUid 앞에 삽입 — 대상이 없으면 맨 뒤에 붙인다. */
+function insertItem(list: CanvasItem[], item: CanvasItem, beforeUid?: string): CanvasItem[] {
+  const index = beforeUid ? list.findIndex((i) => i.uid === beforeUid) : -1
+  if (index < 0) return [...list, item]
+  return [...list.slice(0, index), item, ...list.slice(index)]
+}
+
+function removeByUid(list: CanvasItem[], uid: string): CanvasItem[] {
+  return list.filter((i) => i.uid !== uid)
+}
+
+function moveByUid(list: CanvasItem[], fromUid: string, toUid: string): CanvasItem[] {
+  const from = list.findIndex((i) => i.uid === fromUid)
+  const to = list.findIndex((i) => i.uid === toUid)
+  if (from < 0 || to < 0) return list
+  return arrayMove(list, from, to)
+}
+
+/** 드래그 오버레이에 띄울 이름 — 팔레트 항목이면 slug, 캔버스 항목이면 uid 로 되짚는다. */
+function dragTitle(id: string, items: CanvasItem[]): string {
+  const slug = id.startsWith("palette:")
+    ? id.slice("palette:".length)
+    : (items.find((i) => i.uid === id)?.slug ?? "")
+  return PALETTE_BY_SLUG.get(slug)?.title ?? id
+}
+
 function PaletteItem({ entry, onAdd }: Readonly<{ entry: ComponentEntry; onAdd: (slug: string) => void }>) {
   const { attributes, listeners, setNodeRef, isDragging } = useDraggable({ id: `palette:${entry.slug}` })
 
@@ -190,19 +216,16 @@ export function WireframeBuilder() {
 
   function addItem(slug: string, beforeUid?: string) {
     const uid = `wf-${++uidRef.current}`
-    setItems((prev) => {
-      const index = beforeUid ? prev.findIndex((i) => i.uid === beforeUid) : -1
-      if (index < 0) return [...prev, { uid, slug }]
-      return [...prev.slice(0, index), { uid, slug }, ...prev.slice(index)]
-    })
+    setItems((prev) => insertItem(prev, { uid, slug }, beforeUid))
+  }
+
+  function removeItem(uid: string) {
+    setItems((prev) => removeByUid(prev, uid))
   }
 
   function handleDragStart(e: DragStartEvent) {
     const id = String(e.active.id)
-    const title = id.startsWith("palette:")
-      ? (PALETTE_BY_SLUG.get(id.slice("palette:".length))?.title ?? id)
-      : (PALETTE_BY_SLUG.get(items.find((i) => i.uid === id)?.slug ?? "")?.title ?? id)
-    setActiveDrag({ id, title })
+    setActiveDrag({ id, title: dragTitle(id, items) })
   }
 
   function handleDragEnd(e: DragEndEvent) {
@@ -217,12 +240,7 @@ export function WireframeBuilder() {
       return
     }
     if (activeId !== overId) {
-      setItems((prev) => {
-        const from = prev.findIndex((i) => i.uid === activeId)
-        const to = prev.findIndex((i) => i.uid === overId)
-        if (from < 0 || to < 0) return prev
-        return arrayMove(prev, from, to)
-      })
+      setItems((prev) => moveByUid(prev, activeId, overId))
     }
   }
 
@@ -297,9 +315,8 @@ export function WireframeBuilder() {
           </div>
 
           <div className="overflow-x-auto rounded-lg border border-border bg-muted/20 p-4 sm:p-6">
-            <div
+            <section
               ref={setCanvasRef}
-              role="region"
               aria-label={t("page.wireframe.canvas.aria", "와이어프레임 캔버스")}
               data-testid="wireframe-canvas"
               style={device.width ? { width: device.width } : undefined}
@@ -320,12 +337,12 @@ export function WireframeBuilder() {
                       item={item}
                       title={PALETTE_BY_SLUG.get(item.slug)?.title ?? item.slug}
                       mod={mods[item.slug]}
-                      onRemove={() => setItems((prev) => prev.filter((i) => i.uid !== item.uid))}
+                      onRemove={() => removeItem(item.uid)}
                     />
                   ))
                 )}
               </SortableContext>
-            </div>
+            </section>
           </div>
 
           {items.length > 0 && (

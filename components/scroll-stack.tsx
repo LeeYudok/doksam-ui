@@ -81,6 +81,91 @@ function progressBetween(scrollTop: number, start: number, end: number): number 
   return (scrollTop - start) / (end - start)
 }
 
+/** 현재 스택 최상단에 올라온 카드의 인덱스. 블러 깊이 계산용. */
+function findTopCardIndex(
+  offsets: readonly number[],
+  scrollTop: number,
+  stackPositionPx: number,
+  itemStackDistance: number,
+): number {
+  let topCardIndex = 0
+  for (const [j, offset] of offsets.entries()) {
+    if (scrollTop >= offset - stackPositionPx - itemStackDistance * j) topCardIndex = j
+  }
+  return topCardIndex
+}
+
+function computeTranslateY(
+  scrollTop: number,
+  pinStart: number,
+  pinEnd: number,
+  cardTop: number,
+  stackOffset: number,
+): number {
+  if (scrollTop >= pinStart && scrollTop <= pinEnd) return scrollTop - cardTop + stackOffset
+  if (scrollTop > pinEnd) return pinEnd - cardTop + stackOffset
+  return 0
+}
+
+interface CardTransformInput {
+  index: number
+  cardTop: number
+  scrollTop: number
+  pinEnd: number
+  stackPositionPx: number
+  scaleEndPositionPx: number
+  topCardIndex: number
+  itemStackDistance: number
+  itemScale: number
+  baseScale: number
+  rotationAmount: number
+  blurAmount: number
+}
+
+function computeCardTransform(input: CardTransformInput): CardTransform {
+  const {
+    index,
+    cardTop,
+    scrollTop,
+    pinEnd,
+    stackPositionPx,
+    scaleEndPositionPx,
+    topCardIndex,
+    itemStackDistance,
+    itemScale,
+    baseScale,
+    rotationAmount,
+    blurAmount,
+  } = input
+  const stackOffset = stackPositionPx + itemStackDistance * index
+  const pinStart = cardTop - stackOffset
+  const scaleProgress = progressBetween(scrollTop, pinStart, cardTop - scaleEndPositionPx)
+  const targetScale = baseScale + index * itemScale
+  const translateY = computeTranslateY(scrollTop, pinStart, pinEnd, cardTop, stackOffset)
+
+  return {
+    translateY: Math.round(translateY * 100) / 100,
+    scale: Math.round((1 - scaleProgress * (1 - targetScale)) * 1000) / 1000,
+    rotation: rotationAmount ? Math.round(index * rotationAmount * scaleProgress * 100) / 100 : 0,
+    blur: blurAmount && index < topCardIndex ? (topCardIndex - index) * blurAmount : 0,
+  }
+}
+
+function hasTransformChanged(prev: CardTransform | undefined, next: CardTransform): boolean {
+  return (
+    !prev ||
+    Math.abs(prev.translateY - next.translateY) > 0.1 ||
+    Math.abs(prev.scale - next.scale) > 0.001 ||
+    Math.abs(prev.rotation - next.rotation) > 0.1 ||
+    Math.abs(prev.blur - next.blur) > 0.1
+  )
+}
+
+function applyTransform(card: HTMLElement, transform: CardTransform): void {
+  card.style.transform = `translate3d(0, ${transform.translateY}px, 0) scale(${transform.scale}) rotate(${transform.rotation}deg)`
+  card.style.filter = transform.blur > 0 ? `blur(${transform.blur}px)` : ""
+}
+
 export function ScrollStack({
   children,
   className,
@@ -127,6 +212,12 @@ export function ScrollStack({
     const getOffset = (el: HTMLElement) =>
       useWindowScroll ? el.getBoundingClientRect().top + window.scrollY : el.offsetTop
 
+    const syncStackCompletion = (inStack: boolean) => {
+      if (inStack === stackCompletedRef.current) return
+      stackCompletedRef.current = inStack
+      if (inStack) onStackCompleteRef.current?.()
+    }
+
     const update = () => {
       frameRef.current = null
       if (cards.length === 0) return
@@ -136,62 +227,39 @@ export function ScrollStack({
       const scaleEndPositionPx = parsePosition(scaleEndPosition, containerHeight)
       const endElement = root.querySelector<HTMLElement>(END_SELECTOR)
       const endTop = endElement ? getOffset(endElement) : 0
+      const pinEnd = endTop - containerHeight / 2
+      const offsets = cards.map((card) => getOffset(card))
 
       // 블러는 "현재 최상단으로 쌓인 카드" 대비 깊이로 계산한다.
-      let topCardIndex = 0
-      if (blurAmount) {
-        for (const [j, other] of cards.entries()) {
-          if (scrollTop >= getOffset(other) - stackPositionPx - itemStackDistance * j) {
-            topCardIndex = j
-          }
-        }
-      }
+      const topCardIndex = blurAmount
+        ? findTopCardIndex(offsets, scrollTop, stackPositionPx, itemStackDistance)
+        : 0
 
       for (const [i, card] of cards.entries()) {
-        const cardTop = getOffset(card)
-        const pinStart = cardTop - stackPositionPx - itemStackDistance * i
-        const pinEnd = endTop - containerHeight / 2
-        const scaleProgress = progressBetween(scrollTop, pinStart, cardTop - scaleEndPositionPx)
-        const targetScale = baseScale + i * itemScale
+        const next = computeCardTransform({
+          index: i,
+          cardTop: offsets[i],
+          scrollTop,
+          pinEnd,
+          stackPositionPx,
+          scaleEndPositionPx,
+          topCardIndex,
+          itemStackDistance,
+          itemScale,
+          baseScale,
+          rotationAmount,
+          blurAmount,
+        })
 
-        let translateY = 0
-        if (scrollTop >= pinStart && scrollTop <= pinEnd) {
-          translateY = scrollTop - cardTop + stackPositionPx + itemStackDistance * i
-        } else if (scrollTop > pinEnd) {
-          translateY = pinEnd - cardTop + stackPositionPx + itemStackDistance * i
-        }
-
-        const next: CardTransform = {
-          translateY: Math.round(translateY * 100) / 100,
-          scale: Math.round((1 - scaleProgress * (1 - targetScale)) * 1000) / 1000,
-          rotation: rotationAmount ? Math.round(i * rotationAmount * scaleProgress * 100) / 100 : 0,
-          blur: blurAmount && i < topCardIndex ? (topCardIndex - i) * blurAmount : 0,
-        }
-
-        const prev = transforms.get(i)
-        const changed =
-          !prev ||
-          Math.abs(prev.translateY - next.translateY) > 0.1 ||
-          Math.abs(prev.scale - next.scale) > 0.001 ||
-          Math.abs(prev.rotation - next.rotation) > 0.1 ||
-          Math.abs(prev.blur - next.blur) > 0.1
-
-        if (changed) {
-          card.style.transform = `translate3d(0, ${next.translateY}px, 0) scale(${next.scale}) rotate(${next.rotation}deg)`
-          card.style.filter = next.blur > 0 ? `blur(${next.blur}px)` : ""
+        if (hasTransformChanged(transforms.get(i), next)) {
+          applyTransform(card, next)
           transforms.set(i, next)
         }
-
-        if (i === cards.length - 1) {
-          const inStack = scrollTop >= pinStart && scrollTop <= pinEnd
-          if (inStack && !stackCompletedRef.current) {
-            stackCompletedRef.current = true
-            onStackCompleteRef.current?.()
-          } else if (!inStack && stackCompletedRef.current) {
-            stackCompletedRef.current = false
-          }
-        }
       }
+
+      const lastIndex = cards.length - 1
+      const lastPinStart = offsets[lastIndex] - stackPositionPx - itemStackDistance * lastIndex
+      syncStackCompletion(scrollTop >= lastPinStart && scrollTop <= pinEnd)
     }
 
     const requestUpdate = () => {

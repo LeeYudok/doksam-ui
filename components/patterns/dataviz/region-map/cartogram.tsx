@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, type MouseEvent } from "react";
+import { useRef, useState, type ComponentProps, type MouseEvent } from "react";
 
 import {
   RegionHoverTip,
@@ -158,6 +158,97 @@ interface CartogramTileProps {
   onMove: (e: MouseEvent) => void;
 }
 
+interface TileGeometry {
+  side: number;
+  cx: number;
+  cy: number;
+  largeLabel: boolean;
+  labelFill: string;
+}
+
+/** GRID 좌표와 값 비율에서 타일 한 장의 배치·크기·라벨 표기를 계산한다. */
+function tileGeometry(count: number, maxCount: number, col: number, row: number): TileGeometry {
+  const ratio = maxCount > 0 ? count / maxCount : 0;
+  const side = MIN_SIDE + (MAX_SIDE - MIN_SIDE) * Math.sqrt(ratio);
+  // 진한 타일 내부 라벨은 배경색 글자로 대비 확보(√ 보간 55% 이상 = 진한 편).
+  const darkFill = Math.pow(ratio, 0.45) > 0.5;
+  return {
+    side,
+    cx: PAD + col * CELL + CELL / 2,
+    cy: PAD + row * CELL + CELL / 2,
+    largeLabel: side >= LABEL_LARGE_SIDE,
+    labelFill: darkFill ? "var(--background)" : "var(--foreground)",
+  };
+}
+
+type TileInteraction = Pick<
+  ComponentProps<"g">,
+  "role" | "tabIndex" | "aria-pressed" | "onClick" | "onKeyDown"
+>;
+
+/** 클릭 핸들러가 있을 때만 버튼 시맨틱(role/tabIndex/Enter·Space)을 부여한다. */
+function tileInteraction(
+  region: string,
+  selected: boolean,
+  onRegionClick?: (region: string) => void,
+): TileInteraction {
+  if (!onRegionClick) return {};
+  return {
+    role: "button",
+    tabIndex: 0,
+    "aria-pressed": selected,
+    onClick: () => onRegionClick(region),
+    onKeyDown: (e) => {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      e.preventDefault();
+      onRegionClick(region);
+    },
+  };
+}
+
+function tileAriaLabel(region: RegionDatum, unit: string, selected: boolean): string {
+  return `${region.region} ${region.count.toLocaleString()}${unit}${selected ? " (선택됨)" : ""}`;
+}
+
+function TileLabels({
+  region,
+  total,
+  cx,
+  cy,
+  largeLabel,
+  labelFill,
+}: Readonly<{
+  region: RegionDatum;
+  total: number;
+  cx: number;
+  cy: number;
+  largeLabel: boolean;
+  labelFill: string;
+}>) {
+  return (
+    <>
+      <text
+        x={cx}
+        y={largeLabel ? cy - 3 : cy - 2}
+        textAnchor="middle"
+        className={`pointer-events-none font-semibold ${largeLabel ? "text-[15px]" : "text-[12px]"}`}
+        style={{ fill: labelFill }}
+      >
+        {SHORT_NAME[region.region] ?? region.region}
+      </text>
+      <text
+        x={cx}
+        y={largeLabel ? cy + 14 : cy + 11}
+        textAnchor="middle"
+        className={`pointer-events-none opacity-80 ${largeLabel ? "text-[12px]" : "text-[10px]"}`}
+        style={{ fill: labelFill }}
+      >
+        {regionShare(region.count, total)}%
+      </text>
+    </>
+  );
+}
+
 function CartogramTile({
   region,
   maxCount,
@@ -171,14 +262,7 @@ function CartogramTile({
   onMove,
 }: CartogramTileProps) {
   const [col, row] = GRID[region.region];
-  const ratio = maxCount > 0 ? region.count / maxCount : 0;
-  const side = MIN_SIDE + (MAX_SIDE - MIN_SIDE) * Math.sqrt(ratio);
-  const cx = PAD + col * CELL + CELL / 2;
-  const cy = PAD + row * CELL + CELL / 2;
-  const largeLabel = side >= LABEL_LARGE_SIDE;
-  // 진한 타일 내부 라벨은 배경색 글자로 대비 확보(√ 보간 55% 이상 = 진한 편).
-  const darkFill = Math.pow(ratio, 0.45) > 0.5;
-  const labelFill = darkFill ? "var(--background)" : "var(--foreground)";
+  const { side, cx, cy, largeLabel, labelFill } = tileGeometry(region.count, maxCount, col, row);
 
   return (
     <g
@@ -189,21 +273,8 @@ function CartogramTile({
         filter: hoverFilter(hovered, dimmed),
         transition: "filter 150ms",
       }}
-      role={onRegionClick ? "button" : undefined}
-      tabIndex={onRegionClick ? 0 : undefined}
-      aria-label={`${region.region} ${region.count.toLocaleString()}${unit}${selected ? " (선택됨)" : ""}`}
-      aria-pressed={onRegionClick ? selected : undefined}
-      onClick={onRegionClick ? () => onRegionClick(region.region) : undefined}
-      onKeyDown={
-        onRegionClick
-          ? (e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                onRegionClick(region.region);
-              }
-            }
-          : undefined
-      }
+      aria-label={tileAriaLabel(region, unit, selected)}
+      {...tileInteraction(region.region, selected, onRegionClick)}
       onMouseEnter={() => onHover(region.region)}
       onMouseLeave={() => onHover(null)}
       onMouseMove={onMove}
@@ -236,24 +307,14 @@ function CartogramTile({
           strokeWidth={selected ? 2 : 1}
           style={{ fill: regionFillColor(region.count, maxCount) }}
         />
-        <text
-          x={cx}
-          y={largeLabel ? cy - 3 : cy - 2}
-          textAnchor="middle"
-          className={`pointer-events-none font-semibold ${largeLabel ? "text-[15px]" : "text-[12px]"}`}
-          style={{ fill: labelFill }}
-        >
-          {SHORT_NAME[region.region] ?? region.region}
-        </text>
-        <text
-          x={cx}
-          y={largeLabel ? cy + 14 : cy + 11}
-          textAnchor="middle"
-          className={`pointer-events-none opacity-80 ${largeLabel ? "text-[12px]" : "text-[10px]"}`}
-          style={{ fill: labelFill }}
-        >
-          {regionShare(region.count, total)}%
-        </text>
+        <TileLabels
+          region={region}
+          total={total}
+          cx={cx}
+          cy={cy}
+          largeLabel={largeLabel}
+          labelFill={labelFill}
+        />
       </g>
     </g>
   );

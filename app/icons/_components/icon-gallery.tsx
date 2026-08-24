@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import type { Dispatch, SetStateAction } from "react";
 import type { IconWeight } from "@phosphor-icons/react";
 import { MagnifyingGlassIcon } from "@phosphor-icons/react/dist/ssr";
 
@@ -14,6 +15,20 @@ import { cn } from "@/lib/utils";
 const WEIGHTS: IconWeight[] = ["thin", "light", "regular", "bold", "fill", "duotone"];
 const SIZES = [16, 20, 24, 28] as const;
 const COPY_RESET_MS = 1600;
+
+/** 복사 표시 해제 — 그 사이 다른 아이콘을 복사했다면 그대로 둔다. */
+function clearCopied(name: string) {
+  return (current: string | null) => (current === name ? null : current);
+}
+
+function copyIconImport(name: string, setCopiedName: Dispatch<SetStateAction<string | null>>) {
+  void navigator.clipboard
+    .writeText(`import { ${name} } from "@phosphor-icons/react/dist/ssr"`)
+    .then(() => {
+      setCopiedName(name);
+      globalThis.setTimeout(() => setCopiedName(clearCopied(name)), COPY_RESET_MS);
+    });
+}
 
 /**
  * 아이콘 검색 갤러리 + 플레이그라운드(#66) — lib/icons/catalog.ts 큐레이션
@@ -29,14 +44,7 @@ export function IconGallery() {
 
   const results = searchIcons(query, category);
 
-  const handleCopy = (name: string) => {
-    void navigator.clipboard
-      .writeText(`import { ${name} } from "@phosphor-icons/react/dist/ssr"`)
-      .then(() => {
-        setCopiedName(name);
-        globalThis.setTimeout(() => setCopiedName((current) => (current === name ? null : current)), COPY_RESET_MS);
-      });
-  };
+  const handleCopy = (name: string) => copyIconImport(name, setCopiedName);
 
   return (
     <div className="flex flex-col gap-4">

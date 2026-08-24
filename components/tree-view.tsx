@@ -49,6 +49,54 @@ function flattenVisible(
   return result
 }
 
+/** 키보드 입력이 만들어내는 트리 조작. 순수 계산과 상태 반영을 분리한다. */
+type TreeKeyAction =
+  | { type: "focus"; id: string }
+  | { type: "expand"; id: string; expand: boolean }
+  | { type: "select"; id: string; toggleExpand: boolean }
+
+const HANDLED_KEYS = new Set(["ArrowDown", "ArrowUp", "ArrowRight", "ArrowLeft", "Home", "End", "Enter", " "])
+
+function focusAction(item: FlatItem | undefined): TreeKeyAction | null {
+  return item ? { type: "focus", id: item.node.id } : null
+}
+
+function arrowRightAction(item: FlatItem, next: FlatItem | undefined, expanded: boolean): TreeKeyAction | null {
+  if (!item.hasChildren) return null
+  if (!expanded) return { type: "expand", id: item.node.id, expand: true }
+  return focusAction(next)
+}
+
+function arrowLeftAction(item: FlatItem, expanded: boolean): TreeKeyAction | null {
+  if (item.hasChildren && expanded) return { type: "expand", id: item.node.id, expand: false }
+  return item.parentId ? { type: "focus", id: item.parentId } : null
+}
+
+function resolveTreeKeyAction(
+  key: string,
+  item: FlatItem,
+  flat: FlatItem[],
+  index: number,
+  expanded: boolean
+): TreeKeyAction | null {
+  switch (key) {
+    case "ArrowDown":
+      return focusAction(flat[index + 1])
+    case "ArrowUp":
+      return focusAction(flat[index - 1])
+    case "ArrowRight":
+      return arrowRightAction(item, flat[index + 1], expanded)
+    case "ArrowLeft":
+      return arrowLeftAction(item, expanded)
+    case "Home":
+      return focusAction(flat[0])
+    case "End":
+      return focusAction(flat[flat.length - 1])
+    default:
+      return { type: "select", id: item.node.id, toggleExpand: item.hasChildren }
+  }
+}
+
 /**
  * 범용 접이식 트리 뷰 — json-tree(JSON 전용)와 별개로, 파일탐색기 형태의
  * 임의 노드 트리(id/label/icon?/children?)를 다룬다(#36). 표시되는 노드만
@@ -110,65 +158,27 @@ export function TreeView({
     })
   }
 
-  function handleKeyDown(event: React.KeyboardEvent<HTMLDivElement>, item: FlatItem) {
-    const index = flat.findIndex((flatItem) => flatItem.node.id === item.node.id)
-
-    switch (event.key) {
-      case "ArrowDown": {
-        event.preventDefault()
-        const next = flat[index + 1]
-        if (next) setFocusedId(next.node.id)
-        break
-      }
-      case "ArrowUp": {
-        event.preventDefault()
-        const prev = flat[index - 1]
-        if (prev) setFocusedId(prev.node.id)
-        break
-      }
-      case "ArrowRight": {
-        event.preventDefault()
-        if (!item.hasChildren) break
-        if (!expandedIds.has(item.node.id)) {
-          setExpanded(item.node.id, true)
-        } else {
-          const next = flat[index + 1]
-          if (next) setFocusedId(next.node.id)
-        }
-        break
-      }
-      case "ArrowLeft": {
-        event.preventDefault()
-        if (item.hasChildren && expandedIds.has(item.node.id)) {
-          setExpanded(item.node.id, false)
-        } else if (item.parentId) {
-          setFocusedId(item.parentId)
-        }
-        break
-      }
-      case "Home": {
-        event.preventDefault()
-        if (flat[0]) setFocusedId(flat[0].node.id)
-        break
-      }
-      case "End": {
-        event.preventDefault()
-        const last = flat[flat.length - 1]
-        if (last) setFocusedId(last.node.id)
-        break
-      }
-      case "Enter":
-      case " ": {
-        event.preventDefault()
-        selectNode(item.node.id)
-        if (item.hasChildren) {
-          setExpanded(item.node.id, !expandedIds.has(item.node.id))
-        }
-        break
-      }
-      default:
-        break
+  function applyKeyAction(action: TreeKeyAction | null, expanded: boolean) {
+    if (!action) return
+    if (action.type === "focus") {
+      setFocusedId(action.id)
+      return
     }
+    if (action.type === "expand") {
+      setExpanded(action.id, action.expand)
+      return
+    }
+    selectNode(action.id)
+    if (action.toggleExpand) setExpanded(action.id, !expanded)
+  }
+
+  function handleKeyDown(event: React.KeyboardEvent<HTMLDivElement>, item: FlatItem) {
+    if (!HANDLED_KEYS.has(event.key)) return
+    event.preventDefault()
+
+    const index = flat.findIndex((flatItem) => flatItem.node.id === item.node.id)
+    const expanded = expandedIds.has(item.node.id)
+    applyKeyAction(resolveTreeKeyAction(event.key, item, flat, index, expanded), expanded)
   }
 
   return (
