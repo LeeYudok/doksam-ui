@@ -36,6 +36,120 @@ const PAD_TOP = 14
 const PAD_BOTTOM = 4
 const W = 300
 
+/** 볼린저밴드 3선 (기간 미달 구간은 Number.NaN). */
+interface BollingerBands {
+  upper: number[]
+  middle: number[]
+  lower: number[]
+}
+
+const EMPTY_BANDS: BollingerBands = { upper: [], middle: [], lower: [] }
+
+/** SMA ± 2σ 볼린저밴드를 계산한다 — 기간 미달 구간은 Number.NaN 으로 채운다. */
+function computeBollinger(prices: number[], period: number): BollingerBands {
+  const upper: number[] = []
+  const middle: number[] = []
+  const lower: number[] = []
+  for (let i = 0; i < prices.length; i++) {
+    if (i < period - 1) {
+      upper.push(Number.NaN)
+      middle.push(Number.NaN)
+      lower.push(Number.NaN)
+      continue
+    }
+    const window = prices.slice(i - period + 1, i + 1)
+    const sma = window.reduce((s, v) => s + v, 0) / period
+    const variance = window.reduce((s, v) => s + (v - sma) ** 2, 0) / period
+    const stddev = Math.sqrt(variance)
+    middle.push(sma)
+    upper.push(sma + 2 * stddev)
+    lower.push(sma - 2 * stddev)
+  }
+  return { upper, middle, lower }
+}
+
+/** 가격·수평선·밴드를 모두 포함하는 Y축 범위(8% 패딩)를 구한다. */
+function computeYBounds(prices: number[], thresholds: (number | undefined)[], bandValues: number[]) {
+  const allValues = [...prices]
+  for (const v of thresholds) if (v && v > 0) allValues.push(v)
+  for (const v of bandValues) if (!Number.isNaN(v)) allValues.push(v)
+
+  const minVal = Math.min(...allValues)
+  const maxVal = Math.max(...allValues)
+  const range = maxVal - minVal || 1
+  const pad = range * 0.08
+  return { yMin: minVal - pad, yMax: maxVal + pad }
+}
+
+interface ThresholdLine {
+  price: number
+  color: string
+  label: string
+  dash: string
+  opacity: number
+}
+
+/** 목표매수·익절·손절 수평선 스타일 — thresholds 배열과 같은 순서. */
+const THRESHOLD_STYLES: { color: string; name: string; dash: string; opacity: number }[] = [
+  { color: "var(--success)", name: "매수", dash: "4,3", opacity: 0.6 },
+  { color: "var(--gain)", name: "익절", dash: "4,3", opacity: 0.6 },
+  { color: "var(--loss)", name: "손절", dash: "2,2", opacity: 0.4 },
+]
+
+/** 0 초과인 임계가만 수평선 스펙으로 변환한다. */
+function buildThresholdLines(thresholds: (number | undefined)[]): ThresholdLine[] {
+  const lines: ThresholdLine[] = []
+  thresholds.forEach((price, i) => {
+    if (!price || price <= 0) return
+    const style = THRESHOLD_STYLES[i]
+    lines.push({
+      price,
+      color: style.color,
+      label: `${style.name} ${price.toLocaleString()}`,
+      dash: style.dash,
+      opacity: style.opacity,
+    })
+  })
+  return lines
+}
+
+/** 이벤트 마커(수직선) 좌표·색을 만든다 — 손절은 loss, 익절은 gain. */
+function buildMarker(eventMarker: EventMarker | undefined, count: number, toX: (i: number) => number) {
+  if (!eventMarker) return null
+  return {
+    x: toX(Math.min(eventMarker.index, count - 1)),
+    label: eventMarker.label,
+    color: eventMarker.type === "stop" ? "var(--loss)" : "var(--gain)",
+  }
+}
+
+/** 볼린저밴드 폴리곤(상단→하단 역순)과 중심선 경로를 만든다. */
+function buildBollingerPaths(
+  bands: BollingerBands,
+  count: number,
+  toX: (i: number) => number,
+  toY: (price: number) => number,
+) {
+  const empty = { bbArea: null, bbMiddleLine: null }
+  if (bands.upper.length === 0) return empty
+  const validStart = bands.upper.findIndex((v) => !Number.isNaN(v))
+  if (validStart < 0) return empty
+
+  const upperPts: string[] = []
+  const lowerPts: string[] = []
+  const midPts: string[] = []
+  for (let i = validStart; i < count; i++) {
+    const x = toX(i)
+    upperPts.push(`${x},${toY(bands.upper[i])}`)
+    lowerPts.push(`${x},${toY(bands.lower[i])}`)
+    midPts.push(`${x},${toY(bands.middle[i])}`)
+  }
+  return {
+    bbArea: `${upperPts.join(" ")} ${lowerPts.toReversed().join(" ")}`,
+    bbMiddleLine: midPts.join(" "),
+  }
+}
+
 /**
  * 포트폴리오 카드용 SVG 미니 차트 — 가격 시계열 + 목표가 수평선 + 볼린저밴드.
  * dok3node customs/mini-chart.tsx 이식 — hex 하드코딩 대신 CSS 토큰
@@ -59,39 +173,11 @@ export function MiniChart({
     const drawBottom = height - PAD_BOTTOM
     const drawH = drawBottom - drawTop
 
-    // 볼린저밴드 계산 (SMA ± 2σ)
-    const bbUpper: number[] = []
-    const bbMiddle: number[] = []
-    const bbLower: number[] = []
-    if (showBollinger && prices.length >= bollingerPeriod) {
-      for (let i = 0; i < prices.length; i++) {
-        if (i < bollingerPeriod - 1) {
-          bbUpper.push(NaN)
-          bbMiddle.push(NaN)
-          bbLower.push(NaN)
-          continue
-        }
-        const window = prices.slice(i - bollingerPeriod + 1, i + 1)
-        const sma = window.reduce((s, v) => s + v, 0) / bollingerPeriod
-        const variance = window.reduce((s, v) => s + (v - sma) ** 2, 0) / bollingerPeriod
-        const stddev = Math.sqrt(variance)
-        bbMiddle.push(sma)
-        bbUpper.push(sma + 2 * stddev)
-        bbLower.push(sma - 2 * stddev)
-      }
-    }
+    const bands =
+      showBollinger && prices.length >= bollingerPeriod ? computeBollinger(prices, bollingerPeriod) : EMPTY_BANDS
 
-    // Y축 범위 — 가격 + 수평선 + 밴드 모두 포함
-    const allValues = [...prices]
-    for (const v of [targetBuyPrice, takeProfitPrice, stopLossPrice]) if (v && v > 0) allValues.push(v)
-    for (const v of [...bbUpper, ...bbLower]) if (!Number.isNaN(v)) allValues.push(v)
-
-    const minVal = Math.min(...allValues)
-    const maxVal = Math.max(...allValues)
-    const range = maxVal - minVal || 1
-    const pad = range * 0.08
-    const yMin = minVal - pad
-    const yMax = maxVal + pad
+    const thresholds = [targetBuyPrice, takeProfitPrice, stopLossPrice]
+    const { yMin, yMax } = computeYBounds(prices, thresholds, [...bands.upper, ...bands.lower])
 
     const toY = (price: number) => drawTop + drawH - ((price - yMin) / (yMax - yMin)) * drawH
     const toX = (i: number) => (i / Math.max(prices.length - 1, 1)) * W
@@ -104,43 +190,10 @@ export function MiniChart({
     const lastX = toX(prices.length - 1)
     const lastY = toY(lastPrice)
 
-    const lines: { price: number; color: string; label: string; dash: string; opacity: number }[] = []
-    if (targetBuyPrice && targetBuyPrice > 0)
-      lines.push({ price: targetBuyPrice, color: "var(--success)", label: `매수 ${targetBuyPrice.toLocaleString()}`, dash: "4,3", opacity: 0.6 })
-    if (takeProfitPrice && takeProfitPrice > 0)
-      lines.push({ price: takeProfitPrice, color: "var(--gain)", label: `익절 ${takeProfitPrice.toLocaleString()}`, dash: "4,3", opacity: 0.6 })
-    if (stopLossPrice && stopLossPrice > 0)
-      lines.push({ price: stopLossPrice, color: "var(--loss)", label: `손절 ${stopLossPrice.toLocaleString()}`, dash: "2,2", opacity: 0.4 })
-
+    const lines = buildThresholdLines(thresholds)
     const strokeColor = isUp ? "var(--gain)" : "var(--loss)"
-
-    const marker = eventMarker
-      ? {
-          x: toX(Math.min(eventMarker.index, prices.length - 1)),
-          label: eventMarker.label,
-          color: eventMarker.type === "stop" ? "var(--loss)" : "var(--gain)",
-        }
-      : null
-
-    // 볼린저밴드 경로 (상단→하단 역순으로 닫힌 영역)
-    let bbArea: string | null = null
-    let bbMiddleLine: string | null = null
-    if (showBollinger && bbUpper.length > 0) {
-      const validStart = bbUpper.findIndex((v) => !Number.isNaN(v))
-      if (validStart >= 0) {
-        const upperPts: string[] = []
-        const lowerPts: string[] = []
-        const midPts: string[] = []
-        for (let i = validStart; i < prices.length; i++) {
-          const x = toX(i)
-          upperPts.push(`${x},${toY(bbUpper[i])}`)
-          lowerPts.push(`${x},${toY(bbLower[i])}`)
-          midPts.push(`${x},${toY(bbMiddle[i])}`)
-        }
-        bbArea = `${upperPts.join(" ")} ${lowerPts.reverse().join(" ")}`
-        bbMiddleLine = midPts.join(" ")
-      }
-    }
+    const marker = buildMarker(eventMarker, prices.length, toX)
+    const { bbArea, bbMiddleLine } = buildBollingerPaths(bands, prices.length, toX, toY)
 
     return { drawTop, drawBottom, points, areaPoints, lastX, lastY, lastPrice, strokeColor, lines, toY, marker, bbArea, bbMiddleLine }
   }, [prices, targetBuyPrice, takeProfitPrice, stopLossPrice, eventMarker, showBollinger, bollingerPeriod, height])

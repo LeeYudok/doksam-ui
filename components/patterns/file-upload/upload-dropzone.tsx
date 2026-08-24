@@ -1,7 +1,7 @@
 "use client"
 
 import { useId, useRef, useState } from "react"
-import type { ChangeEvent, DragEvent } from "react"
+import type { ChangeEvent, Dispatch, DragEvent, SetStateAction } from "react"
 import { CloudArrowUpIcon, FileCsvIcon, FileIcon, FileImageIcon, FilePdfIcon, TrashSimpleIcon } from "@phosphor-icons/react/dist/ssr"
 
 import { Badge } from "@/components/ui/badge"
@@ -40,6 +40,51 @@ function statusBadgeVariant(status: UploadStatus): "default" | "secondary" | "de
   return "destructive"
 }
 
+type UploadTimers = Map<string, ReturnType<typeof setInterval>>
+
+const TICK_MS = 300
+const TICK_STEP = 20
+const FAIL_AT = 60
+
+/** 진행중 파일 한 건의 다음 상태. 파일명에 "fail"이 있으면 60%에서 실패로 굳는다. */
+function advanceUpload(file: UploadFile, willFail: boolean): UploadFile {
+  const nextProgress = Math.min(100, file.progress + TICK_STEP)
+  if (willFail && nextProgress >= FAIL_AT) return { ...file, progress: FAIL_AT, status: "실패" }
+  if (nextProgress >= 100) return { ...file, progress: 100, status: "완료" }
+  return { ...file, progress: nextProgress }
+}
+
+function tickUploads(
+  prev: UploadFile[],
+  id: string,
+  willFail: boolean,
+  onSettled: () => void
+): UploadFile[] {
+  return prev.map((f) => {
+    if (f.id !== id || f.status !== "진행중") return f
+    const next = advanceUpload(f, willFail)
+    if (next.status !== "진행중") onSettled()
+    return next
+  })
+}
+
+/** 데모 목적의 결정적(random 없는) 진행률 시뮬레이션. */
+function startUploadSimulation(
+  file: UploadFile,
+  setFiles: Dispatch<SetStateAction<UploadFile[]>>,
+  timers: UploadTimers
+) {
+  const willFail = file.name.toLowerCase().includes("fail")
+  const stop = () => {
+    clearInterval(timer)
+    timers.delete(file.id)
+  }
+  const timer = setInterval(() => {
+    setFiles((prev) => tickUploads(prev, file.id, willFail, stop))
+  }, TICK_MS)
+  timers.set(file.id, timer)
+}
+
 /**
  * 드래그앤드롭 드롭존 + 업로드 진행률 리스트 + 삭제.
  * 실제 업로드 API 호출 없이 setTimeout 기반 진행률 시뮬레이션으로 대체한다.
@@ -48,32 +93,7 @@ export function UploadDropzone() {
   const inputId = useId()
   const [isDragging, setIsDragging] = useState(false)
   const [files, setFiles] = useState<UploadFile[]>([])
-  const timers = useRef<Map<string, ReturnType<typeof setInterval>>>(new Map())
-
-  function simulateUpload(file: UploadFile) {
-    // 데모 목적의 결정적(random 없는) 진행률 시뮬레이션 — 파일명에 "fail"이 포함되면 60%에서 실패로 전환한다.
-    const willFail = file.name.toLowerCase().includes("fail")
-    const timer = setInterval(() => {
-      setFiles((prev) =>
-        prev.map((f) => {
-          if (f.id !== file.id || f.status !== "진행중") return f
-          const nextProgress = Math.min(100, f.progress + 20)
-          if (willFail && nextProgress >= 60) {
-            clearInterval(timer)
-            timers.current.delete(file.id)
-            return { ...f, progress: 60, status: "실패" }
-          }
-          if (nextProgress >= 100) {
-            clearInterval(timer)
-            timers.current.delete(file.id)
-            return { ...f, progress: 100, status: "완료" }
-          }
-          return { ...f, progress: nextProgress }
-        })
-      )
-    }, 300)
-    timers.current.set(file.id, timer)
-  }
+  const timers = useRef<UploadTimers>(new Map())
 
   function addFiles(fileList: FileList) {
     const next: UploadFile[] = Array.from(fileList).map((file, i) => ({
@@ -84,7 +104,7 @@ export function UploadDropzone() {
       status: "진행중" as const,
     }))
     setFiles((prev) => [...prev, ...next])
-    for (const f of next) simulateUpload(f)
+    for (const f of next) startUploadSimulation(f, setFiles, timers.current)
   }
 
   function handleDrop(e: DragEvent<HTMLLabelElement>) {
