@@ -156,6 +156,7 @@ async function gradeScreenshot(anthropic, page, buffer) {
       page: page.name,
       verdict: "fail",
       issues: [{ criterion: "api", detail: "Vision API refused to grade this screenshot." }],
+      skeleton: null,
     };
   }
 
@@ -165,6 +166,7 @@ async function gradeScreenshot(anthropic, page, buffer) {
       page: page.name,
       verdict: "fail",
       issues: [{ criterion: "api", detail: "No text content in vision API response." }],
+      skeleton: null,
     };
   }
 
@@ -176,6 +178,7 @@ async function gradeScreenshot(anthropic, page, buffer) {
       page: page.name,
       verdict: "fail",
       issues: [{ criterion: "api", detail: `Could not parse structured output: ${textBlock.text.slice(0, 200)}` }],
+      skeleton: null,
     };
   }
 }
@@ -215,13 +218,16 @@ async function main() {
         console.log(`screenshot ok (${(buffer.length / 1024).toFixed(0)}KB) -> ${shotPath}`);
         console.log(`    [dry-run] would send to ${MODEL_ID} with prompt:\n` +
           prompt.split("\n").map((l) => `      ${l}`).join("\n") + "\n");
+        const dryRunDiversity = scoreDiversity(page, null, { cliArchetype: CLI_ARCHETYPE });
         results.push({
           page: page.name,
           verdict: "skipped",
           issues: [],
+          skeleton: null,
           url,
           consoleErrors,
           dryRun: true,
+          diversity: dryRunDiversity,
         });
         continue;
       }
@@ -248,6 +254,8 @@ async function main() {
         page: page.name,
         verdict: "fail",
         issues: [{ criterion: "runner", detail: String(err.message || err) }],
+        skeleton: null,
+        diversity: scoreDiversity(page, null, { cliArchetype: CLI_ARCHETYPE }),
       });
     }
   }
