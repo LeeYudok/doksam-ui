@@ -1,6 +1,10 @@
 import { describe, expect, it } from "vitest";
 
+import { LAYOUT_ARCHETYPES } from "@/archetypes";
+import { PERSONALITY_PRESETS } from "@/personalities";
+
 import {
+  CONVERGENCE_ANTIPATTERNS_SECTION,
   DESIGN_BRIEF_SECTION,
   RULES_MARKDOWN,
   RULES_SECTIONS,
@@ -35,6 +39,30 @@ describe("규칙의 두 층(#28)", () => {
     for (const required of ["원형(archetype)", "성격(personality)", "안 쓸 컴포넌트·패턴", "이유:"]) {
       expect(text).toContain(required);
     }
+  });
+
+  it("브리프의 원형 항목은 레지스트리 9종을 전부 이름으로 열거하고 자유 문자열을 금지한다 (#34)", () => {
+    const archetypeItem = DESIGN_BRIEF_SECTION.items.find((item) => item.startsWith("원형(archetype)"));
+    expect(archetypeItem).toBeDefined();
+    for (const archetype of LAYOUT_ARCHETYPES) {
+      expect(archetypeItem).toContain(archetype.name);
+    }
+    expect(archetypeItem).toContain("자유 문자열");
+    expect(archetypeItem).toContain("불가");
+    expect(archetypeItem).not.toMatch(/없으면 자유 문자열/);
+  });
+
+  it("브리프의 성격 항목은 personality 프리셋을 전부 이름으로 열거한다 (#34)", () => {
+    const personalityItem = DESIGN_BRIEF_SECTION.items.find((item) => item.startsWith("성격(personality)"));
+    expect(personalityItem).toBeDefined();
+    for (const preset of PERSONALITY_PRESETS) {
+      expect(personalityItem).toContain(preset.name);
+    }
+  });
+
+  it("CONVERGENCE_ANTIPATTERNS_SECTION 이 둘째 절을 가리킨다 — gen-llms 가 전문을 싣는다", () => {
+    expect(CONVERGENCE_ANTIPATTERNS_SECTION).toBe(RULES_SECTIONS[1]);
+    expect(CONVERGENCE_ANTIPATTERNS_SECTION.title).toBe("수렴 안티패턴");
   });
 
   it("선택 절은 첫 항목이 선택지를 제시하고 나머지에 경계를 붙인다", () => {

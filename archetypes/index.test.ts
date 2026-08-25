@@ -43,11 +43,12 @@ describe("LAYOUT_ARCHETYPES", () => {
     }
   });
 
-  it("모든 원형이 설명·적합 성격·내비 방식·반례를 갖는다", () => {
+  it("모든 원형이 설명·적합 성격·내비 방식·뼈대 한 줄·반례를 갖는다", () => {
     for (const archetype of LAYOUT_ARCHETYPES) {
       expect(archetype.label.length).toBeGreaterThan(0);
       expect(archetype.description.length).toBeGreaterThan(0);
       expect(archetype.navigation.length).toBeGreaterThan(0);
+      expect(archetype.skeleton.length, `${archetype.name} 의 skeleton 이 비어 있다 — llms.txt 원형 표의 원천(#34)`).toBeGreaterThan(0);
       expect(archetype.suitedFor.length).toBeGreaterThan(0);
       expect(archetype.avoidWhen.length).toBeGreaterThan(0);
     }
