@@ -21,6 +21,43 @@ Vision gate — 결정론 게이트(E2E/불변식, A·B영역)로 잡을 수 없
 
 페이지별 verdict는 `pass` / `warn` / `fail` 세 단계. `fail`만 게이트를 막는다.
 
+## 다양성(diversity) 축 (이슈 #92)
+
+표준 준수만 채점하면 채점 자체가 수렴을 강화한다 — 모든 화면이 admin 템플릿
+뼈대를 베끼는 쪽으로 점수가 쏠린다. 이를 보완하기 위해 각 스크린샷을 채점할
+때 비전 모델에게 내비게이션·레이아웃 **뼈대(skeleton)** 도 함께 분류하게 하고
+(`rubric.mjs`의 `DIVERSITY_ARCHETYPES`), 결과를 `scripts/vision-gate/diversity.mjs`
+의 순수 함수로 채점한다.
+
+- **감점**: 실제 뼈대가 기준 템플릿(`rubric.mjs`의 `BASELINE_ARCHETYPE_ID`,
+  현재 `admin-sidebar`)과 같은데 그 페이지가 그 원형으로 선언되지 않았을 때.
+- **가점**: 실제 뼈대가 그 페이지에 **선언된 원형**(`PAGES[].archetype`, 또는
+  `--archetype` 옵션으로 오버라이드한 값)과 일치할 때.
+- 두 조건은 동시에 성립할 수 있고(선언과도 다르고 기준 템플릿에도 수렴), 그
+  경우 감점을 합산한다 — 서로 다른 문제이기 때문이다.
+
+**다양성 점수는 게이트를 막지 않는다** — `fail` 처럼 `exit 1`을 유발하지
+않는 정보성 신호다. 콘솔 요약과 `vision-report.json`의 `diversitySummary`
+(그리고 각 페이지 결과의 `diversity` 필드)로 노출된다.
+
+### `--archetype <name>` 옵션
+
+이번 실행에서 모든 페이지의 기대 원형을 `<name>`으로 오버라이드한다(개별
+페이지의 `PAGES[].archetype` 대신 사용). `rubric.mjs`의 `DIVERSITY_ARCHETYPES`
+에 없는 이름을 주면 에러로 즉시 중단한다.
+
+```sh
+ANTHROPIC_API_KEY=sk-ant-... pnpm test:vision -- --archetype admin-sidebar
+```
+
+### 기준 스크린샷
+
+별도의 기준 스크린샷 파일 셋을 관리하지 않는다 — "기준 템플릿과 뼈대가
+같은가"는 매 실행마다 비전 모델이 대상 스크린샷을 보고 뼈대를 분류한 뒤,
+그 결과를 코드로(로컬에서, API 없이도) `BASELINE_ARCHETYPE_ID`와 비교하는
+방식이라 기준 이미지 자체를 폐쇄망에 저장해 둘 필요가 없다. 루브릭 파싱과
+점수 합산(`diversity.mjs`)은 `pnpm test`로 API 키 없이 단위 테스트된다.
+
 ## 대상 페이지
 
 `rubric.mjs`의 `PAGES` 배열 참고. 비용 의식 때문에 **10개로 제한**했다 — 홈 +
@@ -53,7 +90,9 @@ API 비용 없이 검증할 때 사용.
 - 콘솔: 페이지별 verdict(PASS/WARN/FAIL) + 발견된 issue 개수, 마지막에
   pass/warn/fail 집계.
 - `vision-report.json` (이 디렉터리에 생성, git 미추적): 페이지별 전체 결과
-  (`{page, verdict, issues, url, consoleErrors}`).
+  (`{page, verdict, issues, skeleton, url, consoleErrors, diversity}`) +
+  최상위 `diversitySummary`(`{totalScore, scoredPages, signaledPages,
+  bonusPages, penaltyPages, convergentPages}`).
 - `__screenshots__/*.jpg` (이 디렉터리에 생성, git 미추적): 실행 시 찍은
   스크린샷. jpeg quality 60으로 저장해 비전 토큰 비용을 낮춘다.
 
