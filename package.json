@@ -8,7 +8,7 @@
     "url": "git+https://github.com/leeyudok/doksam-ui.git"
   },
   "engines": {
-    "node": ">=22"
+    "node": ">=22.18"
   },
   "packageManager": "pnpm@11.9.0",
   "license": "MIT",
