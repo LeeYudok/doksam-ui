@@ -20,13 +20,20 @@ doksam-ui 는 doksam 프로젝트 공통 UI 표준 카탈로그다. 개별 화�
 
 ## 0. 작성 규칙의 단일 진실원천
 
-**색·컴포넌트·테마 초기화·아이콘·라우팅·반응형·폐쇄망·TypeScript·의존성 규율의
-실제 규칙 조항은 `lib/rules-markdown.ts` 의 `RULES_SECTIONS` 에 있다.**
+**디자인 브리프·수렴 안티패턴·색·컴포넌트·테마 초기화·아이콘·라우팅·반응형·모션·
+접근성·폐쇄망·TypeScript·의존성 규율의 실제 규칙 조항은 `lib/rules-markdown.ts` 의
+`RULES_SECTIONS` 에 있다.**
 UI 코드를 쓰기 전에 그 파일을 읽는다. 이 스킬은 규칙을 복제하지 않는다 —
 복제하면 두 곳이 어긋나고, 어긋나면 이 스킬 쪽이 틀린 것이다.
 
 규칙 자체를 바꿔야 하면 `lib/rules-markdown.ts` 만 고친다.
 `/rules` 페이지 렌더링과 AI 프롬프트용 markdown(`RULES_MARKDOWN`) 이 거기서 파생된다.
+
+**규칙은 불변(`kind: "invariant"`)과 선택(`kind: "decision"`) 두 층이다.** 불변은
+프로젝트가 달라도 답이 같고, 선택은 프로젝트마다 정답이 다르다 — 선택 절은 명령이
+아니라 선택지·고르는 기준·경계를 준다. 소비 프로젝트에서 화면을 만들기 전에
+`RULES_SECTIONS` 의 첫 절("디자인 브리프")대로 원형·성격·안 쓸 컴포넌트/패턴·이유를
+`DESIGN.md` 에 선언하고, 둘째 절("수렴 안티패턴")로 기본값 채택을 자가 점검한다.
 
 절대 어기지 않는 것 4가지만 여기 요약해 둔다(나머지는 위 파일 참조):
 
@@ -168,10 +175,11 @@ export const donts = ["...", "..."]  // 2~3개 권장
 
 ### 테마 초기화
 
-hydration 이전에 끝낸다 — `app/layout.tsx` `<head>` 의 인라인 `THEME_INIT_SCRIPT` 가
-localStorage 를 읽어 `<html>` 에 `data-theme`/`data-font`/`dark` 를 직접 세팅한다.
-`useEffect` 만으로 적용하면 FOUC(테마 깜빡임)가 난다. 자세한 조항은 `lib/rules-markdown.ts`
-"테마 초기화" 섹션.
+기본 모드·프리셋을 프로필 고정으로 둘지, 사용자 토글로 둘지, 시스템 설정을 따를지는
+프로젝트의 선택이다(선택 층). 어느 쪽을 고르든 경계는 같다 — 결정은 hydration 이전에
+끝낸다. `app/layout.tsx` `<head>` 의 인라인 `THEME_INIT_SCRIPT` 가 localStorage 를 읽어
+`<html>` 에 `data-theme`/`data-font`/`dark` 를 직접 세팅한다. `useEffect` 만으로 적용하면
+FOUC(테마 깜빡임)가 난다. 자세한 조항은 `lib/rules-markdown.ts` "테마 초기화" 섹션.
 
 ---
 

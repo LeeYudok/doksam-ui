@@ -150,8 +150,19 @@ pnpm typecheck && pnpm lint && pnpm test && pnpm build
 ## G. 사용 규칙(/rules) 자체를 바꿀 때
 
 `lib/rules-markdown.ts` 의 `RULES_SECTIONS` 만 수정한다.
-`/rules` 페이지 렌더링과 AI 프롬프트용 `RULES_MARKDOWN` 이 여기서 파생되므로
-다른 곳에 규칙 문장을 복제하지 않는다.
+`/rules` 페이지 렌더링, `/rules.md`, `public/llms.txt` 의 디자인 브리프 블록이 여기서
+파생되므로 다른 곳에 규칙 문장을 복제하지 않는다.
+
+새 절에는 `kind` 를 반드시 지정한다.
+
+- `"invariant"` — 프로젝트가 달라도 답이 같은 조항. 명령문으로 쓴다.
+- `"decision"` — 프로젝트마다 정답이 다른 조항. 첫 항목에 선택지(고르는 기준 포함)를
+  쓰고, 나머지 항목은 `경계 — ...` 로 시작해 어느 선택지를 골라도 지켜야 할 것을 적는다.
+  `lib/rules-markdown.test.ts` 가 이 구조를 강제한다.
+
+첫 두 절("디자인 브리프", "수렴 안티패턴")의 자리는 바꾸지 않는다 — 생성 전에 무엇을
+안 쓸지 고르게 하는 단계이고, `scripts/gen-llms.mjs` 가 `DESIGN_BRIEF_SECTION` 을
+`public/llms.txt` 맨 앞에 싣는다(절 순서가 바뀌면 그 블록도 함께 확인한다).
 
 규칙을 추가했으면 이 스킬(`.claude/skills/doksam-design-guide/`)이 그 규칙과 모순되지 않는지
 한 번 훑는다 — 모순이 있으면 `lib/rules-markdown.ts` 가 옳고 스킬을 고친다.

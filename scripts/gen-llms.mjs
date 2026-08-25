@@ -16,6 +16,15 @@ const ROOT = path.resolve(__dirname, "..");
 
 const HOMEPAGE = "https://ui.doksam.com";
 
+/**
+ * 디자인 브리프 절을 규칙 원문(lib/rules-markdown.ts)에서 그대로 가져온다(#28).
+ * 카탈로그를 읽는 AI 가 컴포넌트 목록보다 먼저 만나야 하는 단계이므로 llms.txt 의
+ * 맨 앞에 싣는다 — 문안은 규칙 원문에만 두고 여기서 다시 쓰지 않는다.
+ *
+ * Node 22.18+ 는 .ts 를 타입 스트리핑으로 그대로 import 한다(CI 도 node 22).
+ */
+const { DESIGN_BRIEF_SECTION } = await import("../lib/rules-markdown.ts");
+
 const TYPE_LABEL = {
   "registry:component": "컴포넌트",
   "registry:lib": "라이브러리/유틸",
@@ -51,7 +60,22 @@ function main() {
       `components.json이 없는 새 프로젝트라면 \`npx shadcn@latest init\`을 먼저 실행하세요.`,
   );
   lines.push("");
-  lines.push(`전체 사용 규칙(코딩 컨벤션·시맨틱 토큰·접근성 규칙)은 [${HOMEPAGE}/rules](${HOMEPAGE}/rules) 를 참고하세요 — AI 프롬프트에 그대로 붙여넣을 수 있는 markdown 원문을 제공합니다.`);
+  lines.push(`전체 사용 규칙(코딩 컨벤션·시맨틱 토큰·접근성 규칙)은 [${HOMEPAGE}/rules](${HOMEPAGE}/rules) 를 참고하세요 — AI 프롬프트에 그대로 붙여넣을 수 있는 markdown 원문을 [${HOMEPAGE}/rules.md](${HOMEPAGE}/rules.md) 에서 바로 받을 수 있습니다.`);
+  lines.push("");
+
+  lines.push(`## ${DESIGN_BRIEF_SECTION.title}`);
+  lines.push("");
+  lines.push(
+    "아래 카탈로그에서 무엇을 고르기 전에 이 단계를 먼저 끝내세요. 규칙은 불변([invariant])과 " +
+      "선택([decision]) 두 층이며, 선택 층은 이 브리프가 없으면 판정할 수 없습니다 — 브리프 없이 " +
+      "설치부터 시작하면 모든 화면이 카탈로그의 기본 조합으로 수렴합니다.",
+  );
+  lines.push("");
+  for (const item of DESIGN_BRIEF_SECTION.items) {
+    lines.push(`- ${item}`);
+  }
+  lines.push("");
+  lines.push(`피해야 할 기본값 목록("수렴 안티패턴")과 두 층의 전체 조항은 ${HOMEPAGE}/rules.md 에 있습니다.`);
   lines.push("");
 
   for (const [label, items] of groups) {
