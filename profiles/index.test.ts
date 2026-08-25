@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import { APP_SHELL_SAMPLES } from "@/components/patterns/app-shell-samples";
 import { FONT_PRESETS, getFontPreset } from "@/fonts";
 import { getLayoutArchetype } from "@/archetypes";
+import { PERSONALITY_PRESETS, getPersonalityPreset } from "@/personalities";
 import { BRAND_PROFILES, DEFAULT_BRAND_PROFILE, getBrandProfile } from "@/profiles";
 import { THEME_PRESETS, getThemePreset } from "@/themes";
 
@@ -22,6 +23,13 @@ describe("BRAND_PROFILES", () => {
     for (const profile of BRAND_PROFILES) {
       expect(getFontPreset(profile.font), `${profile.name}.font = ${profile.font}`).toBeDefined();
       expect(FONT_PRESETS.some((f) => f.name === profile.font)).toBe(true);
+    }
+  });
+
+  it("every profile.personality references a real personality preset (#90)", () => {
+    for (const profile of BRAND_PROFILES) {
+      expect(getPersonalityPreset(profile.personality), `${profile.name}.personality = ${profile.personality}`).toBeDefined();
+      expect(PERSONALITY_PRESETS.some((p) => p.name === profile.personality)).toBe(true);
     }
   });
 

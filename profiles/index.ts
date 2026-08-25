@@ -36,6 +36,10 @@ export interface BrandProfile {
   radius: string;
   /** 정보 밀도 — <html data-density> 속성 값. app/globals.css 의 밀도 토큰 층이 소비. */
   density: ProfileDensity;
+  /** personalities/index.ts PERSONALITY_PRESETS 의 name 참조(#90) — 타입/스페이싱
+   *  스케일·표면 성향·모션 강도를 함께 고정한다. profiles/index.test.ts 가 참조
+   *  무결성을 강제한다. */
+  personality: string;
   /** /patterns/app-shell 의 권장 셸 변형(표시 타이틀) — 문서적 연결, 코드 강제 없음. */
   shell?: string;
   /** archetypes/index.ts LAYOUT_ARCHETYPES 의 name 참조 — 이 프로필의 기본 화면 뼈대. */
@@ -54,6 +58,7 @@ export const BRAND_PROFILES: BrandProfile[] = [
     defaultMode: "light",
     radius: "6px",
     density: "compact",
+    personality: "neutral",
     shell: "사이드바형 셸",
     archetype: "sidebar-app",
     examples: ["크롤러 관리", "배치 모니터"],
@@ -67,6 +72,7 @@ export const BRAND_PROFILES: BrandProfile[] = [
     defaultMode: "light",
     radius: "10px",
     density: "comfortable",
+    personality: "neutral",
     shell: "헤더형 셸",
     archetype: "top-nav-site",
     examples: ["bizinfo 사업자 조회"],
@@ -80,6 +86,7 @@ export const BRAND_PROFILES: BrandProfile[] = [
     defaultMode: "dark",
     radius: "6px",
     density: "compact",
+    personality: "neutral",
     shell: "사이드바형 셸",
     archetype: "dashboard-grid",
     examples: ["news.doksam.com", "srope"],
@@ -93,6 +100,7 @@ export const BRAND_PROFILES: BrandProfile[] = [
     defaultMode: "light",
     radius: "8px",
     density: "comfortable",
+    personality: "neutral",
     shell: "문서 리더 셸",
     archetype: "doc-reader",
     examples: ["위키·기술문서", "brain 문서 뷰"],
@@ -106,6 +114,7 @@ export const BRAND_PROFILES: BrandProfile[] = [
     defaultMode: "dark",
     radius: "4px",
     density: "compact",
+    personality: "neutral",
     shell: "사이드바형 셸",
     archetype: "sidebar-app",
     examples: ["로그 뷰어", "배치 모니터"],

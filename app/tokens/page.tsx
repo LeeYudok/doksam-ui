@@ -4,6 +4,7 @@ import { CopyButton } from "@/components/copy-button";
 import { TranslatedText } from "@/components/showcase/translated-text";
 import { DensitySection } from "@/app/tokens/_components/density-section";
 import { ExtendedTokensSection } from "@/app/tokens/_components/extended-tokens-section";
+import { PersonalitySection } from "@/app/tokens/_components/personality-section";
 import { PresetMatrix } from "@/app/tokens/_components/preset-matrix";
 import { TokenGrid, TokenSwatch } from "@/app/tokens/_components/token-grid";
 import { BRAND_PROFILES } from "@/profiles";
@@ -257,6 +258,7 @@ export default function TokensPage() {
       <FinanceTokensSection />
       <RadiusSection />
       <DensitySection />
+      <PersonalitySection />
       <SpacingSection />
       <TypographySection />
       <CopyPresetsSection />

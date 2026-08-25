@@ -5,6 +5,7 @@ import { MoonIcon, SunIcon } from "@phosphor-icons/react/dist/ssr";
 
 import { cn } from "@/lib/utils";
 import type { ThemeMode } from "@/lib/theme-storage";
+import { getPersonalityPreset, personalityAttrs } from "@/personalities";
 import type { BrandProfile } from "@/profiles";
 
 interface ProfilePreviewKitProps {
@@ -22,12 +23,15 @@ interface ProfilePreviewKitProps {
 export function ProfilePreviewKit({ profile }: Readonly<ProfilePreviewKitProps>) {
   const [mode, setMode] = useState<ThemeMode>(profile.defaultMode);
   const dark = mode === "dark";
+  const personality = getPersonalityPreset(profile.personality);
 
   return (
     <div
       data-theme={profile.theme}
       data-font={profile.font}
       data-density={profile.density}
+      // personality 토큰 층(#90) — 프리셋을 못 찾으면 속성이 방출되지 않아 층 비활성
+      {...personalityAttrs(personality)}
       style={{ "--radius": profile.radius } as React.CSSProperties}
       className={cn(
         "flex flex-col overflow-hidden rounded-lg border border-border bg-background font-sans text-foreground",

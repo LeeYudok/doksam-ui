@@ -18,4 +18,15 @@ export const LOCALE_STORAGE_KEY = "doksam-ui-locale";
 export const DENSITY_STORAGE_KEY = "doksam-ui-density";
 export const RADIUS_STORAGE_KEY = "doksam-ui-radius";
 
+/**
+ * 시각 성격(personality) 토큰 층(#90)이 쓰는 영속 키. personalities/index.ts
+ * 레지스트리의 프리셋이 고정한 scale/surface/motion 3값을, 밀도(density)와
+ * 동일한 패턴으로 preset 이름이 아니라 raw 값 그대로 저장한다 — FOUC 방지
+ * 인라인 스크립트(app/layout.tsx)가 레지스트리를 몰라도 즉시 반영할 수 있게.
+ * 값이 없으면 <html>에 아무것도 세팅하지 않는다(기존 렌더 무변화).
+ */
+export const PERSONALITY_SCALE_STORAGE_KEY = "doksam-ui-personality-scale";
+export const PERSONALITY_SURFACE_STORAGE_KEY = "doksam-ui-personality-surface";
+export const PERSONALITY_MOTION_STORAGE_KEY = "doksam-ui-personality-motion";
+
 export type ThemeMode = "light" | "dark";
