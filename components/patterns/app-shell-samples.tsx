@@ -222,7 +222,9 @@ export const APP_SHELL_SAMPLES: PatternSampleData[] = [
       "좌측 문서 트리·우측 목차가 본문 한 칼럼을 감싸는 셸입니다 — doc-reader 원형의 기본 뼈대입니다.",
     demo: (
       <div className="flex h-[160px] w-full overflow-hidden rounded-md border border-border">
-        <div className="flex w-20 shrink-0 flex-col gap-1 border-r border-border bg-card px-1.5 py-2">
+        {/* 실제 화면 기준점은 트리 lg·목차 xl 이지만 이 데모는 카드 안 축소 삽화라
+            한 단계씩 낮춰 접는다 — 가장 좁은 폭에서 본문만 남는 것은 같다. */}
+        <div className="hidden w-20 shrink-0 flex-col gap-1 border-r border-border bg-card px-1.5 py-2 sm:flex">
           <div className="flex items-center gap-1 px-0.5">
             <ArticleIcon size={11} weight="regular" className="text-primary" />
             <span className="text-[8px] font-semibold tracking-tight">문서</span>
@@ -249,7 +251,7 @@ export const APP_SHELL_SAMPLES: PatternSampleData[] = [
             <div className="h-1 w-9/12 rounded bg-muted" />
           </div>
         </div>
-        <div className="hidden w-16 shrink-0 flex-col gap-1 border-l border-border px-1.5 py-2 sm:flex">
+        <div className="hidden w-16 shrink-0 flex-col gap-1 border-l border-border px-1.5 py-2 md:flex">
           <span className="text-[7px] font-medium uppercase tracking-wider text-muted-foreground/70">목차</span>
           <span className="text-[7px] text-primary">컬러</span>
           <span className="text-[7px] text-muted-foreground">아이콘</span>
