@@ -83,7 +83,21 @@ export function MailSplitPane() {
           mobileDetail ? "hidden lg:flex" : "flex",
         )}
       >
-        <div className="border-b border-border px-3 py-2.5">
+        <div className="flex flex-col gap-2 border-b border-border px-3 py-2.5">
+          {/* md 미만에서는 폴더 레일이 숨으므로 같은 폴더 선택을 셀렉트로 제공한다. */}
+          <select
+            aria-label="메일 폴더 선택"
+            value={folder}
+            onChange={(event) => setFolder(event.target.value)}
+            className="h-8 w-full rounded-md border border-input bg-background px-2 text-sm text-foreground md:hidden"
+          >
+            {FOLDERS.map((item) => (
+              <option key={item.id} value={item.id}>
+                {item.label}
+                {item.count > 0 ? ` (${item.count})` : ""}
+              </option>
+            ))}
+          </select>
           <div className="relative">
             <MagnifyingGlassIcon
               size={15}

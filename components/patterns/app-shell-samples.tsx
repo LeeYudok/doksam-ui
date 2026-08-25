@@ -184,17 +184,17 @@ export const APP_SHELL_SAMPLES: PatternSampleData[] = [
           <span className="rounded bg-muted px-1 py-0.5 text-[7px] text-muted-foreground">알림</span>
         </div>
         <div className="flex-1 overflow-hidden px-2.5 py-2">
-          <div className="mx-auto flex max-w-[240px] flex-col gap-1.5">
+          <ol className="mx-auto flex max-w-[240px] flex-col gap-1.5">
             {FEED_ITEMS.map((item) => (
-              <div key={item} className="flex gap-1.5 rounded border border-border/60 px-2 py-1.5">
+              <li key={item} className="flex gap-1.5 rounded border border-border/60 px-2 py-1.5">
                 <div className="mt-0.5 size-1.5 shrink-0 rounded-full bg-primary/70" />
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-[8px] text-foreground">{item}</p>
                   <p className="text-[7px] text-muted-foreground">방금 전</p>
                 </div>
-              </div>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       </div>
     ),

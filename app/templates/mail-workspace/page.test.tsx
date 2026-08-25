@@ -55,6 +55,17 @@ describe("MailWorkspacePage (split-pane 원형)", () => {
     expect(within(list).getAllByRole("listitem")).toHaveLength(THREADS.filter((m) => m.flagged).length)
   })
 
+  it("모바일용 폴더 셀렉트로도 같은 폴더 전환이 된다", () => {
+    render(<MailWorkspacePage />)
+    const select = screen.getByLabelText("메일 폴더 선택")
+    expect(within(select).getAllByRole("option")).toHaveLength(FOLDERS.length)
+    for (const item of FOLDERS) {
+      fireEvent.change(select, { target: { value: item.id } })
+      const list = screen.getByRole("region", { name: "메일 목록" })
+      expect(within(list).getAllByRole("listitem"), `${item.label} 목록`).toHaveLength(item.count)
+    }
+  })
+
   it("폴더 레일의 count 가 그 폴더 목록 길이와 일치한다", () => {
     render(<MailWorkspacePage />)
     const folders = screen.getByRole("navigation", { name: "메일 폴더" })
