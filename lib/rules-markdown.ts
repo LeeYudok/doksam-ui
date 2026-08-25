@@ -30,9 +30,9 @@ export const RULES_SECTIONS: RulesSection[] = [
     kind: "invariant",
     items: [
       "화면을 만들기 전에 저장소 루트에 DESIGN.md 를 만들고 원형·성격·배제 목록·이유 네 가지를 선언한다 — 선언 없이 생성을 시작하면 결과가 카탈로그의 기본 조합으로 수렴한다.",
-      "원형(archetype): 이 제품이 어떤 종류의 화면인지 한 단어로 고정한다(관리 콘솔, 읽기 중심 문서, 실시간 모니터, 데이터 탐색기, 폼 위주 업무 앱 등). ui.doksam.com/archetypes 레지스트리에 해당 원형이 있으면 그 이름을 쓰고, 없으면 자유 문자열로 적되 그 화면을 하루에 몇 번·얼마나 오래 쓰는지 한 줄로 덧붙인다.",
-      "성격(personality): 같은 원형도 성격에 따라 다르게 생긴다(조용한·밀도 높은·경쾌한·엄격한 등). ui.doksam.com/personalities 레지스트리에 있으면 그 이름을, 없으면 자유 문자열로 적는다. 성격은 밀도·모션의 양·강조 색 사용량을 결정하는 입력이다.",
-      "안 쓸 컴포넌트·패턴: 최소 세 개를 이름으로 배제한다(\"사이드바 안 씀\", \"Card 로 섹션 감싸지 않음\", \"Table 대신 정의 목록\" 등). 화면의 성격은 무엇을 쓰는가보다 무엇을 안 쓰는가에서 나온다.",
+      "원형(archetype): 이 제품의 화면 뼈대를 ui.doksam.com/archetypes 레지스트리의 원형 9종(sidebar-app, top-nav-site, split-pane, feed-timeline, dashboard-grid, wizard-flow, chat-workspace, canvas, doc-reader) 중 하나로 반드시 고른다 — 자유 문자열(\"커머스 스토어프론트\" 같은 자기 발명 이름)은 불가하다. 둘 이상에 걸치면 주 원형 1개 + 보조 원형 1개를 레지스트리 이름으로 적고, 어느 화면이 보조 원형을 쓰는지 밝힌다. 고른 원형의 내비 방식과 본문 구조(레지스트리의 뼈대 한 줄)를 그대로 따른다.",
+      "성격(personality): 같은 원형도 성격에 따라 다르게 생긴다. ui.doksam.com/personalities 레지스트리의 프리셋(neutral, crisp, elevated, statement) 중 하나를 고른다 — 밀도·모션의 양·표면(테두리/그림자/평면) 성향은 이 프리셋이 결정하며 프로젝트에서 값을 임의로 재정의하지 않는다.",
+      "안 쓸 컴포넌트·패턴: 최소 세 개를 이름으로 배제하되, 그중 최소 하나는 고른 원형·과제에서 기본으로 쓰일 법한 것이어야 한다(모바일 커머스라면 \"하단 탭바 안 씀\"·\"카드 그리드 안 씀\"·\"sticky CTA 안 씀\" 같은 것). 어차피 안 쓸 것(\"모바일 앱에서 사이드바 안 씀\")만 나열한 배제 목록은 결정에 영향이 없으므로 무효다. 화면의 성격은 무엇을 쓰는가보다 무엇을 안 쓰는가에서 나온다.",
       "이유: 위 세 항목 각각에 한 줄 근거를 붙인다. 취향(\"깔끔해서\")이 아니라 사용 맥락(사용 빈도·체류 시간·입력 장치·데이터 밀도·조직의 기존 도구)으로 쓴다.",
       "DESIGN.md 는 화면 코드와 같은 저장소에 두고 같은 커밋 흐름으로 갱신한다. 구현이 브리프와 어긋나면 코드부터 고치지 말고 브리프를 갱신할지 먼저 판단한다 — 어긋남이 반복되면 원형 선택이 틀린 것이다.",
       "브리프가 없는 작업은 이 문서의 [decision] 절을 판정할 수 없다 — 첫 화면을 만들기 전에 브리프를 사람과 합의한다.",
@@ -177,7 +177,7 @@ export const RULES_SECTIONS: RulesSection[] = [
     items: [
       "화면을 조립할 때는 컴포넌트 단품이 아니라 ui.doksam.com/patterns 의 조합 패턴(레이아웃·데이터 시각화·카드·상태·폼 입력)을 먼저 본다 — 다만 목록에서 고르는 것이지 전부 쓰는 것이 아니다. 브리프의 배제 목록에 걸린 패턴은 후보에서 뺀다.",
       "주식·파이프라인 등 도메인 화면은 /patterns 의 Srope 확장 패턴을 출발점으로 삼는다 — 도메인 용어나 갱신 주기가 맞지 않으면 그대로 쓰지 말고 어느 부분을 왜 바꿨는지 DESIGN.md 에 남긴다.",
-      "경계 — 레지스트리에 있는 원형은 ui.doksam.com/archetypes 의 권장 app-shell 변형을 프로젝트 전역 표준으로 고정한다. 레지스트리에 없는 자유 문자열 원형은 쓸 app-shell 변형 하나를 DESIGN.md 에 명시하고 그것을 전역 표준으로 삼는다: 어느 쪽이든 화면마다 뼈대를 바꾸지 않는다.",
+      "경계 — DESIGN.md 의 원형은 ui.doksam.com/archetypes 의 권장 app-shell 변형을 프로젝트 전역 표준으로 고정한다(보조 원형이 있으면 그 화면에만 보조 원형의 셸): 화면마다 뼈대를 바꾸지 않는다.",
       "경계 — 로딩·빈 목록·에러 상태는 /patterns/state 의 표준 상태 UI 패턴을 따른다: 이 셋의 존재 자체는 선택이 아니다.",
     ],
   },
@@ -225,6 +225,9 @@ export const RULES_SECTIONS: RulesSection[] = [
 
 /** 디자인 브리프 절. scripts/gen-llms.mjs 가 llms.txt 맨 앞에 싣는다 — 문안은 여기에만 둔다. */
 export const DESIGN_BRIEF_SECTION: RulesSection = RULES_SECTIONS[0];
+
+/** 수렴 안티패턴 절 — gen-llms 가 브리프 바로 뒤에 전문을 싣는다(#34). */
+export const CONVERGENCE_ANTIPATTERNS_SECTION: RulesSection = RULES_SECTIONS[1];
 
 function sectionToMarkdown(section: RulesSection): string {
   const bullets = section.items.map((item) => `- ${item}`).join("\n");

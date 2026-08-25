@@ -37,6 +37,12 @@ export interface LayoutArchetype {
   suitedFor: string[];
   /** 주 내비게이션이 어디에 어떤 형태로 놓이는가. */
   navigation: string;
+  /**
+   * 뼈대 한 줄 — 내비 방식 + 본문 구조를 한 문장으로(#34).
+   * scripts/gen-llms.mjs 가 llms.txt 의 원형 표에 싣는 원천이다: llms.txt 만 읽는
+   * 에이전트가 링크를 따라가지 않아도 원형마다 화면 골격이 어떻게 다른지 알 수 있어야 한다.
+   */
+  skeleton: string;
   /** components/patterns/app-shell-samples.tsx 의 권장 셸 변형 title. */
   shell: string;
   /** lib/templates/registry.ts 의 대표 템플릿 slug 목록. */
@@ -54,6 +60,8 @@ export const LAYOUT_ARCHETYPES: LayoutArchetype[] = [
       "좌측 상시 사이드바가 전 화면의 목적지를 나열하고 본문이 그 옆을 채우는 기본 앱 뼈대입니다. 목적지가 많고 사용자가 하루 종일 머무는 내부 도구에 맞습니다.",
     suitedFor: ["관리자·백오피스", "운영 콘솔", "목적지 6개 이상인 내부 도구"],
     navigation: "좌측 고정 사이드바(lg 미만에서는 드로어) + 본문 상단 페이지 타이틀",
+    skeleton:
+      "좌측 고정 사이드바(모바일은 드로어) → 본문은 페이지 타이틀 아래 한 칼럼 작업 영역. 하단 탭바 없음.",
     shell: "사이드바형 셸",
     templates: ["admin", "crawler-console", "rag-search"],
     avoidWhen: ["목적지가 3개 이하", "첫 방문 전환이 목적인 대외 랜딩", "모바일이 주 사용 환경"],
@@ -66,6 +74,8 @@ export const LAYOUT_ARCHETYPES: LayoutArchetype[] = [
       "상단 가로 내비 아래로 섹션이 세로로 흐르는 사이트 뼈대입니다. 처음 온 사람에게 무엇인지 설명하고 한 가지 행동으로 이끄는 화면에 맞습니다.",
     suitedFor: ["마케팅·랜딩 사이트", "제품 소개·가격 페이지", "공개 포털 홈"],
     navigation: "상단 가로 메뉴(모바일은 햄버거 시트) + 페이지 하단 푸터 링크",
+    skeleton:
+      "상단 가로 메뉴 → 본문은 히어로·섹션이 세로로 흐르는 스크롤 페이지 → 푸터. 사이드바·하단 탭바 없음.",
     shell: "헤더형 셸",
     templates: ["marketing-site", "saas", "bank"],
     avoidWhen: ["목적지가 8개를 넘어 가로 메뉴가 접힘", "화면당 조작이 많은 작업 도구", "상시 컨텍스트 전환이 필요한 콘솔"],
@@ -78,6 +88,8 @@ export const LAYOUT_ARCHETYPES: LayoutArchetype[] = [
       "좌측 목록과 우측 상세를 한 화면에 나란히 두고, 목록 선택이 우측만 바꾸는 뼈대입니다. 항목을 연달아 훑으며 처리하는 화면에 맞습니다.",
     suitedFor: ["메일·메시지 처리함", "이슈·티켓 트리아지", "에디터 + 미리보기"],
     navigation: "좌측 목록 패인이 곧 내비게이션 — 페이지 이동 없이 우측 상세만 교체",
+    skeleton:
+      "화면을 좌우로 분할해 좌측 목록·우측 상세를 동시에 표시(모바일은 목록↔상세 2단 전환). 페이지 이동 대신 우측 교체.",
     shell: "분할 패인 셸",
     templates: ["mail-workspace", "knowledge-base"],
     avoidWhen: ["상세가 목록보다 훨씬 짧아 우측이 비어 보임", "모바일 전용 화면", "항목을 하나만 열고 끝나는 흐름"],
@@ -90,6 +102,8 @@ export const LAYOUT_ARCHETYPES: LayoutArchetype[] = [
       "시간순 단일 세로 스트림이 화면의 주인공이고, 필터·요약은 곁가지로 붙는 뼈대입니다. 끝이 정해지지 않은 흐름을 계속 따라가는 화면에 맞습니다.",
     suitedFor: ["활동·알림 피드", "뉴스·공시 스트림", "감사 로그·이벤트 타임라인"],
     navigation: "상단 얇은 필터 바 + 무한 스크롤 스트림, 목적지 전환은 최소화",
+    skeleton:
+      "상단 얇은 필터 바 → 단일 세로 스트림이 화면 전체(항목은 카드 그리드가 아니라 시간순 한 줄 행). 하단 탭바·사이드바 없음.",
     shell: "피드형 셸",
     templates: ["activity-feed", "market-report"],
     avoidWhen: ["항목 간 비교가 목적인 화면", "정렬·페이징이 핵심인 표 데이터", "항목 수가 20개 미만으로 고정"],
@@ -102,6 +116,8 @@ export const LAYOUT_ARCHETYPES: LayoutArchetype[] = [
       "지표 카드·차트를 격자로 배열해 한 화면에서 전체 상태를 읽는 뼈대입니다. 깊이 파고들기보다 이상 징후를 빨리 찾는 것이 목적일 때 맞습니다.",
     suitedFor: ["KPI 요약 대시보드", "시세·모니터링 보드", "경영 리포트 첫 화면"],
     navigation: "상단 기간·범위 필터 + 카드 클릭으로 상세 화면 진입",
+    skeleton:
+      "상단 기간·범위 필터 → 지표 카드·차트를 2~4열 격자로 배열. 카드 클릭이 상세 진입.",
     shell: "사이드바형 셸",
     templates: ["trading", "brokerage", "company-intel"],
     avoidWhen: ["지표가 3개 이하", "한 지표를 깊게 파는 분석 화면", "카드마다 조작 폼이 붙는 경우"],
@@ -114,6 +130,8 @@ export const LAYOUT_ARCHETYPES: LayoutArchetype[] = [
       "한 번에 한 단계만 보여주고 진행률로 남은 길을 알리는 선형 뼈대입니다. 중간에 이탈하면 안 되는 절차형 입력에 맞습니다.",
     suitedFor: ["가입·온보딩", "이체·결제 등 다단계 거래", "설정 마법사"],
     navigation: "단계 표시기(stepper)가 유일한 내비 — 이전/다음 버튼만 허용",
+    skeleton:
+      "상단 단계 표시기(stepper) → 본문은 현재 단계 하나만 한 칼럼으로 → 하단 이전/다음 버튼. 상시 내비·탭바 없음.",
     shell: "헤더형 셸",
     templates: ["shop", "crawler-console"],
     avoidWhen: ["단계가 2개 이하", "사용자가 순서를 자유롭게 오가야 하는 편집", "언제든 저장하고 나갈 수 있어야 하는 폼"],
@@ -126,6 +144,8 @@ export const LAYOUT_ARCHETYPES: LayoutArchetype[] = [
       "하단 고정 입력창과 위로 쌓이는 대화 스크롤러가 축이고, 대화 목록·설정이 옆에 붙는 뼈대입니다. 왕복 대화가 화면의 본체인 경우에 맞습니다.",
     suitedFor: ["AI 어시스턴트", "상담·문의 콘솔", "협업 메시징"],
     navigation: "좌측 대화 목록(모바일 드로어) + 하단 고정 컴포저",
+    skeleton:
+      "좌측 대화 목록(모바일 드로어) → 중앙은 위로 쌓이는 메시지 스크롤러 → 하단 고정 입력 컴포저.",
     shell: "분할 패인 셸",
     templates: ["chat"],
     avoidWhen: ["단발성 질의응답 한 번으로 끝나는 화면", "대화 이력이 남지 않는 검색", "출력이 표·차트 위주"],
@@ -138,6 +158,8 @@ export const LAYOUT_ARCHETYPES: LayoutArchetype[] = [
       "무한 평면 위에 요소를 직접 배치하고 도구 팔레트·속성 패널이 그 가장자리를 감싸는 뼈대입니다. 공간 배치 자체가 산출물일 때 맞습니다.",
     suitedFor: ["와이어프레임·다이어그램 빌더", "그래프·네트워크 탐색", "보드형 편집기"],
     navigation: "좌측 도구 팔레트 + 우측 속성 패널, 이동은 팬·줌으로 대체",
+    skeleton:
+      "좌측 도구 팔레트 → 중앙 팬·줌 무한 평면 → 우측 속성 패널. 페이지 내비 없이 평면 이동이 곧 탐색.",
     shell: "분할 패인 셸",
     templates: ["glossary", "ontology"],
     avoidWhen: ["읽기 전용 열람 화면", "모바일 우선 화면", "결과가 선형 문서로 충분한 경우"],
@@ -150,6 +172,8 @@ export const LAYOUT_ARCHETYPES: LayoutArchetype[] = [
       "본문 한 칼럼을 읽기 좋은 폭으로 좁히고 좌측 문서 트리·우측 목차가 그 위치를 알려주는 뼈대입니다. 긴 글을 끝까지 읽히는 것이 목적일 때 맞습니다.",
     suitedFor: ["기술 문서·위키", "규칙·정책 문서", "블로그·아티클"],
     navigation: "좌측 문서 트리 + 우측 목차(스크롤 동기) + 본문 max-w-prose",
+    skeleton:
+      "좌측 문서 트리 → 중앙 max-w-prose 본문 한 칼럼 → 우측 스크롤 동기 목차.",
     shell: "문서 리더 셸",
     templates: ["knowledge-base", "kubernetes-firewall"],
     avoidWhen: ["본문이 한 화면에 들어오는 짧은 글", "표·차트가 본문보다 많은 화면", "조작이 주가 되는 도구"],

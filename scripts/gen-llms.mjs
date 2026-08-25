@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// llms.txt(AI 발견용 카탈로그) 생성기(#26).
+// llms.txt(AI 발견용 카탈로그) 생성기(#26, #28, #34).
 //
 // registry.json(루트 — shadcn build 입력, 단일 진실원천)의 items[]를 그대로 순회해
 // public/llms.txt 를 만든다. 새 registry item을 추가/수정해도 이 스크립트를 다시
@@ -23,7 +23,35 @@ const HOMEPAGE = "https://ui.doksam.com";
  *
  * Node 22.18+ 는 .ts 를 타입 스트리핑으로 그대로 import 한다(CI 도 node 22).
  */
-const { DESIGN_BRIEF_SECTION } = await import("../lib/rules-markdown.ts");
+const { DESIGN_BRIEF_SECTION, CONVERGENCE_ANTIPATTERNS_SECTION } = await import("../lib/rules-markdown.ts");
+// 원형·성격 메뉴는 링크가 아니라 표로 인라인한다(#34) — llms.txt 하나만 읽는 에이전트가
+// 레지스트리를 따라가지 않고도 9종 중에서 고를 수 있어야 한다. 항목 원천은 각 레지스트리.
+const { LAYOUT_ARCHETYPES } = await import("../archetypes/index.ts");
+const { PERSONALITY_PRESETS } = await import("../personalities/index.ts");
+
+/** markdown 표 셀 — 파이프는 표를 깨므로 이스케이프한다. */
+const cell = (text) => String(text).replaceAll("|", "\\|");
+
+function archetypeTable() {
+  const rows = [
+    "| 원형(name) | 뼈대(내비 + 본문 구조) | 적합한 화면 | 피해야 할 경우 | 대표 템플릿 |",
+    "| --- | --- | --- | --- | --- |",
+  ];
+  for (const a of LAYOUT_ARCHETYPES) {
+    rows.push(
+      `| \`${a.name}\` | ${cell(a.skeleton)} | ${cell(a.suitedFor.join(" · "))} | ${cell(a.avoidWhen.join(" · "))} | ${a.templates.map((t) => `\`${t}\``).join(", ")} |`,
+    );
+  }
+  return rows;
+}
+
+function personalityTable() {
+  const rows = ["| 성격(name) | scale | surface | motion | 어울리는 곳 |", "| --- | --- | --- | --- | --- |"];
+  for (const p of PERSONALITY_PRESETS) {
+    rows.push(`| \`${p.name}\` | ${p.scale} | ${p.surface} | ${p.motion} | ${cell(p.description)} |`);
+  }
+  return rows;
+}
 
 const TYPE_LABEL = {
   "registry:component": "컴포넌트",
@@ -75,7 +103,29 @@ function main() {
     lines.push(`- ${item}`);
   }
   lines.push("");
-  lines.push(`피해야 할 기본값 목록("수렴 안티패턴")과 두 층의 전체 조항은 ${HOMEPAGE}/rules.md 에 있습니다.`);
+  lines.push(`### 원형 레지스트리 (${LAYOUT_ARCHETYPES.length}종 — 이 중에서만 고른다)`);
+  lines.push("");
+  lines.push(
+    "DESIGN.md 의 원형은 아래 `name` 값 중 하나여야 합니다. 같은 과제라도 원형이 다르면 내비 방식과 " +
+      "본문 구조가 달라야 하며, 뼈대 열이 그 최소 요구입니다. 어느 원형에도 맞지 않으면 가장 가까운 것을 " +
+      "주 원형으로 두고 보조 원형을 하나 더 적습니다 — 새 이름을 만들지 않습니다.",
+  );
+  lines.push("");
+  lines.push(...archetypeTable());
+  lines.push("");
+  lines.push(`### 성격 레지스트리 (${PERSONALITY_PRESETS.length}종)`);
+  lines.push("");
+  lines.push(...personalityTable());
+  lines.push("");
+  lines.push(`## ${CONVERGENCE_ANTIPATTERNS_SECTION.title}`);
+  lines.push("");
+  lines.push("브리프의 배제 목록을 쓰기 전에 읽습니다 — 아래는 근거 없이 채택되면 모든 결과물이 같아지는 기본값입니다.");
+  lines.push("");
+  for (const item of CONVERGENCE_ANTIPATTERNS_SECTION.items) {
+    lines.push(`- ${item}`);
+  }
+  lines.push("");
+  lines.push(`두 층의 전체 조항은 ${HOMEPAGE}/rules.md 에 있습니다.`);
   lines.push("");
 
   for (const [label, items] of groups) {
