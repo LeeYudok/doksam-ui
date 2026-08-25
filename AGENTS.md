@@ -12,13 +12,25 @@ doksam-ui 에서 AI 에이전트가 작업할 때 먼저 읽는 문서입니다.
 
 | 무엇 | 어디 |
 | --- | --- |
-| **UI 작성 규칙 원문** (색·컴포넌트·테마 초기화·아이콘·라우팅·반응형·폐쇄망·TypeScript·의존성 규율) | `lib/rules-markdown.ts` 의 `RULES_SECTIONS` — **단일 진실원천** |
+| **UI 작성 규칙 원문** (디자인 브리프·수렴 안티패턴·색·컴포넌트·테마 초기화·아이콘·라우팅·반응형·모션·접근성·폐쇄망·TypeScript·의존성 규율) | `lib/rules-markdown.ts` 의 `RULES_SECTIONS` — **단일 진실원천** |
 | 카탈로그 항목 추가/수정 절차 | `/doksam-design-guide` 스킬 (`.claude/skills/doksam-design-guide/`) |
 | 레포 개요·디렉터리 구조 | `README.md` |
 
 규칙 조항은 `lib/rules-markdown.ts` 에만 존재합니다. 이 문서를 포함해 어디에도
 규칙 문장을 복제하지 않습니다 — 복제본과 원문이 어긋나면 원문이 옳습니다.
-`/rules` 페이지와 AI 프롬프트용 `RULES_MARKDOWN` 이 모두 그 파일에서 파생됩니다.
+`/rules` 페이지, `/rules.md`, `public/llms.txt` 의 디자인 브리프 블록이 모두 그 파일에서
+파생됩니다.
+
+규칙은 두 층입니다(#28). 각 `RulesSection` 의 `kind` 가 층을 정하고, markdown 에는
+제목 뒤 `[invariant]`(불변) / `[decision]`(선택) 마커로 나갑니다.
+
+- **불변** — 프로젝트가 달라도 답이 같습니다. 상당수는 자동 테스트가 막습니다.
+- **선택** — 프로젝트마다 정답이 다릅니다. 선택 절은 명령문이 아니라 **선택지 + 고르는
+  기준 + 경계** 형식으로 씁니다(첫 항목이 무엇을 고르는지, 나머지가 `경계 —` 항목).
+  무엇을 골랐는지는 소비 프로젝트의 `DESIGN.md` 에 남깁니다.
+
+첫 두 절(디자인 브리프·수렴 안티패턴)은 생성 전에 무엇을 **안 쓸지** 고르게 하는
+단계입니다. 순서를 바꾸지 않습니다.
 
 ---
 
@@ -84,6 +96,10 @@ pnpm build          # 프로덕션 빌드
 
 ## 5. 규칙 자체를 바꿀 때
 
-`lib/rules-markdown.ts` 의 `RULES_SECTIONS` 만 수정합니다. 규칙을 추가·변경했다면
+`lib/rules-markdown.ts` 의 `RULES_SECTIONS` 만 수정합니다. 새 절에는 `kind` 를 반드시
+지정하고, 선택(`decision`) 절이면 첫 항목이 선택지를, 나머지가 `경계 —` 항목이 되도록
+씁니다 — `lib/rules-markdown.test.ts` 가 그 구조를 강제합니다. 디자인 브리프 절은
+`DESIGN_BRIEF_SECTION` 으로 `scripts/gen-llms.mjs` 가 `public/llms.txt` 맨 앞에 실으므로
+첫 절 자리를 유지합니다. 규칙을 추가·변경했다면
 `.claude/skills/doksam-design-guide/` 가 그와 모순되지 않는지 함께 확인하고,
 충돌하면 스킬 쪽을 고칩니다.

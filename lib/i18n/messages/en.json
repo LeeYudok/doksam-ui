@@ -197,6 +197,8 @@
   "page.profiles.meta.shell": "Recommended shell",
   "page.profiles.title": "Brand Profiles",
   "page.rules.description": "The rules to follow when building UI for a doksam project. For AI agents, just paste this page's raw markdown directly into a prompt.",
+  "page.rules.kind.decision": "Decision",
+  "page.rules.kind.invariant": "Invariant",
   "page.templates.badge": "Flagship Bundle",
   "page.templates.description": "Full app scaffolds assembled from brand profiles and standard patterns, ready to deploy as-is. Each template enforces its profile's tokens and uses the catalog's components directly.",
   "page.templates.free": "Free",

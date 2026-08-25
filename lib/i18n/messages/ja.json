@@ -197,6 +197,8 @@
   "page.profiles.meta.shell": "推奨シェル",
   "page.profiles.title": "ブランドプロファイル",
   "page.rules.description": "doksam プロジェクトで UI を作る際に守るルールです。AI エージェントにはこのページの markdown 原文をそのままプロンプトに貼り付ければよいです。",
+  "page.rules.kind.decision": "選択",
+  "page.rules.kind.invariant": "不変",
   "page.templates.badge": "フラッグシップバンドル",
   "page.templates.description": "ブランドプロファイルと標準パターンを組み立て、すぐにデプロイできるフルアプリスキャフォールドです。各テンプレートは対応するプロファイルトークンを強制適用し、カタログのコンポーネントをそのまま使用します。",
   "page.templates.free": "無料",

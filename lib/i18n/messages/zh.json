@@ -197,6 +197,8 @@
   "page.profiles.meta.shell": "推荐 Shell",
   "page.profiles.title": "品牌 Profile",
   "page.rules.description": "在 doksam 项目中构建 UI 时需遵守的规则。对 AI 代理，只需将本页面的 markdown 原文直接粘贴到提示词中即可。",
+  "page.rules.kind.decision": "可选",
+  "page.rules.kind.invariant": "不变",
   "page.templates.badge": "旗舰套装",
   "page.templates.description": "组合品牌 Profile 与标准模式、可直接部署的完整应用脚手架。每个模板均强制应用对应 Profile 的令牌，并直接使用目录中的组件。",
   "page.templates.free": "免费",

@@ -197,6 +197,8 @@
   "page.profiles.meta.shell": "Shell recomendado",
   "page.profiles.title": "Perfiles de marca",
   "page.rules.description": "Reglas que se siguen al construir UI en los proyectos doksam. Al agente de IA basta con pegar el texto markdown original de esta página directamente en el prompt.",
+  "page.rules.kind.decision": "Decisión",
+  "page.rules.kind.invariant": "Invariante",
   "page.templates.badge": "Paquete insignia",
   "page.templates.description": "Scaffolds de aplicación completa listos para desplegar, ensamblados a partir de perfiles de marca y patrones estándar. Cada plantilla aplica de forma forzada los tokens del perfil correspondiente y usa directamente los componentes del catálogo.",
   "page.templates.free": "Gratis",
