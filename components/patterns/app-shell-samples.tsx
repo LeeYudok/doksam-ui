@@ -128,7 +128,8 @@ export const APP_SHELL_SAMPLES: PatternSampleData[] = [
       "좌측 목록과 우측 상세를 한 화면에 두고, 목록 선택이 페이지 이동 없이 우측만 바꾸는 셸입니다 — split-pane 원형의 기본 뼈대입니다.",
     demo: (
       <div className="flex h-[160px] w-full overflow-hidden rounded-md border border-border">
-        {/* 좁은 뷰포트에서는 목록만 남긴다 — 아래 notes 의 접힘 규칙을 데모에서도 그대로 지킨다. */}
+        {/* 좁은 뷰포트에서는 목록만 남긴다 — 아래 notes 의 접힘 규칙을 데모에서도 지킨다.
+            실제 화면 기준점은 lg 지만 이 데모는 카드 안 축소 삽화라 sm 에서 접는다. */}
         <div className="flex w-full shrink-0 flex-col border-r border-border bg-card sm:w-28">
           <div className="flex items-center gap-1 border-b border-border px-2 py-1.5">
             <ColumnsIcon size={11} weight="regular" className="text-primary" />
