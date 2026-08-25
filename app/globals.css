@@ -690,6 +690,83 @@
   padding-block: var(--cell-py);
 }
 
+/* 시각 성격(personality) 토큰 층(#90) — 브랜드 프로필이 <html data-personality>
+   (타입·스페이싱 스케일) · data-personality-surface(표면 성향) ·
+   data-personality-motion(모션 강도) 3개 속성으로 지정한다. 속성이 없으면 아무
+   규칙도 걸리지 않아 기존 렌더와 완전히 동일하다(밀도 층과 동일한 opt-in 원칙).
+   neutral 프리셋(regular/border/subtle, personalities/index.ts)이 기존 5개
+   프로필의 현재 룩이다 — 아래 세 값 모두 no-op 이 되도록 맞춰져 있다. */
+
+/* 타입·스페이싱 스케일 — html font-size 를 rem 기준으로 조정한다. Tailwind
+   유틸리티(text-*, p-*, gap-* 등)가 전부 rem 기반이라 이 한 변수로 타입과
+   스페이싱이 동시에 파생되고, 별도 --spacing 오버라이드가 필요 없다.
+   regular = 1(=기존 렌더와 동일, 5개 프로필이 쓰는 값). */
+[data-personality] {
+  --personality-scale: 1;
+}
+
+[data-personality="compact"] {
+  --personality-scale: 0.9375;
+}
+
+[data-personality="bold"] {
+  --personality-scale: 1.0625;
+}
+
+html[data-personality] {
+  font-size: calc(1rem * var(--personality-scale));
+}
+
+/* rem은 항상 <html> 기준이라 --personality-scale로 지역(div) font-size를 바꿔도
+   rem 기반 Tailwind 유틸리티(text-*, p-*, gap-* 등)는 반응하지 않는다.
+   ProfilePreviewKit·PersonalitySection처럼 <html> 아닌 스코프 컨테이너에 이
+   속성을 걸 때만 zoom으로 시각적 배율을 낸다(CodeRabbit #90 finding —
+   문서 전체 적용은 위 html 규칙이 그대로 처리하므로 이중 적용 방지를 위해
+   :not(html)로 한정한다). */
+[data-personality]:not(html) {
+  zoom: var(--personality-scale);
+}
+
+[data-personality="bold"] :is(h1, h2, h3) {
+  font-weight: 600;
+}
+
+/* 표면(surface) 성향 — border 는 기존 Card 렌더(ring-1 ring-foreground/10)와
+   동일해 오버라이드가 없다. shadow/flat 만 box-shadow 를 재정의한다. 그림자
+   색은 하드코딩 없이 --foreground 시맨틱 토큰에서 color-mix 로 파생한다. */
+[data-personality-surface="shadow"] [data-slot="card"] {
+  box-shadow:
+    0 1px 2px color-mix(in oklch, var(--foreground) 8%, transparent),
+    0 2px 6px color-mix(in oklch, var(--foreground) 10%, transparent);
+}
+
+[data-personality-surface="flat"] [data-slot="card"] {
+  box-shadow: none;
+}
+
+/* 모션 강도 — subtle 은 컴포넌트 기본 transition(예: button.tsx 의
+   "전 속성 전환" 유틸리티)과 동일해 오버라이드가 없다. expressive 는 지속시간을 늘려
+   강조한다. none 은 전 요소의 transition·animation 을 사실상 제거한다 —
+   prefers-reduced-motion 대응과 같은 접근성 목적(전정 장애·저사양 기기)이며,
+   0 대신 0.01ms 를 쓰는 이유는 transitionend/animationend 이벤트에 의존하는
+   컴포넌트(다이얼로그 닫힘 등)가 이벤트를 놓치지 않게 하기 위해서다.
+   !important 는 의도적이다: Tailwind 유틸리티(duration-*)가 요소마다 인라인급
+   우선순위로 지속시간을 박아 두므로, 일반 선택자로는 이를 이길 수 없다. */
+[data-personality-motion="none"] *,
+[data-personality-motion="none"] *::before,
+[data-personality-motion="none"] *::after {
+  transition-duration: 0.01ms !important;
+  animation-duration: 0.01ms !important;
+  /* 지속시간만 줄이면 infinite 애니메이션이 계속 반복 재생된다(#90 CodeRabbit
+     finding) — 1회로 고정해 진짜로 "거의 즉시 끝나는" 상태로 만든다. */
+  animation-iteration-count: 1 !important;
+  scroll-behavior: auto !important;
+}
+
+[data-personality-motion="expressive"] * {
+  transition-duration: 300ms;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { FONT_PRESETS, getFontPreset } from "@/fonts";
 import { generateProfileCode } from "@/lib/profile-css";
+import { getPersonalityPreset } from "@/personalities";
 import { BRAND_PROFILES } from "@/profiles";
 import { THEME_PRESETS, getThemePreset } from "@/themes";
 
@@ -38,6 +39,7 @@ export default function ProfilesPage() {
 function ProfileCard({ profile }: Readonly<{ profile: (typeof BRAND_PROFILES)[number] }>) {
   const theme = getThemePreset(profile.theme);
   const font = getFontPreset(profile.font);
+  const personality = getPersonalityPreset(profile.personality);
   const code = generateProfileCode(profile);
   const installCommand = `npx shadcn@latest add https://ui.doksam.com/r/profile-${profile.name}.json`;
 
@@ -81,6 +83,13 @@ function ProfileCard({ profile }: Readonly<{ profile: (typeof BRAND_PROFILES)[nu
               <TranslatedText k="page.profiles.meta.density" ko="밀도" />
             </dt>
             <dd className="text-foreground">{profile.density}</dd>
+          </div>
+          <div className="flex justify-between gap-2">
+            <dt>
+              <TranslatedText k="page.profiles.meta.personality" ko="시각 성격" />
+            </dt>
+            {/* 레지스트리에 없는 이름이면 raw 키를 그대로 보여 불일치가 눈에 띄게 한다(theme/font 와 동일) */}
+            <dd className="text-foreground">{personality?.label ?? profile.personality}</dd>
           </div>
           {profile.shell ? (
             <div className="flex justify-between gap-2">

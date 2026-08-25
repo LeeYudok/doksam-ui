@@ -61,6 +61,7 @@ export const RULES_SECTIONS: RulesSection[] = [
       "새 프리셋이 필요하면 themes/<name>.ts 파일을 추가하고 themes/index.ts 레지스트리에 등록한다. 기존 프리셋 파일이나 app/globals.css의 다른 프리셋 블록은 건드리지 않는다.",
       "시세 등락(이익/상승, 손실/하락)을 표시할 때는 text-red-600/text-blue-600 등을 직접 쓰지 않고 --gain/--loss 토큰(lib/finance/rate.ts의 rateColor/rateText)을 쓴다 — 한국식 관례로 이익=빨강, 손실=파랑이며 모든 프리셋에서 동일한 값을 쓴다(destructive/success/warning과 같은 방식).",
       "lightweight-charts·canvas 등 CSS를 직접 해석하지 못하는 렌더러에 색을 넘길 때는 CSS 변수/유틸리티 클래스 문자열을 그대로 주지 않고 lib/finance/normalize-color.ts의 normalizeColor(또는 readCssVar/readClassColor)로 hex 값을 해소해서 넘긴다. 프리셋·다크모드 전환 시 재해소가 필요하면 observeColorScheme로 <html>의 class/data-theme/data-font 변화를 구독한다.",
+      "색 외의 시각 성격(타입/스페이싱 스케일, 표면 성향, 모션 강도)은 <html data-personality>/data-personality-surface/data-personality-motion 토큰 층을 쓴다 — personalities/index.ts 레지스트리의 프리셋을 profiles/index.ts의 BrandProfile.personality가 참조하며, 프로젝트에서 값을 임의로 재정의하지 않는다.",
     ],
   },
   {

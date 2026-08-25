@@ -11,6 +11,9 @@ import {
   DENSITY_STORAGE_KEY,
   FONT_STORAGE_KEY,
   LOCALE_STORAGE_KEY,
+  PERSONALITY_MOTION_STORAGE_KEY,
+  PERSONALITY_SCALE_STORAGE_KEY,
+  PERSONALITY_SURFACE_STORAGE_KEY,
   RADIUS_STORAGE_KEY,
   THEME_MODE_STORAGE_KEY,
   THEME_PRESET_STORAGE_KEY,
@@ -149,6 +152,15 @@ const THEME_INIT_SCRIPT = `
     if (density) root.setAttribute("data-density", density);
     var radius = window.localStorage.getItem(${JSON.stringify(RADIUS_STORAGE_KEY)});
     if (radius) root.style.setProperty("--radius", radius);
+    // 시각 성격(personality) 토큰 층(#90) — 밀도와 동일한 패턴으로 raw 값을
+    // 그대로 저장/반영한다(레지스트리 preset 이름이 아니라 scale/surface/motion
+    // 3값). 값이 없으면 아무것도 세팅하지 않는다.
+    var personalityScale = window.localStorage.getItem(${JSON.stringify(PERSONALITY_SCALE_STORAGE_KEY)});
+    if (personalityScale) root.setAttribute("data-personality", personalityScale);
+    var personalitySurface = window.localStorage.getItem(${JSON.stringify(PERSONALITY_SURFACE_STORAGE_KEY)});
+    if (personalitySurface) root.setAttribute("data-personality-surface", personalitySurface);
+    var personalityMotion = window.localStorage.getItem(${JSON.stringify(PERSONALITY_MOTION_STORAGE_KEY)});
+    if (personalityMotion) root.setAttribute("data-personality-motion", personalityMotion);
   } catch (e) {}
 })();
 `;

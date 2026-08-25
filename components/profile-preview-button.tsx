@@ -7,10 +7,14 @@ import { Button } from "@/components/ui/button";
 import {
   DENSITY_STORAGE_KEY,
   FONT_STORAGE_KEY,
+  PERSONALITY_MOTION_STORAGE_KEY,
+  PERSONALITY_SCALE_STORAGE_KEY,
+  PERSONALITY_SURFACE_STORAGE_KEY,
   RADIUS_STORAGE_KEY,
   THEME_MODE_STORAGE_KEY,
   THEME_PRESET_STORAGE_KEY,
 } from "@/lib/theme-storage";
+import { getPersonalityPreset } from "@/personalities";
 import type { BrandProfile } from "@/profiles";
 
 interface ProfilePreviewButtonProps {
@@ -28,10 +32,21 @@ export function ProfilePreviewButton({ profile }: Readonly<ProfilePreviewButtonP
 
   const syncActive = useCallback(() => {
     const root = document.documentElement;
+    // personality 가 undefined(레지스트리 불일치)면 아래 비교는 <html> 에 속성이
+    // 없을 때만 참 — 프로필 무결성 테스트가 이 경우를 사전에 막는다.
+    const personality = getPersonalityPreset(profile.personality);
+    const surface = root.getAttribute("data-personality-surface");
+    const motion = root.getAttribute("data-personality-motion");
     setActive(
       root.dataset.theme === profile.theme &&
         root.dataset.font === profile.font &&
         (root.dataset.density === undefined || root.dataset.density === profile.density) &&
+        (root.dataset.personality === undefined || root.dataset.personality === personality?.scale) &&
+        // scale 이 같아도 surface/motion 이 다른 프리셋일 수 있어(#90 CodeRabbit
+        // finding) 존재하는 속성은 모두 비교한다 — 속성이 없으면(레지스트리
+        // 불일치 등) 기존과 동일하게 비교를 건너뛴다.
+        (surface === null || surface === personality?.surface) &&
+        (motion === null || motion === personality?.motion) &&
         (root.classList.contains("dark") ? "dark" : "light") === profile.defaultMode,
     );
   }, [profile]);
@@ -44,13 +59,22 @@ export function ProfilePreviewButton({ profile }: Readonly<ProfilePreviewButtonP
     const observer = new MutationObserver(syncActive);
     observer.observe(document.documentElement, {
       attributes: true,
-      attributeFilter: ["data-theme", "data-font", "data-density", "class"],
+      attributeFilter: [
+        "data-theme",
+        "data-font",
+        "data-density",
+        "data-personality",
+        "data-personality-surface",
+        "data-personality-motion",
+        "class",
+      ],
     });
     return () => observer.disconnect();
   }, [syncActive]);
 
   const handleClick = useCallback(() => {
     const root = document.documentElement;
+    const personality = getPersonalityPreset(profile.personality);
     root.dataset.theme = profile.theme;
     root.dataset.font = profile.font;
     root.dataset.density = profile.density;
@@ -61,6 +85,15 @@ export function ProfilePreviewButton({ profile }: Readonly<ProfilePreviewButtonP
     window.localStorage.setItem(THEME_MODE_STORAGE_KEY, profile.defaultMode);
     window.localStorage.setItem(DENSITY_STORAGE_KEY, profile.density);
     window.localStorage.setItem(RADIUS_STORAGE_KEY, profile.radius);
+    // 프리셋을 못 찾으면 personality 속성·키를 건드리지 않는다(밀도 층과 동일한 opt-in).
+    if (personality) {
+      root.dataset.personality = personality.scale;
+      root.setAttribute("data-personality-surface", personality.surface);
+      root.setAttribute("data-personality-motion", personality.motion);
+      window.localStorage.setItem(PERSONALITY_SCALE_STORAGE_KEY, personality.scale);
+      window.localStorage.setItem(PERSONALITY_SURFACE_STORAGE_KEY, personality.surface);
+      window.localStorage.setItem(PERSONALITY_MOTION_STORAGE_KEY, personality.motion);
+    }
   }, [profile]);
 
   return (

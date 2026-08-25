@@ -12,7 +12,7 @@ describe("generateProfileCode", () => {
     expect(code).toContain('[data-theme="slate"]');
     expect(code).toContain('[data-theme="slate"].dark');
     expect(code).toContain(
-      '<html data-theme="slate" data-font="geist" data-density="compact" style="--radius: 6px">',
+      '<html data-theme="slate" data-font="geist" data-density="compact" data-personality="regular" data-personality-surface="border" data-personality-motion="subtle" style="--radius: 6px">',
     );
   });
 
@@ -21,7 +21,7 @@ describe("generateProfileCode", () => {
     const code = generateProfileCode(profile);
 
     expect(code).toContain(
-      '<html data-theme="violet" data-font="space-grotesk" data-density="compact" style="--radius: 6px" class="dark">',
+      '<html data-theme="violet" data-font="space-grotesk" data-density="compact" data-personality="regular" data-personality-surface="border" data-personality-motion="subtle" style="--radius: 6px" class="dark">',
     );
   });
 
@@ -34,6 +34,17 @@ describe("generateProfileCode", () => {
     expect(code).toContain("--control-h");
     expect(code).toContain("--cell-py");
     expect(code).toContain("--stack-gap");
+  });
+
+  it("includes the personality token layer so consumers can paste it as-is (#90)", () => {
+    const profile = getBrandProfile("service")!;
+    const code = generateProfileCode(profile);
+
+    expect(code).toContain("[data-personality] {");
+    expect(code).toContain('[data-personality="compact"] {');
+    expect(code).toContain('[data-personality-surface="shadow"]');
+    expect(code).toContain('[data-personality-motion="none"]');
+    expect(code).toContain("--personality-scale");
   });
 
   it("produces non-empty output for every registered profile", () => {
