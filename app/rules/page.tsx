@@ -37,8 +37,8 @@ export default function RulesPage() {
 
       <div className="flex items-center justify-between gap-3 rounded-lg border border-border bg-muted/40 p-4">
         <p className="text-sm text-muted-foreground">
-          AI 프롬프트용 markdown 원문 전체를 복사합니다. 절 제목 뒤 표시가 불변(invariant)과
-          선택(decision)을 가릅니다 — 선택 층은 명령이 아니라 선택지와 고르는 기준입니다.
+          <TranslatedText k="page.rules.copyHint" ko="AI 프롬프트용 markdown 원문 전체를 복사합니다." />{" "}
+          <TranslatedText k="page.rules.kindHint" ko="절 제목 뒤 표시가 불변(invariant)과 선택(decision)을 가릅니다 — 선택 층은 명령이 아니라 선택지와 고르는 기준입니다." />
         </p>
         <CopyButton value={RULES_MARKDOWN} label="전체 markdown 복사" />
       </div>
