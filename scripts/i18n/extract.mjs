@@ -102,6 +102,28 @@ catalog["chrome.sidebar.index"] = "전체 보기";
   while ((m = re.exec(src))) catalog[`profile.${m[1]}.description`] = m[2];
 }
 
+// 레이아웃 원형 카드 문구 (archetype.<name>.* — /archetypes TranslatedText 동적 키)
+{
+  const src = readFileSync(join(ROOT, "archetypes/index.ts"), "utf8");
+  const chunks = src.split(/\n  \{\n    name: "/).slice(1);
+  for (const chunk of chunks) {
+    const name = chunk.slice(0, chunk.indexOf('"'));
+    const one = (field) => chunk.match(new RegExp(`${field}:\\s*\\n?\\s*"([^"]+)"`))?.[1];
+    const many = (field) =>
+      [...(chunk.match(new RegExp(`${field}:\\s*\\[([^\\]]*)\\]`))?.[1] ?? "").matchAll(/"([^"]+)"/g)].map(
+        (m) => m[1],
+      );
+    const description = one("description");
+    if (description) catalog[`archetype.${name}.description`] = description;
+    const navigation = one("navigation");
+    if (navigation) catalog[`archetype.${name}.navigation`] = navigation;
+    const shell = one("shell");
+    if (shell) catalog[`archetype.${name}.shell`] = shell;
+    many("suitedFor").forEach((v, i) => (catalog[`archetype.${name}.suited.${i}`] = v));
+    many("avoidWhen").forEach((v, i) => (catalog[`archetype.${name}.avoid.${i}`] = v));
+  }
+}
+
 // 디바이스 프리뷰 모드 라벨 (chrome.preview.mode.<id> — device-preview 동적 키)
 {
   const src = readFileSync(join(ROOT, "components/device-preview.tsx"), "utf8");

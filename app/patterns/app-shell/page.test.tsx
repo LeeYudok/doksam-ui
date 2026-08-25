@@ -18,8 +18,8 @@ describe("AppShellPatternsPage", () => {
     }
   })
 
-  it("renders 5 samples", () => {
+  it("renders 8 samples", () => {
     render(<AppShellPatternsPage />)
-    expect(APP_SHELL_SAMPLES.length).toBe(5)
+    expect(APP_SHELL_SAMPLES.length).toBe(8)
   })
 })

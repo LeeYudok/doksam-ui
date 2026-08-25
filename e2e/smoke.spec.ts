@@ -14,6 +14,7 @@ const ROUTES = [
   "/templates",
   "/rules",
   "/profiles",
+  "/archetypes",
   "/wireframe",
   // 신규 상세 라우트 — 컴포넌트/패턴/템플릿 각 1개 이상 대표로 포함.
   "/components/date-picker",
@@ -26,6 +27,9 @@ const ROUTES = [
   "/templates/company-intel",
   "/templates/knowledge-base",
   "/templates/rag-search",
+  "/templates/marketing-site",
+  "/templates/mail-workspace",
+  "/templates/activity-feed",
 ];
 
 // 페이지 자체 결함이 아닌 것으로 알려진 콘솔 노이즈만 최소한으로 화이트리스트한다.

@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 
+import { APP_SHELL_SAMPLES } from "@/components/patterns/app-shell-samples";
 import { FONT_PRESETS, getFontPreset } from "@/fonts";
+import { getLayoutArchetype } from "@/archetypes";
 import { BRAND_PROFILES, DEFAULT_BRAND_PROFILE, getBrandProfile } from "@/profiles";
 import { THEME_PRESETS, getThemePreset } from "@/themes";
 
@@ -47,6 +49,26 @@ describe("BRAND_PROFILES", () => {
     expect(getBrandProfile("admin")).toMatchObject({ radius: "6px", density: "compact" });
     expect(getBrandProfile("service")).toMatchObject({ radius: "10px", density: "comfortable" });
     expect(getBrandProfile("data")).toMatchObject({ radius: "6px", density: "compact" });
+  });
+
+  it("every profile.archetype references a real layout archetype (#89)", () => {
+    for (const profile of BRAND_PROFILES) {
+      expect(profile.archetype, `${profile.name}.archetype 누락`).toBeDefined();
+      expect(
+        getLayoutArchetype(profile.archetype ?? ""),
+        `${profile.name}.archetype = ${profile.archetype}`,
+      ).toBeDefined();
+    }
+  });
+
+  it("profile.shell 이 그 원형의 권장 셸과 일치한다 (#89)", () => {
+    const shellTitles = new Set(APP_SHELL_SAMPLES.map((s) => s.title));
+    for (const profile of BRAND_PROFILES) {
+      if (!profile.shell) continue;
+      expect(shellTitles.has(profile.shell), `${profile.name}.shell = ${profile.shell}`).toBe(true);
+      const archetype = getLayoutArchetype(profile.archetype ?? "");
+      expect(profile.shell, `${profile.name} 셸 ↔ 원형 불일치`).toBe(archetype?.shell);
+    }
   });
 
   it("has no duplicate profile names", () => {

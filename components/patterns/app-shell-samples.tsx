@@ -1,10 +1,22 @@
-import { AppWindowIcon, SidebarSimpleIcon } from "@phosphor-icons/react/dist/ssr"
+import {
+  AppWindowIcon,
+  ArticleIcon,
+  ColumnsIcon,
+  NewspaperClippingIcon,
+  SidebarSimpleIcon,
+} from "@phosphor-icons/react/dist/ssr"
 
 import { Badge } from "@/components/ui/badge"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import type { PatternSampleData } from "@/components/showcase/pattern-sample"
 
 const NAV_LABELS = ["홈", "Tokens", "Icons", "Components", "Patterns", "Rules"]
+
+const PANE_ITEMS = ["배포 승인 요청", "야간 배치 실패 알림", "주간 리포트 초안"]
+
+const FEED_ITEMS = ["crawler-worker 재기동 완료", "일일 수집 12,480건 적재", "알림 규칙 3건 변경"]
+
+const DOC_TREE = ["규칙", "컬러 · 토큰", "아이콘", "레이아웃"]
 
 const SPACING_SCALE = [
   { token: "gap-4", px: "16px", usage: "카드 내부 좁은 간격 (라벨-값 등)" },
@@ -111,6 +123,162 @@ export const APP_SHELL_SAMPLES: PatternSampleData[] = [
   },
   {
     num: 3,
+    title: "분할 패인 셸",
+    description:
+      "좌측 목록과 우측 상세를 한 화면에 두고, 목록 선택이 페이지 이동 없이 우측만 바꾸는 셸입니다 — split-pane 원형의 기본 뼈대입니다.",
+    demo: (
+      <div className="flex h-[160px] w-full overflow-hidden rounded-md border border-border">
+        {/* 좁은 뷰포트에서는 목록만 남긴다 — 아래 notes 의 접힘 규칙을 데모에서도 지킨다.
+            실제 화면 기준점은 lg 지만 이 데모는 카드 안 축소 삽화라 sm 에서 접는다. */}
+        <div className="flex w-full shrink-0 flex-col border-r border-border bg-card sm:w-28">
+          <div className="flex items-center gap-1 border-b border-border px-2 py-1.5">
+            <ColumnsIcon size={11} weight="regular" className="text-primary" />
+            <span className="text-[8px] font-semibold tracking-tight">받은 항목</span>
+          </div>
+          {PANE_ITEMS.map((item, i) => (
+            <div
+              key={item}
+              className={`border-b border-border/60 px-2 py-1.5 text-[8px] ${
+                i === 1 ? "bg-accent text-accent-foreground" : "text-muted-foreground"
+              }`}
+            >
+              {item}
+            </div>
+          ))}
+        </div>
+        <div className="hidden min-w-0 flex-1 overflow-hidden px-3 py-2.5 sm:block">
+          <p className="text-[10px] font-semibold tracking-tight">{PANE_ITEMS[1]}</p>
+          <p className="mt-0.5 text-[8px] text-muted-foreground">우측 패인만 교체된다 — URL 은 목록 상태를 유지한다.</p>
+          <div className="mt-2 h-[80px] rounded bg-muted/40" />
+        </div>
+      </div>
+    ),
+    code: `<div className="flex min-h-screen">
+  {/* 목록 패인 — lg 미만에서는 이 패인만 보인다 */}
+  <aside className={cn("flex w-full shrink-0 flex-col border-r border-border bg-card lg:w-72", showDetail && "hidden lg:flex")}>
+    {/* 자체 overflow-y-auto */}
+  </aside>
+  {/* 상세 패인 — min-w-0 가 없으면 긴 본문이 목록 폭을 밀어 가로 스크롤이 생긴다 */}
+  <section className={cn("min-w-0 flex-1 overflow-y-auto px-6 py-6 lg:block", showDetail ? "block" : "hidden lg:block")}>
+    {/* 선택된 항목만 렌더 */}
+  </section>
+</div>`,
+    notes: [
+      "목록 패인은 w-72(288px) 안팎으로 고정하고 shrink-0 을 준다 — 상세가 길어져도 목록 폭이 흔들리지 않아야 한다.",
+      "상세 패인에는 min-w-0 을 반드시 준다. 없으면 긴 코드·표가 flex 자식의 최소 폭을 밀어 페이지 가로 스크롤이 생긴다.",
+      "lg 미만에서는 두 패인을 나란히 두지 않는다 — 목록만 보이고 선택 시 상세로 전환하는 단일 패인 흐름으로 접는다.",
+      "메일 처리함·티켓 트리아지처럼 항목을 연달아 훑는 화면에 쓴다. 항목을 하나만 열고 끝나는 흐름이면 그냥 목록→상세 라우팅이 낫다.",
+    ],
+  },
+  {
+    num: 4,
+    title: "피드형 셸",
+    description:
+      "시간순 단일 세로 스트림이 화면의 주인공이고 필터·요약이 곁가지로 붙는 셸입니다 — feed-timeline 원형의 기본 뼈대입니다.",
+    demo: (
+      <div className="flex h-[160px] w-full flex-col overflow-hidden rounded-md border border-border">
+        <div className="flex shrink-0 items-center gap-1 border-b border-border bg-card px-2.5 py-1.5">
+          <NewspaperClippingIcon size={11} weight="regular" className="text-primary" />
+          <span className="text-[8px] font-semibold tracking-tight">전체</span>
+          <span className="rounded bg-muted px-1 py-0.5 text-[7px] text-muted-foreground">배포</span>
+          <span className="rounded bg-muted px-1 py-0.5 text-[7px] text-muted-foreground">알림</span>
+        </div>
+        <div className="flex-1 overflow-hidden px-2.5 py-2">
+          <ol className="mx-auto flex max-w-[240px] flex-col gap-1.5">
+            {FEED_ITEMS.map((item) => (
+              <li key={item} className="flex gap-1.5 rounded border border-border/60 px-2 py-1.5">
+                <div className="mt-0.5 size-1.5 shrink-0 rounded-full bg-primary/70" />
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-[8px] text-foreground">{item}</p>
+                  <p className="text-[7px] text-muted-foreground">방금 전</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+    ),
+    code: `<div className="flex min-h-screen flex-col">
+  <div className="sticky top-0 z-10 border-b border-border bg-background/80 px-4 py-2 backdrop-blur">
+    {/* 얇은 필터 바 — 목적지가 아니라 스트림의 좁힘 조건 */}
+  </div>
+  <main className="flex-1 px-4 py-6">
+    <ol className="mx-auto flex max-w-2xl flex-col gap-3">
+      {/* 항목 하나 = <li> — 시간 역순 */}
+    </ol>
+  </main>
+</div>`,
+    notes: [
+      "스트림 폭은 max-w-2xl 안팎으로 좁힌다 — 한 줄이 길어지면 시간 흐름을 따라가기 어려워진다.",
+      "필터 바는 sticky top-0 로 남기되 목적지 링크를 섞지 않는다. 피드에서 다른 화면으로 나가는 링크는 항목 안에만 둔다.",
+      "항목 목록은 <ol>/<li> 로 마크업해 순서가 의미를 갖는다는 것을 보조기술에 알린다.",
+      "항목 간 비교나 정렬이 목적이면 이 셸이 아니라 표(data-table 패턴)를 쓴다.",
+    ],
+  },
+  {
+    num: 5,
+    title: "문서 리더 셸",
+    description:
+      "좌측 문서 트리·우측 목차가 본문 한 칼럼을 감싸는 셸입니다 — doc-reader 원형의 기본 뼈대입니다.",
+    demo: (
+      <div className="flex h-[160px] w-full overflow-hidden rounded-md border border-border">
+        {/* 실제 화면 기준점은 트리 lg·목차 xl 이지만 이 데모는 카드 안 축소 삽화라
+            한 단계씩 낮춰 접는다 — 가장 좁은 폭에서 본문만 남는 것은 같다. */}
+        <div className="hidden w-20 shrink-0 flex-col gap-1 border-r border-border bg-card px-1.5 py-2 sm:flex">
+          <div className="flex items-center gap-1 px-0.5">
+            <ArticleIcon size={11} weight="regular" className="text-primary" />
+            <span className="text-[8px] font-semibold tracking-tight">문서</span>
+          </div>
+          {DOC_TREE.map((node, i) => (
+            <div
+              key={node}
+              className={`rounded px-1 py-0.5 text-[7px] ${
+                i === 2 ? "bg-accent text-accent-foreground" : "text-muted-foreground"
+              }`}
+              style={{ paddingLeft: i === 0 ? undefined : "0.5rem" }}
+            >
+              {node}
+            </div>
+          ))}
+        </div>
+        <div className="min-w-0 flex-1 px-3 py-2.5">
+          <p className="text-[10px] font-semibold tracking-tight">규칙 원문</p>
+          <div className="mt-1.5 flex flex-col gap-1">
+            <div className="h-1 w-full rounded bg-muted" />
+            <div className="h-1 w-11/12 rounded bg-muted" />
+            <div className="h-1 w-10/12 rounded bg-muted" />
+            <div className="h-1 w-full rounded bg-muted" />
+            <div className="h-1 w-9/12 rounded bg-muted" />
+          </div>
+        </div>
+        <div className="hidden w-16 shrink-0 flex-col gap-1 border-l border-border px-1.5 py-2 md:flex">
+          <span className="text-[7px] font-medium uppercase tracking-wider text-muted-foreground/70">목차</span>
+          <span className="text-[7px] text-primary">컬러</span>
+          <span className="text-[7px] text-muted-foreground">아이콘</span>
+          <span className="text-[7px] text-muted-foreground">레이아웃</span>
+        </div>
+      </div>
+    ),
+    code: `<div className="flex min-h-screen">
+  <aside className="hidden w-60 shrink-0 border-r border-border px-3 py-6 lg:block">
+    {/* 문서 트리 */}
+  </aside>
+  <article className="min-w-0 flex-1 px-4 py-8">
+    <div className="mx-auto max-w-prose">{children}</div>
+  </article>
+  <aside className="hidden w-56 shrink-0 border-l border-border px-3 py-8 xl:block">
+    {/* 목차 — 스크롤 위치 동기 */}
+  </aside>
+</div>`,
+    notes: [
+      "본문은 max-w-prose 로 줄 길이를 제한한다 — 문서 리더에서 이 폭 제한은 선택이 아니라 요건이다.",
+      "좌측 트리는 lg 이상, 우측 목차는 xl 이상에서만 노출하고 그 아래에서는 본문만 남긴다.",
+      "본문에 들어가는 넓은 요소(표·코드블록)는 자체 overflow-x-auto 래퍼로 감싼다 — max-w-prose 를 넘겨 페이지를 밀지 않게 한다.",
+      "본문이 한 화면에 들어오는 짧은 글에는 쓰지 않는다 — 트리·목차가 본문보다 커진다.",
+    ],
+  },
+  {
+    num: 6,
     title: "페이지 타이틀 패턴",
     description: "셸 종류와 무관하게 모든 페이지 상단에 반복되는 타이틀 3요소 구조입니다.",
     demo: (
@@ -143,7 +311,7 @@ export const APP_SHELL_SAMPLES: PatternSampleData[] = [
     ],
   },
   {
-    num: 4,
+    num: 7,
     title: "여백 밀도 스케일",
     description: "섹션 간격과 카드 내부 간격에 쓰는 gap 토큰 4단계입니다 — 임의의 gap 값을 새로 만들지 않는다.",
     demo: (
@@ -171,7 +339,7 @@ export const APP_SHELL_SAMPLES: PatternSampleData[] = [
     ],
   },
   {
-    num: 5,
+    num: 8,
     title: "반응형 브레이크포인트 규칙",
     description: "셸·그리드가 열을 바꾸는 기준점을 sm/md/lg/xl 4단계로 고정합니다.",
     demo: (

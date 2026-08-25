@@ -6,6 +6,9 @@ import {
   BugIcon,
   GraphIcon,
   MagnifyingGlassIcon,
+  ColumnsIcon,
+  NavigationArrowIcon,
+  NewspaperClippingIcon,
   NewspaperIcon,
   ChartLineUpIcon,
   ChartPieSliceIcon,
@@ -183,5 +186,32 @@ export const TEMPLATE_REGISTRY: TemplateEntry[] = [
       "하이브리드 검색으로 근거를 찾고 그 근거로 답변을 만드는 RAG 콘솔. BM25·벡터·rerank 점수 분해, 문장별 인용과 원문 청크 연결, 색인 파이프라인·인덱스 상태를 세 탭으로 묶었습니다.",
     stack: ["tabs", "contribution-bars", "stage-progress-board", "log-viewer"],
     icon: MagnifyingGlassIcon,
+  },
+  {
+    href: "/templates/marketing-site",
+    title: "Marketing Site",
+    profile: "service 프로필 · Ocean 라이트 · Noto Sans KR · top-nav-site 원형",
+    description:
+      "사이드바 없이 상단 가로 내비 아래로 히어로·기능·동작 방식·요금·FAQ 섹션이 세로로 흐르는 마케팅 사이트. 처음 온 사람에게 설명하고 한 가지 행동으로 이끄는 뼈대입니다.",
+    stack: ["top-nav-site", "accordion", "pricing", "cards"],
+    icon: NavigationArrowIcon,
+  },
+  {
+    href: "/templates/mail-workspace",
+    title: "Mail Workspace",
+    profile: "admin 프로필 · Slate · Geist · split-pane 원형",
+    description:
+      "좌측 목록과 우측 상세를 한 화면에 두고 선택이 라우팅 없이 우측만 바꾸는 2패인 작업 화면. 폴더 레일·검색으로 목록을 좁히고 lg 미만에서는 단일 패인으로 접힙니다.",
+    stack: ["split-pane", "list-detail", "avatar", "input"],
+    icon: ColumnsIcon,
+  },
+  {
+    href: "/templates/activity-feed",
+    title: "Activity Feed",
+    profile: "data 프로필 · Violet 다크 · Space Grotesk · feed-timeline 원형",
+    description:
+      "시간 역순 단일 세로 스트림이 주인공인 활동 피드. 날짜 버킷 그룹핑, 종류 필터 바, 더 보기 방식의 이어 붙이기로 끝이 정해지지 않은 흐름을 다룹니다.",
+    stack: ["feed-timeline", "timeline", "badge", "avatar"],
+    icon: NewspaperClippingIcon,
   },
 ]

@@ -38,6 +38,8 @@ export interface BrandProfile {
   density: ProfileDensity;
   /** /patterns/app-shell 의 권장 셸 변형(표시 타이틀) — 문서적 연결, 코드 강제 없음. */
   shell?: string;
+  /** archetypes/index.ts LAYOUT_ARCHETYPES 의 name 참조 — 이 프로필의 기본 화면 뼈대. */
+  archetype?: string;
   /** 이 프로필을 적용한 실제/가상 프로젝트 예시. */
   examples: string[];
 }
@@ -53,6 +55,7 @@ export const BRAND_PROFILES: BrandProfile[] = [
     radius: "6px",
     density: "compact",
     shell: "사이드바형 셸",
+    archetype: "sidebar-app",
     examples: ["크롤러 관리", "배치 모니터"],
   },
   {
@@ -65,6 +68,7 @@ export const BRAND_PROFILES: BrandProfile[] = [
     radius: "10px",
     density: "comfortable",
     shell: "헤더형 셸",
+    archetype: "top-nav-site",
     examples: ["bizinfo 사업자 조회"],
   },
   {
@@ -77,6 +81,7 @@ export const BRAND_PROFILES: BrandProfile[] = [
     radius: "6px",
     density: "compact",
     shell: "사이드바형 셸",
+    archetype: "dashboard-grid",
     examples: ["news.doksam.com", "srope"],
   },
   {
@@ -88,7 +93,8 @@ export const BRAND_PROFILES: BrandProfile[] = [
     defaultMode: "light",
     radius: "8px",
     density: "comfortable",
-    shell: "헤더형 셸",
+    shell: "문서 리더 셸",
+    archetype: "doc-reader",
     examples: ["위키·기술문서", "brain 문서 뷰"],
   },
   {
@@ -101,6 +107,7 @@ export const BRAND_PROFILES: BrandProfile[] = [
     radius: "4px",
     density: "compact",
     shell: "사이드바형 셸",
+    archetype: "sidebar-app",
     examples: ["로그 뷰어", "배치 모니터"],
   },
 ];
