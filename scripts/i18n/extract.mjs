@@ -102,6 +102,14 @@ catalog["chrome.sidebar.index"] = "전체 보기";
   while ((m = re.exec(src))) catalog[`profile.${m[1]}.description`] = m[2];
 }
 
+// 레이아웃 원형 설명 (archetype.<name>.description — /archetypes TranslatedText 동적 키)
+{
+  const src = readFileSync(join(ROOT, "archetypes/index.ts"), "utf8");
+  const re = /name:\s*"([\w-]+)",[\s\S]*?description:\s*\n?\s*"([^"]+)"/g;
+  let m;
+  while ((m = re.exec(src))) catalog[`archetype.${m[1]}.description`] = m[2];
+}
+
 // 디바이스 프리뷰 모드 라벨 (chrome.preview.mode.<id> — device-preview 동적 키)
 {
   const src = readFileSync(join(ROOT, "components/device-preview.tsx"), "utf8");

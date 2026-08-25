@@ -92,7 +92,7 @@ const WIDTHS = [
   { label: "desktop", width: 1280, height: 900 },
 ];
 
-const PAGES = ["/", "/components", "/patterns", "/templates", "/templates/brokerage", "/templates/admin"];
+const PAGES = ["/", "/components", "/patterns", "/templates", "/archetypes", "/templates/brokerage", "/templates/admin", "/templates/mail-workspace"];
 
 for (const viewport of WIDTHS) {
   test.describe(`레이아웃 불변식 @ ${viewport.label} (${viewport.width}px)`, () => {

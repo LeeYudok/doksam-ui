@@ -9,6 +9,7 @@ import {
   HouseIcon,
   IdentificationBadgeIcon,
   MagnifyingGlassIcon,
+  NavigationArrowIcon,
   PaletteIcon,
   ShapesIcon,
   SquaresFourIcon,
@@ -32,6 +33,7 @@ import { cn } from "@/lib/utils";
 const PAGES = [
   { href: "/", label: "홈", icon: HouseIcon },
   { href: "/profiles", label: "Profiles", icon: IdentificationBadgeIcon },
+  { href: "/archetypes", label: "Archetypes", icon: NavigationArrowIcon },
   { href: "/tokens", label: "Tokens", icon: PaletteIcon },
   { href: "/icons", label: "Icons", icon: ShapesIcon },
   { href: "/components", label: "Components", icon: CubeIcon },

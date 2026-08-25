@@ -12,6 +12,7 @@ import {
   HouseIcon,
   IdentificationBadgeIcon,
   ListIcon,
+  NavigationArrowIcon,
   PaletteIcon,
   ShapesIcon,
   SquaresFourIcon,
@@ -60,6 +61,7 @@ const GROUPS: NavGroup[] = [
     label: "파운데이션",
     items: [
       { key: "profiles", href: "/profiles", label: "Profiles", icon: IdentificationBadgeIcon, description: "브랜드 프로필 — 색·폰트 고정 조합" },
+      { key: "archetypes", href: "/archetypes", label: "Archetypes", icon: NavigationArrowIcon, description: "레이아웃 원형 — 화면 뼈대 고정 조합" },
       { key: "tokens", href: "/tokens", label: "Tokens", icon: PaletteIcon, description: "컬러·radius·간격·타이포그래피" },
       { key: "icons", href: "/icons", label: "Icons", icon: ShapesIcon, description: "아이콘 표준과 weight 데모" },
     ],

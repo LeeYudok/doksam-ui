@@ -6,6 +6,7 @@ import { useI18n } from "@/components/i18n-provider";
 
 const FOOTER_LINKS = [
   { href: "/profiles", label: "Profiles" },
+  { href: "/archetypes", label: "Archetypes" },
   { href: "/tokens", label: "Tokens" },
   { href: "/icons", label: "Icons" },
   { href: "/components", label: "Components" },
