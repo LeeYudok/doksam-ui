@@ -1,4 +1,5 @@
 import type { ThemeMode } from "@/lib/theme-storage";
+import type { PersonalityName } from "@/personalities";
 
 /**
  * 브랜드 프로필 레지스트리 — 단일 진실원천.
@@ -39,7 +40,7 @@ export interface BrandProfile {
   /** personalities/index.ts PERSONALITY_PRESETS 의 name 참조(#90) — 타입/스페이싱
    *  스케일·표면 성향·모션 강도를 함께 고정한다. profiles/index.test.ts 가 참조
    *  무결성을 강제한다. */
-  personality: string;
+  personality: PersonalityName;
   /** /patterns/app-shell 의 권장 셸 변형(표시 타이틀) — 문서적 연결, 코드 강제 없음. */
   shell?: string;
   /** archetypes/index.ts LAYOUT_ARCHETYPES 의 name 참조 — 이 프로필의 기본 화면 뼈대. */

@@ -41,7 +41,7 @@ export interface PersonalityPreset {
   motion: PersonalityMotion;
 }
 
-export const PERSONALITY_PRESETS: PersonalityPreset[] = [
+export const PERSONALITY_PRESETS = [
   {
     name: "neutral",
     label: "Neutral",
@@ -75,9 +75,16 @@ export const PERSONALITY_PRESETS: PersonalityPreset[] = [
     surface: "flat",
     motion: "subtle",
   },
-];
+] as const satisfies readonly PersonalityPreset[];
 
-export const DEFAULT_PERSONALITY_PRESET = "neutral";
+/** PERSONALITY_PRESETS 에 실재하는 name 만 허용하는 리터럴 유니온(#90 CodeRabbit
+ *  finding) — BrandProfile.personality 를 string 대신 이 타입으로 좁혀 오탈자나
+ *  존재하지 않는 프리셋 이름을 컴파일 타임에 막는다. getPersonalityPreset() 은
+ *  런타임 미해소 케이스(레지스트리 불일치·무결성 테스트용 입력)를 계속 다뤄야
+ *  해서 string 을 그대로 받는다. */
+export type PersonalityName = (typeof PERSONALITY_PRESETS)[number]["name"];
+
+export const DEFAULT_PERSONALITY_PRESET: PersonalityName = "neutral";
 
 /**
  * 프리셋을 <html>(또는 스코프 컨테이너)에 걸 data-* 속성 묶음으로 변환한다.
