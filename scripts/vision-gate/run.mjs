@@ -22,7 +22,8 @@ import { writeFile, mkdir } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 import { fileURLToPath } from "node:url";
-import { PAGES, RUBRIC_CRITERIA } from "./rubric.mjs";
+import { DIVERSITY_ARCHETYPES, PAGES, RUBRIC_CRITERIA } from "./rubric.mjs";
+import { parseArchetypeArg, scoreDiversity, summarizeDiversity } from "./diversity.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -32,11 +33,16 @@ const OUTPUT_DIR = path.join(__dirname, "__screenshots__");
 const REPORT_PATH = path.join(__dirname, "vision-report.json");
 
 const DRY_RUN = !process.env.ANTHROPIC_API_KEY;
+// --archetype <name> (issue #92): overrides every page's declared archetype
+// for this run — useful when re-checking the whole batch against one
+// expected skeleton. Throws (with a clear message) on an unknown id.
+const CLI_ARCHETYPE = parseArchetypeArg(process.argv.slice(2));
 
 function buildRubricText(page) {
   const criteriaLines = RUBRIC_CRITERIA.map(
     (c, i) => `${i + 1}. [${c.id}] ${c.label} — ${c.description}`,
   ).join("\n");
+  const archetypeLines = DIVERSITY_ARCHETYPES.map((a) => `- ${a.id}: ${a.description}`).join("\n");
 
   return `You are a visual QA reviewer for a UI design system screenshot.
 
@@ -53,6 +59,14 @@ if it passes. Then give an overall verdict:
 
 Rubric:
 ${criteriaLines}
+
+In addition, classify this screenshot's navigation + layout SKELETON only
+(ignore color/content/copy) into exactly one of these archetypes:
+${archetypeLines}
+
+This skeleton classification feeds a separate "diversity" check — it is not
+part of the pass/warn/fail verdict above, so classify honestly even if the
+skeleton doesn't match what the page is "supposed" to look like.
 
 Respond only via the structured output schema — do not add prose outside it.
 For "issues", list short, specific, evidence-based findings (empty array if
@@ -76,8 +90,13 @@ const RESPONSE_SCHEMA = {
         additionalProperties: false,
       },
     },
+    skeleton: {
+      type: "string",
+      enum: DIVERSITY_ARCHETYPES.map((a) => a.id),
+      description: "Navigation + layout skeleton archetype this screenshot most closely matches.",
+    },
   },
-  required: ["page", "verdict", "issues"],
+  required: ["page", "verdict", "issues", "skeleton"],
   additionalProperties: false,
 };
 
@@ -137,6 +156,7 @@ async function gradeScreenshot(anthropic, page, buffer) {
       page: page.name,
       verdict: "fail",
       issues: [{ criterion: "api", detail: "Vision API refused to grade this screenshot." }],
+      skeleton: null,
     };
   }
 
@@ -146,6 +166,7 @@ async function gradeScreenshot(anthropic, page, buffer) {
       page: page.name,
       verdict: "fail",
       issues: [{ criterion: "api", detail: "No text content in vision API response." }],
+      skeleton: null,
     };
   }
 
@@ -157,6 +178,7 @@ async function gradeScreenshot(anthropic, page, buffer) {
       page: page.name,
       verdict: "fail",
       issues: [{ criterion: "api", detail: `Could not parse structured output: ${textBlock.text.slice(0, 200)}` }],
+      skeleton: null,
     };
   }
 }
@@ -196,13 +218,16 @@ async function main() {
         console.log(`screenshot ok (${(buffer.length / 1024).toFixed(0)}KB) -> ${shotPath}`);
         console.log(`    [dry-run] would send to ${MODEL_ID} with prompt:\n` +
           prompt.split("\n").map((l) => `      ${l}`).join("\n") + "\n");
+        const dryRunDiversity = scoreDiversity(page, null, { cliArchetype: CLI_ARCHETYPE });
         results.push({
           page: page.name,
           verdict: "skipped",
           issues: [],
+          skeleton: null,
           url,
           consoleErrors,
           dryRun: true,
+          diversity: dryRunDiversity,
         });
         continue;
       }
@@ -213,18 +238,35 @@ async function main() {
       if (consoleErrors.length) {
         console.log(`    console errors: ${consoleErrors.length}`);
       }
-      results.push({ ...graded, url, consoleErrors });
+
+      const diversity = scoreDiversity(page, graded.skeleton, { cliArchetype: CLI_ARCHETYPE });
+      if (diversity.reasons.length > 0) {
+        console.log(`    diversity: ${diversity.verdict} (score ${diversity.score})`);
+        for (const reason of diversity.reasons) {
+          console.log(`      - ${reason}`);
+        }
+      }
+
+      results.push({ ...graded, url, consoleErrors, diversity });
     } catch (err) {
       console.log(`ERROR: ${err.message}`);
       results.push({
         page: page.name,
         verdict: "fail",
         issues: [{ criterion: "runner", detail: String(err.message || err) }],
+        skeleton: null,
+        diversity: scoreDiversity(page, null, { cliArchetype: CLI_ARCHETYPE }),
       });
     }
   }
 
   await browser.close();
+
+  // Diversity (issue #92) is informational — it never flips process.exitCode.
+  // It's a soft "did the vision gate itself push everything toward the
+  // baseline template" signal, meant to be read, not to hard-block a manual
+  // gate on a heuristic classification.
+  const diversitySummary = summarizeDiversity(results.map((r) => r.diversity).filter(Boolean));
 
   const summary = {
     baseUrl: VISION_BASE_URL,
@@ -232,6 +274,7 @@ async function main() {
     dryRun: DRY_RUN,
     generatedAt: new Date().toISOString(),
     results,
+    diversitySummary,
   };
   await writeFile(REPORT_PATH, JSON.stringify(summary, null, 2));
 
@@ -245,6 +288,13 @@ async function main() {
   const failed = results.filter((r) => r.verdict === "fail");
   const warned = results.filter((r) => r.verdict === "warn");
   console.log(`\nSummary: ${results.length - failed.length - warned.length} pass, ${warned.length} warn, ${failed.length} fail`);
+  console.log(
+    `Diversity: total score ${diversitySummary.totalScore} ` +
+      `(${diversitySummary.bonusPages.length} bonus, ${diversitySummary.penaltyPages.length} penalty)` +
+      (diversitySummary.convergentPages.length
+        ? ` — converges with baseline: ${diversitySummary.convergentPages.join(", ")}`
+        : ""),
+  );
 
   if (failed.length > 0) {
     console.error("\nFAIL — the following pages have vision-gate issues:");

@@ -46,19 +46,74 @@ export const RUBRIC_CRITERIA = [
 ];
 
 /**
+ * Diversity axis (issue #92) — skeleton archetypes the vision model can
+ * classify a screenshot into. Kept small and mutually distinguishable by
+ * navigation + layout shape only (not color/content), since that's what a
+ * screenshot-level "same skeleton as the baseline template" judgment needs.
+ */
+export const DIVERSITY_ARCHETYPES = [
+  {
+    id: "landing",
+    label: "랜딩/개요",
+    description: "Hero-led marketing/overview page with minimal persistent chrome — no sidebar, no dense data grid.",
+  },
+  {
+    id: "catalog-grid",
+    label: "카탈로그 그리드",
+    description: "Top nav + a browsable grid/list of items with search/filter (no persistent left sidebar).",
+  },
+  {
+    id: "docs-prose",
+    label: "문서/설명",
+    description: "Top nav + long-form written content (headings + paragraphs), not a grid or dashboard.",
+  },
+  {
+    id: "admin-sidebar",
+    label: "관리자 사이드바",
+    description: "Persistent left sidebar navigation + a main content area with tables/widgets — classic admin dashboard skeleton.",
+  },
+  {
+    id: "brokerage-dashboard",
+    label: "브로커리지 대시보드",
+    description: "Dense multi-panel trading layout: watchlist + chart + order-entry panels visible together.",
+  },
+  {
+    id: "shop-grid",
+    label: "쇼핑 그리드",
+    description: "Product grid/list with cart affordances (price, add-to-cart), storefront-style top nav.",
+  },
+  {
+    id: "other",
+    label: "기타",
+    description: "None of the above skeletons fit.",
+  },
+];
+
+/**
+ * "기준 템플릿" (issue #92 설계) — 다른 화면의 뼈대가 여기로 수렴하면 감점 대상.
+ * admin 템플릿을 기준으로 삼는다: 이 표준이 가장 먼저 만들어진 템플릿이자
+ * 다른 doksam 프로젝트가 가장 많이 베끼는 뼈대이기 때문이다.
+ */
+export const BASELINE_ARCHETYPE_ID = "admin-sidebar";
+
+/**
  * Pages to screenshot + grade. Paths are relative to VISION_BASE_URL.
  * Capped at ~10 entries: home, a few top-level sections, template samples,
  * and a couple of components/patterns pages.
+ *
+ * `archetype` (issue #92) declares each page's expected skeleton — the id
+ * must be one of DIVERSITY_ARCHETYPES. Used by diversity.mjs to score
+ * whether the detected skeleton matches what this page is supposed to be.
  */
 export const PAGES = [
-  { path: "/", name: "home", intent: "Landing/overview page introducing the doksam-ui design system." },
-  { path: "/tokens", name: "tokens", intent: "Design token reference (colors, spacing, typography) presented as a browsable catalog." },
-  { path: "/icons", name: "icons", intent: "Icon library browser — grid of icons with search/filter." },
-  { path: "/components", name: "components", intent: "Component catalog listing available UI components." },
-  { path: "/patterns", name: "patterns", intent: "Pattern catalog listing composed UI patterns." },
-  { path: "/rules", name: "rules", intent: "Design/usage rules documentation page." },
-  { path: "/profiles", name: "profiles", intent: "Theme/profile picker showing available visual profiles." },
-  { path: "/templates/admin", name: "template-admin", intent: "Full admin dashboard template: sidebar nav, data tables/widgets." },
-  { path: "/templates/brokerage", name: "template-brokerage", intent: "Brokerage/trading template: watchlist, screener, order entry." },
-  { path: "/templates/shop", name: "template-shop", intent: "E-commerce shop template: product grid, cart affordances." },
+  { path: "/", name: "home", intent: "Landing/overview page introducing the doksam-ui design system.", archetype: "landing" },
+  { path: "/tokens", name: "tokens", intent: "Design token reference (colors, spacing, typography) presented as a browsable catalog.", archetype: "catalog-grid" },
+  { path: "/icons", name: "icons", intent: "Icon library browser — grid of icons with search/filter.", archetype: "catalog-grid" },
+  { path: "/components", name: "components", intent: "Component catalog listing available UI components.", archetype: "catalog-grid" },
+  { path: "/patterns", name: "patterns", intent: "Pattern catalog listing composed UI patterns.", archetype: "catalog-grid" },
+  { path: "/rules", name: "rules", intent: "Design/usage rules documentation page.", archetype: "docs-prose" },
+  { path: "/profiles", name: "profiles", intent: "Theme/profile picker showing available visual profiles.", archetype: "catalog-grid" },
+  { path: "/templates/admin", name: "template-admin", intent: "Full admin dashboard template: sidebar nav, data tables/widgets.", archetype: "admin-sidebar" },
+  { path: "/templates/brokerage", name: "template-brokerage", intent: "Brokerage/trading template: watchlist, screener, order entry.", archetype: "brokerage-dashboard" },
+  { path: "/templates/shop", name: "template-shop", intent: "E-commerce shop template: product grid, cart affordances.", archetype: "shop-grid" },
 ];
