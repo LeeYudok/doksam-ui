@@ -121,6 +121,18 @@ describe("scoreDiversity", () => {
     expect(result.reasons).toHaveLength(0);
   });
 
+  it("treats an explicit null archetype the same as undeclared (review-bot MR!54 P1)", () => {
+    // page.archetype could theoretically be null (not just absent/undefined)
+    // if a caller passes a nullable value through — must not be treated as
+    // "declared" and must not trigger diverges-from-declared-archetype.
+    const nullDeclaredPage = { name: "mystery", archetype: null };
+    const result = scoreDiversity(nullDeclaredPage, "landing");
+    expect(result.expected).toBeNull();
+    expect(result.score).toBe(0);
+    expect(result.verdict).toBe("neutral");
+    expect(result.reasons).toHaveLength(0);
+  });
+
   it("cliArchetype overrides the page's declared archetype", () => {
     const result = scoreDiversity(page, "shop-grid", { cliArchetype: "shop-grid" });
     expect(result.expected).toBe("shop-grid");

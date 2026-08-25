@@ -77,7 +77,7 @@ export function scoreDiversity(page, detectedSkeleton, opts = {}) {
     );
   }
 
-  if (expected) {
+  if (expected !== undefined && expected !== null) {
     if (detectedSkeleton === expected) {
       score += 1;
       reasons.push(`matches-declared-archetype: detected skeleton matches the declared archetype "${expected}"`);
