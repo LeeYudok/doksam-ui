@@ -2,7 +2,9 @@ import { fireEvent, render, screen, within } from "@testing-library/react"
 import { describe, expect, it } from "vitest"
 
 import MailWorkspacePage from "@/app/templates/mail-workspace/page"
-import { FOLDERS, THREADS } from "@/app/templates/mail-workspace/_data/threads"
+import { FOLDERS, FOLDER_FILTERS, THREADS } from "@/app/templates/mail-workspace/_data/threads"
+
+const INBOX = THREADS.filter(FOLDER_FILTERS.inbox)
 
 describe("MailWorkspacePage (split-pane 원형)", () => {
   it("목록 패인과 상세 패인을 한 화면에 둔다", () => {
@@ -14,18 +16,18 @@ describe("MailWorkspacePage (split-pane 원형)", () => {
   it("목록에 전체 메일을 렌더하고 첫 메일을 기본 선택한다", () => {
     render(<MailWorkspacePage />)
     const list = screen.getByRole("region", { name: "메일 목록" })
-    expect(within(list).getAllByRole("listitem")).toHaveLength(THREADS.length)
-    expect(screen.getByRole("heading", { level: 2, name: THREADS[0].subject })).toBeInTheDocument()
+    expect(within(list).getAllByRole("listitem")).toHaveLength(INBOX.length)
+    expect(screen.getByRole("heading", { level: 2, name: INBOX[0].subject })).toBeInTheDocument()
   })
 
   it("목록 항목을 고르면 상세 패인만 바뀐다", () => {
     render(<MailWorkspacePage />)
     const list = screen.getByRole("region", { name: "메일 목록" })
-    fireEvent.click(within(list).getByText(THREADS[2].subject))
+    fireEvent.click(within(list).getByText(INBOX[2].subject))
 
-    expect(screen.getByRole("heading", { level: 2, name: THREADS[2].subject })).toBeInTheDocument()
+    expect(screen.getByRole("heading", { level: 2, name: INBOX[2].subject })).toBeInTheDocument()
     // 목록은 그대로 유지된다 — 라우팅이 아니라 우측 교체다.
-    expect(within(list).getAllByRole("listitem")).toHaveLength(THREADS.length)
+    expect(within(list).getAllByRole("listitem")).toHaveLength(INBOX.length)
   })
 
   it("검색어로 목록만 좁힌다", () => {
@@ -34,7 +36,7 @@ describe("MailWorkspacePage (split-pane 원형)", () => {
 
     const list = screen.getByRole("region", { name: "메일 목록" })
     expect(within(list).getAllByRole("listitem")).toHaveLength(1)
-    expect(within(list).getByText(THREADS[2].subject)).toBeInTheDocument()
+    expect(within(list).getByText(INBOX[2].subject)).toBeInTheDocument()
   })
 
   it("일치하는 메일이 없으면 빈 상태를 보여준다", () => {
@@ -51,5 +53,17 @@ describe("MailWorkspacePage (split-pane 원형)", () => {
 
     const list = screen.getByRole("region", { name: "메일 목록" })
     expect(within(list).getAllByRole("listitem")).toHaveLength(THREADS.filter((m) => m.flagged).length)
+  })
+
+  it("폴더 레일의 count 가 그 폴더 목록 길이와 일치한다", () => {
+    render(<MailWorkspacePage />)
+    const folders = screen.getByRole("navigation", { name: "메일 폴더" })
+    for (const item of FOLDERS) {
+      fireEvent.click(within(folders).getByText(item.label))
+      const list = screen.getByRole("region", { name: "메일 목록" })
+      const matching = THREADS.filter(FOLDER_FILTERS[item.id])
+      expect(matching, `${item.label} count`).toHaveLength(item.count)
+      expect(within(list).getAllByRole("listitem"), `${item.label} 목록`).toHaveLength(item.count)
+    }
   })
 })

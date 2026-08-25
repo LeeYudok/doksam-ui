@@ -9,9 +9,17 @@ export interface MailFolder {
 export const FOLDERS: MailFolder[] = [
   { id: "inbox", label: "받은 메일함", count: 6 },
   { id: "flagged", label: "중요 표시", count: 2 },
-  { id: "sent", label: "보낸 메일함", count: 0 },
-  { id: "archive", label: "보관함", count: 0 },
+  { id: "sent", label: "보낸 메일함", count: 2 },
+  { id: "archive", label: "보관함", count: 2 },
 ]
+
+/** 폴더별 목록 필터 — 레일에 표시하는 count 와 같은 기준을 쓴다. */
+export const FOLDER_FILTERS: Record<string, (message: MailMessage) => boolean> = {
+  inbox: (message) => message.folder === "inbox",
+  flagged: (message) => message.flagged,
+  sent: (message) => message.folder === "sent",
+  archive: (message) => message.folder === "archive",
+}
 
 export interface MailMessage {
   id: string
@@ -24,6 +32,8 @@ export interface MailMessage {
   unread: boolean
   flagged: boolean
   labels: string[]
+  /** 이 메일이 속한 폴더 — flagged 는 폴더가 아니라 가로지르는 표시다. */
+  folder: "inbox" | "sent" | "archive"
 }
 
 /** 가상 발신자·가상 내용. 실제 조직·인물과 무관하다. */
@@ -42,6 +52,7 @@ export const THREADS: MailMessage[] = [
     receivedAt: "02:14",
     unread: true,
     flagged: true,
+    folder: "inbox",
     labels: ["운영", "장애"],
   },
   {
@@ -57,6 +68,7 @@ export const THREADS: MailMessage[] = [
     receivedAt: "09:32",
     unread: true,
     flagged: false,
+    folder: "inbox",
     labels: ["리포트"],
   },
   {
@@ -72,6 +84,7 @@ export const THREADS: MailMessage[] = [
     receivedAt: "어제",
     unread: false,
     flagged: true,
+    folder: "inbox",
     labels: ["보안"],
   },
   {
@@ -87,6 +100,7 @@ export const THREADS: MailMessage[] = [
     receivedAt: "어제",
     unread: false,
     flagged: false,
+    folder: "inbox",
     labels: ["요청"],
   },
   {
@@ -102,6 +116,7 @@ export const THREADS: MailMessage[] = [
     receivedAt: "2일 전",
     unread: false,
     flagged: false,
+    folder: "inbox",
     labels: ["운영", "데이터"],
   },
   {
@@ -116,6 +131,62 @@ export const THREADS: MailMessage[] = [
     receivedAt: "3일 전",
     unread: false,
     flagged: false,
+    folder: "inbox",
     labels: ["계획"],
+  },
+  {
+    id: "m-7",
+    sender: "나",
+    initials: "나",
+    subject: "Re: 신규 대시보드 접근 권한 요청",
+    preview: "읽기 권한 열었습니다. 반영까지 10분 정도 걸립니다.",
+    body: [
+      "요청하신 3명에게 운영 대시보드 읽기 권한을 부여했습니다. 권한 캐시 때문에 반영까지 10분 정도 걸릴 수 있습니다.",
+      "추가로 필요한 화면이 있으면 알려주세요.",
+    ],
+    receivedAt: "어제",
+    unread: false,
+    flagged: false,
+    folder: "sent",
+    labels: ["요청"],
+  },
+  {
+    id: "m-8",
+    sender: "나",
+    initials: "나",
+    subject: "인증서 갱신 일정 공유",
+    preview: "다음 주 화요일 오전에 두 건 모두 갱신합니다.",
+    body: ["gateway 와 internal-api 인증서를 다음 주 화요일 오전에 함께 갱신합니다. 무중단 리로드라 서비스 영향은 없습니다."],
+    receivedAt: "2일 전",
+    unread: false,
+    flagged: false,
+    folder: "sent",
+    labels: ["보안"],
+  },
+  {
+    id: "m-9",
+    sender: "배포 파이프라인",
+    initials: "배포",
+    subject: "지난달 배포 요약",
+    preview: "배포 41회, 롤백 2회, 평균 소요 7분 20초.",
+    body: ["지난달 배포는 41회였고 그중 2회를 롤백했습니다. 평균 소요 시간은 7분 20초입니다."],
+    receivedAt: "지난달",
+    unread: false,
+    flagged: false,
+    folder: "archive",
+    labels: ["운영"],
+  },
+  {
+    id: "m-10",
+    sender: "데이터 품질",
+    initials: "품질",
+    subject: "매퍼 수정 완료 — 적재 정상화",
+    preview: "필드명 변경 반영 후 적재 건수가 회복됐습니다.",
+    body: ["응답 필드명 변경을 매퍼에 반영했고, 다음 수집분부터 적재 건수가 이전 수준으로 회복됐습니다."],
+    receivedAt: "지난달",
+    unread: false,
+    flagged: false,
+    folder: "archive",
+    labels: ["데이터"],
   },
 ]

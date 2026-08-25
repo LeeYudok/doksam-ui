@@ -128,7 +128,8 @@ export const APP_SHELL_SAMPLES: PatternSampleData[] = [
       "좌측 목록과 우측 상세를 한 화면에 두고, 목록 선택이 페이지 이동 없이 우측만 바꾸는 셸입니다 — split-pane 원형의 기본 뼈대입니다.",
     demo: (
       <div className="flex h-[160px] w-full overflow-hidden rounded-md border border-border">
-        <div className="flex w-28 shrink-0 flex-col border-r border-border bg-card">
+        {/* 좁은 뷰포트에서는 목록만 남긴다 — 아래 notes 의 접힘 규칙을 데모에서도 그대로 지킨다. */}
+        <div className="flex w-full shrink-0 flex-col border-r border-border bg-card sm:w-28">
           <div className="flex items-center gap-1 border-b border-border px-2 py-1.5">
             <ColumnsIcon size={11} weight="regular" className="text-primary" />
             <span className="text-[8px] font-semibold tracking-tight">받은 항목</span>
@@ -144,7 +145,7 @@ export const APP_SHELL_SAMPLES: PatternSampleData[] = [
             </div>
           ))}
         </div>
-        <div className="flex-1 overflow-hidden px-3 py-2.5">
+        <div className="hidden min-w-0 flex-1 overflow-hidden px-3 py-2.5 sm:block">
           <p className="text-[10px] font-semibold tracking-tight">{PANE_ITEMS[1]}</p>
           <p className="mt-0.5 text-[8px] text-muted-foreground">우측 패인만 교체된다 — URL 은 목록 상태를 유지한다.</p>
           <div className="mt-2 h-[80px] rounded bg-muted/40" />
@@ -152,11 +153,13 @@ export const APP_SHELL_SAMPLES: PatternSampleData[] = [
       </div>
     ),
     code: `<div className="flex min-h-screen">
-  <aside className="flex w-72 shrink-0 flex-col border-r border-border bg-card">
-    {/* 목록 패인 — 자체 overflow-y-auto */}
+  {/* 목록 패인 — lg 미만에서는 이 패인만 보인다 */}
+  <aside className={cn("flex w-full shrink-0 flex-col border-r border-border bg-card lg:w-72", showDetail && "hidden lg:flex")}>
+    {/* 자체 overflow-y-auto */}
   </aside>
-  <section className="min-w-0 flex-1 overflow-y-auto px-6 py-6">
-    {/* 상세 패인 — 선택된 항목만 렌더 */}
+  {/* 상세 패인 — min-w-0 가 없으면 긴 본문이 목록 폭을 밀어 가로 스크롤이 생긴다 */}
+  <section className={cn("min-w-0 flex-1 overflow-y-auto px-6 py-6 lg:block", showDetail ? "block" : "hidden lg:block")}>
+    {/* 선택된 항목만 렌더 */}
   </section>
 </div>`,
     notes: [

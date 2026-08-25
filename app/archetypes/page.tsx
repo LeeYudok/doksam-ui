@@ -84,9 +84,9 @@ function ArchetypeCard({ archetype }: Readonly<{ archetype: LayoutArchetype }>) 
               <TranslatedText k="page.archetypes.meta.suited" ko="적합한 화면" />
             </dt>
             <dd className="flex flex-wrap gap-1">
-              {archetype.suitedFor.map((item) => (
+              {archetype.suitedFor.map((item, i) => (
                 <Badge key={item} variant="outline" className="text-[11px] font-normal">
-                  {item}
+                  <TranslatedText k={`archetype.${archetype.name}.suited.${i}`} ko={item} />
                 </Badge>
               ))}
             </dd>
@@ -95,7 +95,9 @@ function ArchetypeCard({ archetype }: Readonly<{ archetype: LayoutArchetype }>) 
             <dt className="text-muted-foreground">
               <TranslatedText k="page.archetypes.meta.navigation" ko="내비게이션" />
             </dt>
-            <dd className="leading-relaxed text-foreground">{archetype.navigation}</dd>
+            <dd className="leading-relaxed text-foreground">
+              <TranslatedText k={`archetype.${archetype.name}.navigation`} ko={archetype.navigation} />
+            </dd>
           </div>
           <div className="flex flex-wrap items-center gap-2">
             <dt className="text-muted-foreground">
@@ -106,7 +108,7 @@ function ArchetypeCard({ archetype }: Readonly<{ archetype: LayoutArchetype }>) 
                 href="/patterns/app-shell"
                 className="inline-flex items-center gap-1 text-foreground underline underline-offset-2"
               >
-                {archetype.shell}
+                <TranslatedText k={`archetype.${archetype.name}.shell`} ko={archetype.shell} />
                 <ArrowRightIcon size={12} aria-hidden />
               </Link>
             </dd>
@@ -144,8 +146,13 @@ function ArchetypeCard({ archetype }: Readonly<{ archetype: LayoutArchetype }>) 
             <TranslatedText k="page.archetypes.meta.avoid" ko="이럴 때는 쓰지 않는다" />
           </p>
           <ul className="flex flex-col gap-0.5 text-xs text-muted-foreground">
-            {archetype.avoidWhen.map((item) => (
-              <li key={item}>· {item}</li>
+            {archetype.avoidWhen.map((item, i) => (
+              <li key={item} className="flex gap-1.5">
+                <span aria-hidden="true">·</span>
+                <span>
+                  <TranslatedText k={`archetype.${archetype.name}.avoid.${i}`} ko={item} />
+                </span>
+              </li>
             ))}
           </ul>
         </div>

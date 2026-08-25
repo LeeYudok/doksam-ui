@@ -21,7 +21,7 @@ export default function MailWorkspacePage() {
         <h2 className="text-xl font-semibold tracking-tight md:text-2xl">목록·상세 2패인 작업 화면</h2>
         <p className="max-w-prose text-sm leading-relaxed text-muted-foreground">
           가상 운영 메일함 {THREADS.length}건입니다. 좌측 목록에서 항목을 고르면 페이지 이동 없이 우측 상세만 바뀌고,
-          검색·폴더는 목록을 좁히기만 합니다. lg 미만에서는 두 패인을 나란히 두지 않고 목록 → 상세 단일 패인으로 접힙니다.
+          폴더 레일과 검색은 목록을 좁히기만 합니다. lg 미만에서는 두 패인을 나란히 두지 않고 목록 → 상세 단일 패인으로 접힙니다.
           발신자·본문은 모두 로컬 placeholder 입니다.
         </p>
       </section>

@@ -42,6 +42,10 @@ export interface FeedEvent {
   bucket: string
 }
 
+/**
+ * 시간 역순(최신 → 과거)으로 정렬돼 있다. ActivityStream 은 입력 순서를 그대로
+ * 렌더하므로 이 배열의 순서가 곧 화면 순서다 — 항목을 추가할 때 순서를 지킬 것.
+ */
 export const EVENTS: FeedEvent[] = [
   {
     id: "e-1",
@@ -85,16 +89,6 @@ export const EVENTS: FeedEvent[] = [
   },
   {
     id: "e-5",
-    kind: "alert",
-    actor: "monitor",
-    initials: "MO",
-    title: "야간 배치 3건 실패",
-    detail: "collector-krx 선행 실패로 후속 2건이 함께 넘어갔습니다. 04:00 자동 재시도 예정.",
-    at: "02:14",
-    bucket: "어제",
-  },
-  {
-    id: "e-6",
     kind: "deploy",
     actor: "release-bot",
     initials: "RB",
@@ -104,13 +98,23 @@ export const EVENTS: FeedEvent[] = [
     bucket: "어제",
   },
   {
-    id: "e-7",
+    id: "e-6",
     kind: "data",
     actor: "pipeline",
     initials: "PL",
     title: "스키마 변경 감지 — 매퍼 수정 필요",
     detail: "수집원 한 곳의 응답 필드명이 바뀌어 해당 소스 파싱이 비었습니다.",
     at: "11:07",
+    bucket: "어제",
+  },
+  {
+    id: "e-7",
+    kind: "alert",
+    actor: "monitor",
+    initials: "MO",
+    title: "야간 배치 3건 실패",
+    detail: "collector-krx 선행 실패로 후속 2건이 함께 넘어갔습니다. 04:00 자동 재시도 예정.",
+    at: "02:14",
     bucket: "어제",
   },
   {

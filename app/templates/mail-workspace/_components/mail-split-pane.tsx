@@ -17,7 +17,7 @@ import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 import { cn } from "@/lib/utils"
 
-import { FOLDERS, THREADS, type MailMessage } from "../_data/threads"
+import { FOLDERS, FOLDER_FILTERS, THREADS, type MailMessage } from "../_data/threads"
 
 function matches(message: MailMessage, query: string): boolean {
   if (!query.trim()) return true
@@ -37,8 +37,8 @@ export function MailSplitPane() {
   const [mobileDetail, setMobileDetail] = useState(false)
 
   const visible = useMemo(() => {
-    const byFolder = folder === "flagged" ? THREADS.filter((m) => m.flagged) : THREADS
-    return byFolder.filter((m) => matches(m, query))
+    const inFolder = FOLDER_FILTERS[folder] ?? (() => true)
+    return THREADS.filter((m) => inFolder(m) && matches(m, query))
   }, [folder, query])
 
   const selected = visible.find((m) => m.id === selectedId) ?? visible[0]
@@ -102,7 +102,9 @@ export function MailSplitPane() {
 
         <ul className="flex-1 overflow-y-auto">
           {visible.length === 0 ? (
-            <li className="px-3 py-8 text-center text-sm text-muted-foreground">검색 결과가 없습니다.</li>
+            <li className="px-3 py-8 text-center text-sm text-muted-foreground">
+              {query.trim() ? "검색 결과가 없습니다." : "이 폴더에 메일이 없습니다."}
+            </li>
           ) : (
             visible.map((message) => {
               const unread = message.unread && !readIds.includes(message.id)

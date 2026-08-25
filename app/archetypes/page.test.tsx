@@ -1,11 +1,17 @@
 import { render, screen } from "@testing-library/react"
-import { describe, expect, it } from "vitest"
+import { afterEach, describe, expect, it } from "vitest"
 
 import ArchetypesPage from "@/app/archetypes/page"
+import { I18nProvider } from "@/components/i18n-provider"
+import en from "@/lib/i18n/messages/en.json"
 import { LAYOUT_ARCHETYPES } from "@/archetypes"
 import { BRAND_PROFILES } from "@/profiles"
 
 describe("ArchetypesPage", () => {
+  afterEach(() => {
+    document.documentElement.lang = ""
+  })
+
   it("페이지 제목을 렌더한다", () => {
     render(<ArchetypesPage />)
     expect(screen.getByRole("heading", { level: 1, name: "레이아웃 원형" })).toBeInTheDocument()
@@ -25,7 +31,7 @@ describe("ArchetypesPage", () => {
     for (const archetype of LAYOUT_ARCHETYPES) {
       expect(screen.getByText(archetype.navigation)).toBeInTheDocument()
       for (const item of archetype.avoidWhen) {
-        expect(screen.getByText(`· ${item}`)).toBeInTheDocument()
+        expect(screen.getByText(item)).toBeInTheDocument()
       }
     }
   })
@@ -52,5 +58,27 @@ describe("ArchetypesPage", () => {
     render(<ArchetypesPage />)
     const labels = BRAND_PROFILES.filter((p) => p.archetype === "sidebar-app").map((p) => p.label)
     expect(screen.getByText(labels.join(" · "))).toBeInTheDocument()
+  })
+
+  it("비한국어 로케일에서는 카드 문구 전체가 번역돼 렌더된다", () => {
+    // 이 레포의 I18nProvider 는 <html lang> 에서 로케일을 읽는다.
+    document.documentElement.lang = "en"
+    render(
+      <I18nProvider>
+        <ArchetypesPage />
+      </I18nProvider>,
+    )
+    for (const archetype of LAYOUT_ARCHETYPES) {
+      expect(screen.getByText(en[`archetype.${archetype.name}.description` as keyof typeof en])).toBeInTheDocument()
+      expect(screen.getByText(en[`archetype.${archetype.name}.navigation` as keyof typeof en])).toBeInTheDocument()
+      // 원형별 적합 화면·반례 칩도 한국어 원문이 남아 있지 않아야 한다.
+      expect(screen.queryByText(archetype.navigation)).not.toBeInTheDocument()
+      for (const [i] of archetype.avoidWhen.entries()) {
+        expect(screen.getByText(en[`archetype.${archetype.name}.avoid.${i}` as keyof typeof en])).toBeInTheDocument()
+      }
+      for (const [i] of archetype.suitedFor.entries()) {
+        expect(screen.getByText(en[`archetype.${archetype.name}.suited.${i}` as keyof typeof en])).toBeInTheDocument()
+      }
+    }
   })
 })
