@@ -35,11 +35,18 @@ export function ProfilePreviewButton({ profile }: Readonly<ProfilePreviewButtonP
     // personality 가 undefined(레지스트리 불일치)면 아래 비교는 <html> 에 속성이
     // 없을 때만 참 — 프로필 무결성 테스트가 이 경우를 사전에 막는다.
     const personality = getPersonalityPreset(profile.personality);
+    const surface = root.getAttribute("data-personality-surface");
+    const motion = root.getAttribute("data-personality-motion");
     setActive(
       root.dataset.theme === profile.theme &&
         root.dataset.font === profile.font &&
         (root.dataset.density === undefined || root.dataset.density === profile.density) &&
         (root.dataset.personality === undefined || root.dataset.personality === personality?.scale) &&
+        // scale 이 같아도 surface/motion 이 다른 프리셋일 수 있어(#90 CodeRabbit
+        // finding) 존재하는 속성은 모두 비교한다 — 속성이 없으면(레지스트리
+        // 불일치 등) 기존과 동일하게 비교를 건너뛴다.
+        (surface === null || surface === personality?.surface) &&
+        (motion === null || motion === personality?.motion) &&
         (root.classList.contains("dark") ? "dark" : "light") === profile.defaultMode,
     );
   }, [profile]);

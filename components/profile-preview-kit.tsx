@@ -72,11 +72,13 @@ export function ProfilePreviewKit({ profile }: Readonly<ProfilePreviewKitProps>)
         {/* 본문: 통계 카드 2 + 테이블 행 2 */}
         <div className="flex flex-1 flex-col gap-2 p-2">
           <div className="grid grid-cols-2 gap-2">
-            <div className="rounded-md border border-border bg-card p-2">
+            {/* data-slot="card" — personality surface 토큰 층([data-personality-surface="shadow"|"flat"] [data-slot="card"])이
+                이 타일을 실제 Card 로 인식하게 한다(CodeRabbit #90 finding). */}
+            <div data-slot="card" className="rounded-md border border-border bg-card p-2">
               <p className="text-[10px] text-muted-foreground">오늘 처리</p>
               <p className="text-sm font-semibold text-card-foreground">1,284</p>
             </div>
-            <div className="rounded-md border border-border bg-card p-2">
+            <div data-slot="card" className="rounded-md border border-border bg-card p-2">
               <p className="text-[10px] text-muted-foreground">성공률</p>
               <p className="text-sm font-semibold text-card-foreground">99.2%</p>
             </div>
