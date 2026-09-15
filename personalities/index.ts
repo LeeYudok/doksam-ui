@@ -34,8 +34,12 @@ export interface PersonalityPreset {
   name: string;
   /** 카드/문서에 노출할 표시명. */
   label: string;
-  /** 이 프리셋의 용도 설명 — 어떤 화면 성격에 쓰는지. */
+  /** 이 프리셋이 무엇인지 한 문단 설명. */
   description: string;
+  /** 이 프리셋이 맞는 화면 성격. */
+  suitedFor: string[];
+  /** 이 프리셋을 고르면 안 되는 상황 — 오용을 막는 반례. */
+  avoidWhen: string[];
   scale: PersonalityScale;
   surface: PersonalitySurface;
   motion: PersonalityMotion;
@@ -46,7 +50,16 @@ export const PERSONALITY_PRESETS = [
     name: "neutral",
     label: "Neutral",
     description:
-      "타입·스페이싱·표면·모션 모두 중립값입니다. 기존 5개 브랜드 프로필이 쓰는 값이며, personality 도입 이전과 렌더가 동일합니다.",
+      "타입·스페이싱·표면·모션 모두 중립값입니다. 기존 5개 브랜드 프로필이 쓰던 값이며, personality 도입 이전과 렌더가 동일합니다.",
+    suitedFor: [
+      "아직 화면 성격을 정하지 않은 초기 스캐폴드",
+      "내부 전용 도구라 브랜드 인상이 중요하지 않은 화면",
+      "personality 도입 이전 렌더와 동일하게 유지해야 하는 레거시 화면",
+    ],
+    avoidWhen: [
+      "브랜드 인상을 의도적으로 강조해야 하는 대외 화면이면 피한다",
+      "정보 밀도나 강조가 화면의 핵심 목적이라 다른 프리셋이 이미 맞아떨어지면 피한다",
+    ],
     scale: "regular",
     surface: "border",
     motion: "subtle",
@@ -54,7 +67,16 @@ export const PERSONALITY_PRESETS = [
   {
     name: "crisp",
     label: "Crisp",
-    description: "타이트한 타입·스페이싱과 테두리 위주 표면, 최소 모션 — 정보 밀도를 우선하는 관리 화면에 어울립니다.",
+    description: "타이트한 타입·스페이싱과 테두리 위주 표면, 최소 모션으로 정보 밀도를 우선합니다.",
+    suitedFor: [
+      "표·목록이 화면 대부분을 차지하는 관리 화면",
+      "한 화면에서 많은 항목을 동시에 훑어야 하는 운영 콘솔",
+      "모션이 반복 입력 작업을 방해하는 화면",
+    ],
+    avoidWhen: [
+      "첫 방문자에게 신뢰감과 완성도를 보여줘야 하는 대외 랜딩이면 피한다",
+      "정보량보다 시각적 임팩트가 중요한 강조 대시보드면 피한다",
+    ],
     scale: "compact",
     surface: "border",
     motion: "none",
@@ -62,7 +84,16 @@ export const PERSONALITY_PRESETS = [
   {
     name: "elevated",
     label: "Elevated",
-    description: "그림자로 표면 위계를 강조하고 모션을 또렷하게 씁니다 — 대외 서비스 화면에 어울립니다.",
+    description: "그림자로 표면 위계를 강조하고 모션을 또렷하게 써 완성도 있는 인상을 만듭니다.",
+    suitedFor: [
+      "신뢰감을 줘야 하는 대외 서비스 화면",
+      "카드형 콘텐츠가 중심인 마케팅·제품 소개 화면",
+      "전환을 유도하는 랜딩·온보딩 화면",
+    ],
+    avoidWhen: [
+      "밀도 높은 데이터 표가 화면 대부분을 차지하면 피한다",
+      "저사양 기기·느린 네트워크가 주 사용 환경이라 모션 비용이 부담되면 피한다",
+    ],
     scale: "regular",
     surface: "shadow",
     motion: "expressive",
@@ -70,7 +101,16 @@ export const PERSONALITY_PRESETS = [
   {
     name: "statement",
     label: "Statement",
-    description: "타입·스페이싱을 한 단계 키우고 표면은 완전히 평평하게(flat) 합니다 — 강조가 필요한 대시보드용입니다.",
+    description: "타입·스페이싱을 한 단계 키우고 표면은 완전히 평평하게(flat) 해 강조를 만듭니다.",
+    suitedFor: [
+      "소수의 핵심 지표를 크게 보여줘야 하는 대시보드",
+      "브랜드 인상을 강하게 남겨야 하는 소개 화면",
+      "항목 수가 적어 여백을 넉넉히 써도 되는 화면",
+    ],
+    avoidWhen: [
+      "항목 수가 많아 큰 타입이 스크롤을 과도하게 늘리면 피한다",
+      "표면 위계(그림자)로 우선순위를 구분해야 하는 복잡한 화면이면 피한다",
+    ],
     scale: "bold",
     surface: "flat",
     motion: "subtle",

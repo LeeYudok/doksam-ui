@@ -6,6 +6,7 @@ import {
   BooksIcon,
   CubeIcon,
   IdentificationBadgeIcon,
+  PaintBrushIcon,
   PaletteIcon,
   ShapesIcon,
   SparkleIcon,
@@ -37,6 +38,12 @@ const SECTIONS: SectionCard[] = [
     title: "Tokens",
     description: "프리셋별 컬러 토큰 · radius · 간격 · 타이포그래피",
     icon: PaletteIcon,
+  },
+  {
+    href: "/personalities",
+    title: "Personalities",
+    description: "타입/스페이싱 스케일 · 표면 · 모션 강도를 고정하는 시각 성격 프리셋 4종",
+    icon: PaintBrushIcon,
   },
   {
     href: "/icons",

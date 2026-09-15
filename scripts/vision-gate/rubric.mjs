@@ -46,74 +46,82 @@ export const RUBRIC_CRITERIA = [
 ];
 
 /**
- * Diversity axis (issue #92) — skeleton archetypes the vision model can
- * classify a screenshot into. Kept small and mutually distinguishable by
- * navigation + layout shape only (not color/content), since that's what a
- * screenshot-level "same skeleton as the baseline template" judgment needs.
+ * Diversity axis (issue #92, revised issue #37 RC3) — skeleton archetypes the
+ * vision model can classify a screenshot into.
+ *
+ * Derived from `archetypes/index.ts` (LAYOUT_ARCHETYPES, the catalog's single
+ * source of truth for the 9 layout archetypes) instead of hardcoding a
+ * separate 7-id vocabulary — the old list (landing/catalog-grid/docs-prose/
+ * admin-sidebar/brokerage-dashboard/shop-grid/other) didn't correspond to any
+ * of the 9 real archetypes, so vision-gate diversity scores couldn't be
+ * mapped back onto them. Node 22.18+ type-strips `.ts` on import, same
+ * pattern `scripts/gen-llms.mjs` already uses for this exact file.
+ *
+ * `archetypes/index.ts`'s own `skeleton` field is Korean prose meant for
+ * catalog docs. Here we keep the vocabulary (the `name` ids) but write
+ * fresh English, structure-only descriptions per archetype — matching the
+ * screenshot-classification tone of the previous DIVERSITY_ARCHETYPES — since
+ * the vision model must tell these apart from a screenshot alone, using
+ * navigation placement and layout shape only, never color or copy.
  */
+const { LAYOUT_ARCHETYPES } = await import("../../archetypes/index.ts");
+
+/** English, screenshot-classifiable description per archetype `name`. */
+const DIVERSITY_ARCHETYPE_DESCRIPTIONS = {
+  "sidebar-app": "Persistent left sidebar listing destinations (drawer on mobile), with a single-column content area to its right topped by a page title. No bottom tab bar.",
+  "top-nav-site": "Horizontal top nav bar with sections/content flowing vertically below it down to a footer. No persistent sidebar, no bottom tab bar.",
+  "split-pane": "Screen split into two side-by-side panes visible at once: a list on the left and a detail view on the right (2-step list/detail on mobile).",
+  "feed-timeline": "A single vertical scrolling stream of chronological items fills the screen, with at most a thin filter bar on top. No sidebar, no card grid, no bottom tab bar.",
+  "dashboard-grid": "A 2-4 column grid of metric cards/charts fills the main area below a top filter bar.",
+  "wizard-flow": "A single step indicator (stepper) at the top, one step/form shown at a time in a single column, with prev/next buttons at the bottom. No persistent nav menu.",
+  "chat-workspace": "A conversation list on the left (drawer on mobile) plus a center message scroller with a fixed input composer pinned to the bottom.",
+  "canvas": "An infinite pannable/zoomable canvas fills the center, with a tool palette on the left edge and a properties panel on the right edge. No page-style navigation.",
+  "doc-reader": "A document tree on the left, a narrow reading-width column of prose in the center, and a scroll-synced table of contents on the right.",
+};
+
 export const DIVERSITY_ARCHETYPES = [
-  {
-    id: "landing",
-    label: "랜딩/개요",
-    description: "Hero-led marketing/overview page with minimal persistent chrome — no sidebar, no dense data grid.",
-  },
-  {
-    id: "catalog-grid",
-    label: "카탈로그 그리드",
-    description: "Top nav + a browsable grid/list of items with search/filter (no persistent left sidebar).",
-  },
-  {
-    id: "docs-prose",
-    label: "문서/설명",
-    description: "Top nav + long-form written content (headings + paragraphs), not a grid or dashboard.",
-  },
-  {
-    id: "admin-sidebar",
-    label: "관리자 사이드바",
-    description: "Persistent left sidebar navigation + a main content area with tables/widgets — classic admin dashboard skeleton.",
-  },
-  {
-    id: "brokerage-dashboard",
-    label: "브로커리지 대시보드",
-    description: "Dense multi-panel trading layout: watchlist + chart + order-entry panels visible together.",
-  },
-  {
-    id: "shop-grid",
-    label: "쇼핑 그리드",
-    description: "Product grid/list with cart affordances (price, add-to-cart), storefront-style top nav.",
-  },
+  ...LAYOUT_ARCHETYPES.map((archetype) => ({
+    id: archetype.name,
+    label: archetype.label,
+    description: DIVERSITY_ARCHETYPE_DESCRIPTIONS[archetype.name] ?? archetype.skeleton,
+  })),
   {
     id: "other",
-    label: "기타",
+    label: "Other",
     description: "None of the above skeletons fit.",
   },
 ];
 
 /**
  * "기준 템플릿" (issue #92 설계) — 다른 화면의 뼈대가 여기로 수렴하면 감점 대상.
- * admin 템플릿을 기준으로 삼는다: 이 표준이 가장 먼저 만들어진 템플릿이자
- * 다른 doksam 프로젝트가 가장 많이 베끼는 뼈대이기 때문이다.
+ * `sidebar-app`(옛 admin-sidebar)을 기준으로 삼는다: 이 표준이 가장 먼저 만들어진
+ * 템플릿 뼈대이자 다른 doksam 프로젝트가 가장 많이 베끼는 뼈대이기 때문이다.
  */
-export const BASELINE_ARCHETYPE_ID = "admin-sidebar";
+export const BASELINE_ARCHETYPE_ID = "sidebar-app";
 
 /**
  * Pages to screenshot + grade. Paths are relative to VISION_BASE_URL.
  * Capped at ~10 entries: home, a few top-level sections, template samples,
  * and a couple of components/patterns pages.
  *
- * `archetype` (issue #92) declares each page's expected skeleton — the id
- * must be one of DIVERSITY_ARCHETYPES. Used by diversity.mjs to score
- * whether the detected skeleton matches what this page is supposed to be.
+ * `archetype` (issue #92, revised #37) declares each page's expected
+ * skeleton — the id must be one of DIVERSITY_ARCHETYPES (the 9
+ * archetypes/index.ts ids + "other"). Used by diversity.mjs to score whether
+ * the detected skeleton matches what this page is supposed to be. Mapped
+ * from the actual app layout (app/**\/layout.tsx — CatalogShell = sidebar,
+ * root layout only = top nav) and, for templates, from LAYOUT_ARCHETYPES[].
+ * templates in archetypes/index.ts (the SSOT for which template belongs to
+ * which archetype).
  */
 export const PAGES = [
-  { path: "/", name: "home", intent: "Landing/overview page introducing the doksam-ui design system.", archetype: "landing" },
-  { path: "/tokens", name: "tokens", intent: "Design token reference (colors, spacing, typography) presented as a browsable catalog.", archetype: "catalog-grid" },
-  { path: "/icons", name: "icons", intent: "Icon library browser — grid of icons with search/filter.", archetype: "catalog-grid" },
-  { path: "/components", name: "components", intent: "Component catalog listing available UI components.", archetype: "catalog-grid" },
-  { path: "/patterns", name: "patterns", intent: "Pattern catalog listing composed UI patterns.", archetype: "catalog-grid" },
-  { path: "/rules", name: "rules", intent: "Design/usage rules documentation page.", archetype: "docs-prose" },
-  { path: "/profiles", name: "profiles", intent: "Theme/profile picker showing available visual profiles.", archetype: "catalog-grid" },
-  { path: "/templates/admin", name: "template-admin", intent: "Full admin dashboard template: sidebar nav, data tables/widgets.", archetype: "admin-sidebar" },
-  { path: "/templates/brokerage", name: "template-brokerage", intent: "Brokerage/trading template: watchlist, screener, order entry.", archetype: "brokerage-dashboard" },
-  { path: "/templates/shop", name: "template-shop", intent: "E-commerce shop template: product grid, cart affordances.", archetype: "shop-grid" },
+  { path: "/", name: "home", intent: "Landing/overview page introducing the doksam-ui design system.", archetype: "top-nav-site" },
+  { path: "/tokens", name: "tokens", intent: "Design token reference (colors, spacing, typography) presented as a browsable catalog.", archetype: "top-nav-site" },
+  { path: "/icons", name: "icons", intent: "Icon library browser — grid of icons with search/filter.", archetype: "top-nav-site" },
+  { path: "/components", name: "components", intent: "Component catalog listing available UI components.", archetype: "sidebar-app" },
+  { path: "/patterns", name: "patterns", intent: "Pattern catalog listing composed UI patterns.", archetype: "sidebar-app" },
+  { path: "/rules", name: "rules", intent: "Design/usage rules documentation page.", archetype: "doc-reader" },
+  { path: "/profiles", name: "profiles", intent: "Theme/profile picker showing available visual profiles.", archetype: "top-nav-site" },
+  { path: "/templates/admin", name: "template-admin", intent: "Full admin dashboard template: sidebar nav, data tables/widgets.", archetype: "sidebar-app" },
+  { path: "/templates/brokerage", name: "template-brokerage", intent: "Brokerage/trading template: watchlist, screener, order entry.", archetype: "dashboard-grid" },
+  { path: "/templates/shop", name: "template-shop", intent: "E-commerce shop template: product grid, cart affordances.", archetype: "wizard-flow" },
 ];

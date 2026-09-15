@@ -46,9 +46,14 @@ function archetypeTable() {
 }
 
 function personalityTable() {
-  const rows = ["| 성격(name) | scale | surface | motion | 어울리는 곳 |", "| --- | --- | --- | --- | --- |"];
+  const rows = [
+    "| 성격(name) | scale | surface | motion | 어울리는 곳 | 피해야 할 경우 |",
+    "| --- | --- | --- | --- | --- | --- |",
+  ];
   for (const p of PERSONALITY_PRESETS) {
-    rows.push(`| \`${p.name}\` | ${p.scale} | ${p.surface} | ${p.motion} | ${cell(p.description)} |`);
+    rows.push(
+      `| \`${p.name}\` | ${p.scale} | ${p.surface} | ${p.motion} | ${cell(p.suitedFor.join(" · "))} | ${cell(p.avoidWhen.join(" · "))} |`,
+    );
   }
   return rows;
 }

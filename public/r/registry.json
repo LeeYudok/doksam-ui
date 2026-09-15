@@ -1671,6 +1671,310 @@
           "type": "registry:component"
         }
       ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "template-mail-workspace",
+      "type": "registry:block",
+      "title": "Mail Workspace 템플릿",
+      "description": "admin 프로필 · Slate · Geist · split-pane 원형 · split-pane 원형. 좌측 목록과 우측 상세를 한 화면에 두고 선택이 라우팅 없이 우측만 바꾸는 2패인 작업 화면. 폴더 레일·검색으로 목록을 좁히고 lg 미만에서는 단일 패인으로 접힙니다.",
+      "dependencies": [
+        "@phosphor-icons/react"
+      ],
+      "files": [
+        {
+          "path": "app/templates/mail-workspace/error.tsx",
+          "type": "registry:page",
+          "target": "app/templates/mail-workspace/error.tsx"
+        },
+        {
+          "path": "app/templates/mail-workspace/layout.tsx",
+          "type": "registry:page",
+          "target": "app/templates/mail-workspace/layout.tsx"
+        },
+        {
+          "path": "app/templates/mail-workspace/loading.tsx",
+          "type": "registry:page",
+          "target": "app/templates/mail-workspace/loading.tsx"
+        },
+        {
+          "path": "app/templates/mail-workspace/page.tsx",
+          "type": "registry:page",
+          "target": "app/templates/mail-workspace/page.tsx"
+        },
+        {
+          "path": "app/templates/mail-workspace/_components/mail-split-pane.tsx",
+          "type": "registry:page",
+          "target": "app/templates/mail-workspace/_components/mail-split-pane.tsx"
+        },
+        {
+          "path": "app/templates/mail-workspace/_data/threads.ts",
+          "type": "registry:page",
+          "target": "app/templates/mail-workspace/_data/threads.ts"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "template-activity-feed",
+      "type": "registry:block",
+      "title": "Activity Feed 템플릿",
+      "description": "data 프로필 · Violet 다크 · Space Grotesk · feed-timeline 원형 · feed-timeline 원형. 시간 역순 단일 세로 스트림이 주인공인 활동 피드. 날짜 버킷 그룹핑, 종류 필터 바, 더 보기 방식의 이어 붙이기로 끝이 정해지지 않은 흐름을 다룹니다.",
+      "dependencies": [
+        "@phosphor-icons/react"
+      ],
+      "files": [
+        {
+          "path": "app/templates/activity-feed/error.tsx",
+          "type": "registry:page",
+          "target": "app/templates/activity-feed/error.tsx"
+        },
+        {
+          "path": "app/templates/activity-feed/layout.tsx",
+          "type": "registry:page",
+          "target": "app/templates/activity-feed/layout.tsx"
+        },
+        {
+          "path": "app/templates/activity-feed/loading.tsx",
+          "type": "registry:page",
+          "target": "app/templates/activity-feed/loading.tsx"
+        },
+        {
+          "path": "app/templates/activity-feed/page.tsx",
+          "type": "registry:page",
+          "target": "app/templates/activity-feed/page.tsx"
+        },
+        {
+          "path": "app/templates/activity-feed/_components/activity-stream.tsx",
+          "type": "registry:page",
+          "target": "app/templates/activity-feed/_components/activity-stream.tsx"
+        },
+        {
+          "path": "app/templates/activity-feed/_data/events.ts",
+          "type": "registry:page",
+          "target": "app/templates/activity-feed/_data/events.ts"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "template-marketing-site",
+      "type": "registry:block",
+      "title": "Marketing Site 템플릿",
+      "description": "service 프로필 · Ocean 라이트 · Noto Sans KR · top-nav-site 원형 · top-nav-site 원형. 사이드바 없이 상단 가로 내비 아래로 히어로·기능·동작 방식·요금·FAQ 섹션이 세로로 흐르는 마케팅 사이트. 처음 온 사람에게 설명하고 한 가지 행동으로 이끄는 뼈대입니다.",
+      "dependencies": [
+        "@phosphor-icons/react"
+      ],
+      "files": [
+        {
+          "path": "app/templates/marketing-site/error.tsx",
+          "type": "registry:page",
+          "target": "app/templates/marketing-site/error.tsx"
+        },
+        {
+          "path": "app/templates/marketing-site/layout.tsx",
+          "type": "registry:page",
+          "target": "app/templates/marketing-site/layout.tsx"
+        },
+        {
+          "path": "app/templates/marketing-site/loading.tsx",
+          "type": "registry:page",
+          "target": "app/templates/marketing-site/loading.tsx"
+        },
+        {
+          "path": "app/templates/marketing-site/page.tsx",
+          "type": "registry:page",
+          "target": "app/templates/marketing-site/page.tsx"
+        },
+        {
+          "path": "app/templates/marketing-site/_components/marketing-nav.tsx",
+          "type": "registry:page",
+          "target": "app/templates/marketing-site/_components/marketing-nav.tsx"
+        },
+        {
+          "path": "app/templates/marketing-site/_data/site.ts",
+          "type": "registry:page",
+          "target": "app/templates/marketing-site/_data/site.ts"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "template-knowledge-base",
+      "type": "registry:block",
+      "title": "Knowledge Base 템플릿",
+      "description": "admin 프로필 · Slate · Geist · doc-reader 원형. 위키 문서 트리·마크다운 본문·목차, 칸반풍 아이디어 보드, 날짜별 세션 타임라인을 탭으로 묶은 팀 지식관리 콘솔입니다.",
+      "dependencies": [
+        "@phosphor-icons/react"
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/tree-view.json"
+      ],
+      "files": [
+        {
+          "path": "app/templates/knowledge-base/error.tsx",
+          "type": "registry:page",
+          "target": "app/templates/knowledge-base/error.tsx"
+        },
+        {
+          "path": "app/templates/knowledge-base/layout.tsx",
+          "type": "registry:page",
+          "target": "app/templates/knowledge-base/layout.tsx"
+        },
+        {
+          "path": "app/templates/knowledge-base/loading.tsx",
+          "type": "registry:page",
+          "target": "app/templates/knowledge-base/loading.tsx"
+        },
+        {
+          "path": "app/templates/knowledge-base/page.tsx",
+          "type": "registry:page",
+          "target": "app/templates/knowledge-base/page.tsx"
+        },
+        {
+          "path": "app/templates/knowledge-base/_components/board-view.tsx",
+          "type": "registry:page",
+          "target": "app/templates/knowledge-base/_components/board-view.tsx"
+        },
+        {
+          "path": "app/templates/knowledge-base/_components/knowledge-base-console.tsx",
+          "type": "registry:page",
+          "target": "app/templates/knowledge-base/_components/knowledge-base-console.tsx"
+        },
+        {
+          "path": "app/templates/knowledge-base/_components/logs-view.tsx",
+          "type": "registry:page",
+          "target": "app/templates/knowledge-base/_components/logs-view.tsx"
+        },
+        {
+          "path": "app/templates/knowledge-base/_components/wiki-view.tsx",
+          "type": "registry:page",
+          "target": "app/templates/knowledge-base/_components/wiki-view.tsx"
+        },
+        {
+          "path": "app/templates/knowledge-base/_data/board.ts",
+          "type": "registry:page",
+          "target": "app/templates/knowledge-base/_data/board.ts"
+        },
+        {
+          "path": "app/templates/knowledge-base/_data/logs.ts",
+          "type": "registry:page",
+          "target": "app/templates/knowledge-base/_data/logs.ts"
+        },
+        {
+          "path": "app/templates/knowledge-base/_data/wiki.ts",
+          "type": "registry:page",
+          "target": "app/templates/knowledge-base/_data/wiki.ts"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "template-crawler-console",
+      "type": "registry:block",
+      "title": "Crawler Ops Console 템플릿",
+      "description": "admin 프로필 · Slate · Geist · wizard-flow 원형. 수집·갱신·감지 스텝플로우와 실행 이력 테이블, 수동 트리거(실행/중단 상태 전이)를 갖춘 데이터 파이프라인 운영 콘솔입니다.",
+      "dependencies": [
+        "@phosphor-icons/react"
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/live-indicator.json",
+        "https://ui.doksam.com/r/screen-help-dialog.json"
+      ],
+      "files": [
+        {
+          "path": "app/templates/crawler-console/error.tsx",
+          "type": "registry:page",
+          "target": "app/templates/crawler-console/error.tsx"
+        },
+        {
+          "path": "app/templates/crawler-console/layout.tsx",
+          "type": "registry:page",
+          "target": "app/templates/crawler-console/layout.tsx"
+        },
+        {
+          "path": "app/templates/crawler-console/loading.tsx",
+          "type": "registry:page",
+          "target": "app/templates/crawler-console/loading.tsx"
+        },
+        {
+          "path": "app/templates/crawler-console/page.tsx",
+          "type": "registry:page",
+          "target": "app/templates/crawler-console/page.tsx"
+        },
+        {
+          "path": "app/templates/crawler-console/_components/crawler-console.tsx",
+          "type": "registry:page",
+          "target": "app/templates/crawler-console/_components/crawler-console.tsx"
+        },
+        {
+          "path": "app/templates/crawler-console/_components/run-history-table.tsx",
+          "type": "registry:page",
+          "target": "app/templates/crawler-console/_components/run-history-table.tsx"
+        },
+        {
+          "path": "app/templates/crawler-console/_components/step-flow.tsx",
+          "type": "registry:page",
+          "target": "app/templates/crawler-console/_components/step-flow.tsx"
+        },
+        {
+          "path": "app/templates/crawler-console/_data/runs.ts",
+          "type": "registry:page",
+          "target": "app/templates/crawler-console/_data/runs.ts"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "template-glossary",
+      "type": "registry:block",
+      "title": "Term Network Explorer 템플릿",
+      "description": "data 프로필 · Violet 다크 · Space Grotesk · canvas 원형. SDLC·AI 용어 50개를 6개 카테고리와 관계로 엮은 지식 그래프. 결정론적 방사형 배치의 SVG 성좌 네트워크로 노드 선택 시 이웃 강조·검색 하이라이트·범례 필터·상세 패널을 제공합니다.",
+      "dependencies": [
+        "@phosphor-icons/react"
+      ],
+      "files": [
+        {
+          "path": "app/templates/glossary/error.tsx",
+          "type": "registry:page",
+          "target": "app/templates/glossary/error.tsx"
+        },
+        {
+          "path": "app/templates/glossary/layout.tsx",
+          "type": "registry:page",
+          "target": "app/templates/glossary/layout.tsx"
+        },
+        {
+          "path": "app/templates/glossary/loading.tsx",
+          "type": "registry:page",
+          "target": "app/templates/glossary/loading.tsx"
+        },
+        {
+          "path": "app/templates/glossary/page.tsx",
+          "type": "registry:page",
+          "target": "app/templates/glossary/page.tsx"
+        },
+        {
+          "path": "app/templates/glossary/_components/glossary-explorer.tsx",
+          "type": "registry:page",
+          "target": "app/templates/glossary/_components/glossary-explorer.tsx"
+        },
+        {
+          "path": "app/templates/glossary/_components/term-detail-panel.tsx",
+          "type": "registry:page",
+          "target": "app/templates/glossary/_components/term-detail-panel.tsx"
+        },
+        {
+          "path": "app/templates/glossary/_components/term-network.tsx",
+          "type": "registry:page",
+          "target": "app/templates/glossary/_components/term-network.tsx"
+        },
+        {
+          "path": "app/templates/glossary/_data/terms.ts",
+          "type": "registry:page",
+          "target": "app/templates/glossary/_data/terms.ts"
+        }
+      ]
     }
   ]
 }

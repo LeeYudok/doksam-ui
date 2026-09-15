@@ -12,6 +12,7 @@ import {
   NavigationArrowIcon,
   PaletteIcon,
   ShapesIcon,
+  SparkleIcon,
   SquaresFourIcon,
   StackIcon,
 } from "@phosphor-icons/react/dist/ssr";
@@ -34,6 +35,7 @@ const PAGES = [
   { href: "/", label: "홈", icon: HouseIcon },
   { href: "/profiles", label: "Profiles", icon: IdentificationBadgeIcon },
   { href: "/archetypes", label: "Archetypes", icon: NavigationArrowIcon },
+  { href: "/personalities", label: "Personalities", icon: SparkleIcon },
   { href: "/tokens", label: "Tokens", icon: PaletteIcon },
   { href: "/icons", label: "Icons", icon: ShapesIcon },
   { href: "/components", label: "Components", icon: CubeIcon },
