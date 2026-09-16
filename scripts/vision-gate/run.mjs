@@ -18,12 +18,20 @@
 // be verified without spending API credits.
 
 import { chromium } from "playwright";
-import { writeFile, mkdir } from "node:fs/promises";
+import { readFile, writeFile, mkdir } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 import { fileURLToPath } from "node:url";
-import { DIVERSITY_ARCHETYPES, PAGES, RUBRIC_CRITERIA } from "./rubric.mjs";
-import { parseArchetypeArg, scoreDiversity, summarizeDiversity } from "./diversity.mjs";
+import { DIVERSITY_ARCHETYPES, PAGES as DEFAULT_PAGES, RUBRIC_CRITERIA } from "./rubric.mjs";
+import {
+  DISTINCT_RATIO_FAIL_THRESHOLD,
+  MODE_SHARE_FAIL_THRESHOLD,
+  parseArchetypeArg,
+  parsePagesArg,
+  scoreDiversity,
+  summarizeDiversity,
+  validatePages,
+} from "./diversity.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -37,6 +45,18 @@ const DRY_RUN = !process.env.ANTHROPIC_API_KEY;
 // for this run — useful when re-checking the whole batch against one
 // expected skeleton. Throws (with a clear message) on an unknown id.
 const CLI_ARCHETYPE = parseArchetypeArg(process.argv.slice(2));
+// --pages <path> (issue #37 RC3): grade a consumer project's own page list
+// instead of the catalog's own PAGES — lets doksam-ui's vision gate be
+// pointed at, e.g., fruit-market's screens. File must be a JSON array of
+// { path, name, intent, archetype? } entries (see validatePages).
+const PAGES_ARG = parsePagesArg(process.argv.slice(2));
+
+async function loadPages() {
+  if (!PAGES_ARG) return DEFAULT_PAGES;
+  const raw = await readFile(path.resolve(process.cwd(), PAGES_ARG), "utf-8");
+  const parsed = JSON.parse(raw);
+  return validatePages(parsed);
+}
 
 function buildRubricText(page) {
   const criteriaLines = RUBRIC_CRITERIA.map(
@@ -192,7 +212,10 @@ async function main() {
     );
   }
 
+  const PAGES = await loadPages();
+
   console.log(`Vision gate — base URL: ${VISION_BASE_URL}`);
+  if (PAGES_ARG) console.log(`Pages source: ${PAGES_ARG} (--pages override)`);
   console.log(`Pages: ${PAGES.length}${DRY_RUN ? " (DRY RUN — no ANTHROPIC_API_KEY set)" : ""}\n`);
 
   await mkdir(OUTPUT_DIR, { recursive: true });
@@ -262,10 +285,13 @@ async function main() {
 
   await browser.close();
 
-  // Diversity (issue #92) is informational — it never flips process.exitCode.
-  // It's a soft "did the vision gate itself push everything toward the
-  // baseline template" signal, meant to be read, not to hard-block a manual
-  // gate on a heuristic classification.
+  // Per-page diversity (issue #92) stays informational. Run-level
+  // (pairwise/cross-page) convergence (issue #37 RC3) is different: it's the
+  // one signal that actually catches "every screenshot came out with the
+  // same skeleton" — a per-page score can't, since N pages that each match
+  // their own declared archetype all score a per-page bonus even when the
+  // whole run is skeleton-identical. So `runConverged` DOES flip
+  // process.exitCode below, same as a rubric `fail`.
   const diversitySummary = summarizeDiversity(results.map((r) => r.diversity).filter(Boolean));
 
   const summary = {
@@ -295,12 +321,29 @@ async function main() {
         ? ` — converges with baseline: ${diversitySummary.convergentPages.join(", ")}`
         : ""),
   );
+  console.log(
+    `Diversity (run-level): ${diversitySummary.distinctSkeletons} distinct skeleton(s) across ` +
+      `${results.length} page(s) (distinctRatio ${diversitySummary.distinctRatio.toFixed(2)}), ` +
+      `mode "${diversitySummary.modeSkeleton}" at ${(diversitySummary.modeShare * 100).toFixed(0)}% share` +
+      (diversitySummary.runConverged ? " — CONVERGED" : ""),
+  );
 
   if (failed.length > 0) {
     console.error("\nFAIL — the following pages have vision-gate issues:");
     for (const r of failed) {
       console.error(`  - ${r.page}: ${r.issues.map((i) => i.detail).join("; ")}`);
     }
+    process.exitCode = 1;
+  }
+
+  if (diversitySummary.runConverged) {
+    console.error(
+      `\nFAIL — run-level skeleton convergence: mode "${diversitySummary.modeSkeleton}" ` +
+        `covers ${(diversitySummary.modeShare * 100).toFixed(0)}% of pages ` +
+        `(threshold ${(MODE_SHARE_FAIL_THRESHOLD * 100).toFixed(0)}%) or distinctRatio ` +
+        `${diversitySummary.distinctRatio.toFixed(2)} is below ${DISTINCT_RATIO_FAIL_THRESHOLD.toFixed(2)} — ` +
+        "screens are converging onto the same skeleton regardless of what each page declared.",
+    );
     process.exitCode = 1;
   }
 }

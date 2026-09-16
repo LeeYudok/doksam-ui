@@ -12,7 +12,7 @@ describe("generateProfileCode", () => {
     expect(code).toContain('[data-theme="slate"]');
     expect(code).toContain('[data-theme="slate"].dark');
     expect(code).toContain(
-      '<html data-theme="slate" data-font="geist" data-density="compact" data-personality="regular" data-personality-surface="border" data-personality-motion="subtle" style="--radius: 6px">',
+      '<html data-theme="slate" data-font="geist" data-density="compact" data-personality="compact" data-personality-surface="border" data-personality-motion="none" style="--radius: 6px">',
     );
   });
 

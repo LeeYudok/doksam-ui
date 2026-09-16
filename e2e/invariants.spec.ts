@@ -99,6 +99,7 @@ const PAGES = [
   "/patterns/app-shell",
   "/templates",
   "/archetypes",
+  "/personalities",
   "/templates/brokerage",
   "/templates/admin",
   "/templates/mail-workspace",

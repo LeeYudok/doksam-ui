@@ -51,6 +51,11 @@ export default function TemplatesPage() {
                         className="text-muted-foreground transition-transform group-hover:translate-x-0.5"
                       />
                     </div>
+                    {/* #37 — 이 템플릿이 실물로 보여주는 레이아웃 원형. 원형을 고른 뒤
+                        "그럼 어느 템플릿을 열어보면 되는가"를 목록에서 바로 되짚게 한다. */}
+                    <Badge variant="secondary" className="w-fit font-mono text-[11px]">
+                      {tpl.archetype}
+                    </Badge>
                     <CardTitle>{tpl.title}</CardTitle>
                     <CardDescription>{tpl.profile}</CardDescription>
                   </CardHeader>

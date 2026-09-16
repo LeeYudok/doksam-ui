@@ -15,6 +15,7 @@ const ROUTES = [
   "/rules",
   "/profiles",
   "/archetypes",
+  "/personalities",
   "/wireframe",
   // 신규 상세 라우트 — 컴포넌트/패턴/템플릿 각 1개 이상 대표로 포함.
   "/components/date-picker",

@@ -43,6 +43,59 @@ export function parseArchetypeArg(argv, validIds = DIVERSITY_ARCHETYPE_IDS) {
 }
 
 /**
+ * Parse a `--pages <path>` flag out of an argv-style array (issue #37 RC3).
+ * Only extracts the flag value — actual file reading/JSON.parse stays in
+ * run.mjs (I/O), keeping this module dependency-free/pure like
+ * parseArchetypeArg above.
+ *
+ * @param {string[]} argv
+ * @returns {string|undefined} the path following --pages, or undefined if
+ *   the flag isn't present (callers fall back to rubric.mjs's PAGES).
+ */
+export function parsePagesArg(argv) {
+  const flagIndex = argv.indexOf("--pages");
+  if (flagIndex === -1) return undefined;
+
+  const value = argv[flagIndex + 1];
+  if (!value || value.startsWith("--")) {
+    throw new Error("--pages requires a file path, e.g. --pages ./my-pages.json");
+  }
+  return value;
+}
+
+/**
+ * Validate a loaded pages array (issue #37 RC3) — used after JSON-parsing a
+ * `--pages` file so a malformed/consumer-project page list fails fast with a
+ * clear error instead of silently grading garbage.
+ *
+ * @param {unknown} pages
+ * @param {string[]} [validArchetypeIds]
+ * @returns {{ path: string, name: string, intent: string, archetype?: string }[]}
+ */
+export function validatePages(pages, validArchetypeIds = DIVERSITY_ARCHETYPE_IDS) {
+  if (!Array.isArray(pages) || pages.length === 0) {
+    throw new Error("--pages file must contain a non-empty JSON array of page entries");
+  }
+  for (const [i, page] of pages.entries()) {
+    if (!page || typeof page !== "object") {
+      throw new Error(`--pages entry ${i} is not an object`);
+    }
+    for (const field of ["path", "name", "intent"]) {
+      if (typeof page[field] !== "string" || !page[field]) {
+        throw new Error(`--pages entry ${i} is missing required string field "${field}"`);
+      }
+    }
+    if (page.archetype != null && !validArchetypeIds.includes(page.archetype)) {
+      throw new Error(
+        `--pages entry ${i} ("${page.name}") has unknown archetype "${page.archetype}". ` +
+          `Known archetypes: ${validArchetypeIds.join(", ")}`,
+      );
+    }
+  }
+  return pages;
+}
+
+/**
  * Score one page's diversity axis.
  *
  * @param {{ name: string, archetype?: string }} page rubric.mjs PAGES entry
@@ -92,7 +145,45 @@ export function scoreDiversity(page, detectedSkeleton, opts = {}) {
 }
 
 /**
- * Aggregate per-page diversity scores into a run-level summary.
+ * Run-level (pairwise/cross-page) convergence thresholds (issue #37 RC3).
+ *
+ * The per-page score above (scoreDiversity) only ever compares one page
+ * against its own declaration + the baseline id — it never compares pages to
+ * *each other*. That structurally can't catch "every screen came out with
+ * the same skeleton" as long as each page's declared archetype happens to
+ * match what was detected (e.g. 4 pages all declared+detected as
+ * "sidebar-app" each score a per-page bonus, while the run as a whole has
+ * zero skeleton diversity — this is exactly what happened in the "4/4 동일
+ * 뼈대" real-world case this fix is closing).
+ *
+ * - MODE_SHARE_FAIL_THRESHOLD: if one archetype accounts for more than half
+ *   of all scored screenshots in a run, that's a majority skeleton — treat
+ *   it as convergence regardless of what each page individually declared.
+ *   0.5 is chosen as "more than half" is the smallest threshold that can't
+ *   also be true of two different archetypes simultaneously (avoids a
+ *   double-fail on runs that are genuinely split 50/50 between two shapes).
+ * - DISTINCT_RATIO_FAIL_THRESHOLD: if fewer than a third of the archetypes
+ *   present are distinct relative to the number of screenshots, the run is
+ *   skeleton-poor even without one single dominant mode (e.g. many pages,
+ *   only 2 distinct skeletons among them). 1/3 is intentionally looser than
+ *   the mode-share check — it's a secondary signal, not the primary gate.
+ */
+export const MODE_SHARE_FAIL_THRESHOLD = 0.5;
+export const DISTINCT_RATIO_FAIL_THRESHOLD = 1 / 3;
+
+/**
+ * With fewer than this many detected screenshots, any mode share is
+ * trivially 100% (n=1) or coarse (n=2), so convergence would be a false
+ * positive from sample size alone rather than a real signal. 2 is the
+ * minimum needed for "the same skeleton twice" to even be meaningful.
+ */
+export const MIN_SAMPLES_FOR_CONVERGENCE_CHECK = 2;
+
+/**
+ * Aggregate per-page diversity scores into a run-level summary, including
+ * pairwise/run-level convergence metrics (issue #37 RC3) computed from the
+ * *detected* skeletons across all scored pages — independent of what each
+ * page declared.
  *
  * @param {ReturnType<typeof scoreDiversity>[]} scored
  */
@@ -105,6 +196,29 @@ export function summarizeDiversity(scored) {
     .filter((s) => s.reasons.some((r) => r.startsWith("converges-with-baseline")))
     .map((s) => s.page);
 
+  // Pairwise run-level metrics — only count pages with an actual detected
+  // skeleton (skip null/undefined, e.g. dry-run or API-error pages).
+  const detected = scored.map((s) => s.detected).filter((d) => d != null);
+  const counts = new Map();
+  for (const id of detected) counts.set(id, (counts.get(id) ?? 0) + 1);
+
+  const distinctSkeletons = counts.size;
+  const distinctRatio = detected.length > 0 ? distinctSkeletons / detected.length : 1;
+
+  let modeSkeleton = null;
+  let modeCount = 0;
+  for (const [id, count] of counts) {
+    if (count > modeCount) {
+      modeSkeleton = id;
+      modeCount = count;
+    }
+  }
+  const modeShare = detected.length > 0 ? modeCount / detected.length : 0;
+
+  const runConverged =
+    detected.length >= MIN_SAMPLES_FOR_CONVERGENCE_CHECK &&
+    (modeShare > MODE_SHARE_FAIL_THRESHOLD || distinctRatio < DISTINCT_RATIO_FAIL_THRESHOLD);
+
   return {
     totalScore,
     scoredPages: scored.length,
@@ -112,5 +226,11 @@ export function summarizeDiversity(scored) {
     bonusPages,
     penaltyPages,
     convergentPages,
+    // Run-level (pairwise) skeleton-diversity metrics (issue #37 RC3).
+    distinctSkeletons,
+    distinctRatio,
+    modeSkeleton,
+    modeShare,
+    runConverged,
   };
 }

@@ -36,9 +36,55 @@ Vision gate — 결정론 게이트(E2E/불변식, A·B영역)로 잡을 수 없
 - 두 조건은 동시에 성립할 수 있고(선언과도 다르고 기준 템플릿에도 수렴), 그
   경우 감점을 합산한다 — 서로 다른 문제이기 때문이다.
 
-**다양성 점수는 게이트를 막지 않는다** — `fail` 처럼 `exit 1`을 유발하지
-않는 정보성 신호다. 콘솔 요약과 `vision-report.json`의 `diversitySummary`
-(그리고 각 페이지 결과의 `diversity` 필드)로 노출된다.
+**페이지 단위** 다양성 점수는 게이트를 막지 않는다 — 정보성 신호로 콘솔 요약과
+`vision-report.json`의 `diversitySummary`(그리고 각 페이지 결과의 `diversity`
+필드)로 노출된다.
+
+### 원형(archetype) 어휘 — `archetypes/index.ts`에서 파생 (이슈 #37 RC3)
+
+`DIVERSITY_ARCHETYPES`(`rubric.mjs`)는 더 이상 자체 어휘를 하드코딩하지 않고
+카탈로그의 레이아웃 원형 단일 진실원천인 `archetypes/index.ts`의
+`LAYOUT_ARCHETYPES`(9종)에서 파생한다 — `id`는 그 9종의 `name` + `other`.
+`scripts/gen-llms.mjs`가 이미 쓰는 패턴(Node 22.18+의 `.ts` 타입 스트리핑
+`await import("../../archetypes/index.ts")`)을 그대로 따른다. 각 원형의
+`description`은 비전 모델이 스크린샷만 보고 분류해야 하므로 색/콘텐츠가
+아니라 내비게이션 구조·레이아웃 형태만으로 쓴 영문 설명이다.
+`BASELINE_ARCHETYPE_ID`도 `sidebar-app`(옛 `admin-sidebar`)으로 맞췄다.
+
+### run 단위(pairwise) 수렴 지표 (이슈 #37 RC3)
+
+페이지 단위 점수는 "이 화면의 뼈대가 이 화면이 선언한 원형과 일치하는가"만
+본다 — 여러 화면이 **서로** 같은 뼈대로 수렴했는지는 구조적으로 못 잡는다.
+N개 화면이 전부 같은 원형으로 나와도 각자 선언과 일치하기만 하면 전원
+가점이다(실제 "4/4 동일 뼈대" 사례가 이 방식으로 통과했다). 이를 잡기 위해
+`summarizeDiversity()`가 매 실행마다 감지된(vision 모델이 실제로 분류한)
+뼈대들만으로 run 단위 지표를 계산한다(`diversity.mjs`):
+
+- `distinctSkeletons` / `distinctRatio` — 감지된 뼈대의 고유 개수 / 전체
+  스크린샷 수.
+- `modeSkeleton` / `modeShare` — 가장 많이 감지된 뼈대와 그 점유율.
+- `runConverged` — `modeShare`가 `MODE_SHARE_FAIL_THRESHOLD`(0.5, "과반")를
+  초과하거나 `distinctRatio`가 `DISTINCT_RATIO_FAIL_THRESHOLD`(1/3)보다
+  낮으면 true. 감지된 스크린샷이 `MIN_SAMPLES_FOR_CONVERGENCE_CHECK`(2)
+  미만이면(예: 1페이지만 채점) 표본이 너무 작아 판단하지 않는다.
+
+**`runConverged`는 페이지 단위 다양성 점수와 달리 게이트를 막는다** —
+`fail` 판정과 동일하게 `process.exitCode = 1`을 설정한다. 이 지표가 이번
+수정의 핵심이다: 페이지 단위로는 잡을 수 없는 "여러 화면이 뼈대만 놓고 보면
+서로 다 같다"는 문제를 막는 유일한 신호이기 때문이다.
+
+### `--pages <json경로>` 옵션 (이슈 #37 RC3)
+
+기본값(`rubric.mjs`의 `PAGES`, 카탈로그 자기 페이지)을 그대로 쓰지 않고 소비
+프로젝트(예: fruit-market)의 산출물을 채점하고 싶을 때 쓴다. `{ path, name,
+intent, archetype? }` 객체 배열을 담은 JSON 파일을 가리킨다. `archetype`을
+넣으면 `DIVERSITY_ARCHETYPES`에 있는 id여야 하고(아니면 즉시 에러), 생략하면
+그 페이지는 선언 원형 없이(수렴 감점만 적용되고 declared-archetype 매치
+가점/감점은 없이) 채점된다.
+
+```sh
+ANTHROPIC_API_KEY=sk-ant-... pnpm test:vision -- --pages ./consumer-pages.json
+```
 
 ### `--archetype <name>` 옵션
 
@@ -92,7 +138,8 @@ API 비용 없이 검증할 때 사용.
 - `vision-report.json` (이 디렉터리에 생성, git 미추적): 페이지별 전체 결과
   (`{page, verdict, issues, skeleton, url, consoleErrors, diversity}`) +
   최상위 `diversitySummary`(`{totalScore, scoredPages, signaledPages,
-  bonusPages, penaltyPages, convergentPages}`).
+  bonusPages, penaltyPages, convergentPages, distinctSkeletons, distinctRatio,
+  modeSkeleton, modeShare, runConverged}`).
 - `__screenshots__/*.jpg` (이 디렉터리에 생성, git 미추적): 실행 시 찍은
   스크린샷. jpeg quality 60으로 저장해 비전 토큰 비용을 낮춘다.
 

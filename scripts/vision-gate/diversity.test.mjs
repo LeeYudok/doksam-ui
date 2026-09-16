@@ -4,8 +4,18 @@
 // aggregation only, no Anthropic API / Playwright dependency.
 
 import { describe, expect, it } from "vitest";
-import { DIVERSITY_ARCHETYPE_IDS, parseArchetypeArg, scoreDiversity, summarizeDiversity } from "./diversity.mjs";
+import {
+  DISTINCT_RATIO_FAIL_THRESHOLD,
+  DIVERSITY_ARCHETYPE_IDS,
+  MODE_SHARE_FAIL_THRESHOLD,
+  parseArchetypeArg,
+  parsePagesArg,
+  scoreDiversity,
+  summarizeDiversity,
+  validatePages,
+} from "./diversity.mjs";
 import { BASELINE_ARCHETYPE_ID, DIVERSITY_ARCHETYPES, PAGES } from "./rubric.mjs";
+import { LAYOUT_ARCHETYPES } from "../../archetypes/index.ts";
 
 describe("rubric diversity metadata", () => {
   it("every PAGES entry declares an archetype that exists in DIVERSITY_ARCHETYPES", () => {
@@ -25,6 +35,27 @@ describe("rubric diversity metadata", () => {
     const ids = DIVERSITY_ARCHETYPES.map((a) => a.id);
     expect(new Set(ids).size).toBe(ids.length);
   });
+
+  it("DIVERSITY_ARCHETYPES vocabulary is derived from archetypes/index.ts's 9 layout archetypes + 'other' (issue #37 RC3)", () => {
+    // This is the regression test for the core bug: the old vocabulary
+    // (landing/catalog-grid/docs-prose/admin-sidebar/brokerage-dashboard/
+    // shop-grid/other) had no relationship to the catalog's real 9
+    // archetypes, so vision-gate diversity scores couldn't be mapped back
+    // onto them.
+    const ids = DIVERSITY_ARCHETYPES.map((a) => a.id);
+    const layoutIds = LAYOUT_ARCHETYPES.map((a) => a.name);
+    expect(ids).toEqual([...layoutIds, "other"]);
+  });
+
+  it("BASELINE_ARCHETYPE_ID is sidebar-app (formerly admin-sidebar)", () => {
+    expect(BASELINE_ARCHETYPE_ID).toBe("sidebar-app");
+  });
+
+  it("every DIVERSITY_ARCHETYPES description is screenshot-classifiable prose (not empty, not copied color/content language)", () => {
+    for (const a of DIVERSITY_ARCHETYPES) {
+      expect(a.description.length).toBeGreaterThan(10);
+    }
+  });
 });
 
 describe("parseArchetypeArg", () => {
@@ -34,11 +65,11 @@ describe("parseArchetypeArg", () => {
   });
 
   it("returns the value following --archetype", () => {
-    expect(parseArchetypeArg(["--archetype", "admin-sidebar"])).toBe("admin-sidebar");
+    expect(parseArchetypeArg(["--archetype", "sidebar-app"])).toBe("sidebar-app");
   });
 
   it("works regardless of flag position", () => {
-    expect(parseArchetypeArg(["--other", "x", "--archetype", "landing", "--y"])).toBe("landing");
+    expect(parseArchetypeArg(["--other", "x", "--archetype", "top-nav-site", "--y"])).toBe("top-nav-site");
   });
 
   it("throws when the value is missing", () => {
@@ -144,10 +175,10 @@ describe("scoreDiversity", () => {
 describe("summarizeDiversity", () => {
   it("aggregates totals and buckets pages by verdict", () => {
     const scored = [
-      scoreDiversity({ name: "a", archetype: "landing" }, "landing"), // bonus +1
-      scoreDiversity({ name: "b", archetype: "docs-prose" }, "catalog-grid"), // penalty -1
-      scoreDiversity({ name: "c", archetype: "catalog-grid" }, BASELINE_ARCHETYPE_ID), // penalty -2 (also convergent)
-      scoreDiversity({ name: "d" }, "shop-grid"), // neutral 0
+      scoreDiversity({ name: "a", archetype: "top-nav-site" }, "top-nav-site"), // bonus +1
+      scoreDiversity({ name: "b", archetype: "doc-reader" }, "wizard-flow"), // penalty -1
+      scoreDiversity({ name: "c", archetype: "wizard-flow" }, BASELINE_ARCHETYPE_ID), // penalty -2 (also convergent)
+      scoreDiversity({ name: "d" }, "dashboard-grid"), // neutral 0
     ];
 
     const summary = summarizeDiversity(scored);
@@ -168,6 +199,156 @@ describe("summarizeDiversity", () => {
       bonusPages: [],
       penaltyPages: [],
       convergentPages: [],
+      distinctSkeletons: 0,
+      distinctRatio: 1,
+      modeSkeleton: null,
+      modeShare: 0,
+      runConverged: false,
     });
+  });
+
+  // Pairwise/run-level convergence (issue #37 RC3) — this is the core
+  // regression test for the bug this fix closes: the "4/4 동일 뼈대" real
+  // incident had every page individually match its own declared archetype
+  // (so every per-page score was a bonus/neutral), yet the run as a whole
+  // had zero skeleton diversity. Per-page scoring alone can never flag that;
+  // only a cross-page comparison can.
+  it("flags run-level convergence when every page detects the same skeleton, even though each page individually matches its own declaration", () => {
+    const scored = [
+      scoreDiversity({ name: "a", archetype: "sidebar-app" }, "sidebar-app"),
+      scoreDiversity({ name: "b", archetype: "sidebar-app" }, "sidebar-app"),
+      scoreDiversity({ name: "c", archetype: "sidebar-app" }, "sidebar-app"),
+      scoreDiversity({ name: "d", archetype: "sidebar-app" }, "sidebar-app"),
+    ];
+
+    // Sanity check: every page is individually a bonus (matches its own
+    // declared archetype) — proving the per-page axis alone sees nothing
+    // wrong here.
+    expect(scored.every((s) => s.verdict === "bonus")).toBe(true);
+
+    const summary = summarizeDiversity(scored);
+    expect(summary.distinctSkeletons).toBe(1);
+    expect(summary.distinctRatio).toBe(0.25);
+    expect(summary.modeSkeleton).toBe("sidebar-app");
+    expect(summary.modeShare).toBe(1);
+    expect(summary.runConverged).toBe(true);
+  });
+
+  it("does not flag run-level convergence when skeletons are genuinely varied", () => {
+    const scored = [
+      scoreDiversity({ name: "a" }, "sidebar-app"),
+      scoreDiversity({ name: "b" }, "top-nav-site"),
+      scoreDiversity({ name: "c" }, "dashboard-grid"),
+      scoreDiversity({ name: "d" }, "doc-reader"),
+    ];
+
+    const summary = summarizeDiversity(scored);
+    expect(summary.distinctSkeletons).toBe(4);
+    expect(summary.distinctRatio).toBe(1);
+    expect(summary.modeShare).toBe(0.25);
+    expect(summary.runConverged).toBe(false);
+  });
+
+  it("flags run-level convergence right at a >50% mode share (3 of 4 same skeleton)", () => {
+    const scored = [
+      scoreDiversity({ name: "a" }, "sidebar-app"),
+      scoreDiversity({ name: "b" }, "sidebar-app"),
+      scoreDiversity({ name: "c" }, "sidebar-app"),
+      scoreDiversity({ name: "d" }, "top-nav-site"),
+    ];
+
+    const summary = summarizeDiversity(scored);
+    expect(summary.modeShare).toBe(0.75);
+    expect(summary.modeShare).toBeGreaterThan(MODE_SHARE_FAIL_THRESHOLD);
+    expect(summary.runConverged).toBe(true);
+  });
+
+  it("does not flag convergence at an exact 50/50 split (threshold is 'more than half')", () => {
+    const scored = [
+      scoreDiversity({ name: "a" }, "sidebar-app"),
+      scoreDiversity({ name: "b" }, "sidebar-app"),
+      scoreDiversity({ name: "c" }, "top-nav-site"),
+      scoreDiversity({ name: "d" }, "top-nav-site"),
+    ];
+
+    const summary = summarizeDiversity(scored);
+    expect(summary.modeShare).toBe(0.5);
+    expect(summary.modeShare).not.toBeGreaterThan(MODE_SHARE_FAIL_THRESHOLD);
+    expect(summary.distinctRatio).toBe(0.5);
+    expect(summary.distinctRatio).not.toBeLessThan(DISTINCT_RATIO_FAIL_THRESHOLD);
+    expect(summary.runConverged).toBe(false);
+  });
+
+  it("ignores pages with no detected skeleton (dry run / API error) when computing pairwise metrics", () => {
+    const scored = [
+      scoreDiversity({ name: "a" }, "sidebar-app"),
+      scoreDiversity({ name: "b" }, null), // dry run
+      scoreDiversity({ name: "c" }, undefined), // API error
+    ];
+
+    const summary = summarizeDiversity(scored);
+    expect(summary.distinctSkeletons).toBe(1);
+    expect(summary.distinctRatio).toBe(1);
+    expect(summary.modeShare).toBe(1);
+    expect(summary.runConverged).toBe(false);
+  });
+
+  it("does not flag a run with no detected skeletons at all", () => {
+    const scored = [scoreDiversity({ name: "a" }, null), scoreDiversity({ name: "b" }, null)];
+    const summary = summarizeDiversity(scored);
+    expect(summary.distinctSkeletons).toBe(0);
+    expect(summary.modeSkeleton).toBeNull();
+    expect(summary.runConverged).toBe(false);
+  });
+});
+
+describe("parsePagesArg", () => {
+  it("returns undefined when --pages is not present", () => {
+    expect(parsePagesArg(["--foo", "bar"])).toBeUndefined();
+    expect(parsePagesArg([])).toBeUndefined();
+  });
+
+  it("returns the path following --pages", () => {
+    expect(parsePagesArg(["--pages", "./my-pages.json"])).toBe("./my-pages.json");
+  });
+
+  it("works regardless of flag position", () => {
+    expect(parsePagesArg(["--archetype", "landing", "--pages", "./p.json"])).toBe("./p.json");
+  });
+
+  it("throws when the value is missing", () => {
+    expect(() => parsePagesArg(["--pages"])).toThrow(/requires a file path/);
+  });
+
+  it("throws when the value looks like another flag", () => {
+    expect(() => parsePagesArg(["--pages", "--other"])).toThrow(/requires a file path/);
+  });
+});
+
+describe("validatePages", () => {
+  it("returns the array unchanged when every entry is valid", () => {
+    const pages = [{ path: "/", name: "home", intent: "landing page", archetype: "top-nav-site" }];
+    expect(validatePages(pages)).toBe(pages);
+  });
+
+  it("allows entries with no archetype declared", () => {
+    const pages = [{ path: "/", name: "home", intent: "landing page" }];
+    expect(() => validatePages(pages)).not.toThrow();
+  });
+
+  it("throws on a non-array or empty array", () => {
+    expect(() => validatePages(null)).toThrow(/non-empty JSON array/);
+    expect(() => validatePages([])).toThrow(/non-empty JSON array/);
+    expect(() => validatePages("not an array")).toThrow(/non-empty JSON array/);
+  });
+
+  it("throws when a required field is missing", () => {
+    expect(() => validatePages([{ path: "/", name: "home" }])).toThrow(/missing required string field "intent"/);
+  });
+
+  it("throws on an unknown archetype id", () => {
+    expect(() => validatePages([{ path: "/", name: "home", intent: "x", archetype: "does-not-exist" }])).toThrow(
+      /unknown archetype/,
+    );
   });
 });

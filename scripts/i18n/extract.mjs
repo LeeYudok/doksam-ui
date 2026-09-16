@@ -124,6 +124,24 @@ catalog["chrome.sidebar.index"] = "전체 보기";
   }
 }
 
+// 시각 성격 프리셋 카드 문구 (personality.<name>.* — /personalities, /tokens TranslatedText 동적 키)
+{
+  const src = readFileSync(join(ROOT, "personalities/index.ts"), "utf8");
+  const chunks = src.split(/\n  \{\n    name: "/).slice(1);
+  for (const chunk of chunks) {
+    const name = chunk.slice(0, chunk.indexOf('"'));
+    const one = (field) => chunk.match(new RegExp(`${field}:\\s*\\n?\\s*"([^"]+)"`))?.[1];
+    const many = (field) =>
+      [...(chunk.match(new RegExp(`${field}:\\s*\\[([^\\]]*)\\]`))?.[1] ?? "").matchAll(/"([^"]+)"/g)].map(
+        (m) => m[1],
+      );
+    const description = one("description");
+    if (description) catalog[`personality.${name}.description`] = description;
+    many("suitedFor").forEach((v, i) => (catalog[`personality.${name}.suited.${i}`] = v));
+    many("avoidWhen").forEach((v, i) => (catalog[`personality.${name}.avoid.${i}`] = v));
+  }
+}
+
 // 디바이스 프리뷰 모드 라벨 (chrome.preview.mode.<id> — device-preview 동적 키)
 {
   const src = readFileSync(join(ROOT, "components/device-preview.tsx"), "utf8");
