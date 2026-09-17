@@ -6,374 +6,591 @@
       "upstream": "ced1e58a0cb6836a",
       "localHash": "459d3afef03f241d",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "radiusTokens",
+        "addedAffordance"
+      ],
+      "note": "하우스 스타일: radiusTokens, addedAffordance"
     },
     "alert-dialog.tsx": {
-      "upstream": "03440ddcb9f862fd",
+      "upstream": "41b72a44c2e098b5",
       "localHash": "4737b3db5c2fe56b",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "controlScale",
+        "radiusTokens",
+        "semanticTokenSwap"
+      ],
+      "note": "하우스 스타일: controlScale, radiusTokens, semanticTokenSwap"
     },
     "alert.tsx": {
       "upstream": "afeb8ee000195794",
       "localHash": "126a26b401ab2cd3",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "controlScale"
+      ],
+      "note": "하우스 스타일: controlScale"
     },
     "aspect-ratio.tsx": {
       "upstream": "b1c157886236782c",
       "localHash": "b1c157886236782c",
       "customized": false,
+      "groups": [],
       "note": "상류와 동일"
     },
     "attachment.tsx": {
-      "upstream": "54cf55c5a31a0401",
+      "upstream": "2b21884b65f6ed32",
       "localHash": "ae8a25dd1a896d39",
-      "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "customized": false,
+      "groups": [],
+      "note": "상류와 동일"
     },
     "avatar.tsx": {
       "upstream": "d6b19fe40f7e7d5f",
       "localHash": "fd03e439ae00bf71",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "radiusTokens",
+        "semanticTokenSwap",
+        "addedAffordance"
+      ],
+      "note": "하우스 스타일: radiusTokens, semanticTokenSwap, addedAffordance"
     },
     "badge.tsx": {
       "upstream": "0311bb21a5dc8c1e",
       "localHash": "1b292cd64608eef6",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "controlScale",
+        "radiusTokens",
+        "iconSlotConvention",
+        "semanticTokenSwap"
+      ],
+      "note": "하우스 스타일: controlScale, radiusTokens, iconSlotConvention, semanticTokenSwap"
     },
     "breadcrumb.tsx": {
       "upstream": "38b323cd1ab64e41",
       "localHash": "785212482c3b4702",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "controlScale"
+      ],
+      "note": "하우스 스타일: controlScale"
     },
     "bubble.tsx": {
       "upstream": "64bcd36ae5bef0c9",
       "localHash": "870cc0c5cfc8a515",
-      "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "customized": false,
+      "groups": [],
+      "note": "상류와 동일"
     },
     "button-group.tsx": {
-      "upstream": "c72795268f62afe9",
+      "upstream": "7c861671c7df17a0",
       "localHash": "de73ccc6e10f2982",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "radiusTokens",
+        "variantShorthand"
+      ],
+      "note": "하우스 스타일: radiusTokens, variantShorthand"
     },
     "button.tsx": {
       "upstream": "557e27d5d3159c33",
       "localHash": "9ce417985b97956f",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "controlScale",
+        "radiusTokens",
+        "iconSlotConvention",
+        "semanticTokenSwap"
+      ],
+      "note": "하우스 스타일: controlScale, radiusTokens, iconSlotConvention, semanticTokenSwap"
     },
     "calendar.tsx": {
-      "upstream": "6720074282a823d6",
+      "upstream": "fc19054a481a596b",
       "localHash": "741ca8610a3df14b",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "controlScale",
+        "radiusTokens",
+        "variantShorthand",
+        "semanticTokenSwap",
+        "addedAffordance"
+      ],
+      "note": "하우스 스타일: controlScale, radiusTokens, variantShorthand, semanticTokenSwap, addedAffordance"
     },
     "card.tsx": {
       "upstream": "39480d5b63e46554",
       "localHash": "d8113cbf964f8d1a",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "radiusTokens",
+        "semanticTokenSwap"
+      ],
+      "note": "하우스 스타일: radiusTokens, semanticTokenSwap"
     },
     "carousel.tsx": {
-      "upstream": "caaa206a8971a177",
+      "upstream": "d547ded3a008fb2d",
       "localHash": "c1830b952d87d4a0",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "controlScale"
+      ],
+      "note": "하우스 스타일: controlScale"
     },
     "chart.tsx": {
       "upstream": "8e605dfdcfa9c96a",
       "localHash": "0060b7708d85a5ff",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [],
+      "note": "임의값 유틸리티를 이름 있는 유틸리티로 바꿨다 (min-w-[8rem] → min-w-32). 규칙이 임의값보다 토큰·이름 있는 값을 권하므로 되돌리지 않는다."
     },
     "checkbox.tsx": {
       "upstream": "a7068fe7b1840081",
       "localHash": "fb1ee2e329aa400f",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "semanticTokenSwap",
+        "addedAffordance"
+      ],
+      "note": "하우스 스타일: semanticTokenSwap, addedAffordance"
     },
     "collapsible.tsx": {
       "upstream": "c6598e5584f4258b",
       "localHash": "c6598e5584f4258b",
       "customized": false,
+      "groups": [],
       "note": "상류와 동일"
     },
     "combobox.tsx": {
-      "upstream": "2b1079d58d477dba",
+      "upstream": "39b3e7bb81996f23",
       "localHash": "1c07d2823fa2b489",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "controlScale",
+        "radiusTokens",
+        "semanticTokenSwap"
+      ],
+      "note": "하우스 스타일: controlScale, radiusTokens, semanticTokenSwap"
     },
     "command.tsx": {
-      "upstream": "d229f80082d36563",
+      "upstream": "47f33e1a635a0236",
       "localHash": "7f80b30bbce36228",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "controlScale",
+        "radiusTokens",
+        "semanticTokenSwap"
+      ],
+      "note": "하우스 스타일: controlScale, radiusTokens, semanticTokenSwap"
     },
     "context-menu.tsx": {
       "upstream": "339690813ad1178c",
       "localHash": "6117514d9e475cc2",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "controlScale",
+        "radiusTokens",
+        "semanticTokenSwap"
+      ],
+      "note": "하우스 스타일: controlScale, radiusTokens, semanticTokenSwap"
     },
     "dialog.tsx": {
-      "upstream": "1109d2874a289f6f",
+      "upstream": "0a85c31675f8269b",
       "localHash": "13a5cddf294c6aa5",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "controlScale",
+        "radiusTokens",
+        "semanticTokenSwap"
+      ],
+      "note": "하우스 스타일: controlScale, radiusTokens, semanticTokenSwap"
     },
     "direction.tsx": {
       "upstream": "84ae2ad658207f0e",
       "localHash": "84ae2ad658207f0e",
       "customized": false,
+      "groups": [],
       "note": "상류와 동일"
     },
     "drawer.tsx": {
       "upstream": "2190d08dca91983f",
       "localHash": "b41392855e012321",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "controlScale",
+        "radiusTokens"
+      ],
+      "note": "하우스 스타일: controlScale, radiusTokens"
     },
     "dropdown-menu.tsx": {
       "upstream": "c84b54bc6c8ae8f3",
       "localHash": "47f754e1ab9e4e34",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "controlScale",
+        "radiusTokens",
+        "semanticTokenSwap"
+      ],
+      "note": "하우스 스타일: controlScale, radiusTokens, semanticTokenSwap"
     },
     "empty.tsx": {
       "upstream": "a506c7665171485d",
       "localHash": "e65ee3ba54a21ed6",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "controlScale",
+        "radiusTokens"
+      ],
+      "note": "하우스 스타일: controlScale, radiusTokens"
     },
     "field.tsx": {
-      "upstream": "f42a902b9af20870",
+      "upstream": "9d8bb9290eb9a9a5",
       "localHash": "76e008459f847a96",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "radiusTokens",
+        "semanticTokenSwap"
+      ],
+      "note": "하우스 스타일: radiusTokens, semanticTokenSwap"
     },
     "hover-card.tsx": {
       "upstream": "d646141a4f5b9d6e",
       "localHash": "e8166e75e8dd00e1",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "radiusTokens"
+      ],
+      "note": "하우스 스타일: radiusTokens"
     },
     "input-group.tsx": {
-      "upstream": "7aa99c89f34a162a",
+      "upstream": "3c7efabfb0470634",
       "localHash": "e28122e46635bb66",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "controlScale",
+        "radiusTokens",
+        "variantShorthand"
+      ],
+      "note": "하우스 스타일: controlScale, radiusTokens, variantShorthand"
     },
     "input-otp.tsx": {
       "upstream": "5c630a1e1cc82746",
       "localHash": "f3fcf6c389dc9766",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "controlScale",
+        "radiusTokens"
+      ],
+      "note": "하우스 스타일: controlScale, radiusTokens"
     },
     "input.tsx": {
       "upstream": "7bfd0eff6c53a38c",
       "localHash": "c4902a8c4967875e",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "controlScale",
+        "radiusTokens",
+        "semanticTokenSwap"
+      ],
+      "note": "하우스 스타일: controlScale, radiusTokens, semanticTokenSwap"
     },
     "item.tsx": {
-      "upstream": "fed010264554b4b7",
+      "upstream": "941e53f7bd61a922",
       "localHash": "a197e0c6bf030f49",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "controlScale",
+        "radiusTokens",
+        "variantShorthand",
+        "semanticTokenSwap"
+      ],
+      "note": "하우스 스타일: controlScale, radiusTokens, variantShorthand, semanticTokenSwap"
     },
     "kbd.tsx": {
       "upstream": "6088c3a5432338b1",
       "localHash": "1e477363fca474e2",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "variantShorthand"
+      ],
+      "note": "하우스 스타일: variantShorthand"
     },
     "label.tsx": {
       "upstream": "db5dfcd98a78c5b7",
       "localHash": "a476e41f08b9de5b",
-      "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "customized": false,
+      "groups": [],
+      "note": "상류와 동일"
     },
     "marker.tsx": {
       "upstream": "3496e9fb2b45c675",
       "localHash": "3d798763f094b2bb",
-      "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "customized": false,
+      "groups": [],
+      "note": "상류와 동일"
     },
     "menubar.tsx": {
       "upstream": "73480e5733036568",
       "localHash": "1251709bf39698a7",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "controlScale",
+        "radiusTokens",
+        "semanticTokenSwap"
+      ],
+      "note": "하우스 스타일: controlScale, radiusTokens, semanticTokenSwap"
     },
     "message-scroller.tsx": {
-      "upstream": "e00a57181debb6f8",
+      "upstream": "5cc5f5b874f473f7",
       "localHash": "901c4a6a2a7d3f62",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [],
+      "note": "자동 스크롤 중 스크롤바 처리를 상류의 완전 숨김(scrollbar-none)에서 투명 처리로 바꾸고 항목 간격을 한 단계 좁혔다. 스크롤 위치 감각을 남기기 위한 선택이다."
     },
     "message.tsx": {
       "upstream": "4bd0da2b253cf1ed",
       "localHash": "9d2952bf3b641081",
       "customized": false,
+      "groups": [],
       "note": "상류와 동일"
     },
     "native-select.tsx": {
       "upstream": "5977b78b71c1871a",
       "localHash": "0010395c3c1cbedf",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "controlScale",
+        "radiusTokens",
+        "addedProps"
+      ],
+      "note": "하우스 스타일: controlScale, radiusTokens, addedProps"
     },
     "navigation-menu.tsx": {
       "upstream": "5c56bda25883e9c0",
       "localHash": "4a9c6c31601d6e4b",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "radiusTokens",
+        "semanticTokenSwap"
+      ],
+      "note": "하우스 스타일: radiusTokens, semanticTokenSwap"
     },
     "pagination.tsx": {
-      "upstream": "97f46bede594c231",
+      "upstream": "c41cdc3801e8509b",
       "localHash": "b7aaaa2d0e3cdc9e",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "controlScale"
+      ],
+      "note": "하우스 스타일: controlScale"
     },
     "popover.tsx": {
       "upstream": "5c20c50041dd3a0f",
       "localHash": "51bd4c0e9d6f039e",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "radiusTokens"
+      ],
+      "note": "하우스 스타일: radiusTokens"
     },
     "progress.tsx": {
       "upstream": "1f6eb12292b38dd1",
       "localHash": "1e58b13c2aa4c26b",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "controlScale",
+        "semanticTokenSwap"
+      ],
+      "note": "하우스 스타일: controlScale, semanticTokenSwap"
     },
     "radio-group.tsx": {
       "upstream": "f495c56ce09167fb",
       "localHash": "07676333f885eb2a",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "controlScale",
+        "radiusTokens",
+        "semanticTokenSwap",
+        "addedAffordance"
+      ],
+      "note": "하우스 스타일: controlScale, radiusTokens, semanticTokenSwap, addedAffordance"
     },
     "resizable.tsx": {
       "upstream": "2de0b3a71b18e27a",
       "localHash": "379baf7a1de109a1",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "controlScale",
+        "radiusTokens"
+      ],
+      "note": "하우스 스타일: controlScale, radiusTokens"
     },
     "scroll-area.tsx": {
       "upstream": "55264573642c8d91",
       "localHash": "c3e7e2201d33bc24",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [],
+      "note": "방향(orientation)을 data 속성으로 방출하고 축약 변형으로 스타일을 건다. 가로 스크롤바 두께·테두리를 하우스 값으로 맞췄다."
     },
     "select.tsx": {
       "upstream": "a25676a80cb8ea9b",
       "localHash": "c1295c1404b67895",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "controlScale",
+        "radiusTokens",
+        "semanticTokenSwap"
+      ],
+      "note": "하우스 스타일: controlScale, radiusTokens, semanticTokenSwap"
     },
     "separator.tsx": {
       "upstream": "f9ec8dde26a5c3f2",
       "localHash": "c924a82e99fda036",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "variantShorthand"
+      ],
+      "note": "하우스 스타일: variantShorthand"
     },
     "sheet.tsx": {
       "upstream": "1431af1f2a0f4cd2",
       "localHash": "54e255b2dec4b8ad",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "controlScale",
+        "radiusTokens",
+        "semanticTokenSwap"
+      ],
+      "note": "하우스 스타일: controlScale, radiusTokens, semanticTokenSwap"
     },
     "sidebar.tsx": {
-      "upstream": "7a2464b3a76ff1be",
+      "upstream": "2d58178651ea6a2a",
       "localHash": "f77a7dbfd340f5ba",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "controlScale"
+      ],
+      "note": "하우스 스타일: controlScale"
     },
     "skeleton.tsx": {
       "upstream": "ba48dd5be5a6a137",
       "localHash": "8110bba70d0cb9fe",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "semanticTokenSwap"
+      ],
+      "note": "하우스 스타일: semanticTokenSwap"
     },
     "slider.tsx": {
       "upstream": "9ff8523ba99a37b3",
       "localHash": "c1c20d08f7dabff6",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "controlScale",
+        "variantShorthand",
+        "semanticTokenSwap",
+        "addedAffordance"
+      ],
+      "note": "하우스 스타일: controlScale, variantShorthand, semanticTokenSwap, addedAffordance"
     },
     "sonner.tsx": {
       "upstream": "13ccc9b0fe4248e6",
       "localHash": "2dd975ad2170ba25",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [],
+      "note": "토스트에 classNames 를 지정해 이 카탈로그의 표면·반경 토큰을 따르게 했다. 상류 기본값은 자체 스타일이라 테마 프리셋과 어긋난다."
     },
     "spinner.tsx": {
       "upstream": "d07526a2f8219625",
       "localHash": "900f722c961fa6e1",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [],
+      "note": "상류에 없는 data-slot=spinner 를 추가했다. 이 레포의 전역 CSS 층이 슬롯 이름으로 규칙을 걸기 때문에 슬롯이 없으면 축이 닿지 않는다."
     },
     "switch.tsx": {
       "upstream": "62bd507d11a7abe5",
       "localHash": "f3a1ed75be07bda7",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "controlScale",
+        "addedAffordance"
+      ],
+      "note": "하우스 스타일: controlScale, addedAffordance"
     },
     "table.tsx": {
       "upstream": "84be8055e88e5aeb",
       "localHash": "a13f55a7c1406197",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [],
+      "note": "체크박스 셀의 상류 보정(translate-y-[2px])을 뺐다. 이 레포의 체크박스가 히트 영역을 확장한 변형이라 그 보정이 오히려 어긋난다."
     },
     "tabs.tsx": {
       "upstream": "bc6b1c115fcc9d63",
       "localHash": "2a56759aa5573c65",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "controlScale",
+        "variantShorthand",
+        "iconSlotConvention"
+      ],
+      "note": "하우스 스타일: controlScale, variantShorthand, iconSlotConvention"
     },
     "textarea.tsx": {
       "upstream": "7c7122fc969c6222",
       "localHash": "58b58d84fc54ba5f",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "radiusTokens"
+      ],
+      "note": "하우스 스타일: radiusTokens"
     },
     "toggle-group.tsx": {
-      "upstream": "c7800d3fdff5b856",
+      "upstream": "f9d2c8102caef321",
       "localHash": "4325639473140bda",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "radiusTokens",
+        "iconSlotConvention"
+      ],
+      "note": "하우스 스타일: radiusTokens, iconSlotConvention"
     },
     "toggle.tsx": {
       "upstream": "05a7ea1345d08b6d",
       "localHash": "ae2eec8802536743",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "controlScale",
+        "radiusTokens",
+        "iconSlotConvention",
+        "semanticTokenSwap"
+      ],
+      "note": "하우스 스타일: controlScale, radiusTokens, iconSlotConvention, semanticTokenSwap"
     },
     "tooltip.tsx": {
       "upstream": "345bc589a285ece3",
       "localHash": "f26881e08ed65a97",
       "customized": true,
-      "note": "차이 있음 — 이유를 여기에 적는다"
+      "groups": [
+        "radiusTokens",
+        "addedAffordance"
+      ],
+      "note": "하우스 스타일: radiusTokens, addedAffordance"
     }
   },
   "_readme": [
     "shadcn 상류 대비 차이 기록 (#48).",
-    "이 레포의 components/ui/ 는 '손대지 않은 shadcn 원본' 이 아니라 하우스 스타일이 적용된 포크다.",
-    "60개 중 56개가 상류와 의미 있게 다르다. 규칙의 '수정 금지' 는 '임의로 더 고치지 말고,",
-    "기록된 차이를 되돌리지도 말라' 는 뜻으로 읽어야 한다.",
+    "components/ui/ 는 '손대지 않은 shadcn 원본' 이 아니라 하우스 스타일이 적용된 포크다.",
+    "규칙의 '수정 금지' 는 '임의로 더 고치지 말고, 기록된 차이를 되돌리지도 말라' 는 뜻이다.",
+    "customized 인 항목은 groups(체계적 차이 분류) 또는 note(개별 사유) 중 하나를 반드시 갖는다 —",
+    "test/shadcn-upstream-manifest.test.ts 가 이를 강제한다.",
     "점검: node scripts/shadcn-upstream.mjs (네트워크 사용, 수동 게이트)",
-    "갱신: node scripts/shadcn-upstream.mjs --update"
+    "갱신: node scripts/shadcn-upstream.mjs --update  (커스터마이즈가 사라지면 --force 없이는 중단)"
   ],
   "houseStyle": {
     "controlScale": {
-      "what": "컨트롤 높이·좌우 패딩을 상류보다 한 단계 작게 쓴다 (예: 버튼 default h-9→h-8, input h-9→h-8, px-3→px-2.5).",
+      "what": "컨트롤 높이·좌우 패딩을 상류보다 한 단계 작게 쓴다 (버튼 default h-9→h-8, input h-9→h-8, px-3→px-2.5).",
       "why": "#43 의 밀도(density) 축이 이 값을 기준으로 28/32/36px 비례를 계산한다. 상류 값으로 되돌리면 밀도 축 수치가 어긋난다.",
       "examples": [
         "button.tsx",
@@ -384,22 +601,33 @@
       ]
     },
     "radiusTokens": {
-      "what": "상류의 고정 rounded-md 대신 --radius 파생 토큰을 쓴다 (예: rounded-[min(var(--radius-md),12px)]).",
+      "what": "상류의 고정 rounded-md 대신 --radius 파생 토큰(rounded-lg, rounded-[min(var(--radius-md),12px)] 등)을 쓴다.",
       "why": "#43 의 모서리(corner) 축이 프로필별로 반경을 바꾸려면 컴포넌트가 토큰을 참조해야 한다. 고정값이면 축이 닿지 않는다.",
       "examples": [
         "button.tsx",
         "input.tsx",
-        "badge.tsx",
-        "select.tsx"
+        "textarea.tsx",
+        "popover.tsx",
+        "hover-card.tsx"
       ]
     },
-    "orientationVariant": {
-      "what": "data-[orientation=horizontal]: 를 data-horizontal: 축약 변형으로 쓴다.",
-      "why": "app/globals.css 의 @custom-variant 로 정의한 하우스 축약이다. 클래스 문자열이 길어지는 것을 줄인다.",
+    "semanticTokenSwap": {
+      "what": "상류와 다른 시맨틱 색 토큰을 쓴다 (예: skeleton 이 bg-accent 대신 bg-muted).",
+      "why": "이 카탈로그의 테마 프리셋에서 대비가 맞는 토큰을 고른 결과다. 하드코딩 색이 아니라 토큰 교체이므로 색 규칙에는 어긋나지 않는다.",
+      "examples": [
+        "skeleton.tsx",
+        "checkbox.tsx",
+        "avatar.tsx"
+      ]
+    },
+    "variantShorthand": {
+      "what": "긴 속성 선택자를 Tailwind v4 축약 변형으로 쓴다 (data-[orientation=horizontal]: → data-horizontal:, [[data-slot=x]_&]: → in-data-[slot=x]:).",
+      "why": "app/globals.css 의 @custom-variant 로 정의한 하우스 축약이다. 클래스 문자열 길이를 줄인다.",
       "examples": [
         "separator.tsx",
         "tabs.tsx",
-        "toggle-group.tsx"
+        "toggle-group.tsx",
+        "kbd.tsx"
       ]
     },
     "iconSlotConvention": {
@@ -411,10 +639,19 @@
       ]
     },
     "addedProps": {
-      "what": "일부 컴포넌트에 상류에 없는 prop 을 추가했다 (예: card 의 size).",
-      "why": "카탈로그가 같은 컴포넌트의 밀도 변형을 보여줘야 한다.",
+      "what": "상류에 없는 prop 을 추가했다 (card 의 size).",
+      "why": "카탈로그가 같은 컴포넌트의 밀도 변형을 실물로 보여줘야 한다.",
       "examples": [
         "card.tsx"
+      ]
+    },
+    "addedAffordance": {
+      "what": "상류에 없는 의사요소·슬롯 처리로 기능을 덧댔다 (아바타 테두리 링, 체크박스 히트 영역 확장, 툴팁 안 단축키 슬롯).",
+      "why": "접근성과 대비를 보강한 부분이다. 특히 체크박스의 확장된 히트 영역은 작은 컨트롤의 터치 실패를 줄인다.",
+      "examples": [
+        "avatar.tsx",
+        "checkbox.tsx",
+        "tooltip.tsx"
       ]
     }
   }

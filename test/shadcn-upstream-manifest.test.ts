@@ -23,7 +23,10 @@ const MANIFEST_PATH = path.join(UI_DIR, "upstream.manifest.json");
 interface Manifest {
   style: string;
   checkedAt: string | null;
-  components: Record<string, { upstream: string | null; localHash: string; customized?: boolean; note: string }>;
+  components: Record<
+    string,
+    { upstream: string | null; localHash: string; customized?: boolean; groups?: string[]; note: string }
+  >;
   houseStyle: Record<string, { what: string; why: string; examples: string[] }>;
 }
 
@@ -69,6 +72,32 @@ describe("shadcn 상류 매니페스트", () => {
       expect(group.examples?.length, `${name}.examples 가 비었다`).toBeGreaterThan(0);
       for (const example of group.examples) {
         expect(manifest.components[example], `${name}.examples 의 ${example} 이 실재하지 않는다`).toBeDefined();
+      }
+    }
+  });
+
+  /**
+   * 차이가 있다는 사실만 기록하면 6개월 뒤 누가 그 차이를 보고 "되돌려도 되나" 를
+   * 물을 때 매니페스트가 답을 못 한다. 자동 생성 플레이스홀더가 사유 자리를 채우고
+   * 있으면 기록이 있는 척만 하는 것이다(#48 리뷰 C1).
+   */
+  it("커스터마이즈된 파일마다 분류 또는 사유가 있다", () => {
+    for (const [file, entry] of Object.entries(manifest.components)) {
+      if (!entry.customized) continue;
+      const hasGroups = (entry.groups ?? []).length > 0;
+      const hasNote = entry.note.trim().length > 0;
+      expect(hasGroups || hasNote, `${file} 에 groups 도 note 도 없다`).toBe(true);
+      expect(entry.note, `${file} 의 note 가 플레이스홀더다 — 실제 사유를 적어라`).not.toMatch(
+        /이유를 여기에 적는다/,
+      );
+    }
+  });
+
+  it("분류에 쓰인 그룹 이름이 houseStyle 에 정의돼 있다", () => {
+    const defined = new Set(Object.keys(manifest.houseStyle));
+    for (const [file, entry] of Object.entries(manifest.components)) {
+      for (const group of entry.groups ?? []) {
+        expect(defined.has(group), `${file} 의 그룹 "${group}" 이 houseStyle 에 없다`).toBe(true);
       }
     }
   });

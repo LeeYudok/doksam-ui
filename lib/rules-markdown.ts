@@ -69,7 +69,7 @@ export const RULES_SECTIONS: RulesSection[] = [
     items: [
       "UI 프리미티브는 shadcn/ui를 쓴다 — 단 components/ui/ 는 손대지 않은 상류(upstream) 원본이 아니라 하우스 스타일이 적용된 포크다(컨트롤 높이·패딩 축소, --radius 파생 토큰, data-horizontal: 축약 변형, has-data-[icon=...] 아이콘 슬롯 규약 등). 실제 차이와 사유는 components/ui/upstream.manifest.json 에 파일 단위로 기록되어 있다.",
       "components/ui/ 의 기록된 커스터마이즈는 되돌리지 않는다 — 상류 값으로 되돌리면 프로필의 모서리·밀도 축이 참조하는 값이 어긋난다. 상류를 재설치·업그레이드할 때는 npx shadcn@latest add <name> 을 직접 돌리지 않고 node scripts/shadcn-upstream.mjs 로 upstream.manifest.json 과 대조해 커스터마이즈를 재적용한다.",
-      "커스텀 동작이 필요하면 components/ui/ 밖에 별도 컴포넌트를 만들어 shadcn 프리미티브를 조합한다 — components/ui/customs 같은 하위 폴더를 만들어 components/ui/ 안에 끼워 넣지 않는다. shadcn 원본과 커스텀 조합은 디렉터리 레벨에서 분리한다(예: components/<feature>/ 또는 components/patterns/).",
+      "커스텀 동작이 필요하면 components/ui/ 밖에 별도 컴포넌트를 만들어 shadcn 프리미티브를 조합한다 — components/ui/customs 같은 하위 폴더를 만들어 components/ui/ 안에 끼워 넣지 않는다. shadcn 유래 프리미티브와 커스텀 조합은 디렉터리 레벨에서 분리한다(예: components/<feature>/ 또는 components/patterns/).",
       "테이블 헤더(thead th)는 app/globals.css의 전역 규칙으로 항상 볼드로 렌더링된다 — 컴포넌트마다 font-bold를 개별 지정하지 않는다.",
     ],
   },
@@ -133,7 +133,7 @@ export const RULES_SECTIONS: RulesSection[] = [
     kind: "decision",
     items: [
       "모션의 양을 브리프의 성격이 정한다: (1) 없음 — 상태 변화를 즉시 반영한다, (2) 절제 — hover·focus 피드백과 오버레이 진입·퇴장에만 쓴다, (3) 표현적 — 페이지 전환·목록 재정렬까지 움직인다. 데이터 갱신이 잦고 오래 머무는 업무 화면일수록 (1)·(2) 쪽이고, 짧게 방문하는 소개형 화면일수록 (3)이 허용된다. 고른 값을 DESIGN.md 에 남긴다.",
-      "경계 — 애니메이션할 속성을 반드시 명시한다: transition-all을 쓰지 않는다. 상태 피드백은 transition-colors, 위치·크기 변화는 transition-transform, 페이드는 transition-opacity를 쓰고, 비레이아웃 속성 여러 개가 동시에 바뀌면 Tailwind 기본 transition 유틸이나 transition-[color,background-color,box-shadow]처럼 목록을 좁혀 적는다. transition-all은 레이아웃 속성까지 전환 대상에 넣어 예기치 않은 리플로우를 만든다(components/ui/ 아래 shadcn 원본은 수정 금지 대상이므로 예외).",
+      "경계 — 애니메이션할 속성을 반드시 명시한다: transition-all을 쓰지 않는다. 상태 피드백은 transition-colors, 위치·크기 변화는 transition-transform, 페이드는 transition-opacity를 쓰고, 비레이아웃 속성 여러 개가 동시에 바뀌면 Tailwind 기본 transition 유틸이나 transition-[color,background-color,box-shadow]처럼 목록을 좁혀 적는다. transition-all은 레이아웃 속성까지 전환 대상에 넣어 예기치 않은 리플로우를 만든다(components/ui/ 는 상류 포맷을 따르는 영역이라 이 조항의 적용 대상이 아니다).",
       "경계 — 진행률 바처럼 레이아웃 속성 애니메이션이 불가피하면 transition-[width]처럼 그 속성만 명시한다: 리플로우를 감수하는 지점이 코드에 드러나야 한다. 그 외에는 합성 단계에서 끝나는 transform·opacity를 우선한다.",
       "경계 — duration은 100/200/300ms 스케일만 쓴다: hover·focus 등 즉각 피드백은 duration-100, 일반 상태 전환은 duration-200, 진입·퇴장이나 진행률처럼 눈으로 따라가는 변화는 duration-300. duration-[450ms] 같은 임의 값을 새로 만들지 않는다.",
       "경계 — 커스텀 keyframes를 넣는 컴포넌트는 @media (prefers-reduced-motion: reduce)에서 animation: none으로 멈춘다: JS로 구동하는 모션은 matchMedia(\"(prefers-reduced-motion: reduce)\")를 확인해 변환 자체를 걸지 않는다 — components/scroll-stack.tsx, components/relation-network.tsx가 레퍼런스다. 위 (1)~(3) 어느 쪽을 골라도 이 경계는 같다.",
@@ -227,7 +227,7 @@ export const RULES_SECTIONS: RulesSection[] = [
       "[ ] 폰트·리소스 전부 셀프호스팅 (외부 CDN 0건).",
       "[ ] 빌드 산출물 외부 리소스 부재를 자동 테스트로 실증 (test/closed-network.test.ts, test/sourcemap.test.ts).",
       "[ ] 새 페이지에 loading/error 동반, 상태 UI는 ui.doksam.com/patterns/state 를 따른다.",
-      "[ ] transition-all 0건(components/ui/ shadcn 원본 제외), duration은 100/200/300 스케일만.",
+      "[ ] transition-all 0건(components/ui/ 제외), duration은 100/200/300 스케일만.",
       "[ ] 커스텀 애니메이션은 prefers-reduced-motion: reduce 에서 정지 — 자동 테스트로 실증 (test/motion-rules.test.ts).",
       "[ ] 아이콘 단독 버튼에 접근 가능한 이름, 포커스 표시 유지, 본문 명도대비 WCAG AA.",
       "[ ] TypeScript strict·any 0건, Sonar Quality Gate 통과.",

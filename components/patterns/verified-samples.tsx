@@ -23,7 +23,7 @@ thead th {
   </TableRow>
 </TableHeader>`,
     notes: [
-      "shadcn table.tsx 원본은 수정 금지 정책이라, 헤더 볼드는 app/globals.css @layer base의 전역 규칙으로만 통제한다.",
+      "components/ui/table.tsx 는 화면 작업 중 손대지 않는 영역이라, 헤더 볼드는 app/globals.css @layer base의 전역 규칙으로만 통제한다.",
       "TableHead에 font-bold를 개별로 지정하지 않는다 — 전역 규칙과 중복/불일치 우려가 있다.",
       "규칙 문서(/rules 컴포넌트 섹션)에도 함께 반영되어 있다.",
     ],

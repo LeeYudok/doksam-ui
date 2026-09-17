@@ -11,7 +11,7 @@ const UI_COMPONENT_SLUGS = readdirSync(UI_DIR)
   .map((file) => file.replace(/\.tsx$/, ""))
 
 /**
- * components/ui/ 원본(shadcn CLI 생성, 수정 금지)이 아니라 components/ 바로 아래
+ * components/ui/(shadcn 유래 프리미티브, 화면 작업 중 수정하지 않는 영역)가 아니라 components/ 바로 아래
  * shadcn 프리미티브를 조합한 커스텀 패턴이라 UI_COMPONENT_SLUGS 스캔에는 잡히지 않지만
  * 쇼케이스에는 등록된 slug 목록.
  */
