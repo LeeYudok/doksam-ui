@@ -4,7 +4,7 @@
   "title": "Live Indicator",
   "description": "live/paused/stale/offline 상태를 펄스 도트와 갱신 시각으로 보여주는 실시간 상태 인디케이터.",
   "dependencies": [
-    "@phosphor-icons/react"
+    "@phosphor-icons/react@^2.1.10"
   ],
   "files": [
     {

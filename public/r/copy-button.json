@@ -4,10 +4,11 @@
   "title": "Copy Button",
   "description": "navigator.clipboard로 텍스트를 복사하고 잠깐 \"복사됨\" 피드백을 보여주는 버튼.",
   "dependencies": [
-    "@phosphor-icons/react"
+    "@phosphor-icons/react@^2.1.10"
   ],
   "registryDependencies": [
-    "button"
+    "button",
+    "https://ui.doksam.com/r/i18n-provider.json"
   ],
   "files": [
     {

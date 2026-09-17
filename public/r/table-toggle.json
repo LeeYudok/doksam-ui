@@ -4,7 +4,7 @@
   "title": "Table Toggle",
   "description": "행마다 on/off Switch가 붙은 관리자용 테이블. 낙관적 업데이트, 실패 시 롤백+사유 표시, 행 단위 진행 상태, data 재조정을 지원한다.",
   "dependencies": [
-    "@phosphor-icons/react"
+    "@phosphor-icons/react@^2.1.10"
   ],
   "registryDependencies": [
     "switch",

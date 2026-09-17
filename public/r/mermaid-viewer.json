@@ -4,8 +4,11 @@
   "title": "Mermaid Viewer",
   "description": "mermaid 코드를 동적 로드로 SVG 렌더링하는 다이어그램 뷰어.",
   "dependencies": [
-    "mermaid",
-    "@phosphor-icons/react"
+    "mermaid@^11.16.0",
+    "@phosphor-icons/react@^2.1.10"
+  ],
+  "registryDependencies": [
+    "spinner"
   ],
   "files": [
     {

@@ -4,10 +4,10 @@ import { beforeAll, describe, expect, it } from "vitest"
 import BankHomePage from "@/app/templates/bank/page"
 import { HERO_SLIDES } from "@/app/templates/bank/_data/hero"
 import { PROMO_CARDS } from "@/app/templates/bank/_data/promos"
-import { PRODUCT_CATEGORIES } from "@/app/templates/bank/_data/product-categories"
+import { PRODUCT_CATEGORIES } from "@/app/templates/bank/_data/product-categories-data"
 import { QUICK_SERVICE_TABS } from "@/app/templates/bank/_data/quick-services"
 import { QUICK_LINK_GROUPS } from "@/app/templates/bank/_data/quick-links"
-import { TRENDING_PRODUCTS } from "@/app/templates/bank/_data/trending-products"
+import { TRENDING_PRODUCTS } from "@/app/templates/bank/_data/trending-products-data"
 import { BOTTOM_QUICK_ACTIONS, NEWS_ITEMS } from "@/app/templates/bank/_data/news"
 
 // embla-carousel-react(components/ui/carousel.tsx가 사용)는 window.matchMedia /

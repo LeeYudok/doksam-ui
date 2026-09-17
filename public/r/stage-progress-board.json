@@ -4,7 +4,12 @@
   "title": "Stage Progress Board",
   "description": "단계별 상태 배지·진행 바·작업 체크리스트를 카드 그리드로 보여주는 다단계 진행 현황 보드.",
   "dependencies": [
-    "@phosphor-icons/react"
+    "@phosphor-icons/react@^2.1.10"
+  ],
+  "registryDependencies": [
+    "badge",
+    "card",
+    "progress"
   ],
   "files": [
     {

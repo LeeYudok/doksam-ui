@@ -4,7 +4,12 @@
   "title": "Scenario Simulator",
   "description": "파라미터 선택에 따라 현재/시나리오/증가분 KPI 카드가 즉시 재계산되는 what-if 시나리오 시뮬레이터.",
   "dependencies": [
-    "@phosphor-icons/react"
+    "@phosphor-icons/react@^2.1.10"
+  ],
+  "registryDependencies": [
+    "card",
+    "native-select",
+    "https://ui.doksam.com/r/finance-rate.json"
   ],
   "files": [
     {

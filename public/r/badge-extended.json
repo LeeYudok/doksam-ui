@@ -4,7 +4,7 @@
   "title": "Badge Extended",
   "description": "shadcn Badge를 확장해 success/warning/danger 시맨틱 상태 variant를 추가한 컴포넌트. badge.tsx 원본은 건드리지 않고 badgeVariants만 재사용한다.",
   "dependencies": [
-    "class-variance-authority"
+    "class-variance-authority@^0.7.1"
   ],
   "registryDependencies": [
     "badge"

@@ -4,7 +4,21 @@
   "title": "Brokerage Market Home 템플릿",
   "description": "service 프로필(Ocean·Noto Sans KR) 증권 마켓 홈 — 시장 지표·실시간 랭킹 스크리너·종목 상세(캔들·AI·커뮤니티)·관심종목(가상 누리증권).",
   "dependencies": [
-    "@phosphor-icons/react"
+    "@phosphor-icons/react@^2.1.10"
+  ],
+  "registryDependencies": [
+    "avatar",
+    "badge",
+    "button",
+    "card",
+    "table",
+    "tabs",
+    "https://ui.doksam.com/r/finance-format-won.json",
+    "https://ui.doksam.com/r/finance-rate.json",
+    "https://ui.doksam.com/r/profile-scope.json",
+    "https://ui.doksam.com/r/route-error.json",
+    "https://ui.doksam.com/r/route-loading.json",
+    "https://ui.doksam.com/r/sparkline.json"
   ],
   "files": [
     {

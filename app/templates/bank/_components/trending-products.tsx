@@ -2,7 +2,7 @@ import Link from "next/link"
 
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
-import { TRENDING_PRODUCTS } from "@/app/templates/bank/_data/trending-products"
+import { TRENDING_PRODUCTS } from "@/app/templates/bank/_data/trending-products-data"
 
 export function TrendingProducts() {
   return (

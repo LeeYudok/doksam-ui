@@ -4,9 +4,17 @@
   "title": "SaaS Landing + Dashboard 템플릿",
   "description": "service 프로필(Ocean·Noto Sans KR) 랜딩+대시보드+피드 — 히어로·가격·콘텐츠 피드.",
   "dependencies": [
-    "@phosphor-icons/react"
+    "@phosphor-icons/react@^2.1.10"
   ],
   "registryDependencies": [
+    "accordion",
+    "badge",
+    "card",
+    "https://ui.doksam.com/r/content-feed.json",
+    "https://ui.doksam.com/r/list-controls.json",
+    "https://ui.doksam.com/r/profile-scope.json",
+    "https://ui.doksam.com/r/route-error.json",
+    "https://ui.doksam.com/r/route-loading.json",
     "https://ui.doksam.com/r/screen-help-dialog.json"
   ],
   "files": [

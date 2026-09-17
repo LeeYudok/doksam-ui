@@ -4,7 +4,7 @@
   "title": "Color Picker",
   "description": "스와치+hex 순수 색상 선택기.",
   "dependencies": [
-    "@phosphor-icons/react"
+    "@phosphor-icons/react@^2.1.10"
   ],
   "registryDependencies": [
     "button",

@@ -1,6 +1,6 @@
 import Link from "next/link"
 
-import { PRODUCT_CATEGORIES } from "@/app/templates/bank/_data/product-categories"
+import { PRODUCT_CATEGORIES } from "@/app/templates/bank/_data/product-categories-data"
 
 export function ProductCategories() {
   return (

@@ -4,16 +4,26 @@
   "title": "Admin/Backoffice Pro 템플릿",
   "description": "admin 프로필(Slate·Geist) 관리자 대시보드 — 사이드바 셸·정렬 테이블·관측성 뷰어·설정 폼.",
   "dependencies": [
-    "@tanstack/react-table",
-    "@dnd-kit/core",
-    "@dnd-kit/sortable",
-    "@phosphor-icons/react"
+    "@tanstack/react-table@^8.21.3",
+    "@dnd-kit/core@^6.3.1",
+    "@dnd-kit/sortable@^10.0.0",
+    "@phosphor-icons/react@^2.1.10"
   ],
   "registryDependencies": [
-    "https://ui.doksam.com/r/table-sortable.json",
+    "card",
+    "input",
+    "label",
+    "select",
+    "separator",
+    "sheet",
+    "switch",
     "https://ui.doksam.com/r/json-tree.json",
     "https://ui.doksam.com/r/log-viewer.json",
-    "https://ui.doksam.com/r/request-inspector.json"
+    "https://ui.doksam.com/r/profile-scope.json",
+    "https://ui.doksam.com/r/request-inspector.json",
+    "https://ui.doksam.com/r/route-error.json",
+    "https://ui.doksam.com/r/route-loading.json",
+    "https://ui.doksam.com/r/table-sortable.json"
   ],
   "files": [
     {

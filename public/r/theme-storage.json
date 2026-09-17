@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "theme-storage",
+  "title": "Theme Storage",
+  "description": "테마·프로필·로케일 선택을 localStorage 에 담을 때 쓰는 키와 안전한 읽기/쓰기 헬퍼. 서버 렌더와 클라이언트 하이드레이션 사이에서 값이 어긋나지 않도록 초기화 순서를 고정한다.",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "lib/theme-storage.ts",
+      "content": "/**\n * 테마/폰트 프리셋 · 다크모드 영속에 쓰는 localStorage 키.\n * FOUC 방지 인라인 스크립트(app/layout.tsx)와 hooks/use-theme-preset.ts,\n * hooks/use-font-preset.ts 가 이 값을 공유한다 — 한쪽만 고치면 어긋나니\n * 상수로 단일화.\n */\nexport const THEME_PRESET_STORAGE_KEY = \"doksam-ui-theme-preset\";\nexport const THEME_MODE_STORAGE_KEY = \"doksam-ui-theme-mode\";\nexport const FONT_STORAGE_KEY = \"doksam-ui-font-preset\";\n\nexport const LOCALE_STORAGE_KEY = \"doksam-ui-locale\";\n\n/**\n * 브랜드 프로필 미리보기(#65)가 쓰는 radius·density 영속 키.\n * FOUC 방지 인라인 스크립트(app/layout.tsx)와 profile-preview-button 이 공유.\n * 값이 없으면 <html> 에 아무것도 세팅하지 않는다(기존 렌더 무변화).\n */\nexport const DENSITY_STORAGE_KEY = \"doksam-ui-density\";\nexport const RADIUS_STORAGE_KEY = \"doksam-ui-radius\";\n\n/**\n * 시각 성격(personality) 토큰 층(#90)이 쓰는 영속 키. personalities/index.ts\n * 레지스트리의 프리셋이 고정한 scale/surface/motion 3값을, 밀도(density)와\n * 동일한 패턴으로 preset 이름이 아니라 raw 값 그대로 저장한다 — FOUC 방지\n * 인라인 스크립트(app/layout.tsx)가 레지스트리를 몰라도 즉시 반영할 수 있게.\n * 값이 없으면 <html>에 아무것도 세팅하지 않는다(기존 렌더 무변화).\n */\nexport const PERSONALITY_SCALE_STORAGE_KEY = \"doksam-ui-personality-scale\";\nexport const PERSONALITY_SURFACE_STORAGE_KEY = \"doksam-ui-personality-surface\";\nexport const PERSONALITY_MOTION_STORAGE_KEY = \"doksam-ui-personality-motion\";\n\n/**\n * 형태 변주 축(#43)이 쓰는 영속 키 — 모서리 계열(corner)·타입 대비(type contrast).\n * 밀도·성격 층과 동일한 패턴으로 레지스트리 preset 이름을 그대로 저장한다\n * (app/globals.css 가 이름으로 규칙을 걸기 때문에 raw 값 변환이 필요 없다).\n * FOUC 방지 인라인 스크립트(app/layout.tsx)와 profile-preview-button 이 공유하고,\n * 값이 없으면 <html>에 아무것도 세팅하지 않는다(기존 렌더 무변화).\n */\nexport const CORNER_STORAGE_KEY = \"doksam-ui-corner\";\nexport const TYPE_CONTRAST_STORAGE_KEY = \"doksam-ui-type-contrast\";\n\nexport type ThemeMode = \"light\" | \"dark\";\n",
+      "type": "registry:file",
+      "target": "lib/theme-storage.ts"
+    }
+  ],
+  "type": "registry:lib"
+}

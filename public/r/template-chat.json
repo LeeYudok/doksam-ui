@@ -4,9 +4,28 @@
   "title": "Chat / AI Assistant 템플릿",
   "description": "data 프로필(Violet 다크·Space Grotesk) AI 어시스턴트 대화 템플릿 — 말풍선·메시지 스크롤러·첨부 입력창·설정 폼.",
   "dependencies": [
-    "@phosphor-icons/react"
+    "@phosphor-icons/react@^2.1.10"
   ],
   "registryDependencies": [
+    "attachment",
+    "avatar",
+    "badge",
+    "bubble",
+    "card",
+    "input-group",
+    "label",
+    "message",
+    "message-scroller",
+    "radio-group",
+    "select",
+    "separator",
+    "sheet",
+    "slider",
+    "switch",
+    "textarea",
+    "https://ui.doksam.com/r/profile-scope.json",
+    "https://ui.doksam.com/r/route-error.json",
+    "https://ui.doksam.com/r/route-loading.json",
     "https://ui.doksam.com/r/screen-help-dialog.json"
   ],
   "files": [

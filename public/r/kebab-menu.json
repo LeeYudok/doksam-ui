@@ -4,7 +4,7 @@
   "title": "Kebab Menu",
   "description": "세로 점 3개(⋮) 아이콘 버튼을 누르면 액션 드롭다운이 열리는 케밥 메뉴. items 배열 하나로 메뉴를 선언하며, 아이콘 전용 트리거의 aria-label 누락을 label 필수 prop으로 강제한다.",
   "dependencies": [
-    "@phosphor-icons/react"
+    "@phosphor-icons/react@^2.1.10"
   ],
   "registryDependencies": [
     "button",

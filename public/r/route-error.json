@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "route-error",
+  "title": "Route Error",
+  "description": "Next App Router 의 error.tsx 가 그대로 쓰는 오류 화면. 다시 시도 버튼과 digest 표기를 표준화한다.",
+  "dependencies": [
+    "@phosphor-icons/react@^2.1.10"
+  ],
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "components/route-error.tsx",
+      "content": "\"use client\";\n\nimport { useEffect } from \"react\";\nimport { ArrowClockwiseIcon, WarningCircleIcon } from \"@phosphor-icons/react/dist/ssr\";\n\nimport { Button } from \"@/components/ui/button\";\n\ninterface RouteErrorProps {\n  error: Error & { digest?: string };\n  reset: () => void;\n}\n\n/** app/**\\/error.tsx 가 공유하는 에러 바운더리 UI. */\nexport function RouteError({ error, reset }: Readonly<RouteErrorProps>) {\n  useEffect(() => {\n    console.error(error);\n  }, [error]);\n\n  return (\n    <div className=\"flex flex-col items-start gap-3\">\n      <div className=\"flex items-center gap-2 text-destructive\">\n        <WarningCircleIcon size={20} weight=\"regular\" />\n        <span className=\"text-sm font-medium\">문제가 발생했습니다</span>\n      </div>\n      <p className=\"max-w-prose text-sm text-muted-foreground\">{error.message}</p>\n      <Button type=\"button\" variant=\"outline\" size=\"sm\" onClick={reset}>\n        <ArrowClockwiseIcon size={16} weight=\"regular\" />\n        다시 시도\n      </Button>\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/route-error.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

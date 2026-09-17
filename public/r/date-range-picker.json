@@ -4,7 +4,7 @@
   "title": "Date Range Picker",
   "description": "2달 캘린더 from~to 범위 선택기.",
   "dependencies": [
-    "@phosphor-icons/react"
+    "@phosphor-icons/react@^2.1.10"
   ],
   "registryDependencies": [
     "button",

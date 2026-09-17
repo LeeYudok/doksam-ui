@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "route-loading",
+  "title": "Route Loading",
+  "description": "Next App Router 의 loading.tsx 가 그대로 쓰는 스켈레톤 화면. 라우트 전환 중 레이아웃이 튀지 않도록 높이를 잡아 둔다.",
+  "dependencies": [],
+  "registryDependencies": [
+    "skeleton"
+  ],
+  "files": [
+    {
+      "path": "components/route-loading.tsx",
+      "content": "import { Skeleton } from \"@/components/ui/skeleton\";\n\n/** app/**\\/loading.tsx 가 공유하는 스켈레톤. */\nexport function RouteLoading() {\n  return (\n    <output className=\"flex flex-col gap-3\" aria-label=\"로딩 중\">\n      <Skeleton className=\"h-6 w-40\" />\n      <Skeleton className=\"h-4 w-72\" />\n      <Skeleton className=\"h-4 w-56\" />\n    </output>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/route-loading.tsx"
+    }
+  ],
+  "type": "registry:component"
+}
