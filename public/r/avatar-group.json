@@ -4,7 +4,7 @@
   "title": "Avatar Group",
   "description": "겹친 아바타 스택+N.",
   "registryDependencies": [
-    "avatar"
+    "https://ui.doksam.com/r/avatar.json"
   ],
   "files": [
     {

@@ -8,8 +8,8 @@
     "class-variance-authority@^0.7.1"
   ],
   "registryDependencies": [
-    "button",
-    "dropdown-menu"
+    "https://ui.doksam.com/r/button.json",
+    "https://ui.doksam.com/r/dropdown-menu.json"
   ],
   "files": [
     {

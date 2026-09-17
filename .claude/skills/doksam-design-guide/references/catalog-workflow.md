@@ -64,11 +64,14 @@ pnpm typecheck && pnpm lint && pnpm test && pnpm build
    카탈로그 안에서 빌드가 통과해도 설치본에서는 끊어질 수 있다.
    `scripts/registry/closure.test.ts` 가 그 간극을 막는다 — 새 item 을 넣었으면
    `npx tsx scripts/manual/2026-09-17_issue-52_fill-registry-deps.mts` 로
-   의존성을 다시 계산하고 `pnpm test`(`scripts/registry`)를 돌린다.
+   의존성을 다시 계산하고(프리미티브를 건드렸으면 `pnpm registry:sync` 도)
+   `pnpm test`(`scripts/registry`)를 돌린다.
 
-   - `@/components/ui/<n>` → 상류 shadcn 이름 그대로 `registryDependencies` 에.
-     **알려진 갭** — `components/ui/` 는 하우스 포크인데 bare 이름 dep 은 상류 원본을
-     내려받는다. 소비 프로젝트는 카탈로그와 다른 프리미티브를 받는다(#57 에서 처리).
+   - `@/components/ui/<n>` → `https://ui.doksam.com/r/<n>.json` 을 `registryDependencies` 에.
+     **bare 이름(`"badge"`)을 쓰지 않는다** — bare 는 상류에서 내려와 소비 프로젝트의
+     init 프리셋과 상류 버전에 따라 내용이 갈린다(#57). 프리미티브 항목은 손으로 적지
+     않고 `pnpm registry:sync` 가 파일 import 에서 계산하며,
+     `scripts/registry/ui-items.test.ts` 가 어긋남을 막는다.
    - 카탈로그 자체 파일 → 그 파일을 싣는 item 의 URL 을 `registryDependencies` 에.
      어느 item 도 안 싣는다면 파운데이션 item 을 먼저 만든다.
    - npm 의존성은 **버전 범위까지 박는다**(`@tanstack/react-table@^8.21.3`).

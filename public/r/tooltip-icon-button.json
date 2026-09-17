@@ -7,8 +7,8 @@
     "class-variance-authority@^0.7.1"
   ],
   "registryDependencies": [
-    "button",
-    "tooltip"
+    "https://ui.doksam.com/r/button.json",
+    "https://ui.doksam.com/r/tooltip.json"
   ],
   "files": [
     {

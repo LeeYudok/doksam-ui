@@ -7,16 +7,16 @@
     "@phosphor-icons/react@^2.1.10"
   ],
   "registryDependencies": [
-    "badge",
-    "card",
-    "progress",
-    "table",
-    "textarea",
+    "https://ui.doksam.com/r/badge.json",
+    "https://ui.doksam.com/r/card.json",
     "https://ui.doksam.com/r/live-indicator.json",
     "https://ui.doksam.com/r/profile-scope.json",
+    "https://ui.doksam.com/r/progress.json",
     "https://ui.doksam.com/r/route-error.json",
     "https://ui.doksam.com/r/route-loading.json",
-    "https://ui.doksam.com/r/screen-help-dialog.json"
+    "https://ui.doksam.com/r/screen-help-dialog.json",
+    "https://ui.doksam.com/r/table.json",
+    "https://ui.doksam.com/r/textarea.json"
   ],
   "files": [
     {

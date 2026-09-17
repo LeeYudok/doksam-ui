@@ -90,7 +90,7 @@ shadcn Badge를 확장해 success/warning/danger 시맨틱 상태 variant를 추
 npx shadcn add https://ui.doksam.com/r/badge-extended.json
 ```
 
-registryDependencies: badge
+registryDependencies: https://ui.doksam.com/r/badge.json
 
 npm dependencies: class-variance-authority@^0.7.1
 
@@ -110,7 +110,7 @@ navigator.clipboard로 텍스트를 복사하고 잠깐 "복사됨" 피드백을
 npx shadcn add https://ui.doksam.com/r/copy-button.json
 ```
 
-registryDependencies: button, https://ui.doksam.com/r/i18n-provider.json
+registryDependencies: https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/i18n-provider.json
 
 npm dependencies: @phosphor-icons/react@^2.1.10
 
@@ -122,7 +122,7 @@ npm dependencies: @phosphor-icons/react@^2.1.10
 npx shadcn add https://ui.doksam.com/r/kebab-menu.json
 ```
 
-registryDependencies: button, dropdown-menu
+registryDependencies: https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/dropdown-menu.json
 
 npm dependencies: @phosphor-icons/react@^2.1.10, class-variance-authority@^0.7.1
 
@@ -134,7 +134,7 @@ npm dependencies: @phosphor-icons/react@^2.1.10, class-variance-authority@^0.7.1
 npx shadcn add https://ui.doksam.com/r/tooltip-icon-button.json
 ```
 
-registryDependencies: button, tooltip
+registryDependencies: https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/tooltip.json
 
 npm dependencies: class-variance-authority@^0.7.1
 
@@ -146,7 +146,7 @@ npm dependencies: class-variance-authority@^0.7.1
 npx shadcn add https://ui.doksam.com/r/table-sortable.json
 ```
 
-registryDependencies: button, dropdown-menu, table
+registryDependencies: https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/dropdown-menu.json, https://ui.doksam.com/r/table.json
 
 npm dependencies: @tanstack/react-table@^8.21.3, @dnd-kit/core@^6.3.1, @dnd-kit/sortable@^10.0.0, @dnd-kit/utilities@^3.2.2, @phosphor-icons/react@^2.1.10
 
@@ -158,7 +158,7 @@ npm dependencies: @tanstack/react-table@^8.21.3, @dnd-kit/core@^6.3.1, @dnd-kit/
 npx shadcn add https://ui.doksam.com/r/table-toggle.json
 ```
 
-registryDependencies: switch, table
+registryDependencies: https://ui.doksam.com/r/switch.json, https://ui.doksam.com/r/table.json
 
 npm dependencies: @phosphor-icons/react@^2.1.10
 
@@ -170,7 +170,7 @@ npm dependencies: @phosphor-icons/react@^2.1.10
 npx shadcn add https://ui.doksam.com/r/screen-help-dialog.json
 ```
 
-registryDependencies: button, dialog
+registryDependencies: https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/dialog.json
 
 npm dependencies: @phosphor-icons/react@^2.1.10
 
@@ -182,7 +182,7 @@ npm dependencies: @phosphor-icons/react@^2.1.10
 npx shadcn add https://ui.doksam.com/r/region-map.json
 ```
 
-registryDependencies: button
+registryDependencies: https://ui.doksam.com/r/button.json
 
 ### JSON Tree (`json-tree`)
 
@@ -210,7 +210,7 @@ npx shadcn add https://ui.doksam.com/r/log-viewer.json
 npx shadcn add https://ui.doksam.com/r/request-inspector.json
 ```
 
-registryDependencies: accordion, badge, https://ui.doksam.com/r/copy-button.json
+registryDependencies: https://ui.doksam.com/r/accordion.json, https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/copy-button.json
 
 ### Date Picker (`date-picker`)
 
@@ -220,7 +220,7 @@ calendar+popover 단일 날짜 선택기.
 npx shadcn add https://ui.doksam.com/r/date-picker.json
 ```
 
-registryDependencies: button, calendar, popover
+registryDependencies: https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/calendar.json, https://ui.doksam.com/r/popover.json
 
 npm dependencies: @phosphor-icons/react@^2.1.10
 
@@ -232,7 +232,7 @@ npm dependencies: @phosphor-icons/react@^2.1.10
 npx shadcn add https://ui.doksam.com/r/date-range-picker.json
 ```
 
-registryDependencies: button, calendar, popover
+registryDependencies: https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/calendar.json, https://ui.doksam.com/r/popover.json
 
 npm dependencies: @phosphor-icons/react@^2.1.10, react-day-picker@^10.0.1
 
@@ -244,7 +244,7 @@ command 팝오버 다중 선택 + 칩.
 npx shadcn add https://ui.doksam.com/r/multi-select.json
 ```
 
-registryDependencies: badge, button, command, popover
+registryDependencies: https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/command.json, https://ui.doksam.com/r/popover.json
 
 npm dependencies: @phosphor-icons/react@^2.1.10
 
@@ -256,7 +256,7 @@ npm dependencies: @phosphor-icons/react@^2.1.10
 npx shadcn add https://ui.doksam.com/r/password-input.json
 ```
 
-registryDependencies: input-group
+registryDependencies: https://ui.doksam.com/r/input-group.json
 
 npm dependencies: @phosphor-icons/react@^2.1.10
 
@@ -268,7 +268,7 @@ npm dependencies: @phosphor-icons/react@^2.1.10
 npx shadcn add https://ui.doksam.com/r/number-input.json
 ```
 
-registryDependencies: input-group
+registryDependencies: https://ui.doksam.com/r/input-group.json
 
 npm dependencies: @phosphor-icons/react@^2.1.10
 
@@ -280,7 +280,7 @@ npm dependencies: @phosphor-icons/react@^2.1.10
 npx shadcn add https://ui.doksam.com/r/color-picker.json
 ```
 
-registryDependencies: button, input, popover
+registryDependencies: https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/input.json, https://ui.doksam.com/r/popover.json
 
 npm dependencies: @phosphor-icons/react@^2.1.10
 
@@ -302,7 +302,7 @@ npm dependencies: @phosphor-icons/react@^2.1.10
 npx shadcn add https://ui.doksam.com/r/avatar-group.json
 ```
 
-registryDependencies: avatar
+registryDependencies: https://ui.doksam.com/r/avatar.json
 
 ### Circular Progress (`circular-progress`)
 
@@ -360,7 +360,7 @@ npm dependencies: @phosphor-icons/react@^2.1.10
 npx shadcn add https://ui.doksam.com/r/scenario-simulator.json
 ```
 
-registryDependencies: card, native-select, https://ui.doksam.com/r/finance-rate.json
+registryDependencies: https://ui.doksam.com/r/card.json, https://ui.doksam.com/r/finance-rate.json, https://ui.doksam.com/r/native-select.json
 
 npm dependencies: @phosphor-icons/react@^2.1.10
 
@@ -382,7 +382,7 @@ npm dependencies: @phosphor-icons/react@^2.1.10
 npx shadcn add https://ui.doksam.com/r/stage-progress-board.json
 ```
 
-registryDependencies: badge, card, progress
+registryDependencies: https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/card.json, https://ui.doksam.com/r/progress.json
 
 npm dependencies: @phosphor-icons/react@^2.1.10
 
@@ -424,7 +424,7 @@ mermaid 코드를 동적 로드로 SVG 렌더링하는 다이어그램 뷰어.
 npx shadcn add https://ui.doksam.com/r/mermaid-viewer.json
 ```
 
-registryDependencies: spinner
+registryDependencies: https://ui.doksam.com/r/spinner.json
 
 npm dependencies: mermaid@^11.16.0, @phosphor-icons/react@^2.1.10
 
@@ -446,7 +446,7 @@ Next App Router 의 error.tsx 가 그대로 쓰는 오류 화면. 다시 시도 
 npx shadcn add https://ui.doksam.com/r/route-error.json
 ```
 
-registryDependencies: button
+registryDependencies: https://ui.doksam.com/r/button.json
 
 npm dependencies: @phosphor-icons/react@^2.1.10
 
@@ -458,7 +458,7 @@ Next App Router 의 loading.tsx 가 그대로 쓰는 스켈레톤 화면. 라우
 npx shadcn add https://ui.doksam.com/r/route-loading.json
 ```
 
-registryDependencies: skeleton
+registryDependencies: https://ui.doksam.com/r/skeleton.json
 
 ### Sparkline (`sparkline`)
 
@@ -500,7 +500,7 @@ npx shadcn add https://ui.doksam.com/r/activity-heatmap.json
 npx shadcn add https://ui.doksam.com/r/content-feed.json
 ```
 
-registryDependencies: badge, table
+registryDependencies: https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/table.json
 
 npm dependencies: @phosphor-icons/react@^2.1.10
 
@@ -512,7 +512,7 @@ npm dependencies: @phosphor-icons/react@^2.1.10
 npx shadcn add https://ui.doksam.com/r/list-controls.json
 ```
 
-registryDependencies: button, input, pagination
+registryDependencies: https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/input.json, https://ui.doksam.com/r/pagination.json
 
 npm dependencies: @phosphor-icons/react@^2.1.10
 
@@ -620,7 +620,7 @@ data 프로필(Violet 다크·Space Grotesk) 트레이딩 대시보드 풀 템�
 npx shadcn add https://ui.doksam.com/r/template-trading.json
 ```
 
-registryDependencies: badge, card, https://ui.doksam.com/r/activity-heatmap.json, https://ui.doksam.com/r/diverging-bar.json, https://ui.doksam.com/r/finance-format-won.json, https://ui.doksam.com/r/finance-rate.json, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/return-curve.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json, https://ui.doksam.com/r/sparkline.json, https://ui.doksam.com/r/table-sortable.json
+registryDependencies: https://ui.doksam.com/r/activity-heatmap.json, https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/card.json, https://ui.doksam.com/r/diverging-bar.json, https://ui.doksam.com/r/finance-format-won.json, https://ui.doksam.com/r/finance-rate.json, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/return-curve.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json, https://ui.doksam.com/r/sparkline.json, https://ui.doksam.com/r/table-sortable.json
 
 npm dependencies: @tanstack/react-table@^8.21.3, @dnd-kit/core@^6.3.1, @dnd-kit/sortable@^10.0.0, @phosphor-icons/react@^2.1.10
 
@@ -632,7 +632,7 @@ admin 프로필(Slate·Geist) 관리자 대시보드 — 사이드바 셸·정�
 npx shadcn add https://ui.doksam.com/r/template-admin.json
 ```
 
-registryDependencies: card, input, label, select, separator, sheet, switch, https://ui.doksam.com/r/json-tree.json, https://ui.doksam.com/r/log-viewer.json, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/request-inspector.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json, https://ui.doksam.com/r/table-sortable.json
+registryDependencies: https://ui.doksam.com/r/card.json, https://ui.doksam.com/r/input.json, https://ui.doksam.com/r/json-tree.json, https://ui.doksam.com/r/label.json, https://ui.doksam.com/r/log-viewer.json, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/request-inspector.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json, https://ui.doksam.com/r/select.json, https://ui.doksam.com/r/separator.json, https://ui.doksam.com/r/sheet.json, https://ui.doksam.com/r/switch.json, https://ui.doksam.com/r/table-sortable.json
 
 npm dependencies: @tanstack/react-table@^8.21.3, @dnd-kit/core@^6.3.1, @dnd-kit/sortable@^10.0.0, @phosphor-icons/react@^2.1.10
 
@@ -644,7 +644,7 @@ service 프로필(Ocean·Noto Sans KR) 랜딩+대시보드+피드 — 히어로�
 npx shadcn add https://ui.doksam.com/r/template-saas.json
 ```
 
-registryDependencies: accordion, badge, card, https://ui.doksam.com/r/content-feed.json, https://ui.doksam.com/r/list-controls.json, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json, https://ui.doksam.com/r/screen-help-dialog.json
+registryDependencies: https://ui.doksam.com/r/accordion.json, https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/card.json, https://ui.doksam.com/r/content-feed.json, https://ui.doksam.com/r/list-controls.json, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json, https://ui.doksam.com/r/screen-help-dialog.json
 
 npm dependencies: @phosphor-icons/react@^2.1.10
 
@@ -656,7 +656,7 @@ data 프로필(Violet 다크·Space Grotesk) AI 어시스턴트 대화 템플릿
 npx shadcn add https://ui.doksam.com/r/template-chat.json
 ```
 
-registryDependencies: attachment, avatar, badge, bubble, card, input-group, label, message, message-scroller, radio-group, select, separator, sheet, slider, switch, textarea, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json, https://ui.doksam.com/r/screen-help-dialog.json
+registryDependencies: https://ui.doksam.com/r/attachment.json, https://ui.doksam.com/r/avatar.json, https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/bubble.json, https://ui.doksam.com/r/card.json, https://ui.doksam.com/r/input-group.json, https://ui.doksam.com/r/label.json, https://ui.doksam.com/r/message-scroller.json, https://ui.doksam.com/r/message.json, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/radio-group.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json, https://ui.doksam.com/r/screen-help-dialog.json, https://ui.doksam.com/r/select.json, https://ui.doksam.com/r/separator.json, https://ui.doksam.com/r/sheet.json, https://ui.doksam.com/r/slider.json, https://ui.doksam.com/r/switch.json, https://ui.doksam.com/r/textarea.json
 
 npm dependencies: @phosphor-icons/react@^2.1.10
 
@@ -668,7 +668,7 @@ service 프로필(Ocean·Noto Sans KR) 커머스 템플릿 — 스토어프론�
 npx shadcn add https://ui.doksam.com/r/template-shop.json
 ```
 
-registryDependencies: badge, button, card, carousel, empty, label, progress, radio-group, separator, table, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json
+registryDependencies: https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/card.json, https://ui.doksam.com/r/carousel.json, https://ui.doksam.com/r/empty.json, https://ui.doksam.com/r/label.json, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/progress.json, https://ui.doksam.com/r/radio-group.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json, https://ui.doksam.com/r/separator.json, https://ui.doksam.com/r/table.json
 
 npm dependencies: @phosphor-icons/react@^2.1.10
 
@@ -680,7 +680,7 @@ service 프로필(Ocean·Noto Sans KR) 리테일 뱅크 포털 홈 — 히어로
 npx shadcn add https://ui.doksam.com/r/template-bank.json
 ```
 
-registryDependencies: badge, button, card, carousel, tabs, toggle-group, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json
+registryDependencies: https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/card.json, https://ui.doksam.com/r/carousel.json, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json, https://ui.doksam.com/r/tabs.json, https://ui.doksam.com/r/toggle-group.json
 
 npm dependencies: @phosphor-icons/react@^2.1.10
 
@@ -692,7 +692,7 @@ service 프로필(Ocean·Noto Sans KR) 증권 마켓 홈 — 시장 지표·실�
 npx shadcn add https://ui.doksam.com/r/template-brokerage.json
 ```
 
-registryDependencies: avatar, badge, button, card, table, tabs, https://ui.doksam.com/r/finance-format-won.json, https://ui.doksam.com/r/finance-rate.json, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json, https://ui.doksam.com/r/sparkline.json
+registryDependencies: https://ui.doksam.com/r/avatar.json, https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/card.json, https://ui.doksam.com/r/finance-format-won.json, https://ui.doksam.com/r/finance-rate.json, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json, https://ui.doksam.com/r/sparkline.json, https://ui.doksam.com/r/table.json, https://ui.doksam.com/r/tabs.json
 
 npm dependencies: @phosphor-icons/react@^2.1.10
 
@@ -704,7 +704,7 @@ admin 프로필 · Slate · Geist · split-pane 원형 · split-pane 원형. 좌
 npx shadcn add https://ui.doksam.com/r/template-mail-workspace.json
 ```
 
-registryDependencies: avatar, badge, button, input, separator, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json
+registryDependencies: https://ui.doksam.com/r/avatar.json, https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/input.json, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json, https://ui.doksam.com/r/separator.json
 
 npm dependencies: @phosphor-icons/react@^2.1.10
 
@@ -716,7 +716,7 @@ data 프로필 · Violet 다크 · Space Grotesk · feed-timeline 원형 · feed
 npx shadcn add https://ui.doksam.com/r/template-activity-feed.json
 ```
 
-registryDependencies: avatar, badge, button, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json
+registryDependencies: https://ui.doksam.com/r/avatar.json, https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json
 
 npm dependencies: @phosphor-icons/react@^2.1.10
 
@@ -728,7 +728,7 @@ service 프로필 · Ocean 라이트 · Noto Sans KR · top-nav-site 원형 · t
 npx shadcn add https://ui.doksam.com/r/template-marketing-site.json
 ```
 
-registryDependencies: accordion, badge, button, card, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json
+registryDependencies: https://ui.doksam.com/r/accordion.json, https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/card.json, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json
 
 npm dependencies: @phosphor-icons/react@^2.1.10
 
@@ -740,7 +740,7 @@ admin 프로필 · Slate · Geist · doc-reader 원형. 위키 문서 트리·�
 npx shadcn add https://ui.doksam.com/r/template-knowledge-base.json
 ```
 
-registryDependencies: badge, tabs, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json, https://ui.doksam.com/r/tree-view.json
+registryDependencies: https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json, https://ui.doksam.com/r/tabs.json, https://ui.doksam.com/r/tree-view.json
 
 npm dependencies: @phosphor-icons/react@^2.1.10
 
@@ -752,7 +752,7 @@ admin 프로필 · Slate · Geist · wizard-flow 원형. 수집·갱신·감지 
 npx shadcn add https://ui.doksam.com/r/template-crawler-console.json
 ```
 
-registryDependencies: badge, card, progress, table, textarea, https://ui.doksam.com/r/live-indicator.json, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json, https://ui.doksam.com/r/screen-help-dialog.json
+registryDependencies: https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/card.json, https://ui.doksam.com/r/live-indicator.json, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/progress.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json, https://ui.doksam.com/r/screen-help-dialog.json, https://ui.doksam.com/r/table.json, https://ui.doksam.com/r/textarea.json
 
 npm dependencies: @phosphor-icons/react@^2.1.10
 
@@ -764,7 +764,7 @@ data 프로필 · Violet 다크 · Space Grotesk · canvas 원형. SDLC·AI 용�
 npx shadcn add https://ui.doksam.com/r/template-glossary.json
 ```
 
-registryDependencies: badge, input, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json
+registryDependencies: https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/input.json, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json
 
 npm dependencies: @phosphor-icons/react@^2.1.10
 
@@ -776,9 +776,629 @@ console 프로필 · Ember 다크 · Geist · focus-task 원형. 지속되는 �
 npx shadcn add https://ui.doksam.com/r/template-passkey-auth.json
 ```
 
-registryDependencies: alert, alert-dialog, badge, button, input-otp, separator, spinner, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json
+registryDependencies: https://ui.doksam.com/r/alert-dialog.json, https://ui.doksam.com/r/alert.json, https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/input-otp.json, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json, https://ui.doksam.com/r/separator.json, https://ui.doksam.com/r/spinner.json
 
 npm dependencies: @phosphor-icons/react@^2.1.10
+
+## UI 프리미티브
+
+### Accordion (`accordion`)
+
+Accordion 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/accordion.json
+```
+
+npm dependencies: lucide-react@^1.24.0, radix-ui@^1.6.7
+
+### Alert (`alert`)
+
+Alert 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/alert.json
+```
+
+npm dependencies: class-variance-authority@^0.7.1
+
+### Alert Dialog (`alert-dialog`)
+
+Alert Dialog 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/alert-dialog.json
+```
+
+registryDependencies: https://ui.doksam.com/r/button.json
+
+npm dependencies: radix-ui@^1.6.7
+
+### Aspect Ratio (`aspect-ratio`)
+
+Aspect Ratio 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/aspect-ratio.json
+```
+
+npm dependencies: radix-ui@^1.6.7
+
+### Attachment (`attachment`)
+
+Attachment 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/attachment.json
+```
+
+registryDependencies: https://ui.doksam.com/r/button.json
+
+npm dependencies: class-variance-authority@^0.7.1, radix-ui@^1.6.7
+
+### Avatar (`avatar`)
+
+Avatar 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/avatar.json
+```
+
+npm dependencies: radix-ui@^1.6.7
+
+### Badge (`badge`)
+
+Badge 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/badge.json
+```
+
+npm dependencies: class-variance-authority@^0.7.1, radix-ui@^1.6.7
+
+### Breadcrumb (`breadcrumb`)
+
+Breadcrumb 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/breadcrumb.json
+```
+
+npm dependencies: lucide-react@^1.24.0, radix-ui@^1.6.7
+
+### Bubble (`bubble`)
+
+Bubble 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/bubble.json
+```
+
+npm dependencies: class-variance-authority@^0.7.1, radix-ui@^1.6.7
+
+### Button (`button`)
+
+Button 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/button.json
+```
+
+npm dependencies: class-variance-authority@^0.7.1, radix-ui@^1.6.7
+
+### Button Group (`button-group`)
+
+Button Group 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/button-group.json
+```
+
+registryDependencies: https://ui.doksam.com/r/separator.json
+
+npm dependencies: class-variance-authority@^0.7.1, radix-ui@^1.6.7
+
+### Calendar (`calendar`)
+
+Calendar 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/calendar.json
+```
+
+registryDependencies: https://ui.doksam.com/r/button.json
+
+npm dependencies: lucide-react@^1.24.0, react-day-picker@^10.0.1
+
+### Card (`card`)
+
+Card 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/card.json
+```
+
+### Carousel (`carousel`)
+
+Carousel 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/carousel.json
+```
+
+registryDependencies: https://ui.doksam.com/r/button.json
+
+npm dependencies: embla-carousel-react@^8.6.0, lucide-react@^1.24.0
+
+### Chart (`chart`)
+
+Chart 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/chart.json
+```
+
+npm dependencies: recharts@3.8.0
+
+### Checkbox (`checkbox`)
+
+Checkbox 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다. 이 파일은 상류 shadcn 이 앞서 있다 — 상류가 group-has-[:focus-visible]/field-label 상태 클래스를 더했다 — 우리 쪽이 낡았다. (#61 에서 갱신한다).
+
+```
+npx shadcn add https://ui.doksam.com/r/checkbox.json
+```
+
+npm dependencies: lucide-react@^1.24.0, radix-ui@^1.6.7
+
+### Collapsible (`collapsible`)
+
+Collapsible 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/collapsible.json
+```
+
+npm dependencies: radix-ui@^1.6.7
+
+### Combobox (`combobox`)
+
+Combobox 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/combobox.json
+```
+
+registryDependencies: https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/input-group.json
+
+npm dependencies: @base-ui/react@^1.6.0, lucide-react@^1.24.0
+
+### Command (`command`)
+
+Command 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다. 이 파일은 상류 shadcn 이 앞서 있다 — 상류 CommandDialog 가 내부 Command 에 크기 클래스를 두른다 — 우리 쪽이 낡았다. (#61 에서 갱신한다).
+
+```
+npx shadcn add https://ui.doksam.com/r/command.json
+```
+
+registryDependencies: https://ui.doksam.com/r/dialog.json, https://ui.doksam.com/r/input-group.json
+
+npm dependencies: cmdk@^1.1.1, lucide-react@^1.24.0
+
+### Context Menu (`context-menu`)
+
+Context Menu 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/context-menu.json
+```
+
+npm dependencies: lucide-react@^1.24.0, radix-ui@^1.6.7
+
+### Dialog (`dialog`)
+
+Dialog 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/dialog.json
+```
+
+registryDependencies: https://ui.doksam.com/r/button.json
+
+npm dependencies: lucide-react@^1.24.0, radix-ui@^1.6.7
+
+### Direction (`direction`)
+
+Direction 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/direction.json
+```
+
+npm dependencies: radix-ui@^1.6.7
+
+### Drawer (`drawer`)
+
+Drawer 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/drawer.json
+```
+
+npm dependencies: vaul@^1.1.2
+
+### Dropdown Menu (`dropdown-menu`)
+
+Dropdown Menu 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/dropdown-menu.json
+```
+
+npm dependencies: lucide-react@^1.24.0, radix-ui@^1.6.7
+
+### Empty (`empty`)
+
+Empty 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/empty.json
+```
+
+npm dependencies: class-variance-authority@^0.7.1
+
+### Field (`field`)
+
+Field 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다. 이 파일은 상류 shadcn 이 앞서 있다 — 상류가 FieldLabel 에 hover·focus-visible 처리를 더했다 — 우리 쪽이 낡았다. (#61 에서 갱신한다).
+
+```
+npx shadcn add https://ui.doksam.com/r/field.json
+```
+
+registryDependencies: https://ui.doksam.com/r/label.json, https://ui.doksam.com/r/separator.json
+
+npm dependencies: class-variance-authority@^0.7.1
+
+### Hover Card (`hover-card`)
+
+Hover Card 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/hover-card.json
+```
+
+npm dependencies: radix-ui@^1.6.7
+
+### Input (`input`)
+
+Input 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/input.json
+```
+
+### Input Group (`input-group`)
+
+Input Group 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/input-group.json
+```
+
+registryDependencies: https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/input.json, https://ui.doksam.com/r/textarea.json
+
+npm dependencies: class-variance-authority@^0.7.1
+
+### Input Otp (`input-otp`)
+
+Input Otp 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/input-otp.json
+```
+
+npm dependencies: input-otp@^1.4.2, lucide-react@^1.24.0
+
+### Item (`item`)
+
+Item 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/item.json
+```
+
+registryDependencies: https://ui.doksam.com/r/separator.json
+
+npm dependencies: class-variance-authority@^0.7.1, radix-ui@^1.6.7
+
+### Kbd (`kbd`)
+
+Kbd 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/kbd.json
+```
+
+### Label (`label`)
+
+Label 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/label.json
+```
+
+npm dependencies: radix-ui@^1.6.7
+
+### Marker (`marker`)
+
+Marker 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/marker.json
+```
+
+npm dependencies: class-variance-authority@^0.7.1, radix-ui@^1.6.7
+
+### Menubar (`menubar`)
+
+Menubar 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/menubar.json
+```
+
+npm dependencies: lucide-react@^1.24.0, radix-ui@^1.6.7
+
+### Message (`message`)
+
+Message 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/message.json
+```
+
+### Message Scroller (`message-scroller`)
+
+Message Scroller 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다. 이 파일은 상류 shadcn 이 앞서 있다 — 상류가 data-pending-scroll:invisible 을 더했다 — 우리 쪽이 낡았다. (#61 에서 갱신한다).
+
+```
+npx shadcn add https://ui.doksam.com/r/message-scroller.json
+```
+
+registryDependencies: https://ui.doksam.com/r/button.json
+
+npm dependencies: @shadcn/react@^0.2.1, lucide-react@^1.24.0
+
+### Native Select (`native-select`)
+
+Native Select 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/native-select.json
+```
+
+npm dependencies: lucide-react@^1.24.0
+
+### Navigation Menu (`navigation-menu`)
+
+Navigation Menu 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/navigation-menu.json
+```
+
+npm dependencies: class-variance-authority@^0.7.1, lucide-react@^1.24.0, radix-ui@^1.6.7
+
+### Pagination (`pagination`)
+
+Pagination 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/pagination.json
+```
+
+registryDependencies: https://ui.doksam.com/r/button.json
+
+npm dependencies: lucide-react@^1.24.0
+
+### Popover (`popover`)
+
+Popover 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/popover.json
+```
+
+npm dependencies: radix-ui@^1.6.7
+
+### Progress (`progress`)
+
+Progress 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/progress.json
+```
+
+npm dependencies: radix-ui@^1.6.7
+
+### Radio Group (`radio-group`)
+
+Radio Group 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다. 이 파일은 상류 shadcn 이 앞서 있다 — 상류가 group-has-[:focus-visible]/field-label 상태 클래스를 더했다 — 우리 쪽이 낡았다. (#61 에서 갱신한다).
+
+```
+npx shadcn add https://ui.doksam.com/r/radio-group.json
+```
+
+npm dependencies: radix-ui@^1.6.7
+
+### Resizable (`resizable`)
+
+Resizable 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/resizable.json
+```
+
+npm dependencies: react-resizable-panels@^4.12.1
+
+### Scroll Area (`scroll-area`)
+
+Scroll Area 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/scroll-area.json
+```
+
+npm dependencies: radix-ui@^1.6.7
+
+### Select (`select`)
+
+Select 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/select.json
+```
+
+npm dependencies: lucide-react@^1.24.0, radix-ui@^1.6.7
+
+### Separator (`separator`)
+
+Separator 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/separator.json
+```
+
+npm dependencies: radix-ui@^1.6.7
+
+### Sheet (`sheet`)
+
+Sheet 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/sheet.json
+```
+
+registryDependencies: https://ui.doksam.com/r/button.json
+
+npm dependencies: lucide-react@^1.24.0, radix-ui@^1.6.7
+
+### Sidebar (`sidebar`)
+
+Sidebar 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/sidebar.json
+```
+
+registryDependencies: https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/input.json, https://ui.doksam.com/r/separator.json, https://ui.doksam.com/r/sheet.json, https://ui.doksam.com/r/skeleton.json, https://ui.doksam.com/r/tooltip.json
+
+npm dependencies: class-variance-authority@^0.7.1, lucide-react@^1.24.0, radix-ui@^1.6.7
+
+### Skeleton (`skeleton`)
+
+Skeleton 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/skeleton.json
+```
+
+### Slider (`slider`)
+
+Slider 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/slider.json
+```
+
+npm dependencies: radix-ui@^1.6.7
+
+### Sonner (`sonner`)
+
+Sonner 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/sonner.json
+```
+
+npm dependencies: lucide-react@^1.24.0, next-themes@^0.4.6, sonner@^2.0.7
+
+### Spinner (`spinner`)
+
+Spinner 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/spinner.json
+```
+
+npm dependencies: lucide-react@^1.24.0
+
+### Switch (`switch`)
+
+Switch 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다. 이 파일은 상류 shadcn 이 앞서 있다 — 상류가 group-has-[:focus-visible]/field-label 상태 클래스를 더했다 — 우리 쪽이 낡았다. (#61 에서 갱신한다).
+
+```
+npx shadcn add https://ui.doksam.com/r/switch.json
+```
+
+npm dependencies: radix-ui@^1.6.7
+
+### Table (`table`)
+
+Table 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/table.json
+```
+
+### Tabs (`tabs`)
+
+Tabs 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/tabs.json
+```
+
+npm dependencies: class-variance-authority@^0.7.1, radix-ui@^1.6.7
+
+### Textarea (`textarea`)
+
+Textarea 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/textarea.json
+```
+
+### Toggle (`toggle`)
+
+Toggle 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/toggle.json
+```
+
+npm dependencies: class-variance-authority@^0.7.1, radix-ui@^1.6.7
+
+### Toggle Group (`toggle-group`)
+
+Toggle Group 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/toggle-group.json
+```
+
+registryDependencies: https://ui.doksam.com/r/toggle.json
+
+npm dependencies: class-variance-authority@^0.7.1, radix-ui@^1.6.7
+
+### Tooltip (`tooltip`)
+
+Tooltip 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/tooltip.json
+```
+
+npm dependencies: radix-ui@^1.6.7
 
 ## 링크
 

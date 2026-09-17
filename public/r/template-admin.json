@@ -10,19 +10,19 @@
     "@phosphor-icons/react@^2.1.10"
   ],
   "registryDependencies": [
-    "card",
-    "input",
-    "label",
-    "select",
-    "separator",
-    "sheet",
-    "switch",
+    "https://ui.doksam.com/r/card.json",
+    "https://ui.doksam.com/r/input.json",
     "https://ui.doksam.com/r/json-tree.json",
+    "https://ui.doksam.com/r/label.json",
     "https://ui.doksam.com/r/log-viewer.json",
     "https://ui.doksam.com/r/profile-scope.json",
     "https://ui.doksam.com/r/request-inspector.json",
     "https://ui.doksam.com/r/route-error.json",
     "https://ui.doksam.com/r/route-loading.json",
+    "https://ui.doksam.com/r/select.json",
+    "https://ui.doksam.com/r/separator.json",
+    "https://ui.doksam.com/r/sheet.json",
+    "https://ui.doksam.com/r/switch.json",
     "https://ui.doksam.com/r/table-sortable.json"
   ],
   "files": [

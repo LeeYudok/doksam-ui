@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "collapsible",
+  "title": "Collapsible",
+  "description": "Collapsible 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
+  "dependencies": [
+    "radix-ui@^1.6.7"
+  ],
+  "files": [
+    {
+      "path": "components/ui/collapsible.tsx",
+      "content": "\"use client\"\n\nimport { Collapsible as CollapsiblePrimitive } from \"radix-ui\"\n\nfunction Collapsible({\n  ...props\n}: React.ComponentProps<typeof CollapsiblePrimitive.Root>) {\n  return <CollapsiblePrimitive.Root data-slot=\"collapsible\" {...props} />\n}\n\nfunction CollapsibleTrigger({\n  ...props\n}: React.ComponentProps<typeof CollapsiblePrimitive.CollapsibleTrigger>) {\n  return (\n    <CollapsiblePrimitive.CollapsibleTrigger\n      data-slot=\"collapsible-trigger\"\n      {...props}\n    />\n  )\n}\n\nfunction CollapsibleContent({\n  ...props\n}: React.ComponentProps<typeof CollapsiblePrimitive.CollapsibleContent>) {\n  return (\n    <CollapsiblePrimitive.CollapsibleContent\n      data-slot=\"collapsible-content\"\n      {...props}\n    />\n  )\n}\n\nexport { Collapsible, CollapsibleTrigger, CollapsibleContent }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

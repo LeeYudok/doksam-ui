@@ -10,9 +10,9 @@
     "@phosphor-icons/react@^2.1.10"
   ],
   "registryDependencies": [
-    "badge",
-    "card",
     "https://ui.doksam.com/r/activity-heatmap.json",
+    "https://ui.doksam.com/r/badge.json",
+    "https://ui.doksam.com/r/card.json",
     "https://ui.doksam.com/r/diverging-bar.json",
     "https://ui.doksam.com/r/finance-format-won.json",
     "https://ui.doksam.com/r/finance-rate.json",

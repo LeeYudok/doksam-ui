@@ -36,6 +36,7 @@ export interface RegistryFile {
 }
 
 export interface RegistryItem {
+  $schema?: string
   name: string
   type: string
   title?: string
@@ -147,7 +148,13 @@ export function registryDependencyName(dep: string): string {
   return dep.includes("/") ? dep.split("/").pop()! : dep
 }
 
-/** 상류 shadcn 이 제공하는 프리미티브 이름 — `components/ui/upstream.manifest.json` 이 원천. */
+/**
+ * 상류 shadcn 이 같은 이름으로 제공하는 프리미티브 — `components/ui/upstream.manifest.json` 이 원천.
+ *
+ * **"상류에 같은 이름이 있다" 는 "같은 파일이 깔린다" 가 아니다**(#57). bare 이름으로
+ * 받으면 내용이 소비 프로젝트의 init 프리셋과 상류의 현재 버전에 달리게 된다 —
+ * 실제로 6개 파일은 이미 상류가 카탈로그보다 앞서 있다.
+ */
 export function upstreamComponentNames(): Set<string> {
   const manifest = JSON.parse(
     fs.readFileSync(path.join(REPO_ROOT, "components/ui/upstream.manifest.json"), "utf8"),
@@ -161,6 +168,22 @@ export function upstreamComponentNames(): Set<string> {
 }
 
 /**
+ * 상류 레지스트리 원문과 내용이 다른 프리미티브 — bare 이름으로는 같은 것을 받는다는
+ * 보장이 없다. (그 차이에는 CLI 가 설치 시 치환하는 자리도 섞여 있다. 판정의 원천은
+ * `components/ui/upstream.manifest.json` 이다.)
+ */
+export function divergentPrimitives(): Set<string> {
+  const manifest = JSON.parse(
+    fs.readFileSync(path.join(REPO_ROOT, "components/ui/upstream.manifest.json"), "utf8"),
+  ) as { components: Record<string, { customized?: boolean }> }
+  return new Set(
+    Object.entries(manifest.components)
+      .filter(([, meta]) => meta.customized === true)
+      .map(([file]) => file.replace(/\.tsx?$/, "")),
+  )
+}
+
+/**
  * 항목 하나를 설치했을 때 소비 프로젝트에 실제로 존재하게 되는 파일 집합.
  * 자기 `files` + registryDependencies 로 이어지는 모든 항목의 `files`.
  */
@@ -168,15 +191,16 @@ export function providedPaths(itemName: string, registry: Registry): Set<string>
   const out = new Set<string>()
   const seen = new Set<string>()
   const upstream = upstreamComponentNames()
+  const divergent = divergentPrimitives()
 
   const walk = (name: string) => {
     if (seen.has(name)) return
     seen.add(name)
     const item = registry.items.find((i) => i.name === name)
     if (!item) {
-      // 레지스트리에 없는 이름 = 상류 shadcn 프리미티브. 우리 레포와 같은 자리에 깔린다.
-      // 상류에도 없는 이름이면 아무것도 제공하지 못한다 — 끊어진 import 로 드러난다.
-      if (upstream.has(name)) out.add(`components/ui/${name}.tsx`)
+      // 우리 레지스트리에 없는 이름 = 상류 shadcn 에서 내려오는 파일이다(#57).
+      // 내용이 카탈로그와 같다고 볼 수 없으므로, 상류 원문과 같은 이름일 때만 제공으로 센다.
+      if (upstream.has(name) && !divergent.has(name)) out.add(`components/ui/${name}.tsx`)
       return
     }
     for (const f of item.files ?? []) out.add(f.path)

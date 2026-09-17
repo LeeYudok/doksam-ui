@@ -7,10 +7,10 @@
     "@phosphor-icons/react@^2.1.10"
   ],
   "registryDependencies": [
-    "accordion",
-    "badge",
-    "button",
-    "card",
+    "https://ui.doksam.com/r/accordion.json",
+    "https://ui.doksam.com/r/badge.json",
+    "https://ui.doksam.com/r/button.json",
+    "https://ui.doksam.com/r/card.json",
     "https://ui.doksam.com/r/profile-scope.json",
     "https://ui.doksam.com/r/route-error.json",
     "https://ui.doksam.com/r/route-loading.json"

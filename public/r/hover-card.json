@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "hover-card",
+  "title": "Hover Card",
+  "description": "Hover Card 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
+  "dependencies": [
+    "radix-ui@^1.6.7"
+  ],
+  "files": [
+    {
+      "path": "components/ui/hover-card.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { HoverCard as HoverCardPrimitive } from \"radix-ui\"\n\nimport { cn } from \"@/lib/utils\"\n\nfunction HoverCard({\n  ...props\n}: React.ComponentProps<typeof HoverCardPrimitive.Root>) {\n  return <HoverCardPrimitive.Root data-slot=\"hover-card\" {...props} />\n}\n\nfunction HoverCardTrigger({\n  ...props\n}: React.ComponentProps<typeof HoverCardPrimitive.Trigger>) {\n  return (\n    <HoverCardPrimitive.Trigger data-slot=\"hover-card-trigger\" {...props} />\n  )\n}\n\nfunction HoverCardContent({\n  className,\n  align = \"center\",\n  sideOffset = 4,\n  ...props\n}: React.ComponentProps<typeof HoverCardPrimitive.Content>) {\n  return (\n    <HoverCardPrimitive.Portal data-slot=\"hover-card-portal\">\n      <HoverCardPrimitive.Content\n        data-slot=\"hover-card-content\"\n        align={align}\n        sideOffset={sideOffset}\n        className={cn(\n          \"z-50 w-64 origin-(--radix-hover-card-content-transform-origin) rounded-lg bg-popover p-2.5 text-sm text-popover-foreground shadow-md ring-1 ring-foreground/10 outline-hidden duration-100 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95\",\n          className\n        )}\n        {...props}\n      />\n    </HoverCardPrimitive.Portal>\n  )\n}\n\nexport { HoverCard, HoverCardTrigger, HoverCardContent }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

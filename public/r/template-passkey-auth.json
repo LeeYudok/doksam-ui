@@ -7,16 +7,16 @@
     "@phosphor-icons/react@^2.1.10"
   ],
   "registryDependencies": [
-    "alert",
-    "alert-dialog",
-    "badge",
-    "button",
-    "input-otp",
-    "separator",
-    "spinner",
+    "https://ui.doksam.com/r/alert-dialog.json",
+    "https://ui.doksam.com/r/alert.json",
+    "https://ui.doksam.com/r/badge.json",
+    "https://ui.doksam.com/r/button.json",
+    "https://ui.doksam.com/r/input-otp.json",
     "https://ui.doksam.com/r/profile-scope.json",
     "https://ui.doksam.com/r/route-error.json",
-    "https://ui.doksam.com/r/route-loading.json"
+    "https://ui.doksam.com/r/route-loading.json",
+    "https://ui.doksam.com/r/separator.json",
+    "https://ui.doksam.com/r/spinner.json"
   ],
   "files": [
     {

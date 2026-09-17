@@ -8,9 +8,9 @@
     "react-day-picker@^10.0.1"
   ],
   "registryDependencies": [
-    "button",
-    "calendar",
-    "popover"
+    "https://ui.doksam.com/r/button.json",
+    "https://ui.doksam.com/r/calendar.json",
+    "https://ui.doksam.com/r/popover.json"
   ],
   "files": [
     {

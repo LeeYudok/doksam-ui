@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "separator",
+  "title": "Separator",
+  "description": "Separator 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
+  "dependencies": [
+    "radix-ui@^1.6.7"
+  ],
+  "files": [
+    {
+      "path": "components/ui/separator.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Separator as SeparatorPrimitive } from \"radix-ui\"\n\nimport { cn } from \"@/lib/utils\"\n\nfunction Separator({\n  className,\n  orientation = \"horizontal\",\n  decorative = true,\n  ...props\n}: React.ComponentProps<typeof SeparatorPrimitive.Root>) {\n  return (\n    <SeparatorPrimitive.Root\n      data-slot=\"separator\"\n      decorative={decorative}\n      orientation={orientation}\n      className={cn(\n        \"shrink-0 bg-border data-horizontal:h-px data-horizontal:w-full data-vertical:w-px data-vertical:self-stretch\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nexport { Separator }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

@@ -7,10 +7,10 @@
     "@phosphor-icons/react@^2.1.10"
   ],
   "registryDependencies": [
-    "badge",
-    "button",
-    "command",
-    "popover"
+    "https://ui.doksam.com/r/badge.json",
+    "https://ui.doksam.com/r/button.json",
+    "https://ui.doksam.com/r/command.json",
+    "https://ui.doksam.com/r/popover.json"
   ],
   "files": [
     {

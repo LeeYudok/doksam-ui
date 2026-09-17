@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "skeleton",
+  "title": "Skeleton",
+  "description": "Skeleton 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
+  "files": [
+    {
+      "path": "components/ui/skeleton.tsx",
+      "content": "import { cn } from \"@/lib/utils\"\n\nfunction Skeleton({ className, ...props }: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      data-slot=\"skeleton\"\n      className={cn(\"animate-pulse rounded-md bg-muted\", className)}\n      {...props}\n    />\n  )\n}\n\nexport { Skeleton }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}
