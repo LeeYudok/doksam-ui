@@ -118,8 +118,11 @@ function CornerCard({ preset }: Readonly<{ preset: CornerPreset }>) {
         </dl>
 
         {/* 실측 미니어처 — data-corner 를 이 블록에만 스코프한다. app/globals.css 의
-            모서리 토큰 층이 붙으면 이 안의 카드·버튼·입력 반경이 계열별로 갈린다.
-            아직 그 층이 없어 지금은 네 계열이 동일하게 보인다(정상). */}
+            모서리 토큰 층이 이 안의 카드·버튼·입력 반경을 계열별로 갈라 준다.
+            설명 텍스트가 아니라 실제 렌더로 차이를 보여주는 것이 이 블록의 목적이며,
+            e2e/shape-axes.spec.ts 가 계산된 border-radius 가 실제로 갈리는지 잠근다.
+            스코프 컨테이너에서도 갈리려면 파생 반경 변수를 같은 규칙에서 재계산해야
+            한다 — globals.css 의 [data-corner] 블록 주석 참고. */}
         <div
           data-corner={preset.name}
           className="flex flex-col gap-2 rounded-md border border-border bg-muted/30 p-3"

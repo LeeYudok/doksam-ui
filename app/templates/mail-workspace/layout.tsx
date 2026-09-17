@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { profileScopeAttributes } from "@/components/profile-scope"
 
 export const metadata: Metadata = {
   title: "Mail Workspace · doksam-ui 템플릿",
@@ -12,9 +13,7 @@ export const metadata: Metadata = {
 export default function MailWorkspaceTemplateLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <div
-      data-theme="slate"
-      data-font="geist"
-      data-density="compact"
+      {...profileScopeAttributes("admin")}
       className="flex min-h-[calc(100vh-4rem)] flex-col gap-4 rounded-xl border border-border bg-background p-4 font-sans text-foreground sm:gap-6 sm:p-6"
     >
       <header className="flex flex-col gap-1">

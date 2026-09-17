@@ -138,10 +138,10 @@ export const LAYOUT_SAMPLES: PatternSampleData[] = [
         <div className="flex items-center justify-between py-1 text-[10px] text-muted-foreground">
           <span>1-5 / 50건</span>
           <div className="flex gap-1">
-            <Button size="sm" variant="outline" className="h-6 px-2 text-[10px]">
+            <Button size="xs" variant="outline" className="text-[10px]">
               이전
             </Button>
-            <Button size="sm" variant="outline" className="h-6 px-2 text-[10px]">
+            <Button size="xs" variant="outline" className="text-[10px]">
               다음
             </Button>
           </div>

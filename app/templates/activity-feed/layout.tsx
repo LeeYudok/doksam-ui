@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { profileScopeAttributes } from "@/components/profile-scope"
 
 export const metadata: Metadata = {
   title: "Activity Feed · doksam-ui 템플릿",
@@ -12,8 +13,7 @@ export const metadata: Metadata = {
 export default function ActivityFeedTemplateLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <div
-      data-theme="violet"
-      data-font="space-grotesk"
+      {...profileScopeAttributes("data")}
       className="dark flex min-h-[calc(100vh-4rem)] flex-col gap-4 rounded-xl border border-border bg-background p-4 font-sans text-foreground sm:gap-6 sm:p-6"
     >
       <header className="flex flex-col gap-1">

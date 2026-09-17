@@ -45,24 +45,24 @@ export function AdminGenToolbar({
             size="sm"
             variant="ghost"
             onClick={() => onChangeGenCount(Math.max(1, genCount - STEP))}
-            className="h-7 rounded-none rounded-l px-1.5 text-xs"
+            className="rounded-none rounded-l px-1.5! text-xs"
           >
             -{STEP}
           </Button>
-          <Button size="sm" variant="ghost" onClick={() => onChangeGenCount(Math.max(1, genCount - 1))} className="h-7 rounded-none border-x px-1.5">
+          <Button size="sm" variant="ghost" onClick={() => onChangeGenCount(Math.max(1, genCount - 1))} className="rounded-none border-x px-1.5!">
             -
           </Button>
           <span className="min-w-10 px-2 text-center font-mono text-xs" aria-live="polite">
             {genCount}
           </span>
-          <Button size="sm" variant="ghost" onClick={() => onChangeGenCount(Math.min(MAX_SIZE, genCount + 1))} className="h-7 rounded-none border-x px-1.5">
+          <Button size="sm" variant="ghost" onClick={() => onChangeGenCount(Math.min(MAX_SIZE, genCount + 1))} className="rounded-none border-x px-1.5!">
             +
           </Button>
           <Button
             size="sm"
             variant="ghost"
             onClick={() => onChangeGenCount(Math.min(MAX_SIZE, genCount + STEP))}
-            className="h-7 rounded-none rounded-r px-1.5 text-xs"
+            className="rounded-none rounded-r px-1.5! text-xs"
           >
             +{STEP}
           </Button>
@@ -73,7 +73,7 @@ export function AdminGenToolbar({
       <div className="mx-2 h-5 w-px shrink-0 bg-border" aria-hidden />
 
       <div className="flex shrink-0 items-center gap-1 sm:gap-2">
-        <Button size="sm" variant="outline" onClick={onGenerate} disabled={generating} title="랜덤 생성" className="px-2 sm:px-3">
+        <Button size="sm" variant="outline" onClick={onGenerate} disabled={generating} title="랜덤 생성" className="px-2! sm:px-3!">
           <ShuffleIcon weight="duotone" className="text-success" aria-hidden />
           <span className="hidden sm:inline">{generating ? "생성 중…" : "생성"}</span>
         </Button>
@@ -81,7 +81,7 @@ export function AdminGenToolbar({
         <DataTransferButtons onExport={onExport} onImport={onImport} />
 
         {onDeleteAll ? (
-          <Button size="sm" variant="destructive" onClick={onDeleteAll} disabled={deleting} title="전체삭제" className="px-2 sm:px-3">
+          <Button size="sm" variant="destructive" onClick={onDeleteAll} disabled={deleting} title="전체삭제" className="px-2! sm:px-3!">
             <TrashIcon weight="duotone" aria-hidden />
             <span className="hidden sm:inline">{deleting ? "삭제 중…" : "전체삭제"}</span>
           </Button>

@@ -907,8 +907,28 @@
     [data-slot="input"],
     [data-slot="select-trigger"],
     [data-slot="textarea"],
-    [data-slot="toggle"]
+    [data-slot="toggle"],
+    /* 단독 Toggle 과 같은 컨트롤인데 슬롯 이름만 달라 빠져 있었다 — 한 화면에서
+       둘이 나란히 놓이면 반경이 어긋난다(#47 M5). */
+    [data-slot="toggle-group-item"]
   ) {
+  border-radius: var(--radius-control);
+}
+
+/*
+ * 캘린더 내비 버튼 보정 — components/ui/calendar.tsx 는 Button 컴포넌트가 아니라
+ * buttonVariants() 를 className 으로만 소비해서 data-slot="button" / data-size 가
+ * 찍히지 않는다. 그래서 위의 모서리 규칙이 전혀 걸리지 않고 캘린더 안에서만 다른
+ * 계열로 남는다. components/ui/ 는 수정 금지이므로 여기서 슬롯 대신
+ * data-slot="calendar" 하위의 버튼을 직접 잡아 준다.
+ *
+ * 밀도까지 걸지 않는 이유: 캘린더 격자는 칸 크기가 날짜 셀에 묶여 있어 버튼 높이만
+ * 바꾸면 정렬이 깨진다. 반경만 맞춰 계열 일관성을 확보하고 크기는 건드리지 않는다.
+ *
+ * pill 계열에만 거는 이유: control === surface 인 다른 계열은 --radius 배관이 이미
+ * 같은 값을 주므로 여기서 --radius-control 을 다시 흘릴 이유가 없다.
+ */
+[data-corner="pill"] [data-slot="calendar"] button {
   border-radius: var(--radius-control);
 }
 
@@ -1013,12 +1033,30 @@ html[data-personality] {
    다만 요소마다 기본 그림자 사정이 달라 강도를 따로 잡는다:
    - 팝오버·셀렉트 콘텐츠는 이미 shadow-md 유틸리티가 있다 → shadow 는 카드와 같은
      2단 그림자로 통일하고, flat 이 그 유틸리티를 제거한다(레이어 밖이라 이긴다).
+     드롭다운·컨텍스트메뉴·메뉴바·호버카드·콤보박스·시트도 같은 이유(#47 M2) —
+     팝오버만 표면 성향을 받으면 옆에 뜬 드롭다운이 그대로 남아 표면 위계가
+     뒤섞인다. 다이얼로그는 기본 그림자 유틸리티가 없지만, shadow 프로필에서는
+     같은 2단 그림자를 새로 얹어 다른 오버레이와 인상을 맞춘다(flat 은 원래도
+     그림자가 없어 no-op). 메뉴 **항목**(-item)이나 서브메뉴(-sub-content)는
+     대상이 아니다 — 표면이 아니라 항목/보조 표면까지 번지면 과잉 적용이다.
    - 버튼은 자체 그림자 유틸리티가 없다 → shadow 에서만 1단 그림자를 새로 준다.
      대상은 면이 있는 variant(default·secondary·destructive)뿐이다. ghost·link·outline
      까지 띄우면 배경 없는 텍스트가 떠 보여 위계가 무너진다.
    - 입력은 바깥으로 띄우지 않고 inset 으로 눌린 인상을 준다 — 입력은 "눌러 넣는 면"
      이라는 관례를 따른다. */
-[data-personality-surface="shadow"] :is([data-slot="card"], [data-slot="popover-content"], [data-slot="select-content"]) {
+[data-personality-surface="shadow"]
+  :is(
+    [data-slot="card"],
+    [data-slot="popover-content"],
+    [data-slot="select-content"],
+    [data-slot="dropdown-menu-content"],
+    [data-slot="context-menu-content"],
+    [data-slot="menubar-content"],
+    [data-slot="hover-card-content"],
+    [data-slot="combobox-content"],
+    [data-slot="sheet-content"],
+    [data-slot="dialog-content"]
+  ) {
   box-shadow:
     0 1px 2px color-mix(in oklch, var(--foreground) 8%, transparent),
     0 2px 6px color-mix(in oklch, var(--foreground) 10%, transparent);
@@ -1037,7 +1075,22 @@ html[data-personality] {
   box-shadow: inset 0 1px 2px color-mix(in oklch, var(--foreground) 8%, transparent);
 }
 
-[data-personality-surface="flat"] :is([data-slot="card"], [data-slot="popover-content"], [data-slot="select-content"], [data-slot="button"], [data-slot="input"], [data-slot="textarea"]) {
+[data-personality-surface="flat"]
+  :is(
+    [data-slot="card"],
+    [data-slot="popover-content"],
+    [data-slot="select-content"],
+    [data-slot="dropdown-menu-content"],
+    [data-slot="context-menu-content"],
+    [data-slot="menubar-content"],
+    [data-slot="hover-card-content"],
+    [data-slot="combobox-content"],
+    [data-slot="sheet-content"],
+    [data-slot="dialog-content"],
+    [data-slot="button"],
+    [data-slot="input"],
+    [data-slot="textarea"]
+  ) {
   box-shadow: none;
 }
 

@@ -119,10 +119,11 @@ function TypeContrastCard({ preset }: Readonly<{ preset: TypeContrastPreset }>) 
           ) : null}
         </dl>
 
-        {/* 실측 미니어처 — data-type-contrast 를 이 블록에만 스코프한다. 제목은
-            실제 h3 로 렌더해 app/globals.css 의 타입 대비 토큰 층이 붙으면 헤딩
-            선택자가 바로 적용되게 한다. 아직 그 층이 없어 지금은 세 대비가
-            동일하게 보인다(정상). */}
+        {/* 실측 미니어처 — data-type-contrast 를 이 블록에만 스코프한다. 제목을
+            실제 h3 로 렌더하므로 app/globals.css 의 타입 대비 토큰 층의 헤딩
+            선택자가 그대로 적용된다. 설명 텍스트가 아니라 실제 렌더로 차이를
+            보여주는 것이 이 블록의 목적이며, e2e/shape-axes.spec.ts 가 계산된
+            font-size 가 대비별로 갈리는지 잠근다. */}
         <div
           data-type-contrast={preset.name}
           className="flex flex-col gap-2 rounded-md border border-border bg-muted/30 p-3"

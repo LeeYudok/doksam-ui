@@ -35,7 +35,7 @@ export function CopyButton({ value, className }: Readonly<CopyButtonProps>) {
       variant="outline"
       size="sm"
       onClick={handleCopy}
-      className={cn("gap-1.5", className)}
+      className={cn("gap-1.5!", className)}
     >
       {copied ? (
         <>

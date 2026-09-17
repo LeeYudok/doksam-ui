@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { profileScopeAttributes } from "@/components/profile-scope"
 
 export const metadata: Metadata = {
   title: "Marketing Site · doksam-ui 템플릿",
@@ -13,8 +14,7 @@ export const metadata: Metadata = {
 export default function MarketingSiteTemplateLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <div
-      data-theme="ocean"
-      data-font="noto-sans-kr"
+      {...profileScopeAttributes("service")}
       className="flex min-h-[calc(100vh-4rem)] flex-col overflow-hidden rounded-xl border border-border bg-background font-sans text-foreground"
     >
       <div className="border-b border-border px-4 py-3">

@@ -43,7 +43,7 @@ export function DataTransferButtons({
 
   return (
     <div className={cn("flex gap-1 sm:gap-2", className)}>
-      <Button size="sm" variant="outline" onClick={onExport} title="데이터 내보내기" className="px-2 sm:px-3">
+      <Button size="sm" variant="outline" onClick={onExport} title="데이터 내보내기" className="px-2! sm:px-3!">
         <DownloadSimpleIcon weight="duotone" className="text-chart-1" aria-hidden />
         <span className="hidden sm:inline">{exportLabel}</span>
       </Button>
@@ -63,7 +63,7 @@ export function DataTransferButtons({
         onClick={() => fileInputRef.current?.click()}
         disabled={importing}
         title="데이터 가져오기"
-        className="px-2 sm:px-3"
+        className="px-2! sm:px-3!"
       >
         <UploadSimpleIcon weight="duotone" className="text-warning" aria-hidden />
         <span className="hidden sm:inline">{importing ? "로딩…" : importLabel}</span>

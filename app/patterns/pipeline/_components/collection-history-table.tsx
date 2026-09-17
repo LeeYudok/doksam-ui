@@ -49,7 +49,7 @@ function HistoryRowActions({ row }: Readonly<{ row: HistoryRow }>) {
       {row.status === "running" && (
         <Tooltip>
           <TooltipTrigger asChild>
-            <Button type="button" variant="ghost" size="icon" className="h-6 w-6" aria-label="중단">
+            <Button type="button" variant="ghost" size="icon-xs" aria-label="중단">
               <StopIcon size={12} className="text-destructive" />
             </Button>
           </TooltipTrigger>
@@ -59,7 +59,7 @@ function HistoryRowActions({ row }: Readonly<{ row: HistoryRow }>) {
       {row.error && (
         <Tooltip>
           <TooltipTrigger asChild>
-            <Button type="button" variant="ghost" size="icon" className="h-6 w-6" aria-label={row.error}>
+            <Button type="button" variant="ghost" size="icon-xs" aria-label={row.error}>
               <WarningCircleIcon size={12} className="text-warning" />
             </Button>
           </TooltipTrigger>
@@ -68,7 +68,7 @@ function HistoryRowActions({ row }: Readonly<{ row: HistoryRow }>) {
       )}
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button type="button" variant="ghost" size="icon" className="h-6 w-6" aria-label="삭제">
+          <Button type="button" variant="ghost" size="icon-xs" aria-label="삭제">
             <TrashIcon size={12} className="text-destructive" />
           </Button>
         </TooltipTrigger>

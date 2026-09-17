@@ -21,11 +21,11 @@ export const AUTH_SAMPLES: PatternSampleData[] = [
           <p className="text-xs text-muted-foreground">계정 정보를 입력하거나 소셜 계정으로 로그인하세요.</p>
         </div>
         <div className="flex flex-col gap-2">
-          <Button type="button" variant="outline" size="sm" className="justify-start gap-2">
+          <Button type="button" variant="outline" size="sm" className="justify-start gap-2!">
             <GoogleLogoIcon size={14} weight="regular" />
             Google로 계속하기
           </Button>
-          <Button type="button" variant="outline" size="sm" className="justify-start gap-2">
+          <Button type="button" variant="outline" size="sm" className="justify-start gap-2!">
             <GithubLogoIcon size={14} weight="regular" />
             GitHub으로 계속하기
           </Button>

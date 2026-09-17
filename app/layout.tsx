@@ -8,6 +8,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { DEFAULT_FONT_PRESET } from "@/fonts";
 import { I18nProvider } from "@/components/i18n-provider";
 import {
+  CORNER_STORAGE_KEY,
   DENSITY_STORAGE_KEY,
   FONT_STORAGE_KEY,
   LOCALE_STORAGE_KEY,
@@ -17,6 +18,7 @@ import {
   RADIUS_STORAGE_KEY,
   THEME_MODE_STORAGE_KEY,
   THEME_PRESET_STORAGE_KEY,
+  TYPE_CONTRAST_STORAGE_KEY,
 } from "@/lib/theme-storage";
 import { DEFAULT_THEME_PRESET } from "@/themes";
 
@@ -152,6 +154,12 @@ const THEME_INIT_SCRIPT = `
     if (density) root.setAttribute("data-density", density);
     var radius = window.localStorage.getItem(${JSON.stringify(RADIUS_STORAGE_KEY)});
     if (radius) root.style.setProperty("--radius", radius);
+    // 형태 변주 축(#43) — 모서리 계열·타입 대비. 밀도와 동일하게 레지스트리
+    // preset 이름을 그대로 속성에 얹는다(globals.css 가 이름으로 규칙을 건다).
+    var corner = window.localStorage.getItem(${JSON.stringify(CORNER_STORAGE_KEY)});
+    if (corner) root.setAttribute("data-corner", corner);
+    var typeContrast = window.localStorage.getItem(${JSON.stringify(TYPE_CONTRAST_STORAGE_KEY)});
+    if (typeContrast) root.setAttribute("data-type-contrast", typeContrast);
     // 시각 성격(personality) 토큰 층(#90) — 밀도와 동일한 패턴으로 raw 값을
     // 그대로 저장/반영한다(레지스트리 preset 이름이 아니라 scale/surface/motion
     // 3값). 값이 없으면 아무것도 세팅하지 않는다.
