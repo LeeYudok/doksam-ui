@@ -120,10 +120,10 @@ export function DataTableDemo() {
         {selectedCount > 0 ? (
           <div className="flex items-center gap-2">
             <span className="text-xs font-medium text-foreground">{selectedCount}건 선택됨</span>
-            <Button type="button" variant="outline" size="sm" className="px-2! text-xs" onClick={() => setSelection({})}>
+            <Button type="button" variant="outline" size="sm" className="px-2 text-xs" onClick={() => setSelection({})}>
               선택 해제
             </Button>
-            <Button type="button" variant="outline" size="sm" className="px-2! text-xs">
+            <Button type="button" variant="outline" size="sm" className="px-2 text-xs">
               <DownloadSimpleIcon size={14} />
               내보내기
             </Button>
@@ -131,7 +131,7 @@ export function DataTableDemo() {
               type="button"
               variant="outline"
               size="sm"
-              className="px-2! text-xs text-destructive hover:text-destructive"
+              className="px-2 text-xs text-destructive hover:text-destructive"
             >
               <TrashIcon size={14} />
               삭제
@@ -217,7 +217,7 @@ export function DataTableDemo() {
             type="button"
             variant="outline"
             size="sm"
-            className="px-2! text-xs"
+            className="px-2 text-xs"
             disabled={slice.page <= 1}
             onClick={() => setPageClamped(slice.page - 1)}
           >
@@ -230,7 +230,7 @@ export function DataTableDemo() {
             type="button"
             variant="outline"
             size="sm"
-            className="px-2! text-xs"
+            className="px-2 text-xs"
             disabled={slice.page >= slice.pageCount}
             onClick={() => setPageClamped(slice.page + 1)}
           >

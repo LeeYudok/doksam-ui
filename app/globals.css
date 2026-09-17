@@ -901,6 +901,12 @@
   --radius-control: 9999px;
 }
 
+/* :not([data-day]) 로 캘린더 날짜 셀을 제외한다 — CalendarDayButton 은 Button 이라
+   data-slot="button" 을 달고 들어오는데, 셀 반경은 --cell-radius 와 range 연결
+   유틸리티(rounded-l-/rounded-r-/rounded-none)가 소유한다. 여기서 --radius-control
+   (pill 은 9999px)을 흘리면 셀이 전부 원형이 되고 범위 선택의 좌우 연결이 끊어져
+   보인다(#47 M1). 결합 선택자이므로 :is(...) 와 :not(...) 사이에 공백·주석을 넣지
+   않는다 — 공백이 들어가면 자손 결합자가 되어 규칙이 통째로 빗나간다. */
 [data-corner="pill"]
   :is(
     [data-slot="button"],
@@ -911,16 +917,20 @@
     /* 단독 Toggle 과 같은 컨트롤인데 슬롯 이름만 달라 빠져 있었다 — 한 화면에서
        둘이 나란히 놓이면 반경이 어긋난다(#47 M5). */
     [data-slot="toggle-group-item"]
-  ) {
+  ):not([data-day]) {
   border-radius: var(--radius-control);
 }
 
 /*
- * 캘린더 내비 버튼 보정 — components/ui/calendar.tsx 는 Button 컴포넌트가 아니라
- * buttonVariants() 를 className 으로만 소비해서 data-slot="button" / data-size 가
- * 찍히지 않는다. 그래서 위의 모서리 규칙이 전혀 걸리지 않고 캘린더 안에서만 다른
- * 계열로 남는다. components/ui/ 는 수정 금지이므로 여기서 슬롯 대신
- * data-slot="calendar" 하위의 버튼을 직접 잡아 준다.
+ * 캘린더 내비 버튼 보정 — components/ui/calendar.tsx 의 이전/다음 버튼은 Button
+ * 컴포넌트가 아니라 buttonVariants() 를 className 으로만 소비해서
+ * data-slot="button" / data-size 가 찍히지 않는다. 그래서 위의 모서리 규칙이
+ * 걸리지 않고 캘린더 안에서만 다른 계열로 남는다. components/ui/ 는 수정 금지이므로
+ * 여기서 react-day-picker 가 붙이는 내비 버튼 클래스를 직접 잡아 준다.
+ *
+ * 선택자를 `[data-slot="calendar"] button` 으로 두면 안 된다 — 날짜 셀도 button 이라
+ * 셀 전체가 원형이 되고 범위 선택의 좌우 연결 표시가 끊어진다(#47 M1). 내비 두 개만
+ * 잡는다.
  *
  * 밀도까지 걸지 않는 이유: 캘린더 격자는 칸 크기가 날짜 셀에 묶여 있어 버튼 높이만
  * 바꾸면 정렬이 깨진다. 반경만 맞춰 계열 일관성을 확보하고 크기는 건드리지 않는다.
@@ -928,7 +938,9 @@
  * pill 계열에만 거는 이유: control === surface 인 다른 계열은 --radius 배관이 이미
  * 같은 값을 주므로 여기서 --radius-control 을 다시 흘릴 이유가 없다.
  */
-[data-corner="pill"] [data-slot="calendar"] button {
+[data-corner="pill"]
+  [data-slot="calendar"]
+  :is(.rdp-button_previous, .rdp-button_next) {
   border-radius: var(--radius-control);
 }
 

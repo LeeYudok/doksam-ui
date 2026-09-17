@@ -27,11 +27,11 @@ function Toolbar() {
       <div className="flex items-center gap-2">
         <Checkbox className="h-3.5 w-3.5" aria-label="전체 선택" />
         <span className="text-[10px] text-muted-foreground">3건 선택</span>
-        <Button type="button" variant="outline" size="sm" className="px-2!">
+        <Button type="button" variant="outline" size="sm" className="px-2">
           <TrashIcon size={14} className="text-destructive" />
           삭제
         </Button>
-        <Button type="button" variant="outline" size="sm" className="px-2!">
+        <Button type="button" variant="outline" size="sm" className="px-2">
           <DownloadSimpleIcon size={14} />
           내보내기
         </Button>

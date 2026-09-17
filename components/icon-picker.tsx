@@ -84,7 +84,7 @@ export function IconPicker({ value, onSelect, placeholder = "아이콘 선택…
           aria-expanded={open}
           aria-label="아이콘 선택"
           disabled={disabled}
-          className={cn("w-full justify-between px-2!", className)}
+          className={cn("w-full justify-between px-2", className)}
         >
           <span className="flex min-w-0 items-center gap-1.5">
             {SelectedIcon ? <SelectedIcon className="size-3.5 shrink-0 text-primary" aria-hidden /> : <span className="size-3.5 shrink-0" />}

@@ -93,7 +93,7 @@ export function ColorPicker({
         <Button
           type="button"
           variant="outline"
-          className={cn("gap-2!", className)}
+          className={cn("gap-2", className)}
           aria-label={ariaLabel}
         >
           <span

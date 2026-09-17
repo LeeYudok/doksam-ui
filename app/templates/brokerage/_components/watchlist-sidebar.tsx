@@ -97,7 +97,7 @@ export function WatchlistSidebar() {
         </Tabs>
       </CardHeader>
       <CardContent>
-        <Button variant="outline" size="sm" className="w-full gap-1.5!">
+        <Button variant="outline" size="sm" className="w-full gap-1.5">
           <PlusIcon size={14} />
           종목 추가하기
         </Button>

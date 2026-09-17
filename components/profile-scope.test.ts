@@ -1,5 +1,4 @@
-import { readFileSync } from "node:fs";
-import { readdirSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 
 import { describe, expect, it } from "vitest";
@@ -50,19 +49,40 @@ describe("profileScopeAttributes", () => {
   });
 });
 
+/**
+ * 블루프린트 템플릿은 브랜드 프로필이 아니라 스코프 CSS 모듈로 룩을 캡슐화하므로
+ * layout.tsx 가 없다. 화이트리스트로 못 박는 이유: "layout.tsx 가 있는 것만 검사"로
+ * 두면 **레이아웃 파일을 아예 안 만든 새 템플릿이 프로필 스코프 0인 채로 통과**한다
+ * — #47 이 고치려던 재발 경로가 그대로 남는다(#47 M2).
+ */
+const LAYOUTLESS_TEMPLATES = new Set(["docker-container", "kubernetes-firewall"]);
+
 describe("템플릿 레이아웃 프로필 스코프", () => {
-  const layouts = readdirSync(TEMPLATES_DIR, { withFileTypes: true })
+  const templates = readdirSync(TEMPLATES_DIR, { withFileTypes: true })
     .filter((entry) => entry.isDirectory() && !entry.name.startsWith("_"))
-    .map((entry) => ({ slug: entry.name, file: join(TEMPLATES_DIR, entry.name, "layout.tsx") }))
-    .flatMap((candidate) => {
-      try {
-        return [{ ...candidate, source: readFileSync(candidate.file, "utf8") }];
-      } catch {
-        // 블루프린트 템플릿(docker-container · kubernetes-firewall)은 브랜드
-        // 프로필이 아니라 스코프 CSS 모듈로 룩을 캡슐화하므로 layout.tsx 가 없다.
-        return [];
+    .map((entry) => ({
+      slug: entry.name,
+      file: join(TEMPLATES_DIR, entry.name, "layout.tsx"),
+      hasPage: existsSync(join(TEMPLATES_DIR, entry.name, "page.tsx")),
+    }));
+
+  it("라우트가 있는 템플릿은 layout.tsx 를 갖거나 블루프린트 화이트리스트에 있다 (#47)", () => {
+    for (const { slug, file, hasPage } of templates) {
+      if (!hasPage) continue;
+      if (existsSync(file)) {
+        expect(LAYOUTLESS_TEMPLATES.has(slug), `${slug}: 화이트리스트에 있는데 layout.tsx 가 생겼다 — 화이트리스트에서 빼라`).toBe(false);
+        continue;
       }
-    });
+      expect(
+        LAYOUTLESS_TEMPLATES.has(slug),
+        `${slug}: layout.tsx 가 없어 프로필 스코프가 0이다. 프로필을 스코프하는 layout.tsx 를 만들거나, 스코프 CSS 모듈로 룩을 캡슐화하는 블루프린트라면 LAYOUTLESS_TEMPLATES 에 명시하라`,
+      ).toBe(true);
+    }
+  });
+
+  const layouts = templates
+    .filter(({ file }) => existsSync(file))
+    .map(({ slug, file }) => ({ slug, file, source: readFileSync(file, "utf8") }));
 
   it("레이아웃이 있는 템플릿은 모두 헬퍼로 프로필을 스코프한다 (#47)", () => {
     for (const { slug, source } of layouts) {

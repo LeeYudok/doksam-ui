@@ -34,7 +34,7 @@ export function TokenSwatch({ tokenKey }: Readonly<{ tokenKey: keyof ThemeTokens
           <code className="text-xs font-medium">--{tokenKey}</code>
           <p className="text-xs text-muted-foreground">{TOKEN_DESCRIPTIONS[tokenKey]}</p>
         </div>
-        <CopyButton value={`var(--${tokenKey})`} label="복사" className="h-6! shrink-0 px-2! text-[11px]" />
+        <CopyButton value={`var(--${tokenKey})`} label="복사" className="h-6! shrink-0 px-2 text-[11px]" />
       </div>
     </div>
   );

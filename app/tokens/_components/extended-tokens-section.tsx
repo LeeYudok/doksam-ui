@@ -23,7 +23,7 @@ function VarSwatch({ token }: Readonly<{ token: string }>) {
       />
       <div className="flex items-center justify-between gap-2">
         <code className="min-w-0 truncate text-xs font-medium">--{token}</code>
-        <CopyButton value={`var(--${token})`} label="복사" className="h-6! shrink-0 px-2! text-[11px]" />
+        <CopyButton value={`var(--${token})`} label="복사" className="h-6! shrink-0 px-2 text-[11px]" />
       </div>
     </div>
   );
