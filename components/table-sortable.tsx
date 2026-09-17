@@ -174,7 +174,7 @@ export function TableSortable<TData>({
       <div className="flex items-center justify-end">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button type="button" variant="outline" size="sm" className="h-7 px-2 text-xs">
+            <Button type="button" variant="outline" size="sm" className="px-2 text-xs">
               <ColumnsIcon size={14} />
               컬럼
             </Button>

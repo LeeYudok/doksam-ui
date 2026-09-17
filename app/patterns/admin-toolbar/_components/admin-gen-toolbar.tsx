@@ -45,24 +45,24 @@ export function AdminGenToolbar({
             size="sm"
             variant="ghost"
             onClick={() => onChangeGenCount(Math.max(1, genCount - STEP))}
-            className="h-7 rounded-none rounded-l px-1.5 text-xs"
+            className="rounded-none rounded-l px-1.5 text-xs"
           >
             -{STEP}
           </Button>
-          <Button size="sm" variant="ghost" onClick={() => onChangeGenCount(Math.max(1, genCount - 1))} className="h-7 rounded-none border-x px-1.5">
+          <Button size="sm" variant="ghost" onClick={() => onChangeGenCount(Math.max(1, genCount - 1))} className="rounded-none border-x px-1.5">
             -
           </Button>
           <span className="min-w-10 px-2 text-center font-mono text-xs" aria-live="polite">
             {genCount}
           </span>
-          <Button size="sm" variant="ghost" onClick={() => onChangeGenCount(Math.min(MAX_SIZE, genCount + 1))} className="h-7 rounded-none border-x px-1.5">
+          <Button size="sm" variant="ghost" onClick={() => onChangeGenCount(Math.min(MAX_SIZE, genCount + 1))} className="rounded-none border-x px-1.5">
             +
           </Button>
           <Button
             size="sm"
             variant="ghost"
             onClick={() => onChangeGenCount(Math.min(MAX_SIZE, genCount + STEP))}
-            className="h-7 rounded-none rounded-r px-1.5 text-xs"
+            className="rounded-none rounded-r px-1.5 text-xs"
           >
             +{STEP}
           </Button>

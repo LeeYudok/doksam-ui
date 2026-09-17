@@ -84,7 +84,7 @@ export function IconPicker({ value, onSelect, placeholder = "아이콘 선택…
           aria-expanded={open}
           aria-label="아이콘 선택"
           disabled={disabled}
-          className={cn("h-8 w-full justify-between px-2", className)}
+          className={cn("w-full justify-between px-2", className)}
         >
           <span className="flex min-w-0 items-center gap-1.5">
             {SelectedIcon ? <SelectedIcon className="size-3.5 shrink-0 text-primary" aria-hidden /> : <span className="size-3.5 shrink-0" />}
@@ -104,7 +104,7 @@ export function IconPicker({ value, onSelect, placeholder = "아이콘 선택…
             aria-label="아이콘 검색"
           />
           {search ? (
-            <Button variant="ghost" size="icon" className="size-7 shrink-0" onClick={() => setSearch("")} aria-label="검색어 지우기">
+            <Button variant="ghost" size="icon-sm" className="shrink-0" onClick={() => setSearch("")} aria-label="검색어 지우기">
               <XIcon aria-hidden />
             </Button>
           ) : null}

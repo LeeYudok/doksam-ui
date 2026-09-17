@@ -27,20 +27,20 @@ function Toolbar() {
       <div className="flex items-center gap-2">
         <Checkbox className="h-3.5 w-3.5" aria-label="전체 선택" />
         <span className="text-[10px] text-muted-foreground">3건 선택</span>
-        <Button type="button" variant="outline" size="sm" className="h-7 px-2">
+        <Button type="button" variant="outline" size="sm" className="px-2">
           <TrashIcon size={14} className="text-destructive" />
           삭제
         </Button>
-        <Button type="button" variant="outline" size="sm" className="h-7 px-2">
+        <Button type="button" variant="outline" size="sm" className="px-2">
           <DownloadSimpleIcon size={14} />
           내보내기
         </Button>
       </div>
       <div className="flex items-center gap-1">
-        <Button type="button" variant="outline" size="icon" className="h-7 w-7" aria-label="필터">
+        <Button type="button" variant="outline" size="icon-sm" aria-label="필터">
           <FunnelIcon size={14} />
         </Button>
-        <Button type="button" variant="outline" size="icon" className="h-7 w-7" aria-label="새로고침">
+        <Button type="button" variant="outline" size="icon-sm" aria-label="새로고침">
           <ArrowsClockwiseIcon size={14} />
         </Button>
       </div>
@@ -89,13 +89,13 @@ function DataTableBody() {
             <TableCell className="py-1.5 text-right text-[10px] text-muted-foreground">{row.date}</TableCell>
             <TableCell className="py-1.5">
               <div className="flex items-center gap-0.5">
-                <Button type="button" variant="ghost" size="icon" className="h-6 w-6" aria-label="수정">
+                <Button type="button" variant="ghost" size="icon-xs" aria-label="수정">
                   <PencilSimpleIcon size={12} />
                 </Button>
-                <Button type="button" variant="ghost" size="icon" className="h-6 w-6" aria-label="복사">
+                <Button type="button" variant="ghost" size="icon-xs" aria-label="복사">
                   <CopyIcon size={12} />
                 </Button>
-                <Button type="button" variant="ghost" size="icon" className="h-6 w-6" aria-label="삭제">
+                <Button type="button" variant="ghost" size="icon-xs" aria-label="삭제">
                   <TrashIcon size={12} className="text-destructive" />
                 </Button>
               </div>
@@ -112,11 +112,11 @@ function Pagination() {
     <div className="flex items-center justify-between text-[10px] text-muted-foreground">
       <span>1-4 / 128건</span>
       <div className="flex items-center gap-1">
-        <Button type="button" size="sm" variant="outline" className="h-6 px-2 text-[10px]" disabled>
+        <Button type="button" size="xs" variant="outline" className="text-[10px]" disabled>
           이전
         </Button>
         <span className="px-2 tabular-nums">1 / 32</span>
-        <Button type="button" size="sm" variant="outline" className="h-6 px-2 text-[10px]">
+        <Button type="button" size="xs" variant="outline" className="text-[10px]">
           다음
         </Button>
       </div>

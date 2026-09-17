@@ -28,11 +28,15 @@ const ICON_ACTIONS: IconAction[] = [
   { tip: "상세보기", icon: <EyeIcon size={14} /> },
 ]
 
-function TooltipIconButton({ tip, icon, className }: Readonly<IconAction & { className?: string }>) {
+function TooltipIconButton({
+  tip,
+  icon,
+  size = "icon-sm",
+}: Readonly<IconAction & { size?: "icon-sm" | "icon-xs" }>) {
   return (
     <Tooltip>
       <TooltipTrigger asChild>
-        <Button type="button" variant="ghost" size="icon" className={className ?? "h-7 w-7"} aria-label={tip}>
+        <Button type="button" variant="ghost" size={size} aria-label={tip}>
           {icon}
         </Button>
       </TooltipTrigger>
@@ -58,9 +62,9 @@ export function TooltipActionButtons() {
           <div className="flex items-center justify-between rounded border border-border p-2">
             <span className="text-xs">삼성전자 005930</span>
             <div className="flex items-center gap-0.5">
-              <TooltipIconButton tip="수정" icon={<PencilSimpleIcon size={12} />} className="h-6 w-6" />
-              <TooltipIconButton tip="복사" icon={<CopyIcon size={12} />} className="h-6 w-6" />
-              <TooltipIconButton tip="삭제" icon={<TrashIcon size={12} className="text-destructive" />} className="h-6 w-6" />
+              <TooltipIconButton tip="수정" icon={<PencilSimpleIcon size={12} />} size="icon-xs" />
+              <TooltipIconButton tip="복사" icon={<CopyIcon size={12} />} size="icon-xs" />
+              <TooltipIconButton tip="삭제" icon={<TrashIcon size={12} className="text-destructive" />} size="icon-xs" />
             </div>
           </div>
 

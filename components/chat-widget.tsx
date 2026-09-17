@@ -78,7 +78,7 @@ export function ChatWidget({
               <span className={cn("size-2 rounded-full", connected ? "bg-success" : "bg-muted-foreground")} aria-hidden />
               <span className="text-sm font-medium">{title}</span>
             </div>
-            <Button size="icon" variant="ghost" className="size-7" onClick={() => setOpen(false)} aria-label="채팅 닫기">
+            <Button size="icon-sm" variant="ghost" onClick={() => setOpen(false)} aria-label="채팅 닫기">
               <XIcon aria-hidden />
             </Button>
           </div>
@@ -116,7 +116,7 @@ export function ChatWidget({
 
       <Button
         size="icon"
-        className="relative size-12 rounded-full shadow-md"
+        className="relative size-12! rounded-full shadow-md"
         onClick={() => {
           setOpen((v) => {
             if (!v) onOpen?.()

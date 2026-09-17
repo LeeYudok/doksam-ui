@@ -88,12 +88,13 @@ export const RULES_SECTIONS: RulesSection[] = [
     title: "모서리 · 밀도 · 타입 대비",
     kind: "decision",
     items: [
-      "모서리 계열을 고른다: corners/index.ts 의 CORNER_PRESETS(sharp, soft, rounded, pill) 중 하나다 — 대부분은 프로필이 이미 고정해 뒀으니(admin=sharp, service=pill, data/console=soft, docs=rounded) 화면마다 흔들지 않는다. 각 프리셋의 suitedFor·avoidWhen 을 근거로 고른 이유를 DESIGN.md 에 남긴다.",
+      "모서리 계열을 고른다: corners/index.ts 의 CORNER_PRESETS(sharp, soft, rounded, pill) 중 하나다 — 대부분은 프로필이 이미 고정해 뒀으니(admin=sharp, service=pill, console=sharp, data=soft, docs=rounded) 화면마다 흔들지 않는다. 각 프리셋의 suitedFor·avoidWhen 을 근거로 고른 이유를 DESIGN.md 에 남긴다.",
       "정보 밀도를 고른다: profiles/index.ts 의 ProfileDensity 3단(compact, comfortable, spacious) 중 프로필이 고정한 값을 쓴다 — compact 는 관리·데이터 화면, comfortable 은 일반 서비스 화면, spacious 는 문서·리더 화면이 기본값이다.",
+      "경계 — compact 는 터치가 주 입력인 화면에서 쓰지 않는다: compact 의 컨트롤 높이는 기본 버튼 28px, 작은 버튼 24px, 아주 작은 버튼 22px 로 모바일 터치 타겟 권고(44px)에 못 미친다. 마우스·키보드가 주 입력인 관리 화면을 전제한 값이므로, 같은 화면을 모바일에서도 쓴다면 comfortable 이상을 고르거나 터치 대상 컨트롤만 크기를 키운다.",
       "타입 대비를 고른다: type-contrast/index.ts 의 TYPE_CONTRAST_PRESETS(flat, moderate, dramatic) 중 프로필이 고정한 값을 쓴다 — 제목과 본문의 비례를 이 축이 정하며, personality 의 균등 배율(html data-personality)과는 별개이므로 둘을 혼동해 이중으로 조정하지 않는다.",
       "경계 — 세 축 모두 레지스트리 이름으로만 고른다: radius px, 굵기, 배율 등 자유 숫자를 화면 코드나 인라인 스타일에 새로 쓰지 않는다. 필요한 조합이 레지스트리에 없으면 corners/index.ts·type-contrast/index.ts·profiles/index.ts 에 프리셋을 추가하는 것이 표준 경로다 — 화면마다 값을 발명하면 #43 이전의 자유 문자열 radius 로 되돌아간다.",
       "경계 — 프로필이 고정한 corner·radius·density·typeContrast 를 프로젝트에서 임의 재정의하지 않는다: 바꿀 필요가 생기면 doksam-ui 에 프로필을 추가/수정해서 반영한다.",
-      "경계 — 버튼 등 개별 컨트롤 하나만 밀도 기본값과 다른 크기로 만들고 싶으면 Tailwind v4 의 `!` 접미사(예: h-12!)를 쓴다 — 밀도 층의 전역 CSS 오버라이드가 일반 Tailwind 유틸리티보다 우선 적용되기 때문에 접미사 없이는 클래스를 바꿔도 반영되지 않는 것으로 보인다(구현·검증 중이므로 실제 동작이 다르면 이 항목부터 갱신한다). 컴포넌트 전체나 화면 전체의 밀도를 이 방법으로 우회하지 않는다 — 그건 이 문서 기준 새 density 프리셋을 만들 사안이다.",
+      "경계 — 버튼 등 개별 컨트롤 하나만 밀도 기본값과 다른 크기로 만들고 싶으면 Tailwind v4 의 `!` 접미사(예: h-12!)를 쓴다 — 밀도 층의 전역 CSS 오버라이드가 일반 Tailwind 유틸리티보다 우선 적용되므로 접미사 없이는 클래스를 바꿔도 반영되지 않는다(e2e/shape-axes.spec.ts 가 계산된 값으로 잠근다). 다만 먼저 확인할 것은 size prop 이다 — h-7/h-6 처럼 기본 크기를 손으로 덮고 있었다면 그건 sm·xs·icon-sm·icon-xs 같은 올바른 variant 로 바꿀 자리이며, 대응 variant 가 없는 진짜 커스텀 값만 `!` 로 보호한다. 컴포넌트 전체나 화면 전체의 밀도를 이 방법으로 우회하지 않는다 — 그건 새 density 프리셋을 만들 사안이다.",
     ],
   },
   {

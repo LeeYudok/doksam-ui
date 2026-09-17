@@ -1,3 +1,6 @@
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
+
 import { describe, expect, it } from "vitest";
 
 import { generateProfileCode } from "@/lib/profile-css";
@@ -86,5 +89,56 @@ describe("generateProfileCode", () => {
     for (const profile of BRAND_PROFILES) {
       expect(generateProfileCode(profile).length).toBeGreaterThan(0);
     }
+  });
+  // 미러 드리프트 방지(#47 H3) — app/globals.css 의 [data-corner]·[data-density]·
+  // [data-type-contrast]·[data-personality-surface] 블록에 있는 선택자/토큰이
+  // generateProfileCode 방출 문자열에서도 빠짐없이 나오는지 확인한다. 완벽한
+  // CSS 파싱은 하지 않고, "globals.css 에 있는데 방출에 없으면 실패"하는 수준의
+  // 얕은 집합 비교다. 두 파일 중 하나만 고치고 다른 쪽을 잊으면 여기서 잡힌다.
+  describe("app/globals.css 미러 드리프트 가드", () => {
+    const globalsCss = readFileSync(join(process.cwd(), "app/globals.css"), "utf-8");
+
+    // corner.control !== corner.surface(pill)인 프로필을 하나 포함해야
+    // --radius-control·select-trigger·toggle 분기까지 커버된다.
+    const emitted = BRAND_PROFILES.map((profile) => generateProfileCode(profile)).join("\n");
+
+    it("globals.css 의 data-slot 선택자가 모두 방출 문자열에도 존재한다", () => {
+      const slots = [...new Set([...globalsCss.matchAll(/data-slot="([\w-]+)"/g)].map((m) => m[1]))];
+      expect(slots.length).toBeGreaterThan(0);
+      for (const slot of slots) {
+        expect(emitted).toContain(`data-slot="${slot}"`);
+      }
+    });
+
+    it("globals.css 의 --radius-*/--spacing-stack/--text-xs,sm 변수가 모두 방출 문자열에도 존재한다", () => {
+      const vars = [
+        "--radius-sm",
+        "--radius-md",
+        "--radius-lg",
+        "--radius-xl",
+        "--radius-2xl",
+        "--radius-3xl",
+        "--radius-4xl",
+        "--spacing-stack",
+        "--text-xs",
+        "--text-sm",
+      ];
+      for (const name of vars) {
+        expect(globalsCss).toContain(`${name}:`);
+        expect(emitted).toContain(`${name}:`);
+      }
+    });
+
+    it("globals.css 의 data-icon/icon-xs 패딩·크기 보정 선택자가 모두 방출 문자열에도 존재한다", () => {
+      const tokens = [
+        'data-icon="inline-start"',
+        'data-icon="inline-end"',
+        'data-size="icon-xs"',
+      ];
+      for (const token of tokens) {
+        expect(globalsCss).toContain(token);
+        expect(emitted).toContain(token);
+      }
+    });
   });
 });

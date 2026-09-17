@@ -5,6 +5,7 @@ import { EyeIcon } from "@phosphor-icons/react/dist/ssr";
 
 import { Button } from "@/components/ui/button";
 import {
+  CORNER_STORAGE_KEY,
   DENSITY_STORAGE_KEY,
   FONT_STORAGE_KEY,
   PERSONALITY_MOTION_STORAGE_KEY,
@@ -13,6 +14,7 @@ import {
   RADIUS_STORAGE_KEY,
   THEME_MODE_STORAGE_KEY,
   THEME_PRESET_STORAGE_KEY,
+  TYPE_CONTRAST_STORAGE_KEY,
 } from "@/lib/theme-storage";
 import { getPersonalityPreset } from "@/personalities";
 import type { BrandProfile } from "@/profiles";
@@ -37,10 +39,15 @@ export function ProfilePreviewButton({ profile }: Readonly<ProfilePreviewButtonP
     const personality = getPersonalityPreset(profile.personality);
     const surface = root.getAttribute("data-personality-surface");
     const motion = root.getAttribute("data-personality-motion");
+    const typeContrast = root.getAttribute("data-type-contrast");
     setActive(
       root.dataset.theme === profile.theme &&
         root.dataset.font === profile.font &&
         (root.dataset.density === undefined || root.dataset.density === profile.density) &&
+        // 형태 축(#43)도 존재하는 속성만 비교한다 — 아직 프로필을 한 번도 적용하지
+        // 않은 <html> 에는 속성이 없고, 그때는 기존 축과 동일하게 비교를 건너뛴다.
+        (root.dataset.corner === undefined || root.dataset.corner === profile.corner) &&
+        (typeContrast === null || typeContrast === profile.typeContrast) &&
         (root.dataset.personality === undefined || root.dataset.personality === personality?.scale) &&
         // scale 이 같아도 surface/motion 이 다른 프리셋일 수 있어(#90 CodeRabbit
         // finding) 존재하는 속성은 모두 비교한다 — 속성이 없으면(레지스트리
@@ -63,6 +70,8 @@ export function ProfilePreviewButton({ profile }: Readonly<ProfilePreviewButtonP
         "data-theme",
         "data-font",
         "data-density",
+        "data-corner",
+        "data-type-contrast",
         "data-personality",
         "data-personality-surface",
         "data-personality-motion",
@@ -78,6 +87,13 @@ export function ProfilePreviewButton({ profile }: Readonly<ProfilePreviewButtonP
     root.dataset.theme = profile.theme;
     root.dataset.font = profile.font;
     root.dataset.density = profile.density;
+    root.dataset.corner = profile.corner;
+    root.setAttribute("data-type-contrast", profile.typeContrast);
+    // --radius 는 data-corner 가 이미 결정한다(app/globals.css 의 [data-corner] 블록이
+    // --radius 와 파생 반경을 함께 재계산). 여기서 인라인으로 한 번 더 쓰는 것은
+    // 프로필 CSS 스니펫(lib/profile-css.ts 가 방출하는 <html style="--radius:…">)과
+    // 같은 모양을 유지하기 위한 하위호환이며, profiles/index.test.ts 가
+    // profile.radius === corner.surface 를 강제하므로 두 값이 어긋날 수 없다.
     root.style.setProperty("--radius", profile.radius);
     root.classList.toggle("dark", profile.defaultMode === "dark");
     window.localStorage.setItem(THEME_PRESET_STORAGE_KEY, profile.theme);
@@ -85,6 +101,8 @@ export function ProfilePreviewButton({ profile }: Readonly<ProfilePreviewButtonP
     window.localStorage.setItem(THEME_MODE_STORAGE_KEY, profile.defaultMode);
     window.localStorage.setItem(DENSITY_STORAGE_KEY, profile.density);
     window.localStorage.setItem(RADIUS_STORAGE_KEY, profile.radius);
+    window.localStorage.setItem(CORNER_STORAGE_KEY, profile.corner);
+    window.localStorage.setItem(TYPE_CONTRAST_STORAGE_KEY, profile.typeContrast);
     // 프리셋을 못 찾으면 personality 속성·키를 건드리지 않는다(밀도 층과 동일한 opt-in).
     if (personality) {
       root.dataset.personality = personality.scale;

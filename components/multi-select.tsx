@@ -83,7 +83,7 @@ function MultiSelect({
           disabled={disabled}
           aria-expanded={open}
           className={cn(
-            "h-auto min-h-8 w-72 justify-between px-2.5 py-1 font-normal",
+            "h-auto! min-h-8 w-72 justify-between py-1 font-normal",
             className
           )}
         >

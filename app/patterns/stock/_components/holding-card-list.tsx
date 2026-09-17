@@ -42,9 +42,9 @@ export function HoldingCardList() {
                 </p>
               </div>
               <Button
-                size="sm"
+                size="xs"
                 variant={h.tracking ? "secondary" : "ghost"}
-                className="h-6 gap-1 px-2 text-[10px]"
+                className="text-[10px]"
               >
                 <StarIcon weight={h.tracking ? "fill" : "regular"} aria-hidden />
                 {h.tracking ? "추적중" : "추적"}

@@ -136,3 +136,62 @@ test.describe("밀도(density) 축", () => {
     expect(px(escaped!), "`h-12!` 가 밀도 오버라이드를 이기지 못한다 — 규칙의 탈출구 문장이 거짓이다").toBeCloseTo(48, 0);
   });
 });
+
+/**
+ * 소비 경로 실증 (#47 H1).
+ *
+ * 위 스펙들은 `/corners`·`/type-contrast` 의 **스코프 컨테이너 미니어처**만 본다.
+ * 그래서 축이 레지스트리·CSS 층에는 있는데 정작 `<html>`·템플릿 서브트리에 붙는
+ * 배관이 통째로 빠져 있어도 전부 통과했다 — 그게 #47 이 생긴 이유다. 여기서는
+ * 실제 소비 경로 두 곳(프로필 미리보기 → `<html>`, 템플릿 레이아웃 → 서브트리)을
+ * 잠근다.
+ */
+test.describe("축 소비 경로", () => {
+  test("프로필을 적용하면 <html> 에 두 축 속성이 붙는다", async ({ page }) => {
+    await page.goto("/profiles");
+
+    const html = page.locator("html");
+    // CardTitle 은 heading 롤이 아니므로 카드마다 유일한 설치 명령 문자열로 고른다.
+    const previewButton = (name: string) =>
+      page
+        .locator('[data-slot="card"]')
+        .filter({ hasText: `profile-${name}.json` })
+        .getByRole("button", { name: /^(이 프로필 미리보기|적용됨)$/ });
+
+    await previewButton("admin").click();
+    await expect(html).toHaveAttribute("data-corner", "sharp");
+    await expect(html).toHaveAttribute("data-type-contrast", "flat");
+
+    await previewButton("service").click();
+    await expect(html).toHaveAttribute("data-corner", "pill");
+    await expect(html).toHaveAttribute("data-type-contrast", "dramatic");
+  });
+
+  test("템플릿 서브트리가 프로필 축 전량을 스코프한다", async ({ page }) => {
+    // admin = sharp/flat/compact, service = pill/dramatic/comfortable —
+    // 두 템플릿의 카드 반경과 제목 크기가 실제로 갈려야 한다.
+    const measured: Record<string, { radius: number; heading: number }> = {};
+    for (const [route, corner, contrast, density] of [
+      ["/templates/admin", "sharp", "flat", "compact"],
+      ["/templates/shop", "pill", "dramatic", "comfortable"],
+    ] as const) {
+      await page.goto(route);
+      const scope = page.locator(`[data-corner="${corner}"]`).first();
+      await expect(scope, `${route}: data-corner 스코프가 없다`).toBeVisible();
+      await expect(scope).toHaveAttribute("data-type-contrast", contrast);
+      await expect(scope).toHaveAttribute("data-density", density);
+
+      const card = scope.locator('[data-slot="card"]').first();
+      await expect(card).toBeVisible();
+      const heading = scope.locator("h1, h2, h3").first();
+      await expect(heading).toBeVisible();
+      measured[route] = {
+        radius: px(await card.evaluate((el) => getComputedStyle(el).borderTopLeftRadius)),
+        heading: px(await heading.evaluate((el) => getComputedStyle(el).fontSize)),
+      };
+    }
+
+    expect(measured["/templates/admin"].radius).not.toBeCloseTo(measured["/templates/shop"].radius, 1);
+    expect(measured["/templates/admin"].heading).not.toBeCloseTo(measured["/templates/shop"].heading, 1);
+  });
+});

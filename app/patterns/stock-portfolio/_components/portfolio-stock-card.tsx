@@ -30,27 +30,27 @@ function StockActionsMenu({ isTracking }: Readonly<{ isTracking: boolean }>) {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="ghost" size="icon" className="size-6 text-muted-foreground" aria-label="종목 액션 메뉴">
+        <Button variant="ghost" size="icon-xs" className="text-muted-foreground" aria-label="종목 액션 메뉴">
           <DotsThreeIcon weight="bold" aria-hidden />
         </Button>
       </PopoverTrigger>
       <PopoverContent align="end" className="w-auto p-1">
-        <Button size="sm" variant="ghost" className="h-8 w-full justify-start gap-2 px-3 text-xs">
+        <Button size="default" variant="ghost" className="w-full justify-start gap-2 px-3 text-xs">
           <PencilSimpleIcon aria-hidden />
           매수정보 수정
         </Button>
         <Button
-          size="sm"
+          size="default"
           variant="ghost"
-          className={cn("h-8 w-full justify-start gap-2 px-3 text-xs", isTracking ? "text-success" : "text-muted-foreground")}
+          className={cn("w-full justify-start gap-2 px-3 text-xs", isTracking ? "text-success" : "text-muted-foreground")}
         >
           {isTracking ? <CrosshairIcon aria-hidden /> : <CrosshairSimpleIcon aria-hidden />}
           {isTracking ? "추적 중지" : "추적 시작"}
         </Button>
         <Button
-          size="sm"
+          size="default"
           variant="ghost"
-          className="h-8 w-full justify-start gap-2 px-3 text-xs text-destructive hover:text-destructive"
+          className="w-full justify-start gap-2 px-3 text-xs text-destructive hover:text-destructive"
         >
           <TrashIcon aria-hidden />
           종목 삭제

@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { profileScopeAttributes } from "@/components/profile-scope"
 
 export const metadata: Metadata = {
   title: "증권 마켓 홈 · doksam-ui 템플릿",
@@ -14,8 +15,7 @@ export const metadata: Metadata = {
 export default function BrokerageTemplateLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <div
-      data-theme="ocean"
-      data-font="noto-sans-kr"
+      {...profileScopeAttributes("service")}
       className="flex min-h-[calc(100vh-4rem)] flex-col rounded-xl border border-border bg-background font-sans text-foreground"
     >
       {children}
