@@ -3,6 +3,12 @@ import path from "node:path";
 
 import { test, expect } from "@playwright/test";
 
+// 상대 경로로 import 한다 — 이 파일의 다른 import 전부가 "@/" 별칭을 안 쓰는
+// 것과 동일한 이유(alias-loader.mjs 주석 참고: Playwright 의 자체 트랜스폼이
+// tsconfig "@/*" paths 를 해석해줄지 검증되지 않았고, known-failing-routes.ts
+// 자체는 registry/phosphor-icons 를 참조하지 않아 상대 경로로도 문제 없다).
+import { KNOWN_FAILING_ROUTES } from "../lib/e2e/known-failing-routes";
+
 // 이슈 #42 A영역 — 결정론 스모크 게이트.
 // 전 라우트를 순회하며 (1) 로드 성공 (2) 콘솔 error 0건 (3) 데스크톱 가로 오버플로우
 // 없음 을 assert 한다. e2e/invariants.spec.ts(겹침·클리핑·3폭)와
@@ -38,23 +44,21 @@ const ROUTES: string[] = JSON.parse(fs.readFileSync(ROUTES_SNAPSHOT_PATH, "utf-8
 // (필요 시 문구를 넓히지 말고 정확한 원인을 찾아 화이트리스트를 좁게 유지할 것)
 const CONSOLE_ERROR_WHITELIST: RegExp[] = [];
 
-/**
- * 이슈 #39 로 스모크 대상이 24 → 180개로 늘면서 실제로 새로 걸린 회귀.
- * 화이트리스트 대상(노이즈)이 아니라 진짜 결함이므로 콘솔 error 를 숨기지
- * 않고 test.fixme 로 명시적으로 실패를 인정한 채 스킵한다 — 조용히 초록불로
- * 만들지 않기 위함. 원인 조사·수정은 별도 이슈로 분리(이 이슈는 스모크
- * 커버리지 확장이 스코프).
- */
-const KNOWN_FAILING_ROUTES: Record<string, string> = {
-  "/components/multi-select":
-    "React error #418(하이드레이션 불일치) — components/multi-select.tsx 데모 페이지에서 서버/클라 렌더 결과가 어긋남. 후속 이슈 필요.",
-};
+// KNOWN_FAILING_ROUTES 정의·근거는 lib/e2e/known-failing-routes.ts(SSOT)로
+// 옮겼다 — lib/e2e/routes.test.ts 가 같은 값을 읽어 "키가 실제 라우트에
+// 존재하는지" · "사유에 이슈 번호가 있는지" · "목록 크기가 늘지 않았는지"
+// 를 방어 테스트로 고정한다. 두 곳에 값을 흩어두면 그 보장이 깨진다.
 
 for (const route of ROUTES) {
   const knownFailureReason = KNOWN_FAILING_ROUTES[route];
 
   test(`smoke: ${route}`, async ({ page }) => {
-    test.fixme(!!knownFailureReason, knownFailureReason);
+    // test.fixme() 대신 test.fail() — 몸체를 실제로 돌린다. 지금처럼 진짜로
+    // 실패하면 "예상된 실패"로 초록색 처리되지만, #50 이 고쳐져 이 라우트가
+    // 통과해버리면 Playwright 가 "예상과 다르게 통과함"으로 이 테스트 자체를
+    // 빨간색 처리한다 — 고쳐지고도 KNOWN_FAILING_ROUTES 항목 삭제를 잊는
+    // 상황(전수화 취지를 되돌리는 3번째 새는 구멍)을 CI 가 잡아낸다.
+    test.fail(!!knownFailureReason, knownFailureReason);
 
     const consoleErrors: string[] = [];
 

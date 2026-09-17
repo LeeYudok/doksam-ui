@@ -10,6 +10,10 @@ const BASE_URL = `http://localhost:${PORT}`;
 
 export default defineConfig({
   testDir: "./e2e",
+  // 이슈 #39 PR #51 적대적 리뷰 M2 — `pnpm exec playwright test` 를 생성
+  // 스크립트 없이 직접 실행해도 라우트 스냅샷이 항상 최신이도록 강제한다.
+  // 자세한 이유는 e2e/global-setup.mjs 참고.
+  globalSetup: "./e2e/global-setup.mjs",
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   // CI 안정화를 위해 재시도 부여.

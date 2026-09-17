@@ -98,10 +98,19 @@ function walkTemplatePageRoutes(dir: string, base: string): string[] {
  * 값 1개를 채워 대표 라우트로 편입한다 — 상품/종목 N개를 전부 도는 건
  * 템플릿 셸이 동일한 페이지를 N배 반복 검사하는 것과 같아 시간 대비
  * 얻는 신호가 없다(스모크는 404·콘솔 에러·가로 오버플로우만 본다).
+ *
+ * `filePages`·`paramSources` 는 테스트 주입용이다(기본값 = 실제 파일시스템
+ * 순회 결과 · 실제 DYNAMIC_PARAM_SOURCES). "매핑 누락 시 에러를 던진다"는
+ * 계약은 실제 [id]/[symbol] 폴더가 있어야만 재현되던 것을, 가짜 동적
+ * 라우트 문자열과 빈 매핑을 주입해 lib/e2e/routes.test.ts 가 실제로
+ * 재현·고정할 수 있게 한다.
  */
-export function getTemplateSubRoutes(templateRegistry: { href: string }[] = TEMPLATE_REGISTRY): string[] {
+export function getTemplateSubRoutes(
+  templateRegistry: { href: string }[] = TEMPLATE_REGISTRY,
+  filePages: string[] = walkTemplatePageRoutes(APP_TEMPLATES_DIR, ""),
+  paramSources: Record<string, () => string[]> = DYNAMIC_PARAM_SOURCES,
+): string[] {
   const knownHrefs = new Set(templateRegistry.map((t) => t.href))
-  const filePages = walkTemplatePageRoutes(APP_TEMPLATES_DIR, "")
 
   const result: string[] = []
   for (const routePattern of filePages) {
@@ -116,7 +125,7 @@ export function getTemplateSubRoutes(templateRegistry: { href: string }[] = TEMP
       continue
     }
 
-    const paramSource = DYNAMIC_PARAM_SOURCES[routePattern]
+    const paramSource = paramSources[routePattern]
     if (!paramSource) {
       throw new Error(
         `동적 템플릿 라우트 ${routePattern} 에 대응하는 DYNAMIC_PARAM_SOURCES 매핑이 없습니다. ` +

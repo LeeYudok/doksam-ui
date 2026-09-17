@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest"
 
 import { getAllSmokeRoutes, getComponentRoutes, getPatternRoutes, getTemplateSubRoutes, getTemplateTopRoutes } from "@/lib/e2e/routes"
+import { KNOWN_FAILING_ROUTES, KNOWN_FAILING_ROUTES_MAX_SIZE } from "@/lib/e2e/known-failing-routes"
 import { COMPONENT_REGISTRY } from "@/lib/showcase/registry"
 import { PATTERN_REGISTRY } from "@/lib/patterns/registry"
 import { TEMPLATE_REGISTRY } from "@/lib/templates/registry"
@@ -84,11 +85,17 @@ describe("getTemplateSubRoutes", () => {
   })
 
   it("동적 라우트에 매핑이 없으면 조용히 누락되지 않고 에러를 던진다", () => {
-    expect(() => getTemplateSubRoutes([...TEMPLATE_REGISTRY, { href: "/templates/never-registered" }])).not.toThrow()
-    // DYNAMIC_PARAM_SOURCES 는 파일시스템 실체([id]/[symbol] 폴더)에 묶여 있어
-    // 여기서 새 동적 폴더를 만들지 않고는 미매핑 상태를 재현할 수 없다.
-    // 대신 현재 파일시스템의 동적 폴더 2개가 전부 매핑돼 에러 없이 끝나는
-    // 것으로, "매핑 누락 시 에러"가 아니라 "매핑 존재 시 무사통과"를 고정한다.
+    // getTemplateSubRoutes 가 filePages·paramSources 를 주입받도록 열려 있어
+    // (lib/e2e/routes.ts), 실제 [id]/[symbol] 폴더를 만들지 않고도 미매핑
+    // 상태를 재현한다 — 가짜 동적 라우트 하나를 filePages 로 흘려보내고
+    // paramSources 를 비워 실제로 throw 되는지 검증한다.
+    expect(() =>
+      getTemplateSubRoutes(TEMPLATE_REGISTRY, ["/templates/never-registered/[id]"], {}),
+    ).toThrow(/DYNAMIC_PARAM_SOURCES/)
+
+    // 실제 파일시스템 상태(기본값)는 동적 폴더 2개가 전부 매핑돼 있어
+    // 에러 없이 끝난다 — 회귀 시(새 [param] 폴더를 추가하고 매핑을 깜빡함)
+    // 이 assertion 이 걸린다.
     expect(() => getTemplateSubRoutes()).not.toThrow()
   })
 })
@@ -100,5 +107,30 @@ describe("getAllSmokeRoutes", () => {
     expect(all).toContain("/")
     expect(all).toContain("/components/button")
     expect(all.length).toBeGreaterThan(150)
+  })
+})
+
+// 이슈 #39 PR #51 적대적 리뷰 H1 — KNOWN_FAILING_ROUTES(e2e/smoke.spec.ts 가
+// 읽는 SSOT, lib/e2e/known-failing-routes.ts)가 세 겹으로 새던 것을 막는다.
+describe("KNOWN_FAILING_ROUTES", () => {
+  it("모든 키가 실제 스모크 라우트에 존재한다(라우트 rename·오타로 죽은 항목 방지)", () => {
+    const all = new Set(getAllSmokeRoutes())
+    for (const route of Object.keys(KNOWN_FAILING_ROUTES)) {
+      expect(all.has(route), `${route} 가 getAllSmokeRoutes() 에 없습니다 — rename/오타 여부 확인`).toBe(true)
+    }
+  })
+
+  it("모든 사유에 이슈 번호(#숫자)가 있다(PR 본문에만 남아 추적 불가능해지는 것 방지)", () => {
+    for (const [route, reason] of Object.entries(KNOWN_FAILING_ROUTES)) {
+      expect(reason, `${route} 사유에 이슈 번호(#숫자)가 없습니다: ${reason}`).toMatch(/#\d+/)
+    }
+  })
+
+  it("목록 크기가 KNOWN_FAILING_ROUTES_MAX_SIZE 를 넘지 않는다(조용히 늘어나는 것 방지)", () => {
+    // 새 예외를 추가하려면 KNOWN_FAILING_ROUTES_MAX_SIZE 도 함께 올려야 하고,
+    // 그 diff 자체가 리뷰에서 "예외가 늘었다"는 신호가 된다. 이 테스트는
+    // "줄어드는 것"은 막지 않는다 — 늘리기 전에 정말 별도 이슈로 미룰
+    // 결함인지 한 번 더 검토하라는 의도적인 마찰이다.
+    expect(Object.keys(KNOWN_FAILING_ROUTES).length).toBeLessThanOrEqual(KNOWN_FAILING_ROUTES_MAX_SIZE)
   })
 })
