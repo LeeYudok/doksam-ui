@@ -100,6 +100,8 @@ const PAGES = [
   "/templates",
   "/archetypes",
   "/personalities",
+  "/corners",
+  "/type-contrast",
   "/templates/brokerage",
   "/templates/admin",
   "/templates/mail-workspace",

@@ -151,8 +151,11 @@ export const donts = ["...", "..."]  // 2~3개 권장
 
 ### 토큰
 
-`app/globals.css` 가 소유한다. 색은 OKLCH, `--radius` 기본 **6px**, radius 파생값은
-`--radius-sm ~ --radius-4xl` 이 `calc()` 로 만든다 — 임의 radius 신설 금지.
+`app/globals.css` 가 소유한다. 색은 OKLCH, `--radius` 는 `corners/index.ts` 의
+`CORNER_PRESETS`(sharp=2px, soft=6px, rounded=12px, pill=컨트롤만 9999px)에서 파생되고
+radius 파생값은 `--radius-sm ~ --radius-4xl` 이 `calc()` 로 만든다 — 화면 코드에서 임의
+radius 값을 새로 쓰지 않는다(레지스트리 프리셋 중에서만 고른다. `lib/rules-markdown.ts`
+"모서리 · 밀도 · 타입 대비" 섹션, #43).
 
 시맨틱 색 토큰: `background`/`foreground`, `card`, `popover`, `primary`, `secondary`,
 `muted`, `accent`, `destructive`, `success`, `warning`, `gain`/`loss`(한국식 등락 —
@@ -164,14 +167,23 @@ export const donts = ["...", "..."]  // 2~3개 권장
   **기존 프리셋 파일이나 globals.css 의 다른 프리셋 블록은 건드리지 않는다.**
 - `fonts/index.ts` — 폰트 프리셋 5종. 실 파일은 `assets/fonts/<name>/` 에 woff2 + LICENSE 커밋.
 - `profiles/index.ts` — **프로젝트가 고르는 단위는 프로필 하나**다. 테마·폰트·
-  `defaultMode`·`radius`·`density` 를 미리 고정해 둔 층 (admin/service/data 등).
-  프로젝트가 프로필의 radius·density 를 임의 재정의하면 표준이 발산한다 —
-  바꿀 필요가 생기면 doksam-ui 에 프로필을 추가/수정해서 반영한다.
+  `defaultMode`·`radius`·`corner`·`density`·`typeContrast` 를 미리 고정해 둔 층
+  (admin/service/data 등). 프로젝트가 프로필의 corner·radius·density·typeContrast 를
+  임의 재정의하면 표준이 발산한다 — 바꿀 필요가 생기면 doksam-ui 에 프로필을
+  추가/수정해서 반영한다.
 
-### 밀도
+### 모서리 · 밀도 · 타입 대비
 
-`<html data-density="compact|comfortable">` 를 프로필이 지정하고 `app/globals.css` 의
-밀도 층이 소비한다. `data-density` 가 없으면 아무 규칙도 걸리지 않는다(하위호환).
+- `corners/index.ts` — 모서리 계열 4종(sharp/soft/rounded/pill, #43). radius 는 더 이상
+  프로필이 직접 적는 자유 문자열이 아니라 이 레지스트리에서 파생된다.
+- `<html data-density="compact|comfortable|spacious">` 를 프로필이 지정하고
+  `app/globals.css` 의 밀도 층이 소비한다(#43 에서 spacious 추가로 3단). `data-density`
+  가 없으면 아무 규칙도 걸리지 않는다(하위호환).
+- `type-contrast/index.ts` — 타입 대비 3종(flat/moderate/dramatic, #43). `<html
+  data-type-contrast>` 로 제목/본문 비례를 바꾸며, personality 의 균등 배율과는 다른 축이다.
+- 밀도 층의 전역 CSS 가 버튼 등 개별 컨트롤의 Tailwind 유틸리티보다 우선 적용될 수 있다 —
+  컨트롤 하나만 예외로 두려면 Tailwind v4 `!` 접미사(`h-12!`)를 쓴다. 화면·컴포넌트 전체의
+  밀도를 이 방법으로 우회하지 않는다.
 
 ### 테마 초기화
 

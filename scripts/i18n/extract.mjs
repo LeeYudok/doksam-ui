@@ -142,6 +142,42 @@ catalog["chrome.sidebar.index"] = "전체 보기";
   }
 }
 
+// 모서리 계열 카드 문구 (corner.<name>.* — /corners TranslatedText 동적 키, #43)
+{
+  const src = readFileSync(join(ROOT, "corners/index.ts"), "utf8");
+  const chunks = src.split(/\n  \{\n    name: "/).slice(1);
+  for (const chunk of chunks) {
+    const name = chunk.slice(0, chunk.indexOf('"'));
+    const one = (field) => chunk.match(new RegExp(`${field}:\\s*\\n?\\s*"([^"]+)"`))?.[1];
+    const many = (field) =>
+      [...(chunk.match(new RegExp(`${field}:\\s*\\[([^\\]]*)\\]`))?.[1] ?? "").matchAll(/"([^"]+)"/g)].map(
+        (m) => m[1],
+      );
+    const description = one("description");
+    if (description) catalog[`corner.${name}.description`] = description;
+    many("suitedFor").forEach((v, i) => (catalog[`corner.${name}.suited.${i}`] = v));
+    many("avoidWhen").forEach((v, i) => (catalog[`corner.${name}.avoid.${i}`] = v));
+  }
+}
+
+// 타입 대비 카드 문구 (type-contrast.<name>.* — /type-contrast TranslatedText 동적 키, #43)
+{
+  const src = readFileSync(join(ROOT, "type-contrast/index.ts"), "utf8");
+  const chunks = src.split(/\n  \{\n    name: "/).slice(1);
+  for (const chunk of chunks) {
+    const name = chunk.slice(0, chunk.indexOf('"'));
+    const one = (field) => chunk.match(new RegExp(`${field}:\\s*\\n?\\s*"([^"]+)"`))?.[1];
+    const many = (field) =>
+      [...(chunk.match(new RegExp(`${field}:\\s*\\[([^\\]]*)\\]`))?.[1] ?? "").matchAll(/"([^"]+)"/g)].map(
+        (m) => m[1],
+      );
+    const description = one("description");
+    if (description) catalog[`type-contrast.${name}.description`] = description;
+    many("suitedFor").forEach((v, i) => (catalog[`type-contrast.${name}.suited.${i}`] = v));
+    many("avoidWhen").forEach((v, i) => (catalog[`type-contrast.${name}.avoid.${i}`] = v));
+  }
+}
+
 // 디바이스 프리뷰 모드 라벨 (chrome.preview.mode.<id> — device-preview 동적 키)
 {
   const src = readFileSync(join(ROOT, "components/device-preview.tsx"), "utf8");

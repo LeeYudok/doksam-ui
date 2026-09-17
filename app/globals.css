@@ -58,6 +58,15 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+  /*
+   * 섹션 세로 간격(--stack-gap, #65)을 이름 있는 spacing 키로 승격한다(#43).
+   * 이 토큰은 /tokens 에 문서화돼 있고 프로필 CSS 로도 방출되지만 정작 이를
+   * 소비하는 유틸리티가 없어 참조 0건이었다. 여기 등록하면 `gap-stack` ·
+   * `space-y-stack` · `py-stack` 이 생겨 소비 프로젝트가 섹션 스택에 바로 쓴다.
+   * 폴백 1.5rem 은 data-density 부재 시(=토큰 미정의) 유틸리티가 무효값이 되지
+   * 않게 한다 — opt-in 원칙을 깨지 않으면서 안전하게 쓰이도록.
+   */
+  --spacing-stack: var(--stack-gap, 1.5rem);
 }
 
 /*
@@ -665,21 +674,93 @@
   --font-mono-active: var(--font-space-mono);
 }
 
-/* 밀도(density) 층 — 브랜드 프로필이 <html data-density>로 지정한다(#65).
+/* 밀도(density) 층 — 브랜드 프로필이 <html data-density>로 지정한다(#65, #43 에서 3단).
    data-density 부재 시 아무 규칙도 걸리지 않아 기존 렌더와 완전히 동일하다.
-   comfortable = 컴포넌트 기본값과 동일한 값을 명시, compact = 한 단계 타이트.
-   버튼은 size variant 가 전부 높이 유틸(h-8 등)을 갖고 있어 밀도 강제에서 제외 —
-   단일 높이인 input 과 테이블 셀만 연결한다(profiles/index.ts 주석 참고). */
+   comfortable = 컴포넌트 기본값과 같은 값을 명시(no-op), compact/spacious 가 변주다.
+
+   #43 이전에는 버튼을 의도적으로 제외했다(버튼 size variant 가 높이·패딩·폰트를
+   전부 Tailwind 리터럴로 들고 있어 CSS 변수 경로가 없다는 이유). 그 결정을 뒤집는다 —
+   버튼이 밀도를 안 받으면 프로젝트마다 버튼 크기·모양이 똑같아지고, 그게 "표준을 썼더니
+   전부 같은 화면이 나온다"의 가장 큰 원인이었다. components/ui/ 는 수정 금지이므로
+   통로는 버튼이 이미 방출하는 data-slot/data-size 속성 선택자뿐이다.
+
+   ── 비율을 왜 이렇게 잡았나 (핵심) ────────────────────────────────────────────
+   기존 --personality-scale 은 html font-size 를 ±6.25% 움직이는 균등 배율이라
+   높이:패딩:폰트의 상대 비례가 모든 프로젝트에서 같았다. 그래서 결과가 "다른 디자인"이
+   아니라 "같은 디자인의 배율"로만 나왔다. 밀도 축은 세 값을 **서로 다른 배율**로 움직여
+   비례 자체를 바꾼다.
+
+     축        compact   comfortable   spacious   왜
+     높이      ×0.875    ×1            ×1.125     세로는 좁게 — 한 줄 높이는 클릭 타겟
+                                                  하한(~28px)과 행 정렬에 묶여 크게 못 움직인다.
+     좌우패딩  ×0.8      ×1            ×1.6       가로는 크게 — 버튼을 "여유 있어" 보이게 하는
+                                                  것은 높이가 아니라 라벨 좌우 여백이다.
+                                                  spacious 에서 가장 크게 벌려 랜딩·대외 화면의
+                                                  옆으로 긴 버튼 비례를 만든다.
+     폰트      ×1        ×1            ×1.07      거의 고정 — 축소 쪽은 가독성 하한 때문에 아예
+                                                  건드리지 않고, 확대 쪽만 살짝. 폰트를 같이
+                                                  키우면 결국 균등 배율로 되돌아간다.
+     아이콘버튼 높이만    —             높이만     정사각이라 패딩 축이 없다. 그래서 텍스트 버튼은
+                                                  옆으로 늘어나는데 아이콘 버튼은 거의 그대로 —
+                                                  같은 행 안에서도 비례가 달라진다(의도).
+     셀 패딩   ×0.5      ×1            ×1.5       표는 밀도 체감이 가장 큰 곳이라 가장 크게 움직인다.
+
+   ── 특이도(specificity) 와 탈출구 ──────────────────────────────────────────
+   아래 규칙은 의도적으로 **CSS 레이어 밖**에 있다. Tailwind v4 는 유틸리티를
+   `@layer utilities` 에 넣으므로, 레이어 없는 이 규칙들이 h-8/px-2.5 를 항상 이긴다.
+   부작용: 개발자가 <Button className="h-12"> 로 한 개만 키워도 먹지 않는다.
+   탈출구는 Tailwind v4 의 `!` 접미사다 — `className="h-12!"` 는
+   `height: … !important` 로 컴파일되고, !important 선언은 레이어 소속과 무관하게
+   일반 선언을 이기므로 이 층을 확실히 뚫는다(tailwindcss 4.3.2 컴파일 출력으로 확인).
+   레이어로 옮기는 안은 채택하지 않았다: `@layer base` 로 내리면 유틸리티가 항상 이겨
+   밀도가 아예 안 걸리고, `@layer utilities` 끝으로 옮겨도 우리 선택자 특이도가
+   (0,2,0) 이상이라 (0,1,0)인 h-12 는 여전히 진다. 즉 레이어 이동으로는 아무것도
+   해결되지 않고 `!` 가 유일한 탈출구다. */
 [data-density] {
-  --control-h: 2rem; /* input 기본 높이 (h-8) */
+  /* 컨트롤 높이 — 버튼 size variant(xs/sm/default/lg)와 input 이 공유한다. */
+  --control-h-xs: 1.5rem; /* button size="xs" (h-6) */
+  --control-h-sm: 1.75rem; /* button size="sm" (h-7) */
+  --control-h: 2rem; /* button size="default" · input 기본 높이 (h-8) */
+  --control-h-lg: 2.25rem; /* button size="lg" (h-9) */
+  /* 컨트롤 좌우 패딩 */
+  --control-px: 0.625rem; /* px-2.5 */
+  --control-px-xs: 0.5rem; /* px-2 */
+  /* 아이콘↔라벨 간격 */
+  --control-gap: 0.375rem; /* gap-1.5 (default·lg) */
+  --control-gap-sm: 0.25rem; /* gap-1 (xs·sm) */
+  /* 버튼 라벨 폰트 — text-sm 을 공유하는 default·lg 에만 적용한다.
+     xs(text-xs)·sm(text-[0.8rem])까지 덮으면 size variant 의 타입 위계가 뭉개진다. */
+  --control-fs: 0.875rem; /* text-sm */
   --cell-py: 0.5rem; /* 테이블 셀 세로 패딩 (p-2) */
   --stack-gap: 1.5rem; /* 섹션 세로 간격 (gap-6) */
 }
 
 [data-density="compact"] {
+  --control-h-xs: 1.375rem;
+  --control-h-sm: 1.5rem;
   --control-h: 1.75rem;
+  --control-h-lg: 2rem;
+  --control-px: 0.5rem;
+  --control-px-xs: 0.375rem;
+  --control-gap: 0.25rem;
+  --control-gap-sm: 0.125rem;
+  --control-fs: 0.875rem; /* 축소하지 않는다 — 가독성 하한 */
   --cell-py: 0.25rem;
   --stack-gap: 1rem;
+}
+
+[data-density="spacious"] {
+  --control-h-xs: 1.75rem;
+  --control-h-sm: 2rem;
+  --control-h: 2.25rem;
+  --control-h-lg: 2.5rem;
+  --control-px: 1rem;
+  --control-px-xs: 0.75rem;
+  --control-gap: 0.5rem;
+  --control-gap-sm: 0.375rem;
+  --control-fs: 0.9375rem;
+  --cell-py: 0.75rem;
+  --stack-gap: 2.25rem;
 }
 
 [data-density] [data-slot="input"] {
@@ -688,6 +769,198 @@
 
 [data-density] [data-slot="table-cell"] {
   padding-block: var(--cell-py);
+}
+
+/* 텍스트 버튼 — 높이·좌우 패딩·간격을 밀도 토큰에 연결한다. */
+[data-density] [data-slot="button"][data-size="default"] {
+  height: var(--control-h);
+  padding-inline: var(--control-px);
+  gap: var(--control-gap);
+  font-size: var(--control-fs);
+}
+
+[data-density] [data-slot="button"][data-size="lg"] {
+  height: var(--control-h-lg);
+  padding-inline: var(--control-px);
+  gap: var(--control-gap);
+  font-size: var(--control-fs);
+}
+
+[data-density] [data-slot="button"][data-size="sm"] {
+  height: var(--control-h-sm);
+  padding-inline: var(--control-px);
+  gap: var(--control-gap-sm);
+}
+
+[data-density] [data-slot="button"][data-size="xs"] {
+  height: var(--control-h-xs);
+  padding-inline: var(--control-px-xs);
+  gap: var(--control-gap-sm);
+}
+
+/* 아이콘이 라벨 옆에 붙은 버튼은 그 쪽 패딩을 깎는다 — button.tsx 의
+   has-data-[icon=…]:pr-2 / pl-2 유틸리티가 하던 일이다. 위 padding-inline 이
+   레이어 밖이라 그 유틸리티를 덮어버리므로, 같은 비율(default·lg 은 0.5/0.625=0.8,
+   xs·sm 은 0.375/0.5=0.75)을 밀도 토큰 위에서 다시 만들어 준다. */
+[data-density]
+  [data-slot="button"]:is([data-size="default"], [data-size="lg"]):has(
+    [data-icon="inline-start"]
+  ) {
+  padding-inline-start: calc(var(--control-px) * 0.8);
+}
+
+[data-density]
+  [data-slot="button"]:is([data-size="default"], [data-size="lg"]):has(
+    [data-icon="inline-end"]
+  ) {
+  padding-inline-end: calc(var(--control-px) * 0.8);
+}
+
+[data-density]
+  [data-slot="button"][data-size="sm"]:has([data-icon="inline-start"]) {
+  padding-inline-start: calc(var(--control-px) * 0.75);
+}
+
+[data-density] [data-slot="button"][data-size="sm"]:has([data-icon="inline-end"]) {
+  padding-inline-end: calc(var(--control-px) * 0.75);
+}
+
+[data-density]
+  [data-slot="button"][data-size="xs"]:has([data-icon="inline-start"]) {
+  padding-inline-start: calc(var(--control-px-xs) * 0.75);
+}
+
+[data-density] [data-slot="button"][data-size="xs"]:has([data-icon="inline-end"]) {
+  padding-inline-end: calc(var(--control-px-xs) * 0.75);
+}
+
+/* 아이콘 전용 버튼 — 정사각이라 패딩 축이 없고 높이 토큰만 받는다. */
+[data-density] [data-slot="button"][data-size="icon"] {
+  width: var(--control-h);
+  height: var(--control-h);
+}
+
+[data-density] [data-slot="button"][data-size="icon-xs"] {
+  width: var(--control-h-xs);
+  height: var(--control-h-xs);
+}
+
+[data-density] [data-slot="button"][data-size="icon-sm"] {
+  width: var(--control-h-sm);
+  height: var(--control-h-sm);
+}
+
+[data-density] [data-slot="button"][data-size="icon-lg"] {
+  width: var(--control-h-lg);
+  height: var(--control-h-lg);
+}
+
+/* 모서리(corner) 계열 층 — 브랜드 프로필이 <html data-corner>로 지정한다(#43).
+   단일 진실원천은 corners/index.ts 의 CORNER_PRESETS 이고, 아래 값은 themes/*.ts ↔
+   [data-theme] 블록과 같은 방식의 수기 미러다(프리셋을 고치면 여기도 같이 고친다).
+   data-corner 부재 시 :root 의 --radius: 6px 가 그대로 남아 기존 렌더와 동일하다.
+
+   표면(카드·팝오버)은 --radius → --radius-lg/xl 배관을 그대로 쓴다. 컨트롤 반경을
+   따로 오버라이드하는 것은 control ≠ surface 인 계열뿐이다(현재 pill 하나).
+   sharp/soft/rounded 는 control === surface 라 --radius 만으로 이미 맞으며,
+   여기서 border-radius 를 다시 쓰면 버튼 xs/sm 의 rounded-[min(var(--radius-md),10px)]
+   상한까지 덮어써 오히려 어긋난다 — 그래서 일부러 걸지 않는다. */
+/* 파생 반경 재계산 — 이 규칙이 없으면 축이 스코프 컨테이너에서 끊긴다.
+   --radius-sm/md/lg 등은 @theme 에서 calc(var(--radius) * n) 로 선언되는데,
+   커스텀 속성은 **선언된 요소에서** var() 가 치환된 뒤 계산값으로 상속된다.
+   즉 :root 에서 --radius 6px 로 이미 확정돼 자식이 --radius 를 바꿔도 파생값은
+   따라오지 않는다. <html data-corner> 로 거는 실제 소비 경로는 --radius 와 파생이
+   같은 요소라 우연히 동작하지만, 카탈로그의 스코프 미리보기(/corners 의 계열별
+   미니어처)는 버튼 반경이 전부 같게 나왔다 — 에이전트가 모방할 실물이 곧 그
+   미리보기이므로 이건 치명적이다(e2e/shape-axes.spec.ts 가 잡는다).
+   같은 규칙 안에서 다시 선언하면 그 요소의 --radius 로 재계산된다. */
+[data-corner] {
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+[data-corner="sharp"] {
+  --radius: 2px;
+}
+
+[data-corner="soft"] {
+  --radius: 6px;
+}
+
+[data-corner="rounded"] {
+  --radius: 12px;
+}
+
+[data-corner="pill"] {
+  --radius: 12px;
+  --radius-control: 9999px;
+}
+
+[data-corner="pill"]
+  :is(
+    [data-slot="button"],
+    [data-slot="input"],
+    [data-slot="select-trigger"],
+    [data-slot="textarea"],
+    [data-slot="toggle"]
+  ) {
+  border-radius: var(--radius-control);
+}
+
+/* 타입 대비(type contrast) 층 — 브랜드 프로필이 <html data-type-contrast>로
+   지정한다(#43). 단일 진실원천은 type-contrast/index.ts 의 TYPE_CONTRAST_PRESETS.
+
+   본문에는 배율을 곱하지 않는다. 제목만 움직여 제목↔본문 **비례**를 바꾸는 것이
+   이 축의 존재 이유이며, 본문까지 곱하면 --personality-scale 과 같은 균등 배율이 된다.
+
+   구현: 제목에 걸린 Tailwind text-* 유틸리티는 `font-size: var(--text-2xl)` 처럼
+   테마 변수를 참조하고, 그 변수는 **선언이 적용되는 요소** 기준으로 해소된다.
+   그래서 h1~h3 자신에게 --text-* 를 재정의하면 그 제목만 배율을 받고 본문은 그대로다
+   (tailwindcss 4.3.2 컴파일 출력으로 확인). line-height 는 v4 기본 테마에서
+   calc(2 / 1.5) 같은 무단위 비율이라 폰트 크기를 따라 자동으로 비례한다.
+
+   text-* 유틸리티가 없는 맨 제목은 위 경로로 커버되지 않으므로 @layer base 에 부모
+   상대(em) 폴백을 따로 둔다(파일 하단) — 레이어 안이라 유틸리티가 있으면 유틸리티가
+   이기고, 없을 때만 폴백이 걸린다.
+
+   우선순위: [data-personality="bold"] :is(h1,h2,h3) 의 font-weight 600 과 특이도가
+   (0,1,1) 로 같다. 이 블록이 파일에서 더 뒤에 오므로 타입 대비가 이긴다 — 굵기는
+   이 축이 소유하고 personality 는 대비를 고르지 않은 프로젝트에만 남는다. */
+[data-type-contrast] {
+  --heading-scale: 1;
+  --heading-weight: 600;
+  --heading-tracking: -0.01em;
+}
+
+[data-type-contrast="flat"] {
+  --heading-scale: 0.85;
+  --heading-weight: 600;
+  --heading-tracking: 0;
+}
+
+[data-type-contrast="dramatic"] {
+  --heading-scale: 1.35;
+  --heading-weight: 700;
+  --heading-tracking: -0.03em;
+}
+
+[data-type-contrast] :is(h1, h2, h3) {
+  --text-xs: calc(0.75rem * var(--heading-scale));
+  --text-sm: calc(0.875rem * var(--heading-scale));
+  --text-base: calc(1rem * var(--heading-scale));
+  --text-lg: calc(1.125rem * var(--heading-scale));
+  --text-xl: calc(1.25rem * var(--heading-scale));
+  --text-2xl: calc(1.5rem * var(--heading-scale));
+  --text-3xl: calc(1.875rem * var(--heading-scale));
+  --text-4xl: calc(2.25rem * var(--heading-scale));
+  --text-5xl: calc(3rem * var(--heading-scale));
+  font-weight: var(--heading-weight);
+  letter-spacing: var(--heading-tracking);
 }
 
 /* 시각 성격(personality) 토큰 층(#90) — 브랜드 프로필이 <html data-personality>
@@ -733,14 +1006,38 @@ html[data-personality] {
 
 /* 표면(surface) 성향 — border 는 기존 Card 렌더(ring-1 ring-foreground/10)와
    동일해 오버라이드가 없다. shadow/flat 만 box-shadow 를 재정의한다. 그림자
-   색은 하드코딩 없이 --foreground 시맨틱 토큰에서 color-mix 로 파생한다. */
-[data-personality-surface="shadow"] [data-slot="card"] {
+   색은 하드코딩 없이 --foreground 시맨틱 토큰에서 color-mix 로 파생한다.
+
+   #43 에서 카드 하나였던 대상을 팝오버·버튼·입력까지 넓혔다. 표면 성향이 카드에만
+   걸리면 화면 대부분을 차지하는 컨트롤이 전부 같은 인상으로 남아 축이 사실상 죽는다.
+   다만 요소마다 기본 그림자 사정이 달라 강도를 따로 잡는다:
+   - 팝오버·셀렉트 콘텐츠는 이미 shadow-md 유틸리티가 있다 → shadow 는 카드와 같은
+     2단 그림자로 통일하고, flat 이 그 유틸리티를 제거한다(레이어 밖이라 이긴다).
+   - 버튼은 자체 그림자 유틸리티가 없다 → shadow 에서만 1단 그림자를 새로 준다.
+     대상은 면이 있는 variant(default·secondary·destructive)뿐이다. ghost·link·outline
+     까지 띄우면 배경 없는 텍스트가 떠 보여 위계가 무너진다.
+   - 입력은 바깥으로 띄우지 않고 inset 으로 눌린 인상을 준다 — 입력은 "눌러 넣는 면"
+     이라는 관례를 따른다. */
+[data-personality-surface="shadow"] :is([data-slot="card"], [data-slot="popover-content"], [data-slot="select-content"]) {
   box-shadow:
     0 1px 2px color-mix(in oklch, var(--foreground) 8%, transparent),
     0 2px 6px color-mix(in oklch, var(--foreground) 10%, transparent);
 }
 
-[data-personality-surface="flat"] [data-slot="card"] {
+[data-personality-surface="shadow"]
+  [data-slot="button"]:is(
+    [data-variant="default"],
+    [data-variant="secondary"],
+    [data-variant="destructive"]
+  ) {
+  box-shadow: 0 1px 2px color-mix(in oklch, var(--foreground) 12%, transparent);
+}
+
+[data-personality-surface="shadow"] :is([data-slot="input"], [data-slot="textarea"]) {
+  box-shadow: inset 0 1px 2px color-mix(in oklch, var(--foreground) 8%, transparent);
+}
+
+[data-personality-surface="flat"] :is([data-slot="card"], [data-slot="popover-content"], [data-slot="select-content"], [data-slot="button"], [data-slot="input"], [data-slot="textarea"]) {
   box-shadow: none;
 }
 
@@ -781,5 +1078,13 @@ html[data-personality] {
      수정 금지 정책이라 여기서 통제한다 — /patterns/verified #1 데모 참조. */
   thead th {
     @apply font-bold;
+  }
+  /* 타입 대비 폴백(#43) — text-* 유틸리티가 없는 제목은 --text-* 재정의 경로로
+     커버되지 않는다. 부모 상대(em) 로 배율을 주되 @layer base 안에 두어,
+     유틸리티가 있으면 유틸리티가 이기고 없을 때만 이 폴백이 걸리게 한다.
+     (Tailwind preflight 가 h1~h6 의 font-size 를 inherit 으로 리셋해 두므로
+     1em 은 정확히 "본문과 같은 크기"를 뜻한다.) */
+  [data-type-contrast] :is(h1, h2, h3) {
+    font-size: calc(1em * var(--heading-scale));
   }
 }

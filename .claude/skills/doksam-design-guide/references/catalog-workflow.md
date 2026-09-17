@@ -136,10 +136,13 @@ pnpm typecheck && pnpm lint && pnpm test && pnpm build
 ## F. 브랜드 프로필 추가
 
 1. `profiles/index.ts` 의 `BRAND_PROFILES` 에 항목 추가:
-   `{ name, label, description, theme, font, defaultMode, radius, density, shell?, examples }`
+   `{ name, label, description, theme, font, defaultMode, radius, corner, typeContrast, density, shell?, examples }`
 2. `theme` 은 `themes/index.ts` 의, `font` 는 `fonts/index.ts` 의 실재하는 `name` 이어야 한다
-   — `profiles/index.test.ts` 가 참조 무결성을 강제한다.
-3. `density` 는 `compact`(관리·데이터 화면) 또는 `comfortable`(대외 화면).
+   — `profiles/index.test.ts` 가 참조 무결성을 강제한다. `corner` 는 `corners/index.ts` 의,
+   `typeContrast` 는 `type-contrast/index.ts` 의 실재하는 `name` 이어야 하고(#43), `radius`
+   는 손으로 적지 말고 고른 `corner` 프리셋의 `surface` 값과 일치시킨다.
+3. `density` 는 `compact`(관리·데이터 화면) / `comfortable`(대외 화면) / `spacious`(문서·
+   리더 화면) 3단 중 하나다(#43).
 4. shadcn 레지스트리로 배포하려면 `registry.json` 에 `registry:theme` item 추가
    (`profile-<name>`) 후 `pnpm registry:build && pnpm gen:llms`.
    **폰트는 registry item 으로 자동 설치되지 않는다** — cssVars 는 색·radius 만 담고,

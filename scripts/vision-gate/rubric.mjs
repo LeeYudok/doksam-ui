@@ -112,6 +112,17 @@ export const BASELINE_ARCHETYPE_ID = "sidebar-app";
  * root layout only = top nav) and, for templates, from LAYOUT_ARCHETYPES[].
  * templates in archetypes/index.ts (the SSOT for which template belongs to
  * which archetype).
+ *
+ * `profile` (issue #43, optional) declares the profiles/index.ts
+ * BRAND_PROFILES name this page's subtree forces via a nested layout.tsx
+ * (components/profile-preview-kit.tsx-style data-theme/data-font scoping —
+ * see e.g. app/templates/admin/layout.tsx, app/templates/shop/layout.tsx).
+ * Used only by component.mjs's pipeline-fidelity check (detected component
+ * impression vs. what the declared profile's corner/density/typeContrast/
+ * personality actually implies). Left undeclared on the catalog's own chrome
+ * pages (/, /tokens, /components, ...), which aren't forced into one profile
+ * subtree — same opt-in principle as `archetype` being undeclared meaning
+ * "no check", not "wrong".
  */
 export const PAGES = [
   { path: "/", name: "home", intent: "Landing/overview page introducing the doksam-ui design system.", archetype: "top-nav-site" },
@@ -121,7 +132,7 @@ export const PAGES = [
   { path: "/patterns", name: "patterns", intent: "Pattern catalog listing composed UI patterns.", archetype: "sidebar-app" },
   { path: "/rules", name: "rules", intent: "Design/usage rules documentation page.", archetype: "doc-reader" },
   { path: "/profiles", name: "profiles", intent: "Theme/profile picker showing available visual profiles.", archetype: "top-nav-site" },
-  { path: "/templates/admin", name: "template-admin", intent: "Full admin dashboard template: sidebar nav, data tables/widgets.", archetype: "sidebar-app" },
-  { path: "/templates/brokerage", name: "template-brokerage", intent: "Brokerage/trading template: watchlist, screener, order entry.", archetype: "dashboard-grid" },
-  { path: "/templates/shop", name: "template-shop", intent: "E-commerce shop template: product grid, cart affordances.", archetype: "wizard-flow" },
+  { path: "/templates/admin", name: "template-admin", intent: "Full admin dashboard template: sidebar nav, data tables/widgets.", archetype: "sidebar-app", profile: "admin" },
+  { path: "/templates/brokerage", name: "template-brokerage", intent: "Brokerage/trading template: watchlist, screener, order entry.", archetype: "dashboard-grid", profile: "service" },
+  { path: "/templates/shop", name: "template-shop", intent: "E-commerce shop template: product grid, cart affordances.", archetype: "wizard-flow", profile: "service" },
 ];
