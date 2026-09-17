@@ -41,7 +41,7 @@ describe("규칙의 두 층(#28)", () => {
     }
   });
 
-  it("브리프의 원형 항목은 레지스트리 9종을 전부 이름으로 열거하고 자유 문자열을 금지한다 (#34)", () => {
+  it("브리프의 원형 항목은 레지스트리 원형을 전부 이름으로 열거하고 자유 문자열을 금지한다 (#34)", () => {
     const archetypeItem = DESIGN_BRIEF_SECTION.items.find((item) => item.startsWith("원형(archetype)"));
     expect(archetypeItem).toBeDefined();
     for (const archetype of LAYOUT_ARCHETYPES) {

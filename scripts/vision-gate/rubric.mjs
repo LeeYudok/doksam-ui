@@ -50,10 +50,10 @@ export const RUBRIC_CRITERIA = [
  * vision model can classify a screenshot into.
  *
  * Derived from `archetypes/index.ts` (LAYOUT_ARCHETYPES, the catalog's single
- * source of truth for the 9 layout archetypes) instead of hardcoding a
+ * source of truth for the 10 layout archetypes) instead of hardcoding a
  * separate 7-id vocabulary — the old list (landing/catalog-grid/docs-prose/
  * admin-sidebar/brokerage-dashboard/shop-grid/other) didn't correspond to any
- * of the 9 real archetypes, so vision-gate diversity scores couldn't be
+ * of the real archetypes, so vision-gate diversity scores couldn't be
  * mapped back onto them. Node 22.18+ type-strips `.ts` on import, same
  * pattern `scripts/gen-llms.mjs` already uses for this exact file.
  *
@@ -77,6 +77,14 @@ const DIVERSITY_ARCHETYPE_DESCRIPTIONS = {
   "chat-workspace": "A conversation list on the left (drawer on mobile) plus a center message scroller with a fixed input composer pinned to the bottom.",
   "canvas": "An infinite pannable/zoomable canvas fills the center, with a tool palette on the left edge and a properties panel on the right edge. No page-style navigation.",
   "doc-reader": "A document tree on the left, a narrow reading-width column of prose in the center, and a scroll-synced table of contents on the right.",
+  // Distinguished from top-nav-site (a landing hero can look superficially
+  // similar) by two tests visible inside the classified frame: does the frame
+  // carry ANY navigation of its own, and is there more than one task in it.
+  // Note this archetype is defined by an ABSENCE, so it only classifies
+  // correctly under the "embedded template frame" scoping rule the prompt
+  // states (run.mjs buildRubricText) — without it, the catalog chrome around
+  // an embedded preview reads as the template's own nav.
+  "focus-task": "One centered card holding a single task dominates the frame, sitting in otherwise empty space. Inside the frame there is no navigation of any kind (no sidebar, no nav menu bar, no tab bar, no footer link rows) — at most a bare brand mark above the card — and no second task or content section competing with the card.",
 };
 
 export const DIVERSITY_ARCHETYPES = [
@@ -105,7 +113,7 @@ export const BASELINE_ARCHETYPE_ID = "sidebar-app";
  * and a couple of components/patterns pages.
  *
  * `archetype` (issue #92, revised #37) declares each page's expected
- * skeleton — the id must be one of DIVERSITY_ARCHETYPES (the 9
+ * skeleton — the id must be one of DIVERSITY_ARCHETYPES (the 10
  * archetypes/index.ts ids + "other"). Used by diversity.mjs to score whether
  * the detected skeleton matches what this page is supposed to be. Mapped
  * from the actual app layout (app/**\/layout.tsx — CatalogShell = sidebar,
@@ -135,4 +143,21 @@ export const PAGES = [
   { path: "/templates/admin", name: "template-admin", intent: "Full admin dashboard template: sidebar nav, data tables/widgets.", archetype: "sidebar-app", profile: "admin" },
   { path: "/templates/brokerage", name: "template-brokerage", intent: "Brokerage/trading template: watchlist, screener, order entry.", archetype: "dashboard-grid", profile: "service" },
   { path: "/templates/shop", name: "template-shop", intent: "E-commerce shop template: product grid, cart affordances.", archetype: "wizard-flow", profile: "service" },
+  { path: "/templates/passkey-auth", name: "template-passkey-auth", intent: "Passkey (WebAuthn) auth template: one centered card carrying a single auth task, with the demo state controls kept outside the card.", archetype: "focus-task", profile: "console" },
 ];
+
+/**
+ * Archetypes deliberately NOT covered by a PAGES entry (issue #55 H1).
+ *
+ * PAGES is capped for API cost, so not every archetype can have a screenshot.
+ * The problem that keeps recurring is a *new* archetype being added to
+ * archetypes/index.ts with a rubric description but no page — the gate then
+ * never classifies anything into it, so the description is never measured.
+ * diversity.test.mjs asserts `covered ∪ UNCOVERED_ARCHETYPES === all ids`,
+ * which makes skipping coverage an explicit, reviewable choice rather than an
+ * omission nobody notices.
+ *
+ * Each id below has no template in the catalog cheap enough to add to the
+ * capped page list yet; add a PAGES entry and delete the id here when one lands.
+ */
+export const UNCOVERED_ARCHETYPES = ["split-pane", "feed-timeline", "chat-workspace", "canvas", "other"];

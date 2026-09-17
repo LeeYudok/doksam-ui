@@ -1975,6 +1975,48 @@
           "target": "app/templates/glossary/_data/terms.ts"
         }
       ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "template-passkey-auth",
+      "type": "registry:block",
+      "title": "Passkey Auth 템플릿",
+      "description": "console 프로필 · Ember 다크 · Geist · focus-task 원형. 지속되는 내비 없이 가운데 카드 한 장이 과제 하나만 담는 패스키(WebAuthn) 인증 화면. 로그인 진입·인증기 대기·사용자 취소와 인증 실패 구분·등록·다른 기기 인증·기기 관리·문자 인증 대체 경로·미지원 환경까지 흐름의 상태를 모두 렌더합니다.",
+      "dependencies": [
+        "@phosphor-icons/react"
+      ],
+      "files": [
+        {
+          "path": "app/templates/passkey-auth/error.tsx",
+          "type": "registry:page",
+          "target": "app/templates/passkey-auth/error.tsx"
+        },
+        {
+          "path": "app/templates/passkey-auth/layout.tsx",
+          "type": "registry:page",
+          "target": "app/templates/passkey-auth/layout.tsx"
+        },
+        {
+          "path": "app/templates/passkey-auth/loading.tsx",
+          "type": "registry:page",
+          "target": "app/templates/passkey-auth/loading.tsx"
+        },
+        {
+          "path": "app/templates/passkey-auth/page.tsx",
+          "type": "registry:page",
+          "target": "app/templates/passkey-auth/page.tsx"
+        },
+        {
+          "path": "app/templates/passkey-auth/_components/passkey-auth.tsx",
+          "type": "registry:page",
+          "target": "app/templates/passkey-auth/_components/passkey-auth.tsx"
+        },
+        {
+          "path": "app/templates/passkey-auth/_data/passkey.ts",
+          "type": "registry:page",
+          "target": "app/templates/passkey-auth/_data/passkey.ts"
+        }
+      ]
     }
   ]
 }

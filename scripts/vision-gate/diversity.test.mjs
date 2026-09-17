@@ -14,7 +14,7 @@ import {
   summarizeDiversity,
   validatePages,
 } from "./diversity.mjs";
-import { BASELINE_ARCHETYPE_ID, DIVERSITY_ARCHETYPES, PAGES } from "./rubric.mjs";
+import { BASELINE_ARCHETYPE_ID, DIVERSITY_ARCHETYPES, PAGES, UNCOVERED_ARCHETYPES } from "./rubric.mjs";
 import { LAYOUT_ARCHETYPES } from "../../archetypes/index.ts";
 
 describe("rubric diversity metadata", () => {
@@ -27,6 +27,27 @@ describe("rubric diversity metadata", () => {
     }
   });
 
+  it("every archetype is either graded by a PAGES entry or explicitly listed as uncovered (#55 H1)", () => {
+    // Regression guard for the failure this closes: a new archetype gets a
+    // rubric description but no page, so the gate can never classify anything
+    // into it and the description is never measured. Adding an archetype now
+    // forces either a PAGES entry or an explicit UNCOVERED_ARCHETYPES entry.
+    const covered = new Set(PAGES.map((page) => page.archetype));
+    const accountedFor = new Set([...covered, ...UNCOVERED_ARCHETYPES]);
+    for (const id of DIVERSITY_ARCHETYPE_IDS) {
+      expect(accountedFor.has(id), `archetype "${id}" is neither graded by a PAGES entry nor listed in UNCOVERED_ARCHETYPES`).toBe(true);
+    }
+    // And the allowlist may not quietly cover something a page already grades.
+    for (const id of UNCOVERED_ARCHETYPES) {
+      expect(covered.has(id), `archetype "${id}" is graded by a PAGES entry — remove it from UNCOVERED_ARCHETYPES`).toBe(false);
+    }
+  });
+
+  it("focus-task is actually graded by a PAGES entry (#55 H1)", () => {
+    const focusPages = PAGES.filter((page) => page.archetype === "focus-task");
+    expect(focusPages.length, "no PAGES entry declares focus-task").toBeGreaterThan(0);
+  });
+
   it("BASELINE_ARCHETYPE_ID is one of DIVERSITY_ARCHETYPES", () => {
     expect(DIVERSITY_ARCHETYPE_IDS).toContain(BASELINE_ARCHETYPE_ID);
   });
@@ -36,10 +57,10 @@ describe("rubric diversity metadata", () => {
     expect(new Set(ids).size).toBe(ids.length);
   });
 
-  it("DIVERSITY_ARCHETYPES vocabulary is derived from archetypes/index.ts's 9 layout archetypes + 'other' (issue #37 RC3)", () => {
+  it("DIVERSITY_ARCHETYPES vocabulary is derived from archetypes/index.ts's 10 layout archetypes + other (issue #37 RC3, #45)", () => {
     // This is the regression test for the core bug: the old vocabulary
     // (landing/catalog-grid/docs-prose/admin-sidebar/brokerage-dashboard/
-    // shop-grid/other) had no relationship to the catalog's real 9
+    // shop-grid/other) had no relationship to the catalog's real 10
     // archetypes, so vision-gate diversity scores couldn't be mapped back
     // onto them.
     const ids = DIVERSITY_ARCHETYPES.map((a) => a.id);

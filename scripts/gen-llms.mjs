@@ -25,7 +25,7 @@ const HOMEPAGE = "https://ui.doksam.com";
  */
 const { DESIGN_BRIEF_SECTION, CONVERGENCE_ANTIPATTERNS_SECTION } = await import("../lib/rules-markdown.ts");
 // 원형·성격 메뉴는 링크가 아니라 표로 인라인한다(#34) — llms.txt 하나만 읽는 에이전트가
-// 레지스트리를 따라가지 않고도 9종 중에서 고를 수 있어야 한다. 항목 원천은 각 레지스트리.
+// 레지스트리를 따라가지 않고도 등록된 원형 중에서 고를 수 있어야 한다. 항목 원천은 각 레지스트리.
 const { LAYOUT_ARCHETYPES } = await import("../archetypes/index.ts");
 const { PERSONALITY_PRESETS } = await import("../personalities/index.ts");
 const { CORNER_PRESETS } = await import("../corners/index.ts");

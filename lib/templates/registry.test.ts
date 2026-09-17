@@ -18,8 +18,8 @@ describe("TEMPLATE_REGISTRY", () => {
   })
 
   it("app/templates/ 하위 템플릿 디렉터리와 1:1 대응한다", () => {
-    // 20종 — app/templates/ 하위 템플릿 디렉터리와 1:1
-    expect(TEMPLATE_REGISTRY).toHaveLength(20)
+    // 21종 — app/templates/ 하위 템플릿 디렉터리와 1:1
+    expect(TEMPLATE_REGISTRY).toHaveLength(21)
     for (const t of TEMPLATE_REGISTRY) {
       expect(t.title.length).toBeGreaterThan(0)
       expect(t.description.length).toBeGreaterThan(0)

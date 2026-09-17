@@ -107,6 +107,7 @@ const PAGES = [
   "/templates/mail-workspace",
   "/templates/marketing-site",
   "/templates/activity-feed",
+  "/templates/passkey-auth",
 ];
 
 for (const viewport of WIDTHS) {
