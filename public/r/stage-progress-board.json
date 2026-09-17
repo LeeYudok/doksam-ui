@@ -7,9 +7,9 @@
     "@phosphor-icons/react@^2.1.10"
   ],
   "registryDependencies": [
-    "badge",
-    "card",
-    "progress"
+    "https://ui.doksam.com/r/badge.json",
+    "https://ui.doksam.com/r/card.json",
+    "https://ui.doksam.com/r/progress.json"
   ],
   "files": [
     {

@@ -7,8 +7,8 @@
     "@phosphor-icons/react@^2.1.10"
   ],
   "registryDependencies": [
-    "switch",
-    "table"
+    "https://ui.doksam.com/r/switch.json",
+    "https://ui.doksam.com/r/table.json"
   ],
   "files": [
     {

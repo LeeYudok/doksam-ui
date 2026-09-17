@@ -7,9 +7,9 @@
     "@phosphor-icons/react@^2.1.10"
   ],
   "registryDependencies": [
-    "card",
-    "native-select",
-    "https://ui.doksam.com/r/finance-rate.json"
+    "https://ui.doksam.com/r/card.json",
+    "https://ui.doksam.com/r/finance-rate.json",
+    "https://ui.doksam.com/r/native-select.json"
   ],
   "files": [
     {

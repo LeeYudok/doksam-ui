@@ -7,7 +7,7 @@
     "@phosphor-icons/react@^2.1.10"
   ],
   "registryDependencies": [
-    "button",
+    "https://ui.doksam.com/r/button.json",
     "https://ui.doksam.com/r/i18n-provider.json"
   ],
   "files": [

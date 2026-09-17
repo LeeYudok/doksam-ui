@@ -4,8 +4,8 @@
   "title": "Request Inspector",
   "description": "요청 목록 + 클릭 시 Accordion으로 펼치는 Headers/Query/Payload/Response 상세 인스펙터. 4xx/5xx 상태는 색으로 강조하고 cURL 명령을 바로 복사할 수 있다. 관측성 패턴 코어.",
   "registryDependencies": [
-    "accordion",
-    "badge",
+    "https://ui.doksam.com/r/accordion.json",
+    "https://ui.doksam.com/r/badge.json",
     "https://ui.doksam.com/r/copy-button.json"
   ],
   "files": [

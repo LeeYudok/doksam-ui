@@ -8,7 +8,7 @@
     "@phosphor-icons/react@^2.1.10"
   ],
   "registryDependencies": [
-    "spinner"
+    "https://ui.doksam.com/r/spinner.json"
   ],
   "files": [
     {

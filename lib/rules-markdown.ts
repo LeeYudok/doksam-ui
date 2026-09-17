@@ -67,8 +67,9 @@ export const RULES_SECTIONS: RulesSection[] = [
     title: "컴포넌트",
     kind: "invariant",
     items: [
-      "UI 프리미티브는 shadcn/ui를 쓴다 — 단 components/ui/ 는 손대지 않은 상류(upstream) 원본이 아니라 하우스 스타일이 적용된 포크다(컨트롤 높이·패딩 축소, --radius 파생 토큰, data-horizontal: 축약 변형, has-data-[icon=...] 아이콘 슬롯 규약 등). 실제 차이와 사유는 components/ui/upstream.manifest.json 에 파일 단위로 기록되어 있다.",
-      "components/ui/ 의 기록된 커스터마이즈는 되돌리지 않는다 — 상류 값으로 되돌리면 프로필의 모서리·밀도 축이 참조하는 값이 어긋난다. 상류를 재설치·업그레이드할 때는 npx shadcn@latest add <name> 을 직접 돌리지 않고 node scripts/shadcn-upstream.mjs 로 upstream.manifest.json 과 대조해 커스터마이즈를 재적용한다.",
+      "UI 프리미티브는 shadcn/ui를 쓴다 — components/ui/ 는 components.json 의 style(radix-nova)로 설치한 상류 원본이며, 그 스타일 자체가 컨트롤 높이·--radius 파생 토큰·has-data-[icon=...] 슬롯 규약을 담고 있다. 빈 프로젝트에 같은 프리셋으로 설치해 대조하면 60개 중 6개만 다르고, 그 6개는 상류가 더 앞선 것이다(#57 실측). 파일 단위 기록은 components/ui/upstream.manifest.json 에 있으며, 그 파일의 customized 는 CLI 가 설치 시 치환하는 자리까지 포함한 값이라 그대로 \"하우스 포크\" 로 읽지 않는다.",
+      "components/ui/ 를 손으로 고치지 않는다 — 프로필의 모서리·밀도 축이 이 파일들의 값을 기준으로 계산되므로, 임의 수정은 축을 어긋나게 한다. 상류를 재설치·업그레이드할 때는 node scripts/shadcn-upstream.mjs 로 components.json 의 style 기준 상류와 대조하고, 차이가 나면 upstream.manifest.json 에 기록한다.",
+      "프리미티브도 상류가 아니라 이 카탈로그에서 설치한다 — npx shadcn add https://ui.doksam.com/r/badge.json 을 쓴다. bare 이름(npx shadcn add badge)으로 받으면 무엇이 깔릴지가 소비 프로젝트의 init 프리셋(style·base·아이콘 라이브러리)과 상류의 현재 버전에 달리게 되어, 카탈로그가 렌더한 것과 같다고 보장할 수 없다. 실제로 상류 radix-nova 는 이미 6개 파일(checkbox·radio-group·switch·field·command·message-scroller)에서 카탈로그보다 앞서 있다.",
       "커스텀 동작이 필요하면 components/ui/ 밖에 별도 컴포넌트를 만들어 shadcn 프리미티브를 조합한다 — components/ui/customs 같은 하위 폴더를 만들어 components/ui/ 안에 끼워 넣지 않는다. shadcn 유래 프리미티브와 커스텀 조합은 디렉터리 레벨에서 분리한다(예: components/<feature>/ 또는 components/patterns/).",
       "테이블 헤더(thead th)는 app/globals.css의 전역 규칙으로 항상 볼드로 렌더링된다 — 컴포넌트마다 font-bold를 개별 지정하지 않는다.",
     ],
@@ -209,6 +210,7 @@ export const RULES_SECTIONS: RulesSection[] = [
     kind: "invariant",
     items: [
       "doksam-ui 고유 자산(shadcn/ui 프리미티브가 아닌 것 — badge-extended, tooltip-icon-button, table-sortable, screen-help-dialog, json-tree, log-viewer, request-inspector, finance-* 유틸, format-biz-no, profile-admin/service/data/docs/console)은 코드를 복붙하지 않고 npx shadcn add https://ui.doksam.com/r/<name>.json 으로 설치한다.",
+      "프리미티브(button·card·badge 등 components/ui/ 60종)도 이 레지스트리가 배포한다 — 항목 사이의 registryDependencies 는 전부 https://ui.doksam.com/r/<name>.json 이며 bare 이름을 쓰지 않는다. bare 이름은 상류 shadcn 에서 내려와 소비 프로젝트의 프리셋과 상류 버전에 따라 내용이 갈리므로, 설치본이 카탈로그와 같다는 보장이 사라진다(scripts/registry/ui-items.test.ts 가 막는다).",
       "설치 가능한 전체 목록과 각 install 명령은 ui.doksam.com/llms.txt(AI 발견용 카탈로그)에서 기계적으로 읽을 수 있다 — registry.json(레포 루트)이 단일 진실원천이며 pnpm gen:llms 로 동기화한다.",
       "이 레지스트리를 프로젝트에 상시 등록해두려면 components.json의 registries에 \"@doksam-ui\": \"https://ui.doksam.com/r/{name}.json\" 을 추가한다 — 이후 npx shadcn add @doksam-ui/<name> 으로 짧게 설치할 수 있다.",
       "폰트(assets/fonts/)는 registry item으로 자동 설치되지 않는다 — 프로필(profile-admin 등) cssVars는 색·radius만 적용하고, 폰트는 fonts/index.ts 안내대로 woff2를 수동 복사 후 next/font/local로 연결한다.",

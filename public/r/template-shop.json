@@ -7,19 +7,19 @@
     "@phosphor-icons/react@^2.1.10"
   ],
   "registryDependencies": [
-    "badge",
-    "button",
-    "card",
-    "carousel",
-    "empty",
-    "label",
-    "progress",
-    "radio-group",
-    "separator",
-    "table",
+    "https://ui.doksam.com/r/badge.json",
+    "https://ui.doksam.com/r/button.json",
+    "https://ui.doksam.com/r/card.json",
+    "https://ui.doksam.com/r/carousel.json",
+    "https://ui.doksam.com/r/empty.json",
+    "https://ui.doksam.com/r/label.json",
     "https://ui.doksam.com/r/profile-scope.json",
+    "https://ui.doksam.com/r/progress.json",
+    "https://ui.doksam.com/r/radio-group.json",
     "https://ui.doksam.com/r/route-error.json",
-    "https://ui.doksam.com/r/route-loading.json"
+    "https://ui.doksam.com/r/route-loading.json",
+    "https://ui.doksam.com/r/separator.json",
+    "https://ui.doksam.com/r/table.json"
   ],
   "files": [
     {

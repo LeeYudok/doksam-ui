@@ -13,7 +13,7 @@
         "class-variance-authority@^0.7.1"
       ],
       "registryDependencies": [
-        "badge"
+        "https://ui.doksam.com/r/badge.json"
       ],
       "files": [
         {
@@ -47,7 +47,7 @@
         "@phosphor-icons/react@^2.1.10"
       ],
       "registryDependencies": [
-        "button",
+        "https://ui.doksam.com/r/button.json",
         "https://ui.doksam.com/r/i18n-provider.json"
       ],
       "files": [
@@ -68,8 +68,8 @@
         "class-variance-authority@^0.7.1"
       ],
       "registryDependencies": [
-        "button",
-        "dropdown-menu"
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/dropdown-menu.json"
       ],
       "files": [
         {
@@ -85,8 +85,8 @@
       "title": "Tooltip Icon Button",
       "description": "아이콘 전용 버튼 — Tooltip 래핑과 aria-label을 tip 하나로 강제해서 접근성 실수를 구조적으로 막는다. app/layout.tsx 최상단에 TooltipProvider가 이미 있어야 한다.",
       "registryDependencies": [
-        "button",
-        "tooltip"
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/tooltip.json"
       ],
       "files": [
         {
@@ -112,9 +112,9 @@
         "@phosphor-icons/react@^2.1.10"
       ],
       "registryDependencies": [
-        "button",
-        "dropdown-menu",
-        "table"
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/dropdown-menu.json",
+        "https://ui.doksam.com/r/table.json"
       ],
       "files": [
         {
@@ -133,8 +133,8 @@
         "@phosphor-icons/react@^2.1.10"
       ],
       "registryDependencies": [
-        "switch",
-        "table"
+        "https://ui.doksam.com/r/switch.json",
+        "https://ui.doksam.com/r/table.json"
       ],
       "files": [
         {
@@ -153,8 +153,8 @@
         "@phosphor-icons/react@^2.1.10"
       ],
       "registryDependencies": [
-        "button",
-        "dialog"
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/dialog.json"
       ],
       "files": [
         {
@@ -170,7 +170,7 @@
       "title": "Region Map",
       "description": "한국 시/도 분포 지도 — 지리 지도(hover 3D 돌출·리치 툴팁) ↔ 타일 카토그램 토글. 색은 primary 토큰에서 파생되어 테마 프리셋에 자동 대응한다.",
       "registryDependencies": [
-        "button"
+        "https://ui.doksam.com/r/button.json"
       ],
       "files": [
         {
@@ -231,8 +231,8 @@
       "title": "Request Inspector",
       "description": "요청 목록 + 클릭 시 Accordion으로 펼치는 Headers/Query/Payload/Response 상세 인스펙터. 4xx/5xx 상태는 색으로 강조하고 cURL 명령을 바로 복사할 수 있다. 관측성 패턴 코어.",
       "registryDependencies": [
-        "accordion",
-        "badge",
+        "https://ui.doksam.com/r/accordion.json",
+        "https://ui.doksam.com/r/badge.json",
         "https://ui.doksam.com/r/copy-button.json"
       ],
       "files": [
@@ -607,9 +607,9 @@
         "@phosphor-icons/react@^2.1.10"
       ],
       "registryDependencies": [
-        "badge",
-        "card",
         "https://ui.doksam.com/r/activity-heatmap.json",
+        "https://ui.doksam.com/r/badge.json",
+        "https://ui.doksam.com/r/card.json",
         "https://ui.doksam.com/r/diverging-bar.json",
         "https://ui.doksam.com/r/finance-format-won.json",
         "https://ui.doksam.com/r/finance-rate.json",
@@ -700,19 +700,19 @@
         "@phosphor-icons/react@^2.1.10"
       ],
       "registryDependencies": [
-        "card",
-        "input",
-        "label",
-        "select",
-        "separator",
-        "sheet",
-        "switch",
+        "https://ui.doksam.com/r/card.json",
+        "https://ui.doksam.com/r/input.json",
         "https://ui.doksam.com/r/json-tree.json",
+        "https://ui.doksam.com/r/label.json",
         "https://ui.doksam.com/r/log-viewer.json",
         "https://ui.doksam.com/r/profile-scope.json",
         "https://ui.doksam.com/r/request-inspector.json",
         "https://ui.doksam.com/r/route-error.json",
         "https://ui.doksam.com/r/route-loading.json",
+        "https://ui.doksam.com/r/select.json",
+        "https://ui.doksam.com/r/separator.json",
+        "https://ui.doksam.com/r/sheet.json",
+        "https://ui.doksam.com/r/switch.json",
         "https://ui.doksam.com/r/table-sortable.json"
       ],
       "files": [
@@ -858,9 +858,9 @@
         "@phosphor-icons/react@^2.1.10"
       ],
       "registryDependencies": [
-        "accordion",
-        "badge",
-        "card",
+        "https://ui.doksam.com/r/accordion.json",
+        "https://ui.doksam.com/r/badge.json",
+        "https://ui.doksam.com/r/card.json",
         "https://ui.doksam.com/r/content-feed.json",
         "https://ui.doksam.com/r/list-controls.json",
         "https://ui.doksam.com/r/profile-scope.json",
@@ -1043,26 +1043,26 @@
         }
       ],
       "registryDependencies": [
-        "attachment",
-        "avatar",
-        "badge",
-        "bubble",
-        "card",
-        "input-group",
-        "label",
-        "message",
-        "message-scroller",
-        "radio-group",
-        "select",
-        "separator",
-        "sheet",
-        "slider",
-        "switch",
-        "textarea",
+        "https://ui.doksam.com/r/attachment.json",
+        "https://ui.doksam.com/r/avatar.json",
+        "https://ui.doksam.com/r/badge.json",
+        "https://ui.doksam.com/r/bubble.json",
+        "https://ui.doksam.com/r/card.json",
+        "https://ui.doksam.com/r/input-group.json",
+        "https://ui.doksam.com/r/label.json",
+        "https://ui.doksam.com/r/message-scroller.json",
+        "https://ui.doksam.com/r/message.json",
         "https://ui.doksam.com/r/profile-scope.json",
+        "https://ui.doksam.com/r/radio-group.json",
         "https://ui.doksam.com/r/route-error.json",
         "https://ui.doksam.com/r/route-loading.json",
-        "https://ui.doksam.com/r/screen-help-dialog.json"
+        "https://ui.doksam.com/r/screen-help-dialog.json",
+        "https://ui.doksam.com/r/select.json",
+        "https://ui.doksam.com/r/separator.json",
+        "https://ui.doksam.com/r/sheet.json",
+        "https://ui.doksam.com/r/slider.json",
+        "https://ui.doksam.com/r/switch.json",
+        "https://ui.doksam.com/r/textarea.json"
       ]
     },
     {
@@ -1172,19 +1172,19 @@
         }
       ],
       "registryDependencies": [
-        "badge",
-        "button",
-        "card",
-        "carousel",
-        "empty",
-        "label",
-        "progress",
-        "radio-group",
-        "separator",
-        "table",
+        "https://ui.doksam.com/r/badge.json",
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/card.json",
+        "https://ui.doksam.com/r/carousel.json",
+        "https://ui.doksam.com/r/empty.json",
+        "https://ui.doksam.com/r/label.json",
         "https://ui.doksam.com/r/profile-scope.json",
+        "https://ui.doksam.com/r/progress.json",
+        "https://ui.doksam.com/r/radio-group.json",
         "https://ui.doksam.com/r/route-error.json",
-        "https://ui.doksam.com/r/route-loading.json"
+        "https://ui.doksam.com/r/route-loading.json",
+        "https://ui.doksam.com/r/separator.json",
+        "https://ui.doksam.com/r/table.json"
       ]
     },
     {
@@ -1197,9 +1197,9 @@
         "@phosphor-icons/react@^2.1.10"
       ],
       "registryDependencies": [
-        "button",
-        "calendar",
-        "popover"
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/calendar.json",
+        "https://ui.doksam.com/r/popover.json"
       ],
       "files": [
         {
@@ -1219,9 +1219,9 @@
         "react-day-picker@^10.0.1"
       ],
       "registryDependencies": [
-        "button",
-        "calendar",
-        "popover"
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/calendar.json",
+        "https://ui.doksam.com/r/popover.json"
       ],
       "files": [
         {
@@ -1240,10 +1240,10 @@
         "@phosphor-icons/react@^2.1.10"
       ],
       "registryDependencies": [
-        "badge",
-        "button",
-        "command",
-        "popover"
+        "https://ui.doksam.com/r/badge.json",
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/command.json",
+        "https://ui.doksam.com/r/popover.json"
       ],
       "files": [
         {
@@ -1262,7 +1262,7 @@
         "@phosphor-icons/react@^2.1.10"
       ],
       "registryDependencies": [
-        "input-group"
+        "https://ui.doksam.com/r/input-group.json"
       ],
       "files": [
         {
@@ -1281,7 +1281,7 @@
         "@phosphor-icons/react@^2.1.10"
       ],
       "registryDependencies": [
-        "input-group"
+        "https://ui.doksam.com/r/input-group.json"
       ],
       "files": [
         {
@@ -1300,9 +1300,9 @@
         "@phosphor-icons/react@^2.1.10"
       ],
       "registryDependencies": [
-        "button",
-        "input",
-        "popover"
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/input.json",
+        "https://ui.doksam.com/r/popover.json"
       ],
       "files": [
         {
@@ -1334,7 +1334,7 @@
       "title": "Avatar Group",
       "description": "겹친 아바타 스택+N.",
       "registryDependencies": [
-        "avatar"
+        "https://ui.doksam.com/r/avatar.json"
       ],
       "files": [
         {
@@ -1522,15 +1522,15 @@
         }
       ],
       "registryDependencies": [
-        "badge",
-        "button",
-        "card",
-        "carousel",
-        "tabs",
-        "toggle-group",
+        "https://ui.doksam.com/r/badge.json",
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/card.json",
+        "https://ui.doksam.com/r/carousel.json",
         "https://ui.doksam.com/r/profile-scope.json",
         "https://ui.doksam.com/r/route-error.json",
-        "https://ui.doksam.com/r/route-loading.json"
+        "https://ui.doksam.com/r/route-loading.json",
+        "https://ui.doksam.com/r/tabs.json",
+        "https://ui.doksam.com/r/toggle-group.json"
       ]
     },
     {
@@ -1625,18 +1625,18 @@
         }
       ],
       "registryDependencies": [
-        "avatar",
-        "badge",
-        "button",
-        "card",
-        "table",
-        "tabs",
+        "https://ui.doksam.com/r/avatar.json",
+        "https://ui.doksam.com/r/badge.json",
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/card.json",
         "https://ui.doksam.com/r/finance-format-won.json",
         "https://ui.doksam.com/r/finance-rate.json",
         "https://ui.doksam.com/r/profile-scope.json",
         "https://ui.doksam.com/r/route-error.json",
         "https://ui.doksam.com/r/route-loading.json",
-        "https://ui.doksam.com/r/sparkline.json"
+        "https://ui.doksam.com/r/sparkline.json",
+        "https://ui.doksam.com/r/table.json",
+        "https://ui.doksam.com/r/tabs.json"
       ]
     },
     {
@@ -1671,9 +1671,9 @@
         }
       ],
       "registryDependencies": [
-        "card",
-        "native-select",
-        "https://ui.doksam.com/r/finance-rate.json"
+        "https://ui.doksam.com/r/card.json",
+        "https://ui.doksam.com/r/finance-rate.json",
+        "https://ui.doksam.com/r/native-select.json"
       ]
     },
     {
@@ -1708,9 +1708,9 @@
         }
       ],
       "registryDependencies": [
-        "badge",
-        "card",
-        "progress"
+        "https://ui.doksam.com/r/badge.json",
+        "https://ui.doksam.com/r/card.json",
+        "https://ui.doksam.com/r/progress.json"
       ]
     },
     {
@@ -1778,7 +1778,7 @@
         }
       ],
       "registryDependencies": [
-        "spinner"
+        "https://ui.doksam.com/r/spinner.json"
       ]
     },
     {
@@ -1823,14 +1823,14 @@
         }
       ],
       "registryDependencies": [
-        "avatar",
-        "badge",
-        "button",
-        "input",
-        "separator",
+        "https://ui.doksam.com/r/avatar.json",
+        "https://ui.doksam.com/r/badge.json",
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/input.json",
         "https://ui.doksam.com/r/profile-scope.json",
         "https://ui.doksam.com/r/route-error.json",
-        "https://ui.doksam.com/r/route-loading.json"
+        "https://ui.doksam.com/r/route-loading.json",
+        "https://ui.doksam.com/r/separator.json"
       ]
     },
     {
@@ -1875,9 +1875,9 @@
         }
       ],
       "registryDependencies": [
-        "avatar",
-        "badge",
-        "button",
+        "https://ui.doksam.com/r/avatar.json",
+        "https://ui.doksam.com/r/badge.json",
+        "https://ui.doksam.com/r/button.json",
         "https://ui.doksam.com/r/profile-scope.json",
         "https://ui.doksam.com/r/route-error.json",
         "https://ui.doksam.com/r/route-loading.json"
@@ -1925,10 +1925,10 @@
         }
       ],
       "registryDependencies": [
-        "accordion",
-        "badge",
-        "button",
-        "card",
+        "https://ui.doksam.com/r/accordion.json",
+        "https://ui.doksam.com/r/badge.json",
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/card.json",
         "https://ui.doksam.com/r/profile-scope.json",
         "https://ui.doksam.com/r/route-error.json",
         "https://ui.doksam.com/r/route-loading.json"
@@ -1944,11 +1944,11 @@
         "@phosphor-icons/react@^2.1.10"
       ],
       "registryDependencies": [
-        "badge",
-        "tabs",
+        "https://ui.doksam.com/r/badge.json",
         "https://ui.doksam.com/r/profile-scope.json",
         "https://ui.doksam.com/r/route-error.json",
         "https://ui.doksam.com/r/route-loading.json",
+        "https://ui.doksam.com/r/tabs.json",
         "https://ui.doksam.com/r/tree-view.json"
       ],
       "files": [
@@ -2019,16 +2019,16 @@
         "@phosphor-icons/react@^2.1.10"
       ],
       "registryDependencies": [
-        "badge",
-        "card",
-        "progress",
-        "table",
-        "textarea",
+        "https://ui.doksam.com/r/badge.json",
+        "https://ui.doksam.com/r/card.json",
         "https://ui.doksam.com/r/live-indicator.json",
         "https://ui.doksam.com/r/profile-scope.json",
+        "https://ui.doksam.com/r/progress.json",
         "https://ui.doksam.com/r/route-error.json",
         "https://ui.doksam.com/r/route-loading.json",
-        "https://ui.doksam.com/r/screen-help-dialog.json"
+        "https://ui.doksam.com/r/screen-help-dialog.json",
+        "https://ui.doksam.com/r/table.json",
+        "https://ui.doksam.com/r/textarea.json"
       ],
       "files": [
         {
@@ -2125,8 +2125,8 @@
         }
       ],
       "registryDependencies": [
-        "badge",
-        "input",
+        "https://ui.doksam.com/r/badge.json",
+        "https://ui.doksam.com/r/input.json",
         "https://ui.doksam.com/r/profile-scope.json",
         "https://ui.doksam.com/r/route-error.json",
         "https://ui.doksam.com/r/route-loading.json"
@@ -2174,16 +2174,16 @@
         }
       ],
       "registryDependencies": [
-        "alert",
-        "alert-dialog",
-        "badge",
-        "button",
-        "input-otp",
-        "separator",
-        "spinner",
+        "https://ui.doksam.com/r/alert-dialog.json",
+        "https://ui.doksam.com/r/alert.json",
+        "https://ui.doksam.com/r/badge.json",
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/input-otp.json",
         "https://ui.doksam.com/r/profile-scope.json",
         "https://ui.doksam.com/r/route-error.json",
-        "https://ui.doksam.com/r/route-loading.json"
+        "https://ui.doksam.com/r/route-loading.json",
+        "https://ui.doksam.com/r/separator.json",
+        "https://ui.doksam.com/r/spinner.json"
       ]
     },
     {
@@ -2285,7 +2285,7 @@
         "@phosphor-icons/react@^2.1.10"
       ],
       "registryDependencies": [
-        "button"
+        "https://ui.doksam.com/r/button.json"
       ],
       "files": [
         {
@@ -2302,7 +2302,7 @@
       "description": "Next App Router 의 loading.tsx 가 그대로 쓰는 스켈레톤 화면. 라우트 전환 중 레이아웃이 튀지 않도록 높이를 잡아 둔다.",
       "dependencies": [],
       "registryDependencies": [
-        "skeleton"
+        "https://ui.doksam.com/r/skeleton.json"
       ],
       "files": [
         {
@@ -2381,8 +2381,8 @@
         "@phosphor-icons/react@^2.1.10"
       ],
       "registryDependencies": [
-        "badge",
-        "table"
+        "https://ui.doksam.com/r/badge.json",
+        "https://ui.doksam.com/r/table.json"
       ],
       "files": [
         {
@@ -2405,14 +2405,1046 @@
         "@phosphor-icons/react@^2.1.10"
       ],
       "registryDependencies": [
-        "button",
-        "input",
-        "pagination"
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/input.json",
+        "https://ui.doksam.com/r/pagination.json"
       ],
       "files": [
         {
           "path": "components/patterns/list-controls/list-controls-demo.tsx",
           "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "accordion",
+      "type": "registry:ui",
+      "title": "Accordion",
+      "description": "Accordion 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "lucide-react@^1.24.0",
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "components/ui/accordion.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "alert",
+      "type": "registry:ui",
+      "title": "Alert",
+      "description": "Alert 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1"
+      ],
+      "files": [
+        {
+          "path": "components/ui/alert.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "alert-dialog",
+      "type": "registry:ui",
+      "title": "Alert Dialog",
+      "description": "Alert Dialog 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "components/ui/alert-dialog.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/button.json"
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "aspect-ratio",
+      "type": "registry:ui",
+      "title": "Aspect Ratio",
+      "description": "Aspect Ratio 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "components/ui/aspect-ratio.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "attachment",
+      "type": "registry:ui",
+      "title": "Attachment",
+      "description": "Attachment 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "components/ui/attachment.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/button.json"
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "avatar",
+      "type": "registry:ui",
+      "title": "Avatar",
+      "description": "Avatar 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "components/ui/avatar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "badge",
+      "type": "registry:ui",
+      "title": "Badge",
+      "description": "Badge 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "components/ui/badge.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "breadcrumb",
+      "type": "registry:ui",
+      "title": "Breadcrumb",
+      "description": "Breadcrumb 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "lucide-react@^1.24.0",
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "components/ui/breadcrumb.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "bubble",
+      "type": "registry:ui",
+      "title": "Bubble",
+      "description": "Bubble 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "components/ui/bubble.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "Button 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "components/ui/button.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "button-group",
+      "type": "registry:ui",
+      "title": "Button Group",
+      "description": "Button Group 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "components/ui/button-group.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/separator.json"
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "calendar",
+      "type": "registry:ui",
+      "title": "Calendar",
+      "description": "Calendar 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "lucide-react@^1.24.0",
+        "react-day-picker@^10.0.1"
+      ],
+      "files": [
+        {
+          "path": "components/ui/calendar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/button.json"
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "card",
+      "type": "registry:ui",
+      "title": "Card",
+      "description": "Card 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "files": [
+        {
+          "path": "components/ui/card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "carousel",
+      "type": "registry:ui",
+      "title": "Carousel",
+      "description": "Carousel 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "embla-carousel-react@^8.6.0",
+        "lucide-react@^1.24.0"
+      ],
+      "files": [
+        {
+          "path": "components/ui/carousel.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/button.json"
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "chart",
+      "type": "registry:ui",
+      "title": "Chart",
+      "description": "Chart 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "recharts@3.8.0"
+      ],
+      "files": [
+        {
+          "path": "components/ui/chart.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "checkbox",
+      "type": "registry:ui",
+      "title": "Checkbox",
+      "description": "Checkbox 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — 상류 레지스트리 원문과는 semanticTokenSwap 가 다르다(밀도·모서리·컨트롤 스케일 축이 이 값을 전제한다).",
+      "dependencies": [
+        "lucide-react@^1.24.0",
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "components/ui/checkbox.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "collapsible",
+      "type": "registry:ui",
+      "title": "Collapsible",
+      "description": "Collapsible 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "components/ui/collapsible.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "combobox",
+      "type": "registry:ui",
+      "title": "Combobox",
+      "description": "Combobox 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "@base-ui/react@^1.6.0",
+        "lucide-react@^1.24.0"
+      ],
+      "files": [
+        {
+          "path": "components/ui/combobox.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/input-group.json"
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "command",
+      "type": "registry:ui",
+      "title": "Command",
+      "description": "Command 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — 상류 레지스트리 원문과는 controlScale, semanticTokenSwap, addedAffordance 가 다르다(밀도·모서리·컨트롤 스케일 축이 이 값을 전제한다).",
+      "dependencies": [
+        "cmdk@^1.1.1",
+        "lucide-react@^1.24.0"
+      ],
+      "files": [
+        {
+          "path": "components/ui/command.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/dialog.json",
+        "https://ui.doksam.com/r/input-group.json"
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "context-menu",
+      "type": "registry:ui",
+      "title": "Context Menu",
+      "description": "Context Menu 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "lucide-react@^1.24.0",
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "components/ui/context-menu.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "dialog",
+      "type": "registry:ui",
+      "title": "Dialog",
+      "description": "Dialog 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "lucide-react@^1.24.0",
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "components/ui/dialog.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/button.json"
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "direction",
+      "type": "registry:ui",
+      "title": "Direction",
+      "description": "Direction 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "components/ui/direction.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "drawer",
+      "type": "registry:ui",
+      "title": "Drawer",
+      "description": "Drawer 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "vaul@^1.1.2"
+      ],
+      "files": [
+        {
+          "path": "components/ui/drawer.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "dropdown-menu",
+      "type": "registry:ui",
+      "title": "Dropdown Menu",
+      "description": "Dropdown Menu 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "lucide-react@^1.24.0",
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "components/ui/dropdown-menu.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "empty",
+      "type": "registry:ui",
+      "title": "Empty",
+      "description": "Empty 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1"
+      ],
+      "files": [
+        {
+          "path": "components/ui/empty.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "field",
+      "type": "registry:ui",
+      "title": "Field",
+      "description": "Field 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — 상류 레지스트리 원문과는 semanticTokenSwap 가 다르다(밀도·모서리·컨트롤 스케일 축이 이 값을 전제한다).",
+      "dependencies": [
+        "class-variance-authority@^0.7.1"
+      ],
+      "files": [
+        {
+          "path": "components/ui/field.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/label.json",
+        "https://ui.doksam.com/r/separator.json"
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "hover-card",
+      "type": "registry:ui",
+      "title": "Hover Card",
+      "description": "Hover Card 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "components/ui/hover-card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "Input 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "files": [
+        {
+          "path": "components/ui/input.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "input-group",
+      "type": "registry:ui",
+      "title": "Input Group",
+      "description": "Input Group 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1"
+      ],
+      "files": [
+        {
+          "path": "components/ui/input-group.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/input.json",
+        "https://ui.doksam.com/r/textarea.json"
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "input-otp",
+      "type": "registry:ui",
+      "title": "Input Otp",
+      "description": "Input Otp 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "input-otp@^1.4.2",
+        "lucide-react@^1.24.0"
+      ],
+      "files": [
+        {
+          "path": "components/ui/input-otp.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "item",
+      "type": "registry:ui",
+      "title": "Item",
+      "description": "Item 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "components/ui/item.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/separator.json"
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "kbd",
+      "type": "registry:ui",
+      "title": "Kbd",
+      "description": "Kbd 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "files": [
+        {
+          "path": "components/ui/kbd.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "label",
+      "type": "registry:ui",
+      "title": "Label",
+      "description": "Label 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "components/ui/label.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "marker",
+      "type": "registry:ui",
+      "title": "Marker",
+      "description": "Marker 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "components/ui/marker.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "menubar",
+      "type": "registry:ui",
+      "title": "Menubar",
+      "description": "Menubar 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "lucide-react@^1.24.0",
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "components/ui/menubar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "message",
+      "type": "registry:ui",
+      "title": "Message",
+      "description": "Message 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "files": [
+        {
+          "path": "components/ui/message.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "message-scroller",
+      "type": "registry:ui",
+      "title": "Message Scroller",
+      "description": "Message Scroller 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "@shadcn/react@^0.2.1",
+        "lucide-react@^1.24.0"
+      ],
+      "files": [
+        {
+          "path": "components/ui/message-scroller.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/button.json"
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "native-select",
+      "type": "registry:ui",
+      "title": "Native Select",
+      "description": "Native Select 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "lucide-react@^1.24.0"
+      ],
+      "files": [
+        {
+          "path": "components/ui/native-select.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "navigation-menu",
+      "type": "registry:ui",
+      "title": "Navigation Menu",
+      "description": "Navigation Menu 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "lucide-react@^1.24.0",
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "components/ui/navigation-menu.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "pagination",
+      "type": "registry:ui",
+      "title": "Pagination",
+      "description": "Pagination 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "lucide-react@^1.24.0"
+      ],
+      "files": [
+        {
+          "path": "components/ui/pagination.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/button.json"
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "popover",
+      "type": "registry:ui",
+      "title": "Popover",
+      "description": "Popover 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "components/ui/popover.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "progress",
+      "type": "registry:ui",
+      "title": "Progress",
+      "description": "Progress 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "components/ui/progress.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "radio-group",
+      "type": "registry:ui",
+      "title": "Radio Group",
+      "description": "Radio Group 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — 상류 레지스트리 원문과는 semanticTokenSwap 가 다르다(밀도·모서리·컨트롤 스케일 축이 이 값을 전제한다).",
+      "dependencies": [
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "components/ui/radio-group.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "resizable",
+      "type": "registry:ui",
+      "title": "Resizable",
+      "description": "Resizable 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "react-resizable-panels@^4.12.1"
+      ],
+      "files": [
+        {
+          "path": "components/ui/resizable.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "scroll-area",
+      "type": "registry:ui",
+      "title": "Scroll Area",
+      "description": "Scroll Area 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "components/ui/scroll-area.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "select",
+      "type": "registry:ui",
+      "title": "Select",
+      "description": "Select 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "lucide-react@^1.24.0",
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "components/ui/select.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "separator",
+      "type": "registry:ui",
+      "title": "Separator",
+      "description": "Separator 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "components/ui/separator.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "sheet",
+      "type": "registry:ui",
+      "title": "Sheet",
+      "description": "Sheet 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "lucide-react@^1.24.0",
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "components/ui/sheet.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/button.json"
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "sidebar",
+      "type": "registry:ui",
+      "title": "Sidebar",
+      "description": "Sidebar 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "lucide-react@^1.24.0",
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "components/ui/sidebar.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "hooks/use-mobile.ts",
+          "type": "registry:hook"
+        }
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/input.json",
+        "https://ui.doksam.com/r/separator.json",
+        "https://ui.doksam.com/r/sheet.json",
+        "https://ui.doksam.com/r/skeleton.json",
+        "https://ui.doksam.com/r/tooltip.json"
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "skeleton",
+      "type": "registry:ui",
+      "title": "Skeleton",
+      "description": "Skeleton 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "files": [
+        {
+          "path": "components/ui/skeleton.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "slider",
+      "type": "registry:ui",
+      "title": "Slider",
+      "description": "Slider 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "components/ui/slider.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "sonner",
+      "type": "registry:ui",
+      "title": "Sonner",
+      "description": "Sonner 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "lucide-react@^1.24.0",
+        "next-themes@^0.4.6",
+        "sonner@^2.0.7"
+      ],
+      "files": [
+        {
+          "path": "components/ui/sonner.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "spinner",
+      "type": "registry:ui",
+      "title": "Spinner",
+      "description": "Spinner 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "lucide-react@^1.24.0"
+      ],
+      "files": [
+        {
+          "path": "components/ui/spinner.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "switch",
+      "type": "registry:ui",
+      "title": "Switch",
+      "description": "Switch 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "components/ui/switch.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "table",
+      "type": "registry:ui",
+      "title": "Table",
+      "description": "Table 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "files": [
+        {
+          "path": "components/ui/table.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "tabs",
+      "type": "registry:ui",
+      "title": "Tabs",
+      "description": "Tabs 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "components/ui/tabs.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "textarea",
+      "type": "registry:ui",
+      "title": "Textarea",
+      "description": "Textarea 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "files": [
+        {
+          "path": "components/ui/textarea.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "toggle",
+      "type": "registry:ui",
+      "title": "Toggle",
+      "description": "Toggle 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "components/ui/toggle.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "toggle-group",
+      "type": "registry:ui",
+      "title": "Toggle Group",
+      "description": "Toggle Group 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "components/ui/toggle-group.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/toggle.json"
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "tooltip",
+      "type": "registry:ui",
+      "title": "Tooltip",
+      "description": "Tooltip 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "dependencies": [
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "components/ui/tooltip.tsx",
+          "type": "registry:ui"
         }
       ]
     }

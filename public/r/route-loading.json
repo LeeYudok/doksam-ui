@@ -5,7 +5,7 @@
   "description": "Next App Router 의 loading.tsx 가 그대로 쓰는 스켈레톤 화면. 라우트 전환 중 레이아웃이 튀지 않도록 높이를 잡아 둔다.",
   "dependencies": [],
   "registryDependencies": [
-    "skeleton"
+    "https://ui.doksam.com/r/skeleton.json"
   ],
   "files": [
     {

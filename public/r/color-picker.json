@@ -7,9 +7,9 @@
     "@phosphor-icons/react@^2.1.10"
   ],
   "registryDependencies": [
-    "button",
-    "input",
-    "popover"
+    "https://ui.doksam.com/r/button.json",
+    "https://ui.doksam.com/r/input.json",
+    "https://ui.doksam.com/r/popover.json"
   ],
   "files": [
     {

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "direction",
+  "title": "Direction",
+  "description": "Direction 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+  "dependencies": [
+    "radix-ui@^1.6.7"
+  ],
+  "files": [
+    {
+      "path": "components/ui/direction.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Direction } from \"radix-ui\"\n\nfunction DirectionProvider({\n  dir,\n  direction,\n  children,\n}: React.ComponentProps<typeof Direction.DirectionProvider> & {\n  direction?: React.ComponentProps<typeof Direction.DirectionProvider>[\"dir\"]\n}) {\n  return (\n    <Direction.DirectionProvider dir={direction ?? dir}>\n      {children}\n    </Direction.DirectionProvider>\n  )\n}\n\nconst useDirection = Direction.useDirection\n\nexport { DirectionProvider, useDirection }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

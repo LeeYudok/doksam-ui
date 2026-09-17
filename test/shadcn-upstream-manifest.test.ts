@@ -28,6 +28,7 @@ interface Manifest {
     { upstream: string | null; localHash: string; customized?: boolean; groups?: string[]; note: string }
   >;
   houseStyle: Record<string, { what: string; why: string; examples: string[] }>;
+  installDiff?: { measuredAt: string; how: string; meaning?: string; files: Record<string, string> };
 }
 
 const manifest = JSON.parse(readFileSync(MANIFEST_PATH, "utf8")) as Manifest;
@@ -52,7 +53,26 @@ describe("shadcn 상류 매니페스트", () => {
     }
   });
 
-  it("기준 스타일과 점검일이 기록돼 있다", () => {
+  /**
+   * 기준 스타일이 components.json 과 다르면 이 게이트는 **다른 스타일의 파일과 대조**한다.
+   * 실제로 new-york-v4 로 대조하던 동안 60개 중 52개가 "커스터마이즈" 로 잡혔지만,
+   * 같은 프리셋으로 설치해 보면 다른 것은 6개뿐이었다 (#57).
+   */
+  it("기준 스타일이 components.json 의 style 과 같다", () => {
+    const components = JSON.parse(readFileSync(path.join(REPO_ROOT, "components.json"), "utf8")) as { style: string };
+    expect(manifest.style).toBe(components.style);
+  });
+
+  it("실제 설치본과의 차이가 측정돼 기록돼 있다 — 원문 해시 비교만으로는 CLI 치환과 구분되지 않는다", () => {
+    expect(manifest.installDiff?.measuredAt, "installDiff.measuredAt 이 없다").toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    expect(manifest.installDiff?.how?.length ?? 0).toBeGreaterThan(0);
+    for (const [file, why] of Object.entries(manifest.installDiff?.files ?? {})) {
+      expect(manifest.components[file], `installDiff 의 ${file} 이 실재하지 않는다`).toBeDefined();
+      expect(why.length, `${file} 의 사유가 비었다`).toBeGreaterThan(0);
+    }
+  });
+
+  it("점검일이 기록돼 있다", () => {
     expect(manifest.style.length).toBeGreaterThan(0);
     expect(manifest.checkedAt, "점검일이 없다 — 언제 기준인지 모르면 드리프트 판정이 무의미하다").toMatch(
       /^\d{4}-\d{2}-\d{2}$/,

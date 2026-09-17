@@ -11,9 +11,9 @@
     "@phosphor-icons/react@^2.1.10"
   ],
   "registryDependencies": [
-    "button",
-    "dropdown-menu",
-    "table"
+    "https://ui.doksam.com/r/button.json",
+    "https://ui.doksam.com/r/dropdown-menu.json",
+    "https://ui.doksam.com/r/table.json"
   ],
   "files": [
     {

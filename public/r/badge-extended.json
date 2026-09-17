@@ -7,7 +7,7 @@
     "class-variance-authority@^0.7.1"
   ],
   "registryDependencies": [
-    "badge"
+    "https://ui.doksam.com/r/badge.json"
   ],
   "files": [
     {

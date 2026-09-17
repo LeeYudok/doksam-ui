@@ -25,7 +25,18 @@ import { fileURLToPath } from "node:url";
 const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const UI_DIR = join(ROOT, "components", "ui");
 const MANIFEST_PATH = join(ROOT, "components", "ui", "upstream.manifest.json");
-const STYLE = process.env.SHADCN_STYLE || "new-york-v4";
+/**
+ * 기준 스타일은 **이 레포의 components.json** 에서 읽는다 (#57).
+ *
+ * 예전에는 "new-york-v4" 가 박혀 있었다. 이 레포의 style 은 radix-nova 이므로 그동안
+ * 이 게이트는 **다른 스타일의 파일과 대조**해 왔다 — 60개 중 52개가 "커스터마이즈" 로
+ * 잡힌 것은 하우스 스타일이 아니라 스타일이 달라서였다. 빈 프로젝트에 실제로 설치해
+ * 대조한 결과(#57), 상류 radix-nova 설치본과 의미 있게 다른 것은 6개뿐이다.
+ */
+const STYLE =
+  process.env.SHADCN_STYLE ||
+  JSON.parse(readFileSync(join(ROOT, "components.json"), "utf8")).style ||
+  "new-york-v4";
 const BASE = `https://ui.shadcn.com/r/styles/${STYLE}`;
 /** 상류 레지스트리 연속 조회 간격 — 60개를 한 번에 때리지 않는다. */
 const FETCH_DELAY_MS = Number(process.env.SHADCN_FETCH_DELAY_MS ?? 150);

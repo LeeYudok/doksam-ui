@@ -7,7 +7,7 @@
     "@phosphor-icons/react@^2.1.10"
   ],
   "registryDependencies": [
-    "input-group"
+    "https://ui.doksam.com/r/input-group.json"
   ],
   "files": [
     {

@@ -4,7 +4,7 @@
   "title": "Region Map",
   "description": "한국 시/도 분포 지도 — 지리 지도(hover 3D 돌출·리치 툴팁) ↔ 타일 카토그램 토글. 색은 primary 토큰에서 파생되어 테마 프리셋에 자동 대응한다.",
   "registryDependencies": [
-    "button"
+    "https://ui.doksam.com/r/button.json"
   ],
   "files": [
     {
