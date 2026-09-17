@@ -19,6 +19,10 @@
 /blob-report/
 /playwright/.cache/
 
+# 이슈 #39 — smoke.spec.ts 가 순회할 라우트 스냅샷. `pnpm test:e2e` 실행 전
+# scripts/e2e/generate-smoke-routes.mjs 가 매번 새로 생성한다(레지스트리 파생).
+/e2e/.routes.generated.json
+
 # next.js
 /.next/
 /out/

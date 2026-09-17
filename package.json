@@ -21,7 +21,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "test:e2e": "playwright test",
+    "test:e2e": "node --experimental-strip-types scripts/e2e/generate-smoke-routes.mjs && playwright test",
     "test:vision": "node scripts/vision-gate/run.mjs",
     "registry:build": "shadcn build",
     "gen:llms": "node scripts/gen-llms.mjs",
