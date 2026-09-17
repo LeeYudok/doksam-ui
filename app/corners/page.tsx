@@ -4,54 +4,57 @@ import { TranslatedText } from "@/components/showcase/translated-text"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { CORNER_PRESETS, type CornerPreset } from "@/corners"
 import { BRAND_PROFILES } from "@/profiles"
-import { PERSONALITY_PRESETS, personalityAttrs, type PersonalityPreset } from "@/personalities"
 
-/** 이 성격을 쓰는 브랜드 프로필 이름들. */
+/** 이 모서리 계열을 쓰는 브랜드 프로필 이름들. */
 function profilesFor(name: string): string[] {
-  return BRAND_PROFILES.filter((profile) => profile.personality === name).map((profile) => profile.label)
+  return BRAND_PROFILES.filter((profile) => profile.corner === name).map((profile) => profile.label)
 }
 
 /**
- * /personalities — 시각 성격(personality) 카탈로그(#37 RC1).
- * 원형이 뼈대를, 프로필이 색·폰트를 고정한다면, 성격은 타입/스페이싱 스케일 ·
- * 표면(surface) 성향 · 모션 강도라는 "어떤 느낌으로"를 고정한다. 설명 텍스트
- * 나열이 아니라 각 카드 안의 미니어처를 personalityAttrs() 로 스코프해 실제
- * 렌더 차이(테두리/그림자/평면 표면, 타입 스케일, 모션)를 눈으로 비교한다.
+ * /corners — 모서리(corner) 계열 카탈로그(#43).
+ * 원형이 뼈대를, 프로필이 색·폰트를 고정한다면, 모서리 계열은 표면(카드·팝오버)과
+ * 컨트롤(버튼·입력)의 반경 — "얼마나 각졌는가" — 를 고정한다. 설명 텍스트 나열이
+ * 아니라 각 카드 안의 미니어처에 data-corner 를 스코프해 실제 렌더 차이를 비교한다.
+ * (app/globals.css 의 모서리 토큰 층은 별도 작업으로 구현 중이라, 이 페이지는
+ * 마크업과 data-corner 속성만 올바르게 걸어 둔다 — 그 층이 붙기 전까지는 네 계열
+ * 미니어처가 시각적으로 동일해 보이는 것이 정상이다.)
  */
-export default function PersonalitiesPage() {
+export default function CornersPage() {
   return (
     <div className="flex flex-col gap-10">
       <section className="flex flex-col gap-3">
         <Badge variant="secondary" className="w-fit">
-          Personalities
+          Corners
         </Badge>
         <h1 className="text-2xl font-semibold tracking-tight">
-          <TranslatedText k="page.personalities.title" ko="시각 성격" />
+          <TranslatedText k="page.corners.title" ko="모서리 계열" />
         </h1>
         <p className="max-w-prose text-sm leading-relaxed text-muted-foreground">
           <TranslatedText
-            k="page.personalities.description"
-            ko="원형이 뼈대를, 프로필이 색과 폰트를 고정한다면, 성격은 타입·스페이싱 스케일과 표면 성향, 모션 강도 — 어떤 느낌으로 보이는가 — 를 고정합니다. 프로필마다 personality 를 개별로 고르지 않고 아래 {count}종 중 하나를 참조합니다."
-            params={{ count: PERSONALITY_PRESETS.length }}
+            k="page.corners.description"
+            ko="원형이 뼈대를, 프로필이 색과 폰트를 고정한다면, 모서리 계열은 표면(카드·팝오버)과 컨트롤(버튼·입력)의 반경 — 얼마나 각졌는가 — 를 고정합니다. 프로젝트마다 radius 를 자유 문자열로 고르지 않고 아래 {count}종 중 하나를 명시적으로 고릅니다."
+            params={{ count: CORNER_PRESETS.length }}
           />
         </p>
       </section>
 
       <div className="grid gap-4 lg:grid-cols-2">
-        {PERSONALITY_PRESETS.map((preset) => (
-          <PersonalityCard key={preset.name} preset={preset} />
+        {CORNER_PRESETS.map((preset) => (
+          <CornerCard key={preset.name} preset={preset} />
         ))}
       </div>
 
       <section className="flex flex-col gap-2 rounded-lg border border-border bg-muted/40 p-4 text-sm text-muted-foreground">
         <p className="font-medium text-foreground">
-          <TranslatedText k="page.personalities.howto-title" ko="고르는 순서" />
+          <TranslatedText k="page.corners.howto-title" ko="고르는 순서" />
         </p>
         <p className="max-w-prose leading-relaxed">
           <TranslatedText
-            k="page.personalities.howto-description"
-            ko="먼저 원형으로 뼈대를, 프로필로 색과 폰트를 정한 다음, 화면이 줘야 할 인상으로 성격을 고릅니다. 세 축은 독립이며, 성격 값은 프로필이 참조하는 personalities/index.ts 프리셋이 고정합니다 — 프로젝트에서 scale/surface/motion 을 개별로 재정의하지 않습니다."
+            k="page.corners.howto-description"
+            ko="먼저 원형과 프로필로 뼈대와 색을 정한 다음, 화면이 줘야 할 인상으로 모서리 계열을 고릅니다. 모서리 값은 프로필이 참조하는 corners/index.ts 프리셋이 고정합니다 — 프로젝트에서 radius 를 개별 문자열로 재정의하지 않습니다."
           />
         </p>
       </section>
@@ -59,7 +62,7 @@ export default function PersonalitiesPage() {
   )
 }
 
-function PersonalityCard({ preset }: Readonly<{ preset: PersonalityPreset }>) {
+function CornerCard({ preset }: Readonly<{ preset: CornerPreset }>) {
   const profiles = profilesFor(preset.name)
 
   return (
@@ -70,14 +73,14 @@ function PersonalityCard({ preset }: Readonly<{ preset: PersonalityPreset }>) {
           <code className="ml-auto font-mono text-[11px] text-muted-foreground">{preset.name}</code>
         </div>
         <CardDescription>
-          <TranslatedText k={`personality.${preset.name}.description`} ko={preset.description} />
+          <TranslatedText k={`corner.${preset.name}.description`} ko={preset.description} />
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-1 flex-col gap-4">
         <dl className="flex flex-col gap-2 text-xs">
           <div className="flex flex-col gap-1">
             <dt className="text-muted-foreground">
-              <TranslatedText k="page.personalities.meta.suited" ko="적합한 화면" />
+              <TranslatedText k="page.corners.meta.suited" ko="적합한 화면" />
             </dt>
             <dd className="flex flex-wrap gap-1">
               {preset.suitedFor.map((item, i) => (
@@ -86,49 +89,49 @@ function PersonalityCard({ preset }: Readonly<{ preset: PersonalityPreset }>) {
                   variant="outline"
                   className="h-auto max-w-full py-1 text-left text-[11px] font-normal whitespace-normal break-keep"
                 >
-                  <TranslatedText k={`personality.${preset.name}.suited.${i}`} ko={item} />
+                  <TranslatedText k={`corner.${preset.name}.suited.${i}`} ko={item} />
                 </Badge>
               ))}
             </dd>
           </div>
           <div className="flex flex-wrap items-center gap-2">
             <dt className="text-muted-foreground">
-              <TranslatedText k="page.personalities.meta.tokens" ko="토큰" />
+              <TranslatedText k="page.corners.meta.tokens" ko="토큰" />
             </dt>
             <dd className="flex flex-wrap gap-1.5">
-              <code className="rounded bg-muted px-1.5 py-0.5 text-[11px] text-foreground">scale={preset.scale}</code>
               <code className="rounded bg-muted px-1.5 py-0.5 text-[11px] text-foreground">
                 surface={preset.surface}
               </code>
               <code className="rounded bg-muted px-1.5 py-0.5 text-[11px] text-foreground">
-                motion={preset.motion}
+                control={preset.control}
               </code>
             </dd>
           </div>
           {profiles.length > 0 ? (
             <div className="flex flex-wrap items-center gap-2">
               <dt className="text-muted-foreground">
-                <TranslatedText k="page.personalities.meta.profiles" ko="이 성격을 쓰는 프로필" />
+                <TranslatedText k="page.corners.meta.profiles" ko="이 계열을 쓰는 프로필" />
               </dt>
               <dd className="text-foreground">{profiles.join(" · ")}</dd>
             </div>
           ) : null}
         </dl>
 
-        {/* 실측 미니어처 — personalityAttrs() 로 이 블록에만 scale/surface/motion
-            을 스코프한다. 텍스트 설명이 아니라 렌더 결과로 차이를 보여준다. */}
+        {/* 실측 미니어처 — data-corner 를 이 블록에만 스코프한다. app/globals.css 의
+            모서리 토큰 층이 붙으면 이 안의 카드·버튼·입력 반경이 계열별로 갈린다.
+            아직 그 층이 없어 지금은 네 계열이 동일하게 보인다(정상). */}
         <div
-          {...personalityAttrs(preset)}
+          data-corner={preset.name}
           className="flex flex-col gap-2 rounded-md border border-border bg-muted/30 p-3"
         >
           <p className="text-[10px] text-muted-foreground">
-            <TranslatedText k="page.personalities.meta.preview" ko="미리보기" />
+            <TranslatedText k="page.corners.meta.preview" ko="미리보기" />
           </p>
-          <div data-slot="card" className="rounded-md border border-border bg-card p-3">
+          <div data-slot="card" className="flex flex-col gap-2 rounded-md border border-border bg-card p-3">
             <p className="text-sm font-semibold text-card-foreground">doksam-ui</p>
-            <p className="text-xs text-muted-foreground">scale · surface · motion</p>
-            <Button size="sm" className="mt-2 w-fit">
-              <TranslatedText k="page.personalities.meta.preview-action" ko="확인" />
+            <Input placeholder="input" className="h-8 text-xs" readOnly />
+            <Button size="sm" className="w-fit">
+              <TranslatedText k="page.corners.meta.preview-action" ko="확인" />
             </Button>
           </div>
         </div>
@@ -136,14 +139,14 @@ function PersonalityCard({ preset }: Readonly<{ preset: PersonalityPreset }>) {
         <div className="mt-auto flex flex-col gap-1.5 rounded-md border border-border bg-muted/40 px-3 py-2">
           <p className="flex items-center gap-1.5 text-xs font-medium text-foreground">
             <ProhibitIcon size={13} className="text-destructive" aria-hidden />
-            <TranslatedText k="page.personalities.meta.avoid" ko="이럴 때는 쓰지 않는다" />
+            <TranslatedText k="page.corners.meta.avoid" ko="이럴 때는 쓰지 않는다" />
           </p>
           <ul className="flex flex-col gap-0.5 text-xs text-muted-foreground">
             {preset.avoidWhen.map((item, i) => (
               <li key={item} className="flex gap-1.5">
                 <span aria-hidden="true">·</span>
                 <span>
-                  <TranslatedText k={`personality.${preset.name}.avoid.${i}`} ko={item} />
+                  <TranslatedText k={`corner.${preset.name}.avoid.${i}`} ko={item} />
                 </span>
               </li>
             ))}

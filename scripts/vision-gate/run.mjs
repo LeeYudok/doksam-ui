@@ -32,6 +32,7 @@ import {
   summarizeDiversity,
   validatePages,
 } from "./diversity.mjs";
+import { COMPONENT_AXES, scoreComponentPage, summarizeComponentRun } from "./component.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -63,6 +64,11 @@ function buildRubricText(page) {
     (c, i) => `${i + 1}. [${c.id}] ${c.label} — ${c.description}`,
   ).join("\n");
   const archetypeLines = DIVERSITY_ARCHETYPES.map((a) => `- ${a.id}: ${a.description}`).join("\n");
+  const componentAxisLines = COMPONENT_AXES.map(
+    (axis) =>
+      `- ${axis.key} (respond in "${axis.field}"):\n` +
+      axis.ids.map((id) => `    - ${id}: ${axis.descriptions[id]}`).join("\n"),
+  ).join("\n");
 
   return `You are a visual QA reviewer for a UI design system screenshot.
 
@@ -87,6 +93,15 @@ ${archetypeLines}
 This skeleton classification feeds a separate "diversity" check — it is not
 part of the pass/warn/fail verdict above, so classify honestly even if the
 skeleton doesn't match what the page is "supposed" to look like.
+
+Also classify these 4 COMPONENT-level visual impressions, judging shape only
+(ignore color and copy) — how buttons/inputs/cards/table rows and headings
+actually look, not what the page is about:
+${componentAxisLines}
+
+These component classifications feed a separate "component diversity" check,
+also not part of the pass/warn/fail verdict — classify honestly even if it
+doesn't match what the page is "supposed" to look like.
 
 Respond only via the structured output schema — do not add prose outside it.
 For "issues", list short, specific, evidence-based findings (empty array if
@@ -115,10 +130,24 @@ const RESPONSE_SCHEMA = {
       enum: DIVERSITY_ARCHETYPES.map((a) => a.id),
       description: "Navigation + layout skeleton archetype this screenshot most closely matches.",
     },
+    ...Object.fromEntries(
+      COMPONENT_AXES.map((axis) => [
+        axis.field,
+        {
+          type: "string",
+          enum: axis.ids,
+          description: `Component-level ${axis.key} impression this screenshot most closely matches (shape only, ignore color/copy).`,
+        },
+      ]),
+    ),
   },
-  required: ["page", "verdict", "issues", "skeleton"],
+  required: ["page", "verdict", "issues", "skeleton", ...COMPONENT_AXES.map((a) => a.field)],
   additionalProperties: false,
 };
+
+/** Fallback component-impression fields (all null) for error/refusal/dry-run
+ *  responses, where the vision model never actually classified the screenshot. */
+const NULL_COMPONENT_FIELDS = Object.fromEntries(COMPONENT_AXES.map((axis) => [axis.field, null]));
 
 async function screenshotPage(browser, page) {
   const context = await browser.newContext({
@@ -177,6 +206,7 @@ async function gradeScreenshot(anthropic, page, buffer) {
       verdict: "fail",
       issues: [{ criterion: "api", detail: "Vision API refused to grade this screenshot." }],
       skeleton: null,
+      ...NULL_COMPONENT_FIELDS,
     };
   }
 
@@ -187,6 +217,7 @@ async function gradeScreenshot(anthropic, page, buffer) {
       verdict: "fail",
       issues: [{ criterion: "api", detail: "No text content in vision API response." }],
       skeleton: null,
+      ...NULL_COMPONENT_FIELDS,
     };
   }
 
@@ -199,6 +230,7 @@ async function gradeScreenshot(anthropic, page, buffer) {
       verdict: "fail",
       issues: [{ criterion: "api", detail: `Could not parse structured output: ${textBlock.text.slice(0, 200)}` }],
       skeleton: null,
+      ...NULL_COMPONENT_FIELDS,
     };
   }
 }
@@ -247,10 +279,12 @@ async function main() {
           verdict: "skipped",
           issues: [],
           skeleton: null,
+          ...NULL_COMPONENT_FIELDS,
           url,
           consoleErrors,
           dryRun: true,
           diversity: dryRunDiversity,
+          component: scoreComponentPage(page, {}),
         });
         continue;
       }
@@ -270,7 +304,13 @@ async function main() {
         }
       }
 
-      results.push({ ...graded, url, consoleErrors, diversity });
+      const component = scoreComponentPage(page, graded);
+      const componentFaults = Object.values(component.axes).filter((a) => a.mismatch);
+      if (componentFaults.length > 0) {
+        console.log(`    component pipeline fault(s): ${componentFaults.length}`);
+      }
+
+      results.push({ ...graded, url, consoleErrors, diversity, component });
     } catch (err) {
       console.log(`ERROR: ${err.message}`);
       results.push({
@@ -278,7 +318,9 @@ async function main() {
         verdict: "fail",
         issues: [{ criterion: "runner", detail: String(err.message || err) }],
         skeleton: null,
+        ...NULL_COMPONENT_FIELDS,
         diversity: scoreDiversity(page, null, { cliArchetype: CLI_ARCHETYPE }),
+        component: scoreComponentPage(page, {}),
       });
     }
   }
@@ -294,6 +336,14 @@ async function main() {
   // process.exitCode below, same as a rubric `fail`.
   const diversitySummary = summarizeDiversity(results.map((r) => r.diversity).filter(Boolean));
 
+  // Component-level (issue #43) run summary — deliberately a SEPARATE object
+  // from diversitySummary above. It answers a different question ("do
+  // buttons/cards/headings look the same across screens, and does what
+  // renders match what each page's declared profile promised") that the
+  // skeleton summary structurally cannot answer — a run can vary its page
+  // skeletons while every component still renders identically, or vice versa.
+  const componentSummary = summarizeComponentRun(results.map((r) => r.component).filter(Boolean));
+
   const summary = {
     baseUrl: VISION_BASE_URL,
     model: MODEL_ID,
@@ -301,6 +351,7 @@ async function main() {
     generatedAt: new Date().toISOString(),
     results,
     diversitySummary,
+    componentSummary,
   };
   await writeFile(REPORT_PATH, JSON.stringify(summary, null, 2));
 
@@ -344,6 +395,39 @@ async function main() {
         `${diversitySummary.distinctRatio.toFixed(2)} is below ${DISTINCT_RATIO_FAIL_THRESHOLD.toFixed(2)} — ` +
         "screens are converging onto the same skeleton regardless of what each page declared.",
     );
+    process.exitCode = 1;
+  }
+
+  console.log("\nComponent axes (run-level, issue #43):");
+  for (const [key, axis] of Object.entries(componentSummary.axes)) {
+    console.log(
+      `  ${axis.label} (${key}): ${axis.distinctValues} distinct value(s) across ${axis.sampledPages} page(s) ` +
+        `(distinctRatio ${axis.distinctRatio.toFixed(2)}), mode "${axis.modeValue}" at ` +
+        `${(axis.modeShare * 100).toFixed(0)}% share${axis.converged ? " — CONVERGED" : ""}`,
+    );
+  }
+
+  if (componentSummary.runConverged) {
+    const convergedAxes = Object.entries(componentSummary.axes)
+      .filter(([, a]) => a.converged)
+      .map(([key]) => key);
+    console.error(
+      `\nFAIL — run-level component convergence on: ${convergedAxes.join(", ")} — ` +
+        "every screen renders the same button/card/heading impression on this axis regardless of skeleton diversity.",
+    );
+    process.exitCode = 1;
+  }
+
+  if (componentSummary.pipelineFaults.length > 0) {
+    console.error(
+      `\nFAIL — component pipeline fidelity: ${componentSummary.pipelineFaults.length} page(s) render a different ` +
+        "impression than their declared profile promises (the axis was declared but never reached the render):",
+    );
+    for (const fault of componentSummary.pipelineFaults) {
+      console.error(
+        `  - ${fault.page} (profile "${fault.profile}"): ${fault.axis} expected "${fault.expected}", detected "${fault.detected}"`,
+      );
+    }
     process.exitCode = 1;
   }
 }

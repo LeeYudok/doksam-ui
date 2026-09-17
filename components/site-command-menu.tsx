@@ -13,8 +13,10 @@ import {
   PaletteIcon,
   ShapesIcon,
   SparkleIcon,
+  SquareIcon,
   SquaresFourIcon,
   StackIcon,
+  TextAaIcon,
 } from "@phosphor-icons/react/dist/ssr";
 
 import { useI18n } from "@/components/i18n-provider";
@@ -36,6 +38,8 @@ const PAGES = [
   { href: "/profiles", label: "Profiles", icon: IdentificationBadgeIcon },
   { href: "/archetypes", label: "Archetypes", icon: NavigationArrowIcon },
   { href: "/personalities", label: "Personalities", icon: SparkleIcon },
+  { href: "/corners", label: "Corners", icon: SquareIcon },
+  { href: "/type-contrast", label: "Type Contrast", icon: TextAaIcon },
   { href: "/tokens", label: "Tokens", icon: PaletteIcon },
   { href: "/icons", label: "Icons", icon: ShapesIcon },
   { href: "/components", label: "Components", icon: CubeIcon },

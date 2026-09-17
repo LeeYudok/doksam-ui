@@ -10,8 +10,10 @@ import {
   PaletteIcon,
   ShapesIcon,
   SparkleIcon,
+  SquareIcon,
   SquaresFourIcon,
   StackIcon,
+  TextAaIcon,
 } from "@phosphor-icons/react/dist/ssr";
 
 import { useI18n } from "@/components/i18n-provider";
@@ -44,6 +46,18 @@ const SECTIONS: SectionCard[] = [
     title: "Personalities",
     description: "타입/스페이싱 스케일 · 표면 · 모션 강도를 고정하는 시각 성격 프리셋 4종",
     icon: PaintBrushIcon,
+  },
+  {
+    href: "/corners",
+    title: "Corners",
+    description: "표면·컨트롤의 반경 — 얼마나 각졌는가를 고정하는 모서리 계열 4종",
+    icon: SquareIcon,
+  },
+  {
+    href: "/type-contrast",
+    title: "Type Contrast",
+    description: "제목↔본문의 크기·굵기 비례를 고정하는 타입 대비 3종",
+    icon: TextAaIcon,
   },
   {
     href: "/icons",

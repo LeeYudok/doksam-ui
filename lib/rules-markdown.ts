@@ -57,7 +57,6 @@ export const RULES_SECTIONS: RulesSection[] = [
     kind: "invariant",
     items: [
       "하드코딩 색(hex, rgb, 임의 OKLCH 값 등)을 직접 쓰지 않는다 — 항상 themes/ 의 시맨틱 토큰(bg-background, text-primary 등)만 사용한다.",
-      "radius 기본값은 6px이다. 임의의 radius 값을 새로 만들지 않는다.",
       "새 프리셋이 필요하면 themes/<name>.ts 파일을 추가하고 themes/index.ts 레지스트리에 등록한다. 기존 프리셋 파일이나 app/globals.css의 다른 프리셋 블록은 건드리지 않는다.",
       "시세 등락(이익/상승, 손실/하락)을 표시할 때는 text-red-600/text-blue-600 등을 직접 쓰지 않고 --gain/--loss 토큰(lib/finance/rate.ts의 rateColor/rateText)을 쓴다 — 한국식 관례로 이익=빨강, 손실=파랑이며 모든 프리셋에서 동일한 값을 쓴다(destructive/success/warning과 같은 방식).",
       "lightweight-charts·canvas 등 CSS를 직접 해석하지 못하는 렌더러에 색을 넘길 때는 CSS 변수/유틸리티 클래스 문자열을 그대로 주지 않고 lib/finance/normalize-color.ts의 normalizeColor(또는 readCssVar/readClassColor)로 hex 값을 해소해서 넘긴다. 프리셋·다크모드 전환 시 재해소가 필요하면 observeColorScheme로 <html>의 class/data-theme/data-font 변화를 구독한다.",
@@ -82,6 +81,18 @@ export const RULES_SECTIONS: RulesSection[] = [
       "경계 — useEffect 등 mount 이후 로직만으로 다크모드·프리셋을 적용하지 않는다: 첫 페인트가 기본값으로 그려진 뒤 바뀌는 FOUC(테마 깜빡임)가 발생한다. mount 시 useEffect는 인라인 스크립트가 이미 세팅한 <html> 상태를 React state로 동기화하는 용도로만 쓴다(hooks/use-theme-preset.ts의 mount-sync 패턴 참고).",
       "경계 — 인라인 스크립트가 읽는 localStorage 키는 lib/theme-storage.ts의 상수(THEME_PRESET_STORAGE_KEY 등)를 그대로 참조한다: 훅과 문자열이 어긋나지 않도록 값을 이원화하지 않는다. 스크립트 본문은 try/catch로 감싸 실패 시 조용히 기본값으로 폴백한다.",
       "경계 — 테마 로직은 순수 함수(우선순위 계산·값 읽기)와 IO 어댑터(document/localStorage 접근)를 분리한다: applyToDocument/readDocumentState처럼 부수효과를 별도 함수로 나눠 테스트 가능하게 유지한다.",
+    ],
+  },
+  {
+    title: "모서리 · 밀도 · 타입 대비",
+    kind: "decision",
+    items: [
+      "모서리 계열을 고른다: corners/index.ts 의 CORNER_PRESETS(sharp, soft, rounded, pill) 중 하나다 — 대부분은 프로필이 이미 고정해 뒀으니(admin=sharp, service=pill, data/console=soft, docs=rounded) 화면마다 흔들지 않는다. 각 프리셋의 suitedFor·avoidWhen 을 근거로 고른 이유를 DESIGN.md 에 남긴다.",
+      "정보 밀도를 고른다: profiles/index.ts 의 ProfileDensity 3단(compact, comfortable, spacious) 중 프로필이 고정한 값을 쓴다 — compact 는 관리·데이터 화면, comfortable 은 일반 서비스 화면, spacious 는 문서·리더 화면이 기본값이다.",
+      "타입 대비를 고른다: type-contrast/index.ts 의 TYPE_CONTRAST_PRESETS(flat, moderate, dramatic) 중 프로필이 고정한 값을 쓴다 — 제목과 본문의 비례를 이 축이 정하며, personality 의 균등 배율(html data-personality)과는 별개이므로 둘을 혼동해 이중으로 조정하지 않는다.",
+      "경계 — 세 축 모두 레지스트리 이름으로만 고른다: radius px, 굵기, 배율 등 자유 숫자를 화면 코드나 인라인 스타일에 새로 쓰지 않는다. 필요한 조합이 레지스트리에 없으면 corners/index.ts·type-contrast/index.ts·profiles/index.ts 에 프리셋을 추가하는 것이 표준 경로다 — 화면마다 값을 발명하면 #43 이전의 자유 문자열 radius 로 되돌아간다.",
+      "경계 — 프로필이 고정한 corner·radius·density·typeContrast 를 프로젝트에서 임의 재정의하지 않는다: 바꿀 필요가 생기면 doksam-ui 에 프로필을 추가/수정해서 반영한다.",
+      "경계 — 버튼 등 개별 컨트롤 하나만 밀도 기본값과 다른 크기로 만들고 싶으면 Tailwind v4 의 `!` 접미사(예: h-12!)를 쓴다 — 밀도 층의 전역 CSS 오버라이드가 일반 Tailwind 유틸리티보다 우선 적용되기 때문에 접미사 없이는 클래스를 바꿔도 반영되지 않는 것으로 보인다(구현·검증 중이므로 실제 동작이 다르면 이 항목부터 갱신한다). 컴포넌트 전체나 화면 전체의 밀도를 이 방법으로 우회하지 않는다 — 그건 이 문서 기준 새 density 프리셋을 만들 사안이다.",
     ],
   },
   {
@@ -208,7 +219,7 @@ export const RULES_SECTIONS: RulesSection[] = [
       "[ ] DESIGN.md 에 원형·성격·안 쓸 컴포넌트/패턴·이유 선언 (첫 화면 생성 전).",
       "[ ] 수렴 안티패턴 절의 항목을 화면별로 자가 점검.",
       "[ ] 브랜드 프로필 지정 (admin/service/data/docs/console 중 1 — ui.doksam.com/profiles).",
-      "[ ] 프로필이 고정한 radius·density(<html data-density>)를 프로젝트에서 임의 재정의하지 않는다 — 바꿀 필요가 생기면 doksam-ui에 프로필 추가/수정으로 반영.",
+      "[ ] 프로필이 고정한 corner·radius·density(<html data-density>)·typeContrast(<html data-type-contrast>)를 프로젝트에서 임의 재정의하지 않는다 — 바꿀 필요가 생기면 doksam-ui에 프로필 추가/수정으로 반영.",
       "[ ] 셸 구조 선택 근거를 DESIGN.md 에 기록 — 사이드바 셸을 골랐다면 ui.doksam.com/patterns/app-shell 를 준수.",
       "[ ] 하드코딩 색 0건 — 시맨틱 색상 토큰만 사용.",
       "[ ] 아이콘 표준 3종(Phosphor 기본)만, 이모지 아이콘 0건.",

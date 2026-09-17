@@ -28,6 +28,8 @@ const { DESIGN_BRIEF_SECTION, CONVERGENCE_ANTIPATTERNS_SECTION } = await import(
 // 레지스트리를 따라가지 않고도 9종 중에서 고를 수 있어야 한다. 항목 원천은 각 레지스트리.
 const { LAYOUT_ARCHETYPES } = await import("../archetypes/index.ts");
 const { PERSONALITY_PRESETS } = await import("../personalities/index.ts");
+const { CORNER_PRESETS } = await import("../corners/index.ts");
+const { TYPE_CONTRAST_PRESETS } = await import("../type-contrast/index.ts");
 
 /** markdown 표 셀 — 파이프는 표를 깨므로 이스케이프한다. */
 const cell = (text) => String(text).replaceAll("|", "\\|");
@@ -40,6 +42,41 @@ function archetypeTable() {
   for (const a of LAYOUT_ARCHETYPES) {
     rows.push(
       `| \`${a.name}\` | ${cell(a.skeleton)} | ${cell(a.suitedFor.join(" · "))} | ${cell(a.avoidWhen.join(" · "))} | ${a.templates.map((t) => `\`${t}\``).join(", ")} |`,
+    );
+  }
+  return rows;
+}
+
+/**
+ * 모서리 계열 표 (#43). "피해야 할 경우" 열은 원형·성격 표와 같은 목적이다 —
+ * 선택지만 나열하면 에이전트가 가장 안전한 기본값을 고르거나 평균을 낸다.
+ * 후보를 실제로 잘라내는 열이 있어야 축이 작동한다.
+ */
+function cornerTable() {
+  const rows = [
+    "| 모서리(name) | 표면 반경 | 컨트롤 반경 | 어울리는 곳 | 피해야 할 경우 |",
+    "| --- | --- | --- | --- | --- |",
+  ];
+  for (const c of CORNER_PRESETS) {
+    rows.push(
+      `| \`${c.name}\` | ${c.surface} | ${c.control} | ${cell(c.suitedFor.join(" · "))} | ${cell(c.avoidWhen.join(" · "))} |`,
+    );
+  }
+  return rows;
+}
+
+/**
+ * 타입 대비 표 (#43). 제목 배율은 **본문에 곱하지 않는다** — 그래서 이 축은
+ * 균등 배율인 personality scale 과 달리 비례 자체를 바꾼다.
+ */
+function typeContrastTable() {
+  const rows = [
+    "| 대비(name) | 제목 배율 | 제목 굵기 | 자간 | 어울리는 곳 | 피해야 할 경우 |",
+    "| --- | --- | --- | --- | --- | --- |",
+  ];
+  for (const t of TYPE_CONTRAST_PRESETS) {
+    rows.push(
+      `| \`${t.name}\` | ${t.headingScale}x | ${t.headingWeight} | ${t.headingTracking} | ${cell(t.suitedFor.join(" · "))} | ${cell(t.avoidWhen.join(" · "))} |`,
     );
   }
   return rows;
@@ -121,6 +158,25 @@ function main() {
   lines.push(`### 성격 레지스트리 (${PERSONALITY_PRESETS.length}종)`);
   lines.push("");
   lines.push(...personalityTable());
+  lines.push("");
+  lines.push(`### 모서리 레지스트리 (${CORNER_PRESETS.length}종)`);
+  lines.push("");
+  lines.push(
+    "DESIGN.md 의 모서리는 아래 `name` 값 중 하나여야 합니다 — 픽셀 숫자를 직접 적지 않습니다. " +
+      "표면(카드·팝오버)과 컨트롤(버튼·입력)의 반경은 같은 계열 안에서도 다를 수 있습니다.",
+  );
+  lines.push("");
+  lines.push(...cornerTable());
+  lines.push("");
+  lines.push(`### 타입 대비 레지스트리 (${TYPE_CONTRAST_PRESETS.length}종)`);
+  lines.push("");
+  lines.push(
+    "제목과 본문의 크기·굵기 격차를 정합니다. 화면이 '잡지처럼' 보이는지 '대시보드처럼' 보이는지를 " +
+      "가르는 것은 절대 크기가 아니라 이 대비입니다. 성격(personality)의 scale 은 화면 전체를 같은 " +
+      "비율로 키우는 균등 배율이라 대비를 바꾸지 못하므로, 둘을 혼동하지 않습니다.",
+  );
+  lines.push("");
+  lines.push(...typeContrastTable());
   lines.push("");
   lines.push(`## ${CONVERGENCE_ANTIPATTERNS_SECTION.title}`);
   lines.push("");

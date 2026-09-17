@@ -1,14 +1,18 @@
+import Link from "next/link";
+
 import { CopyButton } from "@/components/copy-button";
 import { TranslatedText } from "@/components/showcase/translated-text";
 import { ProfilePreviewButton } from "@/components/profile-preview-button";
 import { ProfilePreviewKit } from "@/components/profile-preview-kit";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { getCornerPreset } from "@/corners";
 import { FONT_PRESETS, getFontPreset } from "@/fonts";
 import { generateProfileCode } from "@/lib/profile-css";
 import { getPersonalityPreset } from "@/personalities";
 import { BRAND_PROFILES } from "@/profiles";
 import { THEME_PRESETS, getThemePreset } from "@/themes";
+import { getTypeContrastPreset } from "@/type-contrast";
 
 export default function ProfilesPage() {
   return (
@@ -40,6 +44,8 @@ function ProfileCard({ profile }: Readonly<{ profile: (typeof BRAND_PROFILES)[nu
   const theme = getThemePreset(profile.theme);
   const font = getFontPreset(profile.font);
   const personality = getPersonalityPreset(profile.personality);
+  const corner = getCornerPreset(profile.corner);
+  const typeContrast = getTypeContrastPreset(profile.typeContrast);
   const code = generateProfileCode(profile);
   const installCommand = `npx shadcn@latest add https://ui.doksam.com/r/profile-${profile.name}.json`;
 
@@ -77,6 +83,28 @@ function ProfileCard({ profile }: Readonly<{ profile: (typeof BRAND_PROFILES)[nu
               <TranslatedText k="page.profiles.meta.radius" ko="Radius" />
             </dt>
             <dd className="text-foreground">{profile.radius}</dd>
+          </div>
+          <div className="flex justify-between gap-2">
+            <dt>
+              <TranslatedText k="page.profiles.meta.corner" ko="모서리 계열" />
+            </dt>
+            {/* corners/index.ts CORNER_PRESETS 참조 — /corners 로 연결 (#43) */}
+            <dd className="text-foreground">
+              <Link href="/corners" className="underline underline-offset-2">
+                {corner?.label ?? profile.corner}
+              </Link>
+            </dd>
+          </div>
+          <div className="flex justify-between gap-2">
+            <dt>
+              <TranslatedText k="page.profiles.meta.type-contrast" ko="타입 대비" />
+            </dt>
+            {/* type-contrast/index.ts TYPE_CONTRAST_PRESETS 참조 — /type-contrast 로 연결 (#43) */}
+            <dd className="text-foreground">
+              <Link href="/type-contrast" className="underline underline-offset-2">
+                {typeContrast?.label ?? profile.typeContrast}
+              </Link>
+            </dd>
           </div>
           <div className="flex justify-between gap-2">
             <dt>

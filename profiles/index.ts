@@ -18,7 +18,14 @@ import type { PersonalityName } from "@/personalities";
  * 그러면 /profiles 페이지와 프로필 스위처(있다면)에 자동으로 반영된다.
  */
 /** 정보 밀도 — compact=관리·데이터 화면, comfortable=대외 화면. */
-export type ProfileDensity = "compact" | "comfortable";
+/**
+ * 정보 밀도 — #43 에서 spacious 를 추가해 3단이 됐다. 균등 배율이 아니라 높이·패딩·
+ * 폰트를 서로 다른 비율로 움직인다(app/globals.css 밀도 층 주석 참고).
+ */
+import type { CornerName } from "@/corners";
+import type { TypeContrastName } from "@/type-contrast";
+
+export type ProfileDensity = "compact" | "comfortable" | "spacious";
 
 export interface BrandProfile {
   /** 레지스트리 키 (예: "admin"). */
@@ -33,8 +40,24 @@ export interface BrandProfile {
   font: string;
   /** 이 프로필의 기본 라이트/다크 모드. */
   defaultMode: ThemeMode;
-  /** 프로필 단위 radius (px 문자열). <html style="--radius:…"> 오버라이드로 방출. */
+  /**
+   * 프로필 단위 radius (px 문자열). <html style="--radius:…"> 오버라이드로 방출.
+   *
+   * #43 이후 이 값은 `corner` 계열에서 파생된 표면 반경이다 — 손으로 적지 말고
+   * corners/index.ts 의 프리셋을 고쳐라. profiles/index.test.ts 가 둘의 일치를 강제한다.
+   */
   radius: string;
+  /**
+   * 모서리 계열 — corners/index.ts CORNER_PRESETS 의 name 참조 (#43).
+   * 자유 문자열이던 radius 를 이산 enum 으로 승격한 축이다.
+   */
+  corner: CornerName;
+  /**
+   * 타입 대비 — type-contrast/index.ts TYPE_CONTRAST_PRESETS 의 name 참조 (#43).
+   * 제목↔본문의 크기·굵기 격차를 가른다. 균등 배율인 personality scale 과 달리
+   * 비례 자체를 바꾸는 축이다.
+   */
+  typeContrast: TypeContrastName;
   /** 정보 밀도 — <html data-density> 속성 값. app/globals.css 의 밀도 토큰 층이 소비. */
   density: ProfileDensity;
   /** personalities/index.ts PERSONALITY_PRESETS 의 name 참조(#90) — 타입/스페이싱
@@ -57,7 +80,9 @@ export const BRAND_PROFILES: BrandProfile[] = [
     theme: "slate",
     font: "geist",
     defaultMode: "light",
-    radius: "6px",
+    radius: "2px",
+    corner: "sharp",
+    typeContrast: "flat",
     density: "compact",
     personality: "crisp",
     shell: "사이드바형 셸",
@@ -71,7 +96,9 @@ export const BRAND_PROFILES: BrandProfile[] = [
     theme: "ocean",
     font: "noto-sans-kr",
     defaultMode: "light",
-    radius: "10px",
+    radius: "12px",
+    corner: "pill",
+    typeContrast: "dramatic",
     density: "comfortable",
     personality: "elevated",
     shell: "헤더형 셸",
@@ -86,8 +113,10 @@ export const BRAND_PROFILES: BrandProfile[] = [
     font: "space-grotesk",
     defaultMode: "dark",
     radius: "6px",
+    corner: "soft",
+    typeContrast: "flat",
     density: "compact",
-    personality: "neutral",
+    personality: "crisp",
     shell: "사이드바형 셸",
     archetype: "dashboard-grid",
     examples: ["news.doksam.com", "srope"],
@@ -99,9 +128,11 @@ export const BRAND_PROFILES: BrandProfile[] = [
     theme: "forest",
     font: "ibm-plex-kr",
     defaultMode: "light",
-    radius: "8px",
-    density: "comfortable",
-    personality: "neutral",
+    radius: "12px",
+    corner: "rounded",
+    typeContrast: "dramatic",
+    density: "spacious",
+    personality: "statement",
     shell: "문서 리더 셸",
     archetype: "doc-reader",
     examples: ["위키·기술문서", "brain 문서 뷰"],
@@ -113,9 +144,11 @@ export const BRAND_PROFILES: BrandProfile[] = [
     theme: "ember",
     font: "geist",
     defaultMode: "dark",
-    radius: "4px",
+    radius: "2px",
+    corner: "sharp",
+    typeContrast: "moderate",
     density: "compact",
-    personality: "neutral",
+    personality: "crisp",
     shell: "사이드바형 셸",
     archetype: "sidebar-app",
     examples: ["로그 뷰어", "배치 모니터"],
