@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "message-scroller",
   "title": "Message Scroller",
-  "description": "Message Scroller 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+  "description": "Message Scroller 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다. 이 파일은 상류 shadcn 이 앞서 있다 — 상류가 data-pending-scroll:invisible 을 더했다 — 우리 쪽이 낡았다. (#61 에서 갱신한다).",
   "dependencies": [
     "@shadcn/react@^0.2.1",
     "lucide-react@^1.24.0"

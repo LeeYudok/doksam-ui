@@ -183,8 +183,6 @@ export function divergentPrimitives(): Set<string> {
   )
 }
 
-const DIVERGENT_PRIMITIVES = divergentPrimitives()
-
 /**
  * 항목 하나를 설치했을 때 소비 프로젝트에 실제로 존재하게 되는 파일 집합.
  * 자기 `files` + registryDependencies 로 이어지는 모든 항목의 `files`.
@@ -193,6 +191,7 @@ export function providedPaths(itemName: string, registry: Registry): Set<string>
   const out = new Set<string>()
   const seen = new Set<string>()
   const upstream = upstreamComponentNames()
+  const divergent = divergentPrimitives()
 
   const walk = (name: string) => {
     if (seen.has(name)) return
@@ -201,7 +200,7 @@ export function providedPaths(itemName: string, registry: Registry): Set<string>
     if (!item) {
       // 우리 레지스트리에 없는 이름 = 상류 shadcn 에서 내려오는 파일이다(#57).
       // 내용이 카탈로그와 같다고 볼 수 없으므로, 상류 원문과 같은 이름일 때만 제공으로 센다.
-      if (upstream.has(name) && !DIVERGENT_PRIMITIVES.has(name)) out.add(`components/ui/${name}.tsx`)
+      if (upstream.has(name) && !divergent.has(name)) out.add(`components/ui/${name}.tsx`)
       return
     }
     for (const f of item.files ?? []) out.add(f.path)

@@ -6,6 +6,9 @@
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,
+    // scripts/ 의 실행 스크립트는 node --experimental-strip-types 로 돌린다 —
+    // 그 로더는 확장자 없는 상대 import 를 해소하지 못한다(#57 리뷰).
+    "allowImportingTsExtensions": true,
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "bundler",

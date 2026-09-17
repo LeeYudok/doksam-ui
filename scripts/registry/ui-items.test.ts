@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest"
 
 import { divergentPrimitives, packageNameOf, providedPaths, readRegistry, registryDependencyName } from "./closure"
-import { buildUiItem, expectedUiItems, houseUiNames, isDivergent } from "./ui-items"
+import { buildUiItem, expectedUiItems, houseUiNames, isDivergent, readInstallDiff } from "./ui-items"
 
 const registry = readRegistry()
 
@@ -33,9 +33,9 @@ describe("프리미티브 배포 — 이슈 #57", () => {
       const actual = registry.items.find((i) => i.name === expected.name)
       expect(actual, `${expected.name} 항목이 없다`).toBeDefined()
       expect(
-        { ...actual, title: undefined, description: undefined },
-        `${expected.name} 항목이 파일 내용과 어긋난다 — npx tsx scripts/manual/2026-09-17_issue-57_apply-ui-items.mts`,
-      ).toEqual({ ...expected, title: undefined, description: undefined })
+        actual,
+        `${expected.name} 항목이 계산 결과와 어긋난다 — pnpm registry:sync 를 돌려라`,
+      ).toEqual(expected)
     }
   })
 
@@ -72,7 +72,27 @@ describe("프리미티브 배포 — 이슈 #57", () => {
   })
 
   it("isDivergent 가 매니페스트의 customized 를 따른다", () => {
-    expect(isDivergent("card")).toBe(true)
+    // customized 는 상류 **원문** 과의 차이다 — 설치본과의 차이(installDiff)보다 넓다.
+    expect(isDivergent("checkbox")).toBe(true)
     expect(isDivergent("button")).toBe(false)
+  })
+
+  /**
+   * 설명문이 매니페스트의 customized/groups 를 근거로 삼으면, 낡아서 다른 파일까지
+   * "의도한 하우스 스타일" 로 공표하게 된다 — 이 커밋의 실측(#57)과 정면으로 어긋난다.
+   */
+  it("상류가 앞선 파일은 설명문이 그렇게 말한다 — 하우스 스타일이라고 하지 않는다", () => {
+    const behind = Object.keys(readInstallDiff())
+    expect(behind.length, "installDiff 가 비었다 — 측정이 사라졌다").toBeGreaterThan(0)
+    for (const file of behind) {
+      const name = file.replace(/\.tsx$/, "")
+      const item = registry.items.find((i) => i.name === name)!
+      expect(item.description, `${name} 설명문이 상류가 앞섰다는 사실을 숨긴다`).toContain("상류 shadcn 이 앞서 있다")
+    }
+    for (const name of houseUiNames()) {
+      if (behind.includes(`${name}.tsx`)) continue
+      const item = registry.items.find((i) => i.name === name)!
+      expect(item.description, `${name} 이 근거 없이 상류가 앞섰다고 말한다`).not.toContain("상류 shadcn 이 앞서 있다")
+    }
   })
 })

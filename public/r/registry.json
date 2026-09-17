@@ -2421,7 +2421,7 @@
       "name": "accordion",
       "type": "registry:ui",
       "title": "Accordion",
-      "description": "Accordion 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Accordion 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "lucide-react@^1.24.0",
         "radix-ui@^1.6.7"
@@ -2438,7 +2438,7 @@
       "name": "alert",
       "type": "registry:ui",
       "title": "Alert",
-      "description": "Alert 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Alert 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "class-variance-authority@^0.7.1"
       ],
@@ -2454,7 +2454,7 @@
       "name": "alert-dialog",
       "type": "registry:ui",
       "title": "Alert Dialog",
-      "description": "Alert Dialog 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Alert Dialog 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "radix-ui@^1.6.7"
       ],
@@ -2473,7 +2473,7 @@
       "name": "aspect-ratio",
       "type": "registry:ui",
       "title": "Aspect Ratio",
-      "description": "Aspect Ratio 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Aspect Ratio 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "radix-ui@^1.6.7"
       ],
@@ -2489,7 +2489,7 @@
       "name": "attachment",
       "type": "registry:ui",
       "title": "Attachment",
-      "description": "Attachment 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Attachment 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "class-variance-authority@^0.7.1",
         "radix-ui@^1.6.7"
@@ -2509,7 +2509,7 @@
       "name": "avatar",
       "type": "registry:ui",
       "title": "Avatar",
-      "description": "Avatar 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Avatar 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "radix-ui@^1.6.7"
       ],
@@ -2525,7 +2525,7 @@
       "name": "badge",
       "type": "registry:ui",
       "title": "Badge",
-      "description": "Badge 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Badge 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "class-variance-authority@^0.7.1",
         "radix-ui@^1.6.7"
@@ -2542,7 +2542,7 @@
       "name": "breadcrumb",
       "type": "registry:ui",
       "title": "Breadcrumb",
-      "description": "Breadcrumb 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Breadcrumb 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "lucide-react@^1.24.0",
         "radix-ui@^1.6.7"
@@ -2559,7 +2559,7 @@
       "name": "bubble",
       "type": "registry:ui",
       "title": "Bubble",
-      "description": "Bubble 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Bubble 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "class-variance-authority@^0.7.1",
         "radix-ui@^1.6.7"
@@ -2576,7 +2576,7 @@
       "name": "button",
       "type": "registry:ui",
       "title": "Button",
-      "description": "Button 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Button 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "class-variance-authority@^0.7.1",
         "radix-ui@^1.6.7"
@@ -2593,7 +2593,7 @@
       "name": "button-group",
       "type": "registry:ui",
       "title": "Button Group",
-      "description": "Button Group 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Button Group 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "class-variance-authority@^0.7.1",
         "radix-ui@^1.6.7"
@@ -2613,7 +2613,7 @@
       "name": "calendar",
       "type": "registry:ui",
       "title": "Calendar",
-      "description": "Calendar 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Calendar 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "lucide-react@^1.24.0",
         "react-day-picker@^10.0.1"
@@ -2633,7 +2633,7 @@
       "name": "card",
       "type": "registry:ui",
       "title": "Card",
-      "description": "Card 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Card 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "files": [
         {
           "path": "components/ui/card.tsx",
@@ -2646,7 +2646,7 @@
       "name": "carousel",
       "type": "registry:ui",
       "title": "Carousel",
-      "description": "Carousel 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Carousel 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "embla-carousel-react@^8.6.0",
         "lucide-react@^1.24.0"
@@ -2666,7 +2666,7 @@
       "name": "chart",
       "type": "registry:ui",
       "title": "Chart",
-      "description": "Chart 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Chart 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "recharts@3.8.0"
       ],
@@ -2682,7 +2682,7 @@
       "name": "checkbox",
       "type": "registry:ui",
       "title": "Checkbox",
-      "description": "Checkbox 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — 상류 레지스트리 원문과는 semanticTokenSwap 가 다르다(밀도·모서리·컨트롤 스케일 축이 이 값을 전제한다).",
+      "description": "Checkbox 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다. 이 파일은 상류 shadcn 이 앞서 있다 — 상류가 group-has-[:focus-visible]/field-label 상태 클래스를 더했다 — 우리 쪽이 낡았다. (#61 에서 갱신한다).",
       "dependencies": [
         "lucide-react@^1.24.0",
         "radix-ui@^1.6.7"
@@ -2699,7 +2699,7 @@
       "name": "collapsible",
       "type": "registry:ui",
       "title": "Collapsible",
-      "description": "Collapsible 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Collapsible 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "radix-ui@^1.6.7"
       ],
@@ -2715,7 +2715,7 @@
       "name": "combobox",
       "type": "registry:ui",
       "title": "Combobox",
-      "description": "Combobox 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Combobox 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "@base-ui/react@^1.6.0",
         "lucide-react@^1.24.0"
@@ -2736,7 +2736,7 @@
       "name": "command",
       "type": "registry:ui",
       "title": "Command",
-      "description": "Command 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — 상류 레지스트리 원문과는 controlScale, semanticTokenSwap, addedAffordance 가 다르다(밀도·모서리·컨트롤 스케일 축이 이 값을 전제한다).",
+      "description": "Command 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다. 이 파일은 상류 shadcn 이 앞서 있다 — 상류 CommandDialog 가 내부 Command 에 크기 클래스를 두른다 — 우리 쪽이 낡았다. (#61 에서 갱신한다).",
       "dependencies": [
         "cmdk@^1.1.1",
         "lucide-react@^1.24.0"
@@ -2757,7 +2757,7 @@
       "name": "context-menu",
       "type": "registry:ui",
       "title": "Context Menu",
-      "description": "Context Menu 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Context Menu 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "lucide-react@^1.24.0",
         "radix-ui@^1.6.7"
@@ -2774,7 +2774,7 @@
       "name": "dialog",
       "type": "registry:ui",
       "title": "Dialog",
-      "description": "Dialog 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Dialog 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "lucide-react@^1.24.0",
         "radix-ui@^1.6.7"
@@ -2794,7 +2794,7 @@
       "name": "direction",
       "type": "registry:ui",
       "title": "Direction",
-      "description": "Direction 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Direction 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "radix-ui@^1.6.7"
       ],
@@ -2810,7 +2810,7 @@
       "name": "drawer",
       "type": "registry:ui",
       "title": "Drawer",
-      "description": "Drawer 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Drawer 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "vaul@^1.1.2"
       ],
@@ -2826,7 +2826,7 @@
       "name": "dropdown-menu",
       "type": "registry:ui",
       "title": "Dropdown Menu",
-      "description": "Dropdown Menu 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Dropdown Menu 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "lucide-react@^1.24.0",
         "radix-ui@^1.6.7"
@@ -2843,7 +2843,7 @@
       "name": "empty",
       "type": "registry:ui",
       "title": "Empty",
-      "description": "Empty 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Empty 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "class-variance-authority@^0.7.1"
       ],
@@ -2859,7 +2859,7 @@
       "name": "field",
       "type": "registry:ui",
       "title": "Field",
-      "description": "Field 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — 상류 레지스트리 원문과는 semanticTokenSwap 가 다르다(밀도·모서리·컨트롤 스케일 축이 이 값을 전제한다).",
+      "description": "Field 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다. 이 파일은 상류 shadcn 이 앞서 있다 — 상류가 FieldLabel 에 hover·focus-visible 처리를 더했다 — 우리 쪽이 낡았다. (#61 에서 갱신한다).",
       "dependencies": [
         "class-variance-authority@^0.7.1"
       ],
@@ -2879,7 +2879,7 @@
       "name": "hover-card",
       "type": "registry:ui",
       "title": "Hover Card",
-      "description": "Hover Card 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Hover Card 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "radix-ui@^1.6.7"
       ],
@@ -2895,7 +2895,7 @@
       "name": "input",
       "type": "registry:ui",
       "title": "Input",
-      "description": "Input 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Input 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "files": [
         {
           "path": "components/ui/input.tsx",
@@ -2908,7 +2908,7 @@
       "name": "input-group",
       "type": "registry:ui",
       "title": "Input Group",
-      "description": "Input Group 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Input Group 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "class-variance-authority@^0.7.1"
       ],
@@ -2929,7 +2929,7 @@
       "name": "input-otp",
       "type": "registry:ui",
       "title": "Input Otp",
-      "description": "Input Otp 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Input Otp 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "input-otp@^1.4.2",
         "lucide-react@^1.24.0"
@@ -2946,7 +2946,7 @@
       "name": "item",
       "type": "registry:ui",
       "title": "Item",
-      "description": "Item 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Item 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "class-variance-authority@^0.7.1",
         "radix-ui@^1.6.7"
@@ -2966,7 +2966,7 @@
       "name": "kbd",
       "type": "registry:ui",
       "title": "Kbd",
-      "description": "Kbd 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Kbd 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "files": [
         {
           "path": "components/ui/kbd.tsx",
@@ -2979,7 +2979,7 @@
       "name": "label",
       "type": "registry:ui",
       "title": "Label",
-      "description": "Label 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Label 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "radix-ui@^1.6.7"
       ],
@@ -2995,7 +2995,7 @@
       "name": "marker",
       "type": "registry:ui",
       "title": "Marker",
-      "description": "Marker 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Marker 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "class-variance-authority@^0.7.1",
         "radix-ui@^1.6.7"
@@ -3012,7 +3012,7 @@
       "name": "menubar",
       "type": "registry:ui",
       "title": "Menubar",
-      "description": "Menubar 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Menubar 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "lucide-react@^1.24.0",
         "radix-ui@^1.6.7"
@@ -3029,7 +3029,7 @@
       "name": "message",
       "type": "registry:ui",
       "title": "Message",
-      "description": "Message 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Message 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "files": [
         {
           "path": "components/ui/message.tsx",
@@ -3042,7 +3042,7 @@
       "name": "message-scroller",
       "type": "registry:ui",
       "title": "Message Scroller",
-      "description": "Message Scroller 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Message Scroller 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다. 이 파일은 상류 shadcn 이 앞서 있다 — 상류가 data-pending-scroll:invisible 을 더했다 — 우리 쪽이 낡았다. (#61 에서 갱신한다).",
       "dependencies": [
         "@shadcn/react@^0.2.1",
         "lucide-react@^1.24.0"
@@ -3062,7 +3062,7 @@
       "name": "native-select",
       "type": "registry:ui",
       "title": "Native Select",
-      "description": "Native Select 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Native Select 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "lucide-react@^1.24.0"
       ],
@@ -3078,7 +3078,7 @@
       "name": "navigation-menu",
       "type": "registry:ui",
       "title": "Navigation Menu",
-      "description": "Navigation Menu 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Navigation Menu 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "class-variance-authority@^0.7.1",
         "lucide-react@^1.24.0",
@@ -3096,7 +3096,7 @@
       "name": "pagination",
       "type": "registry:ui",
       "title": "Pagination",
-      "description": "Pagination 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Pagination 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "lucide-react@^1.24.0"
       ],
@@ -3115,7 +3115,7 @@
       "name": "popover",
       "type": "registry:ui",
       "title": "Popover",
-      "description": "Popover 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Popover 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "radix-ui@^1.6.7"
       ],
@@ -3131,7 +3131,7 @@
       "name": "progress",
       "type": "registry:ui",
       "title": "Progress",
-      "description": "Progress 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Progress 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "radix-ui@^1.6.7"
       ],
@@ -3147,7 +3147,7 @@
       "name": "radio-group",
       "type": "registry:ui",
       "title": "Radio Group",
-      "description": "Radio Group 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — 상류 레지스트리 원문과는 semanticTokenSwap 가 다르다(밀도·모서리·컨트롤 스케일 축이 이 값을 전제한다).",
+      "description": "Radio Group 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다. 이 파일은 상류 shadcn 이 앞서 있다 — 상류가 group-has-[:focus-visible]/field-label 상태 클래스를 더했다 — 우리 쪽이 낡았다. (#61 에서 갱신한다).",
       "dependencies": [
         "radix-ui@^1.6.7"
       ],
@@ -3163,7 +3163,7 @@
       "name": "resizable",
       "type": "registry:ui",
       "title": "Resizable",
-      "description": "Resizable 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Resizable 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "react-resizable-panels@^4.12.1"
       ],
@@ -3179,7 +3179,7 @@
       "name": "scroll-area",
       "type": "registry:ui",
       "title": "Scroll Area",
-      "description": "Scroll Area 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Scroll Area 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "radix-ui@^1.6.7"
       ],
@@ -3195,7 +3195,7 @@
       "name": "select",
       "type": "registry:ui",
       "title": "Select",
-      "description": "Select 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Select 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "lucide-react@^1.24.0",
         "radix-ui@^1.6.7"
@@ -3212,7 +3212,7 @@
       "name": "separator",
       "type": "registry:ui",
       "title": "Separator",
-      "description": "Separator 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Separator 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "radix-ui@^1.6.7"
       ],
@@ -3228,7 +3228,7 @@
       "name": "sheet",
       "type": "registry:ui",
       "title": "Sheet",
-      "description": "Sheet 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Sheet 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "lucide-react@^1.24.0",
         "radix-ui@^1.6.7"
@@ -3248,7 +3248,7 @@
       "name": "sidebar",
       "type": "registry:ui",
       "title": "Sidebar",
-      "description": "Sidebar 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Sidebar 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "class-variance-authority@^0.7.1",
         "lucide-react@^1.24.0",
@@ -3278,7 +3278,7 @@
       "name": "skeleton",
       "type": "registry:ui",
       "title": "Skeleton",
-      "description": "Skeleton 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Skeleton 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "files": [
         {
           "path": "components/ui/skeleton.tsx",
@@ -3291,7 +3291,7 @@
       "name": "slider",
       "type": "registry:ui",
       "title": "Slider",
-      "description": "Slider 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Slider 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "radix-ui@^1.6.7"
       ],
@@ -3307,7 +3307,7 @@
       "name": "sonner",
       "type": "registry:ui",
       "title": "Sonner",
-      "description": "Sonner 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Sonner 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "lucide-react@^1.24.0",
         "next-themes@^0.4.6",
@@ -3325,7 +3325,7 @@
       "name": "spinner",
       "type": "registry:ui",
       "title": "Spinner",
-      "description": "Spinner 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Spinner 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "lucide-react@^1.24.0"
       ],
@@ -3341,7 +3341,7 @@
       "name": "switch",
       "type": "registry:ui",
       "title": "Switch",
-      "description": "Switch 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Switch 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다. 이 파일은 상류 shadcn 이 앞서 있다 — 상류가 group-has-[:focus-visible]/field-label 상태 클래스를 더했다 — 우리 쪽이 낡았다. (#61 에서 갱신한다).",
       "dependencies": [
         "radix-ui@^1.6.7"
       ],
@@ -3357,7 +3357,7 @@
       "name": "table",
       "type": "registry:ui",
       "title": "Table",
-      "description": "Table 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Table 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "files": [
         {
           "path": "components/ui/table.tsx",
@@ -3370,7 +3370,7 @@
       "name": "tabs",
       "type": "registry:ui",
       "title": "Tabs",
-      "description": "Tabs 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Tabs 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "class-variance-authority@^0.7.1",
         "radix-ui@^1.6.7"
@@ -3387,7 +3387,7 @@
       "name": "textarea",
       "type": "registry:ui",
       "title": "Textarea",
-      "description": "Textarea 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Textarea 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "files": [
         {
           "path": "components/ui/textarea.tsx",
@@ -3400,7 +3400,7 @@
       "name": "toggle",
       "type": "registry:ui",
       "title": "Toggle",
-      "description": "Toggle 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Toggle 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "class-variance-authority@^0.7.1",
         "radix-ui@^1.6.7"
@@ -3417,7 +3417,7 @@
       "name": "toggle-group",
       "type": "registry:ui",
       "title": "Toggle Group",
-      "description": "Toggle Group 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Toggle Group 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "class-variance-authority@^0.7.1",
         "radix-ui@^1.6.7"
@@ -3437,7 +3437,7 @@
       "name": "tooltip",
       "type": "registry:ui",
       "title": "Tooltip",
-      "description": "Tooltip 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.",
+      "description": "Tooltip 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.",
       "dependencies": [
         "radix-ui@^1.6.7"
       ],

@@ -784,7 +784,7 @@ npm dependencies: @phosphor-icons/react@^2.1.10
 
 ### Accordion (`accordion`)
 
-Accordion 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Accordion 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/accordion.json
@@ -794,7 +794,7 @@ npm dependencies: lucide-react@^1.24.0, radix-ui@^1.6.7
 
 ### Alert (`alert`)
 
-Alert 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Alert 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/alert.json
@@ -804,7 +804,7 @@ npm dependencies: class-variance-authority@^0.7.1
 
 ### Alert Dialog (`alert-dialog`)
 
-Alert Dialog 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Alert Dialog 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/alert-dialog.json
@@ -816,7 +816,7 @@ npm dependencies: radix-ui@^1.6.7
 
 ### Aspect Ratio (`aspect-ratio`)
 
-Aspect Ratio 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Aspect Ratio 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/aspect-ratio.json
@@ -826,7 +826,7 @@ npm dependencies: radix-ui@^1.6.7
 
 ### Attachment (`attachment`)
 
-Attachment 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Attachment 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/attachment.json
@@ -838,7 +838,7 @@ npm dependencies: class-variance-authority@^0.7.1, radix-ui@^1.6.7
 
 ### Avatar (`avatar`)
 
-Avatar 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Avatar 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/avatar.json
@@ -848,7 +848,7 @@ npm dependencies: radix-ui@^1.6.7
 
 ### Badge (`badge`)
 
-Badge 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Badge 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/badge.json
@@ -858,7 +858,7 @@ npm dependencies: class-variance-authority@^0.7.1, radix-ui@^1.6.7
 
 ### Breadcrumb (`breadcrumb`)
 
-Breadcrumb 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Breadcrumb 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/breadcrumb.json
@@ -868,7 +868,7 @@ npm dependencies: lucide-react@^1.24.0, radix-ui@^1.6.7
 
 ### Bubble (`bubble`)
 
-Bubble 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Bubble 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/bubble.json
@@ -878,7 +878,7 @@ npm dependencies: class-variance-authority@^0.7.1, radix-ui@^1.6.7
 
 ### Button (`button`)
 
-Button 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Button 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/button.json
@@ -888,7 +888,7 @@ npm dependencies: class-variance-authority@^0.7.1, radix-ui@^1.6.7
 
 ### Button Group (`button-group`)
 
-Button Group 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Button Group 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/button-group.json
@@ -900,7 +900,7 @@ npm dependencies: class-variance-authority@^0.7.1, radix-ui@^1.6.7
 
 ### Calendar (`calendar`)
 
-Calendar 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Calendar 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/calendar.json
@@ -912,7 +912,7 @@ npm dependencies: lucide-react@^1.24.0, react-day-picker@^10.0.1
 
 ### Card (`card`)
 
-Card 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Card 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/card.json
@@ -920,7 +920,7 @@ npx shadcn add https://ui.doksam.com/r/card.json
 
 ### Carousel (`carousel`)
 
-Carousel 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Carousel 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/carousel.json
@@ -932,7 +932,7 @@ npm dependencies: embla-carousel-react@^8.6.0, lucide-react@^1.24.0
 
 ### Chart (`chart`)
 
-Chart 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Chart 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/chart.json
@@ -942,7 +942,7 @@ npm dependencies: recharts@3.8.0
 
 ### Checkbox (`checkbox`)
 
-Checkbox 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — 상류 레지스트리 원문과는 semanticTokenSwap 가 다르다(밀도·모서리·컨트롤 스케일 축이 이 값을 전제한다).
+Checkbox 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다. 이 파일은 상류 shadcn 이 앞서 있다 — 상류가 group-has-[:focus-visible]/field-label 상태 클래스를 더했다 — 우리 쪽이 낡았다. (#61 에서 갱신한다).
 
 ```
 npx shadcn add https://ui.doksam.com/r/checkbox.json
@@ -952,7 +952,7 @@ npm dependencies: lucide-react@^1.24.0, radix-ui@^1.6.7
 
 ### Collapsible (`collapsible`)
 
-Collapsible 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Collapsible 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/collapsible.json
@@ -962,7 +962,7 @@ npm dependencies: radix-ui@^1.6.7
 
 ### Combobox (`combobox`)
 
-Combobox 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Combobox 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/combobox.json
@@ -974,7 +974,7 @@ npm dependencies: @base-ui/react@^1.6.0, lucide-react@^1.24.0
 
 ### Command (`command`)
 
-Command 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — 상류 레지스트리 원문과는 controlScale, semanticTokenSwap, addedAffordance 가 다르다(밀도·모서리·컨트롤 스케일 축이 이 값을 전제한다).
+Command 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다. 이 파일은 상류 shadcn 이 앞서 있다 — 상류 CommandDialog 가 내부 Command 에 크기 클래스를 두른다 — 우리 쪽이 낡았다. (#61 에서 갱신한다).
 
 ```
 npx shadcn add https://ui.doksam.com/r/command.json
@@ -986,7 +986,7 @@ npm dependencies: cmdk@^1.1.1, lucide-react@^1.24.0
 
 ### Context Menu (`context-menu`)
 
-Context Menu 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Context Menu 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/context-menu.json
@@ -996,7 +996,7 @@ npm dependencies: lucide-react@^1.24.0, radix-ui@^1.6.7
 
 ### Dialog (`dialog`)
 
-Dialog 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Dialog 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/dialog.json
@@ -1008,7 +1008,7 @@ npm dependencies: lucide-react@^1.24.0, radix-ui@^1.6.7
 
 ### Direction (`direction`)
 
-Direction 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Direction 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/direction.json
@@ -1018,7 +1018,7 @@ npm dependencies: radix-ui@^1.6.7
 
 ### Drawer (`drawer`)
 
-Drawer 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Drawer 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/drawer.json
@@ -1028,7 +1028,7 @@ npm dependencies: vaul@^1.1.2
 
 ### Dropdown Menu (`dropdown-menu`)
 
-Dropdown Menu 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Dropdown Menu 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/dropdown-menu.json
@@ -1038,7 +1038,7 @@ npm dependencies: lucide-react@^1.24.0, radix-ui@^1.6.7
 
 ### Empty (`empty`)
 
-Empty 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Empty 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/empty.json
@@ -1048,7 +1048,7 @@ npm dependencies: class-variance-authority@^0.7.1
 
 ### Field (`field`)
 
-Field 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — 상류 레지스트리 원문과는 semanticTokenSwap 가 다르다(밀도·모서리·컨트롤 스케일 축이 이 값을 전제한다).
+Field 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다. 이 파일은 상류 shadcn 이 앞서 있다 — 상류가 FieldLabel 에 hover·focus-visible 처리를 더했다 — 우리 쪽이 낡았다. (#61 에서 갱신한다).
 
 ```
 npx shadcn add https://ui.doksam.com/r/field.json
@@ -1060,7 +1060,7 @@ npm dependencies: class-variance-authority@^0.7.1
 
 ### Hover Card (`hover-card`)
 
-Hover Card 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Hover Card 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/hover-card.json
@@ -1070,7 +1070,7 @@ npm dependencies: radix-ui@^1.6.7
 
 ### Input (`input`)
 
-Input 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Input 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/input.json
@@ -1078,7 +1078,7 @@ npx shadcn add https://ui.doksam.com/r/input.json
 
 ### Input Group (`input-group`)
 
-Input Group 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Input Group 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/input-group.json
@@ -1090,7 +1090,7 @@ npm dependencies: class-variance-authority@^0.7.1
 
 ### Input Otp (`input-otp`)
 
-Input Otp 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Input Otp 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/input-otp.json
@@ -1100,7 +1100,7 @@ npm dependencies: input-otp@^1.4.2, lucide-react@^1.24.0
 
 ### Item (`item`)
 
-Item 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Item 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/item.json
@@ -1112,7 +1112,7 @@ npm dependencies: class-variance-authority@^0.7.1, radix-ui@^1.6.7
 
 ### Kbd (`kbd`)
 
-Kbd 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Kbd 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/kbd.json
@@ -1120,7 +1120,7 @@ npx shadcn add https://ui.doksam.com/r/kbd.json
 
 ### Label (`label`)
 
-Label 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Label 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/label.json
@@ -1130,7 +1130,7 @@ npm dependencies: radix-ui@^1.6.7
 
 ### Marker (`marker`)
 
-Marker 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Marker 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/marker.json
@@ -1140,7 +1140,7 @@ npm dependencies: class-variance-authority@^0.7.1, radix-ui@^1.6.7
 
 ### Menubar (`menubar`)
 
-Menubar 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Menubar 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/menubar.json
@@ -1150,7 +1150,7 @@ npm dependencies: lucide-react@^1.24.0, radix-ui@^1.6.7
 
 ### Message (`message`)
 
-Message 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Message 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/message.json
@@ -1158,7 +1158,7 @@ npx shadcn add https://ui.doksam.com/r/message.json
 
 ### Message Scroller (`message-scroller`)
 
-Message Scroller 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Message Scroller 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다. 이 파일은 상류 shadcn 이 앞서 있다 — 상류가 data-pending-scroll:invisible 을 더했다 — 우리 쪽이 낡았다. (#61 에서 갱신한다).
 
 ```
 npx shadcn add https://ui.doksam.com/r/message-scroller.json
@@ -1170,7 +1170,7 @@ npm dependencies: @shadcn/react@^0.2.1, lucide-react@^1.24.0
 
 ### Native Select (`native-select`)
 
-Native Select 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Native Select 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/native-select.json
@@ -1180,7 +1180,7 @@ npm dependencies: lucide-react@^1.24.0
 
 ### Navigation Menu (`navigation-menu`)
 
-Navigation Menu 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Navigation Menu 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/navigation-menu.json
@@ -1190,7 +1190,7 @@ npm dependencies: class-variance-authority@^0.7.1, lucide-react@^1.24.0, radix-u
 
 ### Pagination (`pagination`)
 
-Pagination 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Pagination 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/pagination.json
@@ -1202,7 +1202,7 @@ npm dependencies: lucide-react@^1.24.0
 
 ### Popover (`popover`)
 
-Popover 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Popover 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/popover.json
@@ -1212,7 +1212,7 @@ npm dependencies: radix-ui@^1.6.7
 
 ### Progress (`progress`)
 
-Progress 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Progress 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/progress.json
@@ -1222,7 +1222,7 @@ npm dependencies: radix-ui@^1.6.7
 
 ### Radio Group (`radio-group`)
 
-Radio Group 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — 상류 레지스트리 원문과는 semanticTokenSwap 가 다르다(밀도·모서리·컨트롤 스케일 축이 이 값을 전제한다).
+Radio Group 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다. 이 파일은 상류 shadcn 이 앞서 있다 — 상류가 group-has-[:focus-visible]/field-label 상태 클래스를 더했다 — 우리 쪽이 낡았다. (#61 에서 갱신한다).
 
 ```
 npx shadcn add https://ui.doksam.com/r/radio-group.json
@@ -1232,7 +1232,7 @@ npm dependencies: radix-ui@^1.6.7
 
 ### Resizable (`resizable`)
 
-Resizable 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Resizable 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/resizable.json
@@ -1242,7 +1242,7 @@ npm dependencies: react-resizable-panels@^4.12.1
 
 ### Scroll Area (`scroll-area`)
 
-Scroll Area 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Scroll Area 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/scroll-area.json
@@ -1252,7 +1252,7 @@ npm dependencies: radix-ui@^1.6.7
 
 ### Select (`select`)
 
-Select 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Select 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/select.json
@@ -1262,7 +1262,7 @@ npm dependencies: lucide-react@^1.24.0, radix-ui@^1.6.7
 
 ### Separator (`separator`)
 
-Separator 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Separator 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/separator.json
@@ -1272,7 +1272,7 @@ npm dependencies: radix-ui@^1.6.7
 
 ### Sheet (`sheet`)
 
-Sheet 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Sheet 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/sheet.json
@@ -1284,7 +1284,7 @@ npm dependencies: lucide-react@^1.24.0, radix-ui@^1.6.7
 
 ### Sidebar (`sidebar`)
 
-Sidebar 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Sidebar 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/sidebar.json
@@ -1296,7 +1296,7 @@ npm dependencies: class-variance-authority@^0.7.1, lucide-react@^1.24.0, radix-u
 
 ### Skeleton (`skeleton`)
 
-Skeleton 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Skeleton 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/skeleton.json
@@ -1304,7 +1304,7 @@ npx shadcn add https://ui.doksam.com/r/skeleton.json
 
 ### Slider (`slider`)
 
-Slider 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Slider 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/slider.json
@@ -1314,7 +1314,7 @@ npm dependencies: radix-ui@^1.6.7
 
 ### Sonner (`sonner`)
 
-Sonner 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Sonner 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/sonner.json
@@ -1324,7 +1324,7 @@ npm dependencies: lucide-react@^1.24.0, next-themes@^0.4.6, sonner@^2.0.7
 
 ### Spinner (`spinner`)
 
-Spinner 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Spinner 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/spinner.json
@@ -1334,7 +1334,7 @@ npm dependencies: lucide-react@^1.24.0
 
 ### Switch (`switch`)
 
-Switch 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Switch 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다. 이 파일은 상류 shadcn 이 앞서 있다 — 상류가 group-has-[:focus-visible]/field-label 상태 클래스를 더했다 — 우리 쪽이 낡았다. (#61 에서 갱신한다).
 
 ```
 npx shadcn add https://ui.doksam.com/r/switch.json
@@ -1344,7 +1344,7 @@ npm dependencies: radix-ui@^1.6.7
 
 ### Table (`table`)
 
-Table 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Table 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/table.json
@@ -1352,7 +1352,7 @@ npx shadcn add https://ui.doksam.com/r/table.json
 
 ### Tabs (`tabs`)
 
-Tabs 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Tabs 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/tabs.json
@@ -1362,7 +1362,7 @@ npm dependencies: class-variance-authority@^0.7.1, radix-ui@^1.6.7
 
 ### Textarea (`textarea`)
 
-Textarea 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Textarea 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/textarea.json
@@ -1370,7 +1370,7 @@ npx shadcn add https://ui.doksam.com/r/textarea.json
 
 ### Toggle (`toggle`)
 
-Toggle 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Toggle 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/toggle.json
@@ -1380,7 +1380,7 @@ npm dependencies: class-variance-authority@^0.7.1, radix-ui@^1.6.7
 
 ### Toggle Group (`toggle-group`)
 
-Toggle Group 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Toggle Group 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/toggle-group.json
@@ -1392,7 +1392,7 @@ npm dependencies: class-variance-authority@^0.7.1, radix-ui@^1.6.7
 
 ### Tooltip (`tooltip`)
 
-Tooltip 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 프리셋·상류 버전에 따라 내용이 갈린다.
+Tooltip 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — bare 이름으로 상류에서 받으면 소비 프로젝트의 프리셋·상류 버전에 따라 내용이 갈린다.
 
 ```
 npx shadcn add https://ui.doksam.com/r/tooltip.json

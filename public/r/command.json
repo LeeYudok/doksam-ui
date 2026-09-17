@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "command",
   "title": "Command",
-  "description": "Command 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다 — 상류 레지스트리 원문과는 controlScale, semanticTokenSwap, addedAffordance 가 다르다(밀도·모서리·컨트롤 스케일 축이 이 값을 전제한다).",
+  "description": "Command 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다. 이 파일은 상류 shadcn 이 앞서 있다 — 상류 CommandDialog 가 내부 Command 에 크기 클래스를 두른다 — 우리 쪽이 낡았다. (#61 에서 갱신한다).",
   "dependencies": [
     "cmdk@^1.1.1",
     "lucide-react@^1.24.0"

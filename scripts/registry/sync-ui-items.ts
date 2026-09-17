@@ -1,15 +1,17 @@
 /**
- * #57 적용 — 포크 프리미티브를 레지스트리 항목으로 싣고, bare registryDependencies 를
- * 우리 레지스트리 URL 로 돌린다. 한 번 돌리고 나면 결과는 registry.json 에 남는다.
- * 이후의 드리프트는 scripts/registry/ui-items.test.ts 가 막는다.
+ * `components/ui` 프리미티브 항목을 registry.json 에 다시 써 넣는다 (#57).
  *
- *   node --experimental-strip-types scripts/manual/2026-09-17_issue-57_apply-ui-items.mts
+ * 항목 내용은 손으로 적지 않고 파일의 import 에서 계산한다. 프리미티브를 추가·수정하거나
+ * upstream.manifest.json 의 installDiff 를 갱신했으면 이것을 돌린다. 멱등이다.
+ * 어긋나면 scripts/registry/ui-items.test.ts 가 실패한다.
+ *
+ *   pnpm registry:sync && pnpm registry:build && pnpm gen:llms
  */
 import fs from "node:fs"
 import path from "node:path"
 
-import { REPO_ROOT, readRegistry } from "../registry/closure"
-import { expectedUiItems, houseUiNames } from "../registry/ui-items"
+import { REPO_ROOT, readRegistry } from "./closure.ts"
+import { expectedUiItems, houseUiNames } from "./ui-items.ts"
 
 const registry = readRegistry()
 const uiNames = new Set(houseUiNames())
