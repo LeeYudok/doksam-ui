@@ -67,7 +67,8 @@ export const RULES_SECTIONS: RulesSection[] = [
     title: "컴포넌트",
     kind: "invariant",
     items: [
-      "UI 프리미티브는 shadcn/ui를 쓴다 — components/ui/ 아래 원본 파일은 수정하지 않는다.",
+      "UI 프리미티브는 shadcn/ui를 쓴다 — 단 components/ui/ 는 손대지 않은 상류(upstream) 원본이 아니라 하우스 스타일이 적용된 포크다(컨트롤 높이·패딩 축소, --radius 파생 토큰, data-horizontal: 축약 변형, has-data-[icon=...] 아이콘 슬롯 규약 등). 실제 차이와 사유는 components/ui/upstream.manifest.json 에 파일 단위로 기록되어 있다.",
+      "components/ui/ 의 기록된 커스터마이즈는 되돌리지 않는다 — 상류 값으로 되돌리면 프로필의 모서리·밀도 축이 참조하는 값이 어긋난다. 상류를 재설치·업그레이드할 때는 npx shadcn@latest add <name> 을 직접 돌리지 않고 node scripts/shadcn-upstream.mjs 로 upstream.manifest.json 과 대조해 커스터마이즈를 재적용한다.",
       "커스텀 동작이 필요하면 components/ui/ 밖에 별도 컴포넌트를 만들어 shadcn 프리미티브를 조합한다 — components/ui/customs 같은 하위 폴더를 만들어 components/ui/ 안에 끼워 넣지 않는다. shadcn 원본과 커스텀 조합은 디렉터리 레벨에서 분리한다(예: components/<feature>/ 또는 components/patterns/).",
       "테이블 헤더(thead th)는 app/globals.css의 전역 규칙으로 항상 볼드로 렌더링된다 — 컴포넌트마다 font-bold를 개별 지정하지 않는다.",
     ],

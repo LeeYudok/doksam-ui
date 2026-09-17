@@ -40,8 +40,9 @@ doksam-ui 에서 AI 에이전트가 작업할 때 먼저 읽는 문서입니다.
 
 - **하드코딩 색 0건** — 시맨틱 토큰만 사용합니다(`bg-background`, `text-destructive`,
   `text-chart-1`). 시세 등락은 `--gain`/`--loss` (`lib/finance/rate.ts`).
-- **`components/ui/` 수정 금지** — shadcn CLI 원본입니다. 커스텀은 `components/`
-  또는 `components/patterns/` 에서 조합합니다.
+- **`components/ui/` 는 하우스 스타일 포크** — 손대지 않은 shadcn CLI 원본이 아닙니다.
+  자세한 근거·재설치 절차는 `lib/rules-markdown.ts` 의 "컴포넌트" 절을 참고하세요.
+  커스텀은 `components/` 또는 `components/patterns/` 에서 조합합니다.
 - **아이콘은 Phosphor 기본** — 서버 컴포넌트는 `@phosphor-icons/react/dist/ssr`.
   이모지를 아이콘 대용으로 쓰지 않습니다.
 - **폐쇄망 전제** — 외부 CDN·외부 URL fetch 0건. 폰트는 `next/font/local` +

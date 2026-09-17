@@ -1,0 +1,421 @@
+{
+  "style": "new-york-v4",
+  "checkedAt": "2026-09-17",
+  "components": {
+    "accordion.tsx": {
+      "upstream": "ced1e58a0cb6836a",
+      "localHash": "459d3afef03f241d",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "alert-dialog.tsx": {
+      "upstream": "03440ddcb9f862fd",
+      "localHash": "4737b3db5c2fe56b",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "alert.tsx": {
+      "upstream": "afeb8ee000195794",
+      "localHash": "126a26b401ab2cd3",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "aspect-ratio.tsx": {
+      "upstream": "b1c157886236782c",
+      "localHash": "b1c157886236782c",
+      "customized": false,
+      "note": "상류와 동일"
+    },
+    "attachment.tsx": {
+      "upstream": "54cf55c5a31a0401",
+      "localHash": "ae8a25dd1a896d39",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "avatar.tsx": {
+      "upstream": "d6b19fe40f7e7d5f",
+      "localHash": "fd03e439ae00bf71",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "badge.tsx": {
+      "upstream": "0311bb21a5dc8c1e",
+      "localHash": "1b292cd64608eef6",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "breadcrumb.tsx": {
+      "upstream": "38b323cd1ab64e41",
+      "localHash": "785212482c3b4702",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "bubble.tsx": {
+      "upstream": "64bcd36ae5bef0c9",
+      "localHash": "870cc0c5cfc8a515",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "button-group.tsx": {
+      "upstream": "c72795268f62afe9",
+      "localHash": "de73ccc6e10f2982",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "button.tsx": {
+      "upstream": "557e27d5d3159c33",
+      "localHash": "9ce417985b97956f",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "calendar.tsx": {
+      "upstream": "6720074282a823d6",
+      "localHash": "741ca8610a3df14b",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "card.tsx": {
+      "upstream": "39480d5b63e46554",
+      "localHash": "d8113cbf964f8d1a",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "carousel.tsx": {
+      "upstream": "caaa206a8971a177",
+      "localHash": "c1830b952d87d4a0",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "chart.tsx": {
+      "upstream": "8e605dfdcfa9c96a",
+      "localHash": "0060b7708d85a5ff",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "checkbox.tsx": {
+      "upstream": "a7068fe7b1840081",
+      "localHash": "fb1ee2e329aa400f",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "collapsible.tsx": {
+      "upstream": "c6598e5584f4258b",
+      "localHash": "c6598e5584f4258b",
+      "customized": false,
+      "note": "상류와 동일"
+    },
+    "combobox.tsx": {
+      "upstream": "2b1079d58d477dba",
+      "localHash": "1c07d2823fa2b489",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "command.tsx": {
+      "upstream": "d229f80082d36563",
+      "localHash": "7f80b30bbce36228",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "context-menu.tsx": {
+      "upstream": "339690813ad1178c",
+      "localHash": "6117514d9e475cc2",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "dialog.tsx": {
+      "upstream": "1109d2874a289f6f",
+      "localHash": "13a5cddf294c6aa5",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "direction.tsx": {
+      "upstream": "84ae2ad658207f0e",
+      "localHash": "84ae2ad658207f0e",
+      "customized": false,
+      "note": "상류와 동일"
+    },
+    "drawer.tsx": {
+      "upstream": "2190d08dca91983f",
+      "localHash": "b41392855e012321",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "dropdown-menu.tsx": {
+      "upstream": "c84b54bc6c8ae8f3",
+      "localHash": "47f754e1ab9e4e34",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "empty.tsx": {
+      "upstream": "a506c7665171485d",
+      "localHash": "e65ee3ba54a21ed6",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "field.tsx": {
+      "upstream": "f42a902b9af20870",
+      "localHash": "76e008459f847a96",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "hover-card.tsx": {
+      "upstream": "d646141a4f5b9d6e",
+      "localHash": "e8166e75e8dd00e1",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "input-group.tsx": {
+      "upstream": "7aa99c89f34a162a",
+      "localHash": "e28122e46635bb66",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "input-otp.tsx": {
+      "upstream": "5c630a1e1cc82746",
+      "localHash": "f3fcf6c389dc9766",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "input.tsx": {
+      "upstream": "7bfd0eff6c53a38c",
+      "localHash": "c4902a8c4967875e",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "item.tsx": {
+      "upstream": "fed010264554b4b7",
+      "localHash": "a197e0c6bf030f49",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "kbd.tsx": {
+      "upstream": "6088c3a5432338b1",
+      "localHash": "1e477363fca474e2",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "label.tsx": {
+      "upstream": "db5dfcd98a78c5b7",
+      "localHash": "a476e41f08b9de5b",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "marker.tsx": {
+      "upstream": "3496e9fb2b45c675",
+      "localHash": "3d798763f094b2bb",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "menubar.tsx": {
+      "upstream": "73480e5733036568",
+      "localHash": "1251709bf39698a7",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "message-scroller.tsx": {
+      "upstream": "e00a57181debb6f8",
+      "localHash": "901c4a6a2a7d3f62",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "message.tsx": {
+      "upstream": "4bd0da2b253cf1ed",
+      "localHash": "9d2952bf3b641081",
+      "customized": false,
+      "note": "상류와 동일"
+    },
+    "native-select.tsx": {
+      "upstream": "5977b78b71c1871a",
+      "localHash": "0010395c3c1cbedf",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "navigation-menu.tsx": {
+      "upstream": "5c56bda25883e9c0",
+      "localHash": "4a9c6c31601d6e4b",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "pagination.tsx": {
+      "upstream": "97f46bede594c231",
+      "localHash": "b7aaaa2d0e3cdc9e",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "popover.tsx": {
+      "upstream": "5c20c50041dd3a0f",
+      "localHash": "51bd4c0e9d6f039e",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "progress.tsx": {
+      "upstream": "1f6eb12292b38dd1",
+      "localHash": "1e58b13c2aa4c26b",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "radio-group.tsx": {
+      "upstream": "f495c56ce09167fb",
+      "localHash": "07676333f885eb2a",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "resizable.tsx": {
+      "upstream": "2de0b3a71b18e27a",
+      "localHash": "379baf7a1de109a1",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "scroll-area.tsx": {
+      "upstream": "55264573642c8d91",
+      "localHash": "c3e7e2201d33bc24",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "select.tsx": {
+      "upstream": "a25676a80cb8ea9b",
+      "localHash": "c1295c1404b67895",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "separator.tsx": {
+      "upstream": "f9ec8dde26a5c3f2",
+      "localHash": "c924a82e99fda036",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "sheet.tsx": {
+      "upstream": "1431af1f2a0f4cd2",
+      "localHash": "54e255b2dec4b8ad",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "sidebar.tsx": {
+      "upstream": "7a2464b3a76ff1be",
+      "localHash": "f77a7dbfd340f5ba",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "skeleton.tsx": {
+      "upstream": "ba48dd5be5a6a137",
+      "localHash": "8110bba70d0cb9fe",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "slider.tsx": {
+      "upstream": "9ff8523ba99a37b3",
+      "localHash": "c1c20d08f7dabff6",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "sonner.tsx": {
+      "upstream": "13ccc9b0fe4248e6",
+      "localHash": "2dd975ad2170ba25",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "spinner.tsx": {
+      "upstream": "d07526a2f8219625",
+      "localHash": "900f722c961fa6e1",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "switch.tsx": {
+      "upstream": "62bd507d11a7abe5",
+      "localHash": "f3a1ed75be07bda7",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "table.tsx": {
+      "upstream": "84be8055e88e5aeb",
+      "localHash": "a13f55a7c1406197",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "tabs.tsx": {
+      "upstream": "bc6b1c115fcc9d63",
+      "localHash": "2a56759aa5573c65",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "textarea.tsx": {
+      "upstream": "7c7122fc969c6222",
+      "localHash": "58b58d84fc54ba5f",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "toggle-group.tsx": {
+      "upstream": "c7800d3fdff5b856",
+      "localHash": "4325639473140bda",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "toggle.tsx": {
+      "upstream": "05a7ea1345d08b6d",
+      "localHash": "ae2eec8802536743",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    },
+    "tooltip.tsx": {
+      "upstream": "345bc589a285ece3",
+      "localHash": "f26881e08ed65a97",
+      "customized": true,
+      "note": "차이 있음 — 이유를 여기에 적는다"
+    }
+  },
+  "_readme": [
+    "shadcn 상류 대비 차이 기록 (#48).",
+    "이 레포의 components/ui/ 는 '손대지 않은 shadcn 원본' 이 아니라 하우스 스타일이 적용된 포크다.",
+    "60개 중 56개가 상류와 의미 있게 다르다. 규칙의 '수정 금지' 는 '임의로 더 고치지 말고,",
+    "기록된 차이를 되돌리지도 말라' 는 뜻으로 읽어야 한다.",
+    "점검: node scripts/shadcn-upstream.mjs (네트워크 사용, 수동 게이트)",
+    "갱신: node scripts/shadcn-upstream.mjs --update"
+  ],
+  "houseStyle": {
+    "controlScale": {
+      "what": "컨트롤 높이·좌우 패딩을 상류보다 한 단계 작게 쓴다 (예: 버튼 default h-9→h-8, input h-9→h-8, px-3→px-2.5).",
+      "why": "#43 의 밀도(density) 축이 이 값을 기준으로 28/32/36px 비례를 계산한다. 상류 값으로 되돌리면 밀도 축 수치가 어긋난다.",
+      "examples": [
+        "button.tsx",
+        "input.tsx",
+        "tabs.tsx",
+        "toggle.tsx",
+        "select.tsx"
+      ]
+    },
+    "radiusTokens": {
+      "what": "상류의 고정 rounded-md 대신 --radius 파생 토큰을 쓴다 (예: rounded-[min(var(--radius-md),12px)]).",
+      "why": "#43 의 모서리(corner) 축이 프로필별로 반경을 바꾸려면 컴포넌트가 토큰을 참조해야 한다. 고정값이면 축이 닿지 않는다.",
+      "examples": [
+        "button.tsx",
+        "input.tsx",
+        "badge.tsx",
+        "select.tsx"
+      ]
+    },
+    "orientationVariant": {
+      "what": "data-[orientation=horizontal]: 를 data-horizontal: 축약 변형으로 쓴다.",
+      "why": "app/globals.css 의 @custom-variant 로 정의한 하우스 축약이다. 클래스 문자열이 길어지는 것을 줄인다.",
+      "examples": [
+        "separator.tsx",
+        "tabs.tsx",
+        "toggle-group.tsx"
+      ]
+    },
+    "iconSlotConvention": {
+      "what": "상류의 has-[>svg] 대신 has-data-[icon=inline-start|inline-end] 를 쓴다.",
+      "why": "아이콘 위치에 따라 좌우 패딩을 다르게 보정하기 위해서다. svg 존재 여부만으로는 어느 쪽인지 알 수 없다.",
+      "examples": [
+        "button.tsx",
+        "button-group.tsx"
+      ]
+    },
+    "addedProps": {
+      "what": "일부 컴포넌트에 상류에 없는 prop 을 추가했다 (예: card 의 size).",
+      "why": "카탈로그가 같은 컴포넌트의 밀도 변형을 보여줘야 한다.",
+      "examples": [
+        "card.tsx"
+      ]
+    }
+  }
+}
