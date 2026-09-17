@@ -124,7 +124,7 @@ npx shadcn add https://ui.doksam.com/r/kebab-menu.json
 
 registryDependencies: button, dropdown-menu
 
-npm dependencies: @phosphor-icons/react@^2.1.10
+npm dependencies: @phosphor-icons/react@^2.1.10, class-variance-authority@^0.7.1
 
 ### Tooltip Icon Button (`tooltip-icon-button`)
 
@@ -135,6 +135,8 @@ npx shadcn add https://ui.doksam.com/r/tooltip-icon-button.json
 ```
 
 registryDependencies: button, tooltip
+
+npm dependencies: class-variance-authority@^0.7.1
 
 ### Table Sortable (`table-sortable`)
 
@@ -232,7 +234,7 @@ npx shadcn add https://ui.doksam.com/r/date-range-picker.json
 
 registryDependencies: button, calendar, popover
 
-npm dependencies: @phosphor-icons/react@^2.1.10
+npm dependencies: @phosphor-icons/react@^2.1.10, react-day-picker@^10.0.1
 
 ### Multi Select (`multi-select`)
 

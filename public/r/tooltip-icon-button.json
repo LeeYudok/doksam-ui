@@ -3,6 +3,9 @@
   "name": "tooltip-icon-button",
   "title": "Tooltip Icon Button",
   "description": "아이콘 전용 버튼 — Tooltip 래핑과 aria-label을 tip 하나로 강제해서 접근성 실수를 구조적으로 막는다. app/layout.tsx 최상단에 TooltipProvider가 이미 있어야 한다.",
+  "dependencies": [
+    "class-variance-authority@^0.7.1"
+  ],
   "registryDependencies": [
     "button",
     "tooltip"

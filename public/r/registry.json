@@ -64,7 +64,8 @@
       "title": "Kebab Menu",
       "description": "세로 점 3개(⋮) 아이콘 버튼을 누르면 액션 드롭다운이 열리는 케밥 메뉴. items 배열 하나로 메뉴를 선언하며, 아이콘 전용 트리거의 aria-label 누락을 label 필수 prop으로 강제한다.",
       "dependencies": [
-        "@phosphor-icons/react@^2.1.10"
+        "@phosphor-icons/react@^2.1.10",
+        "class-variance-authority@^0.7.1"
       ],
       "registryDependencies": [
         "button",
@@ -92,6 +93,9 @@
           "path": "components/tooltip-icon-button.tsx",
           "type": "registry:component"
         }
+      ],
+      "dependencies": [
+        "class-variance-authority@^0.7.1"
       ]
     },
     {
@@ -679,8 +683,7 @@
         },
         {
           "path": "lib/templates/trading-data.ts",
-          "type": "registry:file",
-          "target": "lib/templates/trading-data.ts"
+          "type": "registry:lib"
         }
       ]
     },
@@ -1212,7 +1215,8 @@
       "title": "Date Range Picker",
       "description": "2달 캘린더 from~to 범위 선택기.",
       "dependencies": [
-        "@phosphor-icons/react@^2.1.10"
+        "@phosphor-icons/react@^2.1.10",
+        "react-day-picker@^10.0.1"
       ],
       "registryDependencies": [
         "button",
@@ -2193,8 +2197,7 @@
       "files": [
         {
           "path": "lib/theme-storage.ts",
-          "type": "registry:file",
-          "target": "lib/theme-storage.ts"
+          "type": "registry:lib"
         }
       ]
     },
@@ -2211,8 +2214,7 @@
       "files": [
         {
           "path": "components/profile-scope.ts",
-          "type": "registry:file",
-          "target": "components/profile-scope.ts"
+          "type": "registry:component"
         },
         {
           "path": "profiles/index.ts",
@@ -2249,33 +2251,27 @@
       "files": [
         {
           "path": "components/i18n-provider.tsx",
-          "type": "registry:component",
-          "target": "components/i18n-provider.tsx"
+          "type": "registry:component"
         },
         {
           "path": "lib/i18n/index.ts",
-          "type": "registry:file",
-          "target": "lib/i18n/index.ts"
+          "type": "registry:lib"
         },
         {
           "path": "lib/i18n/messages/en.json",
-          "type": "registry:file",
-          "target": "lib/i18n/messages/en.json"
+          "type": "registry:lib"
         },
         {
           "path": "lib/i18n/messages/ja.json",
-          "type": "registry:file",
-          "target": "lib/i18n/messages/ja.json"
+          "type": "registry:lib"
         },
         {
           "path": "lib/i18n/messages/zh.json",
-          "type": "registry:file",
-          "target": "lib/i18n/messages/zh.json"
+          "type": "registry:lib"
         },
         {
           "path": "lib/i18n/messages/es.json",
-          "type": "registry:file",
-          "target": "lib/i18n/messages/es.json"
+          "type": "registry:lib"
         }
       ]
     },
@@ -2294,8 +2290,7 @@
       "files": [
         {
           "path": "components/route-error.tsx",
-          "type": "registry:component",
-          "target": "components/route-error.tsx"
+          "type": "registry:component"
         }
       ]
     },
@@ -2312,8 +2307,7 @@
       "files": [
         {
           "path": "components/route-loading.tsx",
-          "type": "registry:component",
-          "target": "components/route-loading.tsx"
+          "type": "registry:component"
         }
       ]
     },
@@ -2328,8 +2322,7 @@
       "files": [
         {
           "path": "components/patterns/dataviz/sparkline-demo.tsx",
-          "type": "registry:component",
-          "target": "components/patterns/dataviz/sparkline-demo.tsx"
+          "type": "registry:component"
         }
       ]
     },
@@ -2344,8 +2337,7 @@
       "files": [
         {
           "path": "components/patterns/dataviz/return-curve-demo.tsx",
-          "type": "registry:component",
-          "target": "components/patterns/dataviz/return-curve-demo.tsx"
+          "type": "registry:component"
         }
       ]
     },
@@ -2360,8 +2352,7 @@
       "files": [
         {
           "path": "components/patterns/dataviz/diverging-bar-demo.tsx",
-          "type": "registry:component",
-          "target": "components/patterns/dataviz/diverging-bar-demo.tsx"
+          "type": "registry:component"
         }
       ]
     },
@@ -2376,8 +2367,7 @@
       "files": [
         {
           "path": "components/patterns/dataviz/activity-heatmap-demo.tsx",
-          "type": "registry:component",
-          "target": "components/patterns/dataviz/activity-heatmap-demo.tsx"
+          "type": "registry:component"
         }
       ]
     },
@@ -2397,13 +2387,11 @@
       "files": [
         {
           "path": "components/patterns/content-feed/content-feed-demo.tsx",
-          "type": "registry:component",
-          "target": "components/patterns/content-feed/content-feed-demo.tsx"
+          "type": "registry:component"
         },
         {
           "path": "components/patterns/content-feed/content-feed-data.ts",
-          "type": "registry:file",
-          "target": "components/patterns/content-feed/content-feed-data.ts"
+          "type": "registry:component"
         }
       ]
     },
@@ -2424,8 +2412,7 @@
       "files": [
         {
           "path": "components/patterns/list-controls/list-controls-demo.tsx",
-          "type": "registry:component",
-          "target": "components/patterns/list-controls/list-controls-demo.tsx"
+          "type": "registry:component"
         }
       ]
     }

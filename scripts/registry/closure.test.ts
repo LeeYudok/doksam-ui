@@ -1,0 +1,221 @@
+import { describe, expect, it } from "vitest"
+
+import {
+  collectSpecifiers,
+  fileExists,
+  packageNameOf,
+  packageOfSpecifier,
+  providedPaths,
+  readRegistry,
+  registryDependencyName,
+  resolveSpecifier,
+  undeclaredPackages,
+  unresolvedImports,
+  upstreamComponentNames,
+} from "../../scripts/registry/closure"
+
+const registry = readRegistry()
+
+describe("collectSpecifiers", () => {
+  it("import·export·동적 import 를 모두 잡는다", () => {
+    const source = [
+      `import { A } from "@/components/a"`,
+      `import "@/styles/b.css"`,
+      `export { C } from "./c"`,
+      `export * as ns from "../d"`,
+      `const e = await import("@/lib/e")`,
+      `import type { F } from "@/types/f"`,
+      `import{G}from"@/lib/g"`,
+    ].join("\n")
+    expect(collectSpecifiers(source).sort()).toEqual(
+      ["../d", "./c", "@/components/a", "@/lib/e", "@/lib/g", "@/styles/b.css", "@/types/f"].sort(),
+    )
+  })
+
+  it("주석 안의 import 는 잡지 않는다", () => {
+    const source = [`// import { A } from "@/components/gone"`, `/* import { B } from "@/components/also-gone" */`].join(
+      "\n",
+    )
+    expect(collectSpecifiers(source)).toEqual([])
+  })
+
+  it("npm 패키지 지정자도 그대로 돌려준다 — 해소 단계에서 걸러진다", () => {
+    expect(collectSpecifiers(`import React from "react"`)).toEqual(["react"])
+  })
+})
+
+describe("resolveSpecifier", () => {
+  it("@/ 별칭을 레포 상대 경로로 푼다", () => {
+    expect(resolveSpecifier("@/lib/utils", "components/x.tsx")).toEqual({ kind: "resolved", path: "lib/utils.ts" })
+  })
+
+  it("디렉터리 지정자는 index 파일로 푼다", () => {
+    expect(resolveSpecifier("@/profiles", "components/profile-scope.ts")).toEqual({
+      kind: "resolved",
+      path: "profiles/index.ts",
+    })
+  })
+
+  it("상대 경로는 기준 파일에서 푼다", () => {
+    expect(resolveSpecifier("./messages/en.json", "lib/i18n/index.ts")).toEqual({
+      kind: "resolved",
+      path: "lib/i18n/messages/en.json",
+    })
+  })
+
+  it("레포 안을 가리키는데 그런 파일이 없으면 missing", () => {
+    expect(resolveSpecifier("@/lib/does-not-exist", "components/x.tsx")).toEqual({
+      kind: "missing",
+      path: "lib/does-not-exist",
+    })
+  })
+
+  it("대소문자가 다르면 해소하지 않는다 — macOS 에서만 통과하고 리눅스에서 깨지는 걸 막는다", () => {
+    expect(resolveSpecifier("@/lib/Utils", "components/x.tsx").kind).toBe("missing")
+  })
+
+  it("npm 패키지는 external", () => {
+    expect(resolveSpecifier("react", "components/x.tsx")).toEqual({ kind: "external" })
+  })
+})
+
+describe("registryDependencyName", () => {
+  it("URL 에서 항목 이름만 남긴다", () => {
+    expect(registryDependencyName("https://ui.doksam.com/r/profile-scope.json")).toBe("profile-scope")
+  })
+
+  it("상류 shadcn 이름은 그대로", () => {
+    expect(registryDependencyName("button")).toBe("button")
+  })
+})
+
+describe("packageNameOf · packageOfSpecifier", () => {
+  it("버전 범위를 떼어 낸다", () => {
+    expect(packageNameOf("@tanstack/react-table@^8.21.3")).toBe("@tanstack/react-table")
+    expect(packageNameOf("mermaid@^11.16.0")).toBe("mermaid")
+    expect(packageNameOf("clsx")).toBe("clsx")
+  })
+
+  it("하위 경로 import 에서 패키지 이름만 남긴다", () => {
+    expect(packageOfSpecifier("@phosphor-icons/react/dist/ssr")).toBe("@phosphor-icons/react")
+    expect(packageOfSpecifier("date-fns/locale")).toBe("date-fns")
+  })
+})
+
+describe("providedPaths", () => {
+  it("registryDependencies 를 따라 전이적으로 모은다", () => {
+    const provided = providedPaths("route-error", registry)
+    expect(provided).toContain("components/route-error.tsx")
+    // 상류 shadcn 항목은 같은 자리에 깔린다.
+    expect(provided).toContain("components/ui/button.tsx")
+  })
+
+  it("같은 항목을 여러 번 물어도 결과가 같다", () => {
+    expect([...providedPaths("route-error", registry)]).toEqual([...providedPaths("route-error", registry)])
+  })
+})
+
+describe("배포 가능성 — 이슈 #52", () => {
+  it("모든 레지스트리 항목의 import 가 설치본 안에서 해소된다", () => {
+    const broken = registry.items
+      .map((item) => ({ item, problems: unresolvedImports(item, registry) }))
+      .filter((r) => r.problems.length > 0)
+
+    const report = broken
+      .map(
+        ({ item, problems }) =>
+          `${item.name}\n` +
+          [...new Set(problems.map((p) => `  ${p.from} → ${p.specifier}`))].sort().join("\n"),
+      )
+      .join("\n")
+
+    expect(
+      broken.length,
+      `shadcn add 로 설치하면 import 가 끊어지는 항목이 있다 — files 나 registryDependencies 에 빠진 것을 넣어라:\n${report}`,
+    ).toBe(0)
+  })
+
+  it("항목이 import 하는 npm 패키지가 설치본에 선언돼 있다", () => {
+    const broken = registry.items
+      .map((item) => ({ item, problems: undeclaredPackages(item, registry) }))
+      .filter((r) => r.problems.length > 0)
+
+    const report = broken
+      .map(({ item, problems }) => `${item.name}: ${[...new Set(problems.map((p) => p.pkg))].join(", ")}`)
+      .join("\n")
+
+    expect(broken.length, `dependencies 에 빠진 npm 패키지가 있다:\n${report}`).toBe(0)
+  })
+
+  it("npm 의존성에 버전 범위가 박혀 있다 — 없으면 latest 가 깔려 메이저가 어긋난다", () => {
+    for (const item of registry.items) {
+      for (const dep of item.dependencies ?? []) {
+        expect(dep, `${item.name} 의 ${dep} 에 버전 범위가 없다`).not.toBe(packageNameOf(dep))
+      }
+    }
+  })
+
+  it("registryDependencies 가 가리키는 항목이 실제로 존재한다", () => {
+    const names = new Set(registry.items.map((i) => i.name))
+    const upstream = upstreamComponentNames()
+    for (const item of registry.items) {
+      for (const dep of item.registryDependencies ?? []) {
+        const name = registryDependencyName(dep)
+        if (dep.startsWith("https://ui.doksam.com/")) {
+          expect(names, `${item.name} 이 없는 항목 ${dep} 를 가리킨다`).toContain(name)
+        } else {
+          // bare 이름은 상류 shadcn 항목 — 상류에 없으면 소비자의 add 가 실패한다.
+          expect(upstream, `${item.name} 의 ${dep} 는 상류 shadcn 에 없는 이름이다`).toContain(name)
+        }
+      }
+    }
+  })
+
+  it("항목이 싣는 파일은 레포에 실제로 있다", () => {
+    for (const item of registry.items) {
+      for (const f of item.files ?? []) {
+        expect(fileExists(f.path), `${item.name} 의 ${f.path} 가 없다`).toBe(true)
+      }
+    }
+  })
+
+  it("별칭이 있는 디렉터리의 파일에는 target 을 박지 않는다 — src/ 레이아웃 소비자가 깨진다", () => {
+    const ALIASED = ["components/", "lib/", "hooks/"]
+    for (const item of registry.items) {
+      for (const f of item.files ?? []) {
+        if (!ALIASED.some((prefix) => f.path.startsWith(prefix))) continue
+        expect(f.target, `${item.name} 의 ${f.path} 가 target 을 박아 별칭 해석을 우회한다`).toBeUndefined()
+      }
+    }
+  })
+})
+
+describe("파일 이름 충돌 — 이슈 #52", () => {
+  /**
+   * shadcn CLI 는 설치 시 `@/` import 를 그 설치가 싣는 파일 이름으로 다시 쓴다.
+   * 확장자를 뺀 이름이 같은 파일이 둘 있으면 엉뚱한 쪽으로 이어진다 —
+   * 실제로 template-bank 의 `_data/product-categories` import 가 설치 후
+   * `_components/product-categories` 를 가리켜 빌드가 깨졌다.
+   *
+   * 한 항목이 아니라 **한 번의 설치 전체**(전이 의존까지)에서 봐야 한다.
+   *
+   * Next 규약 파일(page·layout·loading·error 등)은 서로를 import 하지 않아 제외한다.
+   */
+  const NEXT_CONVENTION = new Set(["page", "layout", "loading", "error", "not-found", "template", "default", "index"])
+
+  it("한 번의 설치가 까는 파일들의 이름이 겹치지 않는다", () => {
+    for (const item of registry.items) {
+      const seen = new Map<string, string>()
+      for (const filePath of [...providedPaths(item.name, registry)].sort()) {
+        const stem = filePath.replace(/.*\//, "").replace(/\.[^.]+$/, "")
+        if (NEXT_CONVENTION.has(stem)) continue
+        const previous = seen.get(stem)
+        expect(
+          previous,
+          `${item.name} 설치: ${previous} 와 ${filePath} 의 파일 이름이 같다 — shadcn 이 import 를 엉뚱한 쪽으로 다시 쓴다`,
+        ).toBeUndefined()
+        seen.set(stem, filePath)
+      }
+    }
+  })
+})

@@ -2,7 +2,7 @@
  * 이슈 #52 — 레지스트리 항목별 "배포 시 끊어지는 import" 보고서.
  * 실행: npx tsx scripts/manual/2026-09-17_issue-52_registry-resolve-report.mts
  */
-import { readRegistry, unresolvedImports } from "../../lib/registry/closure"
+import { readRegistry, unresolvedImports } from "../registry/closure"
 
 const registry = readRegistry()
 let total = 0
