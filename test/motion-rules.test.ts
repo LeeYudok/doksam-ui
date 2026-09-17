@@ -10,7 +10,7 @@ import { collectFiles } from "./helpers/scan-build-output";
  * 실증한다. 규칙 문장만 있고 게이트가 없으면 카탈로그 항목이 늘어날 때마다 조용히
  * 어긋난다 — 실제로 이 규칙을 도입할 당시 transition-all 이 11곳에 있었다.
  *
- * 스캔 대상은 사람이 쓰는 소스뿐이다. `components/ui/` 는 shadcn CLI 원본이라
+ * 스캔 대상은 사람이 쓰는 소스뿐이다. `components/ui/` 는 상류 포맷을 따르는 영역이라
  * 「컴포넌트」 규칙상 수정 금지 대상이므로 명시적으로 제외한다.
  */
 
@@ -18,7 +18,7 @@ const REPO_ROOT = path.resolve(__dirname, "..");
 const SOURCE_DIRS = ["app", "components", "lib", "hooks", "themes"];
 const SOURCE_EXTENSIONS = [".ts", ".tsx", ".css"] as const;
 
-/** shadcn CLI 원본 — 수정 금지 대상이라 규칙 적용에서 제외한다. */
+/** shadcn 유래 프리미티브 — 상류 포맷을 따르므로 규칙 적용에서 제외한다(#48). */
 const SHADCN_ORIGINAL_DIR = `${path.join("components", "ui")}${path.sep}`;
 
 /**

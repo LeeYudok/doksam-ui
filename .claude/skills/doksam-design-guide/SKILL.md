@@ -38,7 +38,7 @@ UI 코드를 쓰기 전에 그 파일을 읽는다. 이 스킬은 규칙을 복�
 절대 어기지 않는 것 4가지만 여기 요약해 둔다(나머지는 위 파일 참조):
 
 - 하드코딩 색 0건 — 시맨틱 토큰만(`bg-background`, `text-destructive`, `text-chart-1`, `--gain`/`--loss`).
-- `components/ui/` 의 shadcn 원본은 수정하지 않는다 — 조합은 `components/` 또는 `components/patterns/` 에.
+- `components/ui/` 는 손대지 않은 shadcn 원본이 아니라 하우스 스타일 포크다(근거·재설치 절차는 `lib/rules-markdown.ts` "컴포넌트" 절과 `components/ui/upstream.manifest.json` 참고) — 임의로 상류 값으로 되돌리지 않는다. 커스텀 조합은 `components/` 또는 `components/patterns/` 에.
 - 아이콘은 Phosphor 기본(서버 컴포넌트는 `@phosphor-icons/react/dist/ssr`), 이모지 아이콘 금지.
 - 폐쇄망 전제 — 외부 CDN·외부 URL fetch 0건, 폰트는 `next/font/local` + `assets/fonts/` 벤더링.
 
@@ -63,7 +63,7 @@ UI 코드를 쓰기 전에 그 파일을 읽는다. 이 스킬은 규칙을 복�
 
 `ComponentLayer` 는 출처가 아니라 **조립 수준**으로 나눈다 (`lib/showcase/types.ts`).
 
-- `primitive` — shadcn CLI 가 `components/ui/` 에 설치한 저수준 빌딩블록. 수정 금지.
+- `primitive` — shadcn CLI 로 설치한 뒤 하우스 스타일을 적용한 `components/ui/` 저수준 빌딩블록. 커스터마이즈는 `upstream.manifest.json` + `scripts/shadcn-upstream.mjs` 절차로만 갱신하고, 화면 작업 중에는 수정하지 않는다.
 - `composition` — 프리미티브를 조합해 만든 상위 컴포넌트. `components/<name>.tsx` (kebab-case).
 
 카테고리(`ComponentCategory`)는 `form` · `overlay` · `layout` · `data` · `chat` ·
@@ -240,7 +240,7 @@ pnpm gen:llms         # registry.json → public/llms.txt (AI 발견용 카탈�
 
 | 종류 | 위치 | 표기 |
 |---|---|---|
-| shadcn 프리미티브 | `components/ui/<name>.tsx` | kebab-case, **수정 금지** |
+| shadcn 프리미티브 | `components/ui/<name>.tsx` | kebab-case, 화면 작업 중 수정 금지(하우스 스타일 갱신은 `upstream.manifest.json` 절차로만) |
 | 조합 컴포넌트 | `components/<name>.tsx` | kebab-case |
 | 패턴 컴포넌트 | `components/patterns/<name>.tsx` | kebab-case |
 | 쇼케이스 셸 | `components/showcase/<name>.tsx` | kebab-case |

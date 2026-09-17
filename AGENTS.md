@@ -40,8 +40,9 @@ doksam-ui 에서 AI 에이전트가 작업할 때 먼저 읽는 문서입니다.
 
 - **하드코딩 색 0건** — 시맨틱 토큰만 사용합니다(`bg-background`, `text-destructive`,
   `text-chart-1`). 시세 등락은 `--gain`/`--loss` (`lib/finance/rate.ts`).
-- **`components/ui/` 수정 금지** — shadcn CLI 원본입니다. 커스텀은 `components/`
-  또는 `components/patterns/` 에서 조합합니다.
+- **`components/ui/` 는 하우스 스타일 포크** — 손대지 않은 shadcn CLI 원본이 아닙니다.
+  자세한 근거·재설치 절차는 `lib/rules-markdown.ts` 의 "컴포넌트" 절을 참고하세요.
+  커스텀은 `components/` 또는 `components/patterns/` 에서 조합합니다.
 - **아이콘은 Phosphor 기본** — 서버 컴포넌트는 `@phosphor-icons/react/dist/ssr`.
   이모지를 아이콘 대용으로 쓰지 않습니다.
 - **폐쇄망 전제** — 외부 CDN·외부 URL fetch 0건. 폰트는 `next/font/local` +
@@ -83,7 +84,9 @@ pnpm build          # 프로덕션 빌드
 ```
 
 시각적 변화가 큰 작업 뒤에는 `pnpm test:vision`(Claude 비전 채점)을 추가로 돌립니다.
-이 게이트는 수동이며 CI 에 포함되지 않습니다.
+shadcn 유래 프리미티브를 건드렸거나 의존성을 올렸다면 `pnpm check:shadcn`(상류 드리프트 점검)도
+돌립니다. 두 게이트는 수동이며 CI 에 포함되지 않습니다 — 전자는 API, 후자는 외부 레지스트리
+조회가 필요해 폐쇄망 전제와 맞지 않기 때문입니다.
 
 작업을 마치기 전 확인:
 
