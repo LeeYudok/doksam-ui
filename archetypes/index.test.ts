@@ -9,7 +9,7 @@ const TEMPLATE_SLUGS = new Set(TEMPLATE_REGISTRY.map((t) => t.href.split("/").po
 const SHELL_TITLES = new Set(APP_SHELL_SAMPLES.map((s) => s.title));
 
 describe("LAYOUT_ARCHETYPES", () => {
-  it("설계에 명시된 9종 원형을 등록한다", () => {
+  it("설계에 명시된 10종 원형을 등록한다", () => {
     expect(LAYOUT_ARCHETYPES.map((a) => a.name)).toEqual([
       "sidebar-app",
       "top-nav-site",
@@ -20,6 +20,7 @@ describe("LAYOUT_ARCHETYPES", () => {
       "chat-workspace",
       "canvas",
       "doc-reader",
+      "focus-task",
     ]);
   });
 

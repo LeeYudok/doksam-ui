@@ -77,6 +77,10 @@ const DIVERSITY_ARCHETYPE_DESCRIPTIONS = {
   "chat-workspace": "A conversation list on the left (drawer on mobile) plus a center message scroller with a fixed input composer pinned to the bottom.",
   "canvas": "An infinite pannable/zoomable canvas fills the center, with a tool palette on the left edge and a properties panel on the right edge. No page-style navigation.",
   "doc-reader": "A document tree on the left, a narrow reading-width column of prose in the center, and a scroll-synced table of contents on the right.",
+  // Distinguished from top-nav-site (a landing hero can look superficially
+  // similar) by two screenshot-visible tests: is there ANY persistent nav
+  // chrome, and is there more than one task on the screen.
+  "focus-task": "One centered card holding a single task sits in the middle of an otherwise empty screen. No persistent navigation chrome of any kind (no sidebar, no top nav menu, no bottom tab bar, no footer link rows) — at most a bare brand mark — and nothing below the card to scroll to.",
 };
 
 export const DIVERSITY_ARCHETYPES = [

@@ -36,10 +36,10 @@ describe("rubric diversity metadata", () => {
     expect(new Set(ids).size).toBe(ids.length);
   });
 
-  it("DIVERSITY_ARCHETYPES vocabulary is derived from archetypes/index.ts's 9 layout archetypes + 'other' (issue #37 RC3)", () => {
+  it("DIVERSITY_ARCHETYPES vocabulary is derived from archetypes/index.ts's 10 layout archetypes + other (issue #37 RC3, #45)", () => {
     // This is the regression test for the core bug: the old vocabulary
     // (landing/catalog-grid/docs-prose/admin-sidebar/brokerage-dashboard/
-    // shop-grid/other) had no relationship to the catalog's real 9
+    // shop-grid/other) had no relationship to the catalog's real 10
     // archetypes, so vision-gate diversity scores couldn't be mapped back
     // onto them.
     const ids = DIVERSITY_ARCHETYPES.map((a) => a.id);

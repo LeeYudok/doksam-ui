@@ -7,6 +7,7 @@ import {
   GraphIcon,
   MagnifyingGlassIcon,
   ColumnsIcon,
+  FingerprintIcon,
   NavigationArrowIcon,
   NewspaperClippingIcon,
   NewspaperIcon,
@@ -242,5 +243,15 @@ export const TEMPLATE_REGISTRY: TemplateEntry[] = [
       "시간 역순 단일 세로 스트림이 주인공인 활동 피드. 날짜 버킷 그룹핑, 종류 필터 바, 더 보기 방식의 이어 붙이기로 끝이 정해지지 않은 흐름을 다룹니다.",
     stack: ["feed-timeline", "timeline", "badge", "avatar"],
     icon: NewspaperClippingIcon,
+  },
+  {
+    href: "/templates/passkey-auth",
+    title: "Passkey Auth",
+    profile: "console 프로필 · Ember 다크 · Geist",
+    archetype: "focus-task",
+    description:
+      "지속되는 내비 없이 가운데 카드 한 장이 과제 하나만 담는 패스키(WebAuthn) 인증 화면. 로그인 진입·인증기 대기·사용자 취소와 인증 실패 구분·등록·다른 기기 인증·기기 관리·문자 인증 대체 경로·미지원 환경까지 흐름의 상태를 모두 렌더합니다.",
+    stack: ["focus-task", "alert", "input-otp", "alert-dialog"],
+    icon: FingerprintIcon,
   },
 ]

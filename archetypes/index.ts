@@ -8,6 +8,7 @@ import {
   NavigationArrowIcon,
   PenNibIcon,
   SidebarIcon,
+  TargetIcon,
 } from "@phosphor-icons/react/dist/ssr";
 import type { Icon } from "@phosphor-icons/react";
 
@@ -178,6 +179,26 @@ export const LAYOUT_ARCHETYPES: LayoutArchetype[] = [
     templates: ["knowledge-base", "kubernetes-firewall"],
     avoidWhen: ["본문이 한 화면에 들어오는 짧은 글", "표·차트가 본문보다 많은 화면", "조작이 주가 되는 도구"],
     icon: ArticleIcon,
+  },
+  {
+    name: "focus-task",
+    label: "Focus Task",
+    description:
+      "지속되는 내비게이션 없이 화면 가운데 카드 하나에 과제 하나만 놓는 뼈대입니다. 과제를 끝내면 곧바로 떠나는, 사용자가 머물지 않는 화면에 맞습니다.",
+    suitedFor: ["로그인·OTP 등 인증 화면", "결제·삭제처럼 되돌릴 수 없는 확인 화면", "접근 차단·점검 안내·초대 수락"],
+    navigation:
+      "지속되는 내비게이션 없음 — 상단 브랜드 표기, 주 액션 버튼 1개와 보조 액션 1개, 하단 이탈용 보조 링크가 전부",
+    skeleton:
+      "상단 브랜드 표기 외 크롬 없음 → 화면 정중앙 카드 하나에 과제 하나(주 액션 1 + 보조 액션 1) → 하단 보조 링크. 사이드바·상단 메뉴·하단 탭바·푸터 내비 없음.",
+    shell: "집중형 셸",
+    templates: ["passkey-auth"],
+    avoidWhen: [
+      "한 화면에서 과제를 둘 이상 처리해야 하는 경우",
+      "사용자가 머물며 계속 작업하는 화면(목록·편집·대시보드)",
+      "다른 목적지로 자유롭게 오갈 수 있어야 하는 경우",
+      "단계가 여러 개라 진행률을 보여야 하는 절차 — wizard-flow 를 쓴다",
+    ],
+    icon: TargetIcon,
   },
 ];
 

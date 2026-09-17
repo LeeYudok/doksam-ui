@@ -1,6 +1,7 @@
 import {
   AppWindowIcon,
   ArticleIcon,
+  TargetIcon,
   ColumnsIcon,
   NewspaperClippingIcon,
   SidebarSimpleIcon,
@@ -279,6 +280,50 @@ export const APP_SHELL_SAMPLES: PatternSampleData[] = [
   },
   {
     num: 6,
+    title: "집중형 셸",
+    description:
+      "지속되는 내비게이션 없이 화면 정중앙 카드 하나에 과제 하나만 놓는 셸입니다 — focus-task 원형의 기본 뼈대입니다.",
+    demo: (
+      <div className="flex h-[160px] w-full flex-col overflow-hidden rounded-md border border-border bg-muted/20">
+        <div className="flex shrink-0 items-center gap-1 px-3 py-2">
+          <TargetIcon size={11} weight="regular" className="text-primary" />
+          <span className="text-[8px] font-semibold tracking-tight">서비스명</span>
+        </div>
+        <div className="flex flex-1 items-center justify-center px-3 pb-3">
+          <div className="flex w-[150px] flex-col gap-1.5 rounded border border-border bg-card px-3 py-2.5">
+            <p className="text-[10px] font-semibold tracking-tight">로그인</p>
+            <p className="text-[7px] text-muted-foreground">등록한 패스키로 계속합니다.</p>
+            <div className="mt-0.5 rounded bg-primary px-2 py-1 text-center text-[8px] text-primary-foreground">
+              주 액션
+            </div>
+            <div className="rounded border border-border px-2 py-1 text-center text-[8px] text-muted-foreground">
+              보조 액션
+            </div>
+            <span className="mt-0.5 text-center text-[7px] text-muted-foreground/80">도움이 필요하신가요?</span>
+          </div>
+        </div>
+      </div>
+    ),
+    code: `<div className="flex min-h-screen flex-col">
+  <header className="px-4 py-4">
+    {/* 브랜드 표기만 — 목적지 링크를 두지 않는다 */}
+  </header>
+  <main className="flex flex-1 items-center justify-center px-4 pb-16">
+    <div className="w-full max-w-sm">
+      {/* 카드 하나 = 과제 하나: 제목 → 설명 → 주 액션 → 보조 액션 → 보조 링크 */}
+      {children}
+    </div>
+  </main>
+</div>`,
+    notes: [
+      "카드 폭은 max-w-sm(384px) 안팎으로 좁히고 items-center justify-center 로 세로·가로 모두 중앙에 둔다 — 모바일에서는 그대로 한 칼럼이 된다.",
+      "상단에는 브랜드 표기만 남기고 목적지 링크·메뉴·탭바를 두지 않는다. 내비 크롬이 생기는 순간 이 셸이 아니라 헤더형 셸이다.",
+      "액션은 주 1개 + 보조 1개까지로 제한하고, 그 밖의 경로는 카드 하단 보조 링크로 내린다 — 버튼이 셋을 넘으면 과제가 하나가 아니라는 신호다.",
+      "인증·확인·차단 안내처럼 끝내고 떠나는 화면에 쓴다. 사용자가 머물며 계속 작업하는 화면에는 쓰지 않는다.",
+    ],
+  },
+  {
+    num: 7,
     title: "페이지 타이틀 패턴",
     description: "셸 종류와 무관하게 모든 페이지 상단에 반복되는 타이틀 3요소 구조입니다.",
     demo: (
@@ -311,7 +356,7 @@ export const APP_SHELL_SAMPLES: PatternSampleData[] = [
     ],
   },
   {
-    num: 7,
+    num: 8,
     title: "여백 밀도 스케일",
     description: "섹션 간격과 카드 내부 간격에 쓰는 gap 토큰 4단계입니다 — 임의의 gap 값을 새로 만들지 않는다.",
     demo: (
@@ -339,7 +384,7 @@ export const APP_SHELL_SAMPLES: PatternSampleData[] = [
     ],
   },
   {
-    num: 8,
+    num: 9,
     title: "반응형 브레이크포인트 규칙",
     description: "셸·그리드가 열을 바꾸는 기준점을 sm/md/lg/xl 4단계로 고정합니다.",
     demo: (
