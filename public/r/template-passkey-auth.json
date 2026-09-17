@@ -4,7 +4,19 @@
   "title": "Passkey Auth 템플릿",
   "description": "console 프로필 · Ember 다크 · Geist · focus-task 원형. 지속되는 내비 없이 가운데 카드 한 장이 과제 하나만 담는 패스키(WebAuthn) 인증 화면. 로그인 진입·인증기 대기·사용자 취소와 인증 실패 구분·등록·다른 기기 인증·기기 관리·문자 인증 대체 경로·미지원 환경까지 흐름의 상태를 모두 렌더합니다.",
   "dependencies": [
-    "@phosphor-icons/react"
+    "@phosphor-icons/react@^2.1.10"
+  ],
+  "registryDependencies": [
+    "alert",
+    "alert-dialog",
+    "badge",
+    "button",
+    "input-otp",
+    "separator",
+    "spinner",
+    "https://ui.doksam.com/r/profile-scope.json",
+    "https://ui.doksam.com/r/route-error.json",
+    "https://ui.doksam.com/r/route-loading.json"
   ],
   "files": [
     {

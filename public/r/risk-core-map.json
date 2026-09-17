@@ -4,7 +4,7 @@
   "title": "Risk Core Map",
   "description": "위험등급(tier)을 중심→외곽 동심원 밴드로 배치하고 노드 크기·글로우로 익스포저와 위험을 표현하는 리스크 코어 네트워크 맵.",
   "dependencies": [
-    "@phosphor-icons/react"
+    "@phosphor-icons/react@^2.1.10"
   ],
   "files": [
     {

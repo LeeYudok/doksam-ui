@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "diverging-bar",
+  "title": "Diverging Bar",
+  "description": "0을 중심으로 좌우로 뻗는 발산형 막대 — 증감·편차 비교에 쓴다.",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "components/patterns/dataviz/diverging-bar-demo.tsx",
+      "content": "interface DivergingItem {\n  label: string\n  value: number\n}\n\nconst FLOW_DATA: DivergingItem[] = [\n  { label: \"외국인\", value: 1240 },\n  { label: \"기관\", value: -860 },\n  { label: \"개인\", value: -410 },\n]\n\n/**\n * 발산형 막대 — 여러 항목이 중앙 0축을 공유하며, 음수는 왼쪽(destructive와 반대 방향인\n * 매도), 양수는 오른쪽으로 뻗는다. 길이는 |값|/maxAbs 비례(각 절반 영역 기준 %).\n * 0/누락 값은 막대를 그리지 않는다 — 최소폭 슬리버가 가짜 신호를 주지 않게 한다.\n */\nexport function DivergingBarDemo() {\n  const maxAbs = Math.max(...FLOW_DATA.map((d) => Math.abs(d.value)), 1)\n\n  return (\n    <div className=\"grid w-full grid-cols-[auto_1fr_auto] items-center gap-x-3 gap-y-2.5 text-sm\">\n      {FLOW_DATA.map((item) => {\n        const width = item.value ? Math.max((Math.abs(item.value) / maxAbs) * 100, 2) : 0\n        const isPositive = item.value > 0\n        const isNegative = item.value < 0\n        return (\n          <div key={item.label} className=\"contents\">\n            <span className=\"shrink-0 text-muted-foreground\">{item.label}</span>\n            <div className=\"relative h-2.5\">\n              <div className=\"absolute inset-y-0 left-1/2 w-px -translate-x-1/2 bg-border\" aria-hidden=\"true\" />\n              {isNegative && (\n                <div\n                  className=\"absolute inset-y-0 rounded-l-sm bg-loss\"\n                  style={{ right: \"50%\", width: `${width / 2}%` }}\n                  aria-hidden=\"true\"\n                />\n              )}\n              {isPositive && (\n                <div\n                  className=\"absolute inset-y-0 rounded-r-sm bg-gain\"\n                  style={{ left: \"50%\", width: `${width / 2}%` }}\n                  aria-hidden=\"true\"\n                />\n              )}\n            </div>\n            <span className={`shrink-0 text-right font-semibold tabular-nums ${isNegative ? \"text-loss\" : \"text-gain\"}`}>\n              {item.value >= 0 ? \"+\" : \"\"}\n              {item.value.toLocaleString()}\n            </span>\n          </div>\n        )\n      })}\n    </div>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}

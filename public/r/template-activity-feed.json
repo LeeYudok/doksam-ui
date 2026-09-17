@@ -4,7 +4,15 @@
   "title": "Activity Feed 템플릿",
   "description": "data 프로필 · Violet 다크 · Space Grotesk · feed-timeline 원형 · feed-timeline 원형. 시간 역순 단일 세로 스트림이 주인공인 활동 피드. 날짜 버킷 그룹핑, 종류 필터 바, 더 보기 방식의 이어 붙이기로 끝이 정해지지 않은 흐름을 다룹니다.",
   "dependencies": [
-    "@phosphor-icons/react"
+    "@phosphor-icons/react@^2.1.10"
+  ],
+  "registryDependencies": [
+    "avatar",
+    "badge",
+    "button",
+    "https://ui.doksam.com/r/profile-scope.json",
+    "https://ui.doksam.com/r/route-error.json",
+    "https://ui.doksam.com/r/route-loading.json"
   ],
   "files": [
     {

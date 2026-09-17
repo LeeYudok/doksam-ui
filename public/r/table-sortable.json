@@ -4,11 +4,11 @@
   "title": "Table Sortable",
   "description": "고정 헤더 + 스크롤 바디를 가진 제네릭 데이터 그리드. 컬럼 헤더 클릭 정렬(@tanstack/react-table), 행 드래그 순서 변경(@dnd-kit), 컬럼 표시/숨김 토글을 지원한다.",
   "dependencies": [
-    "@tanstack/react-table",
-    "@dnd-kit/core",
-    "@dnd-kit/sortable",
-    "@dnd-kit/utilities",
-    "@phosphor-icons/react"
+    "@tanstack/react-table@^8.21.3",
+    "@dnd-kit/core@^6.3.1",
+    "@dnd-kit/sortable@^10.0.0",
+    "@dnd-kit/utilities@^3.2.2",
+    "@phosphor-icons/react@^2.1.10"
   ],
   "registryDependencies": [
     "button",

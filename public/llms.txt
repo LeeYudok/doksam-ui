@@ -92,7 +92,7 @@ npx shadcn add https://ui.doksam.com/r/badge-extended.json
 
 registryDependencies: badge
 
-npm dependencies: class-variance-authority
+npm dependencies: class-variance-authority@^0.7.1
 
 ### Scroll Stack (`scroll-stack`)
 
@@ -110,9 +110,9 @@ navigator.clipboard로 텍스트를 복사하고 잠깐 "복사됨" 피드백을
 npx shadcn add https://ui.doksam.com/r/copy-button.json
 ```
 
-registryDependencies: button
+registryDependencies: button, https://ui.doksam.com/r/i18n-provider.json
 
-npm dependencies: @phosphor-icons/react
+npm dependencies: @phosphor-icons/react@^2.1.10
 
 ### Kebab Menu (`kebab-menu`)
 
@@ -124,7 +124,7 @@ npx shadcn add https://ui.doksam.com/r/kebab-menu.json
 
 registryDependencies: button, dropdown-menu
 
-npm dependencies: @phosphor-icons/react
+npm dependencies: @phosphor-icons/react@^2.1.10, class-variance-authority@^0.7.1
 
 ### Tooltip Icon Button (`tooltip-icon-button`)
 
@@ -136,6 +136,8 @@ npx shadcn add https://ui.doksam.com/r/tooltip-icon-button.json
 
 registryDependencies: button, tooltip
 
+npm dependencies: class-variance-authority@^0.7.1
+
 ### Table Sortable (`table-sortable`)
 
 고정 헤더 + 스크롤 바디를 가진 제네릭 데이터 그리드. 컬럼 헤더 클릭 정렬(@tanstack/react-table), 행 드래그 순서 변경(@dnd-kit), 컬럼 표시/숨김 토글을 지원한다.
@@ -146,7 +148,7 @@ npx shadcn add https://ui.doksam.com/r/table-sortable.json
 
 registryDependencies: button, dropdown-menu, table
 
-npm dependencies: @tanstack/react-table, @dnd-kit/core, @dnd-kit/sortable, @dnd-kit/utilities, @phosphor-icons/react
+npm dependencies: @tanstack/react-table@^8.21.3, @dnd-kit/core@^6.3.1, @dnd-kit/sortable@^10.0.0, @dnd-kit/utilities@^3.2.2, @phosphor-icons/react@^2.1.10
 
 ### Table Toggle (`table-toggle`)
 
@@ -158,7 +160,7 @@ npx shadcn add https://ui.doksam.com/r/table-toggle.json
 
 registryDependencies: switch, table
 
-npm dependencies: @phosphor-icons/react
+npm dependencies: @phosphor-icons/react@^2.1.10
 
 ### Screen Help Dialog (`screen-help-dialog`)
 
@@ -170,7 +172,7 @@ npx shadcn add https://ui.doksam.com/r/screen-help-dialog.json
 
 registryDependencies: button, dialog
 
-npm dependencies: @phosphor-icons/react
+npm dependencies: @phosphor-icons/react@^2.1.10
 
 ### Region Map (`region-map`)
 
@@ -190,7 +192,7 @@ registryDependencies: button
 npx shadcn add https://ui.doksam.com/r/json-tree.json
 ```
 
-npm dependencies: @phosphor-icons/react
+npm dependencies: @phosphor-icons/react@^2.1.10
 
 ### Log Viewer (`log-viewer`)
 
@@ -220,7 +222,7 @@ npx shadcn add https://ui.doksam.com/r/date-picker.json
 
 registryDependencies: button, calendar, popover
 
-npm dependencies: @phosphor-icons/react
+npm dependencies: @phosphor-icons/react@^2.1.10
 
 ### Date Range Picker (`date-range-picker`)
 
@@ -232,7 +234,7 @@ npx shadcn add https://ui.doksam.com/r/date-range-picker.json
 
 registryDependencies: button, calendar, popover
 
-npm dependencies: @phosphor-icons/react
+npm dependencies: @phosphor-icons/react@^2.1.10, react-day-picker@^10.0.1
 
 ### Multi Select (`multi-select`)
 
@@ -244,7 +246,7 @@ npx shadcn add https://ui.doksam.com/r/multi-select.json
 
 registryDependencies: badge, button, command, popover
 
-npm dependencies: @phosphor-icons/react
+npm dependencies: @phosphor-icons/react@^2.1.10
 
 ### Password Input (`password-input`)
 
@@ -256,7 +258,7 @@ npx shadcn add https://ui.doksam.com/r/password-input.json
 
 registryDependencies: input-group
 
-npm dependencies: @phosphor-icons/react
+npm dependencies: @phosphor-icons/react@^2.1.10
 
 ### Number Input (`number-input`)
 
@@ -268,7 +270,7 @@ npx shadcn add https://ui.doksam.com/r/number-input.json
 
 registryDependencies: input-group
 
-npm dependencies: @phosphor-icons/react
+npm dependencies: @phosphor-icons/react@^2.1.10
 
 ### Color Picker (`color-picker`)
 
@@ -280,7 +282,7 @@ npx shadcn add https://ui.doksam.com/r/color-picker.json
 
 registryDependencies: button, input, popover
 
-npm dependencies: @phosphor-icons/react
+npm dependencies: @phosphor-icons/react@^2.1.10
 
 ### Rating (`rating`)
 
@@ -290,7 +292,7 @@ npm dependencies: @phosphor-icons/react
 npx shadcn add https://ui.doksam.com/r/rating.json
 ```
 
-npm dependencies: @phosphor-icons/react
+npm dependencies: @phosphor-icons/react@^2.1.10
 
 ### Avatar Group (`avatar-group`)
 
@@ -318,7 +320,7 @@ npx shadcn add https://ui.doksam.com/r/circular-progress.json
 npx shadcn add https://ui.doksam.com/r/banner.json
 ```
 
-npm dependencies: class-variance-authority, @phosphor-icons/react
+npm dependencies: class-variance-authority@^0.7.1, @phosphor-icons/react@^2.1.10
 
 ### Code Block (`code-block`)
 
@@ -338,7 +340,7 @@ registryDependencies: https://ui.doksam.com/r/copy-button.json
 npx shadcn add https://ui.doksam.com/r/tree-view.json
 ```
 
-npm dependencies: @phosphor-icons/react
+npm dependencies: @phosphor-icons/react@^2.1.10
 
 ### Risk Core Map (`risk-core-map`)
 
@@ -348,7 +350,7 @@ npm dependencies: @phosphor-icons/react
 npx shadcn add https://ui.doksam.com/r/risk-core-map.json
 ```
 
-npm dependencies: @phosphor-icons/react
+npm dependencies: @phosphor-icons/react@^2.1.10
 
 ### Scenario Simulator (`scenario-simulator`)
 
@@ -358,7 +360,9 @@ npm dependencies: @phosphor-icons/react
 npx shadcn add https://ui.doksam.com/r/scenario-simulator.json
 ```
 
-npm dependencies: @phosphor-icons/react
+registryDependencies: card, native-select, https://ui.doksam.com/r/finance-rate.json
+
+npm dependencies: @phosphor-icons/react@^2.1.10
 
 ### Pipeline Rail (`pipeline-rail`)
 
@@ -368,7 +372,7 @@ npm dependencies: @phosphor-icons/react
 npx shadcn add https://ui.doksam.com/r/pipeline-rail.json
 ```
 
-npm dependencies: @phosphor-icons/react
+npm dependencies: @phosphor-icons/react@^2.1.10
 
 ### Stage Progress Board (`stage-progress-board`)
 
@@ -378,7 +382,9 @@ npm dependencies: @phosphor-icons/react
 npx shadcn add https://ui.doksam.com/r/stage-progress-board.json
 ```
 
-npm dependencies: @phosphor-icons/react
+registryDependencies: badge, card, progress
+
+npm dependencies: @phosphor-icons/react@^2.1.10
 
 ### Keyword Cloud (`keyword-cloud`)
 
@@ -388,7 +394,7 @@ npm dependencies: @phosphor-icons/react
 npx shadcn add https://ui.doksam.com/r/keyword-cloud.json
 ```
 
-npm dependencies: @phosphor-icons/react
+npm dependencies: @phosphor-icons/react@^2.1.10
 
 ### Contribution Bars (`contribution-bars`)
 
@@ -398,7 +404,7 @@ npm dependencies: @phosphor-icons/react
 npx shadcn add https://ui.doksam.com/r/contribution-bars.json
 ```
 
-npm dependencies: @phosphor-icons/react
+npm dependencies: @phosphor-icons/react@^2.1.10
 
 ### Live Indicator (`live-indicator`)
 
@@ -408,7 +414,7 @@ live/paused/stale/offline 상태를 펄스 도트와 갱신 시각으로 보여�
 npx shadcn add https://ui.doksam.com/r/live-indicator.json
 ```
 
-npm dependencies: @phosphor-icons/react
+npm dependencies: @phosphor-icons/react@^2.1.10
 
 ### Mermaid Viewer (`mermaid-viewer`)
 
@@ -418,7 +424,97 @@ mermaid 코드를 동적 로드로 SVG 렌더링하는 다이어그램 뷰어.
 npx shadcn add https://ui.doksam.com/r/mermaid-viewer.json
 ```
 
-npm dependencies: mermaid, @phosphor-icons/react
+registryDependencies: spinner
+
+npm dependencies: mermaid@^11.16.0, @phosphor-icons/react@^2.1.10
+
+### I18n Provider (`i18n-provider`)
+
+로케일 4종(ko·en·ja·zh·es) 메시지 사전과 로케일 선택을 담는 Context Provider. 외부 i18n 의존성 없이 동작하며 선택은 localStorage 에 남는다.
+
+```
+npx shadcn add https://ui.doksam.com/r/i18n-provider.json
+```
+
+registryDependencies: https://ui.doksam.com/r/theme-storage.json
+
+### Route Error (`route-error`)
+
+Next App Router 의 error.tsx 가 그대로 쓰는 오류 화면. 다시 시도 버튼과 digest 표기를 표준화한다.
+
+```
+npx shadcn add https://ui.doksam.com/r/route-error.json
+```
+
+registryDependencies: button
+
+npm dependencies: @phosphor-icons/react@^2.1.10
+
+### Route Loading (`route-loading`)
+
+Next App Router 의 loading.tsx 가 그대로 쓰는 스켈레톤 화면. 라우트 전환 중 레이아웃이 튀지 않도록 높이를 잡아 둔다.
+
+```
+npx shadcn add https://ui.doksam.com/r/route-loading.json
+```
+
+registryDependencies: skeleton
+
+### Sparkline (`sparkline`)
+
+축·범례 없이 추세만 보여 주는 소형 라인 차트. 기준선·밴드·마커를 옵션으로 얹을 수 있고 recharts 없이 SVG 로 그린다.
+
+```
+npx shadcn add https://ui.doksam.com/r/sparkline.json
+```
+
+### Return Curve (`return-curve`)
+
+누적 수익률 곡선 — 0선을 기준으로 이익/손실 구간을 나눠 칠하는 영역 차트.
+
+```
+npx shadcn add https://ui.doksam.com/r/return-curve.json
+```
+
+### Diverging Bar (`diverging-bar`)
+
+0을 중심으로 좌우로 뻗는 발산형 막대 — 증감·편차 비교에 쓴다.
+
+```
+npx shadcn add https://ui.doksam.com/r/diverging-bar.json
+```
+
+### Activity Heatmap (`activity-heatmap`)
+
+날짜별 활동량을 격자 밀도로 보여 주는 히트맵.
+
+```
+npx shadcn add https://ui.doksam.com/r/activity-heatmap.json
+```
+
+### Content Feed (`content-feed`)
+
+같은 목록을 그리드·리스트·테이블 세 표현으로 전환해 보여 주는 콘텐츠 피드.
+
+```
+npx shadcn add https://ui.doksam.com/r/content-feed.json
+```
+
+registryDependencies: badge, table
+
+npm dependencies: @phosphor-icons/react@^2.1.10
+
+### List Controls (`list-controls`)
+
+목록 상단의 검색·정렬·페이지네이션 컨트롤 묶음.
+
+```
+npx shadcn add https://ui.doksam.com/r/list-controls.json
+```
+
+registryDependencies: button, input, pagination
+
+npm dependencies: @phosphor-icons/react@^2.1.10
 
 ## 라이브러리/유틸
 
@@ -453,6 +549,24 @@ npx shadcn add https://ui.doksam.com/r/finance-normalize-color.json
 ```
 npx shadcn add https://ui.doksam.com/r/format-biz-no.json
 ```
+
+### Theme Storage (`theme-storage`)
+
+테마·프로필·로케일 선택을 localStorage 에 담을 때 쓰는 키와 안전한 읽기/쓰기 헬퍼. 서버 렌더와 클라이언트 하이드레이션 사이에서 값이 어긋나지 않도록 초기화 순서를 고정한다.
+
+```
+npx shadcn add https://ui.doksam.com/r/theme-storage.json
+```
+
+### Profile Scope (`profile-scope`)
+
+브랜드 프로필·성격 프리셋·모서리·타입 대비 네 축을 한 곳에서 해소해 레이아웃이 걸 data-* 속성과 클래스로 만들어 주는 헬퍼. 템플릿 레이아웃이 프로필을 스코프할 때 쓴다.
+
+```
+npx shadcn add https://ui.doksam.com/r/profile-scope.json
+```
+
+registryDependencies: https://ui.doksam.com/r/theme-storage.json
 
 ## 프로필(테마+폰트+radius)
 
@@ -506,9 +620,9 @@ data 프로필(Violet 다크·Space Grotesk) 트레이딩 대시보드 풀 템�
 npx shadcn add https://ui.doksam.com/r/template-trading.json
 ```
 
-registryDependencies: https://ui.doksam.com/r/table-sortable.json, https://ui.doksam.com/r/finance-rate.json, https://ui.doksam.com/r/finance-format-won.json
+registryDependencies: badge, card, https://ui.doksam.com/r/activity-heatmap.json, https://ui.doksam.com/r/diverging-bar.json, https://ui.doksam.com/r/finance-format-won.json, https://ui.doksam.com/r/finance-rate.json, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/return-curve.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json, https://ui.doksam.com/r/sparkline.json, https://ui.doksam.com/r/table-sortable.json
 
-npm dependencies: @tanstack/react-table, @dnd-kit/core, @dnd-kit/sortable, @phosphor-icons/react
+npm dependencies: @tanstack/react-table@^8.21.3, @dnd-kit/core@^6.3.1, @dnd-kit/sortable@^10.0.0, @phosphor-icons/react@^2.1.10
 
 ### Admin/Backoffice Pro 템플릿 (`template-admin`)
 
@@ -518,9 +632,9 @@ admin 프로필(Slate·Geist) 관리자 대시보드 — 사이드바 셸·정�
 npx shadcn add https://ui.doksam.com/r/template-admin.json
 ```
 
-registryDependencies: https://ui.doksam.com/r/table-sortable.json, https://ui.doksam.com/r/json-tree.json, https://ui.doksam.com/r/log-viewer.json, https://ui.doksam.com/r/request-inspector.json
+registryDependencies: card, input, label, select, separator, sheet, switch, https://ui.doksam.com/r/json-tree.json, https://ui.doksam.com/r/log-viewer.json, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/request-inspector.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json, https://ui.doksam.com/r/table-sortable.json
 
-npm dependencies: @tanstack/react-table, @dnd-kit/core, @dnd-kit/sortable, @phosphor-icons/react
+npm dependencies: @tanstack/react-table@^8.21.3, @dnd-kit/core@^6.3.1, @dnd-kit/sortable@^10.0.0, @phosphor-icons/react@^2.1.10
 
 ### SaaS Landing + Dashboard 템플릿 (`template-saas`)
 
@@ -530,9 +644,9 @@ service 프로필(Ocean·Noto Sans KR) 랜딩+대시보드+피드 — 히어로�
 npx shadcn add https://ui.doksam.com/r/template-saas.json
 ```
 
-registryDependencies: https://ui.doksam.com/r/screen-help-dialog.json
+registryDependencies: accordion, badge, card, https://ui.doksam.com/r/content-feed.json, https://ui.doksam.com/r/list-controls.json, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json, https://ui.doksam.com/r/screen-help-dialog.json
 
-npm dependencies: @phosphor-icons/react
+npm dependencies: @phosphor-icons/react@^2.1.10
 
 ### Chat / AI Assistant 템플릿 (`template-chat`)
 
@@ -542,9 +656,9 @@ data 프로필(Violet 다크·Space Grotesk) AI 어시스턴트 대화 템플릿
 npx shadcn add https://ui.doksam.com/r/template-chat.json
 ```
 
-registryDependencies: https://ui.doksam.com/r/screen-help-dialog.json
+registryDependencies: attachment, avatar, badge, bubble, card, input-group, label, message, message-scroller, radio-group, select, separator, sheet, slider, switch, textarea, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json, https://ui.doksam.com/r/screen-help-dialog.json
 
-npm dependencies: @phosphor-icons/react
+npm dependencies: @phosphor-icons/react@^2.1.10
 
 ### E-commerce Storefront 템플릿 (`template-shop`)
 
@@ -554,7 +668,9 @@ service 프로필(Ocean·Noto Sans KR) 커머스 템플릿 — 스토어프론�
 npx shadcn add https://ui.doksam.com/r/template-shop.json
 ```
 
-npm dependencies: @phosphor-icons/react
+registryDependencies: badge, button, card, carousel, empty, label, progress, radio-group, separator, table, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json
+
+npm dependencies: @phosphor-icons/react@^2.1.10
 
 ### Bank Portal 템플릿 (`template-bank`)
 
@@ -564,7 +680,9 @@ service 프로필(Ocean·Noto Sans KR) 리테일 뱅크 포털 홈 — 히어로
 npx shadcn add https://ui.doksam.com/r/template-bank.json
 ```
 
-npm dependencies: @phosphor-icons/react
+registryDependencies: badge, button, card, carousel, tabs, toggle-group, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json
+
+npm dependencies: @phosphor-icons/react@^2.1.10
 
 ### Brokerage Market Home 템플릿 (`template-brokerage`)
 
@@ -574,7 +692,9 @@ service 프로필(Ocean·Noto Sans KR) 증권 마켓 홈 — 시장 지표·실�
 npx shadcn add https://ui.doksam.com/r/template-brokerage.json
 ```
 
-npm dependencies: @phosphor-icons/react
+registryDependencies: avatar, badge, button, card, table, tabs, https://ui.doksam.com/r/finance-format-won.json, https://ui.doksam.com/r/finance-rate.json, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json, https://ui.doksam.com/r/sparkline.json
+
+npm dependencies: @phosphor-icons/react@^2.1.10
 
 ### Mail Workspace 템플릿 (`template-mail-workspace`)
 
@@ -584,7 +704,9 @@ admin 프로필 · Slate · Geist · split-pane 원형 · split-pane 원형. 좌
 npx shadcn add https://ui.doksam.com/r/template-mail-workspace.json
 ```
 
-npm dependencies: @phosphor-icons/react
+registryDependencies: avatar, badge, button, input, separator, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json
+
+npm dependencies: @phosphor-icons/react@^2.1.10
 
 ### Activity Feed 템플릿 (`template-activity-feed`)
 
@@ -594,7 +716,9 @@ data 프로필 · Violet 다크 · Space Grotesk · feed-timeline 원형 · feed
 npx shadcn add https://ui.doksam.com/r/template-activity-feed.json
 ```
 
-npm dependencies: @phosphor-icons/react
+registryDependencies: avatar, badge, button, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json
+
+npm dependencies: @phosphor-icons/react@^2.1.10
 
 ### Marketing Site 템플릿 (`template-marketing-site`)
 
@@ -604,7 +728,9 @@ service 프로필 · Ocean 라이트 · Noto Sans KR · top-nav-site 원형 · t
 npx shadcn add https://ui.doksam.com/r/template-marketing-site.json
 ```
 
-npm dependencies: @phosphor-icons/react
+registryDependencies: accordion, badge, button, card, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json
+
+npm dependencies: @phosphor-icons/react@^2.1.10
 
 ### Knowledge Base 템플릿 (`template-knowledge-base`)
 
@@ -614,9 +740,9 @@ admin 프로필 · Slate · Geist · doc-reader 원형. 위키 문서 트리·�
 npx shadcn add https://ui.doksam.com/r/template-knowledge-base.json
 ```
 
-registryDependencies: https://ui.doksam.com/r/tree-view.json
+registryDependencies: badge, tabs, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json, https://ui.doksam.com/r/tree-view.json
 
-npm dependencies: @phosphor-icons/react
+npm dependencies: @phosphor-icons/react@^2.1.10
 
 ### Crawler Ops Console 템플릿 (`template-crawler-console`)
 
@@ -626,9 +752,9 @@ admin 프로필 · Slate · Geist · wizard-flow 원형. 수집·갱신·감지 
 npx shadcn add https://ui.doksam.com/r/template-crawler-console.json
 ```
 
-registryDependencies: https://ui.doksam.com/r/live-indicator.json, https://ui.doksam.com/r/screen-help-dialog.json
+registryDependencies: badge, card, progress, table, textarea, https://ui.doksam.com/r/live-indicator.json, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json, https://ui.doksam.com/r/screen-help-dialog.json
 
-npm dependencies: @phosphor-icons/react
+npm dependencies: @phosphor-icons/react@^2.1.10
 
 ### Term Network Explorer 템플릿 (`template-glossary`)
 
@@ -638,7 +764,9 @@ data 프로필 · Violet 다크 · Space Grotesk · canvas 원형. SDLC·AI 용�
 npx shadcn add https://ui.doksam.com/r/template-glossary.json
 ```
 
-npm dependencies: @phosphor-icons/react
+registryDependencies: badge, input, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json
+
+npm dependencies: @phosphor-icons/react@^2.1.10
 
 ### Passkey Auth 템플릿 (`template-passkey-auth`)
 
@@ -648,7 +776,9 @@ console 프로필 · Ember 다크 · Geist · focus-task 원형. 지속되는 �
 npx shadcn add https://ui.doksam.com/r/template-passkey-auth.json
 ```
 
-npm dependencies: @phosphor-icons/react
+registryDependencies: alert, alert-dialog, badge, button, input-otp, separator, spinner, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json
+
+npm dependencies: @phosphor-icons/react@^2.1.10
 
 ## 링크
 

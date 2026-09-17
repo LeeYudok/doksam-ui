@@ -4,7 +4,16 @@
   "title": "Marketing Site 템플릿",
   "description": "service 프로필 · Ocean 라이트 · Noto Sans KR · top-nav-site 원형 · top-nav-site 원형. 사이드바 없이 상단 가로 내비 아래로 히어로·기능·동작 방식·요금·FAQ 섹션이 세로로 흐르는 마케팅 사이트. 처음 온 사람에게 설명하고 한 가지 행동으로 이끄는 뼈대입니다.",
   "dependencies": [
-    "@phosphor-icons/react"
+    "@phosphor-icons/react@^2.1.10"
+  ],
+  "registryDependencies": [
+    "accordion",
+    "badge",
+    "button",
+    "card",
+    "https://ui.doksam.com/r/profile-scope.json",
+    "https://ui.doksam.com/r/route-error.json",
+    "https://ui.doksam.com/r/route-loading.json"
   ],
   "files": [
     {

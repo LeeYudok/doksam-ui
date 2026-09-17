@@ -4,7 +4,7 @@
   "title": "Date Picker",
   "description": "calendar+popover 단일 날짜 선택기.",
   "dependencies": [
-    "@phosphor-icons/react"
+    "@phosphor-icons/react@^2.1.10"
   ],
   "registryDependencies": [
     "button",

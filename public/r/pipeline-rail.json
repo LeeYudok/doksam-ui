@@ -4,7 +4,7 @@
   "title": "Pipeline Rail",
   "description": "원형 번호 노드 레일과 서브탭 2단으로 프로세스 단계를 탐색하는 파이프라인 스텝퍼.",
   "dependencies": [
-    "@phosphor-icons/react"
+    "@phosphor-icons/react@^2.1.10"
   ],
   "files": [
     {

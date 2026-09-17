@@ -4,7 +4,7 @@
   "title": "Multi Select",
   "description": "command 팝오버 다중 선택 + 칩.",
   "dependencies": [
-    "@phosphor-icons/react"
+    "@phosphor-icons/react@^2.1.10"
   ],
   "registryDependencies": [
     "badge",

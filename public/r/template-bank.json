@@ -4,7 +4,18 @@
   "title": "Bank Portal 템플릿",
   "description": "service 프로필(Ocean·Noto Sans KR) 리테일 뱅크 포털 홈 — 히어로 캐러셀·퀵서비스 탭·프로모·금융상품·바로가기·뜨는상품·새소식(가상 은행 누리은행).",
   "dependencies": [
-    "@phosphor-icons/react"
+    "@phosphor-icons/react@^2.1.10"
+  ],
+  "registryDependencies": [
+    "badge",
+    "button",
+    "card",
+    "carousel",
+    "tabs",
+    "toggle-group",
+    "https://ui.doksam.com/r/profile-scope.json",
+    "https://ui.doksam.com/r/route-error.json",
+    "https://ui.doksam.com/r/route-loading.json"
   ],
   "files": [
     {
@@ -51,7 +62,7 @@
     },
     {
       "path": "app/templates/bank/_components/product-categories.tsx",
-      "content": "import Link from \"next/link\"\n\nimport { PRODUCT_CATEGORIES } from \"@/app/templates/bank/_data/product-categories\"\n\nexport function ProductCategories() {\n  return (\n    <section aria-label=\"금융상품 카테고리\" className=\"flex flex-col gap-4\">\n      <h2 className=\"text-lg font-semibold tracking-tight text-foreground\">금융상품</h2>\n      <div className=\"grid grid-cols-2 gap-4 sm:grid-cols-4\">\n        {PRODUCT_CATEGORIES.map((category) => {\n          const Icon = category.icon\n          return (\n            <Link\n              key={category.key}\n              href={category.href}\n              className=\"flex flex-col items-center gap-2 rounded-xl p-3 text-center transition-colors hover:bg-muted/60\"\n            >\n              <span className=\"flex size-16 items-center justify-center rounded-full bg-primary/10 text-primary\">\n                <Icon size={28} weight=\"duotone\" />\n              </span>\n              <span className=\"text-sm font-medium text-foreground\">{category.label}</span>\n            </Link>\n          )\n        })}\n      </div>\n    </section>\n  )\n}\n",
+      "content": "import Link from \"next/link\"\n\nimport { PRODUCT_CATEGORIES } from \"@/app/templates/bank/_data/product-categories-data\"\n\nexport function ProductCategories() {\n  return (\n    <section aria-label=\"금융상품 카테고리\" className=\"flex flex-col gap-4\">\n      <h2 className=\"text-lg font-semibold tracking-tight text-foreground\">금융상품</h2>\n      <div className=\"grid grid-cols-2 gap-4 sm:grid-cols-4\">\n        {PRODUCT_CATEGORIES.map((category) => {\n          const Icon = category.icon\n          return (\n            <Link\n              key={category.key}\n              href={category.href}\n              className=\"flex flex-col items-center gap-2 rounded-xl p-3 text-center transition-colors hover:bg-muted/60\"\n            >\n              <span className=\"flex size-16 items-center justify-center rounded-full bg-primary/10 text-primary\">\n                <Icon size={28} weight=\"duotone\" />\n              </span>\n              <span className=\"text-sm font-medium text-foreground\">{category.label}</span>\n            </Link>\n          )\n        })}\n      </div>\n    </section>\n  )\n}\n",
       "type": "registry:page",
       "target": "app/templates/bank/_components/product-categories.tsx"
     },
@@ -75,7 +86,7 @@
     },
     {
       "path": "app/templates/bank/_components/trending-products.tsx",
-      "content": "import Link from \"next/link\"\n\nimport { Badge } from \"@/components/ui/badge\"\nimport { Card, CardContent } from \"@/components/ui/card\"\nimport { TRENDING_PRODUCTS } from \"@/app/templates/bank/_data/trending-products\"\n\nexport function TrendingProducts() {\n  return (\n    <section aria-label=\"지금 뜨는 상품\" className=\"flex flex-col gap-4\">\n      <h2 className=\"text-lg font-semibold tracking-tight text-foreground\">지금 뜨는 상품</h2>\n      <div className=\"grid grid-cols-1 gap-4 sm:grid-cols-3\">\n        {TRENDING_PRODUCTS.map((product) => (\n          <Link key={product.id} href={product.href}>\n            <Card className=\"h-full overflow-hidden py-0 transition-colors hover:bg-muted/40\">\n              <div aria-hidden className={`h-24 w-full ${product.gradientClass}`} />\n              <CardContent className=\"flex flex-col gap-2 py-4\">\n                <Badge variant=\"outline\" className=\"w-fit\">\n                  {product.category}\n                </Badge>\n                <h3 className=\"text-sm font-semibold text-foreground\">{product.name}</h3>\n                <p className=\"text-sm font-bold text-primary\">{product.rateLabel}</p>\n                <p className=\"text-sm text-muted-foreground\">{product.description}</p>\n              </CardContent>\n            </Card>\n          </Link>\n        ))}\n      </div>\n    </section>\n  )\n}\n",
+      "content": "import Link from \"next/link\"\n\nimport { Badge } from \"@/components/ui/badge\"\nimport { Card, CardContent } from \"@/components/ui/card\"\nimport { TRENDING_PRODUCTS } from \"@/app/templates/bank/_data/trending-products-data\"\n\nexport function TrendingProducts() {\n  return (\n    <section aria-label=\"지금 뜨는 상품\" className=\"flex flex-col gap-4\">\n      <h2 className=\"text-lg font-semibold tracking-tight text-foreground\">지금 뜨는 상품</h2>\n      <div className=\"grid grid-cols-1 gap-4 sm:grid-cols-3\">\n        {TRENDING_PRODUCTS.map((product) => (\n          <Link key={product.id} href={product.href}>\n            <Card className=\"h-full overflow-hidden py-0 transition-colors hover:bg-muted/40\">\n              <div aria-hidden className={`h-24 w-full ${product.gradientClass}`} />\n              <CardContent className=\"flex flex-col gap-2 py-4\">\n                <Badge variant=\"outline\" className=\"w-fit\">\n                  {product.category}\n                </Badge>\n                <h3 className=\"text-sm font-semibold text-foreground\">{product.name}</h3>\n                <p className=\"text-sm font-bold text-primary\">{product.rateLabel}</p>\n                <p className=\"text-sm text-muted-foreground\">{product.description}</p>\n              </CardContent>\n            </Card>\n          </Link>\n        ))}\n      </div>\n    </section>\n  )\n}\n",
       "type": "registry:page",
       "target": "app/templates/bank/_components/trending-products.tsx"
     },
@@ -98,10 +109,10 @@
       "target": "app/templates/bank/_data/news.ts"
     },
     {
-      "path": "app/templates/bank/_data/product-categories.ts",
+      "path": "app/templates/bank/_data/product-categories-data.ts",
       "content": "import type { Icon } from \"@phosphor-icons/react\"\nimport { ChartPieIcon, CoinsIcon, CurrencyCircleDollarIcon, PiggyBankIcon } from \"@phosphor-icons/react/dist/ssr\"\n\n/** 금융상품 원형 카테고리 4종 — 예금/신탁·대출·펀드·외환. */\nexport interface ProductCategory {\n  key: string\n  label: string\n  icon: Icon\n  href: string\n}\n\nexport const PRODUCT_CATEGORIES: ProductCategory[] = [\n  { key: \"deposit-trust\", label: \"예금/신탁\", icon: PiggyBankIcon, href: \"#category-deposit-trust\" },\n  { key: \"loan\", label: \"대출\", icon: CoinsIcon, href: \"#category-loan\" },\n  { key: \"fund\", label: \"펀드\", icon: ChartPieIcon, href: \"#category-fund\" },\n  { key: \"forex\", label: \"외환\", icon: CurrencyCircleDollarIcon, href: \"#category-forex\" },\n]\n",
       "type": "registry:page",
-      "target": "app/templates/bank/_data/product-categories.ts"
+      "target": "app/templates/bank/_data/product-categories-data.ts"
     },
     {
       "path": "app/templates/bank/_data/promos.ts",
@@ -128,10 +139,10 @@
       "target": "app/templates/bank/_data/site.ts"
     },
     {
-      "path": "app/templates/bank/_data/trending-products.ts",
+      "path": "app/templates/bank/_data/trending-products-data.ts",
       "content": "/** \"지금 뜨는 상품\" 카드 3종 — 예금·적금·대출. 이미지는 CSS 그라디언트로 대체한다. */\nexport interface TrendingProduct {\n  id: string\n  category: \"예금\" | \"적금\" | \"대출\"\n  name: string\n  rateLabel: string\n  description: string\n  /** 카드 상단 이미지 대체 그라디언트(시맨틱 토큰 조합). */\n  gradientClass: string\n  href: string\n}\n\nexport const TRENDING_PRODUCTS: TrendingProduct[] = [\n  {\n    id: \"steady-deposit\",\n    category: \"예금\",\n    name: \"누리 든든 정기예금\",\n    rateLabel: \"연 3.8%\",\n    description: \"가입 기간 1년, 중도해지도 최소한의 이자를 보장하는 정기예금입니다.\",\n    gradientClass: \"bg-gradient-to-br from-primary/70 to-primary/20\",\n    href: \"#trending-steady-deposit\",\n  },\n  {\n    id: \"goal-saving\",\n    category: \"적금\",\n    name: \"누리 목표달성 자유적금\",\n    rateLabel: \"최대 연 5.2%\",\n    description: \"저축 목표를 설정하면 달성률에 따라 우대금리를 추가로 제공합니다.\",\n    gradientClass: \"bg-gradient-to-br from-accent/70 to-accent/20\",\n    href: \"#trending-goal-saving\",\n  },\n  {\n    id: \"home-loan\",\n    category: \"대출\",\n    name: \"누리 보금자리 주택담보대출\",\n    rateLabel: \"연 3.5%~\",\n    description: \"고정금리와 변동금리 중 선택 가능한 실수요자 전용 주택담보대출입니다.\",\n    gradientClass: \"bg-gradient-to-br from-secondary to-secondary/40\",\n    href: \"#trending-home-loan\",\n  },\n]\n",
       "type": "registry:page",
-      "target": "app/templates/bank/_data/trending-products.ts"
+      "target": "app/templates/bank/_data/trending-products-data.ts"
     }
   ],
   "type": "registry:block"

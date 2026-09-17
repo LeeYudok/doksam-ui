@@ -4,7 +4,7 @@
   "title": "Keyword Cloud",
   "description": "빈도를 3단계 티어의 pill 크기·강조로 표현하고 클릭 시 관련 항목을 펼치는 키워드 클라우드.",
   "dependencies": [
-    "@phosphor-icons/react"
+    "@phosphor-icons/react@^2.1.10"
   ],
   "files": [
     {

@@ -4,7 +4,7 @@
   "title": "Number Input",
   "description": "+/- 스테퍼 숫자 입력.",
   "dependencies": [
-    "@phosphor-icons/react"
+    "@phosphor-icons/react@^2.1.10"
   ],
   "registryDependencies": [
     "input-group"

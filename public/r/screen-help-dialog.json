@@ -4,7 +4,7 @@
   "title": "Screen Help Dialog",
   "description": "화면 제목 옆 (?) 버튼을 누르면 뜨는 화면 매뉴얼 다이얼로그. shadcn Dialog + Button(asChild) 조합 커스텀 패턴.",
   "dependencies": [
-    "@phosphor-icons/react"
+    "@phosphor-icons/react@^2.1.10"
   ],
   "registryDependencies": [
     "button",

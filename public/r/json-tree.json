@@ -4,7 +4,7 @@
   "title": "JSON Tree",
   "description": "재귀 JSON 트리 뷰어 — 접기/펼치기, 타입별 색(chart-1~3 시맨틱 토큰), 대용량 배열은 20개씩 \"더 보기\"로 분할 렌더링한다. 관측성(observability) 패턴 코어.",
   "dependencies": [
-    "@phosphor-icons/react"
+    "@phosphor-icons/react@^2.1.10"
   ],
   "files": [
     {

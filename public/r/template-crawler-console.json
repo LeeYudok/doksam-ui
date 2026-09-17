@@ -4,10 +4,18 @@
   "title": "Crawler Ops Console 템플릿",
   "description": "admin 프로필 · Slate · Geist · wizard-flow 원형. 수집·갱신·감지 스텝플로우와 실행 이력 테이블, 수동 트리거(실행/중단 상태 전이)를 갖춘 데이터 파이프라인 운영 콘솔입니다.",
   "dependencies": [
-    "@phosphor-icons/react"
+    "@phosphor-icons/react@^2.1.10"
   ],
   "registryDependencies": [
+    "badge",
+    "card",
+    "progress",
+    "table",
+    "textarea",
     "https://ui.doksam.com/r/live-indicator.json",
+    "https://ui.doksam.com/r/profile-scope.json",
+    "https://ui.doksam.com/r/route-error.json",
+    "https://ui.doksam.com/r/route-loading.json",
     "https://ui.doksam.com/r/screen-help-dialog.json"
   ],
   "files": [

@@ -4,7 +4,7 @@
   "title": "Contribution Bars",
   "description": "요인별 기여도를 트랙 바와 퍼센트로 분해해 보여주는 SHAP 스타일 기여도 패널.",
   "dependencies": [
-    "@phosphor-icons/react"
+    "@phosphor-icons/react@^2.1.10"
   ],
   "files": [
     {

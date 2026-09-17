@@ -4,7 +4,14 @@
   "title": "Term Network Explorer 템플릿",
   "description": "data 프로필 · Violet 다크 · Space Grotesk · canvas 원형. SDLC·AI 용어 50개를 6개 카테고리와 관계로 엮은 지식 그래프. 결정론적 방사형 배치의 SVG 성좌 네트워크로 노드 선택 시 이웃 강조·검색 하이라이트·범례 필터·상세 패널을 제공합니다.",
   "dependencies": [
-    "@phosphor-icons/react"
+    "@phosphor-icons/react@^2.1.10"
+  ],
+  "registryDependencies": [
+    "badge",
+    "input",
+    "https://ui.doksam.com/r/profile-scope.json",
+    "https://ui.doksam.com/r/route-error.json",
+    "https://ui.doksam.com/r/route-loading.json"
   ],
   "files": [
     {

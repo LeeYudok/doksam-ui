@@ -59,6 +59,23 @@ pnpm typecheck && pnpm lint && pnpm test && pnpm build
    ```
    `public/r`·`public/llms.txt` 는 생성물이므로 직접 편집 금지.
 
+   **설치본에서 import 가 해소되는지까지 책임진다(#52).** 소비 프로젝트에 복사되는 것은
+   그 item 의 `files` 와 `registryDependencies` 로 이어지는 item 들의 `files` 뿐이다.
+   카탈로그 안에서 빌드가 통과해도 설치본에서는 끊어질 수 있다.
+   `scripts/registry/closure.test.ts` 가 그 간극을 막는다 — 새 item 을 넣었으면
+   `npx tsx scripts/manual/2026-09-17_issue-52_fill-registry-deps.mts` 로
+   의존성을 다시 계산하고 `pnpm test`(`scripts/registry`)를 돌린다.
+
+   - `@/components/ui/<n>` → 상류 shadcn 이름 그대로 `registryDependencies` 에.
+     **알려진 갭** — `components/ui/` 는 하우스 포크인데 bare 이름 dep 은 상류 원본을
+     내려받는다. 소비 프로젝트는 카탈로그와 다른 프리미티브를 받는다(#57 에서 처리).
+   - 카탈로그 자체 파일 → 그 파일을 싣는 item 의 URL 을 `registryDependencies` 에.
+     어느 item 도 안 싣는다면 파운데이션 item 을 먼저 만든다.
+   - npm 의존성은 **버전 범위까지 박는다**(`@tanstack/react-table@^8.21.3`).
+     범위가 없으면 shadcn 이 latest 를 깔아 메이저가 어긋난다.
+   - 한 item 안에서 **확장자를 뺀 파일 이름이 겹치면 안 된다** — shadcn 이 설치 시
+     import 를 파일 이름으로 다시 쓰기 때문에 엉뚱한 파일로 이어진다.
+
 8. **테스트** — 로직이 있는 컴포넌트는 `components/<slug>.test.tsx`,
    데모에 상호작용이 있으면 `components/demos/<slug>.demo.test.tsx`.
 
@@ -180,5 +197,6 @@ pnpm typecheck && pnpm lint && pnpm test && pnpm build
 - [ ] 새 라우트에 `loading.tsx` / `error.tsx` 가 있는가
 - [ ] 하드코딩 색·외부 URL 0건인가
 - [ ] `registry.json` 을 고쳤으면 `pnpm registry:build && pnpm gen:llms` 를 돌렸는가
+- [ ] 새 item 의 import 가 설치본에서 해소되는가 (`scripts/registry/closure.test.ts`)
 - [ ] 라이트/다크 + 다른 테마 프리셋에서 깨지지 않는가
 - [ ] 모바일·태블릿·데스크톱 3모드에서 가로 스크롤이 안 생기는가

@@ -4,8 +4,8 @@
   "title": "Banner",
   "description": "공지 바(variant·닫기).",
   "dependencies": [
-    "class-variance-authority",
-    "@phosphor-icons/react"
+    "class-variance-authority@^0.7.1",
+    "@phosphor-icons/react@^2.1.10"
   ],
   "files": [
     {
