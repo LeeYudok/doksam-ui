@@ -7,6 +7,7 @@ import {
   CheckCircleIcon,
   DeviceMobileIcon,
   FingerprintIcon,
+  FlaskIcon,
   InfoIcon,
   KeyIcon,
   ProhibitIcon,
@@ -45,19 +46,56 @@ import {
   type RegisteredPasskey,
 } from "../_data/passkey"
 
-/** 데모 컨트롤에 노출하는 화면 목록 — 모든 상태가 클릭 한 번으로 도달 가능해야 한다. */
-const SCREEN_LABELS: { screen: PasskeyScreen; label: string }[] = [
-  { screen: "signin", label: "로그인 진입" },
-  { screen: "waiting", label: "인증기 대기" },
-  { screen: "cancelled", label: "취소 안내" },
-  { screen: "failed", label: "실패 안내" },
-  { screen: "success", label: "인증 완료" },
-  { screen: "register", label: "패스키 등록" },
-  { screen: "cross-device", label: "다른 기기" },
-  { screen: "devices", label: "기기 관리" },
-  { screen: "fallback", label: "문자 인증" },
-  { screen: "unsupported", label: "미지원 환경" },
+/**
+ * 데모 컨트롤에 노출하는 화면 목록.
+ *
+ * `reach` 는 그 화면이 **표준 화면 경로**(카드 안의 버튼·링크)로 도달하는지,
+ * 아니면 실제 환경 신호(API 결과·브라우저 기능 탐지)로만 갈라져 데모 버튼으로만
+ * 도달하는지를 구분한다. 소비 프로젝트는 `demo-only` 로 표시된 화면의 전이를
+ * 실제 신호에 연결해야 한다 — 카드 안에 그 버튼을 두면 안 된다(#55 M2·M3).
+ *
+ * `entry` 는 in-app 화면이 어느 카드의 어느 액션에서 오는지다.
+ */
+const SCREEN_LABELS: {
+  screen: PasskeyScreen
+  label: string
+  reach: "in-app" | "demo-only"
+  entry: string
+}[] = [
+  { screen: "signin", label: "로그인 진입", reach: "in-app", entry: "초기 화면 · 모든 화면의 '로그인으로 돌아가기'" },
+  {
+    screen: "waiting",
+    label: "인증기 대기",
+    reach: "in-app",
+    entry: "로그인 '패스키로 계속' · 등록 '이 기기에 패스키 만들기' · 다른 기기 '휴대폰에서 스캔했습니다' · 취소/실패 '다시 시도'",
+  },
+  { screen: "register", label: "패스키 등록", reach: "in-app", entry: "로그인 '패스키 만들기' · 기기 관리 '패스키 추가' · 문자 인증 '다음부터 패스키 쓰기'" },
+  { screen: "cross-device", label: "다른 기기", reach: "in-app", entry: "로그인 '다른 기기로 로그인' · 등록 '다른 기기에 만들기' · 실패/미지원 '다른 기기로 인증'" },
+  { screen: "devices", label: "기기 관리", reach: "in-app", entry: "로그인 '등록된 기기 관리' · 실패 하단 링크 · 등록 완료 '등록된 기기 확인'" },
+  { screen: "fallback", label: "문자 인증", reach: "in-app", entry: "로그인·취소·미지원 '문자 인증으로 로그인' · 실패 하단 링크" },
+  { screen: "success", label: "인증 완료", reach: "in-app", entry: "문자 인증 '확인'(6자리 입력 후). 패스키 경로의 성공은 서버 검증 결과라 데모 버튼으로 본다" },
+  {
+    screen: "cancelled",
+    label: "취소 안내",
+    reach: "demo-only",
+    entry: "navigator.credentials 프롬프트를 사용자가 닫았을 때(짧은 대기의 NotAllowedError)",
+  },
+  {
+    screen: "failed",
+    label: "실패 안내",
+    reach: "demo-only",
+    entry: "서버 assertion 검증 실패 · InvalidStateError · 타임아웃",
+  },
+  {
+    screen: "unsupported",
+    label: "미지원 환경",
+    reach: "demo-only",
+    entry: "window.PublicKeyCredential 부재 또는 플랫폼 인증기 미가용",
+  },
 ]
+
+const IN_APP_SCREENS = SCREEN_LABELS.filter((item) => item.reach === "in-app")
+const DEMO_ONLY_SCREENS = SCREEN_LABELS.filter((item) => item.reach === "demo-only")
 
 /**
  * 패스키 인증 템플릿 — focus-task 원형의 실물(#45·#46).
@@ -91,7 +129,12 @@ export function PasskeyAuth() {
       {/* focus-task 원형의 본체 — 가운데 카드 한 장. 내비 크롬은 상단 브랜드 표기뿐이다. */}
       <div className="flex min-h-[520px] items-center justify-center rounded-lg border border-border bg-muted/20 px-4 py-10">
         <div className="w-full max-w-sm">
-          <div className="flex flex-col gap-5 rounded-lg border border-border bg-card p-6 shadow-sm">
+          {/* 카드 안에는 그 화면의 표준 요소만 둔다 — 데모용 버튼은 여기 들어오지
+              않는다(page.test.tsx 가 이 region 안을 검사해 강제한다). */}
+          <section
+            aria-label="인증 카드"
+            className="flex flex-col gap-5 rounded-lg border border-border bg-card p-6 shadow-sm"
+          >
             <div className="flex items-center gap-2">
               <ShieldCheckIcon size={18} weight="duotone" className="text-primary" aria-hidden />
               <span className="text-sm font-semibold tracking-tight">doksam 운영 콘솔</span>
@@ -107,7 +150,7 @@ export function PasskeyAuth() {
             {screen === "devices" ? <DevicesScreen devices={devices} onRemove={removeDevice} onGo={go} /> : null}
             {screen === "fallback" ? <FallbackScreen otp={otp} onOtpChange={setOtp} onGo={go} /> : null}
             {screen === "unsupported" ? <UnsupportedScreen onGo={go} /> : null}
-          </div>
+          </section>
 
           <p className="mt-3 px-1 text-center text-xs leading-relaxed text-muted-foreground">
             {SCREEN_API_MAPPING[screen]}
@@ -115,27 +158,52 @@ export function PasskeyAuth() {
         </div>
       </div>
 
-      {/* 데모 컨트롤 — 카탈로그 밖(카드 밖)에 둔다. 소비 프로젝트는 이 줄을 지우고
-          전이 트리거를 실제 navigator.credentials 호출 결과로 바꾼다. */}
-      <div className="flex flex-col gap-2 rounded-lg border border-dashed border-border p-3">
-        <div className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
-          <InfoIcon size={14} aria-hidden />
-          데모 컨트롤 — 화면 상태 직접 이동 (표준 화면에는 포함하지 않는다)
+      {/* 데모 컨트롤 — 전부 카드 밖에 둔다. 카드 안에는 그 화면의 표준 액션만
+          남는다(주 액션 1 + 보조 액션 1 + 하단 보조 링크). 소비 프로젝트는 이
+          블록을 통째로 지우고, 아래 '데모 전용' 화면의 전이를 실제 신호
+          (navigator.credentials 결과 · 기능 탐지)에 연결한다. */}
+      <section aria-label="데모 컨트롤" className="flex flex-col gap-3 rounded-lg border border-dashed border-border p-3">
+        <div className="flex flex-col gap-1.5">
+          <div className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
+            <InfoIcon size={14} aria-hidden />
+            데모 컨트롤 — 표준 화면 경로로 도달하는 화면 (카드 안 버튼으로도 갈 수 있다)
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            {IN_APP_SCREENS.map((item) => (
+              <Button
+                key={item.screen}
+                size="xs"
+                variant={screen === item.screen ? "secondary" : "ghost"}
+                aria-pressed={screen === item.screen}
+                title={item.entry}
+                onClick={() => go(item.screen)}
+              >
+                {item.label}
+              </Button>
+            ))}
+          </div>
         </div>
-        <div className="flex flex-wrap gap-1.5">
-          {SCREEN_LABELS.map((item) => (
-            <Button
-              key={item.screen}
-              size="xs"
-              variant={screen === item.screen ? "secondary" : "ghost"}
-              aria-pressed={screen === item.screen}
-              onClick={() => go(item.screen)}
-            >
-              {item.label}
-            </Button>
-          ))}
+        <div className="flex flex-col gap-1.5 border-t border-dashed border-border pt-3">
+          <div className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
+            <FlaskIcon size={14} aria-hidden />
+            데모 전용 — 실제로는 API 결과·환경 탐지로만 갈라지는 화면
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            {DEMO_ONLY_SCREENS.map((item) => (
+              <Button
+                key={item.screen}
+                size="xs"
+                variant={screen === item.screen ? "secondary" : "ghost"}
+                aria-pressed={screen === item.screen}
+                title={item.entry}
+                onClick={() => go(item.screen)}
+              >
+                {item.label}
+              </Button>
+            ))}
+          </div>
         </div>
-      </div>
+      </section>
     </div>
   )
 }
@@ -143,7 +211,7 @@ export function PasskeyAuth() {
 function ScreenHeading({ title, description }: Readonly<{ title: string; description: string }>) {
   return (
     <div className="flex flex-col gap-1.5">
-      <h2 className="text-lg font-semibold tracking-tight">{title}</h2>
+      <h3 className="text-lg font-semibold tracking-tight">{title}</h3>
       <p className="text-sm leading-relaxed text-muted-foreground">{description}</p>
     </div>
   )
@@ -206,7 +274,8 @@ function SigninScreen({
 
 /**
  * 2. 인증기 대기 — navigator.credentials.get()/create() 의 Promise 가 pending 인 동안.
- * 데모라 자동으로 끝나지 않고, 실제 API 가 돌려줄 세 결과를 사용자가 고른다.
+ * 카드 안에는 대기 상태와 이탈용 보조 링크만 둔다. 성공·취소·실패로 갈라지는 것은
+ * 실제로는 API 결과이므로, 데모에서 그 분기를 고르는 버튼은 카드 밖 데모 컨트롤에 있다.
  */
 function WaitingScreen({ intent, onGo }: Readonly<{ intent: PasskeyIntent; onGo: (s: PasskeyScreen) => void }>) {
   return (
@@ -220,23 +289,6 @@ function WaitingScreen({ intent, onGo }: Readonly<{ intent: PasskeyIntent; onGo:
         <div className="flex flex-col">
           <span className="text-sm font-medium">인증기 응답 대기 중</span>
           <span className="text-xs text-muted-foreground">이 창을 닫지 마세요.</span>
-        </div>
-      </div>
-      <div className="flex flex-col gap-2">
-        <span className="text-xs font-medium text-muted-foreground">데모: 실제 API 가 돌려줄 결과 고르기</span>
-        <div className="flex flex-wrap gap-1.5">
-          {/* 서버 검증 성공 */}
-          <Button size="sm" variant="secondary" onClick={() => onGo("success")}>
-            성공
-          </Button>
-          {/* 사용자가 프롬프트를 닫음 — NotAllowedError(짧은 대기) */}
-          <Button size="sm" variant="outline" onClick={() => onGo("cancelled")}>
-            사용자 취소
-          </Button>
-          {/* 서버 검증 실패 · InvalidStateError · 타임아웃 */}
-          <Button size="sm" variant="outline" onClick={() => onGo("failed")}>
-            인증 실패
-          </Button>
         </div>
       </div>
       <FooterLinks>
@@ -416,7 +468,7 @@ function CrossDeviceScreen({ onWaiting, onGo }: Readonly<{ onWaiting: () => void
       <div className="flex flex-col items-center gap-3">
         <div
           className="grid w-40 gap-px rounded-md border border-border bg-background p-2"
-          style={{ gridTemplateColumns: `repeat(${QR_MATRIX.length}, minmax(0, 1fr))` }}
+          style={{ gridTemplateColumns: `repeat(${QR_MATRIX[0].length}, minmax(0, 1fr))` }}
           role="img"
           aria-label="다른 기기 인증용 QR 코드 자리표시자"
         >

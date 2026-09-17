@@ -135,7 +135,11 @@ export const LAYOUT_ARCHETYPES: LayoutArchetype[] = [
       "상단 단계 표시기(stepper) → 본문은 현재 단계 하나만 한 칼럼으로 → 하단 이전/다음 버튼. 상시 내비·탭바 없음.",
     shell: "헤더형 셸",
     templates: ["shop", "crawler-console"],
-    avoidWhen: ["단계가 2개 이하", "사용자가 순서를 자유롭게 오가야 하는 편집", "언제든 저장하고 나갈 수 있어야 하는 폼"],
+    avoidWhen: [
+      "단계가 2개 이하 — 과제가 사실상 하나면 focus-task 를 쓴다",
+      "사용자가 순서를 자유롭게 오가야 하는 편집",
+      "언제든 저장하고 나갈 수 있어야 하는 폼",
+    ],
     icon: ListChecksIcon,
   },
   {

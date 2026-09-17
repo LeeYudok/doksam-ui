@@ -44,7 +44,7 @@ Vision gate — 결정론 게이트(E2E/불변식, A·B영역)로 잡을 수 없
 
 `DIVERSITY_ARCHETYPES`(`rubric.mjs`)는 더 이상 자체 어휘를 하드코딩하지 않고
 카탈로그의 레이아웃 원형 단일 진실원천인 `archetypes/index.ts`의
-`LAYOUT_ARCHETYPES`(9종)에서 파생한다 — `id`는 그 9종의 `name` + `other`.
+`LAYOUT_ARCHETYPES`(10종)에서 파생한다 — `id`는 그 10종의 `name` + `other`.
 `scripts/gen-llms.mjs`가 이미 쓰는 패턴(Node 22.18+의 `.ts` 타입 스트리핑
 `await import("../../archetypes/index.ts")`)을 그대로 따른다. 각 원형의
 `description`은 비전 모델이 스크린샷만 보고 분류해야 하므로 색/콘텐츠가
@@ -106,11 +106,20 @@ ANTHROPIC_API_KEY=sk-ant-... pnpm test:vision -- --archetype admin-sidebar
 
 ## 대상 페이지
 
-`rubric.mjs`의 `PAGES` 배열 참고. 비용 의식 때문에 **10개로 제한**했다 — 홈 +
+`rubric.mjs`의 `PAGES` 배열 참고. 비용 의식 때문에 **11개로 제한**했다 — 홈 +
 주요 카탈로그 페이지(tokens/icons/components/patterns/rules/profiles) + 템플릿
-샘플 3종(admin/brokerage/shop). 전체 템플릿 7종을 다 넣으면 예산 상한을
-넘어가므로, 대표성 있는 3종만 우선 커버했다. 페이지 추가/변경은 `rubric.mjs`
-편집만으로 가능.
+샘플 4종(admin/brokerage/shop/passkey-auth). 전체 템플릿을 다 넣으면 예산 상한을
+넘어가므로 대표성 있는 것만 커버하되, **어떤 원형이 빠졌는지는 명시한다** —
+`rubric.mjs`의 `UNCOVERED_ARCHETYPES` 가 그 목록이고 `diversity.test.mjs` 가
+`PAGES` 가 채점하는 원형 ∪ `UNCOVERED_ARCHETYPES` == 전체 원형임을 강제한다.
+원형을 새로 추가하면 페이지를 넣거나 그 목록에 적어야 테스트가 통과한다(#55).
+페이지 추가/변경은 `rubric.mjs` 편집만으로 가능.
+
+템플릿 페이지는 카탈로그 크롬(사이트 상단 내비·페이지 머리말·점선 데모 패널)
+안에 템플릿 프레임이 박힌 형태로 찍힌다. 그래서 프롬프트(`run.mjs`
+`buildRubricText`)가 **뼈대 분류 범위를 그 템플릿 프레임 안으로 한정**한다 —
+`focus-task` 처럼 "내비가 없다"는 부재로 정의되는 원형은 이 한정이 없으면
+둘러싼 카탈로그 크롬이 템플릿 자신의 내비로 읽혀 오분류된다.
 
 ## 사용법
 

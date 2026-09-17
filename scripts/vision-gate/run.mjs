@@ -90,6 +90,17 @@ In addition, classify this screenshot's navigation + layout SKELETON only
 (ignore color/content/copy) into exactly one of these archetypes:
 ${archetypeLines}
 
+SCOPE: if the screenshot shows a template preview embedded in this catalog —
+a bordered, labelled frame containing the template itself — classify the
+skeleton of THAT TEMPLATE, and ignore the catalog's own documentation chrome
+wrapped around it, even where that chrome sits inside the same bordered frame:
+the site's top navigation bar, a small "doksam-ui 템플릿" label, an eyebrow
+badge plus heading and explanatory paragraph describing the template, and any
+dashed "demo controls" panel. If there is no such embedded template preview,
+classify the page as a whole. This matters most for archetypes defined by the
+ABSENCE of navigation: surrounding catalog chrome is not the template's own
+navigation, and explanatory prose about the template is not a second task.
+
 This skeleton classification feeds a separate "diversity" check — it is not
 part of the pass/warn/fail verdict above, so classify honestly even if the
 skeleton doesn't match what the page is "supposed" to look like.
