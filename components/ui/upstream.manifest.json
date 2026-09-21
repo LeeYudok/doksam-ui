@@ -3,135 +3,154 @@
   "checkedAt": "2026-09-21",
   "components": {
     "accordion.tsx": {
-      "upstream": "f8ba21f76f86c9fa",
+      "installed": "059670d39ed4b291",
       "localHash": "459d3afef03f241d",
-      "customized": true,
+      "customized": false,
+      "residual": "importLayout",
       "groups": [],
-      "note": "상류 레지스트리 원문과 다름: 분류 없음. 원문 차이에는 CLI 가 설치 시 치환하는 자리가 섞여 있다 — 설치본과의 실제 차이는 installDiff 를 본다."
+      "note": "설치본과 내용 동일 — import 배치(순서·빈 줄 묶음)만 다름."
     },
     "alert-dialog.tsx": {
-      "upstream": "d2ad548a4cd693dd",
+      "installed": "bb5d5d946fadc4c0",
       "localHash": "4737b3db5c2fe56b",
-      "customized": true,
+      "customized": false,
+      "residual": "importOrder",
       "groups": [],
-      "note": "상류 레지스트리 원문과 다름: 분류 없음. 원문 차이에는 CLI 가 설치 시 치환하는 자리가 섞여 있다 — 설치본과의 실제 차이는 installDiff 를 본다."
+      "note": "설치본과 내용 동일 — import 문 순서만 다름."
     },
     "alert.tsx": {
-      "upstream": "798218fddd9446e8",
+      "installed": "2cbc2b518605e3d2",
       "localHash": "126a26b401ab2cd3",
       "customized": false,
+      "residual": "formatting",
       "groups": [],
-      "note": "상류 원문과 동일"
+      "note": "설치본과 내용 동일 — 따옴표·세미콜론·공백만 다름."
     },
     "aspect-ratio.tsx": {
-      "upstream": "b1c157886236782c",
+      "installed": "a8f021357f956c26",
       "localHash": "b1c157886236782c",
       "customized": false,
+      "residual": "identical",
       "groups": [],
-      "note": "상류 원문과 동일"
+      "note": "설치본과 내용 동일 — 바이트까지 동일."
     },
     "attachment.tsx": {
-      "upstream": "2b21884b65f6ed32",
+      "installed": "510bae0d7fb05726",
       "localHash": "ae8a25dd1a896d39",
       "customized": false,
+      "residual": "importOrder",
       "groups": [],
-      "note": "상류 원문과 동일"
+      "note": "설치본과 내용 동일 — import 문 순서만 다름."
     },
     "avatar.tsx": {
-      "upstream": "24f797c56deef4d3",
+      "installed": "7226474024a2bdef",
       "localHash": "fd03e439ae00bf71",
       "customized": false,
+      "residual": "importLayout",
       "groups": [],
-      "note": "상류 원문과 동일"
+      "note": "설치본과 내용 동일 — import 배치(순서·빈 줄 묶음)만 다름."
     },
     "badge.tsx": {
-      "upstream": "ac24435d9954a37f",
+      "installed": "3cc896540e008631",
       "localHash": "1b292cd64608eef6",
       "customized": false,
+      "residual": "importLayout",
       "groups": [],
-      "note": "상류 원문과 동일"
+      "note": "설치본과 내용 동일 — import 배치(순서·빈 줄 묶음)만 다름."
     },
     "breadcrumb.tsx": {
-      "upstream": "9e44e91df4f68316",
+      "installed": "6c8efd8ca59fb77d",
       "localHash": "785212482c3b4702",
-      "customized": true,
+      "customized": false,
+      "residual": "importLayout",
       "groups": [],
-      "note": "상류 레지스트리 원문과 다름: 분류 없음. 원문 차이에는 CLI 가 설치 시 치환하는 자리가 섞여 있다 — 설치본과의 실제 차이는 installDiff 를 본다."
+      "note": "설치본과 내용 동일 — import 배치(순서·빈 줄 묶음)만 다름."
     },
     "bubble.tsx": {
-      "upstream": "64bcd36ae5bef0c9",
+      "installed": "8cab9d8a509ddb8f",
       "localHash": "870cc0c5cfc8a515",
       "customized": false,
+      "residual": "importLayout",
       "groups": [],
-      "note": "상류 원문과 동일"
+      "note": "설치본과 내용 동일 — import 배치(순서·빈 줄 묶음)만 다름."
     },
     "button-group.tsx": {
-      "upstream": "3ceb1e76f3097f1e",
+      "installed": "6365a8f150fca5a3",
       "localHash": "de73ccc6e10f2982",
       "customized": false,
+      "residual": "importOrder",
       "groups": [],
-      "note": "상류 원문과 동일"
+      "note": "설치본과 내용 동일 — import 문 순서만 다름."
     },
     "button.tsx": {
-      "upstream": "eff75f2b1fdf9b57",
+      "installed": "a425e993fdf48b67",
       "localHash": "9ce417985b97956f",
       "customized": false,
+      "residual": "importLayout",
       "groups": [],
-      "note": "상류 원문과 동일"
+      "note": "설치본과 내용 동일 — import 배치(순서·빈 줄 묶음)만 다름."
     },
     "calendar.tsx": {
-      "upstream": "cce70404b10f1aaf",
+      "installed": "0c657d3b1d9d1c50",
       "localHash": "741ca8610a3df14b",
-      "customized": true,
+      "customized": false,
+      "residual": "importOrder",
       "groups": [],
-      "note": "상류 레지스트리 원문과 다름: 분류 없음. 원문 차이에는 CLI 가 설치 시 치환하는 자리가 섞여 있다 — 설치본과의 실제 차이는 installDiff 를 본다."
+      "note": "설치본과 내용 동일 — import 문 순서만 다름."
     },
     "card.tsx": {
-      "upstream": "8b8f57b4b78193b9",
+      "installed": "1d3d55b002909c66",
       "localHash": "d8113cbf964f8d1a",
-      "customized": true,
+      "customized": false,
+      "residual": "formatting",
       "groups": [],
-      "note": "상류 레지스트리 원문과 다름: 분류 없음. 원문 차이에는 CLI 가 설치 시 치환하는 자리가 섞여 있다 — 설치본과의 실제 차이는 installDiff 를 본다."
+      "note": "설치본과 내용 동일 — 따옴표·세미콜론·공백만 다름."
     },
     "carousel.tsx": {
-      "upstream": "62bf66ec47427bfb",
+      "installed": "615e2be5d8b0f233",
       "localHash": "c1830b952d87d4a0",
-      "customized": true,
+      "customized": false,
+      "residual": "importOrder",
       "groups": [],
-      "note": "상류 레지스트리 원문과 다름: 분류 없음. 원문 차이에는 CLI 가 설치 시 치환하는 자리가 섞여 있다 — 설치본과의 실제 차이는 installDiff 를 본다."
+      "note": "설치본과 내용 동일 — import 문 순서만 다름."
     },
     "chart.tsx": {
-      "upstream": "994e720a206e32c5",
+      "installed": "e74a3da1adcfcf35",
       "localHash": "0060b7708d85a5ff",
       "customized": false,
+      "residual": "importLayout",
       "groups": [],
-      "note": "상류 원문과 동일"
+      "note": "설치본과 내용 동일 — import 배치(순서·빈 줄 묶음)만 다름."
     },
     "checkbox.tsx": {
-      "upstream": "54effbf83ed1ca38",
+      "installed": "f0a187d20abff9cc",
       "localHash": "a519ebd2254c5d3d",
-      "customized": true,
+      "customized": false,
+      "residual": "importLayout",
       "groups": [],
-      "note": "포커스 가시성 상태 클래스(group-has-[:focus-visible]/field-label)를 #61 에서 상류에 맞춰 갱신했다. 남은 차이는 import 정렬 등 포맷 차이뿐."
+      "note": "설치본과 내용 동일 — import 배치(순서·빈 줄 묶음)만 다름."
     },
     "collapsible.tsx": {
-      "upstream": "c6598e5584f4258b",
+      "installed": "a11c3175ebe3d4eb",
       "localHash": "c6598e5584f4258b",
       "customized": false,
+      "residual": "identical",
       "groups": [],
-      "note": "상류 원문과 동일"
+      "note": "설치본과 내용 동일 — 바이트까지 동일."
     },
     "combobox.tsx": {
-      "upstream": "5e3d42459429e41b",
+      "installed": "f917a90243d44593",
       "localHash": "1c07d2823fa2b489",
-      "customized": true,
+      "customized": false,
+      "residual": "importOrder",
       "groups": [],
-      "note": "상류 레지스트리 원문과 다름: 분류 없음. 원문 차이에는 CLI 가 설치 시 치환하는 자리가 섞여 있다 — 설치본과의 실제 차이는 installDiff 를 본다."
+      "note": "설치본과 내용 동일 — import 문 순서만 다름."
     },
     "command.tsx": {
-      "upstream": "fbfce27ec7cc6a68",
+      "installed": "0b29e6bed378c6a1",
       "localHash": "7f80b30bbce36228",
       "customized": true,
+      "residual": "differs",
       "groups": [
         "controlScale",
         "semanticTokenSwap",
@@ -140,302 +159,345 @@
       "note": "상류가 CommandDialog 내부 <Command> 래퍼(크기 클래스 포함)를 완전히 제거했지만, 이 변경을 반영하면 cmdk 컨텍스트가 사라져 CommandInput/CommandList 가 런타임 에러를 낸다(#61 에서 실측). 하우스 쪽 <Command> 래퍼를 의도적으로 유지한다 — installDiff 참고."
     },
     "context-menu.tsx": {
-      "upstream": "ca9a99ad6e254634",
+      "installed": "f5cddb6a92721388",
       "localHash": "6117514d9e475cc2",
-      "customized": true,
+      "customized": false,
+      "residual": "importLayout",
       "groups": [],
-      "note": "상류 레지스트리 원문과 다름: 분류 없음. 원문 차이에는 CLI 가 설치 시 치환하는 자리가 섞여 있다 — 설치본과의 실제 차이는 installDiff 를 본다."
+      "note": "설치본과 내용 동일 — import 배치(순서·빈 줄 묶음)만 다름."
     },
     "dialog.tsx": {
-      "upstream": "426f3da10d81de00",
+      "installed": "1ea5a83f767d4544",
       "localHash": "13a5cddf294c6aa5",
-      "customized": true,
+      "customized": false,
+      "residual": "importOrder",
       "groups": [],
-      "note": "상류 레지스트리 원문과 다름: 분류 없음. 원문 차이에는 CLI 가 설치 시 치환하는 자리가 섞여 있다 — 설치본과의 실제 차이는 installDiff 를 본다."
+      "note": "설치본과 내용 동일 — import 문 순서만 다름."
     },
     "direction.tsx": {
-      "upstream": "84ae2ad658207f0e",
+      "installed": "cc3505ac6d1c7c6a",
       "localHash": "84ae2ad658207f0e",
       "customized": false,
+      "residual": "identical",
       "groups": [],
-      "note": "상류 원문과 동일"
+      "note": "설치본과 내용 동일 — 바이트까지 동일."
     },
     "drawer.tsx": {
-      "upstream": "f1ad69e9f8fe76c7",
+      "installed": "280698c691b28eb3",
       "localHash": "b41392855e012321",
-      "customized": true,
+      "customized": false,
+      "residual": "importLayout",
       "groups": [],
-      "note": "상류 레지스트리 원문과 다름: 분류 없음. 원문 차이에는 CLI 가 설치 시 치환하는 자리가 섞여 있다 — 설치본과의 실제 차이는 installDiff 를 본다."
+      "note": "설치본과 내용 동일 — import 배치(순서·빈 줄 묶음)만 다름."
     },
     "dropdown-menu.tsx": {
-      "upstream": "6858ce872fe5e8e7",
+      "installed": "c211a9ffc75d71b3",
       "localHash": "47f754e1ab9e4e34",
-      "customized": true,
+      "customized": false,
+      "residual": "importLayout",
       "groups": [],
-      "note": "상류 레지스트리 원문과 다름: 분류 없음. 원문 차이에는 CLI 가 설치 시 치환하는 자리가 섞여 있다 — 설치본과의 실제 차이는 installDiff 를 본다."
+      "note": "설치본과 내용 동일 — import 배치(순서·빈 줄 묶음)만 다름."
     },
     "empty.tsx": {
-      "upstream": "3ebbc56c675fea47",
+      "installed": "277a05ab9c58b885",
       "localHash": "e65ee3ba54a21ed6",
-      "customized": true,
+      "customized": false,
+      "residual": "formatting",
       "groups": [],
-      "note": "상류 레지스트리 원문과 다름: 분류 없음. 원문 차이에는 CLI 가 설치 시 치환하는 자리가 섞여 있다 — 설치본과의 실제 차이는 installDiff 를 본다."
+      "note": "설치본과 내용 동일 — 따옴표·세미콜론·공백만 다름."
     },
     "field.tsx": {
-      "upstream": "48c093a17462877a",
+      "installed": "547982c3153aa2bc",
       "localHash": "3c2272fd6ca7d1b4",
       "customized": false,
+      "residual": "importOrder",
       "groups": [],
-      "note": "FieldLabel 의 hover·focus-visible 처리를 #61 에서 상류에 맞춰 갱신했다."
+      "note": "설치본과 내용 동일 — import 문 순서만 다름."
     },
     "hover-card.tsx": {
-      "upstream": "6b7654754e7748b5",
+      "installed": "757adb73cd2df9e8",
       "localHash": "e8166e75e8dd00e1",
       "customized": false,
+      "residual": "importLayout",
       "groups": [],
-      "note": "상류 원문과 동일"
+      "note": "설치본과 내용 동일 — import 배치(순서·빈 줄 묶음)만 다름."
     },
     "input-group.tsx": {
-      "upstream": "dc178dc0993167f7",
+      "installed": "6e36ca533aa4048f",
       "localHash": "e28122e46635bb66",
       "customized": false,
+      "residual": "importOrder",
       "groups": [],
-      "note": "상류 원문과 동일"
+      "note": "설치본과 내용 동일 — import 문 순서만 다름."
     },
     "input-otp.tsx": {
-      "upstream": "3ee8b32008c1175b",
+      "installed": "f1df3015e310617f",
       "localHash": "f3fcf6c389dc9766",
-      "customized": true,
+      "customized": false,
+      "residual": "importLayout",
       "groups": [],
-      "note": "상류 레지스트리 원문과 다름: 분류 없음. 원문 차이에는 CLI 가 설치 시 치환하는 자리가 섞여 있다 — 설치본과의 실제 차이는 installDiff 를 본다."
+      "note": "설치본과 내용 동일 — import 배치(순서·빈 줄 묶음)만 다름."
     },
     "input.tsx": {
-      "upstream": "a387752d3db4ac3f",
+      "installed": "237c5ea0bd10ceae",
       "localHash": "c4902a8c4967875e",
       "customized": false,
+      "residual": "formatting",
       "groups": [],
-      "note": "상류 원문과 동일"
+      "note": "설치본과 내용 동일 — 따옴표·세미콜론·공백만 다름."
     },
     "item.tsx": {
-      "upstream": "d390b55dd2d09304",
+      "installed": "e2684329b39e2ec0",
       "localHash": "a197e0c6bf030f49",
       "customized": false,
+      "residual": "importOrder",
       "groups": [],
-      "note": "상류 원문과 동일"
+      "note": "설치본과 내용 동일 — import 문 순서만 다름."
     },
     "kbd.tsx": {
-      "upstream": "1e477363fca474e2",
+      "installed": "bf23c8b474ea5634",
       "localHash": "1e477363fca474e2",
       "customized": false,
+      "residual": "cnAlias",
       "groups": [],
-      "note": "상류 원문과 동일"
+      "note": "설치본과 내용 동일 — 설치본의 `from \"cn\"` 플레이스홀더만 다름 — 우리 쪽은 실제 별칭으로 해소돼 있다."
     },
     "label.tsx": {
-      "upstream": "db5dfcd98a78c5b7",
+      "installed": "8809103124a76f2c",
       "localHash": "a476e41f08b9de5b",
       "customized": false,
+      "residual": "importLayout",
       "groups": [],
-      "note": "상류 원문과 동일"
+      "note": "설치본과 내용 동일 — import 배치(순서·빈 줄 묶음)만 다름."
     },
     "marker.tsx": {
-      "upstream": "3496e9fb2b45c675",
+      "installed": "c762fba2d26e55d3",
       "localHash": "3d798763f094b2bb",
       "customized": false,
+      "residual": "importLayout",
       "groups": [],
-      "note": "상류 원문과 동일"
+      "note": "설치본과 내용 동일 — import 배치(순서·빈 줄 묶음)만 다름."
     },
     "menubar.tsx": {
-      "upstream": "c8b75f2fb5c40335",
+      "installed": "ec742c293f853b08",
       "localHash": "1251709bf39698a7",
-      "customized": true,
+      "customized": false,
+      "residual": "importLayout",
       "groups": [],
-      "note": "상류 레지스트리 원문과 다름: 분류 없음. 원문 차이에는 CLI 가 설치 시 치환하는 자리가 섞여 있다 — 설치본과의 실제 차이는 installDiff 를 본다."
+      "note": "설치본과 내용 동일 — import 배치(순서·빈 줄 묶음)만 다름."
     },
     "message-scroller.tsx": {
-      "upstream": "f74ce3d2a5afdfb8",
+      "installed": "0af16d6fe50abf33",
       "localHash": "0db627e9f462388c",
-      "customized": true,
+      "customized": false,
+      "residual": "importOrder",
       "groups": [],
-      "note": "data-pending-scroll:invisible 을 #61 에서 상류에 맞춰 갱신했다."
+      "note": "설치본과 내용 동일 — import 문 순서만 다름."
     },
     "message.tsx": {
-      "upstream": "4bd0da2b253cf1ed",
+      "installed": "bea99c3676d68ef3",
       "localHash": "9d2952bf3b641081",
       "customized": false,
+      "residual": "formatting",
       "groups": [],
-      "note": "상류 원문과 동일"
+      "note": "설치본과 내용 동일 — 따옴표·세미콜론·공백만 다름."
     },
     "native-select.tsx": {
-      "upstream": "efa8029f33cccbf2",
+      "installed": "a7aaaf941ad29eb4",
       "localHash": "0010395c3c1cbedf",
-      "customized": true,
+      "customized": false,
+      "residual": "formatting",
       "groups": [],
-      "note": "상류 레지스트리 원문과 다름: 분류 없음. 원문 차이에는 CLI 가 설치 시 치환하는 자리가 섞여 있다 — 설치본과의 실제 차이는 installDiff 를 본다."
+      "note": "설치본과 내용 동일 — 따옴표·세미콜론·공백만 다름."
     },
     "navigation-menu.tsx": {
-      "upstream": "f63117984b82a4f1",
+      "installed": "48d1f2df29d4d7c5",
       "localHash": "4a9c6c31601d6e4b",
-      "customized": true,
+      "customized": false,
+      "residual": "importLayout",
       "groups": [],
-      "note": "상류 레지스트리 원문과 다름: 분류 없음. 원문 차이에는 CLI 가 설치 시 치환하는 자리가 섞여 있다 — 설치본과의 실제 차이는 installDiff 를 본다."
+      "note": "설치본과 내용 동일 — import 배치(순서·빈 줄 묶음)만 다름."
     },
     "pagination.tsx": {
-      "upstream": "8322e502f351c5b3",
+      "installed": "d980c042c67ad8bc",
       "localHash": "b7aaaa2d0e3cdc9e",
-      "customized": true,
+      "customized": false,
+      "residual": "importOrder",
       "groups": [],
-      "note": "상류 레지스트리 원문과 다름: 분류 없음. 원문 차이에는 CLI 가 설치 시 치환하는 자리가 섞여 있다 — 설치본과의 실제 차이는 installDiff 를 본다."
+      "note": "설치본과 내용 동일 — import 문 순서만 다름."
     },
     "popover.tsx": {
-      "upstream": "3f2341b39ffe5cb1",
+      "installed": "4f3b08d03aaf060d",
       "localHash": "51bd4c0e9d6f039e",
       "customized": false,
+      "residual": "importLayout",
       "groups": [],
-      "note": "상류 원문과 동일"
+      "note": "설치본과 내용 동일 — import 배치(순서·빈 줄 묶음)만 다름."
     },
     "progress.tsx": {
-      "upstream": "1a7ef3d276dc2e57",
+      "installed": "e4bfe3d315f23896",
       "localHash": "1e58b13c2aa4c26b",
       "customized": false,
+      "residual": "importLayout",
       "groups": [],
-      "note": "상류 원문과 동일"
+      "note": "설치본과 내용 동일 — import 배치(순서·빈 줄 묶음)만 다름."
     },
     "radio-group.tsx": {
-      "upstream": "1d322232962043fb",
+      "installed": "649ae647b8db687f",
       "localHash": "9f77a4333ecf018f",
       "customized": false,
+      "residual": "importLayout",
       "groups": [],
-      "note": "포커스 가시성 상태 클래스(group-has-[:focus-visible]/field-label)를 #61 에서 상류에 맞춰 갱신했다."
+      "note": "설치본과 내용 동일 — import 배치(순서·빈 줄 묶음)만 다름."
     },
     "resizable.tsx": {
-      "upstream": "890e091d9b6185ac",
+      "installed": "59e0e1bfb41d38d1",
       "localHash": "379baf7a1de109a1",
       "customized": false,
+      "residual": "importLayout",
       "groups": [],
-      "note": "상류 원문과 동일"
+      "note": "설치본과 내용 동일 — import 배치(순서·빈 줄 묶음)만 다름."
     },
     "scroll-area.tsx": {
-      "upstream": "976f98295cb2e308",
+      "installed": "2d3c831625e7fadc",
       "localHash": "c3e7e2201d33bc24",
       "customized": false,
+      "residual": "importLayout",
       "groups": [],
-      "note": "상류 원문과 동일"
+      "note": "설치본과 내용 동일 — import 배치(순서·빈 줄 묶음)만 다름."
     },
     "select.tsx": {
-      "upstream": "433b2a90d1af5cae",
+      "installed": "ba43ea66f8a2b5d8",
       "localHash": "c1295c1404b67895",
-      "customized": true,
+      "customized": false,
+      "residual": "importLayout",
       "groups": [],
-      "note": "상류 레지스트리 원문과 다름: 분류 없음. 원문 차이에는 CLI 가 설치 시 치환하는 자리가 섞여 있다 — 설치본과의 실제 차이는 installDiff 를 본다."
+      "note": "설치본과 내용 동일 — import 배치(순서·빈 줄 묶음)만 다름."
     },
     "separator.tsx": {
-      "upstream": "81be5dc979069b45",
+      "installed": "afaf07988180ca90",
       "localHash": "c924a82e99fda036",
       "customized": false,
+      "residual": "importLayout",
       "groups": [],
-      "note": "상류 원문과 동일"
+      "note": "설치본과 내용 동일 — import 배치(순서·빈 줄 묶음)만 다름."
     },
     "sheet.tsx": {
-      "upstream": "c247918bc6dd097d",
+      "installed": "0f023987004b329a",
       "localHash": "54e255b2dec4b8ad",
-      "customized": true,
+      "customized": false,
+      "residual": "importOrder",
       "groups": [],
-      "note": "상류 레지스트리 원문과 다름: 분류 없음. 원문 차이에는 CLI 가 설치 시 치환하는 자리가 섞여 있다 — 설치본과의 실제 차이는 installDiff 를 본다."
+      "note": "설치본과 내용 동일 — import 문 순서만 다름."
     },
     "sidebar.tsx": {
-      "upstream": "d2ab9e8068b47a76",
+      "installed": "865a3f34054b6242",
       "localHash": "f77a7dbfd340f5ba",
-      "customized": true,
+      "customized": false,
+      "residual": "importOrder",
       "groups": [],
-      "note": "상류 레지스트리 원문과 다름: 분류 없음. 원문 차이에는 CLI 가 설치 시 치환하는 자리가 섞여 있다 — 설치본과의 실제 차이는 installDiff 를 본다."
+      "note": "설치본과 내용 동일 — import 문 순서만 다름."
     },
     "skeleton.tsx": {
-      "upstream": "8110bba70d0cb9fe",
+      "installed": "04c41bf9dbc603d1",
       "localHash": "8110bba70d0cb9fe",
       "customized": false,
+      "residual": "cnAlias",
       "groups": [],
-      "note": "상류 원문과 동일"
+      "note": "설치본과 내용 동일 — 설치본의 `from \"cn\"` 플레이스홀더만 다름 — 우리 쪽은 실제 별칭으로 해소돼 있다."
     },
     "slider.tsx": {
-      "upstream": "b21b703b5638323a",
+      "installed": "8032bb3e5ebcc1f4",
       "localHash": "c1c20d08f7dabff6",
       "customized": false,
+      "residual": "importLayout",
       "groups": [],
-      "note": "상류 원문과 동일"
+      "note": "설치본과 내용 동일 — import 배치(순서·빈 줄 묶음)만 다름."
     },
     "sonner.tsx": {
-      "upstream": "d5178ce4c7834d3f",
+      "installed": "48806b2fa1a50615",
       "localHash": "2dd975ad2170ba25",
-      "customized": true,
+      "customized": false,
+      "residual": "identical",
       "groups": [],
-      "note": "상류 레지스트리 원문과 다름: 분류 없음. 원문 차이에는 CLI 가 설치 시 치환하는 자리가 섞여 있다 — 설치본과의 실제 차이는 installDiff 를 본다."
+      "note": "설치본과 내용 동일 — 바이트까지 동일."
     },
     "spinner.tsx": {
-      "upstream": "9fb9e91c4b316fab",
+      "installed": "220d0e4cd8649dd7",
       "localHash": "900f722c961fa6e1",
-      "customized": true,
+      "customized": false,
+      "residual": "cnAlias",
       "groups": [],
-      "note": "상류 레지스트리 원문과 다름: 분류 없음. 원문 차이에는 CLI 가 설치 시 치환하는 자리가 섞여 있다 — 설치본과의 실제 차이는 installDiff 를 본다."
+      "note": "설치본과 내용 동일 — 설치본의 `from \"cn\"` 플레이스홀더만 다름 — 우리 쪽은 실제 별칭으로 해소돼 있다."
     },
     "switch.tsx": {
-      "upstream": "43072a00ef3108c1",
+      "installed": "0fa86da576b6f743",
       "localHash": "245e0e306b1c0947",
       "customized": false,
+      "residual": "importLayout",
       "groups": [],
-      "note": "포커스 가시성 상태 클래스(group-has-[:focus-visible]/field-label)를 #61 에서 상류에 맞춰 갱신했다."
+      "note": "설치본과 내용 동일 — import 배치(순서·빈 줄 묶음)만 다름."
     },
     "table.tsx": {
-      "upstream": "af2c73194ef5e018",
+      "installed": "5e2026d548128ed7",
       "localHash": "a13f55a7c1406197",
       "customized": false,
+      "residual": "formatting",
       "groups": [],
-      "note": "상류 원문과 동일"
+      "note": "설치본과 내용 동일 — 따옴표·세미콜론·공백만 다름."
     },
     "tabs.tsx": {
-      "upstream": "46069535413cb62f",
+      "installed": "7266ea15aff35abc",
       "localHash": "2a56759aa5573c65",
       "customized": false,
+      "residual": "importLayout",
       "groups": [],
-      "note": "상류 원문과 동일"
+      "note": "설치본과 내용 동일 — import 배치(순서·빈 줄 묶음)만 다름."
     },
     "textarea.tsx": {
-      "upstream": "fa0ce5e86f2d8315",
+      "installed": "7d2f8214eaf7f889",
       "localHash": "58b58d84fc54ba5f",
       "customized": false,
+      "residual": "formatting",
       "groups": [],
-      "note": "상류 원문과 동일"
+      "note": "설치본과 내용 동일 — 따옴표·세미콜론·공백만 다름."
     },
     "toggle-group.tsx": {
-      "upstream": "42e7c1d06bbfdd91",
+      "installed": "f5410b4c6e83f707",
       "localHash": "4325639473140bda",
       "customized": false,
+      "residual": "importOrder",
       "groups": [],
-      "note": "상류 원문과 동일"
+      "note": "설치본과 내용 동일 — import 문 순서만 다름."
     },
     "toggle.tsx": {
-      "upstream": "b817b50bd40933df",
+      "installed": "2e24fb3d89ece13b",
       "localHash": "ae2eec8802536743",
       "customized": false,
+      "residual": "importLayout",
       "groups": [],
-      "note": "상류 원문과 동일"
+      "note": "설치본과 내용 동일 — import 배치(순서·빈 줄 묶음)만 다름."
     },
     "tooltip.tsx": {
-      "upstream": "c54cb0cba3c7c55a",
+      "installed": "8cc018adcd99cbae",
       "localHash": "f26881e08ed65a97",
       "customized": false,
+      "residual": "importLayout",
       "groups": [],
-      "note": "상류 원문과 동일"
+      "note": "설치본과 내용 동일 — import 배치(순서·빈 줄 묶음)만 다름."
     }
   },
   "_readme": [
-    "shadcn 상류 대비 차이 기록 (#48, 기준 스타일 정정 #57).",
+    "shadcn 상류 대비 차이 기록 (#48, 기준 스타일 정정 #57, 대조 방식 정정 #62).",
     "기준 스타일은 components.json 의 style(radix-nova)이다 — 예전에는 new-york-v4 로 대조해 60개 중 52개가 '커스터마이즈' 로 잡혔지만, 그건 스타일이 달라서였다.",
-    "customized 는 '상류 레지스트리 JSON 원문과 내용이 다름' 이다. 그 차이에는 CLI 가 설치 시점에 치환하는 자리(IconPlaceholder → 아이콘 라이브러리, cn-* 토큰, 메뉴 옵션)가 섞여 있어 그대로 '하우스 포크' 로 읽으면 안 된다.",
+    "customized 는 이제 '상류 레지스트리 JSON 원문과 다름' 이 아니라 **'같은 프리셋으로 실제 설치한 결과와 다름'** 이다 (#62). 원문에는 CLI 가 설치 시점에 치환하는 자리(IconPlaceholder → 아이콘 라이브러리, cn-* 토큰, 메뉴 옵션)가 섞여 있어 그대로 읽으면 안 되고, 그 치환을 정규식으로 흉내내는 시도는 #57 에서 두 번 실패했다 — 그래서 CLI 를 직접 돌린다.",
+    "residual 은 '내용은 같은데 바이트는 왜 다른가' 에 대한 **측정 결과**다 (identical·cnAlias·importOrder·importLayout·formatting). 손으로 적은 '포맷 차이뿐' 같은 문장은 검증되지 않아 낡아도 아무도 모르므로 쓰지 않는다 (#67 리뷰 2).",
+    "installed 는 설치본을 정규화한 내용의 해시다 — 이 값이 바뀌면 상류가 움직인 것이고, localHash 가 바뀌면 우리가 고친 것이다.",
     "houseStyle 의 examples 는 **그 성격이 드러나는 파일**이지 diff 분류(groups) 결과가 아니다 — 성격은 radix-nova 스타일에서 오므로 상류와 같은 파일에도 드러난다 (#63 리뷰 지적).",
-    "빈 Next 프로젝트에 같은 프리셋으로 실제 설치해 대조한 결과(#57, 2026-09-17): 60개 중 의미 있게 다른 것은 installDiff 의 6개뿐이며, 그 6개는 우리 쪽이 상류보다 낡은 것이다.",
-    "커스터마이즈 인 항목은 groups(체계적 차이 분류) 또는 note(개별 사유) 중 하나를 반드시 갖는다 — test/shadcn-upstream-manifest.test.ts 가 이를 강제한다.",
-    "점검: node scripts/shadcn-upstream.mjs (네트워크 사용, 수동 게이트)",
-    "갱신: node scripts/shadcn-upstream.mjs --update  (커스터마이즈가 사라지면 --force 없이는 중단)"
+    "installDiff 는 손으로 적는 목록이 아니라 마지막 측정의 결과다. files 의 사유만 사람이 채운다.",
+    "점검: pnpm check:shadcn  (프로브에 실제 설치, 네트워크 사용, 수동 게이트)",
+    "갱신: node scripts/shadcn-upstream.mjs --update  (차이가 사라지면 --force 없이는 중단)",
+    "폐쇄망: node scripts/shadcn-upstream.mjs --cached  (캐시된 설치본과만 대조 — 상류 드리프트는 검증되지 않는다)"
   ],
   "houseStyle": {
     "controlScale": {
@@ -520,8 +582,8 @@
   },
   "installDiff": {
     "measuredAt": "2026-09-21",
-    "how": "빈 Next 앱에 shadcn init -t next -b radix -p nova 후 6개(checkbox·radio-group·switch·field·command·message-scroller)를 bare 이름으로 재설치해 대조 (#61, #57 갱신).",
-    "meaning": "CLI 설치본과 실제로 다른 파일. #57 에서 확인한 6개 중 5개는 이번에 상류를 반영해 갱신했다. command.tsx 는 상류가 더 앞서 있지만 의도적으로 반영하지 않았다 — 이유는 files 참고.",
+    "how": ".shadcn-probe 프로브에 이 레포의 components.json 프리셋(style=radix-nova)으로 shadcn init 후 60종을 bare 이름으로 설치해 대조 (node scripts/shadcn-upstream.mjs --update).",
+    "meaning": "CLI 설치본과 실제로 다른 파일. 원문이 아니라 설치 결과와 비교하므로 CLI 치환(IconPlaceholder·cn-* 토큰·메뉴 옵션)은 여기에 섞이지 않는다 (#62).",
     "files": {
       "command.tsx": "상류가 CommandDialog 내부의 <Command> 래퍼 자체를 제거했다(크기 클래스뿐 아니라 cmdk 컨텍스트 프로바이더까지). 실제로 반영해 브라우저에서 확인한 결과 CommandInput/CommandList 가 cmdk Command 컨텍스트를 잃어 'Cannot read properties of undefined (reading subscribe)' 런타임 에러로 커맨드 팔레트가 완전히 깨진다(site-command-menu.tsx 등 모든 소비처가 CommandInput/CommandList 를 <Command> 래퍼 없이 직접 CommandDialog 자식으로 전달하는 구조라서). 상류의 이 변경은 우리 소비 패턴과 호환되지 않는 회귀로 판단해 반영을 보류했다 — 하우스 쪽의 <Command className='...'> 래퍼(크기 클래스 포함)를 그대로 유지한다."
     }

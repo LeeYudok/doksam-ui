@@ -71,10 +71,16 @@ describe("프리미티브 배포 — 이슈 #57", () => {
     expect(sidebar.registryDependencies).not.toContain("https://ui.doksam.com/r/sidebar.json")
   })
 
-  it("isDivergent 가 매니페스트의 customized 를 따른다", () => {
-    // customized 는 상류 **원문** 과의 차이다 — 설치본과의 차이(installDiff)보다 넓다.
-    expect(isDivergent("checkbox")).toBe(true)
-    expect(isDivergent("button")).toBe(false)
+  it("isDivergent 가 매니페스트의 customized 를 따르고, 그 집합이 installDiff 와 같다", () => {
+    // #62 이후 customized 는 상류 원문이 아니라 **실제 설치본** 과의 차이다.
+    // 두 근거가 갈라지면 어느 쪽이 사실인지 알 수 없어지므로 집합이 같아야 한다.
+    const behind = Object.keys(readInstallDiff())
+    expect(behind.length).toBeGreaterThan(0)
+    for (const file of behind) expect(isDivergent(file.replace(/\.tsx$/, ""))).toBe(true)
+    for (const name of houseUiNames()) {
+      if (behind.includes(`${name}.tsx`)) continue
+      expect(isDivergent(name), `${name} 이 설치본과 다르다고 기록됐는데 installDiff 에는 없다`).toBe(false)
+    }
   })
 
   /**

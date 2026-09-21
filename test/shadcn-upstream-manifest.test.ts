@@ -1,31 +1,47 @@
+import { createHash, type BinaryLike } from "node:crypto";
 import { readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
 
 import { describe, expect, it } from "vitest";
 
 /**
- * shadcn 상류 차이 매니페스트 검증 (#48).
+ * shadcn 상류 차이 매니페스트 검증 (#48, 대조 방식 정정 #62).
  *
  * 배경: `components/ui/` 는 components.json 의 style(radix-nova)로 설치한 상류
  * 원본이다. 한동안 매니페스트가 **다른 스타일(new-york-v4)** 과 대조한 탓에 60개 중
- * 52개가 "하우스 포크" 로 기록돼 있었으나, 같은 프리셋으로 실제 설치해 대조하면 다른
- * 것은 6개뿐이고 모두 상류가 앞선 경우였다 (#57 실측 → #61 에서 갱신).
+ * 52개가 "하우스 포크" 로 기록돼 있었고(#57 에서 정정), 그 뒤에도 **레지스트리 JSON
+ * 원문**과 대조한 탓에 CLI 가 설치 시점에 치환하는 자리가 차이로 섞여 있었다. #62 에서
+ * 게이트를 **실제 설치본 대조**로 바꾸면서 `customized` 의 뜻이 "설치했을 때 달라지는
+ * 파일" 로 좁아졌다.
  *
- * 그래서 이 테스트가 지키는 것은 "포크 기록" 이 아니라 **기준이 현실과 맞는지** 다 —
- * 기준 스타일이 components.json 과 같은지, 설치본 대조 측정이 기록돼 있는지. 상류와의
- * 실제 대조는 네트워크가 필요하므로 `scripts/shadcn-upstream.mjs` 수동 게이트가
+ * 그래서 이 테스트가 지키는 것은 "포크 기록" 이 아니라 **기록이 현실과 맞는지** 다 —
+ * 기준 스타일이 components.json 과 같은지, 측정이 지금 파일 상태를 반영하는지. 상류와의
+ * 실제 대조는 네트워크와 shadcn CLI 가 필요하므로 `pnpm check:shadcn` 수동 게이트가
  * 담당한다(폐쇄망 전제라 테스트에서 외부 fetch 를 하지 않는다).
  */
 const REPO_ROOT = path.resolve(__dirname, "..");
 const UI_DIR = path.join(REPO_ROOT, "components", "ui");
 const MANIFEST_PATH = path.join(UI_DIR, "upstream.manifest.json");
 
+/** 게이트가 쓰는 것과 같은 해시 — 기록이 현재 파일에서 나온 것인지 대조한다. */
+const sha = (s: BinaryLike) => createHash("sha256").update(s).digest("hex").slice(0, 16);
+
+/** scripts/shadcn-upstream.mjs 의 RESIDUAL_KINDS 와 짝이다. */
+const RESIDUAL_KINDS = ["identical", "absent", "cnAlias", "importOrder", "importLayout", "formatting", "differs"];
+
 interface Manifest {
   style: string;
   checkedAt: string | null;
   components: Record<
     string,
-    { upstream: string | null; localHash: string; customized?: boolean; groups?: string[]; note: string }
+    {
+      installed: string | null;
+      localHash: string;
+      customized?: boolean;
+      residual?: string;
+      groups?: string[];
+      note: string;
+    }
   >;
   houseStyle: Record<string, { what: string; why: string; examples: string[] }>;
   installDiff?: { measuredAt: string; how: string; meaning?: string; files: Record<string, string> };
@@ -72,6 +88,57 @@ describe("shadcn 상류 매니페스트", () => {
     for (const [file, why] of files) {
       expect(manifest.components[file], `installDiff 의 ${file} 이 실재하지 않는다`).toBeDefined();
       expect(why.length, `${file} 의 사유가 비었다`).toBeGreaterThan(0);
+    }
+  });
+
+  /**
+   * `installDiff` 는 손으로 적는 목록이 아니라 게이트가 매 측정마다 다시 쓰는 결과다.
+   * 두 곳이 갈라지면 어느 쪽이 사실인지 알 수 없어지므로 집합이 같아야 한다 (#62).
+   */
+  it("installDiff.files 의 집합이 customized 집합과 같다", () => {
+    const customized = Object.entries(manifest.components)
+      .filter(([, entry]) => entry.customized)
+      .map(([file]) => file)
+      .sort();
+    expect(Object.keys(manifest.installDiff?.files ?? {}).sort()).toEqual(customized);
+  });
+
+  /**
+   * **신선도 검사 (#62).** 날짜 창(예: 90일)으로 재면 아무도 파일을 안 건드려도 언젠가
+   * 빨개지고, 반대로 어제 프리미티브를 고쳐도 오늘은 초록이다 — 둘 다 틀린 신호다.
+   * 대신 기록된 `localHash` 를 실제 파일에서 다시 계산해 맞춘다. 프리미티브를 고쳤는데
+   * 게이트를 다시 돌리지 않았다면 정확히 그 순간 실패한다. 네트워크는 필요 없다.
+   */
+  it("측정이 현재 파일 상태를 반영한다 — 프리미티브를 고쳤으면 게이트를 다시 돌려야 한다", () => {
+    for (const file of componentFiles) {
+      const entry = manifest.components[file];
+      if (!entry) continue;
+      expect(
+        sha(readFileSync(path.join(UI_DIR, file), "utf8")),
+        `${file} 이 기록된 localHash 와 다르다 — 측정이 낡았다. node scripts/shadcn-upstream.mjs --update 를 돌려라`,
+      ).toBe(entry.localHash);
+    }
+  });
+
+  it("측정일과 점검일이 같은 실행에서 나왔다", () => {
+    expect(
+      manifest.installDiff?.measuredAt,
+      "installDiff.measuredAt 과 checkedAt 이 다르다 — 한쪽만 손으로 고친 기록이다",
+    ).toBe(manifest.checkedAt);
+  });
+
+  /**
+   * "내용은 같은데 바이트는 왜 다른가" 를 사람이 문장으로 적으면 낡아도 아무도 모른다.
+   * 게이트가 분류한 값만 오도록 막는다 (#67 리뷰 2 → #62).
+   */
+  it("residual 이 알려진 분류값이다", () => {
+    for (const [file, entry] of Object.entries(manifest.components)) {
+      expect(RESIDUAL_KINDS, `${file} 의 residual "${entry.residual}" 이 알려진 분류가 아니다`).toContain(
+        entry.residual,
+      );
+      expect(entry.residual === "differs", `${file} 의 residual 과 customized 가 어긋난다`).toBe(
+        Boolean(entry.customized),
+      );
     }
   });
 

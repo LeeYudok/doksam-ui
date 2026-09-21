@@ -19,6 +19,9 @@ const eslintConfig = defineConfig([
     "hooks/use-mobile.ts",
     // 서브에이전트 git worktree가 레포 안(.claude/worktrees/)에 생김 — lint 제외.
     ".claude/**",
+    // 상류 드리프트 게이트(pnpm check:shadcn)가 만드는 프로브 프로젝트 (#62).
+    // 남의 코드이며 우리 규칙의 대상이 아니다 — 대조용으로만 존재한다.
+    ".shadcn-probe/**",
   ]),
 ]);
 
