@@ -116,6 +116,21 @@ describe("shadcn 상류 매니페스트", () => {
     }
   });
 
+  /**
+   * examples 는 "그 성격이 드러나는 파일" 이다 — 성격은 radix-nova 스타일에서 오므로
+   * 상류와 같은 파일에도 드러난다. 설명만으로는 그 주장이 낡아도 알 수 없으니,
+   * 축이 실제로 의존하는 두 성격은 파일 내용으로 확인한다 (#63 리뷰).
+   */
+  it("축이 의존하는 성격은 examples 파일에서 실제로 확인된다", () => {
+    const read = (file: string) => readFileSync(path.join(UI_DIR, file), "utf8");
+    for (const file of manifest.houseStyle.controlScale.examples) {
+      expect(read(file), `${file} 에 축소된 컨트롤 높이(h-8/h-7)가 없다`).toMatch(/\bh-(?:7|8)\b/);
+    }
+    for (const file of manifest.houseStyle.radiusTokens.examples) {
+      expect(read(file), `${file} 이 --radius 파생 토큰을 쓰지 않는다`).toMatch(/rounded-(?:lg|\[min\(var\(--radius)/);
+    }
+  });
+
   it("분류에 쓰인 그룹 이름이 houseStyle 에 정의돼 있다", () => {
     const defined = new Set(Object.keys(manifest.houseStyle));
     for (const [file, entry] of Object.entries(manifest.components)) {
