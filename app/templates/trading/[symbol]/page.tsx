@@ -3,11 +3,11 @@ import { notFound } from "next/navigation"
 
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Sparkline } from "@/components/patterns/dataviz/sparkline-demo"
-import { ReturnCurveChart } from "@/components/patterns/dataviz/return-curve-demo"
-import { DivergingBarDemo } from "@/components/patterns/dataviz/diverging-bar-demo"
+import { Sparkline } from "@/components/patterns/dataviz/sparkline"
+import { ReturnCurveChart } from "@/components/patterns/dataviz/return-curve"
+import { DivergingBar } from "@/components/patterns/dataviz/diverging-bar"
 import { rateColor, rateText } from "@/lib/finance/rate"
-import { getSymbolDetail, listSymbols, rangePosition } from "@/lib/templates/trading-data"
+import { getSymbolDetail, investorFlowFor, listSymbols, rangePosition } from "@/lib/templates/trading-data"
 
 interface SymbolPageProps {
   params: Promise<{ symbol: string }>
@@ -88,7 +88,7 @@ export default async function TradingSymbolPage({ params }: Readonly<SymbolPageP
           <CardTitle className="text-sm font-semibold">수급 동향</CardTitle>
         </CardHeader>
         <CardContent>
-          <DivergingBarDemo />
+          <DivergingBar items={investorFlowFor(detail.symbol)} />
         </CardContent>
       </Card>
     </div>

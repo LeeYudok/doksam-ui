@@ -4,9 +4,9 @@ import { EyeIcon } from "@phosphor-icons/react/dist/ssr"
 
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { ActivityHeatmapDemo } from "@/components/patterns/dataviz/activity-heatmap-demo"
+import { ActivityHeatmap } from "@/components/patterns/dataviz/activity-heatmap"
 import { rateColor, rateText } from "@/lib/finance/rate"
-import { WATCHLIST } from "@/lib/templates/trading-data"
+import { WATCHLIST, watchlistActivityWeeks } from "@/lib/templates/trading-data"
 
 export const metadata: Metadata = {
   title: "관심종목 · Trading Dashboard",
@@ -55,7 +55,11 @@ export default function TradingWatchlistPage() {
           <CardTitle className="text-sm font-semibold">관심종목 알림 활동</CardTitle>
         </CardHeader>
         <CardContent className="overflow-x-auto">
-          <ActivityHeatmapDemo />
+          <ActivityHeatmap
+            weeks={watchlistActivityWeeks()}
+            rangeLabel="최근 20주 활동"
+            gridLabel="최근 20주 일별 활동 건수 히트맵"
+          />
         </CardContent>
       </Card>
     </div>

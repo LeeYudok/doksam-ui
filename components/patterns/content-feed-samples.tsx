@@ -1,5 +1,6 @@
 import type { PatternSampleData } from "@/components/showcase/pattern-sample"
-import { ContentCard, ContentFeedDemo, ContentThumbFeedDemo } from "@/components/patterns/content-feed/content-feed-demo"
+import { ContentFeedDemo, ContentThumbFeedDemo } from "@/components/patterns/content-feed/content-feed-demo"
+import { ContentCard } from "@/components/patterns/content-feed/content-feed"
 import { CONTENT_ITEMS } from "@/components/patterns/content-feed/content-feed-data"
 
 export const CONTENT_FEED_SAMPLES: PatternSampleData[] = [

@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/badge"
 import { ScreenHelpDialog } from "@/components/screen-help-dialog"
-import { ContentFeedDemo } from "@/components/patterns/content-feed/content-feed-demo"
-import { ListControlsDemo } from "@/components/patterns/list-controls/list-controls-demo"
+import { RecentUpdates } from "@/app/templates/saas/_components/recent-updates"
+import { DocList } from "@/app/templates/saas/_components/doc-list"
 import { DashboardSummary } from "@/app/templates/saas/_components/dashboard-summary"
 
 const HELP_ITEMS = [
@@ -34,12 +34,12 @@ export default function SaasDashboardPage() {
 
       <section className="flex flex-col gap-3">
         <h2 className="text-lg font-semibold tracking-tight">최근 업데이트</h2>
-        <ContentFeedDemo />
+        <RecentUpdates />
       </section>
 
       <section className="flex flex-col gap-3">
         <h2 className="text-lg font-semibold tracking-tight">문서 목록</h2>
-        <ListControlsDemo />
+        <DocList />
       </section>
     </div>
   )

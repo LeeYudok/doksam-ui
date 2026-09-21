@@ -1000,49 +1000,13 @@
       ],
       "files": [
         {
-          "path": "app/templates/saas/error.tsx",
-          "type": "registry:page",
-          "target": "app/templates/saas/error.tsx"
-        },
-        {
-          "path": "app/templates/saas/layout.tsx",
-          "type": "registry:page",
-          "target": "app/templates/saas/layout.tsx"
-        },
-        {
-          "path": "app/templates/saas/loading.tsx",
-          "type": "registry:page",
-          "target": "app/templates/saas/loading.tsx"
-        },
-        {
-          "path": "app/templates/saas/page.tsx",
-          "type": "registry:page",
-          "target": "app/templates/saas/page.tsx"
-        },
-        {
-          "path": "app/templates/saas/_lib/data.ts",
-          "type": "registry:page",
-          "target": "app/templates/saas/_lib/data.ts"
-        },
-        {
-          "path": "app/templates/saas/dashboard/error.tsx",
-          "type": "registry:page",
-          "target": "app/templates/saas/dashboard/error.tsx"
-        },
-        {
-          "path": "app/templates/saas/dashboard/loading.tsx",
-          "type": "registry:page",
-          "target": "app/templates/saas/dashboard/loading.tsx"
-        },
-        {
-          "path": "app/templates/saas/dashboard/page.tsx",
-          "type": "registry:page",
-          "target": "app/templates/saas/dashboard/page.tsx"
-        },
-        {
           "path": "app/templates/saas/_components/dashboard-summary.tsx",
           "type": "registry:page",
           "target": "app/templates/saas/_components/dashboard-summary.tsx"
+        },
+        {
+          "path": "app/templates/saas/_components/doc-list.tsx",
+          "type": "registry:component"
         },
         {
           "path": "app/templates/saas/_components/faq-section.tsx",
@@ -1070,9 +1034,38 @@
           "target": "app/templates/saas/_components/pricing-section.tsx"
         },
         {
+          "path": "app/templates/saas/_components/recent-updates.tsx",
+          "type": "registry:component"
+        },
+        {
           "path": "app/templates/saas/_components/template-nav.tsx",
           "type": "registry:page",
           "target": "app/templates/saas/_components/template-nav.tsx"
+        },
+        {
+          "path": "app/templates/saas/_lib/data.ts",
+          "type": "registry:page",
+          "target": "app/templates/saas/_lib/data.ts"
+        },
+        {
+          "path": "app/templates/saas/dashboard/error.tsx",
+          "type": "registry:page",
+          "target": "app/templates/saas/dashboard/error.tsx"
+        },
+        {
+          "path": "app/templates/saas/dashboard/loading.tsx",
+          "type": "registry:page",
+          "target": "app/templates/saas/dashboard/loading.tsx"
+        },
+        {
+          "path": "app/templates/saas/dashboard/page.tsx",
+          "type": "registry:page",
+          "target": "app/templates/saas/dashboard/page.tsx"
+        },
+        {
+          "path": "app/templates/saas/error.tsx",
+          "type": "registry:page",
+          "target": "app/templates/saas/error.tsx"
         },
         {
           "path": "app/templates/saas/feed/error.tsx",
@@ -1088,6 +1081,21 @@
           "path": "app/templates/saas/feed/page.tsx",
           "type": "registry:page",
           "target": "app/templates/saas/feed/page.tsx"
+        },
+        {
+          "path": "app/templates/saas/layout.tsx",
+          "type": "registry:page",
+          "target": "app/templates/saas/layout.tsx"
+        },
+        {
+          "path": "app/templates/saas/loading.tsx",
+          "type": "registry:page",
+          "target": "app/templates/saas/loading.tsx"
+        },
+        {
+          "path": "app/templates/saas/page.tsx",
+          "type": "registry:page",
+          "target": "app/templates/saas/page.tsx"
         }
       ]
     },
@@ -2451,7 +2459,7 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "components/patterns/dataviz/sparkline-demo.tsx",
+          "path": "components/patterns/dataviz/sparkline.tsx",
           "type": "registry:component"
         }
       ]
@@ -2466,7 +2474,7 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "components/patterns/dataviz/return-curve-demo.tsx",
+          "path": "components/patterns/dataviz/return-curve.tsx",
           "type": "registry:component"
         }
       ]
@@ -2481,7 +2489,7 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "components/patterns/dataviz/diverging-bar-demo.tsx",
+          "path": "components/patterns/dataviz/diverging-bar.tsx",
           "type": "registry:component"
         }
       ]
@@ -2496,7 +2504,7 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "components/patterns/dataviz/activity-heatmap-demo.tsx",
+          "path": "components/patterns/dataviz/activity-heatmap.tsx",
           "type": "registry:component"
         }
       ]
@@ -2516,11 +2524,7 @@
       ],
       "files": [
         {
-          "path": "components/patterns/content-feed/content-feed-demo.tsx",
-          "type": "registry:component"
-        },
-        {
-          "path": "components/patterns/content-feed/content-feed-data.ts",
+          "path": "components/patterns/content-feed/content-feed.tsx",
           "type": "registry:component"
         }
       ]
@@ -2541,7 +2545,7 @@
       ],
       "files": [
         {
-          "path": "components/patterns/list-controls/list-controls-demo.tsx",
+          "path": "components/patterns/list-controls/list-controls.tsx",
           "type": "registry:component"
         }
       ]

@@ -359,3 +359,56 @@ export function rangePosition(currentPrice: number, range52w: { low: number; hig
   if (high <= low) return 0
   return Math.min(Math.max(((currentPrice - low) / (high - low)) * 100, 0), 100)
 }
+
+/** 관심종목 알림 활동 히트맵용 표본 셀 1건. */
+export interface WatchlistActivityCell {
+  week: number
+  day: number
+  count: number
+}
+
+/** 결정적 의사난수(시드 고정) — 표본 데이터를 항상 같은 모양으로 재현한다. */
+function pseudoActivityCount(week: number, day: number): number {
+  const x = Math.sin(week * 12.9898 + day * 78.233) * 43758.5453
+  const frac = x - Math.floor(x)
+  return Math.floor(frac * 11)
+}
+
+/** 최근 N주 관심종목 알림 활동 표본 — 주(週) 단위 열 × 요일(일~토) 행. */
+export function watchlistActivityWeeks(weeks = 20): WatchlistActivityCell[][] {
+  const out: WatchlistActivityCell[][] = []
+  for (let w = 0; w < weeks; w++) {
+    const col: WatchlistActivityCell[] = []
+    for (let d = 0; d < 7; d++) {
+      col.push({ week: w, day: d, count: pseudoActivityCount(w, d) })
+    }
+    out.push(col)
+  }
+  return out
+}
+
+/** 투자자 주체별 순매수 1건 — 양수는 순매수, 음수는 순매도(억 원). */
+export interface InvestorFlowItem {
+  label: string
+  value: number
+}
+
+/**
+ * 종목별 투자자 수급 표본.
+ *
+ * 종목 코드에서 시드를 만들어 결정적으로 생성한다 — 표본이지만 종목마다 다른
+ * 모양이 나오고, 같은 종목은 언제 렌더해도 같은 값이라 SSR 과 클라이언트가
+ * 어긋나지 않는다.
+ */
+export function investorFlowFor(symbol: string): InvestorFlowItem[] {
+  const seed = [...symbol].reduce((acc, ch) => acc + ch.charCodeAt(0), 0)
+  const at = (i: number) => {
+    const x = Math.sin(seed * 12.9898 + i * 78.233) * 43758.5453
+    return Math.round((x - Math.floor(x) - 0.5) * 2600)
+  }
+  return [
+    { label: "외국인", value: at(1) },
+    { label: "기관", value: at(2) },
+    { label: "개인", value: at(3) },
+  ]
+}

@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { WalletIcon, ChartLineUpIcon, PercentIcon } from "@phosphor-icons/react/dist/ssr"
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { ReturnCurveChart } from "@/components/patterns/dataviz/return-curve-demo"
+import { ReturnCurveChart } from "@/components/patterns/dataviz/return-curve"
 import { formatWon } from "@/lib/finance/format-won"
 import { rateColor, rateText } from "@/lib/finance/rate"
 import { getPortfolioSummary, HOLDINGS, PORTFOLIO_RETURN_CURVE } from "@/lib/templates/trading-data"

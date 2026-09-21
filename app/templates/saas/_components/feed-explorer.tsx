@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react"
 
 import { cn } from "@/lib/utils"
-import { ContentCard, ContentViewToggle, type ContentViewMode } from "@/components/patterns/content-feed/content-feed-demo"
+import { ContentCard, ContentViewToggle, type ContentViewMode } from "@/components/patterns/content-feed/content-feed"
 import { FEED_POSTS, FEED_WORKSPACES } from "@/app/templates/saas/_lib/data"
 
 /**

@@ -1,11 +1,6 @@
-export interface ContentItem {
-  id: string
-  title: string
-  category: string
-  author: string
-  updatedAt: string
-  summary: string
-}
+import type { ContentItem } from "@/components/patterns/content-feed/content-feed"
+
+export type { ContentItem }
 
 /** 뉴스/문서 등 특정 도메인에 묶이지 않는 제네릭 콘텐츠 목록 — 사내 문서/가이드를 예시로 든다. */
 export const CONTENT_ITEMS: ContentItem[] = [
