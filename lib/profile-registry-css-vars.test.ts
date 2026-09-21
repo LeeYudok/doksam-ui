@@ -3,7 +3,11 @@ import { join } from "node:path";
 
 import { describe, expect, it } from "vitest";
 
-import { computeProfileRegistryCssVars, PROFILE_CSS_VAR_KEYS } from "@/lib/profile-registry-css-vars";
+import {
+  computeProfileRegistryCssVars,
+  extractRadiusFromDescription,
+  PROFILE_CSS_VAR_KEYS,
+} from "@/lib/profile-registry-css-vars";
 import { BRAND_PROFILES } from "@/profiles";
 
 /**
@@ -23,6 +27,7 @@ import { BRAND_PROFILES } from "@/profiles";
 
 interface RegistryItemCssVars {
   name: string;
+  description?: string;
   cssVars?: {
     theme?: Record<string, string>;
     light?: Record<string, string>;
@@ -66,6 +71,19 @@ describe("registry.json profile-* cssVars (#36)", () => {
       expect(item?.cssVars?.theme).toEqual(expected!.theme);
       expect(item?.cssVars?.light).toEqual(expected!.light);
       expect(item?.cssVars?.dark).toEqual(expected!.dark);
+    });
+
+    it(`${itemName} 의 description 이 언급하는 radius 가 cssVars.theme.radius 와 같다`, () => {
+      // 어드버서리얼 리뷰(#36 finding 1): description 은 손글씨라 radius= 부분이
+      // profiles/index.ts 와 따로 놀 수 있다(실측 — 5개 중 4개가 어긋나 있었다).
+      // 기대값은 하드코딩하지 않고 profile.radius(단일 진실원천)에서 가져온다.
+      const item = items.find((i) => i.name === itemName);
+      expect(item?.description, `${itemName} 에 description 이 없다`).toBeTruthy();
+
+      const mentioned = extractRadiusFromDescription(item!.description!);
+      expect(mentioned, `${itemName} description 에 "radius=" 패턴이 없다`).toBeDefined();
+      expect(mentioned).toBe(profile.radius);
+      expect(item?.cssVars?.theme?.radius).toBe(profile.radius);
     });
   }
 });

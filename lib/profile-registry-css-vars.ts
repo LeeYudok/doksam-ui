@@ -49,3 +49,29 @@ export function computeProfileRegistryCssVars(profile: BrandProfile): ProfileReg
     dark,
   };
 }
+
+/** `description` 안에서 `radius=<값>` 을 찾는 패턴 — 두 곳(생성기·테스트)이 공유. */
+const RADIUS_IN_DESCRIPTION = /radius=([^\s+]+)/;
+
+/**
+ * `registry.json` 의 `profile-*` 항목 `description` 은 손으로 쓴 문장이라
+ * (폰트 설치 캐비어트 등 프로필마다 다른 내용을 담는다) 전체를 자동 생성하지
+ * 않는다. 다만 그 문장 안의 `radius=<값>` 부분은 `profiles/index.ts` 의
+ * `profile.radius` 와 반드시 같아야 한다 — 손으로 옮겨 적다가 어긋난 사고가
+ * 4/5 프로필에서 실제로 있었다(#36 어드버서리얼 리뷰).
+ *
+ * 이 함수가 그 부분 문자열만 `profile.radius` 로 다시 써서 나머지 손글씨
+ * 문장은 그대로 보존한다. `radius=` 패턴이 없으면(문구가 바뀌었거나 애초에
+ * 없으면) 원본을 그대로 반환한다 — 조용히 실패하지 않도록
+ * `lib/profile-registry-css-vars.test.ts` 가 모든 프로필에 이 패턴이
+ * 실존하는지도 함께 확인한다.
+ */
+export function withSyncedRadiusDescription(description: string, radius: string): string {
+  if (!RADIUS_IN_DESCRIPTION.test(description)) return description;
+  return description.replace(RADIUS_IN_DESCRIPTION, `radius=${radius}`);
+}
+
+/** `description` 에서 `radius=<값>` 부분을 추출한다. 없으면 undefined. */
+export function extractRadiusFromDescription(description: string): string | undefined {
+  return description.match(RADIUS_IN_DESCRIPTION)?.[1];
+}

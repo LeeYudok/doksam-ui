@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "profile-service",
   "title": "Profile: Service",
-  "description": "대외 서비스·고객 대면 화면 프로필. theme=ocean(신뢰감 있는 블루) + font=Noto Sans KR + defaultMode=light + radius=10px + density=comfortable — <html>에 data-density=\"comfortable\"을 지정한다(밀도 토큰 층은 /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/noto-sans-kr/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응). 자세한 절차는 https://ui.doksam.com/rules 참고.",
+  "description": "대외 서비스·고객 대면 화면 프로필. theme=ocean(신뢰감 있는 블루) + font=Noto Sans KR + defaultMode=light + radius=12px + density=comfortable — <html>에 data-density=\"comfortable\"을 지정한다(밀도 토큰 층은 /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/noto-sans-kr/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응). 자세한 절차는 https://ui.doksam.com/rules 참고.",
   "cssVars": {
     "theme": {
       "radius": "12px"

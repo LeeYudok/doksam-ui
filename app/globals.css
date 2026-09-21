@@ -85,28 +85,33 @@
 :root {
   --radius: 6px;
 
-  /* ocean · light (기본 프리셋의 기본값 — FOUC 방지용 폴백) */
-  --background: oklch(0.985 0.004 262);
+  /*
+   * ocean · light (기본 프리셋의 기본값 — FOUC 방지용 폴백). 아래 [data-theme="ocean"]
+   * 블록과 값이 같아야 한다(둘 다 themes/ocean.ts 미러) — #36 어드버서리얼
+   * 리뷰에서 이 블록이 실제로는 themes/ocean.ts 가 아니라 예전에 어긋나 있던
+   * profile-service 레지스트리 값을 옮겨 적은 상태였던 것으로 드러나 바로잡았다.
+   */
+  --background: oklch(0.948 0.016 262);
   --foreground: oklch(0.21 0.02 262);
-  --card: oklch(0.995 0.002 262);
+  --card: oklch(0.998 0.003 262);
   --card-foreground: oklch(0.21 0.02 262);
-  --popover: oklch(0.995 0.002 262);
+  --popover: oklch(0.998 0.003 262);
   --popover-foreground: oklch(0.21 0.02 262);
   --primary: oklch(0.53 0.21 262);
   --primary-foreground: oklch(0.98 0.01 262);
-  --secondary: oklch(0.94 0.02 262);
+  --secondary: oklch(0.9 0.03 262);
   --secondary-foreground: oklch(0.28 0.03 262);
-  --muted: oklch(0.955 0.012 262);
+  --muted: oklch(0.93 0.02 262);
   --muted-foreground: oklch(0.5 0.03 262);
-  --accent: oklch(0.92 0.035 262);
+  --accent: oklch(0.87 0.055 262);
   --accent-foreground: oklch(0.28 0.03 262);
   --destructive: oklch(0.58 0.22 27);
   --success: oklch(0.55 0.15 152);
   --warning: oklch(0.75 0.16 80);
   --gain: oklch(0.58 0.22 27);
   --loss: oklch(0.55 0.2 258);
-  --border: oklch(0.9 0.015 262);
-  --input: oklch(0.9 0.015 262);
+  --border: oklch(0.84 0.032 262);
+  --input: oklch(0.84 0.032 262);
   --ring: oklch(0.53 0.21 262);
   --chart-1: oklch(0.53 0.21 262);
   --chart-2: oklch(0.62 0.17 220);

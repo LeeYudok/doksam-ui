@@ -299,7 +299,7 @@
       "name": "profile-admin",
       "type": "registry:theme",
       "title": "Profile: Admin",
-      "description": "내부 관리자 도구·백오피스 화면 프로필. theme=slate(무채색 뉴트럴) + font=Geist + defaultMode=light + radius=6px + density=compact — <html>에 data-density=\"compact\"를 지정한다(밀도 토큰 층은 /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/geist/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응, next/font/google 미사용). 자세한 절차는 https://ui.doksam.com/rules 참고.",
+      "description": "내부 관리자 도구·백오피스 화면 프로필. theme=slate(무채색 뉴트럴) + font=Geist + defaultMode=light + radius=2px + density=compact — <html>에 data-density=\"compact\"를 지정한다(밀도 토큰 층은 /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/geist/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응, next/font/google 미사용). 자세한 절차는 https://ui.doksam.com/rules 참고.",
       "cssVars": {
         "theme": {
           "radius": "2px"
@@ -385,7 +385,7 @@
       "name": "profile-service",
       "type": "registry:theme",
       "title": "Profile: Service",
-      "description": "대외 서비스·고객 대면 화면 프로필. theme=ocean(신뢰감 있는 블루) + font=Noto Sans KR + defaultMode=light + radius=10px + density=comfortable — <html>에 data-density=\"comfortable\"을 지정한다(밀도 토큰 층은 /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/noto-sans-kr/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응). 자세한 절차는 https://ui.doksam.com/rules 참고.",
+      "description": "대외 서비스·고객 대면 화면 프로필. theme=ocean(신뢰감 있는 블루) + font=Noto Sans KR + defaultMode=light + radius=12px + density=comfortable — <html>에 data-density=\"comfortable\"을 지정한다(밀도 토큰 층은 /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/noto-sans-kr/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응). 자세한 절차는 https://ui.doksam.com/rules 참고.",
       "cssVars": {
         "theme": {
           "radius": "12px"
@@ -557,7 +557,7 @@
       "name": "profile-docs",
       "type": "registry:theme",
       "title": "Profile: Docs",
-      "description": "문서·위키·블로그류 화면 프로필. theme=forest(차분한 그린) + font=IBM Plex Sans KR + defaultMode=light + radius=8px + density=comfortable — <html>에 data-density=\"comfortable\"을 지정한다(밀도 토큰 층은 /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/ibm-plex-kr/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응). 자세한 절차는 https://ui.doksam.com/rules 참고.",
+      "description": "문서·위키·블로그류 화면 프로필. theme=forest(차분한 그린) + font=IBM Plex Sans KR + defaultMode=light + radius=12px + density=comfortable — <html>에 data-density=\"comfortable\"을 지정한다(밀도 토큰 층은 /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/ibm-plex-kr/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응). 자세한 절차는 https://ui.doksam.com/rules 참고.",
       "cssVars": {
         "theme": {
           "radius": "12px"
@@ -643,7 +643,7 @@
       "name": "profile-console",
       "type": "registry:theme",
       "title": "Profile: Console",
-      "description": "모니터링·운영 콘솔류 화면 프로필. theme=ember(웜 오렌지) + font=Geist + defaultMode=dark + radius=4px + density=compact — <html>에 data-density=\"compact\"를 지정한다(밀도 토큰 층은 /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/geist/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응, next/font/google 미사용). 자세한 절차는 https://ui.doksam.com/rules 참고.",
+      "description": "모니터링·운영 콘솔류 화면 프로필. theme=ember(웜 오렌지) + font=Geist + defaultMode=dark + radius=2px + density=compact — <html>에 data-density=\"compact\"를 지정한다(밀도 토큰 층은 /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/geist/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응, next/font/google 미사용). 자세한 절차는 https://ui.doksam.com/rules 참고.",
       "cssVars": {
         "theme": {
           "radius": "2px"
