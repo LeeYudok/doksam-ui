@@ -72,6 +72,16 @@ describe("PersonalitiesPage", () => {
       </I18nProvider>,
     )
     for (const preset of PERSONALITY_PRESETS) {
+      // 키가 없으면 getByText(undefined) 로 엉뚱하게 실패하므로, 키 존재를 먼저
+      // 명시적으로 단언한다 — "번역 누락"과 "렌더 실패"를 구분하기 위해서다 (#42).
+      const keys = [
+        `personality.${preset.name}.description`,
+        ...preset.suitedFor.map((_, i) => `personality.${preset.name}.suited.${i}`),
+        ...preset.avoidWhen.map((_, i) => `personality.${preset.name}.avoid.${i}`),
+      ]
+      for (const key of keys) {
+        expect(messages[key], `${locale} 로케일에 ${key} 키가 없다`).toBeTruthy()
+      }
       expect(screen.getByText(messages[`personality.${preset.name}.description`])).toBeInTheDocument()
       expect(screen.queryByText(preset.description)).not.toBeInTheDocument()
       for (const [i] of preset.avoidWhen.entries()) {

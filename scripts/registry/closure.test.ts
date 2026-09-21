@@ -193,28 +193,36 @@ describe("배포 가능성 — 이슈 #52", () => {
 describe("파일 이름 충돌 — 이슈 #52", () => {
   /**
    * shadcn CLI 는 설치 시 `@/` import 를 그 설치가 싣는 파일 이름으로 다시 쓴다.
-   * 확장자를 뺀 이름이 같은 파일이 둘 있으면 엉뚱한 쪽으로 이어진다 —
-   * 실제로 template-bank 의 `_data/product-categories` import 가 설치 후
-   * `_components/product-categories` 를 가리켜 빌드가 깨졌다.
+   * 후보가 여럿이면 **확장자 순서**가 1순위, 기대 경로 prefix 가 2순위다.
+   * 그래서 같은 이름이라도 확장자가 같으면 prefix 로 갈리지만, `.tsx` 와 `.ts` 가
+   * 섞이면 확장자 순서가 먼저 이겨 엉뚱한 쪽으로 이어진다 — template-bank 의
+   * `_data/product-categories.ts` import 가 설치 후 `_components/product-categories.tsx`
+   * 를 가리켜 빌드가 깨진 것이 정확히 이 경우다.
    *
    * 한 항목이 아니라 **한 번의 설치 전체**(전이 의존까지)에서 봐야 한다.
    *
-   * Next 규약 파일(page·layout·loading·error 등)은 서로를 import 하지 않아 제외한다.
+   * Next 규약 파일(page·layout·loading·error 등)은 alias import 대상이 아니라 제외한다.
+   * `index` 는 규약 파일이 아니고 실제 import 대상이므로(`@/profiles` 등) 제외하지 않는다 —
+   * 확장자가 같은 동안에만 안전하다는 사실을 이 검사가 지킨다 (#54).
    */
-  const NEXT_CONVENTION = new Set(["page", "layout", "loading", "error", "not-found", "template", "default", "index"])
+  const NEXT_CONVENTION = new Set(["page", "layout", "loading", "error", "not-found", "template", "default"])
 
-  it("한 번의 설치가 까는 파일들의 이름이 겹치지 않는다", () => {
+  it("한 번의 설치가 까는 파일 중 이름이 같고 확장자가 다른 짝이 없다", () => {
     for (const item of registry.items) {
       const seen = new Map<string, string>()
       for (const filePath of [...providedPaths(item.name, registry)].sort()) {
         const stem = filePath.replace(/.*\//, "").replace(/\.[^.]+$/, "")
         if (NEXT_CONVENTION.has(stem)) continue
+        const extension = filePath.slice(filePath.lastIndexOf("."))
         const previous = seen.get(stem)
+        if (previous === undefined) {
+          seen.set(stem, filePath)
+          continue
+        }
         expect(
-          previous,
-          `${item.name} 설치: ${previous} 와 ${filePath} 의 파일 이름이 같다 — shadcn 이 import 를 엉뚱한 쪽으로 다시 쓴다`,
-        ).toBeUndefined()
-        seen.set(stem, filePath)
+          previous.slice(previous.lastIndexOf(".")),
+          `${item.name} 설치: ${previous} 와 ${filePath} 는 이름이 같고 확장자가 다르다 — shadcn 이 import 를 엉뚱한 쪽으로 다시 쓴다`,
+        ).toBe(extension)
       }
     }
   })

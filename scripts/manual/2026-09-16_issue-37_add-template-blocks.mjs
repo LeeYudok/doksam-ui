@@ -63,11 +63,25 @@ for (const item of registry.items) {
 const existing = new Set(registry.items.map((i) => i.name));
 const templateMeta = readFileSync(join(ROOT, "lib/templates/registry.ts"), "utf8");
 
+/**
+ * 템플릿 레지스트리에서 해당 slug 의 메타데이터를 읽는다.
+ *
+ * slug 가 없으면 조용히 fallback 하지 않고 던진다 — 조용한 fallback 은
+ * title 이 slug 로, profile·description 이 빈 문자열로 registry.json 에
+ * 기록되는 결과를 낳고, 그 블록은 빌드까지 통과해버린다 (GitLab MR !62 리뷰 지적, #42).
+ */
 function metaFor(slug) {
-  const block = templateMeta.split(`href: "/templates/${slug}"`)[1] ?? "";
-  const title = block.match(/title: "([^"]+)"/)?.[1] ?? slug;
-  const profile = block.match(/profile: "([^"]+)"/)?.[1] ?? "";
-  const description = block.match(/description:\s*\n?\s*"([^"]+)"/)?.[1] ?? "";
+  const marker = `href: "/templates/${slug}"`;
+  const at = templateMeta.indexOf(marker);
+  if (at === -1) throw new Error(`lib/templates/registry.ts 에 ${slug} 항목이 없다`);
+  const block = templateMeta.slice(at + marker.length);
+
+  const title = block.match(/title: "([^"]+)"/)?.[1];
+  const profile = block.match(/profile: "([^"]+)"/)?.[1];
+  const description = block.match(/description:\s*\n?\s*"([^"]+)"/)?.[1];
+  for (const [key, value] of Object.entries({ title, profile, description })) {
+    if (!value) throw new Error(`${slug} 의 ${key} 를 registry.ts 에서 읽지 못했다`);
+  }
   return { title, profile, description };
 }
 

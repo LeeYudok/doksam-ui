@@ -87,8 +87,12 @@ export function ChatWidget({
             {messages.length === 0 ? (
               <p className="mt-4 text-center text-xs text-muted-foreground">아직 메시지가 없습니다</p>
             ) : null}
-            {messages.map((msg, i) => (
-              <MessageItem key={i} msg={msg} currentUsername={currentUsername} />
+            {messages.map((msg) => (
+              <MessageItem
+                key={`${msg.time}-${msg.from ?? "system"}-${msg.content}`}
+                msg={msg}
+                currentUsername={currentUsername}
+              />
             ))}
             <div ref={endRef} />
           </div>
