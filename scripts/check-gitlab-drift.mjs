@@ -1,0 +1,137 @@
+#!/usr/bin/env node
+/**
+ * GitHub(SSOT) 과 GitLab(배포용) 클론의 내용 드리프트를 수동으로 점검한다 (#54, #56).
+ *
+ * 두 레포는 히스토리가 다르고 라우팅 구조도 다르다(`app/X` ↔ `app/[locale]/X`). CI 에
+ * 넣지 않는 이유는 폐쇄망 전제 — 이 스크립트는 GitLab 클론이 로컬에 이미 있다고
+ * 가정하고 그 경로를 인자로 받는다. 외부 네트워크를 쓰지 않는다.
+ *
+ * 사용:
+ *   node scripts/check-gitlab-drift.mjs <gitlab 클론 경로>
+ *   node scripts/check-gitlab-drift.mjs ~/workspace/gitlab.doksam.com/doksam-ui
+ *
+ * 대상 디렉터리(`components/`, `lib/`, `scripts/`, `test/`, `app/`)를 걸으며
+ * 같은 상대 경로(app 아래는 `app/X` → `app/[locale]/X` 로 치환)의 파일을 찾아
+ * 내용을 비교한다. 구조적으로 다른 게 확실한 것은 스킵 목록에 넣어 제외한다 —
+ * 배포 설정(.gitlab-ci.yml 등), 규칙 원문 위치(형식 자체가 다르다: GitHub 는
+ * lib/rules-markdown.ts, GitLab 은 content/rules.mdx), 로케일 라우팅을 성립시키는
+ * 파일(app/[locale]/layout.tsx, middleware.ts), 생성물(public/r/, registry.json —
+ * 소스가 같아도 로케일 라우팅 경로 차이로 항상 다르게 나온다), 개인 메모리.
+ *
+ * 결과는 참고용 목록이다 — 사람이 "이식 / 불필요 / GitLab 전용" 을 판단해야 한다
+ * (#54 가 이미 그렇게 했다). 이 스크립트는 그 판단의 재료(어떤 파일이 다른가)만 만든다.
+ */
+import { readFileSync, existsSync, statSync, readdirSync } from "node:fs";
+import path from "node:path";
+
+const GITHUB_ROOT = path.resolve(import.meta.dirname, "..");
+
+const gitlabRootArg = process.argv[2];
+if (!gitlabRootArg) {
+  console.error("사용법: node scripts/check-gitlab-drift.mjs <gitlab 클론 경로>");
+  process.exit(1);
+}
+const GITLAB_ROOT = path.resolve(gitlabRootArg);
+if (!existsSync(GITLAB_ROOT)) {
+  console.error(`경로가 없다: ${GITLAB_ROOT}`);
+  process.exit(1);
+}
+
+// 구조적으로 다르다고 이미 확인된 것들 — 드리프트가 아니라 설계다.
+const SKIP_PATTERNS = [
+  /^\.github\//,
+  /^\.gitlab-ci\.yml$/,
+  /^content\/rules(\.en)?\.mdx$/,
+  /^lib\/rules-markdown/, // GitLab 에 대응 파일이 없다(마크다운 vs TS)
+  /^public\/r\//, // 생성물 — 소스가 같아도 라우팅 차이로 항상 다르다
+  /^registry\.json$/,
+  /^\.claude\//,
+  /^HANDOFF\.md$/,
+  /middleware\.ts$/,
+  /^app\/\[locale\]\/layout\.tsx$/, // 로케일 세그먼트를 성립시키는 카탈로그 전용 레이아웃
+  /node_modules\//,
+  /\.next\//,
+  /coverage\//,
+  /playwright-report\//,
+  /^\.git\//,
+];
+
+function isSkipped(relPath) {
+  return SKIP_PATTERNS.some((re) => re.test(relPath));
+}
+
+/** app/X 를 gitlab 쪽 app/[locale]/X 로 매핑한다. 그 외 디렉터리는 그대로. */
+function toGitlabPath(relPath) {
+  if (relPath === "app" || relPath.startsWith("app/")) {
+    return relPath.replace(/^app\//, "app/[locale]/").replace(/^app$/, "app/[locale]");
+  }
+  return relPath;
+}
+
+// app/ 은 대상에서 뺀다 — GitHub 은 플랫 라우팅 + document.documentElement.lang,
+// GitLab 은 app/[locale] 라우팅 + I18nProvider locale={...} 라 파일 내용 자체가
+// 항상 갈린다(구조적 차이). 그 아래 컴포넌트/데이터 파일은 대부분 동일해야 하니
+// 필요하면 이 목록에 app 하위 개별 서브트리를 추가해 좁게 쓴다.
+const WALK_DIRS = ["components", "lib", "scripts", "test"];
+
+function walk(root, rel = "") {
+  const abs = path.join(root, rel);
+  if (!existsSync(abs)) return [];
+  const entries = readdirSync(abs, { withFileTypes: true });
+  const files = [];
+  for (const entry of entries) {
+    const childRel = rel ? `${rel}/${entry.name}` : entry.name;
+    if (isSkipped(childRel)) continue;
+    if (entry.isDirectory()) {
+      files.push(...walk(root, childRel));
+    } else if (entry.isFile()) {
+      files.push(childRel);
+    }
+  }
+  return files;
+}
+
+const githubFiles = WALK_DIRS.flatMap((dir) => walk(GITHUB_ROOT, dir));
+
+const onlyInGithub = [];
+const differs = [];
+let identical = 0;
+
+for (const relPath of githubFiles) {
+  const gitlabRel = toGitlabPath(relPath);
+  const githubAbs = path.join(GITHUB_ROOT, relPath);
+  const gitlabAbs = path.join(GITLAB_ROOT, gitlabRel);
+
+  if (!existsSync(gitlabAbs) || !statSync(gitlabAbs).isFile()) {
+    onlyInGithub.push(relPath);
+    continue;
+  }
+
+  const githubContent = readFileSync(githubAbs, "utf8");
+  const gitlabContent = readFileSync(gitlabAbs, "utf8");
+  if (githubContent === gitlabContent) {
+    identical++;
+  } else {
+    differs.push({ relPath, gitlabRel });
+  }
+}
+
+console.log(`동일: ${identical}개`);
+console.log(`GitHub 에만 있음: ${onlyInGithub.length}개`);
+if (onlyInGithub.length) {
+  for (const f of onlyInGithub.slice(0, 30)) console.log(`  - ${f}`);
+  if (onlyInGithub.length > 30) console.log(`  ... 외 ${onlyInGithub.length - 30}개`);
+}
+
+console.log(`\n내용이 다름: ${differs.length}개`);
+for (const { relPath, gitlabRel } of differs) {
+  console.log(`  - ${relPath}  (gitlab: ${gitlabRel})`);
+}
+
+if (differs.length === 0 && onlyInGithub.length === 0) {
+  console.log("\n드리프트 후보 없음 — 대상 디렉터리 전체가 내용까지 동일하다.");
+} else {
+  console.log(
+    "\n각 항목을 '이식 / 불필요(의도된 차이) / GitLab 전용' 으로 사람이 분류할 것 — 이 스크립트는 목록만 만든다.",
+  );
+}

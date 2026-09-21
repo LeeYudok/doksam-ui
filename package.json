@@ -26,7 +26,8 @@
     "registry:sync": "node --experimental-strip-types scripts/registry/sync-ui-items.ts",
     "registry:build": "shadcn build",
     "gen:llms": "node scripts/gen-llms.mjs",
-    "check:shadcn": "node scripts/shadcn-upstream.mjs"
+    "check:shadcn": "node scripts/shadcn-upstream.mjs",
+    "check:gitlab-drift": "node scripts/check-gitlab-drift.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",

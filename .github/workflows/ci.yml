@@ -20,12 +20,20 @@ jobs:
       - run: pnpm typecheck
       - run: pnpm test
       # registry.json 수정 후 재생성을 깜빡한 드리프트를 잡는 게이트.
+      # git diff 는 untracked 파일을 안 본다 — 항목이 늘어 public/r/<new>.json 이 새로
+      # 생겼는데 git add 를 빠뜨리면 CI 는 통과하고 배포본에서만 404 가 난다(#54).
+      # 그래서 diff 가 아니라 "작업 트리가 깨끗한가" 로 검사한다.
       - run: pnpm registry:build && pnpm gen:llms
-      - run: git diff --exit-code -- public/r public/llms.txt
+      - run: |
+          test -z "$(git status --porcelain --untracked-files=all -- public/r public/llms.txt)" || \
+          (git status --short --untracked-files=all -- public/r public/llms.txt && \
+           echo "registry.json 변경 후 'pnpm registry:build && pnpm gen:llms' 를 실행해 public/r·public/llms.txt를 함께 커밋하세요." && exit 1)
       # ko-catalog.json(extract.mjs 산출 — 번역 대상 키 목록)도 같은 방식으로 검증한다.
       # t() 호출을 고치고 재생성을 깜빡하면 messages.test.ts 의 누락 검사 기준이 낡는다.
       - run: node scripts/i18n/extract.mjs
-      - run: git diff --exit-code -- scripts/i18n/ko-catalog.json
+      - run: |
+          test -z "$(git status --porcelain --untracked-files=all -- scripts/i18n/ko-catalog.json)" || \
+          (echo "t() 호출 변경 후 'node scripts/i18n/extract.mjs' 를 실행해 scripts/i18n/ko-catalog.json 을 함께 커밋하세요." && exit 1)
 
   e2e:
     runs-on: ubuntu-latest

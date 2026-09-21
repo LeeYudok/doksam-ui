@@ -4,7 +4,6 @@ import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import {
-  ArrowLeftIcon,
   GearSixIcon,
   ListIcon,
   SquaresFourIcon,
@@ -88,13 +87,7 @@ export function AdminSidebar() {
   return (
     <>
       <div className="flex items-center justify-between border-b border-border bg-card px-3 py-2.5 md:hidden">
-        <Link
-          href="/templates"
-          className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-foreground"
-        >
-          <ArrowLeftIcon size={14} weight="regular" />
-          템플릿으로
-        </Link>
+        <span />
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild>
             <Button variant="outline" size="icon-sm" aria-label="Admin 메뉴 열기">
@@ -116,13 +109,6 @@ export function AdminSidebar() {
         aria-label="Admin 템플릿 내비게이션"
         className="hidden h-full w-56 shrink-0 flex-col gap-1 border-r border-border bg-card px-3 py-4 md:flex"
       >
-        <Link
-          href="/templates"
-          className="mb-3 flex items-center gap-1.5 px-2 text-xs font-medium text-muted-foreground hover:text-foreground"
-        >
-          <ArrowLeftIcon size={14} weight="regular" />
-          템플릿으로
-        </Link>
         <AdminNavLinks pathname={pathname} />
       </nav>
     </>

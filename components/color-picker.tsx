@@ -105,7 +105,7 @@ export function ColorPicker({
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-56">
-        <div role="group" aria-label="색상 프리셋" className="grid grid-cols-5 gap-1.5">
+        <fieldset aria-label="색상 프리셋" className="m-0 grid grid-cols-5 gap-1.5 border-0 p-0">
           {presets.map((preset) => {
             const selected = normalizeHex(preset) === normalizeHex(value)
             return (
@@ -126,7 +126,7 @@ export function ColorPicker({
               />
             )
           })}
-        </div>
+        </fieldset>
         <div className="flex items-center gap-2">
           <span
             aria-hidden
