@@ -5,7 +5,7 @@
   "description": "내부 관리자 도구·백오피스 화면 프로필. theme=slate(무채색 뉴트럴) + font=Geist + defaultMode=light + radius=6px + density=compact — <html>에 data-density=\"compact\"를 지정한다(밀도 토큰 층은 /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/geist/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응, next/font/google 미사용). 자세한 절차는 https://ui.doksam.com/rules 참고.",
   "cssVars": {
     "theme": {
-      "radius": "6px"
+      "radius": "2px"
     },
     "light": {
       "background": "oklch(0.985 0.002 240)",
@@ -29,7 +29,20 @@
       "loss": "oklch(0.55 0.2 258)",
       "border": "oklch(0.9 0.006 240)",
       "input": "oklch(0.9 0.006 240)",
-      "ring": "oklch(0.32 0.014 240)"
+      "ring": "oklch(0.32 0.014 240)",
+      "chart-1": "oklch(0.32 0.014 240)",
+      "chart-2": "oklch(0.48 0.02 240)",
+      "chart-3": "oklch(0.6 0.02 210)",
+      "chart-4": "oklch(0.68 0.015 260)",
+      "chart-5": "oklch(0.75 0.01 230)",
+      "sidebar": "oklch(0.985 0.004 262)",
+      "sidebar-foreground": "oklch(0.21 0.02 262)",
+      "sidebar-primary": "oklch(0.53 0.21 262)",
+      "sidebar-primary-foreground": "oklch(0.98 0.01 262)",
+      "sidebar-accent": "oklch(0.92 0.035 262)",
+      "sidebar-accent-foreground": "oklch(0.28 0.03 262)",
+      "sidebar-border": "oklch(0.9 0.015 262)",
+      "sidebar-ring": "oklch(0.53 0.21 262)"
     },
     "dark": {
       "background": "oklch(0.19 0.005 240)",
@@ -53,7 +66,20 @@
       "loss": "oklch(0.72 0.16 254)",
       "border": "oklch(1 0 0 / 12%)",
       "input": "oklch(1 0 0 / 16%)",
-      "ring": "oklch(0.75 0.014 240)"
+      "ring": "oklch(0.75 0.014 240)",
+      "chart-1": "oklch(0.75 0.014 240)",
+      "chart-2": "oklch(0.65 0.02 240)",
+      "chart-3": "oklch(0.7 0.02 210)",
+      "chart-4": "oklch(0.78 0.015 260)",
+      "chart-5": "oklch(0.82 0.01 230)",
+      "sidebar": "oklch(0.225 0.02 262)",
+      "sidebar-foreground": "oklch(0.95 0.008 262)",
+      "sidebar-primary": "oklch(0.68 0.18 262)",
+      "sidebar-primary-foreground": "oklch(0.15 0.02 262)",
+      "sidebar-accent": "oklch(0.31 0.03 262)",
+      "sidebar-accent-foreground": "oklch(0.95 0.008 262)",
+      "sidebar-border": "oklch(1 0 0 / 12%)",
+      "sidebar-ring": "oklch(0.68 0.18 262)"
     }
   },
   "type": "registry:theme"

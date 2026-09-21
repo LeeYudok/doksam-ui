@@ -113,6 +113,11 @@
   --chart-3: oklch(0.68 0.14 200);
   --chart-4: oklch(0.58 0.19 290);
   --chart-5: oklch(0.72 0.14 235);
+  /*
+   * 사이드바 chrome — 선택된 테마 프리셋과 무관하게 라이트/다크 각 한 쌍뿐이다
+   * (아래 [data-theme="*"] 블록들이 재정의하지 않는다). 단일 진실원천은
+   * lib/sidebar-tokens.ts — 값을 고치면 그 파일도 같이 갱신할 것(#36).
+   */
   --sidebar: oklch(0.985 0.004 262);
   --sidebar-foreground: oklch(0.21 0.02 262);
   --sidebar-primary: oklch(0.53 0.21 262);
@@ -124,6 +129,7 @@
 }
 
 .dark {
+  /* 사이드바 chrome 다크값 — 단일 진실원천은 lib/sidebar-tokens.ts(#36). */
   --sidebar: oklch(0.225 0.02 262);
   --sidebar-foreground: oklch(0.95 0.008 262);
   --sidebar-primary: oklch(0.68 0.18 262);
