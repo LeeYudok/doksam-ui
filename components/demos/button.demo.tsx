@@ -3,9 +3,13 @@ import { FloppyDiskIcon } from "@phosphor-icons/react/dist/ssr"
 import { Button } from "@/components/ui/button"
 import type { DemoExample } from "@/lib/showcase/types"
 
+// Keep the glossy treatment local to this example; the shared primitive stays unchanged.
+const glossyButtonClassName =
+  "relative isolate overflow-hidden border-primary-foreground/15 bg-linear-to-b from-primary via-primary to-primary/85 shadow-md shadow-primary/25 inset-shadow-sm inset-shadow-primary-foreground/25 before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:h-1/2 before:bg-linear-to-b before:from-primary-foreground/20 before:to-transparent transition-[filter,box-shadow] duration-200 hover:brightness-110 hover:shadow-lg active:brightness-95 motion-reduce:transition-none motion-reduce:transform-none"
+
 export const demo = (
   <div className="flex flex-wrap items-center gap-3">
-    <Button>저장하기</Button>
+    <Button className={glossyButtonClassName}>저장하기</Button>
     <Button variant="outline">취소</Button>
     <Button variant="secondary">임시저장</Button>
     <Button variant="ghost">더 보기</Button>
@@ -19,7 +23,7 @@ export const demo = (
   </div>
 )
 
-export const code = `<Button>저장하기</Button>
+export const code = `<Button className="${glossyButtonClassName}">저장하기</Button>
 <Button variant="outline">취소</Button>
 <Button variant="secondary">임시저장</Button>
 <Button variant="ghost">더 보기</Button>
@@ -48,7 +52,7 @@ export const examples: DemoExample[] = [
     name: "Variants",
     demo: (
       <div className="flex flex-wrap items-center gap-3">
-        <Button>저장하기</Button>
+        <Button className={glossyButtonClassName}>저장하기</Button>
         <Button variant="outline">취소</Button>
         <Button variant="secondary">임시저장</Button>
         <Button variant="ghost">더 보기</Button>
@@ -56,7 +60,7 @@ export const examples: DemoExample[] = [
         <Button variant="link">자세히 보기</Button>
       </div>
     ),
-    code: `<Button>저장하기</Button>
+    code: `<Button className="${glossyButtonClassName}">저장하기</Button>
 <Button variant="outline">취소</Button>
 <Button variant="secondary">임시저장</Button>
 <Button variant="ghost">더 보기</Button>
