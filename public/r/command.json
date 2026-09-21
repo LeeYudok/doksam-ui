@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "command",
   "title": "Command",
-  "description": "Command 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다. 이 파일은 상류 shadcn 이 앞서 있다 — 상류 CommandDialog 가 내부 Command 에 크기 클래스를 두른다 — 우리 쪽이 낡았다. (#61 에서 갱신한다).",
+  "description": "Command 프리미티브. 카탈로그가 렌더하는 것과 같은 파일을 배포한다. 이 파일은 상류 shadcn 이 앞서 있다 — 상류가 CommandDialog 내부의 <Command> 래퍼 자체를 제거했다(크기 클래스뿐 아니라 cmdk 컨텍스트 프로바이더까지). 실제로 반영해 브라우저에서 확인한 결과 CommandInput/CommandList 가 cmdk Command 컨텍스트를 잃어 'Cannot read properties of undefined (reading subscribe)' 런타임 에러로 커맨드 팔레트가 완전히 깨진다(site-command-menu.tsx 등 모든 소비처가 CommandInput/CommandList 를 <Command> 래퍼 없이 직접 CommandDialog 자식으로 전달하는 구조라서). 상류의 이 변경은 우리 소비 패턴과 호환되지 않는 회귀로 판단해 반영을 보류했다 — 하우스 쪽의 <Command className='...'> 래퍼(크기 클래스 포함)를 그대로 유지한다. (#61 에서 갱신한다).",
   "dependencies": [
     "cmdk@^1.1.1",
     "lucide-react@^1.24.0"

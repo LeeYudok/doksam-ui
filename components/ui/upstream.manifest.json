@@ -1,6 +1,6 @@
 {
   "style": "radix-nova",
-  "checkedAt": "2026-09-17",
+  "checkedAt": "2026-09-21",
   "components": {
     "accordion.tsx": {
       "upstream": "f8ba21f76f86c9fa",
@@ -109,12 +109,10 @@
     },
     "checkbox.tsx": {
       "upstream": "54effbf83ed1ca38",
-      "localHash": "fb1ee2e329aa400f",
+      "localHash": "a519ebd2254c5d3d",
       "customized": true,
-      "groups": [
-        "semanticTokenSwap"
-      ],
-      "note": "설치본과 실제로 다르다 — 상류가 group-has-[:focus-visible]/field-label 상태 클래스를 더했다 — 우리 쪽이 낡았다. (#61 에서 갱신한다)."
+      "groups": [],
+      "note": "포커스 가시성 상태 클래스(group-has-[:focus-visible]/field-label)를 #61 에서 상류에 맞춰 갱신했다. 남은 차이는 import 정렬 등 포맷 차이뿐."
     },
     "collapsible.tsx": {
       "upstream": "c6598e5584f4258b",
@@ -139,7 +137,7 @@
         "semanticTokenSwap",
         "addedAffordance"
       ],
-      "note": "설치본과 실제로 다르다 — 상류 CommandDialog 가 내부 Command 에 크기 클래스를 두른다 — 우리 쪽이 낡았다. (#61 에서 갱신한다)."
+      "note": "상류가 CommandDialog 내부 <Command> 래퍼(크기 클래스 포함)를 완전히 제거했지만, 이 변경을 반영하면 cmdk 컨텍스트가 사라져 CommandInput/CommandList 가 런타임 에러를 낸다(#61 에서 실측). 하우스 쪽 <Command> 래퍼를 의도적으로 유지한다 — installDiff 참고."
     },
     "context-menu.tsx": {
       "upstream": "ca9a99ad6e254634",
@@ -185,12 +183,10 @@
     },
     "field.tsx": {
       "upstream": "48c093a17462877a",
-      "localHash": "76e008459f847a96",
-      "customized": true,
-      "groups": [
-        "semanticTokenSwap"
-      ],
-      "note": "설치본과 실제로 다르다 — 상류가 FieldLabel 에 hover·focus-visible 처리를 더했다 — 우리 쪽이 낡았다. (#61 에서 갱신한다)."
+      "localHash": "3c2272fd6ca7d1b4",
+      "customized": false,
+      "groups": [],
+      "note": "FieldLabel 의 hover·focus-visible 처리를 #61 에서 상류에 맞춰 갱신했다."
     },
     "hover-card.tsx": {
       "upstream": "6b7654754e7748b5",
@@ -257,10 +253,10 @@
     },
     "message-scroller.tsx": {
       "upstream": "f74ce3d2a5afdfb8",
-      "localHash": "901c4a6a2a7d3f62",
+      "localHash": "0db627e9f462388c",
       "customized": true,
       "groups": [],
-      "note": "설치본과 실제로 다르다 — 상류가 data-pending-scroll:invisible 을 더했다 — 우리 쪽이 낡았다. (#61 에서 갱신한다)."
+      "note": "data-pending-scroll:invisible 을 #61 에서 상류에 맞춰 갱신했다."
     },
     "message.tsx": {
       "upstream": "4bd0da2b253cf1ed",
@@ -306,12 +302,10 @@
     },
     "radio-group.tsx": {
       "upstream": "1d322232962043fb",
-      "localHash": "07676333f885eb2a",
-      "customized": true,
-      "groups": [
-        "semanticTokenSwap"
-      ],
-      "note": "설치본과 실제로 다르다 — 상류가 group-has-[:focus-visible]/field-label 상태 클래스를 더했다 — 우리 쪽이 낡았다. (#61 에서 갱신한다)."
+      "localHash": "9f77a4333ecf018f",
+      "customized": false,
+      "groups": [],
+      "note": "포커스 가시성 상태 클래스(group-has-[:focus-visible]/field-label)를 #61 에서 상류에 맞춰 갱신했다."
     },
     "resizable.tsx": {
       "upstream": "890e091d9b6185ac",
@@ -385,10 +379,10 @@
     },
     "switch.tsx": {
       "upstream": "43072a00ef3108c1",
-      "localHash": "f3a1ed75be07bda7",
-      "customized": true,
+      "localHash": "245e0e306b1c0947",
+      "customized": false,
       "groups": [],
-      "note": "설치본과 실제로 다르다 — 상류가 group-has-[:focus-visible]/field-label 상태 클래스를 더했다 — 우리 쪽이 낡았다. (#61 에서 갱신한다)."
+      "note": "포커스 가시성 상태 클래스(group-has-[:focus-visible]/field-label)를 #61 에서 상류에 맞춰 갱신했다."
     },
     "table.tsx": {
       "upstream": "af2c73194ef5e018",
@@ -517,16 +511,11 @@
     }
   },
   "installDiff": {
-    "measuredAt": "2026-09-17",
-    "how": "빈 Next 앱에 shadcn init -t next -b radix -p nova 후 60개를 bare 이름으로 설치해 components/ui 와 직접 대조 (#57).",
-    "meaning": "CLI 설치본과 실제로 다른 파일. 나머지 54개는 설치하면 우리 파일과 같아진다.",
+    "measuredAt": "2026-09-21",
+    "how": "빈 Next 앱에 shadcn init -t next -b radix -p nova 후 6개(checkbox·radio-group·switch·field·command·message-scroller)를 bare 이름으로 재설치해 대조 (#61, #57 갱신).",
+    "meaning": "CLI 설치본과 실제로 다른 파일. #57 에서 확인한 6개 중 5개는 이번에 상류를 반영해 갱신했다. command.tsx 는 상류가 더 앞서 있지만 의도적으로 반영하지 않았다 — 이유는 files 참고.",
     "files": {
-      "checkbox.tsx": "상류가 group-has-[:focus-visible]/field-label 상태 클래스를 더했다 — 우리 쪽이 낡았다.",
-      "radio-group.tsx": "상류가 group-has-[:focus-visible]/field-label 상태 클래스를 더했다 — 우리 쪽이 낡았다.",
-      "switch.tsx": "상류가 group-has-[:focus-visible]/field-label 상태 클래스를 더했다 — 우리 쪽이 낡았다.",
-      "field.tsx": "상류가 FieldLabel 에 hover·focus-visible 처리를 더했다 — 우리 쪽이 낡았다.",
-      "command.tsx": "상류 CommandDialog 가 내부 Command 에 크기 클래스를 두른다 — 우리 쪽이 낡았다.",
-      "message-scroller.tsx": "상류가 data-pending-scroll:invisible 을 더했다 — 우리 쪽이 낡았다."
+      "command.tsx": "상류가 CommandDialog 내부의 <Command> 래퍼 자체를 제거했다(크기 클래스뿐 아니라 cmdk 컨텍스트 프로바이더까지). 실제로 반영해 브라우저에서 확인한 결과 CommandInput/CommandList 가 cmdk Command 컨텍스트를 잃어 'Cannot read properties of undefined (reading subscribe)' 런타임 에러로 커맨드 팔레트가 완전히 깨진다(site-command-menu.tsx 등 모든 소비처가 CommandInput/CommandList 를 <Command> 래퍼 없이 직접 CommandDialog 자식으로 전달하는 구조라서). 상류의 이 변경은 우리 소비 패턴과 호환되지 않는 회귀로 판단해 반영을 보류했다 — 하우스 쪽의 <Command className='...'> 래퍼(크기 클래스 포함)를 그대로 유지한다."
     }
   }
 }
