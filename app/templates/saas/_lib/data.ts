@@ -10,7 +10,7 @@ import {
   UsersThreeIcon,
 } from "@phosphor-icons/react/dist/ssr"
 
-import type { ContentItem } from "@/components/patterns/content-feed/content-feed-data"
+import type { ContentItem } from "@/components/patterns/content-feed/content-feed"
 
 /**
  * SaaS 템플릿(app/templates/saas/) 전용 데모 데이터.
@@ -278,3 +278,35 @@ export const FEED_POSTS: FeedPost[] = [
   },
 ]
 
+
+/** 문서 목록 1건 — 대시보드의 문서 탐색 영역이 쓴다. */
+export interface DocItem {
+  id: string
+  title: string
+  type: "guide" | "update" | "notice"
+  updatedAt: string
+}
+
+/** 문서 목록 탭 축 — 빈 key 는 "전체". */
+export const DOC_TABS: { key: string; label: string }[] = [
+  { key: "", label: "전체" },
+  { key: "guide", label: "가이드" },
+  { key: "update", label: "업데이트" },
+  { key: "notice", label: "공지" },
+]
+
+/** 한 페이지에 보여줄 문서 수. */
+export const DOC_PAGE_SIZE = 4
+
+export const DOC_ITEMS: DocItem[] = [
+  { id: "d1", title: "Flowbase 설치 가이드", type: "guide", updatedAt: "2026-07-01" },
+  { id: "d2", title: "환경 변수 설정 가이드", type: "guide", updatedAt: "2026-06-29" },
+  { id: "d3", title: "v3.2 업데이트 노트", type: "update", updatedAt: "2026-06-27" },
+  { id: "d4", title: "정기 점검 공지", type: "notice", updatedAt: "2026-06-25" },
+  { id: "d5", title: "API 마이그레이션 가이드", type: "guide", updatedAt: "2026-06-20" },
+  { id: "d6", title: "v3.1 업데이트 노트", type: "update", updatedAt: "2026-06-18" },
+  { id: "d7", title: "요금제 변경 공지", type: "notice", updatedAt: "2026-06-15" },
+  { id: "d8", title: "보안 패치 업데이트", type: "update", updatedAt: "2026-06-10" },
+  { id: "d9", title: "권한 관리 가이드", type: "guide", updatedAt: "2026-06-05" },
+  { id: "d10", title: "서비스 점검 완료 공지", type: "notice", updatedAt: "2026-06-01" },
+]

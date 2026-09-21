@@ -3,35 +3,7 @@
 import { useMemo, useState, type FormEvent } from "react"
 
 import { ListControls } from "@/components/patterns/list-controls/list-controls"
-
-interface ListItem {
-  id: string
-  title: string
-  type: "guide" | "update" | "notice"
-  updatedAt: string
-}
-
-const TYPE_TABS = [
-  { key: "", label: "전체" },
-  { key: "guide", label: "가이드" },
-  { key: "update", label: "업데이트" },
-  { key: "notice", label: "공지" },
-] as const
-
-const PAGE_SIZE = 4
-
-const ITEMS: ListItem[] = [
-  { id: "1", title: "설치 가이드", type: "guide", updatedAt: "2026-07-01" },
-  { id: "2", title: "환경 변수 설정 가이드", type: "guide", updatedAt: "2026-06-29" },
-  { id: "3", title: "v3.2 업데이트 노트", type: "update", updatedAt: "2026-06-27" },
-  { id: "4", title: "정기 점검 공지", type: "notice", updatedAt: "2026-06-25" },
-  { id: "5", title: "API 마이그레이션 가이드", type: "guide", updatedAt: "2026-06-20" },
-  { id: "6", title: "v3.1 업데이트 노트", type: "update", updatedAt: "2026-06-18" },
-  { id: "7", title: "요금제 변경 공지", type: "notice", updatedAt: "2026-06-15" },
-  { id: "8", title: "보안 패치 업데이트", type: "update", updatedAt: "2026-06-10" },
-  { id: "9", title: "권한 관리 가이드", type: "guide", updatedAt: "2026-06-05" },
-  { id: "10", title: "서비스 점검 완료 공지", type: "notice", updatedAt: "2026-06-01" },
-]
+import { DOC_ITEMS, DOC_PAGE_SIZE, DOC_TABS } from "@/app/templates/saas/_lib/data"
 
 interface ListParams {
   type: string
@@ -42,9 +14,10 @@ interface ListParams {
 const INITIAL_PARAMS: ListParams = { type: "", q: "", page: 0 }
 
 /**
- * URLSearchParams로 다음 상태의 쿼리스트링을 만든다.
- * 실서비스에서는 이 함수의 반환값이 그대로 <Link href> 가 되고, 서버 컴포넌트가
- * searchParams prop으로 같은 값을 읽어 SSR 결과에 반영한다 — 클라이언트 상태가 아니라 URL이 단일 진실원천이다.
+ * 다음 상태의 쿼리스트링을 만든다.
+ *
+ * 실서비스에서는 이 반환값이 그대로 `<Link href>` 가 되고 서버 컴포넌트가 같은
+ * 값을 `searchParams` 로 읽는다 — 클라이언트 상태가 아니라 URL 이 단일 진실원천이다.
  */
 function buildQuery(params: ListParams): string {
   const sp = new URLSearchParams()
@@ -55,22 +28,27 @@ function buildQuery(params: ListParams): string {
   return qs ? `?${qs}` : ""
 }
 
-/** URL 기반 탭 + 검색 필터 + 페이지네이션 종합 데모 — 필터링·페이지 분할은 여기서 하고, 렌더는 실물 ListControls 에 맡긴다. */
-export function ListControlsDemo() {
+/**
+ * 대시보드 "문서 목록" 영역 — 실물 list-controls 에 이 템플릿의 데이터를 물린다.
+ *
+ * 카탈로그 데모(`list-controls-demo.tsx`)를 쓰지 않는 이유는 #58 이다 — 데모는
+ * 카탈로그 전용 표본을 품고 있어 설치본에 함께 실려 나간다.
+ */
+export function DocList() {
   const [params, setParams] = useState<ListParams>(INITIAL_PARAMS)
   const [qInput, setQInput] = useState("")
 
   const filtered = useMemo(() => {
-    return ITEMS.filter((item) => {
+    return DOC_ITEMS.filter((item) => {
       if (params.type && item.type !== params.type) return false
       if (params.q && !item.title.toLowerCase().includes(params.q.toLowerCase())) return false
       return true
     })
   }, [params.type, params.q])
 
-  const pageCount = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE))
+  const pageCount = Math.max(1, Math.ceil(filtered.length / DOC_PAGE_SIZE))
   const page = Math.min(params.page, pageCount - 1)
-  const pageItems = filtered.slice(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE)
+  const pageItems = filtered.slice(page * DOC_PAGE_SIZE, page * DOC_PAGE_SIZE + DOC_PAGE_SIZE)
 
   function goTab(type: string) {
     // 탭(필터 축)을 바꾸면 이전 페이지 번호는 더 이상 유효하지 않을 수 있으므로 1페이지로 되돌린다.
@@ -101,7 +79,7 @@ export function ListControlsDemo() {
           <span className="text-muted-foreground">{item.updatedAt}</span>
         </div>
       )}
-      tabs={TYPE_TABS.map((tab) => ({ key: tab.key, label: tab.label }))}
+      tabs={DOC_TABS}
       activeTab={params.type}
       onTabChange={goTab}
       searchValue={qInput}
@@ -114,11 +92,6 @@ export function ListControlsDemo() {
       onPrevPage={() => goPage(page - 1)}
       onNextPage={() => goPage(page + 1)}
       buildPageHref={(p) => buildQuery({ ...params, page: p }) || "?"}
-      footer={
-        <p className="font-mono text-[11px] text-muted-foreground">
-          결과 URL: <code>{buildQuery(params) || "/"}</code>
-        </p>
-      }
     />
   )
 }

@@ -1,7 +1,7 @@
 import { TrendDownIcon, TrendUpIcon } from "@phosphor-icons/react/dist/ssr"
 
 import { Card, CardContent } from "@/components/ui/card"
-import { Sparkline } from "@/components/patterns/dataviz/sparkline-demo"
+import { Sparkline } from "@/components/patterns/dataviz/sparkline"
 import { rateColor, rateText } from "@/lib/finance/rate"
 import { MARKET_INDICES, type MarketIndex } from "@/app/templates/brokerage/_data/market"
 

@@ -5,7 +5,7 @@ import Link from "next/link"
 
 import { Badge } from "@/components/ui/badge"
 import { TableSortable } from "@/components/table-sortable"
-import { Sparkline } from "@/components/patterns/dataviz/sparkline-demo"
+import { Sparkline } from "@/components/patterns/dataviz/sparkline"
 import { formatWon } from "@/lib/finance/format-won"
 import { rateColor, rateText } from "@/lib/finance/rate"
 import type { Holding } from "@/lib/templates/trading-data"
