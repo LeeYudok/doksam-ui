@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "glossy-button",
+  "title": "Glossy Button",
+  "description": "shadcn Button 에 그라데이션과 상단 하이라이트를 얹은 광택 변형. button.tsx 원본은 건드리지 않고 조합만 한다. 광택은 프로필의 표면(surface) 축 바깥이라 flat 프로필에서도 유지되므로, 단일 주행동 CTA 처럼 의도적으로 띄우는 자리에만 쓴다.",
+  "registryDependencies": [
+    "https://ui.doksam.com/r/button.json"
+  ],
+  "files": [
+    {
+      "path": "components/glossy-button.tsx",
+      "content": "import { cn } from \"@/lib/utils\"\nimport { Button } from \"@/components/ui/button\"\n\n/**\n * 광택 버튼 — 기본 `Button` 에 그라데이션과 상단 하이라이트를 얹은 변형이다.\n *\n * 프리미티브(`components/ui/button.tsx`)는 건드리지 않고 조합만 한다. 규칙의\n * 컴포넌트 절(\"커스텀은 components/ui/ 밖에서 조합한다\")을 따른 배치다.\n *\n * **고르는 쪽이 알아야 할 것** — 이 광택은 프로필의 표면(surface) 축\n * (`personalities/index.ts` 의 `border | shadow | flat`) 바깥에 있다.\n * `data-personality-surface=\"flat\"` 인 프로필에서도 그라데이션은 유지된다\n * (그림자만 축을 따라 꺼진다). 평면을 고른 프로필에서 이 버튼을 쓰면\n * 그 자리만 성격이 달라진다는 뜻이므로, 화면 전체의 표면 성향을 바꾸려는\n * 의도라면 이 컴포넌트가 아니라 프로필 쪽을 골라야 한다.\n *\n * 강조 하나를 의도적으로 띄우는 자리(가입·결제 등 단일 주행동 CTA)에 쓴다.\n * 한 화면에 여러 개를 두면 강조가 상쇄된다.\n */\nfunction GlossyButton({ className, ...props }: React.ComponentProps<typeof Button>) {\n  return (\n    <Button\n      data-slot=\"glossy-button\"\n      className={cn(\n        // 바탕: 위에서 아래로 primary → primary/85 로 떨어지는 그라데이션.\n        \"relative isolate overflow-hidden border-primary-foreground/15\",\n        \"bg-linear-to-b from-primary via-primary to-primary/85\",\n        // 입체: 바깥 그림자 + 안쪽 상단 하이라이트.\n        \"shadow-md shadow-primary/25 inset-shadow-sm inset-shadow-primary-foreground/25\",\n        // 상단 절반을 덮는 광택 띠. 클릭을 가로채지 않도록 pointer-events 를 끈다.\n        \"before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:h-1/2\",\n        \"before:bg-linear-to-b before:from-primary-foreground/20 before:to-transparent\",\n        // 상태 피드백은 전환할 속성을 좁혀 명시한다 (규칙: 모션 절).\n        \"transition-[filter,box-shadow] duration-100\",\n        \"hover:brightness-110 hover:shadow-lg active:brightness-95\",\n        \"motion-reduce:transition-none\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nexport { GlossyButton }\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}
