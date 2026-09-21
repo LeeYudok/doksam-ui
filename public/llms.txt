@@ -790,6 +790,16 @@ registryDependencies: https://ui.doksam.com/r/activity-heatmap.json, https://ui.
 
 npm dependencies: @tanstack/react-table@^8.21.3, @dnd-kit/core@^6.3.1, @dnd-kit/sortable@^10.0.0, @phosphor-icons/react@^2.1.10
 
+## registry:file
+
+### ESLint Plugin (표준 준수 검사) (`eslint-plugin`)
+
+ui.doksam.com 표준의 불변 조항 중 정적으로 판정 가능한 것을 소비 프로젝트의 IDE·CI 에서 강제하는 ESLint 플러그인. 규칙 5종(하드코딩 색·이모지 아이콘·외부 URL·components/ui 중첩·라우트 경계). 런타임 의존성 없이 평문 ESM 이라 빌드 단계가 없다.
+
+```
+npx shadcn add https://ui.doksam.com/r/eslint-plugin.json
+```
+
 ## UI 프리미티브
 
 ### Accordion (`accordion`)

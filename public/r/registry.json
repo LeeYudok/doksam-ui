@@ -2568,6 +2568,60 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "eslint-plugin",
+      "type": "registry:file",
+      "title": "ESLint Plugin (표준 준수 검사)",
+      "description": "ui.doksam.com 표준의 불변 조항 중 정적으로 판정 가능한 것을 소비 프로젝트의 IDE·CI 에서 강제하는 ESLint 플러그인. 규칙 5종(하드코딩 색·이모지 아이콘·외부 URL·components/ui 중첩·라우트 경계). 런타임 의존성 없이 평문 ESM 이라 빌드 단계가 없다.",
+      "files": [
+        {
+          "path": "tools/eslint-doksam/index.d.mts",
+          "type": "registry:file",
+          "target": "tools/eslint-doksam/index.d.mts"
+        },
+        {
+          "path": "tools/eslint-doksam/index.mjs",
+          "type": "registry:file",
+          "target": "tools/eslint-doksam/index.mjs"
+        },
+        {
+          "path": "tools/eslint-doksam/meta.d.mts",
+          "type": "registry:file",
+          "target": "tools/eslint-doksam/meta.d.mts"
+        },
+        {
+          "path": "tools/eslint-doksam/meta.mjs",
+          "type": "registry:file",
+          "target": "tools/eslint-doksam/meta.mjs"
+        },
+        {
+          "path": "tools/eslint-doksam/rules/no-emoji-icon.mjs",
+          "type": "registry:file",
+          "target": "tools/eslint-doksam/rules/no-emoji-icon.mjs"
+        },
+        {
+          "path": "tools/eslint-doksam/rules/no-external-url.mjs",
+          "type": "registry:file",
+          "target": "tools/eslint-doksam/rules/no-external-url.mjs"
+        },
+        {
+          "path": "tools/eslint-doksam/rules/no-hardcoded-color.mjs",
+          "type": "registry:file",
+          "target": "tools/eslint-doksam/rules/no-hardcoded-color.mjs"
+        },
+        {
+          "path": "tools/eslint-doksam/rules/no-nested-ui-dir.mjs",
+          "type": "registry:file",
+          "target": "tools/eslint-doksam/rules/no-nested-ui-dir.mjs"
+        },
+        {
+          "path": "tools/eslint-doksam/rules/require-route-boundaries.mjs",
+          "type": "registry:file",
+          "target": "tools/eslint-doksam/rules/require-route-boundaries.mjs"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "accordion",
       "type": "registry:ui",
       "title": "Accordion",
