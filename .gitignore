@@ -54,3 +54,7 @@ next-env.d.ts
 # lastworks resume file
 lastworks.resume
 .scannerwork/
+
+# 상류 드리프트 게이트(pnpm check:shadcn)가 쓰는 프로브 프로젝트 캐시 (#62).
+# 실제 설치본과 대조하기 위해 create-next-app + shadcn init 을 만들어 재사용한다.
+/.shadcn-probe/

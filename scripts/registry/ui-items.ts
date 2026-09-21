@@ -85,7 +85,13 @@ export function readInstallDiff(): Record<string, string> {
   return readManifestFile().installDiff?.files ?? {}
 }
 
-/** 매니페스트 기준으로 상류 레지스트리 원문과 다른 프리미티브인지. */
+/**
+ * 매니페스트 기준으로 **같은 프리셋으로 실제 설치했을 때와 다른** 프리미티브인지 (#62).
+ *
+ * 예전에는 "상류 레지스트리 JSON 원문과 다름" 이었다. 원문에는 CLI 가 설치 시점에
+ * 치환하는 자리가 섞여 있어 그 뜻으로는 60개 중 28개가 걸렸지만, 실제 설치본과
+ * 대조하면 1개다. 이제 `customized` 와 `installDiff.files` 는 같은 집합이다.
+ */
 export function isDivergent(name: string, manifest = readManifest()): boolean {
   return manifest[`${name}.tsx`]?.customized === true
 }
