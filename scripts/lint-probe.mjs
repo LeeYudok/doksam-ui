@@ -1,8 +1,19 @@
+/**
+ * 린트 규칙 dogfood — 이 카탈로그 자신에게 doksam-ui 플러그인을 물려 돌린다 (#40).
+ *
+ * 규칙을 고치면 여기서 먼저 돌려 오탐을 본다. 소비 프로젝트보다 카탈로그가
+ * 규칙에 더 많이 노출되므로(데모·템플릿·패턴이 전부 들어 있다) 오탐이 있으면
+ * 여기서 먼저 드러난다. 실제로 이 스크립트로 95건 → 23건까지 좁혔고, 남은
+ * 23건은 카탈로그의 실제 위반이다.
+ *
+ *   node scripts/lint-probe.mjs
+ */
 import { ESLint } from "eslint"
-import base from "./eslint.config.mjs"
-import doksam from "./tools/eslint-doksam/index.mjs"
+import base from "../eslint.config.mjs"
+import doksam from "../tools/eslint-doksam/index.mjs"
 
 const eslint = new ESLint({
+  cwd: new URL("..", import.meta.url).pathname,
   overrideConfigFile: true,
   overrideConfig: [
     ...base,

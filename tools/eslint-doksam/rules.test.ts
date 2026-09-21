@@ -126,7 +126,7 @@ tester.run("no-external-url", rules["no-external-url"], {
   invalid: [
     {
       code: `const font = "https://fonts.googleapis.com/css2?family=Inter"`,
-      errors: [{ messageId: "externalUrl" }],
+      errors: [{ messageId: "externalResource" }],
     },
     {
       code: `const el = <img src="https://i.pravatar.cc/100" alt="" />`,

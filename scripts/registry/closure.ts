@@ -293,6 +293,8 @@ export function undeclaredPackages(item: RegistryItem, registry: Registry): { fr
     const source = fs.readFileSync(path.join(REPO_ROOT, file.path), "utf8")
     for (const spec of collectSpecifiers(source)) {
       if (resolveSpecifier(spec, file.path).kind !== "external") continue
+      // node:fs 같은 내장 모듈은 설치 대상이 아니다 — 선언할 패키지가 없다.
+      if (spec.startsWith("node:")) continue
       const pkg = packageOfSpecifier(spec)
       // react·next 등 프레임워크는 소비 프로젝트가 이미 갖고 있다.
       if (FRAMEWORK_PACKAGES.has(pkg)) continue
@@ -303,8 +305,14 @@ export function undeclaredPackages(item: RegistryItem, registry: Registry): { fr
   return problems
 }
 
-/** 소비 프로젝트가 이미 갖고 있다고 보는 패키지. */
-const FRAMEWORK_PACKAGES = new Set(["react", "react-dom", "next"])
+/**
+ * 소비 프로젝트가 이미 갖고 있다고 보는 패키지.
+ *
+ * `eslint` 는 린트 플러그인의 peer 다 — 플러그인을 설치했다는 것은 ESLint 를
+ * 이미 돌리고 있다는 뜻이고, 여기서 선언하면 소비자가 쓰던 버전 위에 다른
+ * 버전이 깔릴 수 있다. 타입(.d.mts)에서만 참조하므로 런타임 의존도 아니다.
+ */
+const FRAMEWORK_PACKAGES = new Set(["react", "react-dom", "next", "eslint"])
 
 /** registry.json 을 읽는다. */
 export function readRegistry(): Registry {

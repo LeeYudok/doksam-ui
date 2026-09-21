@@ -41,11 +41,42 @@ const plugin = {
 /** 전 규칙을 error 로 켠 기본 설정. 불변 조항이므로 warn 이 아니다. */
 const allErrors = Object.fromEntries(Object.keys(rules).map((name) => [`doksam-ui/${name}`, "error"]))
 
+/** 전 규칙을 끈 설정 — 플러그인 자기 소스처럼 규칙이 적용될 자리가 아닌 곳에 쓴다. */
+const allOff = Object.fromEntries(Object.keys(rules).map((name) => [`doksam-ui/${name}`, "off"]))
+
 /**
  * 토큰을 정의하는 자리에서는 색 리터럴이 곧 데이터다 — 그 자리에서만 끈다.
  * 규칙 원문의 "themes/<name>.ts 를 추가한다" 가 가리키는 자리와 같다.
  */
-const TOKEN_DEFINITION_FILES = ["themes/**", "**/themes/**", "**/*.config.{js,cjs,mjs,ts,mts}"]
+const TOKEN_DEFINITION_FILES = [
+  "themes/**",
+  "**/themes/**",
+  "**/*.config.{js,cjs,mjs,ts,mts}",
+  // 시맨틱 토큰의 원천값을 적는 자리 — 여기서의 색 리터럴이 곧 토큰이다.
+  "**/*-tokens.{ts,mts}",
+  "**/tokens/**",
+  "**/profile-css.ts",
+]
+
+/**
+ * 색을 **데이터로 다루는** 파일 — 색 리터럴이 디자인 결정이 아니라 입력값이다.
+ *
+ * 테스트와 fixture 는 위반 사례 자체를 적어야 하고, 색을 고르거나 변환하는
+ * 컴포넌트에서 팔레트는 사용자가 고를 후보지 화면의 시맨틱이 아니다.
+ * 카탈로그 자신에게 돌려 실측했을 때 이 두 부류가 오탐의 대부분이었다.
+ */
+const COLOR_AS_DATA_FILES = [
+  "**/color-picker*.{ts,tsx}",
+  "**/*color-picker*.{ts,tsx}",
+]
+
+/**
+ * 테스트와 fixture — 위반 사례 자체를 값으로 적어야 하는 자리다.
+ *
+ * 색뿐 아니라 외부 URL 도 마찬가지다(폐쇄망 검사를 검사하는 테스트는 외부 URL
+ * 문자열을 입력으로 갖는다). 그래서 색만이 아니라 두 규칙을 함께 끈다.
+ */
+const TEST_FILES = ["**/*.test.{ts,tsx,mts}", "**/*.spec.{ts,tsx,mts}", "**/__fixtures__/**", "**/e2e/**"]
 
 export const configs = {
   recommended: [
@@ -58,6 +89,26 @@ export const configs = {
       name: "doksam-ui/token-definitions",
       files: TOKEN_DEFINITION_FILES,
       rules: { "doksam-ui/no-hardcoded-color": "off" },
+    },
+    {
+      name: "doksam-ui/color-as-data",
+      files: COLOR_AS_DATA_FILES,
+      rules: { "doksam-ui/no-hardcoded-color": "off" },
+    },
+    {
+      name: "doksam-ui/tests",
+      files: TEST_FILES,
+      rules: {
+        "doksam-ui/no-hardcoded-color": "off",
+        "doksam-ui/no-external-url": "off",
+      },
+    },
+    {
+      // 이 플러그인 자신의 소스에는 규칙이 잡아야 할 문자열이 예시로 들어 있다
+      // (meta.mjs 의 요약문, no-external-url.mjs 의 remotePatterns 감지 등).
+      name: "doksam-ui/self",
+      files: ["**/eslint-doksam/**"],
+      rules: allOff,
     },
   ],
 }

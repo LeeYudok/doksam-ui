@@ -20,6 +20,25 @@ import { RULE_META } from "../meta.mjs"
 const EXTERNAL = /https?:\/\/[^\s"'`)]+/g
 const CSS_URL = /url\(\s*['"]?(https?:\/\/[^\s'")]+)/gi
 
+/**
+ * 자산을 서빙하는 것 말고는 쓰임이 없는 호스트.
+ *
+ * 위치 기반 판정(아래 RESOURCE_ATTRIBUTES 등)은 "적재하는 자리"만 보므로
+ * `const fontUrl = "https://fonts.googleapis.com/..."` 처럼 한 단계 건너 쓰는
+ * 코드를 놓친다. 그런데 이 호스트들은 **존재 이유가 자산 전달**이라, 코드에
+ * 글자로 등장한 시점에 이미 self-host 원칙을 벗어났다고 봐도 오탐이 아니다.
+ * 위치와 무관하게 잡는 이유다.
+ */
+const ASSET_HOSTS = [
+  "fonts.googleapis.com",
+  "fonts.gstatic.com",
+  "cdn.jsdelivr.net",
+  "unpkg.com",
+  "cdnjs.cloudflare.com",
+  "use.typekit.net",
+  "use.fontawesome.com",
+]
+
 const DEFAULT_ALLOW = [
   "http://localhost",
   "https://localhost",
@@ -78,6 +97,7 @@ export default {
   create(context) {
     const allow = [...DEFAULT_ALLOW, ...(context.options[0]?.allow ?? [])]
     const isAllowed = (url) => allow.some((prefix) => url.startsWith(prefix))
+    const isAssetHost = (url) => ASSET_HOSTS.some((host) => url.includes(host))
 
     /** 리소스 적재 위치의 값 노드를 검사한다. */
     const checkResource = (node, valueNode) => {
@@ -90,12 +110,17 @@ export default {
     }
 
     return {
-      // 어느 위치든 CSS url() 은 곧 적재다.
+      // 어느 위치든 CSS url() 은 곧 적재고, 자산 전용 호스트는 등장 자체가 위반이다.
       Literal(node) {
         if (typeof node.value !== "string") return
         for (const match of node.value.matchAll(CSS_URL)) {
           if (isAllowed(match[1])) continue
           context.report({ node, messageId: "externalResource", data: { value: match[1] } })
+          return
+        }
+        for (const match of node.value.matchAll(EXTERNAL)) {
+          if (isAllowed(match[0]) || !isAssetHost(match[0])) continue
+          context.report({ node, messageId: "externalResource", data: { value: match[0] } })
         }
       },
 
