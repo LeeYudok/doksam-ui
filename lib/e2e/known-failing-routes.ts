@@ -24,10 +24,12 @@
  * 가 "예상과 다르게 통과함"으로 그 자체를 실패 처리한다. 즉 #50 이 고쳐지고도
  * 이 레코드를 지우는 걸 잊으면 CI 가 그 사실을 알려준다 — `test.fixme()` 는
  * 몸체를 아예 안 돌려서 이 감지가 불가능했다.)
+ *
+ * #50 에서 `/components/multi-select` 항목을 제거했다 — 원인은 트리거
+ * `<Button>`(button) 안에 칩 제거용 `<button>` 이 중첩된 무효 HTML 이었고,
+ * components/multi-select.tsx 에서 제거 컨트롤을 role="button" span 으로
+ * 바꿔 해결했다. 현재 알려진 실패 라우트는 없다.
  */
-export const KNOWN_FAILING_ROUTES: Record<string, string> = {
-  "/components/multi-select":
-    "React error #418(하이드레이션 불일치) — components/multi-select.tsx 데모 페이지에서 서버/클라 렌더 결과가 어긋남. 이슈 #50 에서 추적.",
-}
+export const KNOWN_FAILING_ROUTES: Record<string, string> = {}
 
-export const KNOWN_FAILING_ROUTES_MAX_SIZE = 1
+export const KNOWN_FAILING_ROUTES_MAX_SIZE = 0

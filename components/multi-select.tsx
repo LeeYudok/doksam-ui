@@ -99,18 +99,35 @@ function MultiSelect({
                   onClick={(event) => event.stopPropagation()}
                 >
                   {option.label}
-                  <button
-                    type="button"
+                  {/*
+                   * 상위 트리거가 이미 <button>(Button 컴포넌트)이라 여기에
+                   * 또 <button> 을 두면 브라우저 HTML 파서가 button-in-button
+                   * 을 만나 자동으로 태그를 닫아 트리 구조를 다시 짠다(#50).
+                   * 그 결과 SSR 로 내려간 마크업과 파서가 실제로 구성한 DOM
+                   * 이 달라져 하이드레이션 불일치가 난다. 버튼 안에 버튼을
+                   * 두지 않도록 role="button" 을 가진 span 으로 대체한다.
+                   */}
+                  <span
+                    role="button"
                     aria-label={`${option.label} 제거`}
+                    aria-disabled={disabled || undefined}
+                    tabIndex={disabled ? -1 : 0}
                     className="rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
-                    disabled={disabled}
                     onClick={(event) => {
                       event.stopPropagation()
+                      if (disabled) return
+                      remove(option.value)
+                    }}
+                    onKeyDown={(event) => {
+                      if (event.key !== "Enter" && event.key !== " ") return
+                      event.preventDefault()
+                      event.stopPropagation()
+                      if (disabled) return
                       remove(option.value)
                     }}
                   >
                     <XIcon className="pointer-events-none size-3" />
-                  </button>
+                  </span>
                 </Badge>
               ))
             )}
