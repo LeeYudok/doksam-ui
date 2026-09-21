@@ -95,7 +95,7 @@ export const RULES_SECTIONS: RulesSection[] = [
       "타입 대비를 고른다: type-contrast/index.ts 의 TYPE_CONTRAST_PRESETS(flat, moderate, dramatic) 중 프로필이 고정한 값을 쓴다 — 제목과 본문의 비례를 이 축이 정하며, personality 의 균등 배율(html data-personality)과는 별개이므로 둘을 혼동해 이중으로 조정하지 않는다.",
       "경계 — 세 축 모두 레지스트리 이름으로만 고른다: radius px, 굵기, 배율 등 자유 숫자를 화면 코드나 인라인 스타일에 새로 쓰지 않는다. 필요한 조합이 레지스트리에 없으면 corners/index.ts·type-contrast/index.ts·profiles/index.ts 에 프리셋을 추가하는 것이 표준 경로다 — 화면마다 값을 발명하면 #43 이전의 자유 문자열 radius 로 되돌아간다.",
       "경계 — 프로필이 고정한 corner·radius·density·typeContrast 를 프로젝트에서 임의 재정의하지 않는다: 바꿀 필요가 생기면 doksam-ui 에 프로필을 추가/수정해서 반영한다.",
-      "경계 — 버튼 등 개별 컨트롤 하나만 밀도 기본값과 다른 크기로 만들고 싶으면 Tailwind v4 의 `!` 접미사(예: h-12!)를 쓴다 — 밀도 층의 전역 CSS 오버라이드가 일반 Tailwind 유틸리티보다 우선 적용되므로 접미사 없이는 클래스를 바꿔도 반영되지 않는다(e2e/shape-axes.spec.ts 가 계산된 값으로 잠근다). 다만 먼저 확인할 것은 size prop 이다 — h-7/h-6 처럼 기본 크기를 손으로 덮고 있었다면 그건 sm·xs·icon-sm·icon-xs 같은 올바른 variant 로 바꿀 자리이며, 대응 variant 가 없는 진짜 커스텀 값만 `!` 로 보호한다. 컴포넌트 전체나 화면 전체의 밀도를 이 방법으로 우회하지 않는다 — 그건 새 density 프리셋을 만들 사안이다.",
+      "경계 — 버튼 등 개별 컨트롤 하나만 밀도 기본값과 다른 크기로 만들고 싶으면 Tailwind v4 의 `!` 접미사(예: h-12!)를 쓴다 — 밀도 층의 전역 CSS 오버라이드가 일반 Tailwind 유틸리티보다 우선 적용되므로 접미사 없이는 클래스를 바꿔도 반영되지 않는다(e2e/shape-axes.spec.ts 가 계산된 값으로 잠근다). 다만 먼저 확인할 것은 size prop 이다 — h-7/h-6 처럼 기본 크기를 손으로 덮고 있었다면 그건 sm·xs·icon-sm·icon-xs 같은 올바른 variant 로 바꿀 자리이며, 대응 variant 가 없는 진짜 커스텀 값만 `!` 로 보호한다. 또 `!` 는 높이·크기에만 쓴다 — 패딩·간격에 붙이면 밀도 층이 소유한 padding-inline·gap 까지 축에서 빠져 컨트롤이 밀도를 따르지 않는다. 컴포넌트 전체나 화면 전체의 밀도를 이 방법으로 우회하지 않는다 — 그건 새 density 프리셋을 만들 사안이다.",
     ],
   },
   {
