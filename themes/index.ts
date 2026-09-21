@@ -1,15 +1,19 @@
-import { ember } from "./ember";
-import { forest } from "./forest";
-import { gold } from "./gold";
-import { inkBulb } from "./ink-bulb";
-import { ocean } from "./ocean";
-import { rose } from "./rose";
-import { slate } from "./slate";
-import type { ThemePreset } from "./types";
-import { violet } from "./violet";
+// 명시적 .ts 확장자 — tsconfig.json 의 allowImportingTsExtensions 로 tsc·Next
+// 번들러 해석은 그대로고, scripts/registry/sync-profile-vars.ts 처럼 plain
+// `node --experimental-strip-types` 로 이 파일을 직접 import 하는 경로도
+// 확장자 없는 상대 import 를 해소하지 못해 깨진다(#36 작업 중 실측).
+import { ember } from "./ember.ts";
+import { forest } from "./forest.ts";
+import { gold } from "./gold.ts";
+import { inkBulb } from "./ink-bulb.ts";
+import { ocean } from "./ocean.ts";
+import { rose } from "./rose.ts";
+import { slate } from "./slate.ts";
+import type { ThemePreset } from "./types.ts";
+import { violet } from "./violet.ts";
 
-export type { ThemePreset, ThemeTokens } from "./types";
-export { THEME_TOKEN_KEYS } from "./types";
+export type { ThemePreset, ThemeTokens } from "./types.ts";
+export { THEME_TOKEN_KEYS } from "./types.ts";
 
 /**
  * 테마 프리셋 레지스트리 — 단일 진실원천.

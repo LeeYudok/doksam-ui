@@ -35,6 +35,12 @@ export interface RegistryFile {
   target?: string
 }
 
+export interface RegistryCssVars {
+  theme?: Record<string, string>
+  light?: Record<string, string>
+  dark?: Record<string, string>
+}
+
 export interface RegistryItem {
   $schema?: string
   name: string
@@ -44,6 +50,7 @@ export interface RegistryItem {
   files?: RegistryFile[]
   registryDependencies?: string[]
   dependencies?: string[]
+  cssVars?: RegistryCssVars
 }
 
 export interface Registry {
