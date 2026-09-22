@@ -165,6 +165,7 @@ export const RULES_SECTIONS: RulesSection[] = [
       "이미지·아바타 등 데모 콘텐츠도 외부 이미지 URL(i.pravatar.cc 등) 대신 로컬 placeholder(AvatarFallback, public/ 내 이미지)를 쓴다.",
       "next.config의 images.remotePatterns에 외부 도메인을 추가하지 않는다 — next/image는 로컬/자체 호스팅 이미지만 최적화 대상으로 둔다.",
       "빌드 산출물(.next) 외부 리소스 부재를 자동 테스트로 실증한다 — test/closed-network.test.ts가 프로덕션 정적 HTML/CSS에서 외부 <script src>/<link href>/CSS url()/CDN 힌트 문자열 0건을, test/sourcemap.test.ts가 프로덕션 청크에 sourcemap 부재를 검증한다.",
+      "관측(analytics·APM) 로더만 예외로 둘 수 있고, 예외는 세 조건을 모두 만족해야 한다 — (1) 환경변수로 켜져야 하고 값이 없으면 스크립트가 아예 렌더되지 않는다(폐쇄망 배포는 변수를 주지 않으므로 외부 요청이 0건이다), (2) 허용 호스트를 코드에 목록으로 적고 그 목록만 통과시키는 게이트를 둔다 — 린트에서는 eslint-plugin-doksam-ui 의 no-external-url allow 옵션을 그 스크립트가 있는 파일에만 좁혀 주고, 빌드 산출물을 훑는 테스트에도 같은 성격의 허용 목록을 둔다(둘은 검사 대상이 달라 목록이 같지 않을 수 있다), (3) 화면 기능은 그 스크립트 없이도 완전히 동작한다. 폰트·아이콘·이미지·스타일·데이터는 이 예외에 들지 않는다 — 화면이 그것 없이 성립하지 않으므로 self-host가 유일한 답이다.",
     ],
   },
   {

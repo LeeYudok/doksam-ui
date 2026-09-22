@@ -74,6 +74,20 @@ const COLOR_FUNCTION = /\b(rgb|rgba|hsl|hsla|hwb|lab|lch|oklab|oklch|color-mix)\
 
 const HEX = /#[0-9a-fA-F]{3,8}\b/g
 
+/**
+ * 색 함수 인자에 들어간 CSS named color — hex 와 같은 하드코딩 색이다.
+ *
+ * `color-mix(in oklch, var(--chart-1) 20%, white)` 는 겉으로는 토큰 파생처럼
+ * 보이지만 `white` 가 곧 `#ffffff` 다(#79 에서 카탈로그 자신이 실제로 이렇게
+ * 우회했다). 문자열 전체가 아니라 **색 함수 인자 안에서만** 본다 — 밖에서도
+ * 잡으면 "white paper" 같은 평범한 문장이 걸려 오탐이 쏟아진다.
+ *
+ * `transparent`·`currentColor` 는 색을 새로 만드는 것이 아니라 투명도·상속을
+ * 가리키는 키워드라 제외한다.
+ */
+const NAMED_COLOR =
+  /\b(?:white|black|red|green|blue|yellow|orange|purple|pink|brown|gray|grey|cyan|magenta|silver|gold|navy|teal|olive|maroon|lime|aqua|fuchsia|indigo|violet|beige|ivory|khaki|salmon|coral|crimson|turquoise|lavender|tan|plum|orchid|wheat|azure|snow|linen|tomato|chocolate|skyblue|steelblue|slateblue|midnightblue|whitesmoke|ghostwhite|antiquewhite|floralwhite|navajowhite|rebeccapurple)\b/i
+
 /** 색 문맥으로 보는 식별자 — 속성 이름·객체 키·변수 이름에 쓰인다. */
 const COLOR_NAME = /colou?r|fill|stroke|background|shadow|border|stop|palette|swatch|gradient|tint|shade/i
 
@@ -142,6 +156,8 @@ function isTokenDerived(text, start) {
   if (!/var\(\s*--/.test(args)) return false
   // HEX 는 /g 라 test() 가 lastIndex 를 남긴다 — 상태 없는 match 로 확인한다.
   if (args.match(HEX)) return false
+  // named color 가 섞이면 토큰 파생이 아니라 리터럴과의 혼합이다.
+  if (NAMED_COLOR.test(args)) return false
   // 중첩 색 함수의 인자도 같은 기준으로 본다 — 안쪽이 리터럴이면 파생이 아니다.
   const inner = COLOR_FUNCTION.exec(args)
   if (inner && !isTokenDerived(args, inner.index)) return false
@@ -215,6 +231,26 @@ export default {
       },
       TemplateElement(node) {
         check(node, node.value.cooked ?? node.value.raw)
+      },
+
+      /**
+       * 템플릿 리터럴은 조각(quasi)별로 검사하면 색 함수가 조각 경계에서 쪼개져
+       * 빠져나간다 — `` `color-mix(in oklch, ${c} 20%, white)` `` 는 앞 조각에
+       * 숫자가 없어 "보간으로 값을 채우는 코드" 로 통과하고, 뒤 조각에는 색
+       * 함수가 없어 아무도 `white` 를 보지 않는다(#79).
+       *
+       * 그래서 보간 자리를 토큰 참조로 메운 **합친 문자열**을 한 번 더 본다.
+       * 보간의 실제 값은 정적으로 알 수 없으므로 토큰으로 가정하고, 글자로 적힌
+       * 리터럴만 판정한다.
+       */
+      TemplateLiteral(node) {
+        if (node.expressions.length === 0) return
+        const joined = node.quasis
+          .map((q) => q.value.cooked ?? q.value.raw)
+          .join("var(--interpolated)")
+        const fn = COLOR_FUNCTION.exec(joined)
+        if (!fn || isTokenDerived(joined, fn.index)) return
+        context.report({ node, messageId: "hardcodedColor", data: { value: `${fn[1]}()` } })
       },
     }
   },

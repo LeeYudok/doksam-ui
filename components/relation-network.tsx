@@ -2,13 +2,13 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
-/** 관계 그룹 — 카테고리별 색(데이터 색, 시맨틱 토큰이 아닌 계열 accent). */
+/** 관계 그룹 — 카테고리별 계열 색. 차트 토큰(--chart-1~5)에서 고른다. */
 export interface RelationGroup {
   /** 노드의 group 값과 매칭되는 키. */
   key: string
   /** 범례에 표시할 이름. */
   label: string
-  /** 계열 색(hex 또는 CSS 변수). */
+  /** 계열 색 — 차트 토큰 참조만 쓴다(`"var(--chart-1)"`). 색 리터럴을 넣지 않는다. */
   color: string
 }
 
@@ -40,10 +40,10 @@ export interface RelationNetworkProps extends Omit<React.ComponentProps<"div">, 
 }
 
 const DEFAULT_GROUPS: RelationGroup[] = [
-  { key: "a", label: "그룹 A", color: "#22d3ee" },
-  { key: "b", label: "그룹 B", color: "#a78bfa" },
-  { key: "c", label: "그룹 C", color: "#34d399" },
-  { key: "d", label: "그룹 D", color: "#f59e0b" },
+  { key: "a", label: "그룹 A", color: "var(--chart-1)" },
+  { key: "b", label: "그룹 B", color: "var(--chart-2)" },
+  { key: "c", label: "그룹 C", color: "var(--chart-3)" },
+  { key: "d", label: "그룹 D", color: "var(--chart-4)" },
 ]
 
 const VW = 800
@@ -51,6 +51,17 @@ const CX = VW / 2
 const LABEL_W = 152
 const R_IN = 96
 const R_OUT = 168
+
+/**
+ * 그룹별 스포크 선 패턴 — **색만으로 정보를 전달하지 않기 위한** 두 번째 채널이다.
+ *
+ * 계열 색은 --chart-1~5 에서 오는데, 기본 테마의 chart 토큰은 hue 200~290 의
+ * 파랑~보라 한 띠 안에 있고 forest 프리셋은 전부 초록 띠다. 즉 프리셋에 따라
+ * 4계열이 서로 비슷한 색으로 해석될 수 있고, 이 그래프는 스포크가 교차하므로
+ * 색만으로는 "이 노드가 어느 그룹" 이 읽히지 않는다. 규칙 원문 "접근성" 절의
+ * "색만으로 정보를 전달하지 않는다" 가 걸리는 자리라 선 패턴을 함께 준다.
+ */
+const GROUP_DASH = [undefined, "6 3", "2 3", "8 3 2 3", "1 3"] as const
 
 function nodeRadius(weight?: number | null): number {
   return 6 + Math.min(12, Math.sqrt(Math.max(weight ?? 2, 0)) * 1.4)
@@ -72,8 +83,13 @@ function RelationNetwork({
   className,
   ...props
 }: Readonly<RelationNetworkProps>) {
+  const groupIndexOf = (key?: string) => groups.findIndex((g) => g.key === key)
   const colorOf = (n: RelationNode) =>
-    groups.find((g) => g.key === n.group)?.color ?? "#94a3b8"
+    groups.find((g) => g.key === n.group)?.color ?? "var(--muted-foreground)"
+  const dashOf = (n: RelationNode) => {
+    const i = groupIndexOf(n.group)
+    return i < 0 ? undefined : GROUP_DASH[i % GROUP_DASH.length]
+  }
 
   const shown = [...nodes]
     .sort((a, b) => (b.weight ?? -1) - (a.weight ?? -1))
@@ -101,6 +117,7 @@ function RelationNetwork({
         y: cy + rad * Math.sin(ang),
         r: nodeRadius(n.weight),
         color: colorOf(n),
+        dash: dashOf(n),
       }
     })
     withPos.sort((a, b) => a.y - b.y)
@@ -178,7 +195,13 @@ function RelationNetwork({
 
         {placed.map((p, i) => (
           <g key={`spoke-${i}`}>
-            <path d={`M${CX},${cy} L${p.x},${p.y}`} stroke={p.color} strokeWidth={1} strokeOpacity={0.24} />
+            <path
+              d={`M${CX},${cy} L${p.x},${p.y}`}
+              stroke={p.color}
+              strokeWidth={1}
+              strokeOpacity={0.24}
+              strokeDasharray={p.dash}
+            />
             {animated && (
               <path
                 className="rn-flow"
@@ -196,6 +219,7 @@ function RelationNetwork({
               stroke={p.color}
               strokeWidth={1}
               strokeOpacity={0.28}
+              strokeDasharray={p.dash}
             />
           </g>
         ))}
@@ -213,7 +237,16 @@ function RelationNetwork({
                 style={{ animationDelay: `${(i % 5) * 0.5}s` }}
               />
               <circle cx={p.x} cy={p.y} r={p.r} fill={p.color} filter="url(#rn-glow)" />
-              <circle cx={p.x - p.r * 0.3} cy={p.y - p.r * 0.3} r={Math.max(1.6, p.r * 0.34)} fill="#ffffff" opacity={0.85} />
+              <circle
+                cx={p.x - p.r * 0.3}
+                cy={p.y - p.r * 0.3}
+                r={Math.max(1.6, p.r * 0.34)}
+                // 광택점은 테마 표면색이다 — 라이트에서는 밝은 반사, 다크에서는
+                // 어두운 면으로 읽힌다. "항상 흰색" 으로 두려면 색 리터럴이
+                // 필요한데 그것이 곧 규칙이 막는 것이다.
+                className="fill-card"
+                opacity={0.85}
+              />
               <foreignObject x={p.labelX} y={p.railY - 24} width={LABEL_W} height={48} style={{ overflow: "visible" }}>
                 <div
                   className={cn(
@@ -225,7 +258,7 @@ function RelationNetwork({
                   {p.n.weight != null && (
                     <span
                       className="mt-0.5 inline-block rounded-full px-1.5 font-mono text-[9.5px] font-semibold"
-                      style={{ color: p.color, background: `${p.color}22` }}
+                      style={{ color: p.color, background: `color-mix(in oklch, ${p.color} 14%, transparent)` }}
                     >
                       {p.n.weight}%
                     </span>
@@ -244,19 +277,19 @@ function RelationNetwork({
         })}
 
         <circle
-          className={anim("gold")}
+          // 중심 궤도 링 — 그룹 색(chart-1~4)과 겹치지 않도록 chart-5 를 쓴다.
+          className={cn("stroke-chart-5", anim("orbit"))}
           cx={CX}
           cy={cy}
           r={19}
           fill="none"
-          stroke="#f5d17a"
           strokeWidth={1.5}
           strokeOpacity={0.7}
           strokeDasharray="4 6"
           style={{ transformBox: "view-box", transformOrigin: `${CX}px ${cy}px` }}
         />
         <g className={anim("core")} style={{ transformBox: "view-box", transformOrigin: `${CX}px ${cy}px` }}>
-          <circle cx={CX} cy={cy} r={11} fill="#e6faff" filter="url(#rn-glow)" />
+          <circle cx={CX} cy={cy} r={11} className="fill-primary" opacity={0.35} filter="url(#rn-glow)" />
           <circle cx={CX} cy={cy} r={5} className="fill-primary" />
         </g>
         <text x={CX} y={cy + 36} textAnchor="middle" className="fill-foreground" fontSize="12" fontWeight="700">
@@ -265,12 +298,17 @@ function RelationNetwork({
       </svg>
 
       <div className="relative flex flex-wrap gap-x-4 gap-y-1.5 px-4 pb-3">
-        {groups.map((g) => {
+        {groups.map((g, gi) => {
           const count = nodes.filter((n) => n.group === g.key).length
           if (count === 0) return null
+          const dash = GROUP_DASH[gi % GROUP_DASH.length]
           return (
             <span key={g.key} className="flex items-center gap-1.5 text-[11px] text-muted-foreground">
-              <span className="inline-block size-2 rounded-full" style={{ background: g.color, boxShadow: `0 0 6px ${g.color}` }} />
+              {/* 점 + 그 그룹의 스포크 패턴 — 색이 비슷한 프리셋에서도 범례와 그래프를 맞출 수 있다. */}
+              <svg width={22} height={8} aria-hidden className="shrink-0">
+                <circle cx={4} cy={4} r={3} fill={g.color} />
+                <path d="M9,4 L21,4" stroke={g.color} strokeWidth={1.5} strokeDasharray={dash} />
+              </svg>
               {g.label} <span className="opacity-60">{count}</span>
             </span>
           )
@@ -284,7 +322,7 @@ const RN_CSS = `
 [data-slot="relation-network"] .rn-node{transition:filter .2s ease}
 [data-slot="relation-network"] a:hover .rn-node,[data-slot="relation-network"] .rn-node:hover{filter:brightness(1.3)}
 [data-slot="relation-network"] .rn-spin{animation:rn-rotate 60s linear infinite}
-[data-slot="relation-network"] .rn-gold{animation:rn-rotate 24s linear infinite}
+[data-slot="relation-network"] .rn-orbit{animation:rn-rotate 24s linear infinite}
 [data-slot="relation-network"] .rn-core{animation:rn-breathe 3.8s ease-in-out infinite}
 [data-slot="relation-network"] .rn-halo{animation:rn-pulse 3.4s ease-in-out infinite}
 [data-slot="relation-network"] .rn-twinkle{animation:rn-twinkle 3.2s ease-in-out infinite}
@@ -294,7 +332,7 @@ const RN_CSS = `
 @keyframes rn-pulse{0%,100%{opacity:.1}50%{opacity:.24}}
 @keyframes rn-twinkle{0%,100%{opacity:.2}50%{opacity:.85}}
 @keyframes rn-flow{to{stroke-dashoffset:-32}}
-@media (prefers-reduced-motion:reduce){[data-slot="relation-network"] .rn-spin,[data-slot="relation-network"] .rn-gold,[data-slot="relation-network"] .rn-core,[data-slot="relation-network"] .rn-halo,[data-slot="relation-network"] .rn-twinkle,[data-slot="relation-network"] .rn-flow{animation:none}}
+@media (prefers-reduced-motion:reduce){[data-slot="relation-network"] .rn-spin,[data-slot="relation-network"] .rn-orbit,[data-slot="relation-network"] .rn-core,[data-slot="relation-network"] .rn-halo,[data-slot="relation-network"] .rn-twinkle,[data-slot="relation-network"] .rn-flow{animation:none}}
 `
 
 export { RelationNetwork }
