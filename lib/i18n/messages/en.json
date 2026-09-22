@@ -527,5 +527,9 @@
   "type-contrast.moderate.avoid.0": "Avoid it for products that must look visually distinct from other profiles — it's the default and leaves no impression",
   "type-contrast.moderate.description": "The default. Headings are clearly larger than body text without being excessive.",
   "type-contrast.moderate.suited.0": "Early scaffolds that haven't settled on a screen character yet",
-  "type-contrast.moderate.suited.1": "General product screens split evenly between reading and operating"
+  "type-contrast.moderate.suited.1": "General product screens split evenly between reading and operating",
+  "chrome.auditCodeTag.copied": "Audit code copied",
+  "chrome.auditCodeTag.copy": "Copy audit code",
+  "component.audit-code-tag.description": "A tag that shows an audit code tracing the basis of a judgment, using monospace type and a semantic token background only. It does not split meaning by color, and click-to-navigate and copy are both optional (#83).",
+  "component.party-identity-cell.description": "A two-line party identity cell — the company name on line 1, and industry, corporate type, and a masked business registration number on line 2, formatted with formatBizNo (#83)."
 }

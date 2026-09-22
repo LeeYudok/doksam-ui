@@ -20,6 +20,27 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "audit-code-tag",
+      "type": "registry:component",
+      "title": "Audit Code Tag",
+      "description": "판단 근거를 추적하는 감사코드를 등폭 글꼴 + 시맨틱 토큰 배경으로 표시하는 태그. 색으로 의미를 나누지 않고, 클릭 이동·복사는 옵션이다.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10",
+        "sonner@^2.0.7"
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/badge.json",
+        "https://ui.doksam.com/r/i18n-provider.json"
+      ],
+      "files": [
+        {
+          "path": "components/audit-code-tag.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "avatar-group",
       "type": "registry:component",
       "title": "Avatar Group",
@@ -531,6 +552,22 @@
       "files": [
         {
           "path": "components/number-input.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "party-identity-cell",
+      "type": "registry:component",
+      "title": "Party Identity Cell",
+      "description": "차주 식별 2줄 셀. 1행 업체명 / 2행 업종·법인구분·마스킹 사업자번호를 표시하며 사업자번호 포맷은 formatBizNo를 그대로 쓴다.",
+      "registryDependencies": [
+        "https://ui.doksam.com/r/format-biz-no.json"
+      ],
+      "files": [
+        {
+          "path": "components/party-identity-cell.tsx",
           "type": "registry:component"
         }
       ]
