@@ -20,6 +20,7 @@ import {
   RocketLaunchIcon,
   StorefrontIcon,
   ShieldCheckIcon,
+  SirenIcon,
   PackageIcon,
   TreeStructureIcon,
 } from "@phosphor-icons/react/dist/ssr"
@@ -275,5 +276,15 @@ export const TEMPLATE_REGISTRY: TemplateEntry[] = [
       "focus-task 원형에 시스템 상태바·공지사항·보안 고지를 더한 사내 업무포털 로그인 변형. 세 표시 모두 다른 화면으로 이동시키지 않는 정보성 표시라 원형의 내비게이션 없음 규칙을 지킵니다. 담당자·심사역·관리자 역할 분기는 로그인 후 서버가 판단하므로 화면에는 안내 문구로만 노출합니다.",
     stack: ["focus-task", "alert", "banner", "live-indicator"],
     icon: IdentificationCardIcon,
+  },
+  {
+    href: "/templates/ews-dashboard",
+    title: "EWS Dashboard",
+    profile: "finance 프로필 · Ivory · Noto Sans KR",
+    archetype: "dashboard-grid",
+    description:
+      "여신 조기경보(EWS) 홈 대시보드. top-nav 셸 아래로 규정 콜아웃·KPI 4장·등급 분포 도넛·긴급 처리 차주 표를 배치합니다. 등급 색은 --risk-* 토큰으로만 칠하고 등급 문구와 Tier 번호를 항상 함께 실어 색 외 두 번째 채널을 보장합니다.",
+    stack: ["top-nav-shell", "risk-table", "compliance-callout", "risk-grade-badge"],
+    icon: SirenIcon,
   },
 ]

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "page-header",
+  "title": "Page Header",
+  "description": "페이지 상단 제목 + 우측 슬롯 + 설명 조합. 제목 옆 슬롯에는 상태 배지·기준시각 칩처럼 제목을 보충하는 표시를 둔다.",
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "components/page-header.tsx",
+      "content": "import type * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\nexport interface PageHeaderProps {\n  title: string\n  /** 설명 — 문자열이면 muted 문단으로, ReactNode 면 그대로 렌더. */\n  description?: React.ReactNode\n  /** 타이틀 우측 슬롯(배지·액션 버튼 등). */\n  children?: React.ReactNode\n  className?: string\n}\n\n/**\n * 페이지 상단 헤더 — 타이틀 + 우측 슬롯 + 설명. admin 템플릿 스코프에 있던\n * 페이지 헤딩을 공용 컴포넌트로 승격(srope customs/page-header 이식).\n */\nexport function PageHeader({ title, description, children, className }: PageHeaderProps) {\n  return (\n    <div className={cn(\"mb-2\", className)}>\n      <div className=\"flex items-center gap-2\">\n        <h1 className=\"text-2xl font-bold tracking-tight\">{title}</h1>\n        {children}\n      </div>\n      {description ? (\n        <div className=\"mt-1 flex items-center gap-2\">\n          {typeof description === \"string\" ? <p className=\"text-sm text-muted-foreground\">{description}</p> : description}\n        </div>\n      ) : null}\n    </div>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}
