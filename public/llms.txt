@@ -260,6 +260,18 @@ npx shadcn add https://ui.doksam.com/r/i18n-provider.json
 
 registryDependencies: https://ui.doksam.com/r/theme-storage.json
 
+### Inline Help Link (`inline-help-link`)
+
+섹션 제목(h2) 옆에 붙는 인라인 사용법 링크. 화면 단위 ScreenHelpDialog 와 달리 섹션 하나만 가리키며, 같은 화면 도움말 다이얼로그를 특정 항목으로 열거나(onOpen) 별도 도움말 화면으로 이동한다(href).
+
+```
+npx shadcn add https://ui.doksam.com/r/inline-help-link.json
+```
+
+registryDependencies: https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/tooltip.json
+
+npm dependencies: @phosphor-icons/react@^2.1.10
+
 ### JSON Tree (`json-tree`)
 
 재귀 JSON 트리 뷰어 — 접기/펼치기, 타입별 색(chart-1~3 시맨틱 토큰), 대용량 배열은 20개씩 "더 보기"로 분할 렌더링한다. 관측성(observability) 패턴 코어.

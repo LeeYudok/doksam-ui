@@ -394,6 +394,26 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "inline-help-link",
+      "type": "registry:component",
+      "title": "Inline Help Link",
+      "description": "섹션 제목(h2) 옆에 붙는 인라인 사용법 링크. 화면 단위 ScreenHelpDialog 와 달리 섹션 하나만 가리키며, 같은 화면 도움말 다이얼로그를 특정 항목으로 열거나(onOpen) 별도 도움말 화면으로 이동한다(href).",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10"
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/tooltip.json"
+      ],
+      "files": [
+        {
+          "path": "components/inline-help-link.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "json-tree",
       "type": "registry:component",
       "title": "JSON Tree",

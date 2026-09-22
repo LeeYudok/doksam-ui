@@ -191,6 +191,7 @@
   "component.gauge-card.description": "名称+状态徽章+基于阈值的仪表条+标签/原因标签卡片。按 60/30 阈值自动决定颜色(移植自 srope)。",
   "component.hover-card.description": "悬停时展示预览卡片。",
   "component.icon-picker.description": "通过分类标签与中英韩统一搜索选择 Phosphor 图标的弹出选择器(移植自 srope)。",
+  "component.inline-help-link.description": "贴在小节标题(h2)旁边的内联使用说明链接。与画面级的 ScreenHelpDialog 不同，只指向单个小节 — 可以打开同一画面帮助对话框的指定项目，也可以跳转到独立的帮助画面(#97)。",
   "component.input-group.description": "在输入框上附加图标·按钮·文本 addon 时使用。",
   "component.input-otp.description": "用于一次性验证码等固定位数输入的场景。",
   "component.input.description": "接收单行文本输入的基础文本字段。",

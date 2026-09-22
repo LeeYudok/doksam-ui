@@ -192,6 +192,7 @@
   "component.gauge-card.description": "이름 + 상태 배지 + 임계 기반 게이지 바 + 태그·원인 태그 카드입니다. 60/30 임계로 색이 자동 결정됩니다(srope 이식).",
   "component.hover-card.description": "호버 시 미리보기 카드를 보여줍니다.",
   "component.icon-picker.description": "Phosphor 아이콘을 카테고리 탭과 한글/영문 통합 검색으로 고르는 팝오버 선택기입니다(srope 이식).",
+  "component.inline-help-link.description": "섹션 제목(h2) 옆에 붙는 인라인 사용법 링크입니다. 화면 단위인 ScreenHelpDialog와 달리 섹션 하나만 가리킵니다(#97).",
   "component.input-group.description": "아이콘·버튼·텍스트 애드온을 입력 필드에 붙일 때 사용합니다.",
   "component.input-otp.description": "일회용 인증 코드처럼 자릿수가 고정된 입력에 사용합니다.",
   "component.input.description": "한 줄 텍스트를 입력받는 기본 텍스트 필드입니다.",
