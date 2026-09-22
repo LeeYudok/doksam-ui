@@ -211,6 +211,7 @@
   "component.item.description": "アイコン・テキスト・アクションを備えたリスト項目レイアウトです。",
   "component.kbd.description": "キーボードショートカットを表示するインライン要素です。",
   "component.kebab-menu.description": "縦の三点（⋮）アイコンボタンを押すとアクションのドロップダウンが開くケバブメニューです。items 配列1つで宣言し、トリガーの aria-label を label prop として強制します。",
+  "component.coach-mark-tour.description": "既存画面の上に重ねる段階型コーチマーク（プロダクトツアー）です。ディムオーバーレイ・対象ハイライト・説明ポップオーバー・ステップ移動を1セットで提供します（#99）。",
   "component.keyword-cloud.description": "頻度を3段階ティアのpillサイズ・強調で表現し、クリックで関連項目を展開するキーワードクラウドです。",
   "component.label.description": "フォームコントロールにアクセシブルに紐づくラベルです。",
   "component.live-indicator.description": "live/paused/stale/offlineの状態をパルスドットと更新時刻で表示するリアルタイム状態インジケーターです。",

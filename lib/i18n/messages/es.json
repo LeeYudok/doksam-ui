@@ -211,6 +211,7 @@
   "component.item.description": "Layout de elemento de lista con ícono, texto y acciones.",
   "component.kbd.description": "Elemento en línea para mostrar atajos de teclado.",
   "component.kebab-menu.description": "Menú kebab que abre un dropdown de acciones al presionar el botón de ícono de tres puntos verticales (⋮). Se declara con un único array items y obliga el aria-label del trigger mediante el prop label.",
+  "component.coach-mark-tour.description": "Un recorrido guiado paso a paso (coach mark) superpuesto sobre una pantalla existente. Agrupa una superposición atenuada, resaltado del objetivo, popover de descripción y controles de paso en un solo conjunto (#99).",
   "component.keyword-cloud.description": "Nube de palabras clave que expresa la frecuencia con tres niveles de tamaño y énfasis de pills, y despliega los elementos relacionados al hacer clic.",
   "component.label.description": "Etiqueta accesible vinculada a un control de formulario.",
   "component.live-indicator.description": "Indicador de estado en tiempo real que muestra los estados live/paused/stale/offline con un punto pulsante y la hora de última actualización.",

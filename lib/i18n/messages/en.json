@@ -211,6 +211,7 @@
   "component.item.description": "A list item layout with icon, text, and actions.",
   "component.kbd.description": "An inline element for displaying keyboard shortcuts.",
   "component.kebab-menu.description": "A kebab menu where pressing the vertical three-dot (⋮) icon button opens an action dropdown. Declared with a single items array, and enforces an aria-label on the trigger via the label prop.",
+  "component.coach-mark-tour.description": "A step-by-step coach mark (product tour) overlaid on an existing screen. Bundles a dim overlay, target highlight, description popover, and step controls in one set (#99).",
   "component.keyword-cloud.description": "A keyword cloud that expresses frequency through three tiers of pill size and emphasis, expanding related items on click.",
   "component.label.description": "A label accessibly bound to a form control.",
   "component.live-indicator.description": "A real-time status indicator showing live/paused/stale/offline states with a pulsing dot and last-updated time.",

@@ -127,6 +127,26 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "coach-mark-tour",
+      "type": "registry:component",
+      "title": "Coach Mark Tour",
+      "description": "기존 화면 위에 덧씌우는 단계형 코치마크(제품 투어). 딤 오버레이·대상 하이라이트·설명 팝오버·단계 이동을 한 세트로 제공한다.",
+      "dependencies": [
+        "radix-ui@^1.6.7",
+        "@phosphor-icons/react@^2.1.10"
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "components/coach-mark-tour.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "code-block",
       "type": "registry:component",
       "title": "Code Block",

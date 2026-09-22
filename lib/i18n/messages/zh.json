@@ -211,6 +211,7 @@
   "component.item.description": "包含图标·文本·操作按钮的列表项布局。",
   "component.kbd.description": "展示键盘快捷键的行内元素。",
   "component.kebab-menu.description": "点击竖排三点（⋮）图标按钮后打开操作下拉菜单的 kebab 菜单。仅通过 items 数组声明，并强制通过 label prop 设置触发器的 aria-label。",
+  "component.coach-mark-tour.description": "叠加在现有画面之上的分步教练标记（产品导览）。将暗化遮罩、目标高亮、说明气泡框、步骤控制整合为一套（#99）。",
   "component.keyword-cloud.description": "以三级层级的标签大小与强调表现频次，点击可展开相关条目的关键词云。",
   "component.label.description": "以无障碍方式关联到表单控件的标签。",
   "component.live-indicator.description": "以脉冲圆点与更新时间显示 live/paused/stale/offline 状态的实时状态指示器。",
