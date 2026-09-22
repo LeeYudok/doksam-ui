@@ -714,7 +714,7 @@
       "name": "profile-admin",
       "type": "registry:theme",
       "title": "Profile: Admin",
-      "description": "내부 관리자 도구·백오피스 화면 프로필. theme=slate(무채색 뉴트럴) + font=Geist + defaultMode=light + radius=2px + density=compact — <html>에 data-density=\"compact\"를 지정한다(밀도 토큰 층은 /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/geist/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응, next/font/google 미사용). 자세한 절차는 https://ui.doksam.com/rules 참고.",
+      "description": "내부 관리자 도구·백오피스 화면 프로필. theme=slate(무채색 뉴트럴) + font=Geist + defaultMode=light + radius=2px + density=compact + personality=crisp — <html>에 data-density=\"compact\" data-personality=\"crisp\" data-personality-surface=\"border\" data-personality-motion=\"none\" 네 속성을 지정한다(속성이 없으면 밀도·성격 토큰 층이 아예 걸리지 않는 opt-in 이다 — /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/geist/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응, next/font/google 미사용). 자세한 절차는 https://ui.doksam.com/rules 참고.",
       "cssVars": {
         "theme": {
           "radius": "2px"
@@ -836,7 +836,7 @@
       "name": "profile-console",
       "type": "registry:theme",
       "title": "Profile: Console",
-      "description": "모니터링·운영 콘솔류 화면 프로필. theme=ember(웜 오렌지) + font=Geist + defaultMode=dark + radius=2px + density=compact — <html>에 data-density=\"compact\"를 지정한다(밀도 토큰 층은 /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/geist/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응, next/font/google 미사용). 자세한 절차는 https://ui.doksam.com/rules 참고.",
+      "description": "모니터링·운영 콘솔류 화면 프로필. theme=ember(웜 오렌지) + font=Geist + defaultMode=dark + radius=2px + density=compact + personality=crisp — <html>에 data-density=\"compact\" data-personality=\"crisp\" data-personality-surface=\"border\" data-personality-motion=\"none\" 네 속성을 지정한다(속성이 없으면 밀도·성격 토큰 층이 아예 걸리지 않는 opt-in 이다 — /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/geist/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응, next/font/google 미사용). 자세한 절차는 https://ui.doksam.com/rules 참고.",
       "cssVars": {
         "theme": {
           "radius": "2px"
@@ -958,7 +958,7 @@
       "name": "profile-finance",
       "type": "registry:theme",
       "title": "Profile: Finance",
-      "description": "여신·리스크 모니터링 등 금융기관 업무 화면 프로필. theme=ivory(아이보리 종이톤 + 네이비 잉크 + 골드 포인트) + font=Noto Sans KR + defaultMode=light + radius=2px + density=compact — <html>에 data-density=\"compact\"를 지정한다(밀도 토큰 층은 /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/noto-sans-kr/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응, next/font/google 미사용). 자세한 절차는 https://ui.doksam.com/rules 참고.",
+      "description": "여신·리스크 모니터링 등 금융기관 업무 화면 프로필. theme=ivory(아이보리 종이톤 + 네이비 잉크 + 골드 포인트) + font=Noto Sans KR + defaultMode=light + radius=2px + density=compact + personality=crisp — <html>에 data-density=\"compact\" data-personality=\"crisp\" data-personality-surface=\"border\" data-personality-motion=\"none\" 네 속성을 지정한다(속성이 없으면 밀도·성격 토큰 층이 아예 걸리지 않는 opt-in 이다 — /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/noto-sans-kr/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응, next/font/google 미사용). 자세한 절차는 https://ui.doksam.com/rules 참고.",
       "cssVars": {
         "theme": {
           "radius": "2px"
@@ -1080,7 +1080,7 @@
       "name": "profile-data",
       "type": "registry:theme",
       "title": "Profile: Data",
-      "description": "데이터 대시보드·시세/뉴스류 화면 프로필. theme=violet(대비 뚜렷한 퍼플) + font=Space Grotesk + defaultMode=dark + radius=6px + density=compact — <html>에 data-density=\"compact\"를 지정한다(밀도 토큰 층은 /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/space-grotesk/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응, 라틴 전용이라 한글은 Noto Sans KR 로 폴백 — assets/fonts/noto-sans-kr/ 도 함께 필요). 자세한 절차는 https://ui.doksam.com/rules 참고.",
+      "description": "데이터 대시보드·시세/뉴스류 화면 프로필. theme=violet(대비 뚜렷한 퍼플) + font=Space Grotesk + defaultMode=dark + radius=6px + density=compact + personality=crisp — <html>에 data-density=\"compact\" data-personality=\"crisp\" data-personality-surface=\"border\" data-personality-motion=\"none\" 네 속성을 지정한다(속성이 없으면 밀도·성격 토큰 층이 아예 걸리지 않는 opt-in 이다 — /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/space-grotesk/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응, 라틴 전용이라 한글은 Noto Sans KR 로 폴백 — assets/fonts/noto-sans-kr/ 도 함께 필요). 자세한 절차는 https://ui.doksam.com/rules 참고.",
       "cssVars": {
         "theme": {
           "radius": "6px"
@@ -1202,7 +1202,7 @@
       "name": "profile-docs",
       "type": "registry:theme",
       "title": "Profile: Docs",
-      "description": "문서·위키·블로그류 화면 프로필. theme=forest(차분한 그린) + font=IBM Plex Sans KR + defaultMode=light + radius=12px + density=comfortable — <html>에 data-density=\"comfortable\"을 지정한다(밀도 토큰 층은 /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/ibm-plex-kr/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응). 자세한 절차는 https://ui.doksam.com/rules 참고.",
+      "description": "문서·위키·블로그류 화면 프로필. theme=forest(차분한 그린) + font=IBM Plex Sans KR + defaultMode=light + radius=12px + density=spacious + personality=statement — <html>에 data-density=\"spacious\" data-personality=\"statement\" data-personality-surface=\"flat\" data-personality-motion=\"subtle\" 네 속성을 지정한다(속성이 없으면 밀도·성격 토큰 층이 아예 걸리지 않는 opt-in 이다 — /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/ibm-plex-kr/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응). 자세한 절차는 https://ui.doksam.com/rules 참고.",
       "cssVars": {
         "theme": {
           "radius": "12px"
@@ -1361,7 +1361,7 @@
       "name": "profile-service",
       "type": "registry:theme",
       "title": "Profile: Service",
-      "description": "대외 서비스·고객 대면 화면 프로필. theme=ocean(신뢰감 있는 블루) + font=Noto Sans KR + defaultMode=light + radius=12px + density=comfortable — <html>에 data-density=\"comfortable\"을 지정한다(밀도 토큰 층은 /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/noto-sans-kr/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응). 자세한 절차는 https://ui.doksam.com/rules 참고.",
+      "description": "대외 서비스·고객 대면 화면 프로필. theme=ocean(신뢰감 있는 블루) + font=Noto Sans KR + defaultMode=light + radius=12px + density=comfortable + personality=elevated — <html>에 data-density=\"comfortable\" data-personality=\"elevated\" data-personality-surface=\"shadow\" data-personality-motion=\"expressive\" 네 속성을 지정한다(속성이 없으면 밀도·성격 토큰 층이 아예 걸리지 않는 opt-in 이다 — /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/noto-sans-kr/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응). 자세한 절차는 https://ui.doksam.com/rules 참고.",
       "cssVars": {
         "theme": {
           "radius": "12px"

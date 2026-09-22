@@ -5,9 +5,13 @@ import { describe, expect, it } from "vitest";
 
 import {
   computeProfileRegistryCssVars,
+  extractDensityFromDescription,
+  extractPersonalityFromDescription,
+  extractProfileDataAttrsFromDescription,
   extractRadiusFromDescription,
   PROFILE_CSS_VAR_KEYS,
 } from "@/lib/profile-registry-css-vars";
+import { getPersonalityPreset } from "@/personalities";
 import { BRAND_PROFILES } from "@/profiles";
 
 /**
@@ -84,6 +88,34 @@ describe("registry.json profile-* cssVars (#36)", () => {
       expect(mentioned, `${itemName} description 에 "radius=" 패턴이 없다`).toBeDefined();
       expect(mentioned).toBe(profile.radius);
       expect(item?.cssVars?.theme?.radius).toBe(profile.radius);
+    });
+
+    it(`${itemName} 의 description 이 언급하는 density 가 profiles/index.ts 와 같다`, () => {
+      // #110 finding 2: sync 가 radius 만 재계산하던 동안 profile-docs 의 설명은
+      // density=comfortable 인데 실제 프로필은 spacious 였다. 기대값은
+      // profile.density(단일 진실원천)에서 가져온다.
+      const item = items.find((i) => i.name === itemName);
+      const mentioned = extractDensityFromDescription(item!.description!);
+      expect(mentioned, `${itemName} description 에 "density=" 패턴이 없다`).toBeDefined();
+      expect(mentioned).toBe(profile.density);
+      expect(extractProfileDataAttrsFromDescription(item!.description!).density).toBe(profile.density);
+    });
+
+    it(`${itemName} 의 description 이 data-personality 세 속성을 프로필 값으로 안내한다`, () => {
+      // #110 finding 3: personality 층은 속성이 없으면 아무 규칙도 걸리지 않는
+      // opt-in 이다 — 설명이 속성을 안내하지 않으면 설치만 한 소비 프로젝트가
+      // 성격 미적용으로 돌아간다.
+      const item = items.find((i) => i.name === itemName);
+      const preset = getPersonalityPreset(profile.personality);
+      expect(preset, `profile.personality "${profile.personality}" 이 personalities/index.ts 에 없다`).toBeDefined();
+
+      expect(extractPersonalityFromDescription(item!.description!)).toBe(profile.personality);
+      expect(extractProfileDataAttrsFromDescription(item!.description!)).toEqual({
+        density: profile.density,
+        personality: profile.personality,
+        surface: preset!.surface,
+        motion: preset!.motion,
+      });
     });
   }
 });
