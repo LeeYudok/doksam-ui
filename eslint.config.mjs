@@ -15,14 +15,16 @@ const eslintConfig = defineConfig([
     name: "doksam-ui/catalog-analytics",
     // 규칙 원문 "폐쇄망 대응" 절의 관측 로더 예외 — NEXT_PUBLIC_GA_ID 가 있는
     // 공개 배포(ui.doksam.com)에서만 렌더되고, 폐쇄망 배포는 변수를 주지 않아
-    // 요청이 0건이다. 허용 호스트는 test/helpers/scan-build-output.ts 의
-    // ANALYTICS_ALLOWED_HOSTS 와 같은 목록이다.
+    // 요청이 0건이다.
+    //
+    // 소스에 글자로 적히는 호스트는 gtag 로더 하나뿐이라 그 하나만 연다.
+    // test/helpers/scan-build-output.ts 의 ANALYTICS_ALLOWED_HOSTS 는 빌드
+    // 산출물을 훑으므로 로더가 런타임에 부르는 google-analytics.com 까지
+    // 포함한다 — 두 목록은 검사 대상이 달라서 같을 이유가 없고, 여기서 쓰지도
+    // 않는 호스트를 미리 열면 다음에 그 호스트로 뭘 붙여도 리뷰 없이 통과한다.
     files: ["app/layout.tsx"],
     rules: {
-      "doksam-ui/no-external-url": [
-        "error",
-        { allow: ["https://www.googletagmanager.com/", "https://www.google-analytics.com/"] },
-      ],
+      "doksam-ui/no-external-url": ["error", { allow: ["https://www.googletagmanager.com/"] }],
     },
   },
   // Override default ignores of eslint-config-next.

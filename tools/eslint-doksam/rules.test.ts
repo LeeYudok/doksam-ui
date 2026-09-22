@@ -42,6 +42,12 @@ tester.run("no-hardcoded-color", rules["no-hardcoded-color"], {
       code: `const swatches = ["#ef4444"]`,
       options: [{ allow: ["#ef4444"] }],
     },
+    // 색 이름 글자가 색 함수 밖에 있으면 색이 아니다 — 문장·식별자를 잡지 않는다 (#79).
+    { code: `const label = "white paper"` },
+    { code: `const cls = "bg-card text-card-foreground"` },
+    // transparent·currentColor 는 색을 새로 만드는 것이 아니라 투명도·상속이다.
+    { code: `const s = "color-mix(in oklch, var(--primary) 14%, transparent)"` },
+    { code: `const s = \`color-mix(in oklch, \${c} 14%, transparent)\`` },
   ],
   invalid: [
     {
@@ -79,6 +85,17 @@ tester.run("no-hardcoded-color", rules["no-hardcoded-color"], {
     },
     {
       code: `const el = <div className="bg-emerald-600" />`,
+      errors: 1,
+    },
+    // named color 는 hex 와 같다 — 색 함수 안에 섞이면 토큰 파생이 아니다 (#79).
+    {
+      code: `const s = "color-mix(in oklch, var(--primary) 40%, white)"`,
+      errors: [{ messageId: "hardcodedColor", data: { value: "color-mix()" } }],
+    },
+    {
+      // 템플릿 리터럴은 조각별로 보면 색 함수가 경계에서 쪼개져 빠져나간다 —
+      // 보간을 메운 합친 문자열로 한 번 더 본다.
+      code: `const s = \`color-mix(in oklch, \${c} 20%, white)\``,
       errors: 1,
     },
   ],

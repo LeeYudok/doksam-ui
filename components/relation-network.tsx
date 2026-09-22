@@ -52,6 +52,17 @@ const LABEL_W = 152
 const R_IN = 96
 const R_OUT = 168
 
+/**
+ * 그룹별 스포크 선 패턴 — **색만으로 정보를 전달하지 않기 위한** 두 번째 채널이다.
+ *
+ * 계열 색은 --chart-1~5 에서 오는데, 기본 테마의 chart 토큰은 hue 200~290 의
+ * 파랑~보라 한 띠 안에 있고 forest 프리셋은 전부 초록 띠다. 즉 프리셋에 따라
+ * 4계열이 서로 비슷한 색으로 해석될 수 있고, 이 그래프는 스포크가 교차하므로
+ * 색만으로는 "이 노드가 어느 그룹" 이 읽히지 않는다. 규칙 원문 "접근성" 절의
+ * "색만으로 정보를 전달하지 않는다" 가 걸리는 자리라 선 패턴을 함께 준다.
+ */
+const GROUP_DASH = [undefined, "6 3", "2 3", "8 3 2 3", "1 3"] as const
+
 function nodeRadius(weight?: number | null): number {
   return 6 + Math.min(12, Math.sqrt(Math.max(weight ?? 2, 0)) * 1.4)
 }
@@ -72,8 +83,13 @@ function RelationNetwork({
   className,
   ...props
 }: Readonly<RelationNetworkProps>) {
+  const groupIndexOf = (key?: string) => groups.findIndex((g) => g.key === key)
   const colorOf = (n: RelationNode) =>
     groups.find((g) => g.key === n.group)?.color ?? "var(--muted-foreground)"
+  const dashOf = (n: RelationNode) => {
+    const i = groupIndexOf(n.group)
+    return i < 0 ? undefined : GROUP_DASH[i % GROUP_DASH.length]
+  }
 
   const shown = [...nodes]
     .sort((a, b) => (b.weight ?? -1) - (a.weight ?? -1))
@@ -101,6 +117,7 @@ function RelationNetwork({
         y: cy + rad * Math.sin(ang),
         r: nodeRadius(n.weight),
         color: colorOf(n),
+        dash: dashOf(n),
       }
     })
     withPos.sort((a, b) => a.y - b.y)
@@ -178,7 +195,13 @@ function RelationNetwork({
 
         {placed.map((p, i) => (
           <g key={`spoke-${i}`}>
-            <path d={`M${CX},${cy} L${p.x},${p.y}`} stroke={p.color} strokeWidth={1} strokeOpacity={0.24} />
+            <path
+              d={`M${CX},${cy} L${p.x},${p.y}`}
+              stroke={p.color}
+              strokeWidth={1}
+              strokeOpacity={0.24}
+              strokeDasharray={p.dash}
+            />
             {animated && (
               <path
                 className="rn-flow"
@@ -196,6 +219,7 @@ function RelationNetwork({
               stroke={p.color}
               strokeWidth={1}
               strokeOpacity={0.28}
+              strokeDasharray={p.dash}
             />
           </g>
         ))}
@@ -217,7 +241,10 @@ function RelationNetwork({
                 cx={p.x - p.r * 0.3}
                 cy={p.y - p.r * 0.3}
                 r={Math.max(1.6, p.r * 0.34)}
-                fill={`color-mix(in oklch, ${p.color} 20%, white)`}
+                // 광택점은 테마 표면색이다 — 라이트에서는 밝은 반사, 다크에서는
+                // 어두운 면으로 읽힌다. "항상 흰색" 으로 두려면 색 리터럴이
+                // 필요한데 그것이 곧 규칙이 막는 것이다.
+                className="fill-card"
                 opacity={0.85}
               />
               <foreignObject x={p.labelX} y={p.railY - 24} width={LABEL_W} height={48} style={{ overflow: "visible" }}>
@@ -262,7 +289,7 @@ function RelationNetwork({
           style={{ transformBox: "view-box", transformOrigin: `${CX}px ${cy}px` }}
         />
         <g className={anim("core")} style={{ transformBox: "view-box", transformOrigin: `${CX}px ${cy}px` }}>
-          <circle cx={CX} cy={cy} r={11} fill="color-mix(in oklch, var(--primary) 40%, white)" filter="url(#rn-glow)" />
+          <circle cx={CX} cy={cy} r={11} className="fill-primary" opacity={0.35} filter="url(#rn-glow)" />
           <circle cx={CX} cy={cy} r={5} className="fill-primary" />
         </g>
         <text x={CX} y={cy + 36} textAnchor="middle" className="fill-foreground" fontSize="12" fontWeight="700">
@@ -271,12 +298,17 @@ function RelationNetwork({
       </svg>
 
       <div className="relative flex flex-wrap gap-x-4 gap-y-1.5 px-4 pb-3">
-        {groups.map((g) => {
+        {groups.map((g, gi) => {
           const count = nodes.filter((n) => n.group === g.key).length
           if (count === 0) return null
+          const dash = GROUP_DASH[gi % GROUP_DASH.length]
           return (
             <span key={g.key} className="flex items-center gap-1.5 text-[11px] text-muted-foreground">
-              <span className="inline-block size-2 rounded-full" style={{ background: g.color, boxShadow: `0 0 6px ${g.color}` }} />
+              {/* 점 + 그 그룹의 스포크 패턴 — 색이 비슷한 프리셋에서도 범례와 그래프를 맞출 수 있다. */}
+              <svg width={22} height={8} aria-hidden className="shrink-0">
+                <circle cx={4} cy={4} r={3} fill={g.color} />
+                <path d="M9,4 L21,4" stroke={g.color} strokeWidth={1.5} strokeDasharray={dash} />
+              </svg>
               {g.label} <span className="opacity-60">{count}</span>
             </span>
           )
