@@ -22,9 +22,10 @@ describe("PatternsPage", () => {
     }
   })
 
-  it("labels the srope scope as a project extension", () => {
+  it("places former srope patterns in the finance scope", () => {
     render(<PatternsPage />)
-    expect(screen.getByRole("heading", { level: 2, name: "Srope — 프로젝트 확장" })).toBeInTheDocument()
+    expect(screen.queryByRole("heading", { level: 2, name: "Srope — 프로젝트 확장" })).not.toBeInTheDocument()
+    expect(screen.getByRole("heading", { level: 2, name: "금융 도메인" })).toBeInTheDocument()
   })
 
   it("links every registry entry to its detail page", () => {

@@ -15,7 +15,7 @@ doksam 프로젝트 공통 UI 표준 — shadcn/ui 기반 컴포넌트·패턴·
 | 계층 | 개수 | 성격 |
 | --- | --- | --- |
 | [컴포넌트](https://ui.doksam.com/components) | 104 | shadcn 프리미티브 + 조합 컴포넌트. 항목마다 데모·코드·Do/Don't |
-| [패턴](https://ui.doksam.com/patterns) | 30 | 화면 단위 조합 규칙. 공통 22 · 금융 4 · 프로젝트 확장 4 |
+| [패턴](https://ui.doksam.com/patterns) | 31 | 화면 단위 조합 규칙. 공통 22 · 금융 9 |
 | [템플릿](https://ui.doksam.com/templates) | 16 | 대시보드·랜딩·콘솔 등 완성된 화면 |
 
 그 외에 [토큰](https://ui.doksam.com/tokens)(색·간격·타이포), [테마·프로필](https://ui.doksam.com/profiles), [아이콘](https://ui.doksam.com/icons) 페이지가 있습니다. **작성 규칙의 단일 진실원천은 [/rules](https://ui.doksam.com/rules)** 이고, 새 화면을 만들기 전에 여기부터 읽으면 됩니다.

@@ -4,10 +4,10 @@ import { describe, expect, it } from "vitest"
 import AdminToolbarPatternsPage from "@/app/patterns/admin-toolbar/page"
 
 describe("AdminToolbarPatternsPage", () => {
-  it("renders the page heading and srope extension badge", () => {
+  it("renders the page heading and finance badge", () => {
     render(<AdminToolbarPatternsPage />)
     expect(screen.getByRole("heading", { level: 1, name: "관리자 툴바 패턴" })).toBeInTheDocument()
-    expect(screen.getByText("Srope — 프로젝트 확장")).toBeInTheDocument()
+    expect(screen.getByText("금융 도메인")).toBeInTheDocument()
   })
 
   it("renders every pattern section title", () => {

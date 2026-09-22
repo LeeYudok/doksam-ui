@@ -71,7 +71,7 @@ export default function PipelinePatternsPage() {
     <div className="flex max-w-3xl flex-col gap-8">
       <section className="flex flex-col gap-3">
         <Badge variant="secondary" className="w-fit">
-          Srope — 프로젝트 확장
+          금융 도메인
         </Badge>
         <h1 className="text-2xl font-semibold tracking-tight">파이프라인 UI 패턴</h1>
         <p className="max-w-prose text-sm text-muted-foreground">
