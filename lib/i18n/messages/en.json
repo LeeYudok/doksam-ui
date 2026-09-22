@@ -198,6 +198,7 @@
   "component.gauge-card.description": "A name + status badge + threshold-based gauge bar + tags/cause-tag card. Colors resolve automatically at the 60/30 thresholds (ported from srope).",
   "component.hover-card.description": "Shows a preview card on hover.",
   "component.icon-picker.description": "A popover picker that selects Phosphor icons via category tabs and combined Korean/English search (ported from srope).",
+  "component.inline-help-link.description": "An inline help link next to a section heading (h2), unlike the screen-level ScreenHelpDialog it points to a single section — opening a same-screen help dialog on a specific item, or navigating to a separate help screen (#97).",
   "component.input-group.description": "Attaches icon, button, or text add-ons to an input field.",
   "component.input-otp.description": "For fixed-length inputs such as one-time passcodes.",
   "component.input.description": "The default single-line text input field.",

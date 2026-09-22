@@ -65,6 +65,7 @@ const MANUAL_ENTRY_SLUGS = [
   "action-card",
   "category-card",
   "gauge-card",
+  "inline-help-link",
   "page-header",
   "signal-card",
   "chat-widget",

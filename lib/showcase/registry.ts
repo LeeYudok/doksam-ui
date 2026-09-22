@@ -899,6 +899,14 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
     status: "done",
   },
   {
+    slug: "inline-help-link",
+    title: "Inline Help Link",
+    category: "layout",
+    layer: "composition",
+    description: "섹션 제목(h2) 옆에 붙는 인라인 사용법 링크입니다. 화면 단위인 ScreenHelpDialog와 달리 섹션 하나만 가리킵니다(#97).",
+    status: "done",
+  },
+  {
     slug: "page-header",
     title: "Page Header",
     category: "layout",

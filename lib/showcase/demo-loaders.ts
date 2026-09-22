@@ -115,6 +115,7 @@ export const DEMO_LOADERS: Record<string, DemoLoader> = {
   "action-card": () => import("@/components/demos/action-card.demo"),
   "category-card": () => import("@/components/demos/category-card.demo"),
   "gauge-card": () => import("@/components/demos/gauge-card.demo"),
+  "inline-help-link": () => import("@/components/demos/inline-help-link.demo"),
   "page-header": () => import("@/components/demos/page-header.demo"),
   "scroll-stack": () => import("@/components/demos/scroll-stack.demo"),
   "signal-card": () => import("@/components/demos/signal-card.demo"),

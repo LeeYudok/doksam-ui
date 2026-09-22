@@ -198,6 +198,7 @@
   "component.gauge-card.description": "Tarjeta de nombre + insignia de estado + barra de medición por umbrales + etiquetas/causa. Los colores se resuelven en los umbrales 60/30 (portado de srope).",
   "component.hover-card.description": "Muestra una tarjeta de vista previa al pasar el cursor.",
   "component.icon-picker.description": "Un selector popover que elige iconos Phosphor mediante pestañas de categoría y búsqueda combinada coreano/inglés (portado de srope).",
+  "component.inline-help-link.description": "Un enlace de ayuda en línea junto a un encabezado de sección (h2); a diferencia del ScreenHelpDialog a nivel de pantalla, apunta a una sola sección — abre un diálogo de ayuda de la misma pantalla en un ítem específico o navega a una pantalla de ayuda aparte (#97).",
   "component.input-group.description": "Para adjuntar íconos, botones o texto a un campo de input.",
   "component.input-otp.description": "Para inputs de longitud fija, como códigos de verificación de un solo uso.",
   "component.input.description": "Campo de texto básico de una sola línea.",

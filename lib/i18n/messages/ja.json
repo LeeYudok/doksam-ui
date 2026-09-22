@@ -198,6 +198,7 @@
   "component.gauge-card.description": "名前+状態バッジ+しきい値ベースのゲージバー+タグ・原因タグのカードです。60/30のしきい値で色が自動決定されます(srope移植)。",
   "component.hover-card.description": "ホバー時にプレビューカードを表示します。",
   "component.icon-picker.description": "カテゴリタブと日英韓統合検索でPhosphorアイコンを選ぶポップオーバー選択器です(srope移植)。",
+  "component.inline-help-link.description": "セクション見出し(h2)の横に付くインライン使用法リンクです。画面単位のScreenHelpDialogと異なり、セクション1つだけを指します — 同じ画面のヘルプダイアログを特定項目で開くか、別のヘルプ画面へ移動します(#97)。",
   "component.input-group.description": "アイコン・ボタン・テキストアドオンを入力フィールドに付けるときに使用します。",
   "component.input-otp.description": "ワンタイム認証コードのように桁数が固定された入力に使用します。",
   "component.input.description": "1行のテキストを入力する基本のテキストフィールドです。",

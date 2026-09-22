@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "inline-help-link",
+  "title": "Inline Help Link",
+  "description": "섹션 제목(h2) 옆에 붙는 인라인 사용법 링크. 화면 단위 ScreenHelpDialog 와 달리 섹션 하나만 가리키며, 같은 화면 도움말 다이얼로그를 특정 항목으로 열거나(onOpen) 별도 도움말 화면으로 이동한다(href).",
+  "dependencies": [
+    "@phosphor-icons/react@^2.1.10"
+  ],
+  "registryDependencies": [
+    "https://ui.doksam.com/r/button.json",
+    "https://ui.doksam.com/r/tooltip.json"
+  ],
+  "files": [
+    {
+      "path": "components/inline-help-link.tsx",
+      "content": "\"use client\"\n\nimport Link from \"next/link\"\nimport { InfoIcon } from \"@phosphor-icons/react/dist/ssr\"\n\nimport { Button } from \"@/components/ui/button\"\nimport { Tooltip, TooltipContent, TooltipTrigger } from \"@/components/ui/tooltip\"\n\ninterface InlineHelpLinkBaseProps {\n  /** 사용법 설명. 툴팁 텍스트와 aria-label/title 로 동시에 쓴다 — 라벨 없는 아이콘 단독이라 필수다. */\n  label: string\n  className?: string\n}\n\ninterface InlineHelpLinkOpenProps extends InlineHelpLinkBaseProps {\n  /** 같은 화면의 도움말 다이얼로그(예: ScreenHelpDialog)를 특정 항목으로 여는 콜백. */\n  onOpen: () => void\n  href?: never\n}\n\ninterface InlineHelpLinkNavigateProps extends InlineHelpLinkBaseProps {\n  /** 별도 도움말 화면으로 이동할 경로. */\n  href: string\n  onOpen?: never\n}\n\nexport type InlineHelpLinkProps = InlineHelpLinkOpenProps | InlineHelpLinkNavigateProps\n\n/**\n * 섹션 제목(h2) 옆에 붙는 인라인 사용법 링크 (#97, EWS v2 `ews-helplink` 이식).\n *\n * `ScreenHelpDialog`((?) 버튼 → 화면 전체 매뉴얼)와 역할이 다르다 — 그쪽은 **화면 단위**,\n * 이쪽은 **지금 보고 있는 섹션 하나**의 사용법만 가리킨다. 항상 둘 중 하나만 준다:\n * `onOpen` 은 같은 화면의 도움말 다이얼로그를 특정 항목으로 열 때, `href` 는 별도\n * 도움말 화면으로 이동할 때 쓴다.\n *\n * 아이콘 단독(장식이 아니라 기능을 가리키는 자리)이라 `label` 을 툴팁·aria-label·title\n * 세 곳 모두에 강제로 채운다. 클릭 표적은 `icon-xs`(24px)로 제목 옆 최소 표적 크기를\n * 만족한다.\n */\nfunction InlineHelpLink({ label, className, ...props }: Readonly<InlineHelpLinkProps>) {\n  const icon = <InfoIcon className=\"size-3.5\" weight=\"bold\" aria-hidden />\n\n  const trigger = props.href ? (\n    <Button asChild variant=\"ghost\" size=\"icon-xs\" className={className} aria-label={label} title={label}>\n      <Link href={props.href}>{icon}</Link>\n    </Button>\n  ) : (\n    <Button\n      type=\"button\"\n      variant=\"ghost\"\n      size=\"icon-xs\"\n      className={className}\n      aria-label={label}\n      title={label}\n      onClick={props.onOpen}\n    >\n      {icon}\n    </Button>\n  )\n\n  return (\n    <Tooltip>\n      <TooltipTrigger asChild>{trigger}</TooltipTrigger>\n      <TooltipContent>{label}</TooltipContent>\n    </Tooltip>\n  )\n}\n\nexport { InlineHelpLink }\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}
