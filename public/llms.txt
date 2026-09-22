@@ -25,7 +25,7 @@ DESIGN.md 의 원형은 아래 `name` 값 중 하나여야 합니다. 같은 과
 | 원형(name) | 뼈대(내비 + 본문 구조) | 적합한 화면 | 피해야 할 경우 | 대표 템플릿 |
 | --- | --- | --- | --- | --- |
 | `sidebar-app` | 좌측 고정 사이드바(모바일은 드로어) → 본문은 페이지 타이틀 아래 한 칼럼 작업 영역. 하단 탭바 없음. | 관리자·백오피스 · 운영 콘솔 · 목적지 6개 이상인 내부 도구 | 목적지가 3개 이하 · 첫 방문 전환이 목적인 대외 랜딩 · 모바일이 주 사용 환경 | `admin`, `crawler-console`, `rag-search` |
-| `top-nav-site` | 상단 가로 메뉴 → 본문은 히어로·섹션이 세로로 흐르는 스크롤 페이지 → 푸터. 사이드바·하단 탭바 없음. | 마케팅·랜딩 사이트 · 제품 소개·가격 페이지 · 공개 포털 홈 | 목적지가 8개를 넘어 가로 메뉴가 접힘 · 화면당 조작이 많은 작업 도구 · 상시 컨텍스트 전환이 필요한 콘솔 | `marketing-site`, `saas`, `bank` |
+| `top-nav-site` | 상단 가로 메뉴 → 본문은 히어로·섹션이 세로로 흐르는 스크롤 페이지 → 푸터. 사이드바·하단 탭바 없음. | 마케팅·랜딩 사이트 · 제품 소개·가격 페이지 · 공개 포털 홈 | 목적지가 8개를 넘는데 오버플로 처리를 정하지 않음 — 그 경우 app-shell 의 글로벌 탑내비 셸 변형을 쓴다 · 화면당 조작이 많은 작업 도구 · 상시 컨텍스트 전환이 필요한 콘솔 | `marketing-site`, `saas`, `bank` |
 | `split-pane` | 화면을 좌우로 분할해 좌측 목록·우측 상세를 동시에 표시(모바일은 목록↔상세 2단 전환). 페이지 이동 대신 우측 교체. | 메일·메시지 처리함 · 이슈·티켓 트리아지 · 에디터 + 미리보기 | 상세가 목록보다 훨씬 짧아 우측이 비어 보임 · 모바일 전용 화면 · 항목을 하나만 열고 끝나는 흐름 | `mail-workspace`, `knowledge-base` |
 | `feed-timeline` | 상단 얇은 필터 바 → 단일 세로 스트림이 화면 전체(항목은 카드 그리드가 아니라 시간순 한 줄 행). 하단 탭바·사이드바 없음. | 활동·알림 피드 · 뉴스·공시 스트림 · 감사 로그·이벤트 타임라인 | 항목 간 비교가 목적인 화면 · 정렬·페이징이 핵심인 표 데이터 · 항목 수가 20개 미만으로 고정 | `activity-feed`, `market-report` |
 | `dashboard-grid` | 상단 기간·범위 필터 → 지표 카드·차트를 2~4열 격자로 배열. 카드 클릭이 상세 진입. | KPI 요약 대시보드 · 시세·모니터링 보드 · 경영 리포트 첫 화면 | 지표가 3개 이하 · 한 지표를 깊게 파는 분석 화면 · 카드마다 조작 폼이 붙는 경우 | `trading`, `brokerage`, `company-intel` |
@@ -509,6 +509,18 @@ npx shadcn add https://ui.doksam.com/r/stage-progress-board.json
 ```
 
 registryDependencies: https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/card.json, https://ui.doksam.com/r/progress.json
+
+npm dependencies: @phosphor-icons/react@^2.1.10
+
+### Top Nav Shell (`top-nav-shell`)
+
+1단 글로벌 nav + 2단 서브탭바(현재 화면명·하위 탭·상시 ask 바)를 한 몸으로 붙인 업무 시스템용 셸. 넘치는 메뉴는 더보기 드롭다운으로, 좁은 폭에서는 전체 nav 를 시트로 접는다.
+
+```
+npx shadcn add https://ui.doksam.com/r/top-nav-shell.json
+```
+
+registryDependencies: https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/dropdown-menu.json, https://ui.doksam.com/r/kbd.json, https://ui.doksam.com/r/sheet.json
 
 npm dependencies: @phosphor-icons/react@^2.1.10
 

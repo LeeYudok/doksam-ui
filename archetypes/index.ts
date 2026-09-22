@@ -79,7 +79,11 @@ export const LAYOUT_ARCHETYPES: LayoutArchetype[] = [
       "상단 가로 메뉴 → 본문은 히어로·섹션이 세로로 흐르는 스크롤 페이지 → 푸터. 사이드바·하단 탭바 없음.",
     shell: "헤더형 셸",
     templates: ["marketing-site", "saas", "bank"],
-    avoidWhen: ["목적지가 8개를 넘어 가로 메뉴가 접힘", "화면당 조작이 많은 작업 도구", "상시 컨텍스트 전환이 필요한 콘솔"],
+    avoidWhen: [
+      "목적지가 8개를 넘는데 오버플로 처리를 정하지 않음 — 그 경우 app-shell 의 글로벌 탑내비 셸 변형을 쓴다",
+      "화면당 조작이 많은 작업 도구",
+      "상시 컨텍스트 전환이 필요한 콘솔",
+    ],
     icon: NavigationArrowIcon,
   },
   {

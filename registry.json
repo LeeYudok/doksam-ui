@@ -1498,6 +1498,28 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "top-nav-shell",
+      "type": "registry:component",
+      "title": "Top Nav Shell",
+      "description": "1단 글로벌 nav + 2단 서브탭바(현재 화면명·하위 탭·상시 ask 바)를 한 몸으로 붙인 업무 시스템용 셸. 넘치는 메뉴는 더보기 드롭다운으로, 좁은 폭에서는 전체 nav 를 시트로 접는다.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10"
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/dropdown-menu.json",
+        "https://ui.doksam.com/r/kbd.json",
+        "https://ui.doksam.com/r/sheet.json"
+      ],
+      "files": [
+        {
+          "path": "components/patterns/top-nav-shell/top-nav-shell.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "table-sortable",
       "type": "registry:component",
       "title": "Table Sortable",

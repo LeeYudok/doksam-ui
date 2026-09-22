@@ -56,7 +56,7 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
   {
     slug: "app-shell",
     title: "앱 셸 패턴",
-    description: "레이아웃 원형별 셸 5종(사이드바·헤더·분할 패인·피드·문서 리더)과 페이지 타이틀·여백 밀도·브레이크포인트 표준입니다.",
+    description: "레이아웃 원형별 셸 7종(사이드바·헤더·분할 패인·피드·문서 리더·집중형·글로벌 탑내비)과 페이지 타이틀·여백 밀도·브레이크포인트 표준입니다.",
     icon: AppWindowIcon,
     scope: "common",
   },
