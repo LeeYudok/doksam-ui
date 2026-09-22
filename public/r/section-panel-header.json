@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "section-panel-header",
+  "title": "Section Panel Header",
+  "description": "카드 헤더 자리에 들어가는 아이콘 + 제목 + 우측 메타/필터 슬롯 조합. 좁은 폭에서는 우측 슬롯이 제목 아래로 줄바꿈된다.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://ui.doksam.com/r/card.json"
+  ],
+  "files": [
+    {
+      "path": "components/section-panel-header.tsx",
+      "content": "import * as React from \"react\"\nimport type { Icon } from \"@phosphor-icons/react\"\n\nimport { CardDescription, CardHeader, CardTitle } from \"@/components/ui/card\"\nimport { cn } from \"@/lib/utils\"\n\nexport interface SectionPanelHeaderProps extends Omit<React.ComponentProps<typeof CardHeader>, \"title\"> {\n  /** 좌측 아이콘. Phosphor(`@phosphor-icons/react/dist/ssr`)만 쓰고 이모지는 쓰지 않는다. */\n  icon: Icon\n  /** 섹션 제목. */\n  title: React.ReactNode\n  /** 제목 아래 보조 설명. 생략 가능. */\n  description?: React.ReactNode\n  /** 우측에 놓는 메타 텍스트(건수·기준일 등). 텍스트만 필요하면 이쪽을 쓴다. */\n  meta?: React.ReactNode\n  /** 우측에 놓는 인터랙티브 요소(필터·링크·버튼). 여러 개면 호출부가 gap 을 관리한다. */\n  actions?: React.ReactNode\n}\n\n/**\n * 섹션 패널 헤더 (#88) — `card` 헤더 자리에 들어가는 아이콘 + 제목 + 우측 슬롯 조합이다.\n *\n * 얇은 래퍼가 되지 않도록 정렬·줄바꿈 규칙을 여기서 고정한다: 좁은 폭에서는\n * 우측 슬롯(`meta`/`actions`)이 제목 아래로 줄바꿈되고, 넓은 폭에서는 제목과\n * 한 줄에서 끝에 정렬된다. 제목이 길어도 좌측 아이콘 폭은 줄어들지 않는다\n * (`shrink-0`), 우측 슬롯도 줄어들지 않아 필터·버튼이 찌그러지지 않는다.\n *\n * `CardHeader` 를 그대로 감싸 쓴다 — `card-header` 의 패딩·라운딩을 재구현하지 않는다.\n */\nfunction SectionPanelHeader({\n  className,\n  icon: IconComponent,\n  title,\n  description,\n  meta,\n  actions,\n  ...props\n}: Readonly<SectionPanelHeaderProps>) {\n  const hasRightSlot = Boolean(meta || actions)\n\n  return (\n    <CardHeader\n      data-slot=\"section-panel-header\"\n      className={cn(\"flex flex-row flex-wrap items-start justify-between gap-x-3 gap-y-2\", className)}\n      {...props}\n    >\n      <div className=\"flex min-w-0 items-start gap-2\">\n        <IconComponent size={18} weight=\"duotone\" className=\"mt-0.5 shrink-0 text-muted-foreground\" aria-hidden />\n        <div className=\"flex min-w-0 flex-col gap-0.5\">\n          <CardTitle className=\"truncate\">{title}</CardTitle>\n          {description ? <CardDescription>{description}</CardDescription> : null}\n        </div>\n      </div>\n      {hasRightSlot ? (\n        <div className=\"flex shrink-0 flex-wrap items-center justify-end gap-2 text-xs text-muted-foreground\">\n          {meta ? <span data-slot=\"section-panel-header-meta\">{meta}</span> : null}\n          {actions ? (\n            <div data-slot=\"section-panel-header-actions\" className=\"flex flex-wrap items-center gap-2\">\n              {actions}\n            </div>\n          ) : null}\n        </div>\n      ) : null}\n    </CardHeader>\n  )\n}\n\nexport { SectionPanelHeader }\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}

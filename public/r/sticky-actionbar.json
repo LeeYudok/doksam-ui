@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "sticky-actionbar",
+  "title": "Sticky Actionbar",
+  "description": "화면(또는 스크롤 컨테이너) 하단에 sticky 로 붙는 주 액션 바. 안전영역·모바일 키보드를 고려해 fixed 대신 sticky 를 쓰고, 파괴적/보조/주 액션의 배치 순서를 고정한다.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://ui.doksam.com/r/button.json"
+  ],
+  "files": [
+    {
+      "path": "components/sticky-actionbar.tsx",
+      "content": "import * as React from \"react\"\n\nimport { Button } from \"@/components/ui/button\"\nimport { cn } from \"@/lib/utils\"\n\nexport interface StickyActionbarAction {\n  label: string\n  onClick?: () => void\n  variant?: React.ComponentProps<typeof Button>[\"variant\"]\n  disabled?: boolean\n}\n\nexport interface StickyActionbarProps extends Omit<React.ComponentProps<\"div\">, \"children\"> {\n  /** 화면의 주 액션(결재 상신 등). 항상 우측 끝에 놓인다. */\n  primaryAction: StickyActionbarAction\n  /** 주 액션 왼쪽의 보조 액션(이전 단계로·임시저장 등). */\n  secondaryAction?: StickyActionbarAction\n  /**\n   * 파괴적 액션(반려·삭제 등). 있으면 주 액션과 시각적으로 분리해 **맨 왼쪽**에 둔다 —\n   * 주 액션 옆에 붙이면 연속 클릭 동선에서 오조작으로 이어진다.\n   */\n  destructiveAction?: StickyActionbarAction\n  /** 좌측에 보여줄 보조 정보(선택 건수·마지막 저장 시각 등). */\n  meta?: React.ReactNode\n}\n\n/**\n * 하단 고정 액션바 (#88) — 결재 상신 등 화면의 주 액션을 항상 보이는 위치에 둔다.\n *\n * `fixed` 가 아니라 `sticky bottom-0` 을 쓴다 — iOS Safari 는 소프트 키보드가\n * 올라오면 `fixed` 요소를 시각 뷰포트가 아니라 레이아웃 뷰포트 기준으로 고정해\n * 키보드 뒤에 숨는다. `sticky` 는 스크롤 컨테이너 흐름 안에서 하단에 붙기 때문에\n * 키보드가 올라와도 눌린 입력 필드 옆에 그대로 보인다. 안전영역은\n * `env(safe-area-inset-bottom)` 을 패딩에 더해 흡수한다.\n *\n * 액션 배치 순서(왼쪽 → 오른쪽): 파괴적 액션 → 보조 정보 → 보조 액션 → 주 액션.\n * 주 액션을 항상 오른쪽 끝에 두어 \"다음으로 진행\"의 방향과 일치시키고, 파괴적\n * 액션은 반대쪽 끝에 떨어뜨려 두 액션이 서로의 클릭 동선에 끼어들지 않게 한다.\n */\nfunction StickyActionbar({\n  className,\n  primaryAction,\n  secondaryAction,\n  destructiveAction,\n  meta,\n  ...props\n}: Readonly<StickyActionbarProps>) {\n  return (\n    <div\n      data-slot=\"sticky-actionbar\"\n      className={cn(\n        \"sticky bottom-0 z-10 flex flex-wrap items-center justify-between gap-3 border-t border-border bg-card/95 px-4 py-3 backdrop-blur-sm\",\n        \"pb-[calc(env(safe-area-inset-bottom)+0.75rem)]\",\n        className\n      )}\n      {...props}\n    >\n      <div className=\"flex min-w-0 flex-wrap items-center gap-3\">\n        {destructiveAction ? (\n          <Button\n            variant={destructiveAction.variant ?? \"outline\"}\n            className=\"text-destructive transition-colors duration-200 hover:bg-destructive/10 hover:text-destructive\"\n            onClick={destructiveAction.onClick}\n            disabled={destructiveAction.disabled}\n          >\n            {destructiveAction.label}\n          </Button>\n        ) : null}\n        {meta ? <span className=\"truncate text-xs text-muted-foreground\">{meta}</span> : null}\n      </div>\n      <div className=\"flex shrink-0 items-center gap-2\">\n        {secondaryAction ? (\n          <Button\n            variant={secondaryAction.variant ?? \"ghost\"}\n            onClick={secondaryAction.onClick}\n            disabled={secondaryAction.disabled}\n          >\n            {secondaryAction.label}\n          </Button>\n        ) : null}\n        <Button\n          variant={primaryAction.variant ?? \"default\"}\n          onClick={primaryAction.onClick}\n          disabled={primaryAction.disabled}\n        >\n          {primaryAction.label}\n        </Button>\n      </div>\n    </div>\n  )\n}\n\nexport { StickyActionbar }\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}

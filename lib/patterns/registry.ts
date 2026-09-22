@@ -27,6 +27,7 @@ import {
   TrayArrowUpIcon,
   WalletIcon,
 } from "@phosphor-icons/react/dist/ssr"
+import { AnchorIcon, GavelIcon, RowsIcon } from "@phosphor-icons/react/dist/ssr"
 import type { Icon } from "@phosphor-icons/react"
 
 /**
@@ -262,6 +263,27 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "매수/매도 탭·호가 클릭 가격 반영·수량/주문유형·예상 체결금액 주문 화면입니다.",
     icon: CurrencyKrwIcon,
     scope: "finance",
+  },
+  {
+    slug: "compliance-callout",
+    title: "규정 콜아웃",
+    description: "근거 규정 번호 + 대상 조건 + 요구 행위 + 기한 + 액션 버튼을 한 덩어리로 보여주는 업무 규칙 안내 3단 심각도입니다.",
+    icon: GavelIcon,
+    scope: "common",
+  },
+  {
+    slug: "section-panel-header",
+    title: "섹션 패널 헤더",
+    description: "카드 헤더 자리에 들어가는 아이콘 + 제목 + 우측 메타/필터 슬롯이며, 좁은 폭에서는 우측 슬롯이 줄바꿈됩니다.",
+    icon: RowsIcon,
+    scope: "common",
+  },
+  {
+    slug: "sticky-actionbar",
+    title: "하단 고정 액션바",
+    description: "화면 하단에 고정되는 주 액션 바입니다. 안전영역과 모바일 키보드를 고려해 sticky로 구현하고, 파괴적/보조/주 액션의 배치 순서를 고정합니다.",
+    icon: AnchorIcon,
+    scope: "common",
   },
   {
     slug: "evidence-decision",
