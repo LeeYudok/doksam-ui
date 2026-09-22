@@ -21,6 +21,7 @@ import {
   StorefrontIcon,
   ShieldCheckIcon,
   SirenIcon,
+  StethoscopeIcon,
   PackageIcon,
   TreeStructureIcon,
 } from "@phosphor-icons/react/dist/ssr"
@@ -286,5 +287,15 @@ export const TEMPLATE_REGISTRY: TemplateEntry[] = [
       "여신 조기경보(EWS) 홈 대시보드. top-nav 셸 아래로 규정 콜아웃·KPI 4장·등급 분포 도넛·긴급 처리 차주 표를 배치합니다. 등급 색은 --risk-* 토큰으로만 칠하고 등급 문구와 Tier 번호를 항상 함께 실어 색 외 두 번째 채널을 보장합니다.",
     stack: ["top-nav-shell", "risk-table", "compliance-callout", "risk-grade-badge"],
     icon: SirenIcon,
+  },
+  {
+    href: "/templates/ews-diagnosis",
+    title: "EWS Diagnosis",
+    profile: "finance 프로필 · Ivory · Noto Sans KR",
+    archetype: "split-pane",
+    description:
+      "여신 조기경보(EWS) 경보 원인 진단 상세. 좌측 차주 목록이 곧 내비게이션이고 선택은 우측 상세만 교체합니다. 기여 변수 랭킹·근거 감사 추적·자료 수집 현황을 EWS Dashboard 와 같은 파츠 집합으로만 조립해 파츠가 특정 화면 전용이 아니라 재사용 가능한지 검증합니다.",
+    stack: ["top-nav-shell", "contribution-meter", "audit-code-tag", "sticky-actionbar"],
+    icon: StethoscopeIcon,
   },
 ]

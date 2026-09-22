@@ -536,6 +536,7 @@
   "template.docker-container.description": "用预制菜烹饪的比喻讲解 Docker 核心概念(Image、Container、Volume、Registry)的教学信息图,配有 build→run 流程图和症状▶对策表。",
   "template.elearning.description": "具备章节课程列表·进度侧栏、16:9 播放器、自动续播倒计时与 AI 摘要弹窗的学习内容播放器。",
   "template.ews-dashboard.description": "授信早期预警（EWS）首页仪表板。在顶部导航外壳下依次排布合规提示、4 张 KPI 卡片、等级分布环形图与紧急处理借款人表格。等级颜色只使用 --risk-* 令牌，并始终同时标注等级文字与 Tier 编号，保证颜色之外的第二通道。",
+  "template.ews-diagnosis.description": "授信早期预警（EWS）告警成因诊断详情页。左侧借款人列表即导航，选择只替换右侧详情。贡献变量排名、依据审计轨迹与资料收集进度均仅用与 EWS Dashboard 相同的部件集合拼装，以验证这些部件可复用而非专属于某一屏。",
   "template.glossary.description": "将 50 个 SDLC·AI 术语按 6 个类别与关系编织成的知识图谱。确定性径向布局的 SVG 星座网络，提供选中节点的邻接高亮、搜索高亮、图例筛选与详情面板。",
   "template.help-center.description": "不是文档查看器，而是提问窗口式的帮助中心。将提问（自由提问与推荐问题）、按画面/功能检索的手册索引、FAQ 手风琴，以及按时间顺序查看我的提问回答状态的历史记录这 4 个标签页作为路由深链接。",
   "template.knowledge-base.description": "将维基文档树·markdown 正文·目录、看板式创意板与按日期分组的会话时间线以标签页组织的团队知识管理控制台。",
