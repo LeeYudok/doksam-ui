@@ -710,6 +710,14 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
     status: "done",
   },
   {
+    slug: "evidence-decision-panel",
+    title: "Evidence Decision Panel",
+    category: "finance",
+    layer: "composition",
+    description: "근거의 출처·검증 상태와 연결된 조치 후보를 함께 보여주고, 사람의 선택만 상위 흐름으로 전달하는 의사결정 패널입니다.",
+    status: "done",
+  },
+  {
     slug: "pipeline-rail",
     title: "Pipeline Rail",
     category: "layout",

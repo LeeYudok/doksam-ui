@@ -92,6 +92,7 @@ export const DEMO_LOADERS: Record<string, DemoLoader> = {
   "relation-network": () => import("@/components/demos/relation-network.demo"),
   "risk-core-map": () => import("@/components/demos/risk-core-map.demo"),
   "scenario-simulator": () => import("@/components/demos/scenario-simulator.demo"),
+  "evidence-decision-panel": () => import("@/components/demos/evidence-decision-panel.demo"),
   "pipeline-rail": () => import("@/components/demos/pipeline-rail.demo"),
   "stage-progress-board": () => import("@/components/demos/stage-progress-board.demo"),
   "keyword-cloud": () => import("@/components/demos/keyword-cloud.demo"),

@@ -18,6 +18,7 @@ import {
   WrenchIcon,
   ClockCounterClockwiseIcon,
   CurrencyKrwIcon,
+  ScalesIcon,
   GaugeIcon,
   KanbanIcon,
   SignInIcon,
@@ -260,6 +261,13 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     title: "주식 · 주문",
     description: "매수/매도 탭·호가 클릭 가격 반영·수량/주문유형·예상 체결금액 주문 화면입니다.",
     icon: CurrencyKrwIcon,
+    scope: "finance",
+  },
+  {
+    slug: "evidence-decision",
+    title: "근거 기반 의사결정",
+    description: "근거의 출처·검증 상태를 먼저 확인하고, 연결된 대응 후보를 사람이 선택해 상위 승인 흐름으로 넘기는 금융 의사결정 패턴입니다.",
+    icon: ScalesIcon,
     scope: "finance",
   },
 ]

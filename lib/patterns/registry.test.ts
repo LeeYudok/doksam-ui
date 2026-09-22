@@ -8,9 +8,10 @@ describe("PATTERN_REGISTRY", () => {
     expect(new Set(slugs).size).toBe(slugs.length)
   })
 
-  it("registers all 30 patterns (22 common + 4 finance + 4 srope)", () => {
-    expect(PATTERN_REGISTRY.length).toBe(30)
+  it("registers all 31 patterns (22 common + 5 finance + 4 srope)", () => {
+    expect(PATTERN_REGISTRY.length).toBe(31)
     expect(PATTERN_REGISTRY.filter((entry) => entry.scope === "common").length).toBe(22)
+    expect(PATTERN_REGISTRY.filter((entry) => entry.scope === "finance").length).toBe(5)
     expect(PATTERN_REGISTRY.filter((entry) => entry.scope === "srope").length).toBe(4)
   })
 
