@@ -1,6 +1,6 @@
 import { TranslatedText } from "@/components/showcase/translated-text";
 import { CopyButton } from "@/components/copy-button";
-import { RISK_LEVELS, RISK_LEVEL_DESCRIPTIONS } from "@/lib/risk-tokens";
+import { RISK_LEVELS, RISK_LEVEL_DESCRIPTIONS, riskTintBackground } from "@/lib/risk-tokens";
 
 const SIDEBAR_TOKENS = [
   "sidebar",
@@ -51,7 +51,7 @@ function RiskSwatch({ level }: Readonly<{ level: (typeof RISK_LEVELS)[number] }>
         <div
           className="flex h-10 items-center justify-center rounded-md text-xs font-medium"
           style={{
-            backgroundColor: `color-mix(in oklch, var(--risk-${level}) 14%, transparent)`,
+            backgroundColor: riskTintBackground(level),
             color: `var(--risk-${level})`,
           }}
         >
@@ -61,7 +61,15 @@ function RiskSwatch({ level }: Readonly<{ level: (typeof RISK_LEVELS)[number] }>
       <div className="flex items-start justify-between gap-2">
         <div className="flex min-w-0 flex-col gap-0.5">
           <code className="text-xs font-medium">--risk-{level}</code>
-          <p className="text-xs text-muted-foreground">{RISK_LEVEL_DESCRIPTIONS[level]}</p>
+          <p className="text-xs text-muted-foreground">
+            {/* 키가 동적이라 scripts/i18n/extract.mjs 의 리터럴 스캔에는 안 잡힌다 —
+                ko 원문은 RISK_LEVEL_DESCRIPTIONS 가 SSOT 이고, 4로케일 번역은
+                lib/i18n/messages/*.json 에 page.tokens.risk.level.<level> 로 있다. */}
+            <TranslatedText
+              k={`page.tokens.risk.level.${level}`}
+              ko={RISK_LEVEL_DESCRIPTIONS[level]}
+            />
+          </p>
         </div>
         <CopyButton
           value={`var(--risk-${level})`}

@@ -6,11 +6,14 @@
 /**
  * 위험 심각도 4단 시맨틱 토큰 — 단일 진실원천 (#81).
  *
- * `--gain`/`--loss`(한국식 등락색)와 같은 성격의 **도메인 토큰**이다. 브랜드가
- * 아니라 관례가 값을 정하므로 `themes/*.ts` 의 27키에 넣지 않고, 사이드바
- * chrome 과 마찬가지로 `app/globals.css` 의 `:root`/`.dark` 에만 정의해 테마
- * 프리셋 8종이 그대로 물려받는다 — 심각도는 브랜드에 따라 달라지면 안 되는
- * 층이다(forest 테마에서 "경보" 가 초록이 되면 안 된다).
+ * `--gain`/`--loss`(한국식 등락색)와 같은 성격의 **도메인 토큰**이다 — 브랜드가
+ * 아니라 관례가 값을 정한다. 다만 층의 위치는 다르다: gain/loss 는 `ThemeTokens`
+ * 27키 안에 있고 프리셋 8종이 같은 값을 각각 적는 방식이지만(SSOT 는
+ * `themes/*.ts`), risk-* 는 사이드바 chrome 과 같이 27키에서 빠져
+ * `app/globals.css` 의 `:root`/`.dark` 에만 정의되고 프리셋이 재정의하지 않는다.
+ * 심각도는 브랜드에 따라 달라지면 안 되는 층이므로, 프리셋마다 값을 적어 두고
+ * 같기를 바라는 것보다 아예 프리셋이 손댈 수 없는 자리에 두는 쪽이 맞다
+ * (forest 테마에서 "경보" 가 초록이 되면 안 된다).
  *
  * 왜 `--chart-1~5` 가 아닌가: chart 토큰은 **범주(category)** 구분용 팔레트이고
  * 실제로 한 색상 띠 안에 모여 있다(기본 테마 hue 262/220/200/290/235 — #93).
@@ -35,9 +38,13 @@
  * 등급 표기는 반드시 텍스트·아이콘 등 두 번째 채널을 같이 싣는다(접근성 절의
  * 불변 규칙).
  *
- * `-foreground` 는 **solid 채움 위 글자색**이다. tint 배경(`color-mix`)에 얹는
- * 글자는 foreground 가 아니라 값 토큰 자신을 쓴다 — 위 4.5:1 이 그 용법을
- * 보장한다.
+ * `-foreground` 는 **solid 채움 위 글자색**이다. tint 배경(`riskTintBackground`)에
+ * 얹는 글자는 foreground 가 아니라 값 토큰 자신을 쓰는데, 위 4.5:1 이 그 용법을
+ * 그대로 보장하지는 **않는다** — tint 면은 backdrop 이 글자색 쪽으로 14% 끌려와
+ * 대비가 내려가므로 별도 판정이 필요하다(#81 리뷰 finding 1). 그래서 tint 용법은
+ * `RISK_TINT_SAFE_SURFACES` 위에서만 약속하고, 이미 틴트된 표면(accent·secondary)
+ * 위에서는 solid 채움을 쓴다. 이 약속도 `lib/risk-tokens.test.ts` 가 합성색을
+ * 실제로 계산해서 지킨다.
  */
 
 /** 심각도 오름차순. 이 순서가 곧 등급 순서다(정상 → 경보). */
@@ -75,6 +82,28 @@ export const RISK_TOKENS: { light: RiskTokens; dark: RiskTokens } = {
     "risk-severe-foreground": "oklch(0.15 0.02 27)",
   },
 };
+
+/**
+ * tint 면의 값 토큰 비율. 이 숫자를 올리면 tint 배경이 글자색에 가까워져
+ * 대비가 내려간다 — 바꾸면 `lib/risk-tokens.test.ts` 의 tint 게이트가 먼저 깨진다.
+ */
+export const RISK_TINT_PERCENT = 14;
+
+/** 위 비율을 0..1 로 — 대비 계산(합성 알파)이 쓴다. */
+export const RISK_TINT_RATIO = RISK_TINT_PERCENT / 100;
+
+/**
+ * tint 배경 위 본문 글자의 4.5:1 을 약속하는 표면. 이미 자기 자신이 틴트된
+ * 표면(accent·secondary)은 여기 없다 — 그 위에서는 tint 를 겹치지 않고 solid
+ * 채움을 쓴다(#81 리뷰 finding 1의 실측: ocean 라이트 accent 위 risk-low tint 는
+ * 3.86:1 로 미달).
+ */
+export const RISK_TINT_SAFE_SURFACES = ["background", "card", "muted"] as const;
+
+/** tint 배경의 CSS 값 — 페이지와 테스트가 같은 문자열을 쓰도록 여기서 만든다. */
+export function riskTintBackground(level: RiskLevel): string {
+  return `color-mix(in oklch, var(--risk-${level}) ${RISK_TINT_PERCENT}%, transparent)`;
+}
 
 /** 각 등급이 무엇을 뜻하는지 — /tokens 스와치 설명과 문서가 공유한다. */
 export const RISK_LEVEL_DESCRIPTIONS: Record<RiskLevel, string> = {

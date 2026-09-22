@@ -162,12 +162,19 @@ radius 값을 새로 쓰지 않는다(레지스트리 프리셋 중에서만 고
 상승 빨강/하락 파랑), `border`, `input`, `ring`, `chart-1~5`, `sidebar-*`,
 `risk-low`/`risk-moderate`/`risk-high`/`risk-severe`(+ 각 `-foreground`).
 
-`gain`/`loss` 와 `risk-*` 는 프리셋 27키가 아니라 **도메인 토큰 층**이다 —
-`lib/risk-tokens.ts` 가 단일 진실원천이고 `globals.css` 의 `:root`/`.dark` 에만
-정의돼 프리셋을 바꿔도 값이 안 바뀐다(`[data-theme="*"]` 에서 재정의 금지).
+`gain`/`loss` 와 `risk-*` 는 둘 다 브랜드가 아니라 **도메인 관례**가 값을 정하는
+토큰인데 층의 위치가 다르다:
+
+- `gain`/`loss` — 프리셋 27키(`ThemeTokens`) 안에 있고 프리셋 8종이 **같은 값을
+  각각 적는다**. SSOT 는 `themes/*.ts`, `globals.css` 의 `[data-theme]` 블록 16개가
+  이 값을 미러링한다.
+- `risk-*` — `sidebar-*` 처럼 27키에서 **빠져** `globals.css` 의 `:root`/`.dark` 에만
+  정의된다. SSOT 는 `lib/risk-tokens.ts`, 프리셋 블록이 재정의하지 않는다
+  (`lib/globals-css-mirror.test.ts` 가 막는다).
+
 순서 있는 심각도는 `chart-1~5`(범주 팔레트)나 `success`/`warning`/`destructive`(3단
 상태색)로 대체하지 않는다. 값을 고칠 때는 `lib/risk-tokens.test.ts` 가 프리셋 8종
-× 라이트/다크에서 본문 대비 4.5:1 을 지킨다(#81).
+× 라이트/다크에서 본문 대비 4.5:1(불투명 표면 5종 + tint 면 3종)을 지킨다(#81).
 
 ### 테마 · 폰트 · 프로필
 

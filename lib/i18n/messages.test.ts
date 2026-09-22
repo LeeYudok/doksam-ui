@@ -5,6 +5,7 @@ import es from "@/lib/i18n/messages/es.json"
 import ja from "@/lib/i18n/messages/ja.json"
 import zh from "@/lib/i18n/messages/zh.json"
 import { PATTERN_REGISTRY } from "@/lib/patterns/registry"
+import { RISK_LEVELS } from "@/lib/risk-tokens"
 import { COMPONENT_REGISTRY } from "@/lib/showcase/registry"
 import { TEMPLATE_REGISTRY } from "@/lib/templates/registry"
 
@@ -51,6 +52,18 @@ describe("i18n 메시지 스냅샷 정합성", () => {
     for (const [locale, msgs] of Object.entries(ALL)) {
       const missing = koKeys.filter((k) => !(k in msgs))
       expect(missing, `${locale} 번역 누락 ${missing.length}건`).toEqual([])
+    }
+  })
+
+  it("위험등급 설명 4단의 번역이 4개 로케일에 존재한다 (#81)", () => {
+    // 이 키는 /tokens 스와치가 `page.tokens.risk.level.${level}` 로 **동적 조회**해서
+    // extract.mjs 의 리터럴 스캔에 안 잡힌다 — ko-catalog 를 경유하는 위 누락
+    // 감지가 닿지 않으므로 등급 목록에서 직접 유도해 검사한다.
+    for (const level of RISK_LEVELS) {
+      const key = `page.tokens.risk.level.${level}`
+      for (const [locale, msgs] of Object.entries(ALL)) {
+        expect(msgs[key], `${locale}:${key} 누락`).toBeTruthy()
+      }
     }
   })
 
