@@ -179,6 +179,27 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "contribution-meter",
+      "type": "registry:component",
+      "title": "Contribution Meter",
+      "description": "기여도 % + Progress 게이지 + 감사코드(AuditCodeTag)를 묶은 판단 근거 표기. 방향(위험 상승/하락 요인)은 --gain/--loss로 칠한다.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10"
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/audit-code-tag.json",
+        "https://ui.doksam.com/r/i18n-provider.json",
+        "https://ui.doksam.com/r/progress.json"
+      ],
+      "files": [
+        {
+          "path": "components/contribution-meter.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "copy-button",
       "type": "registry:component",
       "title": "Copy Button",
