@@ -1,0 +1,155 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "template-help-center",
+  "title": "Help Center 템플릿",
+  "description": "admin 프로필(Slate·Geist) 질문 창구형 도움말 센터 — 물어보기·매뉴얼 색인·FAQ·질문 이력 4탭을 라우트로 딥링크.",
+  "dependencies": [
+    "@phosphor-icons/react@^2.1.10",
+    "cmdk@^1.1.1"
+  ],
+  "registryDependencies": [
+    "https://ui.doksam.com/r/accordion.json",
+    "https://ui.doksam.com/r/badge.json",
+    "https://ui.doksam.com/r/button.json",
+    "https://ui.doksam.com/r/command.json",
+    "https://ui.doksam.com/r/profile-scope.json",
+    "https://ui.doksam.com/r/route-error.json",
+    "https://ui.doksam.com/r/route-loading.json",
+    "https://ui.doksam.com/r/textarea.json"
+  ],
+  "files": [
+    {
+      "path": "app/templates/help-center/error.tsx",
+      "content": "\"use client\"\n\nimport { RouteError } from \"@/components/route-error\"\n\nexport default function RouteErrorPage({\n  error,\n  reset,\n}: Readonly<{\n  error: Error & { digest?: string }\n  reset: () => void\n}>) {\n  return <RouteError error={error} reset={reset} />\n}\n",
+      "type": "registry:page",
+      "target": "app/templates/help-center/error.tsx"
+    },
+    {
+      "path": "app/templates/help-center/layout.tsx",
+      "content": "import type { Metadata } from \"next\"\nimport type { ReactNode } from \"react\"\n\nimport { profileScopeAttributes } from \"@/components/profile-scope\"\n\nimport { HelpCenterNav } from \"./_components/help-center-nav\"\n\nexport const metadata: Metadata = {\n  title: \"Help Center · doksam-ui 템플릿\",\n  description: \"admin 프로필(slate · Geist)을 강제 적용한 질문 창구형 도움말 센터 템플릿\",\n}\n\n/**\n * Help Center 템플릿(#100) 레이아웃 — profiles/index.ts 의 \"admin\" 프로필\n * (theme: slate, font: geist)을 이 서브트리에만 강제한다. rag-search/ontology 와\n * 동일한 컨테이너 스코프 패턴: sidebar-app 원형의 \"한 칼럼 작업 영역\"을\n * 자체 사이드바 없이 쓴다(#87 RiskTable 등과 동일하게 이 이슈 범위에서는\n * 전역 사이드바 배선을 새로 만들지 않는다).\n *\n * 탭 4개(물어보기·매뉴얼 색인·FAQ·질문 이력)는 client Tabs 가 아니라 라우트다 —\n * HelpCenterNav 가 각 탭을 딥링크 가능한 하위 경로로 연결한다.\n */\nexport default function HelpCenterTemplateLayout({ children }: Readonly<{ children: ReactNode }>) {\n  return (\n    <div\n      {...profileScopeAttributes(\"admin\")}\n      className=\"flex min-h-[calc(100vh-4rem)] w-full flex-col gap-4 rounded-xl border border-border bg-background p-4 font-sans text-foreground sm:gap-6 sm:p-6\"\n    >\n      <header className=\"flex flex-col gap-3\">\n        <div className=\"flex flex-col gap-1\">\n          <span className=\"text-xs font-medium text-muted-foreground\">doksam-ui 템플릿 · admin 프로필</span>\n          <h1 className=\"text-lg font-semibold tracking-tight sm:text-xl\">Help Center</h1>\n          <p className=\"max-w-prose text-sm text-muted-foreground\">\n            문서를 훑어보는 대신 질문으로 들어오는 도움말 센터입니다. 전 업무화면의 ask 바가 여기로 연결됩니다.\n          </p>\n        </div>\n        <HelpCenterNav />\n      </header>\n      <div className=\"min-w-0 flex-1\">{children}</div>\n    </div>\n  )\n}\n",
+      "type": "registry:page",
+      "target": "app/templates/help-center/layout.tsx"
+    },
+    {
+      "path": "app/templates/help-center/loading.tsx",
+      "content": "import { RouteLoading } from \"@/components/route-loading\"\n\nexport default function Loading() {\n  return <RouteLoading />\n}\n",
+      "type": "registry:page",
+      "target": "app/templates/help-center/loading.tsx"
+    },
+    {
+      "path": "app/templates/help-center/page.tsx",
+      "content": "import { Badge } from \"@/components/ui/badge\"\n\nimport { AskPanel } from \"./_components/ask-panel\"\n\nexport default function HelpCenterAskPage() {\n  return (\n    <div className=\"flex w-full flex-col gap-4\">\n      <section className=\"flex flex-col gap-1\">\n        <Badge variant=\"secondary\" className=\"w-fit\">\n          물어보기\n        </Badge>\n        <p className=\"max-w-prose text-sm leading-relaxed text-muted-foreground\">\n          찾는 답이 매뉴얼에 없으면 바로 물어보세요. 자주 나오는 질문은 추천 질문 칩으로 바로 채울 수 있습니다.\n        </p>\n      </section>\n      <AskPanel />\n    </div>\n  )\n}\n",
+      "type": "registry:page",
+      "target": "app/templates/help-center/page.tsx"
+    },
+    {
+      "path": "app/templates/help-center/manual/error.tsx",
+      "content": "\"use client\"\n\nimport { RouteError } from \"@/components/route-error\"\n\nexport default function RouteErrorPage({\n  error,\n  reset,\n}: Readonly<{\n  error: Error & { digest?: string }\n  reset: () => void\n}>) {\n  return <RouteError error={error} reset={reset} />\n}\n",
+      "type": "registry:page",
+      "target": "app/templates/help-center/manual/error.tsx"
+    },
+    {
+      "path": "app/templates/help-center/manual/loading.tsx",
+      "content": "import { RouteLoading } from \"@/components/route-loading\"\n\nexport default function Loading() {\n  return <RouteLoading />\n}\n",
+      "type": "registry:page",
+      "target": "app/templates/help-center/manual/loading.tsx"
+    },
+    {
+      "path": "app/templates/help-center/manual/page.tsx",
+      "content": "import { Badge } from \"@/components/ui/badge\"\n\nimport { ManualIndex } from \"../_components/manual-index\"\nimport { MANUAL_CATEGORIES } from \"../_data/manual\"\n\nconst ENTRY_COUNT = MANUAL_CATEGORIES.reduce((sum, category) => sum + category.entries.length, 0)\n\nexport default function HelpCenterManualPage() {\n  return (\n    <div className=\"flex w-full flex-col gap-4\">\n      <section className=\"flex flex-col gap-1\">\n        <Badge variant=\"secondary\" className=\"w-fit\">\n          매뉴얼 색인\n        </Badge>\n        <p className=\"max-w-prose text-sm leading-relaxed text-muted-foreground\">\n          화면·기능 이름으로 매뉴얼을 검색합니다. 카테고리 {MANUAL_CATEGORIES.length}개 · 항목 {ENTRY_COUNT}건이\n          담겨 있습니다.\n        </p>\n      </section>\n      <ManualIndex />\n    </div>\n  )\n}\n",
+      "type": "registry:page",
+      "target": "app/templates/help-center/manual/page.tsx"
+    },
+    {
+      "path": "app/templates/help-center/faq/error.tsx",
+      "content": "\"use client\"\n\nimport { RouteError } from \"@/components/route-error\"\n\nexport default function RouteErrorPage({\n  error,\n  reset,\n}: Readonly<{\n  error: Error & { digest?: string }\n  reset: () => void\n}>) {\n  return <RouteError error={error} reset={reset} />\n}\n",
+      "type": "registry:page",
+      "target": "app/templates/help-center/faq/error.tsx"
+    },
+    {
+      "path": "app/templates/help-center/faq/loading.tsx",
+      "content": "import { RouteLoading } from \"@/components/route-loading\"\n\nexport default function Loading() {\n  return <RouteLoading />\n}\n",
+      "type": "registry:page",
+      "target": "app/templates/help-center/faq/loading.tsx"
+    },
+    {
+      "path": "app/templates/help-center/faq/page.tsx",
+      "content": "import { Badge } from \"@/components/ui/badge\"\n\nimport { FaqList } from \"../_components/faq-list\"\nimport { FAQ_ITEMS } from \"../_data/faq\"\n\nexport default function HelpCenterFaqPage() {\n  return (\n    <div className=\"flex w-full flex-col gap-4\">\n      <section className=\"flex flex-col gap-1\">\n        <Badge variant=\"secondary\" className=\"w-fit\">\n          FAQ\n        </Badge>\n        <p className=\"max-w-prose text-sm leading-relaxed text-muted-foreground\">\n          자주 묻는 질문 {FAQ_ITEMS.length}건을 카테고리별로 묶었습니다.\n        </p>\n      </section>\n      <FaqList />\n    </div>\n  )\n}\n",
+      "type": "registry:page",
+      "target": "app/templates/help-center/faq/page.tsx"
+    },
+    {
+      "path": "app/templates/help-center/history/error.tsx",
+      "content": "\"use client\"\n\nimport { RouteError } from \"@/components/route-error\"\n\nexport default function RouteErrorPage({\n  error,\n  reset,\n}: Readonly<{\n  error: Error & { digest?: string }\n  reset: () => void\n}>) {\n  return <RouteError error={error} reset={reset} />\n}\n",
+      "type": "registry:page",
+      "target": "app/templates/help-center/history/error.tsx"
+    },
+    {
+      "path": "app/templates/help-center/history/loading.tsx",
+      "content": "import { RouteLoading } from \"@/components/route-loading\"\n\nexport default function Loading() {\n  return <RouteLoading />\n}\n",
+      "type": "registry:page",
+      "target": "app/templates/help-center/history/loading.tsx"
+    },
+    {
+      "path": "app/templates/help-center/history/page.tsx",
+      "content": "import { Badge } from \"@/components/ui/badge\"\n\nimport { QuestionHistory } from \"../_components/question-history\"\nimport { QUESTION_HISTORY } from \"../_data/questions\"\n\nexport default function HelpCenterHistoryPage() {\n  return (\n    <div className=\"flex w-full flex-col gap-4\">\n      <section className=\"flex flex-col gap-1\">\n        <Badge variant=\"secondary\" className=\"w-fit\">\n          질문 이력\n        </Badge>\n        <p className=\"max-w-prose text-sm leading-relaxed text-muted-foreground\">\n          내가 보낸 질문 {QUESTION_HISTORY.length}건을 최근 순으로 보여줍니다. 답변 대기/완료 상태는 배지 색과\n          텍스트로 함께 구분합니다.\n        </p>\n      </section>\n      <QuestionHistory />\n    </div>\n  )\n}\n",
+      "type": "registry:page",
+      "target": "app/templates/help-center/history/page.tsx"
+    },
+    {
+      "path": "app/templates/help-center/_components/help-center-nav.tsx",
+      "content": "\"use client\"\n\nimport Link from \"next/link\"\nimport { usePathname } from \"next/navigation\"\nimport { BookOpenIcon, ChatCircleIcon, ClockCounterClockwiseIcon, QuestionIcon } from \"@phosphor-icons/react/dist/ssr\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst TABS = [\n  { href: \"/templates/help-center\", label: \"물어보기\", icon: ChatCircleIcon },\n  { href: \"/templates/help-center/manual\", label: \"매뉴얼 색인\", icon: BookOpenIcon },\n  { href: \"/templates/help-center/faq\", label: \"FAQ\", icon: QuestionIcon },\n  { href: \"/templates/help-center/history\", label: \"질문 이력\", icon: ClockCounterClockwiseIcon },\n] as const\n\n/**\n * 도움말 센터 4탭 내비게이션(#100) — 라우트 전환이라 딥링크가 가능하다.\n * Radix Tabs(클라이언트 상태) 대신 app/templates/saas/_components/template-nav.tsx 와\n * 같은 Link 탭 패턴을 쓴다 — 이슈 설계(\"탭 전환이 라우트가 되도록\")가 요구하는 지점.\n */\nexport function HelpCenterNav() {\n  const pathname = usePathname()\n\n  return (\n    <nav\n      aria-label=\"도움말 센터 탭\"\n      className=\"flex w-fit items-center gap-1 overflow-x-auto rounded-lg border border-border bg-card p-1\"\n    >\n      {TABS.map((tab) => {\n        const active = pathname === tab.href\n        const Icon = tab.icon\n        return (\n          <Link\n            key={tab.href}\n            href={tab.href}\n            aria-current={active ? \"page\" : undefined}\n            className={cn(\n              \"flex shrink-0 items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium transition-colors\",\n              active\n                ? \"bg-primary text-primary-foreground\"\n                : \"text-muted-foreground hover:bg-muted hover:text-foreground\",\n            )}\n          >\n            <Icon size={16} weight={active ? \"duotone\" : \"regular\"} aria-hidden />\n            {tab.label}\n          </Link>\n        )\n      })}\n    </nav>\n  )\n}\n",
+      "type": "registry:page",
+      "target": "app/templates/help-center/_components/help-center-nav.tsx"
+    },
+    {
+      "path": "app/templates/help-center/_components/ask-panel.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { CheckCircleIcon, ClockIcon, PaperPlaneRightIcon, SparkleIcon } from \"@phosphor-icons/react/dist/ssr\"\n\nimport { Badge } from \"@/components/ui/badge\"\nimport { Button } from \"@/components/ui/button\"\nimport { Textarea } from \"@/components/ui/textarea\"\nimport { cn } from \"@/lib/utils\"\n\nimport { QUESTION_HISTORY, type QuestionStatus } from \"../_data/questions\"\nimport { SUGGESTED_QUESTIONS } from \"../_data/suggested-questions\"\n\nconst STATUS_LABEL: Record<QuestionStatus, string> = {\n  answered: \"답변 완료\",\n  pending: \"답변 대기\",\n}\n\nconst STATUS_CLASS: Record<QuestionStatus, string> = {\n  answered: \"border-success/40 bg-success/10 text-success\",\n  pending: \"border-warning/40 bg-warning/10 text-warning\",\n}\n\nconst RECENT_ANSWERED = QUESTION_HISTORY.filter((q) => q.status === \"answered\").slice(0, 2)\n\n/**\n * 물어보기 탭(#100) — 자유 질문 입력 + 추천 질문 칩 + 최근 답변 미리보기.\n *\n * ChatWidget(components/chat-widget.tsx)은 화면 구석 상주형 런처+패널이라 항상\n * 열려 있어야 하는 탭 본문으로 끼워 넣기에 맞지 않는다(설계 판단 — 최종 보고 참고).\n * 대신 같은 자유 질문 진입점 의도를 로컬 프레젠테이션 컴포넌트로 구현하고,\n * 새 카탈로그 컴포넌트는 만들지 않는다.\n */\nexport function AskPanel() {\n  const [value, setValue] = React.useState(\"\")\n  const [submitted, setSubmitted] = React.useState<string[]>([])\n\n  function handleSubmit(event: React.FormEvent) {\n    event.preventDefault()\n    const question = value.trim()\n    if (!question) return\n    setSubmitted((prev) => [question, ...prev])\n    setValue(\"\")\n  }\n\n  return (\n    <div className=\"flex flex-col gap-6\">\n      <form onSubmit={handleSubmit} className=\"flex flex-col gap-3 rounded-lg border border-border bg-card p-4\">\n        <label htmlFor=\"ask-question\" className=\"text-sm font-medium text-foreground\">\n          무엇이 궁금하신가요?\n        </label>\n        <Textarea\n          id=\"ask-question\"\n          value={value}\n          onChange={(event) => setValue(event.target.value)}\n          placeholder=\"예: 여신 심사 화면에서 반려 사유는 어디서 확인하나요?\"\n          rows={3}\n          className=\"resize-none\"\n        />\n\n        <div className=\"flex flex-wrap gap-1.5\">\n          {SUGGESTED_QUESTIONS.map((question) => (\n            <button\n              key={question}\n              type=\"button\"\n              onClick={() => setValue(question)}\n              className=\"flex items-center gap-1 rounded-full border border-border bg-background px-2.5 py-1 text-xs text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground\"\n            >\n              <SparkleIcon size={12} aria-hidden />\n              {question}\n            </button>\n          ))}\n        </div>\n\n        <div className=\"flex justify-end\">\n          <Button type=\"submit\" disabled={!value.trim()}>\n            <PaperPlaneRightIcon aria-hidden />\n            질문 보내기\n          </Button>\n        </div>\n      </form>\n\n      {submitted.length > 0 ? (\n        <section aria-label=\"방금 보낸 질문\" className=\"flex flex-col gap-2\">\n          <h3 className=\"text-sm font-semibold text-foreground\">방금 보낸 질문</h3>\n          <ul className=\"flex flex-col gap-2\">\n            {submitted.map((question) => (\n              <li\n                key={question}\n                className=\"flex items-center gap-2 rounded-lg border border-dashed border-border bg-muted/30 px-3 py-2 text-sm text-foreground\"\n              >\n                <ClockIcon size={14} className=\"shrink-0 text-muted-foreground\" aria-hidden />\n                {question}\n                <Badge variant=\"outline\" className={cn(\"ml-auto shrink-0 gap-1\", STATUS_CLASS.pending)}>\n                  {STATUS_LABEL.pending}\n                </Badge>\n              </li>\n            ))}\n          </ul>\n        </section>\n      ) : null}\n\n      <section aria-label=\"최근 답변된 질문\" className=\"flex flex-col gap-2\">\n        <h3 className=\"text-sm font-semibold text-foreground\">최근 답변된 질문</h3>\n        <ul className=\"flex flex-col gap-2\">\n          {RECENT_ANSWERED.map((item) => (\n            <li key={item.id} className=\"flex flex-col gap-1 rounded-lg border border-border bg-card p-3\">\n              <div className=\"flex items-center gap-2\">\n                <CheckCircleIcon size={14} weight=\"fill\" className=\"shrink-0 text-success\" aria-hidden />\n                <p className=\"text-sm font-medium text-foreground\">{item.question}</p>\n                <Badge variant=\"outline\" className={cn(\"ml-auto shrink-0 gap-1\", STATUS_CLASS.answered)}>\n                  {STATUS_LABEL.answered}\n                </Badge>\n              </div>\n              {item.answer ? <p className=\"pl-6 text-sm text-muted-foreground\">{item.answer}</p> : null}\n            </li>\n          ))}\n        </ul>\n      </section>\n    </div>\n  )\n}\n",
+      "type": "registry:page",
+      "target": "app/templates/help-center/_components/ask-panel.tsx"
+    },
+    {
+      "path": "app/templates/help-center/_components/manual-index.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { FileTextIcon } from \"@phosphor-icons/react/dist/ssr\"\n\nimport { Badge } from \"@/components/ui/badge\"\nimport { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from \"@/components/ui/command\"\n\nimport { MANUAL_CATEGORIES, type ManualEntry } from \"../_data/manual\"\n\nconst FIRST_ENTRY = MANUAL_CATEGORIES[0]?.entries[0] ?? null\n\n/**\n * 매뉴얼 색인 탭(#100) — components/ui/command.tsx 의 Command(다이얼로그 아님,\n * 인라인)를 화면·기능 트리 검색기로 재사용한다. 좌측에서 고른 항목이 우측\n * 디테일 패널에 뜬다(md 미만에서는 세로로 쌓인다).\n */\nexport function ManualIndex() {\n  const [selected, setSelected] = React.useState<ManualEntry | null>(FIRST_ENTRY)\n\n  return (\n    <div className=\"grid grid-cols-1 gap-4 md:grid-cols-[280px_1fr]\">\n      <Command className=\"min-w-0 rounded-lg border border-border\" aria-label=\"매뉴얼 검색\">\n        <CommandInput placeholder=\"화면·기능 검색…\" />\n        <CommandList>\n          <CommandEmpty>일치하는 매뉴얼이 없습니다.</CommandEmpty>\n          {MANUAL_CATEGORIES.map((category) => (\n            <CommandGroup key={category.id} heading={category.label}>\n              {category.entries.map((entry) => (\n                <CommandItem key={entry.id} value={`${category.label} ${entry.title}`} onSelect={() => setSelected(entry)}>\n                  <FileTextIcon aria-hidden />\n                  {entry.title}\n                </CommandItem>\n              ))}\n            </CommandGroup>\n          ))}\n        </CommandList>\n      </Command>\n\n      <div className=\"min-w-0 rounded-lg border border-border bg-card p-4\">\n        {selected ? (\n          <div className=\"flex flex-col gap-2\">\n            <Badge variant=\"secondary\" className=\"w-fit\">\n              {selected.screen}\n            </Badge>\n            <h3 className=\"text-base font-semibold text-foreground\">{selected.title}</h3>\n            <p className=\"text-sm leading-relaxed text-muted-foreground\">{selected.body}</p>\n          </div>\n        ) : (\n          <p className=\"text-sm text-muted-foreground\">왼쪽에서 항목을 선택하면 설명이 여기 표시됩니다.</p>\n        )}\n      </div>\n    </div>\n  )\n}\n",
+      "type": "registry:page",
+      "target": "app/templates/help-center/_components/manual-index.tsx"
+    },
+    {
+      "path": "app/templates/help-center/_components/faq-list.tsx",
+      "content": "import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from \"@/components/ui/accordion\"\nimport { Badge } from \"@/components/ui/badge\"\n\nimport { FAQ_ITEMS } from \"../_data/faq\"\n\nconst CATEGORIES = [...new Set(FAQ_ITEMS.map((item) => item.category))]\n\n/** FAQ 탭(#100) — components/ui/accordion.tsx 를 카테고리별로 그룹핑해 조합한다. */\nexport function FaqList() {\n  return (\n    <div className=\"flex flex-col gap-6\">\n      {CATEGORIES.map((category) => {\n        const items = FAQ_ITEMS.filter((item) => item.category === category)\n        return (\n          <section key={category} className=\"flex flex-col gap-2\">\n            <h3 className=\"flex items-center gap-2 text-sm font-semibold text-foreground\">\n              {category}\n              <Badge variant=\"outline\" className=\"font-mono text-[10px] font-normal\">\n                {items.length}\n              </Badge>\n            </h3>\n            <Accordion type=\"single\" collapsible className=\"rounded-lg border border-border\">\n              {items.map((item) => (\n                <AccordionItem key={item.id} value={item.id}>\n                  <AccordionTrigger className=\"px-4\">{item.question}</AccordionTrigger>\n                  <AccordionContent className=\"px-4 text-muted-foreground\">{item.answer}</AccordionContent>\n                </AccordionItem>\n              ))}\n            </Accordion>\n          </section>\n        )\n      })}\n    </div>\n  )\n}\n",
+      "type": "registry:page",
+      "target": "app/templates/help-center/_components/faq-list.tsx"
+    },
+    {
+      "path": "app/templates/help-center/_components/question-history.tsx",
+      "content": "import { CheckCircleIcon, ClockIcon } from \"@phosphor-icons/react/dist/ssr\"\n\nimport { Badge } from \"@/components/ui/badge\"\nimport { cn } from \"@/lib/utils\"\n\nimport { QUESTION_HISTORY, type QuestionStatus } from \"../_data/questions\"\n\nconst STATUS_LABEL: Record<QuestionStatus, string> = {\n  answered: \"답변 완료\",\n  pending: \"답변 대기\",\n}\n\nconst STATUS_CLASS: Record<QuestionStatus, string> = {\n  answered: \"border-success/40 bg-success/10 text-success\",\n  pending: \"border-warning/40 bg-warning/10 text-warning\",\n}\n\n/**\n * 질문 이력 탭(#100) — 표가 아니라 시간순 목록(이슈 설계). 상태는 배지 색뿐\n * 아니라 텍스트(\"답변 완료\"/\"답변 대기\")와 아이콘으로도 구분한다(색 외 2번째\n * 채널). askedAt 은 목 데이터의 포맷된 문자열을 그대로 쓰고 new Date() 로\n * 내부에서 다시 계산하지 않는다(hydration).\n */\nexport function QuestionHistory() {\n  return (\n    <ol aria-label=\"내 질문 이력\" className=\"relative flex flex-col gap-4 pl-2\">\n      {QUESTION_HISTORY.map((item) => {\n        const Icon = item.status === \"answered\" ? CheckCircleIcon : ClockIcon\n        return (\n          <li key={item.id} className=\"relative flex gap-3 pb-4 pl-6 last:pb-0\">\n            <span aria-hidden className=\"absolute top-6 bottom-0 left-[7px] w-px bg-border last:hidden\" />\n            <span\n              className={cn(\n                \"absolute top-1 left-0 flex size-4 shrink-0 items-center justify-center rounded-full border\",\n                STATUS_CLASS[item.status],\n              )}\n            >\n              <Icon size={10} weight=\"fill\" aria-hidden />\n            </span>\n            <div className=\"flex min-w-0 flex-1 flex-col gap-1 rounded-lg border border-border bg-card p-3\">\n              <div className=\"flex flex-wrap items-center gap-2\">\n                <span className=\"font-mono text-[11px] text-muted-foreground\">{item.askedAt}</span>\n                <Badge variant=\"outline\" className={cn(\"gap-1 text-[10px]\", STATUS_CLASS[item.status])}>\n                  {STATUS_LABEL[item.status]}\n                </Badge>\n              </div>\n              <p className=\"text-sm font-medium text-foreground\">{item.question}</p>\n              {item.answer ? <p className=\"text-sm text-muted-foreground\">{item.answer}</p> : null}\n            </div>\n          </li>\n        )\n      })}\n    </ol>\n  )\n}\n",
+      "type": "registry:page",
+      "target": "app/templates/help-center/_components/question-history.tsx"
+    },
+    {
+      "path": "app/templates/help-center/_data/suggested-questions.ts",
+      "content": "/** 물어보기 탭 추천 질문 — 자유 질문 입력창을 채우는 원클릭 칩. */\nexport const SUGGESTED_QUESTIONS: readonly string[] = [\n  \"여신 심사 화면에서 반려 사유는 어디서 확인하나요?\",\n  \"리스크 등급 배지는 어떤 기준으로 색이 바뀌나요?\",\n  \"감사 추적(Audit Trail) 이력은 얼마나 보관되나요?\",\n  \"질문한 내용은 누가 답변하나요?\",\n]\n",
+      "type": "registry:page",
+      "target": "app/templates/help-center/_data/suggested-questions.ts"
+    },
+    {
+      "path": "app/templates/help-center/_data/manual.ts",
+      "content": "/** 매뉴얼 색인 탭의 목 데이터 — 화면(카테고리)별 기능 문서 트리. */\nexport interface ManualEntry {\n  id: string\n  title: string\n  /** 이 항목이 속한 화면 이름(디테일 패널 상단 배지용). */\n  screen: string\n  body: string\n}\n\nexport interface ManualCategory {\n  id: string\n  label: string\n  entries: ManualEntry[]\n}\n\nexport const MANUAL_CATEGORIES: ManualCategory[] = [\n  {\n    id: \"underwriting\",\n    label: \"여신 심사\",\n    entries: [\n      {\n        id: \"underwriting-reject-reason\",\n        title: \"반려 사유 확인하는 법\",\n        screen: \"여신 심사 상세\",\n        body: \"심사 결과 카드의 '반려 사유' 배지를 누르면 근거가 된 내규 조항과 감사 코드(Audit Code)가 함께 열립니다. 감사 코드를 복사해 이력서에 남길 수 있습니다.\",\n      },\n      {\n        id: \"underwriting-risk-grade\",\n        title: \"리스크 등급 배지 읽는 법\",\n        screen: \"여신 심사 상세\",\n        body: \"등급 배지는 색만으로 위험도를 구분하지 않습니다. 등급 문자(A~E)와 아이콘이 함께 표시되어 색약 사용자도 구분할 수 있습니다.\",\n      },\n      {\n        id: \"underwriting-audit-code\",\n        title: \"감사 코드로 판단 근거 추적하기\",\n        screen: \"여신 심사 상세\",\n        body: \"감사 코드를 누르면 그 판단이 어떤 규칙·모델 버전에서 나왔는지 상세 화면으로 이동합니다. 복사 아이콘으로 코드만 따로 복사할 수도 있습니다.\",\n      },\n    ],\n  },\n  {\n    id: \"compliance\",\n    label: \"컴플라이언스\",\n    entries: [\n      {\n        id: \"compliance-callout\",\n        title: \"규정 안내 배너가 뜨는 조건\",\n        screen: \"컴플라이언스 점검\",\n        body: \"notice/warning/critical 3단계로 표시되며, critical 은 처리를 막는 필수 조치가 있을 때만 뜹니다. 배너의 '조치' 버튼을 누르면 해당 조항 원문으로 이동합니다.\",\n      },\n      {\n        id: \"compliance-due-date\",\n        title: \"처리 기한 표시 방식\",\n        screen: \"컴플라이언스 점검\",\n        body: \"기한이 임박하면(3일 이내) 카운트다운 배지가 경고 색으로 바뀝니다. 기한을 넘기면 배지 텍스트가 '기한 초과'로 바뀌고 담당자에게 알림이 갑니다.\",\n      },\n    ],\n  },\n  {\n    id: \"reports\",\n    label: \"리포트\",\n    entries: [\n      {\n        id: \"reports-export\",\n        title: \"리포트 내보내기\",\n        screen: \"리포트 목록\",\n        body: \"표 우측 상단의 내보내기 버튼으로 현재 필터가 적용된 목록만 CSV 로 받을 수 있습니다. 전체 데이터가 필요하면 필터를 먼저 초기화하세요.\",\n      },\n      {\n        id: \"reports-schedule\",\n        title: \"정기 발송 예약하기\",\n        screen: \"리포트 설정\",\n        body: \"리포트 설정에서 발송 주기(매일/매주/매월)와 수신자를 지정하면 지정 시각에 자동 발송됩니다. 예약은 언제든 일시중지할 수 있습니다.\",\n      },\n    ],\n  },\n]\n",
+      "type": "registry:page",
+      "target": "app/templates/help-center/_data/manual.ts"
+    },
+    {
+      "path": "app/templates/help-center/_data/faq.ts",
+      "content": "/** FAQ 탭의 목 데이터. */\nexport interface FaqItem {\n  id: string\n  category: string\n  question: string\n  answer: string\n}\n\nexport const FAQ_ITEMS: FaqItem[] = [\n  {\n    id: \"faq-account-role\",\n    category: \"계정\",\n    question: \"권한이 부족하다는 안내가 뜨는데 어떻게 하나요?\",\n    answer: \"소속 부서장에게 역할(Role) 부여를 요청하세요. 승인되면 별도 재로그인 없이 5분 내 권한이 반영됩니다.\",\n  },\n  {\n    id: \"faq-account-password\",\n    category: \"계정\",\n    question: \"비밀번호를 잊었습니다.\",\n    answer: \"로그인 화면의 '비밀번호 재설정'에서 사내 메일로 재설정 링크를 받을 수 있습니다. 링크는 10분간 유효합니다.\",\n  },\n  {\n    id: \"faq-data-refresh\",\n    category: \"데이터\",\n    question: \"화면의 수치가 실시간이 아닌 것 같아요.\",\n    answer: \"대부분의 집계 화면은 5분 주기 배치로 갱신됩니다. 화면 상단의 '마지막 갱신' 시각을 확인하세요. 실시간이 필요하면 라이브 인디케이터가 있는 화면인지 먼저 확인합니다.\",\n  },\n  {\n    id: \"faq-data-export\",\n    category: \"데이터\",\n    question: \"데이터를 외부로 내보내도 되나요?\",\n    answer: \"개인정보·고객 식별정보가 포함된 표는 마스킹된 상태로만 내보내기가 허용됩니다. 원본이 필요하면 별도 반출 승인 절차를 거쳐야 합니다.\",\n  },\n  {\n    id: \"faq-support-response\",\n    category: \"지원\",\n    question: \"질문을 올리면 답변까지 얼마나 걸리나요?\",\n    answer: \"평균 1영업일 이내 답변됩니다. 질문 이력 탭에서 답변 상태(대기/완료)를 확인할 수 있습니다.\",\n  },\n]\n",
+      "type": "registry:page",
+      "target": "app/templates/help-center/_data/faq.ts"
+    },
+    {
+      "path": "app/templates/help-center/_data/questions.ts",
+      "content": "/** 질문 이력 탭의 목 데이터 — 표가 아니라 시간순 목록으로 보여준다(#100). */\nexport type QuestionStatus = \"answered\" | \"pending\"\n\nexport interface QuestionHistoryItem {\n  id: string\n  question: string\n  /** 표시용 시각 문자열 — new Date() 로 내부에서 읽지 않는다(hydration). */\n  askedAt: string\n  status: QuestionStatus\n  answer?: string\n}\n\nexport const QUESTION_HISTORY: QuestionHistoryItem[] = [\n  {\n    id: \"q-1\",\n    question: \"여신 심사 화면에서 반려 사유는 어디서 확인하나요?\",\n    askedAt: \"2026-09-19 09:12\",\n    status: \"answered\",\n    answer: \"심사 결과 카드의 '반려 사유' 배지를 누르면 근거 조항과 감사 코드가 함께 열립니다. 매뉴얼 색인의 '반려 사유 확인하는 법' 항목도 참고하세요.\",\n  },\n  {\n    id: \"q-2\",\n    question: \"정기 리포트 발송을 일시중지하려면 어디서 하나요?\",\n    askedAt: \"2026-09-18 16:40\",\n    status: \"answered\",\n    answer: \"리포트 설정 화면의 예약 카드에서 일시중지 토글을 끄면 됩니다. 다시 켜면 다음 예정 시각부터 재개됩니다.\",\n  },\n  {\n    id: \"q-3\",\n    question: \"컴플라이언스 배너의 처리 기한을 놓치면 어떤 일이 생기나요?\",\n    askedAt: \"2026-09-17 11:05\",\n    status: \"pending\",\n  },\n  {\n    id: \"q-4\",\n    question: \"권한 신청 승인이 5분이 지나도 반영되지 않습니다.\",\n    askedAt: \"2026-09-15 14:22\",\n    status: \"pending\",\n  },\n]\n",
+      "type": "registry:page",
+      "target": "app/templates/help-center/_data/questions.ts"
+    }
+  ],
+  "type": "registry:block"
+}

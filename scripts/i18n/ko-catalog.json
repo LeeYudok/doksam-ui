@@ -518,6 +518,7 @@
   "template.docker-container.description": "도커 핵심 개념(Image·Container·Volume·Registry)을 밀키트 요리 비유로 설명하는 교육용 인포그래픽. build→run 흐름 도식과 증상▶대응 표를 갖춘 블루프린트 템플릿입니다.",
   "template.elearning.description": "챕터별 강의 리스트·진행률 사이드바와 16:9 플레이어, 자동진행 카운트다운, AI 요약 모달을 갖춘 학습 콘텐츠 플레이어입니다.",
   "template.glossary.description": "SDLC·AI 용어 50개를 6개 카테고리와 관계로 엮은 지식 그래프. 결정론적 방사형 배치의 SVG 성좌 네트워크로 노드 선택 시 이웃 강조·검색 하이라이트·범례 필터·상세 패널을 제공합니다.",
+  "template.help-center.description": "문서 뷰어가 아니라 질문 창구인 도움말 센터. 자유 질문과 추천 질문을 받는 물어보기, 화면·기능별 매뉴얼 검색 색인, FAQ 아코디언, 내 질문의 답변 상태를 시간순으로 보는 이력까지 4탭을 라우트로 딥링크합니다.",
   "template.knowledge-base.description": "위키 문서 트리·마크다운 본문·목차, 칸반풍 아이디어 보드, 날짜별 세션 타임라인을 탭으로 묶은 팀 지식관리 콘솔입니다.",
   "template.kubernetes-firewall.description": "쿠버네티스 4겹 보안(NetworkPolicy·Security Group·Ingress·OS Firewall)을 아파트 단지 비유로 설명하는 교육용 인포그래픽. 종이 격자·하드 섀도우의 설계도면 룩을 스코프 CSS로 캡슐화했습니다.",
   "template.mail-workspace.description": "좌측 목록과 우측 상세를 한 화면에 두고 선택이 라우팅 없이 우측만 바꾸는 2패인 작업 화면. 폴더 레일·검색으로 목록을 좁히고 lg 미만에서는 단일 패인으로 접힙니다.",

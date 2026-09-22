@@ -521,6 +521,7 @@
   "template.docker-container.description": "Dockerの主要概念(Image・Container・Volume・Registry)をミールキット料理のたとえで解説する教育用インフォグラフィック。build→runのフロー図と症状▶対処の表を備える。",
   "template.elearning.description": "チャプター別レッスンリスト・進捗サイドバーと16:9プレイヤー、自動再生カウントダウン、AI要約モーダルを備えた学習コンテンツプレイヤーです。",
   "template.glossary.description": "SDLC・AI用語50個を6カテゴリと関係で結んだナレッジグラフです。決定論的な放射状配置のSVG星座ネットワークで、ノード選択時の隣接強調・検索ハイライト・凡例フィルター・詳細パネルを提供します。",
+  "template.help-center.description": "文書ビューアではなく質問窓口としてのヘルプセンターです。自由質問と推奨質問を受け付ける「聞く」、画面・機能別マニュアル検索索引、FAQアコーディオン、自分の質問の回答状況を時系列で見る履歴まで、4つのタブをルートとしてディープリンクします。",
   "template.knowledge-base.description": "Wiki文書ツリー・マークダウン本文・目次、カンバン風アイデアボード、日付別セッションタイムラインをタブでまとめたチームナレッジ管理コンソールです。",
   "template.kubernetes-firewall.description": "Kubernetesの4層セキュリティ(NetworkPolicy・Security Group・Ingress・OSファイアウォール)をマンション団地のたとえで解説する教育用インフォグラフィック。設計図面風のルックをスコープCSSにカプセル化。",
   "template.mail-workspace.description": "左に一覧、右に詳細を置き、選択がルーティングなしに右側だけを差し替える 2 ペイン作業画面。フォルダレールと検索で一覧を絞り、lg 未満では単一ペインに畳まれます。",

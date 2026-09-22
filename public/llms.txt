@@ -888,6 +888,18 @@ registryDependencies: https://ui.doksam.com/r/badge.json, https://ui.doksam.com/
 
 npm dependencies: @phosphor-icons/react@^2.1.10
 
+### Help Center 템플릿 (`template-help-center`)
+
+admin 프로필(Slate·Geist) 질문 창구형 도움말 센터 — 물어보기·매뉴얼 색인·FAQ·질문 이력 4탭을 라우트로 딥링크.
+
+```
+npx shadcn add https://ui.doksam.com/r/template-help-center.json
+```
+
+registryDependencies: https://ui.doksam.com/r/accordion.json, https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/command.json, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json, https://ui.doksam.com/r/textarea.json
+
+npm dependencies: @phosphor-icons/react@^2.1.10, cmdk@^1.1.1
+
 ### Knowledge Base 템플릿 (`template-knowledge-base`)
 
 admin 프로필 · Slate · Geist · doc-reader 원형. 위키 문서 트리·마크다운 본문·목차, 칸반풍 아이디어 보드, 날짜별 세션 타임라인을 탭으로 묶은 팀 지식관리 콘솔입니다.
