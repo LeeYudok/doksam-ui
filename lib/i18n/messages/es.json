@@ -485,6 +485,7 @@
   "personality.statement.suited.2": "Pantallas con pocos elementos que permiten usar espacio en blanco generoso",
   "profile.admin.description": "Perfil para herramientas administrativas internas y pantallas de back-office. Tonos neutros y serenos que priorizan la densidad de información.",
   "profile.console.description": "Perfil para pantallas de monitoreo y consolas de operación. Oscuro por defecto con acentos naranjas cálidos, mostrando logs y estados con alta densidad.",
+  "profile.finance.description": "Perfil para pantallas de trabajo de entidades financieras, como monitoreo de crédito y riesgo. Fondo tono papel marfil con tinta azul marino y acentos dorados, que contiene esquinas rectas y tablas y listas de alertas densas con sobriedad.",
   "profile.data.description": "Perfil para paneles de datos y pantallas de cotizaciones/noticias. Oscuro por defecto con tonos violetas de alto contraste.",
   "profile.docs.description": "Perfil para pantallas de documentación, wikis y blogs. Tonos verdes serenos y espaciado amplio priorizan la lectura de textos largos.",
   "profile.service.description": "Perfil para pantallas de servicios públicos orientadas al cliente. Tonos azules que transmiten confianza y priorizan la legibilidad del coreano.",

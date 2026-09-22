@@ -608,6 +608,14 @@ npx shadcn add https://ui.doksam.com/r/profile-admin.json
 npx shadcn add https://ui.doksam.com/r/profile-console.json
 ```
 
+### Profile: Finance (`profile-finance`)
+
+여신·리스크 모니터링 등 금융기관 업무 화면 프로필. theme=ivory(아이보리 종이톤 + 네이비 잉크 + 골드 포인트) + font=Noto Sans KR + defaultMode=light + radius=2px + density=compact — <html>에 data-density="compact"를 지정한다(밀도 토큰 층은 /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/noto-sans-kr/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응, next/font/google 미사용). 자세한 절차는 https://ui.doksam.com/rules 참고.
+
+```
+npx shadcn add https://ui.doksam.com/r/profile-finance.json
+```
+
 ### Profile: Data (`profile-data`)
 
 데이터 대시보드·시세/뉴스류 화면 프로필. theme=violet(대비 뚜렷한 퍼플) + font=Space Grotesk + defaultMode=dark + radius=6px + density=compact — <html>에 data-density="compact"를 지정한다(밀도 토큰 층은 /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/space-grotesk/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응, 라틴 전용이라 한글은 Noto Sans KR 로 폴백 — assets/fonts/noto-sans-kr/ 도 함께 필요). 자세한 절차는 https://ui.doksam.com/rules 참고.

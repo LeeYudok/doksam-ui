@@ -485,6 +485,7 @@
   "personality.statement.suited.2": "Screens with few enough items to afford generous whitespace",
   "profile.admin.description": "A profile for internal admin tools and back-office screens. Calm neutral tones that prioritize information density.",
   "profile.console.description": "Profile for monitoring and ops-console screens. Dark by default with warm orange accents, packing logs and status densely.",
+  "profile.finance.description": "Profile for banking work screens such as credit and risk monitoring. An ivory paper-tone background with navy ink and gold accents, holding sharp corners and dense tables and alert lists in a calm register.",
   "profile.data.description": "A profile for data dashboards and market/news screens. Dark by default with high-contrast violet tones.",
   "profile.docs.description": "Profile for docs, wikis and blog-style screens. Calm green tones and generous spacing prioritize long-form readability.",
   "profile.service.description": "A profile for public-facing, customer-oriented screens. Trustworthy blue tones with Korean readability first.",

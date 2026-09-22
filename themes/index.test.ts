@@ -4,9 +4,9 @@ import { DEFAULT_THEME_PRESET, getThemePreset, THEME_PRESETS } from "@/themes";
 import { THEME_TOKEN_KEYS } from "@/themes/types";
 
 describe("theme registry", () => {
-  it("has exactly the eight presets", () => {
+  it("has exactly the nine presets", () => {
     const names = THEME_PRESETS.map((preset) => preset.name).sort();
-    expect(names).toEqual(["ember", "forest", "gold", "ink-bulb", "ocean", "rose", "slate", "violet"]);
+    expect(names).toEqual(["ember", "forest", "gold", "ink-bulb", "ivory", "ocean", "rose", "slate", "violet"]);
   });
 
   it("registers the default preset in the registry", () => {
