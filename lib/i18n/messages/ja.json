@@ -222,6 +222,8 @@
   "component.relation-network.description": "ノード・エッジデータを星座状に描画する純粋な SVG 関係ネットワーク可視化です。",
   "component.resizable.description": "ドラッグでサイズを調整できるパネルレイアウトです。",
   "component.risk-core-map.description": "リスク等級(tier)を中心から外側への同心円バンドに配置し、ノードのサイズとグローでエクスポージャーとリスクを表現するリスクコアネットワークマップです。",
+  "component.risk-grade-badge.description": "順序のある危険度4段階を --risk-* トークンのみで塗る等級バッジです。等級のラベルと Tier 番号の表記を分離します(#82)。",
+  "component.due-countdown-badge.description": "基準日に対する期限までの残り日数を「余裕/直前/超過」の3段階で表示するバッジです。状態の導出は lib/due.ts が担い、しきい値と文言は注入します(#82)。",
   "component.scenario-simulator.description": "パラメータの選択に応じて現在/シナリオ/増減のKPIカードが即座に再計算されるWhat-ifシナリオシミュレーターです。",
   "component.screen-help-dialog.description": "画面タイトル横の (?) ボタンで開く画面マニュアルダイアログです（bizinfo 移植、#8）。",
   "component.scroll-area.description": "カスタムスクロールバーを持つスクロール領域です。",

@@ -41,6 +41,8 @@ const MANUAL_ENTRY_SLUGS = [
   "tree-view",
   "relation-network",
   "risk-core-map",
+  "risk-grade-badge",
+  "due-countdown-badge",
   "scenario-simulator",
   "evidence-decision-panel",
   "pipeline-rail",

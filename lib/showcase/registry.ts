@@ -694,6 +694,24 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
     status: "done",
   },
   {
+    slug: "risk-grade-badge",
+    title: "Risk Grade Badge",
+    category: "finance",
+    layer: "composition",
+    description:
+      "순서 있는 위험 심각도 4단을 --risk-* 토큰으로만 칠하는 등급 배지입니다. 등급 문구와 Tier 번호 표기를 분리합니다(#82).",
+    status: "done",
+  },
+  {
+    slug: "due-countdown-badge",
+    title: "Due Countdown Badge",
+    category: "finance",
+    layer: "composition",
+    description:
+      "기준일 대비 기한 잔여일을 여유/임박/경과 3단으로 표시하는 배지입니다. 상태 파생은 lib/due.ts가 소유하고 임계값·문구는 주입받습니다(#82).",
+    status: "done",
+  },
+  {
     slug: "risk-core-map",
     title: "Risk Core Map",
     category: "finance",
