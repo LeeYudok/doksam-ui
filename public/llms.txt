@@ -592,6 +592,38 @@ npx shadcn add https://ui.doksam.com/r/tree-view.json
 
 npm dependencies: @phosphor-icons/react@^2.1.10
 
+### Compliance Callout (`compliance-callout`)
+
+근거 규정 번호 + 대상 조건 + 요구 행위 + 기한 + 액션 버튼을 한 덩어리로 보여주는 업무 규칙 안내 콜아웃. 심각도 3단은 --warning/--destructive 시맨틱 토큰만 쓴다.
+
+```
+npx shadcn add https://ui.doksam.com/r/compliance-callout.json
+```
+
+registryDependencies: https://ui.doksam.com/r/alert.json, https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/button.json
+
+npm dependencies: @phosphor-icons/react@^2.1.10
+
+### Section Panel Header (`section-panel-header`)
+
+카드 헤더 자리에 들어가는 아이콘 + 제목 + 우측 메타/필터 슬롯 조합. 좁은 폭에서는 우측 슬롯이 제목 아래로 줄바꿈된다.
+
+```
+npx shadcn add https://ui.doksam.com/r/section-panel-header.json
+```
+
+registryDependencies: https://ui.doksam.com/r/card.json
+
+### Sticky Actionbar (`sticky-actionbar`)
+
+화면(또는 스크롤 컨테이너) 하단에 sticky 로 붙는 주 액션 바. 안전영역·모바일 키보드를 고려해 fixed 대신 sticky 를 쓰고, 파괴적/보조/주 액션의 배치 순서를 고정한다.
+
+```
+npx shadcn add https://ui.doksam.com/r/sticky-actionbar.json
+```
+
+registryDependencies: https://ui.doksam.com/r/button.json
+
 ## 라이브러리/유틸
 
 ### Due (`due`)

@@ -2947,6 +2947,61 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "compliance-callout",
+      "type": "registry:component",
+      "title": "Compliance Callout",
+      "description": "근거 규정 번호 + 대상 조건 + 요구 행위 + 기한 + 액션 버튼을 한 덩어리로 보여주는 업무 규칙 안내 콜아웃. 심각도 3단은 --warning/--destructive 시맨틱 토큰만 쓴다.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10"
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/alert.json",
+        "https://ui.doksam.com/r/badge.json",
+        "https://ui.doksam.com/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "components/compliance-callout.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "section-panel-header",
+      "type": "registry:component",
+      "title": "Section Panel Header",
+      "description": "카드 헤더 자리에 들어가는 아이콘 + 제목 + 우측 메타/필터 슬롯 조합. 좁은 폭에서는 우측 슬롯이 제목 아래로 줄바꿈된다.",
+      "dependencies": [],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/card.json"
+      ],
+      "files": [
+        {
+          "path": "components/section-panel-header.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "sticky-actionbar",
+      "type": "registry:component",
+      "title": "Sticky Actionbar",
+      "description": "화면(또는 스크롤 컨테이너) 하단에 sticky 로 붙는 주 액션 바. 안전영역·모바일 키보드를 고려해 fixed 대신 sticky 를 쓰고, 파괴적/보조/주 액션의 배치 순서를 고정한다.",
+      "dependencies": [],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "components/sticky-actionbar.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "accordion",
       "type": "registry:ui",
       "title": "Accordion",
