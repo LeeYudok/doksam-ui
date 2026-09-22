@@ -730,6 +730,15 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
     status: "done",
   },
   {
+    slug: "metric-comparison-table",
+    title: "Metric Comparison Table",
+    category: "data",
+    layer: "composition",
+    description:
+      "행 = 지표, 열 = 대상 A·대상 B·델타로 A/B 성능을 비교하는 표입니다. 방향 색은 델타 부호가 아니라 지표별 betterWhen(higher/lower)으로 정해, 작을수록 좋은 지표에서 방향이 뒤집히지 않습니다(#102).",
+    status: "done",
+  },
+  {
     slug: "party-identity-cell",
     title: "Party Identity Cell",
     category: "finance",

@@ -579,6 +579,26 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "metric-comparison-table",
+      "type": "registry:component",
+      "title": "Metric Comparison Table",
+      "description": "행 = 지표, 열 = 대상 A·대상 B·델타로 A/B 성능을 비교하는 표. 방향 색은 델타 부호가 아니라 지표별 betterWhen(higher/lower)으로 정한다.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10"
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/i18n-provider.json",
+        "https://ui.doksam.com/r/table.json"
+      ],
+      "files": [
+        {
+          "path": "components/metric-comparison-table.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "multi-select",
       "type": "registry:component",
       "title": "Multi Select",
