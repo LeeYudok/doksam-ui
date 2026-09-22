@@ -650,6 +650,8 @@ npx shadcn add https://ui.doksam.com/r/section-panel-header.json
 
 registryDependencies: https://ui.doksam.com/r/card.json
 
+npm dependencies: @phosphor-icons/react@^2.1.10
+
 ### Sticky Actionbar (`sticky-actionbar`)
 
 화면(또는 스크롤 컨테이너) 하단에 sticky 로 붙는 주 액션 바. 안전영역·모바일 키보드를 고려해 fixed 대신 sticky 를 쓰고, 파괴적/보조/주 액션의 배치 순서를 고정한다.

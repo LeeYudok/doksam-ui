@@ -3,7 +3,9 @@
   "name": "section-panel-header",
   "title": "Section Panel Header",
   "description": "카드 헤더 자리에 들어가는 아이콘 + 제목 + 우측 메타/필터 슬롯 조합. 좁은 폭에서는 우측 슬롯이 제목 아래로 줄바꿈된다.",
-  "dependencies": [],
+  "dependencies": [
+    "@phosphor-icons/react@^2.1.10"
+  ],
   "registryDependencies": [
     "https://ui.doksam.com/r/card.json"
   ],
