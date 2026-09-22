@@ -1582,6 +1582,26 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "ranked-alternatives-list",
+      "type": "registry:component",
+      "title": "Ranked Alternatives List",
+      "description": "모형이 계산한 순위·동점·순위없음 상태를 보이는 대안 목록. 채택해도 나머지 대안이 사라지지 않고 채택 이력이 누적된다.",
+      "dependencies": [],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/badge.json",
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/card.json",
+        "https://ui.doksam.com/r/risk-grade-badge.json"
+      ],
+      "files": [
+        {
+          "path": "components/ranked-alternatives-list.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "risk-core-map",
       "type": "registry:component",
       "title": "Risk Core Map",

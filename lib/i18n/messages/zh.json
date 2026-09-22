@@ -205,6 +205,7 @@
   "component.empty.description": "无数据时展示的空状态画面。",
   "component.error-state.description": "具有 page(卡片+重试)/inline(表单框)/simple(单行)三种变体的错误状态(移植自 srope)。",
   "component.evidence-decision-panel.description": "并列展示证据出处·验证状态和关联处置候选项，并仅将人工选择传递给上层流程的决策面板。",
+  "component.ranked-alternatives-list.description": "展示模型计算的排名、并列和无排名状态的备选方案列表。采纳其中一项不会移除其余方案，采纳历史会持续累积。",
   "component.field.description": "包含标签·说明·错误消息的表单字段布局基础组件。",
   "component.format-biz-no.description": "将营业执照号格式化为 000-00-00000 形式的显示工具（从 bizinfo 移植，#8）。",
   "component.format-won.description": "将韩元金额按亿/兆单位缩写显示的工具（从 news FlowPanel eok() 移植，#18）。",

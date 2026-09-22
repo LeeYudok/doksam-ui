@@ -52,6 +52,7 @@ const MANUAL_ENTRY_SLUGS = [
   "audit-trail",
   "scenario-simulator",
   "evidence-decision-panel",
+  "ranked-alternatives-list",
   "pipeline-rail",
   "stage-progress-board",
   "keyword-cloud",
