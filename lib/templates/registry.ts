@@ -15,6 +15,7 @@ import {
   ChartPieSliceIcon,
   ChatCircleDotsIcon,
   GaugeIcon,
+  LifebuoyIcon,
   RocketLaunchIcon,
   StorefrontIcon,
   ShieldCheckIcon,
@@ -253,5 +254,15 @@ export const TEMPLATE_REGISTRY: TemplateEntry[] = [
       "지속되는 내비 없이 가운데 카드 한 장이 과제 하나만 담는 패스키(WebAuthn) 인증 화면. 로그인 진입·인증기 대기·사용자 취소와 인증 실패 구분·등록·다른 기기 인증·기기 관리·문자 인증 대체 경로·미지원 환경까지 흐름의 상태를 모두 렌더합니다.",
     stack: ["focus-task", "alert", "input-otp", "alert-dialog"],
     icon: FingerprintIcon,
+  },
+  {
+    href: "/templates/help-center",
+    title: "Help Center",
+    profile: "admin 프로필 · Slate · Geist",
+    archetype: "sidebar-app",
+    description:
+      "문서 뷰어가 아니라 질문 창구인 도움말 센터. 자유 질문과 추천 질문을 받는 물어보기, 화면·기능별 매뉴얼 검색 색인, FAQ 아코디언, 내 질문의 답변 상태를 시간순으로 보는 이력까지 4탭을 라우트로 딥링크합니다.",
+    stack: ["command", "accordion", "timeline", "badge"],
+    icon: LifebuoyIcon,
   },
 ]

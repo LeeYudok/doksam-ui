@@ -521,6 +521,7 @@
   "template.docker-container.description": "用预制菜烹饪的比喻讲解 Docker 核心概念(Image、Container、Volume、Registry)的教学信息图,配有 build→run 流程图和症状▶对策表。",
   "template.elearning.description": "具备章节课程列表·进度侧栏、16:9 播放器、自动续播倒计时与 AI 摘要弹窗的学习内容播放器。",
   "template.glossary.description": "将 50 个 SDLC·AI 术语按 6 个类别与关系编织成的知识图谱。确定性径向布局的 SVG 星座网络，提供选中节点的邻接高亮、搜索高亮、图例筛选与详情面板。",
+  "template.help-center.description": "不是文档查看器，而是提问窗口式的帮助中心。将提问（自由提问与推荐问题）、按画面/功能检索的手册索引、FAQ 手风琴，以及按时间顺序查看我的提问回答状态的历史记录这 4 个标签页作为路由深链接。",
   "template.knowledge-base.description": "将维基文档树·markdown 正文·目录、看板式创意板与按日期分组的会话时间线以标签页组织的团队知识管理控制台。",
   "template.kubernetes-firewall.description": "用公寓小区的比喻讲解 Kubernetes 四层安全(NetworkPolicy、Security Group、Ingress、OS 防火墙)的教学信息图,蓝图纸格外观封装在作用域 CSS 中。",
   "template.mail-workspace.description": "左列表、右详情的双面板工作界面，选择项目不触发路由，只替换右侧面板。文件夹栏与搜索用于收窄列表，小于 lg 时折叠为单面板。",
