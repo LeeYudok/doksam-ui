@@ -537,5 +537,7 @@
   "chrome.auditCodeTag.copied": "已复制审计代码",
   "chrome.auditCodeTag.copy": "复制审计代码",
   "component.audit-code-tag.description": "用于追溯判断依据的审计代码标签，仅使用等宽字体和语义化令牌背景，不以颜色区分含义，点击跳转与复制均为可选项(#83)。",
-  "component.party-identity-cell.description": "借款方识别两行单元格 — 第一行为公司名称，第二行为行业、法人类型与脱敏后的营业执照号，号码格式复用 formatBizNo(#83)。"
+  "component.party-identity-cell.description": "借款方识别两行单元格 — 第一行为公司名称，第二行为行业、法人类型与脱敏后的营业执照号，号码格式复用 formatBizNo(#83)。",
+  "pattern.draft-review-panel.description": "LLM 按分节生成的初稿由人工逐节审核并修改后确定的画面模式。文档类型通过标签切换，分节编辑通过内联切换完成，且不会丢失编辑状态。",
+  "pattern.draft-review-panel.title": "分节式初稿审核·编辑面板"
 }

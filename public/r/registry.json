@@ -3002,6 +3002,32 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "draft-review-panel",
+      "type": "registry:component",
+      "title": "Draft Review Panel",
+      "description": "LLM이 섹션별로 생성한 초안을 사람이 검토·가필해 확정하는 패널. 문서 종류는 탭으로, 섹션 편집은 인라인 토글로 전환하며 편집 상태는 컴포넌트가 직접 소유해 섹션·탭 전환에도 유실되지 않는다.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10"
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/badge-extended.json",
+        "https://ui.doksam.com/r/badge.json",
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/card.json",
+        "https://ui.doksam.com/r/section-panel-header.json",
+        "https://ui.doksam.com/r/sticky-actionbar.json",
+        "https://ui.doksam.com/r/tabs.json",
+        "https://ui.doksam.com/r/textarea.json"
+      ],
+      "files": [
+        {
+          "path": "components/patterns/draft-review-panel/draft-review-panel.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "accordion",
       "type": "registry:ui",
       "title": "Accordion",

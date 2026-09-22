@@ -537,5 +537,7 @@
   "chrome.auditCodeTag.copied": "監査コードをコピーしました",
   "chrome.auditCodeTag.copy": "監査コードをコピー",
   "component.audit-code-tag.description": "判断根拠を追跡する監査コードを、等幅フォント + セマンティックトークン背景だけで表示するタグです。色で意味を分けず、クリック遷移とコピーはどちらもオプションです(#83)。",
-  "component.party-identity-cell.description": "借主識別の2行セルです — 1行目に会社名、2行目に業種・法人区分・マスキングされた事業者登録番号を表示し、番号のフォーマットは formatBizNo をそのまま使います(#83)。"
+  "component.party-identity-cell.description": "借主識別の2行セルです — 1行目に会社名、2行目に業種・法人区分・マスキングされた事業者登録番号を表示し、番号のフォーマットは formatBizNo をそのまま使います(#83)。",
+  "pattern.draft-review-panel.description": "LLMがセクション単位で生成した初稿を人が確認・加筆して確定する画面パターンです。文書種別はタブで切り替え、セクション編集はインライン切り替えで編集状態を失いません。",
+  "pattern.draft-review-panel.title": "セクション型初稿レビュー・編集パネル"
 }

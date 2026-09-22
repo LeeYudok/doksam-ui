@@ -414,6 +414,8 @@
   "pattern.data-table.title": "데이터 테이블",
   "pattern.dataviz.description": "recharts 기반 막대·영역·원형 차트와 CSS BarList 조합 6종입니다.",
   "pattern.dataviz.title": "데이터 시각화 패턴",
+  "pattern.draft-review-panel.description": "LLM이 섹션별로 생성한 초안을 사람이 검토·가필해 확정하는 화면 패턴입니다. 문서 종류는 탭으로, 섹션 편집은 인라인 토글로 전환하며 편집 상태를 잃지 않습니다.",
+  "pattern.draft-review-panel.title": "섹션형 초안 검토·편집 패널",
   "pattern.evidence-decision.description": "근거의 출처·검증 상태를 먼저 확인하고, 연결된 대응 후보를 사람이 선택해 상위 승인 흐름으로 넘기는 금융 의사결정 패턴입니다.",
   "pattern.evidence-decision.title": "근거 기반 의사결정",
   "pattern.faceted-filter.description": "2단계 카테고리 칩 + 카운트 배지 + 그룹 컬러로 구성하는 다면 필터입니다.",

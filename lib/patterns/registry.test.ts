@@ -8,9 +8,9 @@ describe("PATTERN_REGISTRY", () => {
     expect(new Set(slugs).size).toBe(slugs.length)
   })
 
-  it("registers all 34 patterns (25 common + 9 finance)", () => {
-    expect(PATTERN_REGISTRY.length).toBe(34)
-    expect(PATTERN_REGISTRY.filter((entry) => entry.scope === "common").length).toBe(25)
+  it("registers all 35 patterns (26 common + 9 finance)", () => {
+    expect(PATTERN_REGISTRY.length).toBe(35)
+    expect(PATTERN_REGISTRY.filter((entry) => entry.scope === "common").length).toBe(26)
     expect(PATTERN_REGISTRY.filter((entry) => entry.scope === "finance").length).toBe(9)
   })
 
@@ -37,6 +37,7 @@ describe("PATTERN_REGISTRY", () => {
         "compliance-callout",
         "section-panel-header",
         "sticky-actionbar",
+        "draft-review-panel",
       ]),
     )
   })

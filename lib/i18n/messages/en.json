@@ -537,5 +537,7 @@
   "chrome.auditCodeTag.copied": "Audit code copied",
   "chrome.auditCodeTag.copy": "Copy audit code",
   "component.audit-code-tag.description": "A tag that shows an audit code tracing the basis of a judgment, using monospace type and a semantic token background only. It does not split meaning by color, and click-to-navigate and copy are both optional (#83).",
-  "component.party-identity-cell.description": "A two-line party identity cell — the company name on line 1, and industry, corporate type, and a masked business registration number on line 2, formatted with formatBizNo (#83)."
+  "component.party-identity-cell.description": "A two-line party identity cell — the company name on line 1, and industry, corporate type, and a masked business registration number on line 2, formatted with formatBizNo (#83).",
+  "pattern.draft-review-panel.description": "A screen pattern where a human reviews and edits AI-generated drafts section by section before finalizing. Document type switches via tabs and section editing toggles inline without losing edit state.",
+  "pattern.draft-review-panel.title": "Draft Review Panel"
 }

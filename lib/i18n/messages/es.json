@@ -537,5 +537,7 @@
   "chrome.auditCodeTag.copied": "Código de auditoría copiado",
   "chrome.auditCodeTag.copy": "Copiar código de auditoría",
   "component.audit-code-tag.description": "Una etiqueta que muestra un código de auditoría que rastrea la base de un juicio, usando tipografía monoespaciada y solo un fondo de token semántico. No separa el significado por color, y la navegación al hacer clic y la copia son ambas opcionales (#83).",
-  "component.party-identity-cell.description": "Una celda de identidad de la parte de dos líneas — el nombre de la empresa en la línea 1, y el sector, el tipo societario y el número de registro empresarial enmascarado en la línea 2, formateado con formatBizNo (#83)."
+  "component.party-identity-cell.description": "Una celda de identidad de la parte de dos líneas — el nombre de la empresa en la línea 1, y el sector, el tipo societario y el número de registro empresarial enmascarado en la línea 2, formateado con formatBizNo (#83).",
+  "pattern.draft-review-panel.description": "Un patrón de pantalla donde una persona revisa y edita, sección por sección, los borradores generados por LLM antes de confirmarlos. El tipo de documento se cambia con pestañas y la edición de cada sección se alterna en línea sin perder el estado de edición.",
+  "pattern.draft-review-panel.title": "Panel de revisión y edición de borradores por sección"
 }

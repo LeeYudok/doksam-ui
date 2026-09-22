@@ -12,6 +12,7 @@ import {
 import { FunnelIcon, GridFourIcon, TagIcon } from "@phosphor-icons/react/dist/ssr"
 import { NetworkIcon, TerminalWindowIcon, TreeStructureIcon } from "@phosphor-icons/react/dist/ssr"
 import { BookOpenTextIcon } from "@phosphor-icons/react/dist/ssr"
+import { NotePencilIcon } from "@phosphor-icons/react/dist/ssr"
 import {
   BankIcon,
   BriefcaseIcon,
@@ -283,6 +284,13 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     title: "하단 고정 액션바",
     description: "화면 하단에 고정되는 주 액션 바입니다. 안전영역과 모바일 키보드를 고려해 sticky로 구현하고, 파괴적/보조/주 액션의 배치 순서를 고정합니다.",
     icon: AnchorIcon,
+    scope: "common",
+  },
+  {
+    slug: "draft-review-panel",
+    title: "섹션형 초안 검토·편집 패널",
+    description: "LLM이 섹션별로 생성한 초안을 사람이 검토·가필해 확정하는 화면 패턴입니다. 문서 종류는 탭으로, 섹션 편집은 인라인 토글로 전환하며 편집 상태를 잃지 않습니다.",
+    icon: NotePencilIcon,
     scope: "common",
   },
   {
