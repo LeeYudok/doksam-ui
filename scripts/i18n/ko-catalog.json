@@ -238,6 +238,7 @@
   "component.popover.description": "트리거 요소 주변에 뜨는 자유 형식 콘텐츠 오버레이입니다.",
   "component.progress.description": "작업 진행률을 보여주는 바입니다.",
   "component.radio-group.description": "여러 옵션 중 하나만 선택하는 라디오 버튼 그룹입니다.",
+  "component.ranked-alternatives-list.description": "모형이 계산한 순위·동점·순위없음 상태를 보이는 대안 목록입니다. 채택해도 나머지 대안이 사라지지 않고 채택 이력이 누적됩니다(#105).",
   "component.rate-color.description": "한국식 등락 색(이익=빨강/손실=파랑) 클래스와 부호 포함 등락률 텍스트를 만드는 유틸입니다(tossinvest 이식, #18).",
   "component.rating.description": "별점 — hover 프리뷰·반개·readonly를 지원합니다.",
   "component.region-map.description": "한국 시/도 분포 지도 — 지리 지도(hover 3D 돌출·리치 툴팁) ↔ 타일 카토그램 토글입니다(bizinfo 이식, #56).",

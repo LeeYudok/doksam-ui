@@ -102,6 +102,7 @@ export const DEMO_LOADERS: Record<string, DemoLoader> = {
   "matrix-heatmap": () => import("@/components/demos/matrix-heatmap.demo"),
   "scenario-simulator": () => import("@/components/demos/scenario-simulator.demo"),
   "evidence-decision-panel": () => import("@/components/demos/evidence-decision-panel.demo"),
+  "ranked-alternatives-list": () => import("@/components/demos/ranked-alternatives-list.demo"),
   "pipeline-rail": () => import("@/components/demos/pipeline-rail.demo"),
   "stage-progress-board": () => import("@/components/demos/stage-progress-board.demo"),
   "keyword-cloud": () => import("@/components/demos/keyword-cloud.demo"),

@@ -500,6 +500,16 @@ registryDependencies: https://ui.doksam.com/r/badge.json, https://ui.doksam.com/
 
 npm dependencies: radix-ui@^1.6.7
 
+### Ranked Alternatives List (`ranked-alternatives-list`)
+
+모형이 계산한 순위·동점·순위없음 상태를 보이는 대안 목록. 채택해도 나머지 대안이 사라지지 않고 채택 이력이 누적된다.
+
+```
+npx shadcn add https://ui.doksam.com/r/ranked-alternatives-list.json
+```
+
+registryDependencies: https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/card.json, https://ui.doksam.com/r/risk-grade-badge.json
+
 ### Risk Core Map (`risk-core-map`)
 
 위험등급(tier)을 중심→외곽 동심원 밴드로 배치하고 노드 크기·글로우로 익스포저와 위험을 표현하는 리스크 코어 네트워크 맵.

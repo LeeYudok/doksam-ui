@@ -798,6 +798,15 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
     status: "done",
   },
   {
+    slug: "ranked-alternatives-list",
+    title: "Ranked Alternatives List",
+    category: "finance",
+    layer: "composition",
+    description:
+      "모형이 계산한 순위·동점·순위없음 상태를 보이는 대안 목록입니다. 채택해도 나머지 대안이 사라지지 않고 채택 이력이 누적됩니다(#105).",
+    status: "done",
+  },
+  {
     slug: "pipeline-rail",
     title: "Pipeline Rail",
     category: "layout",

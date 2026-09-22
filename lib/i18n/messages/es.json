@@ -205,6 +205,7 @@
   "component.empty.description": "Pantalla de estado vacío cuando no hay datos.",
   "component.error-state.description": "Un estado de error con 3 variantes: page (tarjeta + reintento), inline (caja de formulario) y simple (una línea) (portado de srope).",
   "component.evidence-decision-panel.description": "Panel de decisión que muestra procedencia y estado de verificación de evidencia junto a opciones de acción vinculadas, y entrega solo la selección humana al flujo padre.",
+  "component.ranked-alternatives-list.description": "Lista de alternativas clasificadas que muestra el rango calculado por el modelo, empates y estados sin rango. Adoptar una no elimina las demás, y el historial de adopción sigue acumulándose.",
   "component.field.description": "Primitiva de layout de campo de formulario con label, descripción y mensaje de error.",
   "component.format-biz-no.description": "Utilidad de visualización que formatea el número de registro de negocio como 000-00-00000 (portado de bizinfo, #8).",
   "component.format-won.description": "Utilidad que abrevia montos en won usando unidades eok/jo (portado de eok() del FlowPanel de news, #18).",

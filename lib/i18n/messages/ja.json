@@ -205,6 +205,7 @@
   "component.empty.description": "データがないときに表示する空状態画面です。",
   "component.error-state.description": "page(カード+再試行)/inline(フォームボックス)/simple(一行)の3バリアントを持つエラー状態です(srope移植)。",
   "component.evidence-decision-panel.description": "根拠の出所・検証状態と接続された対応候補を並べて示し、人による選択だけを親フローへ渡す意思決定パネルです。",
+  "component.ranked-alternatives-list.description": "モデルが算出した順位・同点・順位なしの状態を示す代替案リストです。採用しても残りの代替案は消えず、採用履歴が積み上がります。",
   "component.field.description": "ラベル・説明・エラーメッセージを備えたフォームフィールドレイアウトプリミティブです。",
   "component.format-biz-no.description": "事業者登録番号を 000-00-00000 形式にフォーマットする表示用ユーティリティです（bizinfo 移植、#8）。",
   "component.format-won.description": "ウォン金額を億/兆単位で省略表示するユーティリティです（news FlowPanel の eok() 移植、#18）。",
