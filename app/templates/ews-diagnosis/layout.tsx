@@ -15,12 +15,18 @@ export const metadata: Metadata = {
  * 카탈로그 chrome 헤더를 두지 않는 것도 같은 이유다 — 화면 셸을 `TopNavShell`
  * (#86) 이 통째로 소유하고 그 상단 바가 sticky 라, 위에 제목 줄을 얹으면 스크롤
  * 시 두 겹이 겹친다. 폭 컨테이너도 셸이 가지므로 여기서 선언하지 않는다.
+ *
+ * 래퍼에 `overflow-hidden` 을 주지 않는다 — `overflow: hidden` 은 scrollport 를
+ * 만들어 안쪽 `TopNavShell` 의 `sticky top-0` 과 `StickyActionbar` 의
+ * `sticky bottom-0` 을 이 래퍼 기준으로 가둬버린다(둘 다 붙지 않는다).
+ * 모서리 밖으로 넘치는 가로 폭만 잘라내면 되므로 `overflow-x-clip` 을 쓴다 —
+ * `clip` 은 scrollport 를 만들지 않아 sticky 가 뷰포트 기준으로 살아 있다.
  */
 export default function EwsDiagnosisTemplateLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <div
       {...profileScopeAttributes("finance")}
-      className="min-w-0 overflow-hidden rounded-xl border border-border bg-background font-sans text-foreground"
+      className="min-w-0 overflow-x-clip rounded-xl border border-border bg-background font-sans text-foreground"
     >
       {children}
     </div>

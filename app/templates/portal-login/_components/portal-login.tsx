@@ -50,6 +50,15 @@ export function PortalLogin() {
   const [password, setPassword] = React.useState("")
   const [validationError, setValidationError] = React.useState(false)
   const [inlineNote, setInlineNote] = React.useState<InlineNote>(null)
+  const successHeadingRef = React.useRef<HTMLHeadingElement>(null)
+
+  // 로그인 성공 시 SigninScreen 이 통째로 언마운트되면서 제출 버튼에 있던 포커스가
+  // body 로 떨어진다. 새로 그려진 성공 화면 제목으로 포커스를 옮겨 키보드 위치를
+  // 잇는다(`tabIndex={-1}` 은 프로그램적 포커스 전용 — 탭 순서에는 끼지 않는다).
+  React.useEffect(() => {
+    if (screen !== "success") return
+    successHeadingRef.current?.focus()
+  }, [screen])
 
   const pinnedNotice = NOTICES.find((notice) => notice.pinned)
   const otherNotices = NOTICES.filter((notice) => !notice.pinned)
@@ -134,9 +143,17 @@ export function PortalLogin() {
               onPasswordReset={() => setInlineNote((prev) => (prev === "reset" ? null : "reset"))}
             />
           ) : (
-            <SuccessScreen employeeId={employeeId} onRestart={restart} />
+            <SuccessScreen employeeId={employeeId} onRestart={restart} headingRef={successHeadingRef} />
           )}
         </section>
+
+        {/* 화면 교체는 SigninScreen 언마운트를 뜻하므로 결과를 눈으로만 알리면
+            스크린리더 사용자에게는 아무 일도 일어나지 않은 것이 된다. 상태 문구는
+            항상 마운트된 live region 에 두고 내용만 바꾼다 — region 자체가 새로
+            나타나면 일부 리더가 읽지 않는다. */}
+        <p aria-live="polite" className="sr-only">
+          {screen === "success" ? "로그인했습니다. 해당 화면으로 이동합니다." : ""}
+        </p>
 
         {/* 역할 분기 안내 — 선택 UI 가 아니라 문구로만 드러낸다. */}
         {screen === "signin" ? (
@@ -255,11 +272,17 @@ function SigninScreen({
   )
 }
 
-function SuccessScreen({ employeeId, onRestart }: Readonly<{ employeeId: string; onRestart: () => void }>) {
+function SuccessScreen({
+  employeeId,
+  onRestart,
+  headingRef,
+}: Readonly<{ employeeId: string; onRestart: () => void; headingRef?: React.Ref<HTMLHeadingElement> }>) {
   return (
     <>
       <div className="flex flex-col gap-1.5">
-        <h3 className="text-lg font-semibold tracking-tight">로그인했습니다</h3>
+        <h3 ref={headingRef} tabIndex={-1} className="text-lg font-semibold tracking-tight focus:outline-none">
+          로그인했습니다
+        </h3>
         <p className="text-sm leading-relaxed text-muted-foreground">해당 화면으로 이동합니다.</p>
       </div>
       <div className="flex items-center gap-3 rounded-md border border-border bg-background px-3 py-4">

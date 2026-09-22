@@ -24,11 +24,15 @@ const STATUS_CLASS: Record<QuestionStatus, string> = {
 export function QuestionHistory() {
   return (
     <ol aria-label="내 질문 이력" className="relative flex flex-col gap-4 pl-2">
-      {QUESTION_HISTORY.map((item) => {
+      {QUESTION_HISTORY.map((item, index) => {
         const Icon = item.status === "answered" ? CheckCircleIcon : ClockIcon
+        // 커넥터 선은 li 의 첫 자식이라 `last:hidden` 이 영영 걸리지 않는다
+        // (`last:` 는 그 요소 자신이 마지막 자식일 때만 맞는다). 마지막 항목
+        // 아래로 선 꼬리가 남지 않도록 index 로 직접 판단한다.
+        const isLast = index === QUESTION_HISTORY.length - 1
         return (
           <li key={item.id} className="relative flex gap-3 pb-4 pl-6 last:pb-0">
-            <span aria-hidden className="absolute top-6 bottom-0 left-[7px] w-px bg-border last:hidden" />
+            {isLast ? null : <span aria-hidden className="absolute top-6 bottom-0 left-[7px] w-px bg-border" />}
             <span
               className={cn(
                 "absolute top-1 left-0 flex size-4 shrink-0 items-center justify-center rounded-full border",

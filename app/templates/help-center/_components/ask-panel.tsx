@@ -31,15 +31,25 @@ const RECENT_ANSWERED = QUESTION_HISTORY.filter((q) => q.status === "answered").
  * 대신 같은 자유 질문 진입점 의도를 로컬 프레젠테이션 컴포넌트로 구현하고,
  * 새 카탈로그 컴포넌트는 만들지 않는다.
  */
+interface SubmittedQuestion {
+  id: string
+  question: string
+}
+
 export function AskPanel() {
   const [value, setValue] = React.useState("")
-  const [submitted, setSubmitted] = React.useState<string[]>([])
+  const [submitted, setSubmitted] = React.useState<SubmittedQuestion[]>([])
+  // 추천 질문 칩을 두 번 누르면 같은 문장이 두 번 제출되는 것이 기본 동선이라
+  // 질문 문자열은 key 가 될 수 없다. 렌더 중 Date.now() 도 쓰지 않는다(hydration).
+  // 제출 핸들러 안에서 단조 증가 카운터로 id 를 발급한다.
+  const nextId = React.useRef(0)
 
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault()
     const question = value.trim()
     if (!question) return
-    setSubmitted((prev) => [question, ...prev])
+    nextId.current += 1
+    setSubmitted((prev) => [{ id: `ask-${nextId.current}`, question }, ...prev])
     setValue("")
   }
 
@@ -84,13 +94,13 @@ export function AskPanel() {
         <section aria-label="방금 보낸 질문" className="flex flex-col gap-2">
           <h3 className="text-sm font-semibold text-foreground">방금 보낸 질문</h3>
           <ul className="flex flex-col gap-2">
-            {submitted.map((question) => (
+            {submitted.map((item) => (
               <li
-                key={question}
+                key={item.id}
                 className="flex items-center gap-2 rounded-lg border border-dashed border-border bg-muted/30 px-3 py-2 text-sm text-foreground"
               >
                 <ClockIcon size={14} className="shrink-0 text-muted-foreground" aria-hidden />
-                {question}
+                {item.question}
                 <Badge variant="outline" className={cn("ml-auto shrink-0 gap-1", STATUS_CLASS.pending)}>
                   {STATUS_LABEL.pending}
                 </Badge>
