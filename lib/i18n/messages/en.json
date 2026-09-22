@@ -222,6 +222,8 @@
   "component.relation-network.description": "A pure SVG relationship network visualization that renders node/edge data as a constellation.",
   "component.resizable.description": "A panel layout resizable by dragging.",
   "component.risk-core-map.description": "A risk core network map that places risk tiers in concentric bands from center to edge, expressing exposure and risk through node size and glow.",
+  "component.risk-grade-badge.description": "A risk grade badge that paints an ordered four-step severity scale using only the --risk-* tokens, keeping the grade label and the tier number separate (#82).",
+  "component.due-countdown-badge.description": "A badge that shows the days left until a deadline as ahead/soon/overdue against a reference date; lib/due.ts owns the derivation while the threshold and wording are injected (#82).",
   "component.scenario-simulator.description": "A what-if scenario simulator where current/scenario/delta KPI cards recalculate instantly as parameters change.",
   "component.screen-help-dialog.description": "A screen manual dialog opened via a (?) button next to the screen title (ported from bizinfo, #8).",
   "component.scroll-area.description": "A scroll area with a custom scrollbar.",

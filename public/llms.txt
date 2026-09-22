@@ -218,6 +218,16 @@ npm dependencies: @phosphor-icons/react@^2.1.10, react-day-picker@^10.0.1
 npx shadcn add https://ui.doksam.com/r/diverging-bar.json
 ```
 
+### Due Countdown Badge (`due-countdown-badge`)
+
+기준일 대비 기한 잔여일을 여유/임박/경과 3단으로 표시하는 배지. 상태 파생은 lib/due.ts가 소유하고 임계값·문구는 주입받는다.
+
+```
+npx shadcn add https://ui.doksam.com/r/due-countdown-badge.json
+```
+
+registryDependencies: https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/due.json, https://ui.doksam.com/r/risk-grade-badge.json
+
 ### Glossy Button (`glossy-button`)
 
 shadcn Button 에 그라데이션과 상단 하이라이트를 얹은 광택 변형. button.tsx 원본은 건드리지 않고 조합만 한다. 광택은 프로필의 표면(surface) 축 바깥이라 flat 프로필에서도 유지되므로, 단일 주행동 CTA 처럼 의도적으로 띄우는 자리에만 쓴다.
@@ -418,6 +428,16 @@ npx shadcn add https://ui.doksam.com/r/risk-core-map.json
 
 npm dependencies: @phosphor-icons/react@^2.1.10
 
+### Risk Grade Badge (`risk-grade-badge`)
+
+순서 있는 위험 심각도 4단을 --risk-* 토큰으로만 칠하는 등급 배지. 등급 문구와 Tier 번호 표기를 분리하고, 색은 소비 프로젝트에 유틸리티 매핑이 없어도 되도록 var(--risk-*) 인라인 스타일로 넣는다.
+
+```
+npx shadcn add https://ui.doksam.com/r/risk-grade-badge.json
+```
+
+registryDependencies: https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/risk-tokens.json
+
 ### Route Error (`route-error`)
 
 Next App Router 의 error.tsx 가 그대로 쓰는 오류 화면. 다시 시도 버튼과 digest 표기를 표준화한다.
@@ -540,6 +560,14 @@ npm dependencies: @phosphor-icons/react@^2.1.10
 
 ## 라이브러리/유틸
 
+### Due (`due`)
+
+기한 카운트다운 상태 파생 유틸. 기준일 대비 잔여일을 달력 하루 단위로 세어 여유/임박/경과를 돌려준다. 임박 임계값은 인자로 받고 문구는 만들지 않는다.
+
+```
+npx shadcn add https://ui.doksam.com/r/due.json
+```
+
 ### Finance: Format Won (`finance-format-won`)
 
 원화 금액을 억/조 단위로 축약하는 유틸. 1억 미만은 천단위 콤마, 반올림 경계값(9,999.6억 등)을 조 단위로 안전하게 전환한다.
@@ -581,6 +609,14 @@ npx shadcn add https://ui.doksam.com/r/profile-scope.json
 ```
 
 registryDependencies: https://ui.doksam.com/r/theme-storage.json
+
+### Risk Tokens (`risk-tokens`)
+
+위험 심각도 4단 토큰의 단일 진실원천. 등급 목록·값·tint 배경 헬퍼와 tint 를 얹어도 되는 표면 목록을 담는다. 값 자체는 프로필 설치가 :root/.dark 에 넣는다.
+
+```
+npx shadcn add https://ui.doksam.com/r/risk-tokens.json
+```
 
 ### Theme Storage (`theme-storage`)
 
