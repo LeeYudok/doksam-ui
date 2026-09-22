@@ -8,6 +8,7 @@ import {
   MagnifyingGlassIcon,
   ColumnsIcon,
   FingerprintIcon,
+  IdentificationCardIcon,
   NavigationArrowIcon,
   NewspaperClippingIcon,
   NewspaperIcon,
@@ -264,5 +265,15 @@ export const TEMPLATE_REGISTRY: TemplateEntry[] = [
       "문서 뷰어가 아니라 질문 창구인 도움말 센터. 자유 질문과 추천 질문을 받는 물어보기, 화면·기능별 매뉴얼 검색 색인, FAQ 아코디언, 내 질문의 답변 상태를 시간순으로 보는 이력까지 4탭을 라우트로 딥링크합니다.",
     stack: ["command", "accordion", "timeline", "badge"],
     icon: LifebuoyIcon,
+  },
+  {
+    href: "/templates/portal-login",
+    title: "Portal Login",
+    profile: "finance 프로필 · Ivory · Noto Sans KR",
+    archetype: "focus-task",
+    description:
+      "focus-task 원형에 시스템 상태바·공지사항·보안 고지를 더한 사내 업무포털 로그인 변형. 세 표시 모두 다른 화면으로 이동시키지 않는 정보성 표시라 원형의 내비게이션 없음 규칙을 지킵니다. 담당자·심사역·관리자 역할 분기는 로그인 후 서버가 판단하므로 화면에는 안내 문구로만 노출합니다.",
+    stack: ["focus-task", "alert", "banner", "live-indicator"],
+    icon: IdentificationCardIcon,
   },
 ]
