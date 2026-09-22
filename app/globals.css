@@ -673,6 +673,70 @@
 }
 
 /*
+ * Ivory — 금융기관 업무 화면용 아이보리·네이비·골드 프리셋 (#91).
+ * 단일 진실원천은 themes/ivory.ts — 아래 값은 그 파일을 미러링한 것이다.
+ */
+[data-theme="ivory"] {
+  --background: oklch(0.973 0.005 95);
+  --foreground: oklch(0.27 0.052 267);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.27 0.052 267);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.27 0.052 267);
+  --primary: oklch(0.27 0.052 267);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.929 0.002 101);
+  --secondary-foreground: oklch(0.27 0.052 267);
+  --muted: oklch(0.932 0.013 91);
+  --muted-foreground: oklch(0.503 0.024 82);
+  --accent: oklch(0.94 0.033 86);
+  --accent-foreground: oklch(0.27 0.052 267);
+  --destructive: oklch(0.496 0.141 28);
+  --success: oklch(0.485 0.081 160);
+  --warning: oklch(0.54 0.114 72);
+  --gain: oklch(0.496 0.141 28);
+  --loss: oklch(0.48 0.13 258);
+  --border: oklch(0.883 0.023 90);
+  --input: oklch(0.883 0.023 90);
+  --ring: oklch(0.637 0.111 86);
+  --chart-1: oklch(0.27 0.052 267);
+  --chart-2: oklch(0.637 0.111 86);
+  --chart-3: oklch(0.5 0.07 267);
+  --chart-4: oklch(0.58 0.1 40);
+  --chart-5: oklch(0.6 0.07 160);
+}
+
+[data-theme="ivory"].dark {
+  --background: oklch(0.195 0.033 270);
+  --foreground: oklch(0.939 0.009 100);
+  --card: oklch(0.236 0.044 269);
+  --card-foreground: oklch(0.939 0.009 100);
+  --popover: oklch(0.236 0.044 269);
+  --popover-foreground: oklch(0.939 0.009 100);
+  --primary: oklch(0.92 0.024 273);
+  --primary-foreground: oklch(0.195 0.033 270);
+  --secondary: oklch(0.283 0.031 271);
+  --secondary-foreground: oklch(0.939 0.009 100);
+  --muted: oklch(0.27 0.044 271);
+  --muted-foreground: oklch(0.709 0.025 91);
+  --accent: oklch(0.3 0.039 86);
+  --accent-foreground: oklch(0.939 0.009 100);
+  --destructive: oklch(0.679 0.133 28);
+  --success: oklch(0.689 0.098 161);
+  --warning: oklch(0.731 0.129 73);
+  --gain: oklch(0.679 0.133 28);
+  --loss: oklch(0.72 0.11 258);
+  --border: oklch(0.328 0.053 271);
+  --input: oklch(0.328 0.053 271);
+  --ring: oklch(0.77 0.112 86);
+  --chart-1: oklch(0.82 0.05 270);
+  --chart-2: oklch(0.77 0.112 86);
+  --chart-3: oklch(0.62 0.08 267);
+  --chart-4: oklch(0.7 0.1 40);
+  --chart-5: oklch(0.689 0.098 161);
+}
+
+/*
  * 폰트 프리셋 CSS 변수.
  *
  * 단일 진실원천은 fonts/index.ts (FontPreset.cssVariable) — 아래 각

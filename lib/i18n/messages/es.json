@@ -487,6 +487,7 @@
   "profile.console.description": "Perfil para pantallas de monitoreo y consolas de operación. Oscuro por defecto con acentos naranjas cálidos, mostrando logs y estados con alta densidad.",
   "profile.data.description": "Perfil para paneles de datos y pantallas de cotizaciones/noticias. Oscuro por defecto con tonos violetas de alto contraste.",
   "profile.docs.description": "Perfil para pantallas de documentación, wikis y blogs. Tonos verdes serenos y espaciado amplio priorizan la lectura de textos largos.",
+  "profile.finance.description": "Perfil para pantallas de trabajo de entidades financieras, como monitoreo de crédito y riesgo. Fondo tono papel marfil con tinta azul marino y acentos dorados, que contiene esquinas rectas y tablas y listas de alertas densas con sobriedad.",
   "profile.service.description": "Perfil para pantallas de servicios públicos orientadas al cliente. Tonos azules que transmiten confianza y priorizan la legibilidad del coreano.",
   "template.activity-feed.description": "Un feed de actividad cuyo protagonista es un único flujo vertical en orden cronológico inverso. Agrupación por fecha, barra de filtros por tipo y carga incremental para un flujo sin final.",
   "template.admin.description": "Dashboard de shell con sidebar para administración y back-office. Incluye tabla ordenable, filtro multifacetado, visores de observabilidad de logs/requests/JSON y formularios de configuración.",

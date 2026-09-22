@@ -10,8 +10,8 @@ import { BRAND_PROFILES, DEFAULT_BRAND_PROFILE, getBrandProfile } from "@/profil
 import { THEME_PRESETS, getThemePreset } from "@/themes";
 
 describe("BRAND_PROFILES", () => {
-  it("registers exactly the 5 documented profiles", () => {
-    expect(BRAND_PROFILES.map((p) => p.name)).toEqual(["admin", "service", "data", "docs", "console"]);
+  it("registers exactly the 6 documented profiles", () => {
+    expect(BRAND_PROFILES.map((p) => p.name)).toEqual(["admin", "service", "data", "docs", "console", "finance"]);
   });
 
   it("every profile.theme references a real theme preset", () => {

@@ -6,6 +6,7 @@ import { ember } from "./ember.ts";
 import { forest } from "./forest.ts";
 import { gold } from "./gold.ts";
 import { inkBulb } from "./ink-bulb.ts";
+import { ivory } from "./ivory.ts";
 import { ocean } from "./ocean.ts";
 import { rose } from "./rose.ts";
 import { slate } from "./slate.ts";
@@ -20,7 +21,7 @@ export { THEME_TOKEN_KEYS } from "./types.ts";
  * 여기에 항목을 추가/제거하면 스위처와 사이트 전체에 자동 반영된다.
  * (CSS 변수는 app/globals.css 에 별도로 동기화해야 함 — 파일 상단 주석 참고)
  */
-export const THEME_PRESETS: ThemePreset[] = [ocean, forest, violet, ember, rose, slate, gold, inkBulb];
+export const THEME_PRESETS: ThemePreset[] = [ocean, forest, violet, ember, rose, slate, gold, inkBulb, ivory];
 
 export const DEFAULT_THEME_PRESET = "ocean";
 

@@ -153,6 +153,23 @@ export const BRAND_PROFILES: BrandProfile[] = [
     archetype: "sidebar-app",
     examples: ["로그 뷰어", "배치 모니터"],
   },
+  {
+    name: "finance",
+    label: "Finance",
+    description:
+      "여신 · 리스크 모니터링 등 금융기관 업무 화면에 쓰는 프로필입니다. 아이보리 종이톤 배경에 네이비 잉크와 골드 포인트로, 각진 모서리와 높은 밀도의 표·경보 목록을 차분하게 담습니다.",
+    theme: "ivory",
+    font: "noto-sans-kr",
+    defaultMode: "light",
+    radius: "2px",
+    corner: "sharp",
+    typeContrast: "flat",
+    density: "compact",
+    personality: "crisp",
+    shell: "사이드바형 셸",
+    archetype: "sidebar-app",
+    examples: ["여신 조기경보 콘솔"],
+  },
 ];
 
 export const DEFAULT_BRAND_PROFILE = "admin";
