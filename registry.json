@@ -2585,6 +2585,60 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "template-portal-login",
+      "type": "registry:block",
+      "title": "Portal Login 템플릿",
+      "description": "finance 프로필 · Ivory · Noto Sans KR · focus-task 원형. 시스템 상태바·공지사항·보안 고지를 더한 사내 업무포털 로그인 변형. 세 표시 모두 다른 화면으로 이동시키지 않는 정보성 표시라 원형의 내비게이션 없음 규칙을 지킵니다. 담당자·심사역·관리자 역할 분기는 로그인 후 서버가 판단하므로 화면에는 안내 문구로만 노출합니다.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10"
+      ],
+      "files": [
+        {
+          "path": "app/templates/portal-login/error.tsx",
+          "type": "registry:page",
+          "target": "app/templates/portal-login/error.tsx"
+        },
+        {
+          "path": "app/templates/portal-login/layout.tsx",
+          "type": "registry:page",
+          "target": "app/templates/portal-login/layout.tsx"
+        },
+        {
+          "path": "app/templates/portal-login/loading.tsx",
+          "type": "registry:page",
+          "target": "app/templates/portal-login/loading.tsx"
+        },
+        {
+          "path": "app/templates/portal-login/page.tsx",
+          "type": "registry:page",
+          "target": "app/templates/portal-login/page.tsx"
+        },
+        {
+          "path": "app/templates/portal-login/_components/portal-login.tsx",
+          "type": "registry:page",
+          "target": "app/templates/portal-login/_components/portal-login.tsx"
+        },
+        {
+          "path": "app/templates/portal-login/_data/portal-login-data.ts",
+          "type": "registry:page",
+          "target": "app/templates/portal-login/_data/portal-login-data.ts"
+        }
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/alert.json",
+        "https://ui.doksam.com/r/badge.json",
+        "https://ui.doksam.com/r/banner.json",
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/input.json",
+        "https://ui.doksam.com/r/label.json",
+        "https://ui.doksam.com/r/live-indicator.json",
+        "https://ui.doksam.com/r/profile-scope.json",
+        "https://ui.doksam.com/r/route-error.json",
+        "https://ui.doksam.com/r/route-loading.json"
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "template-saas",
       "type": "registry:block",
       "title": "SaaS Landing + Dashboard 템플릿",

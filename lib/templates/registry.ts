@@ -8,6 +8,7 @@ import {
   MagnifyingGlassIcon,
   ColumnsIcon,
   FingerprintIcon,
+  IdentificationCardIcon,
   NavigationArrowIcon,
   NewspaperClippingIcon,
   NewspaperIcon,
@@ -253,5 +254,15 @@ export const TEMPLATE_REGISTRY: TemplateEntry[] = [
       "지속되는 내비 없이 가운데 카드 한 장이 과제 하나만 담는 패스키(WebAuthn) 인증 화면. 로그인 진입·인증기 대기·사용자 취소와 인증 실패 구분·등록·다른 기기 인증·기기 관리·문자 인증 대체 경로·미지원 환경까지 흐름의 상태를 모두 렌더합니다.",
     stack: ["focus-task", "alert", "input-otp", "alert-dialog"],
     icon: FingerprintIcon,
+  },
+  {
+    href: "/templates/portal-login",
+    title: "Portal Login",
+    profile: "finance 프로필 · Ivory · Noto Sans KR",
+    archetype: "focus-task",
+    description:
+      "focus-task 원형에 시스템 상태바·공지사항·보안 고지를 더한 사내 업무포털 로그인 변형. 세 표시 모두 다른 화면으로 이동시키지 않는 정보성 표시라 원형의 내비게이션 없음 규칙을 지킵니다. 담당자·심사역·관리자 역할 분기는 로그인 후 서버가 판단하므로 화면에는 안내 문구로만 노출합니다.",
+    stack: ["focus-task", "alert", "banner", "live-indicator"],
+    icon: IdentificationCardIcon,
   },
 ]

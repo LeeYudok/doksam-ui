@@ -33,7 +33,7 @@ DESIGN.md 의 원형은 아래 `name` 값 중 하나여야 합니다. 같은 과
 | `chat-workspace` | 좌측 대화 목록(모바일 드로어) → 중앙은 위로 쌓이는 메시지 스크롤러 → 하단 고정 입력 컴포저. | AI 어시스턴트 · 상담·문의 콘솔 · 협업 메시징 | 단발성 질의응답 한 번으로 끝나는 화면 · 대화 이력이 남지 않는 검색 · 출력이 표·차트 위주 | `chat` |
 | `canvas` | 좌측 도구 팔레트 → 중앙 팬·줌 무한 평면 → 우측 속성 패널. 페이지 내비 없이 평면 이동이 곧 탐색. | 와이어프레임·다이어그램 빌더 · 그래프·네트워크 탐색 · 보드형 편집기 | 읽기 전용 열람 화면 · 모바일 우선 화면 · 결과가 선형 문서로 충분한 경우 | `glossary`, `ontology` |
 | `doc-reader` | 좌측 문서 트리 → 중앙 max-w-prose 본문 한 칼럼 → 우측 스크롤 동기 목차. | 기술 문서·위키 · 규칙·정책 문서 · 블로그·아티클 | 본문이 한 화면에 들어오는 짧은 글 · 표·차트가 본문보다 많은 화면 · 조작이 주가 되는 도구 | `knowledge-base`, `kubernetes-firewall` |
-| `focus-task` | 상단 브랜드 표기 외 크롬 없음 → 화면 정중앙 카드 하나에 과제 하나(주 액션 1 + 보조 액션 1) → 하단 보조 링크. 사이드바·상단 메뉴·하단 탭바·푸터 내비 없음. | 로그인·OTP 등 인증 화면 · 결제·삭제처럼 되돌릴 수 없는 확인 화면 · 접근 차단·점검 안내·초대 수락 | 한 화면에서 과제를 둘 이상 처리해야 하는 경우 · 사용자가 머물며 계속 작업하는 화면(목록·편집·대시보드) · 다른 목적지로 자유롭게 오갈 수 있어야 하는 경우 · 단계가 여러 개라 진행률을 보여야 하는 절차 — wizard-flow 를 쓴다 | `passkey-auth` |
+| `focus-task` | 상단 브랜드 표기 외 크롬 없음(클릭해도 다른 화면으로 이동하지 않는 시스템 상태바·공지·보안 고지 같은 정보성 표시는 허용) → 화면 정중앙 카드 하나에 과제 하나(주 액션 1 + 보조 액션 1) → 하단 보조 링크. 사이드바·상단 메뉴·하단 탭바처럼 다른 목적지로 이동하는 내비게이션은 없다. | 로그인·OTP 등 인증 화면 · 결제·삭제처럼 되돌릴 수 없는 확인 화면 · 접근 차단·점검 안내·초대 수락 · 시스템 바·공지·보안 고지가 붙는 사내 업무포털 로그인 | 한 화면에서 과제를 둘 이상 처리해야 하는 경우 · 사용자가 머물며 계속 작업하는 화면(목록·편집·대시보드) · 다른 목적지로 자유롭게 오갈 수 있어야 하는 경우 · 단계가 여러 개라 진행률을 보여야 하는 절차 — wizard-flow 를 쓴다 · 상단·하단 정보 영역에 다른 화면으로 이동하는 링크(내비게이션)를 넣어야 하는 경우 — 그 순간부터는 정보성 표시가 아니라 내비게이션이라 focus-task 가 아니다 | `passkey-auth`, `portal-login` |
 
 ### 성격 레지스트리 (4종)
 
@@ -933,6 +933,18 @@ npx shadcn add https://ui.doksam.com/r/template-passkey-auth.json
 ```
 
 registryDependencies: https://ui.doksam.com/r/alert-dialog.json, https://ui.doksam.com/r/alert.json, https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/input-otp.json, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json, https://ui.doksam.com/r/separator.json, https://ui.doksam.com/r/spinner.json
+
+npm dependencies: @phosphor-icons/react@^2.1.10
+
+### Portal Login 템플릿 (`template-portal-login`)
+
+finance 프로필 · Ivory · Noto Sans KR · focus-task 원형. 시스템 상태바·공지사항·보안 고지를 더한 사내 업무포털 로그인 변형. 세 표시 모두 다른 화면으로 이동시키지 않는 정보성 표시라 원형의 내비게이션 없음 규칙을 지킵니다. 담당자·심사역·관리자 역할 분기는 로그인 후 서버가 판단하므로 화면에는 안내 문구로만 노출합니다.
+
+```
+npx shadcn add https://ui.doksam.com/r/template-portal-login.json
+```
+
+registryDependencies: https://ui.doksam.com/r/alert.json, https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/banner.json, https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/input.json, https://ui.doksam.com/r/label.json, https://ui.doksam.com/r/live-indicator.json, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json
 
 npm dependencies: @phosphor-icons/react@^2.1.10
 
