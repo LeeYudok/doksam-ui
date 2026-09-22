@@ -1,5 +1,6 @@
 import { TranslatedText } from "@/components/showcase/translated-text";
 import { CopyButton } from "@/components/copy-button";
+import { RISK_LEVELS, RISK_LEVEL_DESCRIPTIONS } from "@/lib/risk-tokens";
 
 const SIDEBAR_TOKENS = [
   "sidebar",
@@ -30,8 +31,52 @@ function VarSwatch({ token }: Readonly<{ token: string }>) {
 }
 
 /**
+ * 위험등급 한 단계의 스와치(#81) — 왼쪽이 solid 채움 + 전경 토큰, 오른쪽이
+ * tint 배경 + 값 토큰 글자다. 배지·행 강조 두 용법이 실제로 읽히는지 이
+ * 페이지에서 바로 확인할 수 있게 둘 다 렌더한다.
+ */
+function RiskSwatch({ level }: Readonly<{ level: (typeof RISK_LEVELS)[number] }>) {
+  return (
+    <div className="flex flex-col gap-2 rounded-lg border border-border p-3">
+      <div className="grid grid-cols-2 gap-2">
+        <div
+          className="flex h-10 items-center justify-center rounded-md text-xs font-medium"
+          style={{
+            backgroundColor: `var(--risk-${level})`,
+            color: `var(--risk-${level}-foreground)`,
+          }}
+        >
+          solid
+        </div>
+        <div
+          className="flex h-10 items-center justify-center rounded-md text-xs font-medium"
+          style={{
+            backgroundColor: `color-mix(in oklch, var(--risk-${level}) 14%, transparent)`,
+            color: `var(--risk-${level})`,
+          }}
+        >
+          tint
+        </div>
+      </div>
+      <div className="flex items-start justify-between gap-2">
+        <div className="flex min-w-0 flex-col gap-0.5">
+          <code className="text-xs font-medium">--risk-{level}</code>
+          <p className="text-xs text-muted-foreground">{RISK_LEVEL_DESCRIPTIONS[level]}</p>
+        </div>
+        <CopyButton
+          value={`var(--risk-${level})`}
+          label="복사"
+          className="h-6! shrink-0 px-2 text-[11px]"
+        />
+      </div>
+    </div>
+  );
+}
+
+/**
  * 시맨틱 27키 밖의 보조 토큰 층 문서(#66) — sidebar 8종(프리셋 무관,
- * globals.css :root/.dark 정의)과 브랜드 확장 토큰(ink-bulb 전용 opt-in).
+ * globals.css :root/.dark 정의), 위험등급 4단(#81), 브랜드 확장 토큰(ink-bulb
+ * 전용 opt-in).
  */
 export function ExtendedTokensSection() {
   return (
@@ -51,6 +96,25 @@ export function ExtendedTokensSection() {
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {SIDEBAR_TOKENS.map((token) => (
             <VarSwatch key={token} token={token} />
+          ))}
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-1">
+          <h2 className="text-lg font-medium">
+            <TranslatedText k="page.tokens.risk.title" ko="위험등급 토큰" />
+          </h2>
+          <p className="max-w-prose text-sm text-muted-foreground">
+            <TranslatedText
+              k="page.tokens.risk.description"
+              ko="순서 있는 심각도 4단입니다(정상 → 관찰 → 주의 → 경보). 범주 구분용인 chart-1~5 와 달리 순서가 의미를 갖는 층이라 둘을 바꿔 쓰지 않습니다. gain/loss 와 같은 도메인 토큰이라 테마 프리셋을 바꿔도 값이 바뀌지 않으며, 몇 단계를 쓸지는 프로젝트가 고릅니다. 색만으로 등급을 전달하지 않도록 텍스트·아이콘을 함께 싣습니다."
+            />
+          </p>
+        </div>
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {RISK_LEVELS.map((level) => (
+            <RiskSwatch key={level} level={level} />
           ))}
         </div>
       </div>

@@ -60,7 +60,20 @@ export const RULES_SECTIONS: RulesSection[] = [
       "새 프리셋이 필요하면 themes/<name>.ts 파일을 추가하고 themes/index.ts 레지스트리에 등록한다. 기존 프리셋 파일이나 app/globals.css의 다른 프리셋 블록은 건드리지 않는다.",
       "시세 등락(이익/상승, 손실/하락)을 표시할 때는 text-red-600/text-blue-600 등을 직접 쓰지 않고 --gain/--loss 토큰(lib/finance/rate.ts의 rateColor/rateText)을 쓴다 — 한국식 관례로 이익=빨강, 손실=파랑이며 모든 프리셋에서 동일한 값을 쓴다(destructive/success/warning과 같은 방식).",
       "lightweight-charts·canvas 등 CSS를 직접 해석하지 못하는 렌더러에 색을 넘길 때는 CSS 변수/유틸리티 클래스 문자열을 그대로 주지 않고 lib/finance/normalize-color.ts의 normalizeColor(또는 readCssVar/readClassColor)로 hex 값을 해소해서 넘긴다. 프리셋·다크모드 전환 시 재해소가 필요하면 observeColorScheme로 <html>의 class/data-theme/data-font 변화를 구독한다.",
+      "위험·심각도 등급(정상/관찰/주의/경보 같은 순서 있는 단계)을 chart-1~5로 표현하지 않는다 — chart 토큰은 계열을 나누는 범주 팔레트라 한 색상 띠 안에 모여 있고(기본 테마는 hue 262/220/200/290/235) 순서를 싣지 못한다. 등급에는 --risk-low/--risk-moderate/--risk-high/--risk-severe 와 각각의 -foreground 쌍(lib/risk-tokens.ts)을 쓴다. 같은 화면에서 등급 색과 계열 색이 같은 토큰을 쓰면 둘 중 하나는 반드시 오독된다.",
+      "위험등급 토큰은 gain/loss와 마찬가지로 테마 프리셋과 무관한 도메인 층이다 — globals.css의 :root/.dark에만 정의하고 [data-theme=\"*\"] 블록에서 재정의하지 않는다. 브랜드에 맞춰 경보를 초록으로 바꾸는 식의 오버라이드는 표준 위반이다.",
       "색 외의 시각 성격(타입/스페이싱 스케일, 표면 성향, 모션 강도)은 <html data-personality>/data-personality-surface/data-personality-motion 토큰 층을 쓴다 — personalities/index.ts 레지스트리의 프리셋을 profiles/index.ts의 BrandProfile.personality가 참조하며, 프로젝트에서 값을 임의로 재정의하지 않는다.",
+    ],
+  },
+  {
+    title: "위험등급 표기",
+    kind: "decision",
+    items: [
+      "등급을 몇 단계로 나눌지, 어느 단계를 기본값으로 둘지 프로젝트가 정한다: 카탈로그는 심각도 오름차순 4단(low=정상, moderate=관찰, high=주의, severe=경보)을 제공하지만 3단만 쓰는 도메인이면 low·high·severe처럼 부분집합을 고른다. 단계 수는 사람이 실제로 다르게 행동하는 경계의 수로 정한다 — 행동이 같은 두 단계는 하나로 합친다. 고른 단계와 그 뜻(무슨 조치를 부르는 단계인가)은 DESIGN.md에 남긴다.",
+      "경계 — 단계 이름은 --risk-* 토큰 이름을 그대로 쓰고 자체 번호 토큰(--grade-1 등)을 만들지 않는다: 화면에 보이는 라벨(\"1등급\", \"Tier 2\")은 도메인 용어로 자유롭게 쓰되, 그것을 토큰 이름으로 끌어오면 다른 프로젝트가 같은 색을 다른 번호로 부르게 된다.",
+      "경계 — 등급을 색으로만 구분하지 않는다: 네 등급은 밝기가 같고 hue로만 갈리므로 색각 이상 사용자에게는 차이가 전달되지 않는다. 배지 텍스트·아이콘·순서 중 최소 하나를 두 번째 채널로 같이 싣는다(접근성 절의 불변 규칙).",
+      "경계 — tint 배경과 solid 채움에서 글자색을 다르게 쓴다: solid 채움 위에는 --risk-<level>-foreground를, tint 배경(color-mix로 만든 옅은 면) 위에는 값 토큰 자신(--risk-<level>)을 글자색으로 쓴다. 값 토큰은 프리셋 8종의 불투명 표면 위에서 본문 대비 4.5:1을 넘도록 잡혀 있고(lib/risk-tokens.test.ts), -foreground는 그 용도가 아니다.",
+      "경계 — 등급 색을 상태 색(success/warning/destructive)으로 대체하지 않는다: 상태 색은 3단이라 4단 등급을 실을 수 없고, 같은 화면에서 \"작업 실패\"와 \"경보 등급\"이 같은 색이 되면 읽는 쪽이 둘을 구분하지 못한다.",
     ],
   },
   {
@@ -227,6 +240,7 @@ export const RULES_SECTIONS: RulesSection[] = [
       "[ ] 프로필이 고정한 corner·radius·density(<html data-density>)·typeContrast(<html data-type-contrast>)를 프로젝트에서 임의 재정의하지 않는다 — 바꿀 필요가 생기면 doksam-ui에 프로필 추가/수정으로 반영.",
       "[ ] 셸 구조 선택 근거를 DESIGN.md 에 기록 — 사이드바 셸을 골랐다면 ui.doksam.com/patterns/app-shell 를 준수.",
       "[ ] 하드코딩 색 0건 — 시맨틱 색상 토큰만 사용.",
+      "[ ] 위험·심각도 등급은 --risk-* 토큰으로, chart-1~5·상태 색으로 대체 0건 — 등급마다 색 외 채널(텍스트·아이콘) 동반.",
       "[ ] 아이콘 표준 3종(Phosphor 기본)만, 이모지 아이콘 0건.",
       "[ ] 폰트·리소스 전부 셀프호스팅 (외부 CDN 0건).",
       "[ ] 빌드 산출물 외부 리소스 부재를 자동 테스트로 실증 (test/closed-network.test.ts, test/sourcemap.test.ts).",

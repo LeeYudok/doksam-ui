@@ -31,6 +31,18 @@
   --color-warning: var(--warning);
   --color-gain: var(--gain);
   --color-loss: var(--loss);
+  /*
+   * 위험 심각도 4단(#81) — 단일 진실원천은 lib/risk-tokens.ts. gain/loss 와
+   * 같은 도메인 토큰이라 프리셋 27키에 넣지 않고 :root/.dark 에만 정의한다.
+   */
+  --color-risk-low: var(--risk-low);
+  --color-risk-low-foreground: var(--risk-low-foreground);
+  --color-risk-moderate: var(--risk-moderate);
+  --color-risk-moderate-foreground: var(--risk-moderate-foreground);
+  --color-risk-high: var(--risk-high);
+  --color-risk-high-foreground: var(--risk-high-foreground);
+  --color-risk-severe: var(--risk-severe);
+  --color-risk-severe-foreground: var(--risk-severe-foreground);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
   --color-muted-foreground: var(--muted-foreground);
@@ -131,6 +143,19 @@
   --sidebar-accent-foreground: oklch(0.28 0.03 262);
   --sidebar-border: oklch(0.9 0.015 262);
   --sidebar-ring: oklch(0.53 0.21 262);
+  /*
+   * 위험 심각도 4단 라이트값 — 단일 진실원천은 lib/risk-tokens.ts(#81).
+   * 사이드바 chrome 과 마찬가지로 [data-theme="*"] 블록이 재정의하지 않는다:
+   * 심각도는 브랜드가 아니라 관례가 정하는 층이다.
+   */
+  --risk-low: oklch(0.45 0.13 152);
+  --risk-low-foreground: oklch(0.98 0.01 152);
+  --risk-moderate: oklch(0.45 0.11 85);
+  --risk-moderate-foreground: oklch(0.98 0.01 85);
+  --risk-high: oklch(0.45 0.15 48);
+  --risk-high-foreground: oklch(0.98 0.01 48);
+  --risk-severe: oklch(0.45 0.2 27);
+  --risk-severe-foreground: oklch(0.98 0.01 27);
 }
 
 .dark {
@@ -143,6 +168,15 @@
   --sidebar-accent-foreground: oklch(0.95 0.008 262);
   --sidebar-border: oklch(1 0 0 / 12%);
   --sidebar-ring: oklch(0.68 0.18 262);
+  /* 위험 심각도 4단 다크값 — 단일 진실원천은 lib/risk-tokens.ts(#81). */
+  --risk-low: oklch(0.74 0.15 152);
+  --risk-low-foreground: oklch(0.15 0.02 152);
+  --risk-moderate: oklch(0.74 0.12 85);
+  --risk-moderate-foreground: oklch(0.15 0.02 85);
+  --risk-high: oklch(0.74 0.15 48);
+  --risk-high-foreground: oklch(0.15 0.02 48);
+  --risk-severe: oklch(0.74 0.18 27);
+  --risk-severe-foreground: oklch(0.15 0.02 27);
 }
 
 [data-theme="ocean"] {
