@@ -549,5 +549,7 @@
   "type-contrast.moderate.suited.0": "尚未确定界面性格的早期脚手架",
   "type-contrast.moderate.suited.1": "阅读与操作各占一半的通用产品界面",
   "pattern.draft-review-panel.description": "LLM 按分节生成的初稿由人工逐节审核并修改后确定的画面模式。文档类型通过标签切换，分节编辑通过内联切换完成，且不会丢失编辑状态。",
-  "pattern.draft-review-panel.title": "分节式初稿审核·编辑面板"
+  "pattern.draft-review-panel.title": "分节式初稿审核·编辑面板",
+  "pattern.risk-table.description": "按严重度为行添加背景色调和左侧强调条的业务表格。固定金额、换行与行内操作的单元格约定，密度交由品牌配置的 data-density 层决定。",
+  "pattern.risk-table.title": "风险高亮表格"
 }

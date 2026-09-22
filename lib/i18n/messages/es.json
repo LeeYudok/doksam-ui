@@ -549,5 +549,7 @@
   "type-contrast.moderate.suited.0": "Prototipos iniciales que aún no han definido el carácter de la pantalla",
   "type-contrast.moderate.suited.1": "Pantallas de producto generales repartidas entre lectura y operación",
   "pattern.draft-review-panel.description": "Un patrón de pantalla donde una persona revisa y edita, sección por sección, los borradores generados por LLM antes de confirmarlos. El tipo de documento se cambia con pestañas y la edición de cada sección se alterna en línea sin perder el estado de edición.",
-  "pattern.draft-review-panel.title": "Panel de revisión y edición de borradores por sección"
+  "pattern.draft-review-panel.title": "Panel de revisión y edición de borradores por sección",
+  "pattern.risk-table.description": "Una tabla de trabajo que tiñe el fondo de la fila y añade una barra de acento a la izquierda según la severidad. Fija las convenciones de celda para importes, ajuste de línea y acciones de fila, y deja la densidad a la capa data-density del perfil.",
+  "pattern.risk-table.title": "Tabla con resalte de riesgo"
 }

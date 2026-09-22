@@ -28,7 +28,7 @@ import {
   TrayArrowUpIcon,
   WalletIcon,
 } from "@phosphor-icons/react/dist/ssr"
-import { AnchorIcon, GavelIcon, RowsIcon } from "@phosphor-icons/react/dist/ssr"
+import { AnchorIcon, GavelIcon, RowsIcon, WarningDiamondIcon } from "@phosphor-icons/react/dist/ssr"
 import type { Icon } from "@phosphor-icons/react"
 
 /**
@@ -298,6 +298,13 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     title: "근거 기반 의사결정",
     description: "근거의 출처·검증 상태를 먼저 확인하고, 연결된 대응 후보를 사람이 선택해 상위 승인 흐름으로 넘기는 금융 의사결정 패턴입니다.",
     icon: ScalesIcon,
+    scope: "finance",
+  },
+  {
+    slug: "risk-table",
+    title: "위험 강조 테이블",
+    description: "심각도에 따라 행 배경 tint 와 좌측 accent bar 가 붙는 업무 테이블입니다. 금액·줄바꿈·행 액션 셀 규약을 고정하고 밀도는 프로필의 data-density 층에 맡깁니다.",
+    icon: WarningDiamondIcon,
     scope: "finance",
   },
 ]

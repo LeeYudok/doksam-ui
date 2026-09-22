@@ -549,5 +549,7 @@
   "type-contrast.moderate.suited.0": "まだ画面の性格を決めていない初期スキャフォールド",
   "type-contrast.moderate.suited.1": "読むことと操作することが半々に混在する一般的な製品画面",
   "pattern.draft-review-panel.description": "LLMがセクション単位で生成した初稿を人が確認・加筆して確定する画面パターンです。文書種別はタブで切り替え、セクション編集はインライン切り替えで編集状態を失いません。",
-  "pattern.draft-review-panel.title": "セクション型初稿レビュー・編集パネル"
+  "pattern.draft-review-panel.title": "セクション型初稿レビュー・編集パネル",
+  "pattern.risk-table.description": "重大度に応じて行の背景ティントと左側アクセントバーが付く業務テーブルです。金額・折り返し・行アクションのセル規約を固定し、密度はプロファイルの data-density 層に委ねます。",
+  "pattern.risk-table.title": "重大度ハイライト表"
 }
