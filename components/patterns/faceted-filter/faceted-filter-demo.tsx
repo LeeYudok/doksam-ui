@@ -141,7 +141,7 @@ function FacetChip({
 
 function CountBadge({ active, children }: Readonly<{ active: boolean; children: ReactNode }>) {
   return (
-    <span className={cn("font-mono text-[10px]", active ? "text-white/80" : "text-muted-foreground")}>
+    <span className={cn("font-mono text-[10px]", active ? "text-primary-foreground/80" : "text-muted-foreground")}>
       {children}
     </span>
   )

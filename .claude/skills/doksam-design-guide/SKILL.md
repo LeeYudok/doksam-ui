@@ -159,7 +159,22 @@ radius 값을 새로 쓰지 않는다(레지스트리 프리셋 중에서만 고
 
 시맨틱 색 토큰: `background`/`foreground`, `card`, `popover`, `primary`, `secondary`,
 `muted`, `accent`, `destructive`, `success`, `warning`, `gain`/`loss`(한국식 등락 —
-상승 빨강/하락 파랑), `border`, `input`, `ring`, `chart-1~5`, `sidebar-*`.
+상승 빨강/하락 파랑), `border`, `input`, `ring`, `chart-1~5`, `sidebar-*`,
+`risk-low`/`risk-moderate`/`risk-high`/`risk-severe`(+ 각 `-foreground`).
+
+`gain`/`loss` 와 `risk-*` 는 둘 다 브랜드가 아니라 **도메인 관례**가 값을 정하는
+토큰인데 층의 위치가 다르다:
+
+- `gain`/`loss` — 프리셋 27키(`ThemeTokens`) 안에 있고 프리셋 8종이 **같은 값을
+  각각 적는다**. SSOT 는 `themes/*.ts`, `globals.css` 의 `[data-theme]` 블록 16개가
+  이 값을 미러링한다.
+- `risk-*` — `sidebar-*` 처럼 27키에서 **빠져** `globals.css` 의 `:root`/`.dark` 에만
+  정의된다. SSOT 는 `lib/risk-tokens.ts`, 프리셋 블록이 재정의하지 않는다
+  (`lib/globals-css-mirror.test.ts` 가 막는다).
+
+순서 있는 심각도는 `chart-1~5`(범주 팔레트)나 `success`/`warning`/`destructive`(3단
+상태색)로 대체하지 않는다. 값을 고칠 때는 `lib/risk-tokens.test.ts` 가 프리셋 8종
+× 라이트/다크에서 본문 대비 4.5:1(불투명 표면 5종 + tint 면 3종)을 지킨다(#81).
 
 ### 테마 · 폰트 · 프로필
 
@@ -265,5 +280,6 @@ className 병합은 항상 `cn()` (`@/lib/utils`). variant 가 여럿이면 CVA.
 - 새 라우트에 `loading.tsx`/`error.tsx` 누락
 - `public/r`·`public/llms.txt` 를 손으로 수정
 - 등락 표시에 `text-red-600`/`text-blue-600` 직접 사용 (→ `--gain`/`--loss`, `lib/finance/rate.ts`)
+- 위험·심각도 등급을 `chart-1~5` 나 3단 상태색으로 표현 (→ `--risk-*`, `lib/risk-tokens.ts`)
 - 캔버스·차트 렌더러에 CSS 변수 문자열을 그대로 전달 (→ `lib/finance/normalize-color.ts`)
 - 새 UI 라이브러리를 먼저 설치하고 나중에 정당화 (의존성 규율 4항목 선검토가 순서)

@@ -23,8 +23,14 @@ function StockLogo({ name }: Readonly<{ name: string }>) {
   return (
     <span
       aria-hidden
+      // 글자색은 text-primary-foreground — 같은 화면 screener-table 로고와 같은
+      // 처리이고, chart-* 에는 대응 foreground 토큰이 없다. 다크에서는 대비가
+      // 크게 좋아지지만(2.0 → 9.6:1) 라이트의 chart-2/3/5 는 4.5:1 에 못 미친다
+      // — text-white 시절부터 있던 문제이고 chart 토큰 자체의 명도 문제라 여기서
+      // 풀 수 없다(#93 으로 분리). 이 이니셜이 전달하는 종목 식별은 옆 셀의
+      // 종목명·코드가 텍스트로 온전히 주므로 색·대비에만 실린 정보는 없다.
       className={cn(
-        "flex size-8 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white",
+        "flex size-8 shrink-0 items-center justify-center rounded-full text-xs font-bold text-primary-foreground",
         logoColorClass(name)
       )}
     >
