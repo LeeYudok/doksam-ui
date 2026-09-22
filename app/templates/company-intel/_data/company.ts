@@ -75,10 +75,10 @@ export const NEWS: NewsItem[] = [
 
 /** 출자·주주 관계 그룹(계열 색). */
 export const RELATION_GROUPS: RelationGroup[] = [
-  { key: "out-invest", label: "출자한 회사", color: "#22d3ee" },
-  { key: "shareholder", label: "주요 주주", color: "#a78bfa" },
-  { key: "affiliate", label: "계열·관계사", color: "#34d399" },
-  { key: "in-invest", label: "이 회사에 출자", color: "#f59e0b" },
+  { key: "out-invest", label: "출자한 회사", color: "var(--chart-1)" },
+  { key: "shareholder", label: "주요 주주", color: "var(--chart-2)" },
+  { key: "affiliate", label: "계열·관계사", color: "var(--chart-3)" },
+  { key: "in-invest", label: "이 회사에 출자", color: "var(--chart-4)" },
 ]
 
 /** 출자·주주 관계 노드 — weight 는 지분율(%). 전부 가상. */

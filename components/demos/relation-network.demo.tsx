@@ -1,10 +1,10 @@
 import { RelationNetwork, type RelationGroup, type RelationNode } from "@/components/relation-network"
 
 const groups: RelationGroup[] = [
-  { key: "out-invest", label: "출자한 회사", color: "#22d3ee" },
-  { key: "out-shareholder", label: "주요 주주", color: "#a78bfa" },
-  { key: "in-invest", label: "이 회사에 출자", color: "#34d399" },
-  { key: "in-shareholder", label: "이 회사가 주주", color: "#f59e0b" },
+  { key: "out-invest", label: "출자한 회사", color: "var(--chart-1)" },
+  { key: "out-shareholder", label: "주요 주주", color: "var(--chart-2)" },
+  { key: "in-invest", label: "이 회사에 출자", color: "var(--chart-3)" },
+  { key: "in-shareholder", label: "이 회사가 주주", color: "var(--chart-4)" },
 ]
 
 const nodes: RelationNode[] = [
@@ -27,8 +27,8 @@ export const demo = (
 export const code = `import { RelationNetwork, type RelationGroup, type RelationNode } from "@/components/relation-network"
 
 const groups: RelationGroup[] = [
-  { key: "out-invest", label: "출자한 회사", color: "#22d3ee" },
-  { key: "out-shareholder", label: "주요 주주", color: "#a78bfa" },
+  { key: "out-invest", label: "출자한 회사", color: "var(--chart-1)" },
+  { key: "out-shareholder", label: "주요 주주", color: "var(--chart-2)" },
 ]
 
 const nodes: RelationNode[] = [

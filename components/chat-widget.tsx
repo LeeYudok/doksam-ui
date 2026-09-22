@@ -131,7 +131,7 @@ export function ChatWidget({
       >
         <ChatCircleIcon className="size-5" aria-hidden />
         {!open && unread > 0 ? (
-          <span className="absolute -top-1 -right-1 flex size-5 items-center justify-center rounded-full bg-destructive text-xs text-white">
+          <span className="absolute -top-1 -right-1 flex size-5 items-center justify-center rounded-full bg-destructive text-xs text-destructive-foreground">
             {unread > 99 ? "99+" : unread}
           </span>
         ) : null}

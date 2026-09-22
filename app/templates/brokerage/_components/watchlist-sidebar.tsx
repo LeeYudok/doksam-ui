@@ -23,8 +23,11 @@ function StockLogo({ name }: Readonly<{ name: string }>) {
   return (
     <span
       aria-hidden
+      // 글자색은 text-primary-foreground — 같은 화면의 screener-table 로고와 같은
+      // 처리다. chart-* 에는 대응 foreground 토큰이 없고, 이 이니셜은 aria-hidden
+      // 장식이라 옆의 종목명이 같은 정보를 텍스트로 이미 준다.
       className={cn(
-        "flex size-8 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white",
+        "flex size-8 shrink-0 items-center justify-center rounded-full text-xs font-bold text-primary-foreground",
         logoColorClass(name)
       )}
     >
