@@ -527,5 +527,9 @@
   "type-contrast.moderate.avoid.0": "他のプロファイルと視覚的に区別すべき製品では避けてください — デフォルトのため印象に残りません",
   "type-contrast.moderate.description": "デフォルトです。見出しが本文より明確に大きいものの、過剰ではありません。",
   "type-contrast.moderate.suited.0": "まだ画面の性格を決めていない初期スキャフォールド",
-  "type-contrast.moderate.suited.1": "読むことと操作することが半々に混在する一般的な製品画面"
+  "type-contrast.moderate.suited.1": "読むことと操作することが半々に混在する一般的な製品画面",
+  "chrome.auditCodeTag.copied": "監査コードをコピーしました",
+  "chrome.auditCodeTag.copy": "監査コードをコピー",
+  "component.audit-code-tag.description": "判断根拠を追跡する監査コードを、等幅フォント + セマンティックトークン背景だけで表示するタグです。色で意味を分けず、クリック遷移とコピーはどちらもオプションです(#83)。",
+  "component.party-identity-cell.description": "借主識別の2行セルです — 1行目に会社名、2行目に業種・法人区分・マスキングされた事業者登録番号を表示し、番号のフォーマットは formatBizNo をそのまま使います(#83)。"
 }

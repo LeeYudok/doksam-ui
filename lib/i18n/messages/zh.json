@@ -527,5 +527,9 @@
   "type-contrast.moderate.avoid.0": "需要与其他配置文件在视觉上区分的产品应避免使用 — 它是默认值,不会留下印象",
   "type-contrast.moderate.description": "默认值。标题明显大于正文,但不过分。",
   "type-contrast.moderate.suited.0": "尚未确定界面性格的早期脚手架",
-  "type-contrast.moderate.suited.1": "阅读与操作各占一半的通用产品界面"
+  "type-contrast.moderate.suited.1": "阅读与操作各占一半的通用产品界面",
+  "chrome.auditCodeTag.copied": "已复制审计代码",
+  "chrome.auditCodeTag.copy": "复制审计代码",
+  "component.audit-code-tag.description": "用于追溯判断依据的审计代码标签，仅使用等宽字体和语义化令牌背景，不以颜色区分含义，点击跳转与复制均为可选项(#83)。",
+  "component.party-identity-cell.description": "借款方识别两行单元格 — 第一行为公司名称，第二行为行业、法人类型与脱敏后的营业执照号，号码格式复用 formatBizNo(#83)。"
 }

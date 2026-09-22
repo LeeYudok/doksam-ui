@@ -90,6 +90,18 @@ DESIGN.md 의 모서리는 아래 `name` 값 중 하나여야 합니다 — 픽�
 npx shadcn add https://ui.doksam.com/r/activity-heatmap.json
 ```
 
+### Audit Code Tag (`audit-code-tag`)
+
+판단 근거를 추적하는 감사코드를 등폭 글꼴 + 시맨틱 토큰 배경으로 표시하는 태그. 색으로 의미를 나누지 않고, 클릭 이동·복사는 옵션이다.
+
+```
+npx shadcn add https://ui.doksam.com/r/audit-code-tag.json
+```
+
+registryDependencies: https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/i18n-provider.json
+
+npm dependencies: @phosphor-icons/react@^2.1.10, sonner@^2.0.7
+
 ### Avatar Group (`avatar-group`)
 
 겹친 아바타 스택+N.
@@ -345,6 +357,16 @@ npx shadcn add https://ui.doksam.com/r/number-input.json
 registryDependencies: https://ui.doksam.com/r/input-group.json
 
 npm dependencies: @phosphor-icons/react@^2.1.10
+
+### Party Identity Cell (`party-identity-cell`)
+
+차주 식별 2줄 셀. 1행 업체명 / 2행 업종·법인구분·마스킹 사업자번호를 표시하며 사업자번호 포맷은 formatBizNo를 그대로 쓴다.
+
+```
+npx shadcn add https://ui.doksam.com/r/party-identity-cell.json
+```
+
+registryDependencies: https://ui.doksam.com/r/format-biz-no.json
 
 ### Password Input (`password-input`)
 

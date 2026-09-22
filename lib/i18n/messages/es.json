@@ -527,5 +527,9 @@
   "type-contrast.moderate.avoid.0": "Evítalo en productos que deben distinguirse visualmente de otros perfiles — al ser el valor predeterminado no deja impresión",
   "type-contrast.moderate.description": "El valor predeterminado. Los títulos son claramente más grandes que el cuerpo sin ser excesivos.",
   "type-contrast.moderate.suited.0": "Prototipos iniciales que aún no han definido el carácter de la pantalla",
-  "type-contrast.moderate.suited.1": "Pantallas de producto generales repartidas entre lectura y operación"
+  "type-contrast.moderate.suited.1": "Pantallas de producto generales repartidas entre lectura y operación",
+  "chrome.auditCodeTag.copied": "Código de auditoría copiado",
+  "chrome.auditCodeTag.copy": "Copiar código de auditoría",
+  "component.audit-code-tag.description": "Una etiqueta que muestra un código de auditoría que rastrea la base de un juicio, usando tipografía monoespaciada y solo un fondo de token semántico. No separa el significado por color, y la navegación al hacer clic y la copia son ambas opcionales (#83).",
+  "component.party-identity-cell.description": "Una celda de identidad de la parte de dos líneas — el nombre de la empresa en la línea 1, y el sector, el tipo societario y el número de registro empresarial enmascarado en la línea 2, formateado con formatBizNo (#83)."
 }

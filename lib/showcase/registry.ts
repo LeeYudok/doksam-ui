@@ -678,6 +678,15 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
     status: "done",
   },
   {
+    slug: "audit-code-tag",
+    title: "Audit Code Tag",
+    category: "data",
+    layer: "composition",
+    description:
+      "판단 근거를 추적하는 감사코드를 등폭 글꼴 + 시맨틱 토큰 배경으로 표시하는 태그입니다. 색으로 의미를 나누지 않고, 클릭 이동·복사는 옵션입니다(#83).",
+    status: "done",
+  },
+  {
     slug: "tree-view",
     title: "Tree View",
     category: "data",
@@ -709,6 +718,15 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
     layer: "composition",
     description:
       "기준일 대비 기한 잔여일을 여유/임박/경과 3단으로 표시하는 배지입니다. 상태 파생은 lib/due.ts가 소유하고 임계값·문구는 주입받습니다(#82).",
+    status: "done",
+  },
+  {
+    slug: "party-identity-cell",
+    title: "Party Identity Cell",
+    category: "finance",
+    layer: "composition",
+    description:
+      "차주 식별 2줄 셀입니다 — 업체명(1행) / 업종·법인구분·마스킹 사업자번호(2행)을 표시하며 사업자번호 포맷은 formatBizNo를 그대로 씁니다(#83).",
     status: "done",
   },
   {
