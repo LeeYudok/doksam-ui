@@ -382,6 +382,18 @@ registryDependencies: https://ui.doksam.com/r/spinner.json
 
 npm dependencies: mermaid@^11.16.0, @phosphor-icons/react@^2.1.10
 
+### Metric Comparison Table (`metric-comparison-table`)
+
+행 = 지표, 열 = 대상 A·대상 B·델타로 A/B 성능을 비교하는 표. 방향 색은 델타 부호가 아니라 지표별 betterWhen(higher/lower)으로 정한다.
+
+```
+npx shadcn add https://ui.doksam.com/r/metric-comparison-table.json
+```
+
+registryDependencies: https://ui.doksam.com/r/i18n-provider.json, https://ui.doksam.com/r/table.json
+
+npm dependencies: @phosphor-icons/react@^2.1.10
+
 ### Multi Select (`multi-select`)
 
 command 팝오버 다중 선택 + 칩.

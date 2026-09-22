@@ -96,6 +96,7 @@ export const DEMO_LOADERS: Record<string, DemoLoader> = {
   "due-countdown-badge": () => import("@/components/demos/due-countdown-badge.demo"),
   "party-identity-cell": () => import("@/components/demos/party-identity-cell.demo"),
   "contribution-meter": () => import("@/components/demos/contribution-meter.demo"),
+  "metric-comparison-table": () => import("@/components/demos/metric-comparison-table.demo"),
   "audit-trail": () => import("@/components/demos/audit-trail.demo"),
   "risk-core-map": () => import("@/components/demos/risk-core-map.demo"),
   "scenario-simulator": () => import("@/components/demos/scenario-simulator.demo"),

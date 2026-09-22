@@ -47,6 +47,7 @@ const MANUAL_ENTRY_SLUGS = [
   "due-countdown-badge",
   "party-identity-cell",
   "contribution-meter",
+  "metric-comparison-table",
   "audit-trail",
   "scenario-simulator",
   "evidence-decision-panel",

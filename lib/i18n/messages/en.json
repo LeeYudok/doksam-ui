@@ -124,6 +124,11 @@
   "chrome.footer.license": "All fonts SIL Open Font License · Code MIT",
   "chrome.footer.tagline": "Shared UI standard for doksam projects",
   "chrome.locale.aria": "Select language",
+  "chrome.metricComparisonTable.deltaHeader": "Delta",
+  "chrome.metricComparisonTable.improved": "Improved",
+  "chrome.metricComparisonTable.metricHeader": "Metric",
+  "chrome.metricComparisonTable.unchanged": "Unchanged",
+  "chrome.metricComparisonTable.worsened": "Worsened",
   "chrome.nav.aria": "Site navigation",
   "chrome.nav.group.catalog": "Catalog",
   "chrome.nav.group.foundation": "Foundation",
@@ -222,6 +227,7 @@
   "component.mermaid-viewer.description": "A diagram viewer that dynamically loads mermaid to render code as SVG. Supports code-fence stripping, dark mode, and loading/error states.",
   "component.message-scroller.description": "A container that auto-scrolls to follow new messages.",
   "component.message.description": "A component representing a single chat message.",
+  "component.metric-comparison-table.description": "A table that compares A/B performance with rows as metrics and columns as Subject A, Subject B, and delta. The direction color is decided not by the delta's sign but by each metric's betterWhen (higher/lower), so the direction never flips for metrics where lower is better (#102).",
   "component.multi-select.description": "A component for multi-selecting via a command popover, with removable chips for selected items.",
   "component.native-select.description": "A styled version of the browser's native select element.",
   "component.navigation-menu.description": "A top navigation menu that includes dropdowns.",
@@ -434,6 +440,8 @@
   "pattern.data-table.title": "Data Table",
   "pattern.dataviz.description": "6 combinations of recharts-based bar, area, and pie charts with a CSS BarList.",
   "pattern.dataviz.title": "Data Visualization Pattern",
+  "pattern.draft-review-panel.description": "A screen pattern where a human reviews and edits AI-generated drafts section by section before finalizing. Document type switches via tabs and section editing toggles inline without losing edit state.",
+  "pattern.draft-review-panel.title": "Draft Review Panel",
   "pattern.evidence-decision.description": "A finance decision pattern that checks evidence provenance and verification state first, then hands a human-selected response candidate to the parent approval flow.",
   "pattern.evidence-decision.title": "Evidence-based Decision",
   "pattern.faceted-filter.description": "A faceted filter built from two-level category chips, count badges, and group colors.",
@@ -554,7 +562,5 @@
   "type-contrast.moderate.avoid.0": "Avoid it for products that must look visually distinct from other profiles — it's the default and leaves no impression",
   "type-contrast.moderate.description": "The default. Headings are clearly larger than body text without being excessive.",
   "type-contrast.moderate.suited.0": "Early scaffolds that haven't settled on a screen character yet",
-  "type-contrast.moderate.suited.1": "General product screens split evenly between reading and operating",
-  "pattern.draft-review-panel.description": "A screen pattern where a human reviews and edits AI-generated drafts section by section before finalizing. Document type switches via tabs and section editing toggles inline without losing edit state.",
-  "pattern.draft-review-panel.title": "Draft Review Panel"
+  "type-contrast.moderate.suited.1": "General product screens split evenly between reading and operating"
 }
