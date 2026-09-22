@@ -31,9 +31,9 @@ import type { Icon } from "@phosphor-icons/react"
 
 /**
  * common = 어떤 doksam 프로젝트에서든 재사용 가능한 일반 UI 패턴.
- * srope = srope 프로젝트에서 이식된, 도메인 색이 짙은 확장 패턴("Srope — 프로젝트 확장" 로 표기).
+ * finance = 금융 도메인 화면에 특화된 패턴. srope에서 이식한 패턴도 여기에 포함한다.
  */
-export type PatternScope = "common" | "finance" | "srope"
+export type PatternScope = "common" | "finance"
 
 /** /patterns 인덱스·상세 페이지가 공유하는 패턴 메타데이터. */
 export interface PatternEntry {
@@ -49,7 +49,7 @@ export interface PatternEntry {
  * 패턴 레지스트리 — 단일 진실원천.
  * common 5종은 srope UiStandards 탭(LayoutPatternsView 등)에서 이식했고,
  * verified(실전 검증 패턴)는 bizinfo 프로덕션에서 검증된 패턴을 일반화해 편입했다.
- * srope 2종(stock·pipeline)은 srope 프로젝트 전용 확장 패턴이다.
+ * srope에서 이식한 4종은 금융 도메인 패턴으로 분류한다.
  * 여기 항목을 추가/수정하면 /patterns 인덱스에 자동 반영된다.
  */
 export const PATTERN_REGISTRY: PatternEntry[] = [
@@ -156,28 +156,28 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     title: "주식 패턴",
     description: "종목 시세·호가·포트폴리오 등 srope 주식 도메인 전용 UI 패턴입니다.",
     icon: TrendUpIcon,
-    scope: "srope",
+    scope: "finance",
   },
   {
     slug: "pipeline",
     title: "파이프라인 패턴",
     description: "수집·처리 단계 진행 상황을 보여주는 srope 데이터 파이프라인 전용 UI 패턴입니다.",
     icon: FlowArrowIcon,
-    scope: "srope",
+    scope: "finance",
   },
   {
     slug: "stock-portfolio",
     title: "포트폴리오·추천 패턴",
     description: "미니차트 포트폴리오 카드, 확신도 추천 카드, 옵티마이저 가격 5종, 비트 격자, 종목 뉴스 패널 등 srope 포트폴리오 화면 전용 UI 패턴입니다.",
     icon: BriefcaseIcon,
-    scope: "srope",
+    scope: "finance",
   },
   {
     slug: "admin-toolbar",
     title: "관리자 툴바 패턴",
     description: "JSON 내보내기/가져오기, 더미 생성 스피너, 파괴적 초기화 확인 등 srope 관리자 데이터 운영 툴바 패턴입니다.",
     icon: WrenchIcon,
-    scope: "srope",
+    scope: "finance",
   },
   {
     slug: "auth",
@@ -279,7 +279,6 @@ export function getPatternEntry(slug: string): PatternEntry | undefined {
 export const PATTERN_SCOPE_LABEL: Record<PatternScope, string> = {
   common: "Common",
   finance: "금융 도메인",
-  srope: "Srope — 프로젝트 확장",
 }
 
-export const PATTERN_SCOPE_ORDER: PatternScope[] = ["common", "finance", "srope"]
+export const PATTERN_SCOPE_ORDER: PatternScope[] = ["common", "finance"]

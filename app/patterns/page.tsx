@@ -21,7 +21,7 @@ export default function PatternsPage() {
         <p className="max-w-prose text-sm text-muted-foreground">
           {t(
             "page.patterns.description",
-            "단일 컴포넌트가 아니라 여러 shadcn 컴포넌트를 조합한 화면 패턴({total}종)을 모았습니다. Common은 어떤 doksam 프로젝트에서든 그대로 재사용할 수 있고, 금융 도메인은 모바일뱅킹·주식 등 금융 화면에 특화된 패턴, Srope는 srope 프로젝트 도메인에 특화된 확장 패턴입니다.",
+            "단일 컴포넌트가 아니라 여러 shadcn 컴포넌트를 조합한 화면 패턴({total}종)을 모았습니다. Common은 어떤 doksam 프로젝트에서든 그대로 재사용할 수 있고, 금융 도메인은 모바일뱅킹·주식 및 Srope에서 이식한 금융 화면 패턴입니다.",
             { total: PATTERN_REGISTRY.length },
           )}
         </p>

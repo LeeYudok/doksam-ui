@@ -4,10 +4,10 @@ import { describe, expect, it } from "vitest"
 import StockPortfolioPatternsPage from "@/app/patterns/stock-portfolio/page"
 
 describe("StockPortfolioPatternsPage", () => {
-  it("renders the page heading and srope extension badge", () => {
+  it("renders the page heading and finance badge", () => {
     render(<StockPortfolioPatternsPage />)
     expect(screen.getByRole("heading", { level: 1, name: "포트폴리오·추천 패턴" })).toBeInTheDocument()
-    expect(screen.getByText("Srope — 프로젝트 확장")).toBeInTheDocument()
+    expect(screen.getByText("금융 도메인")).toBeInTheDocument()
   })
 
   it("renders every pattern section title", () => {
