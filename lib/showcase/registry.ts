@@ -248,6 +248,14 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
     status: "done",
   },
   {
+    slug: "coach-mark-tour",
+    title: "Coach Mark Tour",
+    category: "overlay",
+    layer: "composition",
+    description: "기존 화면 위에 덧씌우는 단계형 코치마크(제품 투어)입니다. 딤 오버레이·대상 하이라이트·팝오버·단계 이동을 한 세트로 제공합니다(#99).",
+    status: "done",
+  },
+  {
     slug: "menubar",
     title: "Menubar",
     category: "overlay",

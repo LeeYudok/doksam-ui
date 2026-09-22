@@ -55,6 +55,7 @@ export const DEMO_LOADERS: Record<string, DemoLoader> = {
   "context-menu": () => import("@/components/demos/context-menu.demo"),
   "dropdown-menu": () => import("@/components/demos/dropdown-menu.demo"),
   "kebab-menu": () => import("@/components/demos/kebab-menu.demo"),
+  "coach-mark-tour": () => import("@/components/demos/coach-mark-tour.demo"),
   menubar: () => import("@/components/demos/menubar.demo"),
   command: () => import("@/components/demos/command.demo"),
   sonner: () => import("@/components/demos/sonner.demo"),

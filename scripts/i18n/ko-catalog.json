@@ -177,6 +177,7 @@
   "component.chat-widget.description": "우하단 런처 + 미읽음 배지 + 말풍선/귓속말/시스템 메시지 패널의 플로팅 채팅 위젯입니다. 실시간 연동은 호출부 소유(srope 이식).",
   "component.checkbox.description": "다중 선택이 가능한 체크박스 입력입니다.",
   "component.circular-progress.description": "순수 SVG 링 진행률(중앙 라벨·size/stroke)입니다.",
+  "component.coach-mark-tour.description": "기존 화면 위에 덧씌우는 단계형 코치마크(제품 투어)입니다. 딤 오버레이·대상 하이라이트·팝오버·단계 이동을 한 세트로 제공합니다(#99).",
   "component.code-block.description": "복사 버튼과 라인번호를 갖춘 코드 블록입니다(외부 하이라이터 없음).",
   "component.collapsible.description": "단일 콘텐츠 블록을 펼치고 접습니다.",
   "component.color-picker.description": "프리셋 스와치 그리드 + hex 입력 + 미리보기의 순수 색상 선택기입니다(외부 라이브러리 없음).",

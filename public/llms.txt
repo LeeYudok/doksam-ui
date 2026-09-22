@@ -154,6 +154,18 @@ SVG 링 진행률.
 npx shadcn add https://ui.doksam.com/r/circular-progress.json
 ```
 
+### Coach Mark Tour (`coach-mark-tour`)
+
+기존 화면 위에 덧씌우는 단계형 코치마크(제품 투어). 딤 오버레이·대상 하이라이트·설명 팝오버·단계 이동을 한 세트로 제공한다.
+
+```
+npx shadcn add https://ui.doksam.com/r/coach-mark-tour.json
+```
+
+registryDependencies: https://ui.doksam.com/r/button.json
+
+npm dependencies: radix-ui@^1.6.7, @phosphor-icons/react@^2.1.10
+
 ### Code Block (`code-block`)
 
 복사·라인번호 코드 블록.

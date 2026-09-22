@@ -24,6 +24,7 @@ const MANUAL_ENTRY_SLUGS = [
   "badge-extended",
   "tooltip-icon-button",
   "kebab-menu",
+  "coach-mark-tour",
   "table-sortable",
   "table-toggle",
   "date-picker",
