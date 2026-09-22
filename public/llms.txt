@@ -396,6 +396,18 @@ registryDependencies: https://ui.doksam.com/r/accordion.json, https://ui.doksam.
 npx shadcn add https://ui.doksam.com/r/return-curve.json
 ```
 
+### Evidence Decision Panel (`evidence-decision-panel`)
+
+근거의 출처·검증 상태와 연결된 조치 후보를 함께 보여주고, 사람의 선택만 상위 흐름으로 전달하는 의사결정 패널.
+
+```
+npx shadcn add https://ui.doksam.com/r/evidence-decision-panel.json
+```
+
+registryDependencies: https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/card.json, https://ui.doksam.com/r/radio-group.json
+
+npm dependencies: radix-ui@^1.6.7
+
 ### Risk Core Map (`risk-core-map`)
 
 위험등급(tier)을 중심→외곽 동심원 밴드로 배치하고 노드 크기·글로우로 익스포저와 위험을 표현하는 리스크 코어 네트워크 맵.
