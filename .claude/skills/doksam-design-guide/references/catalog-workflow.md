@@ -93,10 +93,11 @@ pnpm typecheck && pnpm lint && pnpm test && pnpm build
    - 에러 UI 는 `div role="alert"`.
 2. **레지스트리 등록** — `lib/patterns/registry.ts`
    ```ts
-   { slug: "<slug>", title: "...", description: "...", icon: SomeIcon, scope: "common" | "finance" | "srope" }
+   { slug: "<slug>", title: "...", description: "...", icon: SomeIcon, scope: "common" | "finance" }
    ```
+   - `PatternScope` 는 2종이다(#96 에서 `srope` 제거 — 출처가 아니라 재사용 범위로 나눈다).
    - `scope: "common"` 은 어떤 doksam 프로젝트에서도 재사용 가능한 것만.
-     도메인 색이 짙으면 `finance` 또는 `srope`.
+     도메인 색이 짙으면 `finance`.
    - `icon` 은 `@phosphor-icons/react/dist/ssr` 에서 import.
 3. **샘플 데이터** — 목 데이터가 필요하면 `lib/patterns/<name>-data.ts` +
    `<name>-data.test.ts` (기존 `mobile-banking-data`, `stock-order-data` 참고).
@@ -121,15 +122,23 @@ pnpm typecheck && pnpm lint && pnpm test && pnpm build
      href: "/templates/<slug>",
      title: "...",
      profile: "admin 프로필 · Slate · Geist",   // 사람이 읽는 조합 설명
+     archetype: "sidebar-app",                  // 필수 — archetypes/index.ts 의 name
      description: "...",
      stack: ["app-shell", "table-sortable"],     // 사용한 패턴/자산
      icon: SomeIcon,
    }
    ```
+   - `archetype` 은 선택 필드가 아니라 **필수**다(#37). 빠뜨리면 `pnpm typecheck` 가 깨지고,
+     `lib/templates/registry.test.ts` 가 원형↔템플릿 양방향 참조 무결성을 강제한다.
 3. **i18n** — `template.<slug>.description` 을 4개 로케일에
    (slug 는 `href` 의 마지막 세그먼트).
 4. **폐쇄망** — 템플릿의 데모 데이터도 외부 이미지 URL 금지. 아바타는 `AvatarFallback`.
-5. 검증 + 시각 확인(`pnpm dev` 로 라이트/다크 양쪽).
+5. **배포 산출물** — 템플릿도 shadcn 레지스트리로 배포한다. `registry.json` 에
+   `registry:block` item(`template-<slug>`)을 손으로 추가한 뒤
+   `pnpm registry:sync && pnpm registry:build && pnpm gen:llms`.
+   `registryDependencies` 에 bare 이름(`"badge"`)을 쓰지 않는다 — `registry:sync` 가
+   카탈로그 URL 항목명으로 다시 계산한다(#57).
+6. 검증 + 시각 확인(`pnpm dev` 로 라이트/다크 양쪽).
 
 ---
 

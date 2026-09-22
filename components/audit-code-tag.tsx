@@ -29,6 +29,11 @@ export interface AuditCodeTagProps extends Omit<React.ComponentProps<"span">, "o
  * 의미를 나누지 않는다 — 감사코드 체계(`EVD-`/`TAX-`/`BIO-` 등 접두어)는 프로젝트마다
  * 달라서, 이 컴포넌트가 접두어를 해석해 색을 배정하면 표준이 아니라 특정 화면의
  * 우연한 규칙을 전체에 강제하게 된다.
+ *
+ * `copyable` 을 켜면 복사 버튼이 태그 밖 형제로 렌더되고 둘을 감싸는
+ * `audit-code-tag-group` 래퍼가 생긴다 — `onNavigate` 와 함께 쓰면 태그 자신이
+ * `<button>` 이라, 복사 컨트롤을 그 안에 두면 중첩 인터랙티브가 되기 때문이다.
+ * 이때 `className` 은 래퍼에, 나머지 props 는 태그 요소에 붙는다.
  */
 function AuditCodeTag({ className, code, onNavigate, copyable = false, ...props }: Readonly<AuditCodeTagProps>) {
   const { t } = useI18n()
@@ -43,53 +48,49 @@ function AuditCodeTag({ className, code, onNavigate, copyable = false, ...props 
     [code, t]
   )
 
-  const content = (
-    <>
-      <span className="font-mono">{code}</span>
-      {copyable && (
-        <span
-          role="button"
-          tabIndex={0}
-          aria-label={t("chrome.auditCodeTag.copy", "감사코드 복사")}
-          onClick={handleCopy}
-          onKeyDown={(event) => {
-            if (event.key === "Enter" || event.key === " ") {
-              event.preventDefault()
-              handleCopy(event as unknown as React.MouseEvent)
-            }
-          }}
-          className="-mr-0.5 ml-0.5 inline-flex shrink-0 rounded-sm text-muted-foreground hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring"
-        >
-          <CopyIcon size={12} weight="regular" />
-        </span>
-      )}
-    </>
-  )
-
-  const sharedClassName = cn(
+  const tagClassName = cn(
     badgeVariants({ variant: "outline" }),
     "gap-1 bg-muted text-muted-foreground",
     onNavigate && "cursor-pointer hover:bg-accent hover:text-accent-foreground",
-    className
+    copyable ? undefined : className
   )
 
-  if (onNavigate) {
-    return (
+  const tag = onNavigate ? (
+    <button
+      type="button"
+      data-slot="audit-code-tag"
+      onClick={onNavigate}
+      className={tagClassName}
+      {...(props as React.ComponentProps<"button">)}
+    >
+      <span className="font-mono">{code}</span>
+    </button>
+  ) : (
+    <span data-slot="audit-code-tag" className={tagClassName} {...props}>
+      <span className="font-mono">{code}</span>
+    </span>
+  )
+
+  if (!copyable) return tag
+
+  // 복사 컨트롤은 태그 "안"이 아니라 형제 버튼으로 둔다 — onNavigate 가 있으면 태그
+  // 자신이 <button> 이라, 안에 또 하나의 조작 요소를 넣으면 중첩 인터랙티브가 된다
+  // (스크린리더가 이름을 합쳐 읽고, 키보드 포커스 순서도 어긋난다).
+  return (
+    <span
+      data-slot="audit-code-tag-group"
+      className={cn("inline-flex items-center gap-1 align-middle", className)}
+    >
+      {tag}
       <button
         type="button"
-        data-slot="audit-code-tag"
-        onClick={onNavigate}
-        className={sharedClassName}
-        {...(props as React.ComponentProps<"button">)}
+        data-slot="audit-code-tag-copy"
+        aria-label={t("chrome.auditCodeTag.copy", "감사코드 복사")}
+        onClick={handleCopy}
+        className="inline-flex shrink-0 rounded-sm text-muted-foreground hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring"
       >
-        {content}
+        <CopyIcon size={12} weight="regular" />
       </button>
-    )
-  }
-
-  return (
-    <span data-slot="audit-code-tag" className={sharedClassName} {...props}>
-      {content}
     </span>
   )
 }

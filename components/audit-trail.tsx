@@ -83,9 +83,15 @@ function AuditTrailActorTag({ actor }: Readonly<{ actor: AuditTrailActor }>) {
   )
 }
 
-function AuditTrailRow({ entry }: Readonly<{ entry: AuditTrailEntry }>) {
+function AuditTrailRow({ entry, hidden }: Readonly<{ entry: AuditTrailEntry; hidden: boolean }>) {
   return (
-    <li data-slot="audit-trail-row" className="flex flex-col gap-1.5 border-b border-border py-3 last:border-b-0">
+    <li
+      data-slot="audit-trail-row"
+      className={cn(
+        "flex flex-col gap-1.5 border-b border-border py-3 last:border-b-0",
+        hidden && "hidden print:block"
+      )}
+    >
       <div className="flex flex-wrap items-center gap-2">
         <span className="shrink-0 font-mono text-xs tabular-nums text-muted-foreground">{entry.timestamp}</span>
         <AuditTrailActorTag actor={entry.actor} />
@@ -133,11 +139,7 @@ function AuditTrail({ className, entries, visibleCount = 5, ...props }: Readonly
       <ol className="flex flex-col">
         {entries.map((entry, index) => {
           const hidden = hasOverflow && !expanded && index >= visibleCount
-          return (
-            <div key={entry.id} className={cn(hidden ? "hidden print:block" : "block")}>
-              <AuditTrailRow entry={entry} />
-            </div>
-          )
+          return <AuditTrailRow key={entry.id} entry={entry} hidden={hidden} />
         })}
       </ol>
       {hasOverflow ? (

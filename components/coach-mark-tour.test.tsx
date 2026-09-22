@@ -1,4 +1,4 @@
-import { useRef, useState } from "react"
+import { StrictMode, useRef, useState } from "react"
 import { fireEvent, render, screen } from "@testing-library/react"
 import { beforeAll, describe, expect, it, vi } from "vitest"
 
@@ -91,6 +91,30 @@ describe("CoachMarkTour", () => {
     expect(scrollToSpy).toHaveBeenCalledWith(40, 120)
 
     scrollToSpy.mockRestore()
+  })
+
+  // 회귀(#111 finding 12①): 닫기 콜백을 setState 업데이터 안에서 부르면 StrictMode 가
+  // 업데이터를 두 번 실행하면서 부수효과도 두 번 발화한다.
+  it("StrictMode에서도 마지막 단계의 완료 클릭이 onOpenChange를 한 번만 부른다", () => {
+    const onOpenChange = vi.fn()
+    render(
+      <StrictMode>
+        <CoachMarkTour steps={makeSteps(2)} open onOpenChange={onOpenChange} />
+      </StrictMode>,
+    )
+    fireEvent.click(screen.getByRole("button", { name: "다음" }))
+    fireEvent.click(screen.getByRole("button", { name: "완료" }))
+    expect(onOpenChange).toHaveBeenCalledTimes(1)
+    expect(onOpenChange).toHaveBeenCalledWith(false)
+  })
+
+  // 회귀(#111 finding 12②): role=dialog 인 팝오버 콘텐츠에 접근명이 없으면
+  // 스크린리더가 "dialog" 로만 읽는다.
+  it("팝오버 다이얼로그의 접근명이 현재 단계 제목이다", () => {
+    render(<CoachMarkTour steps={makeSteps(3)} open onOpenChange={vi.fn()} />)
+    expect(screen.getByRole("dialog")).toHaveAccessibleName("제목 1")
+    fireEvent.click(screen.getByRole("button", { name: "다음" }))
+    expect(screen.getByRole("dialog")).toHaveAccessibleName("제목 2")
   })
 
   it("ArrowRight/ArrowLeft로 단계를 이동할 수 있다", () => {

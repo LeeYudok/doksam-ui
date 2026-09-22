@@ -73,6 +73,8 @@ function useTargetRect(target: HTMLElement | null, active: boolean): DOMRect | n
  * - 대상은 셀렉터가 아니라 `targetRef` 로 받는다(리팩터 안전).
  * - `Popover` 프리미티브를 `modal` 로 써서 포커스 트랩·Esc 닫기·아웃사이드
  *   포인터 차단을 재구현하지 않고 그대로 재사용한다.
+ * - 팝오버 콘텐츠는 `role="dialog"` 라 접근명이 필요하다 — 단계 제목을
+ *   `aria-labelledby` 로 연결한다(이름 없는 다이얼로그는 스크린리더가 "dialog" 로만 읽는다).
  * - 열릴 때 포커스·스크롤 위치를 `useLayoutEffect` 로 저장하고, 닫힐 때
  *   복원한다 — 팝오버가 마운트되어 포커스를 가져가기 전에 커밋되므로
  *   이전 포커스 대상을 정확히 저장한다(#99 종료 게이트).
@@ -91,6 +93,7 @@ export function CoachMarkTour({
   closeLabel = "투어 닫기",
 }: Readonly<CoachMarkTourProps>) {
   const [activeStep, setActiveStep] = React.useState(0)
+  const titleId = React.useId()
 
   const savedFocusRef = React.useRef<HTMLElement | null>(null)
   const savedScrollRef = React.useRef<{ x: number; y: number } | null>(null)
@@ -143,15 +146,15 @@ export function CoachMarkTour({
     setActiveStep((value) => Math.max(0, value - 1))
   }, [])
 
+  // 상태 업데이터 안에서 onOpenChange 를 부르지 않는다 — React StrictMode 는 업데이터를
+  // 두 번 실행하므로 부수효과가 두 번 발화한다(닫기 콜백 중복 호출).
   const goNext = React.useCallback(() => {
-    setActiveStep((value) => {
-      if (value >= total - 1) {
-        onOpenChange(false)
-        return value
-      }
-      return value + 1
-    })
-  }, [total, onOpenChange])
+    if (clampedStep >= total - 1) {
+      onOpenChange(false)
+      return
+    }
+    setActiveStep(clampedStep + 1)
+  }, [clampedStep, total, onOpenChange])
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === "ArrowRight") {
@@ -197,13 +200,16 @@ export function CoachMarkTour({
               sideOffset={12}
               onKeyDown={handleKeyDown}
               onCloseAutoFocus={(event) => event.preventDefault()}
+              aria-labelledby={titleId}
               className={cn(
                 "z-50 flex w-80 flex-col gap-3 rounded-lg bg-popover p-4 text-sm text-popover-foreground shadow-md ring-1 ring-foreground/10 outline-hidden duration-200",
                 "data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0"
               )}
             >
               <div className="flex items-start justify-between gap-2">
-                <p className="font-medium leading-none">{current.title}</p>
+                <p id={titleId} className="font-medium leading-none">
+                  {current.title}
+                </p>
                 <PopoverPrimitive.Close asChild>
                   <Button type="button" variant="ghost" size="icon-sm" aria-label={closeLabel} className="-mt-1 -mr-1">
                     <XIcon />

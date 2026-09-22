@@ -72,6 +72,16 @@ export function computeProfileRegistryCssVars(profile: BrandProfile): ProfileReg
 const RADIUS_IN_DESCRIPTION = /radius=([^\s+]+)/;
 
 /**
+ * 치환용 전역 패턴 — `String.replace` 는 비전역 정규식이면 **첫 번째 일치만** 바꾼다.
+ * 설명 문장이 같은 토큰을 두 번 언급하면(예: 요약 한 번 + 설치 안내 한 번) 뒤쪽이
+ * 옛 값으로 남아 드리프트가 다시 생긴다. 추출(`extract*`)·실존 확인은 캡처 그룹을
+ * 그대로 읽어야 하므로 비전역 쪽을 쓰고, 치환만 이 전역 쌍을 쓴다 (#111 finding 15b).
+ */
+function replaceAll(input: string, pattern: RegExp, replacement: string): string {
+  return input.replace(new RegExp(pattern.source, "g"), replacement);
+}
+
+/**
  * `registry.json` 의 `profile-*` 항목 `description` 은 손으로 쓴 문장이라
  * (폰트 설치 캐비어트 등 프로필마다 다른 내용을 담는다) 전체를 자동 생성하지
  * 않는다. 다만 그 문장 안의 `radius=<값>` 부분은 `profiles/index.ts` 의
@@ -86,7 +96,7 @@ const RADIUS_IN_DESCRIPTION = /radius=([^\s+]+)/;
  */
 export function withSyncedRadiusDescription(description: string, radius: string): string {
   if (!RADIUS_IN_DESCRIPTION.test(description)) return description;
-  return description.replace(RADIUS_IN_DESCRIPTION, `radius=${radius}`);
+  return replaceAll(description, RADIUS_IN_DESCRIPTION, `radius=${radius}`);
 }
 
 /** `description` 에서 `radius=<값>` 부분을 추출한다. 없으면 undefined. */
@@ -115,21 +125,28 @@ const DATA_PERSONALITY_MOTION_IN_DESCRIPTION = /data-personality-motion="([a-z]+
  * 없으면 아무 층도 걸리지 않는 opt-in 이라, 설명이 `data-personality*` 세 속성을
  * 안내하지 않으면 설치만 한 프로젝트가 성격 미적용으로 돌아간다.
  *
+ * 치환은 전역으로 한다 — 같은 토큰이 문장 안에 두 번 나오면 첫 개만 바뀌어
+ * 나머지가 옛 값으로 남는다(#111 finding 15b).
+ *
  * 각 패턴은 없으면 그 부분만 건너뛴다 — 조용한 실패를 막기 위해
  * `lib/profile-registry-css-vars.test.ts` 가 전 프로필에 모든 패턴이 실존하는지
  * 함께 확인한다.
  */
 export function withSyncedProfileAxesDescription(description: string, profile: BrandProfile): string {
   let out = withSyncedRadiusDescription(description, profile.radius);
-  out = out.replace(DENSITY_IN_DESCRIPTION, `density=${profile.density}`);
-  out = out.replace(DATA_DENSITY_IN_DESCRIPTION, `data-density="${profile.density}"`);
-  out = out.replace(PERSONALITY_IN_DESCRIPTION, `personality=${profile.personality}`);
-  out = out.replace(DATA_PERSONALITY_IN_DESCRIPTION, `data-personality="${profile.personality}"`);
+  out = replaceAll(out, DENSITY_IN_DESCRIPTION, `density=${profile.density}`);
+  out = replaceAll(out, DATA_DENSITY_IN_DESCRIPTION, `data-density="${profile.density}"`);
+  out = replaceAll(out, PERSONALITY_IN_DESCRIPTION, `personality=${profile.personality}`);
+  out = replaceAll(out, DATA_PERSONALITY_IN_DESCRIPTION, `data-personality="${profile.personality}"`);
 
   const personality = getPersonalityPreset(profile.personality);
   if (personality) {
-    out = out.replace(DATA_PERSONALITY_SURFACE_IN_DESCRIPTION, `data-personality-surface="${personality.surface}"`);
-    out = out.replace(DATA_PERSONALITY_MOTION_IN_DESCRIPTION, `data-personality-motion="${personality.motion}"`);
+    out = replaceAll(
+      out,
+      DATA_PERSONALITY_SURFACE_IN_DESCRIPTION,
+      `data-personality-surface="${personality.surface}"`,
+    );
+    out = replaceAll(out, DATA_PERSONALITY_MOTION_IN_DESCRIPTION, `data-personality-motion="${personality.motion}"`);
   }
   return out;
 }

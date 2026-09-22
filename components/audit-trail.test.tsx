@@ -59,18 +59,29 @@ describe("AuditTrail", () => {
     // 접힌 항목은 DOM에는 남아있지만 hidden 클래스로 숨는다(인쇄 대비 — 렌더에서 빼지 않는다).
     expect(container.querySelectorAll('[data-slot="audit-trail-row"]')).toHaveLength(7)
     const rows = container.querySelectorAll('[data-slot="audit-trail-row"]')
-    expect(rows[6]!.parentElement).toHaveClass("hidden")
+    expect(rows[6]!).toHaveClass("hidden")
 
     fireEvent.click(screen.getByRole("button"))
     expect(screen.getByText("접기")).toBeInTheDocument()
-    expect(rows[6]!.parentElement).not.toHaveClass("hidden")
+    expect(container.querySelectorAll('[data-slot="audit-trail-row"]')[6]!).not.toHaveClass("hidden")
   })
 
   it("접힌 항목의 wrapper 는 인쇄 시 강제로 펼쳐지는 print:block 클래스를 갖는다", () => {
     const entries = Array.from({ length: 7 }, (_, i) => entry({ id: String(i) }))
     const { container } = render(<AuditTrail entries={entries} visibleCount={5} />)
     const rows = container.querySelectorAll('[data-slot="audit-trail-row"]')
-    expect(rows[5]!.parentElement).toHaveClass("print:block")
+    expect(rows[5]!).toHaveClass("print:block")
+  })
+
+  it("ol 의 직계 자식은 전부 li 다 — 접힘 래퍼가 리스트 시맨틱과 last:border-b-0 판정을 깨지 않는다", () => {
+    const entries = Array.from({ length: 7 }, (_, i) => entry({ id: String(i) }))
+    const { container } = render(<AuditTrail entries={entries} visibleCount={5} />)
+    const list = container.querySelector("ol")!
+    const children = Array.from(list.children)
+    expect(children).toHaveLength(7)
+    expect(children.every((child) => child.tagName === "LI")).toBe(true)
+    // 마지막 행만 구분선이 지워져야 한다(:last-child 가 전 행에 걸리면 구분선이 통째로 사라진다).
+    expect(children.filter((child) => child.matches("li:last-child"))).toHaveLength(1)
   })
 
   it("하드코딩 색 없이 시맨틱 유틸리티 클래스만 쓴다", () => {

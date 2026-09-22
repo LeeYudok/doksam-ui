@@ -46,6 +46,8 @@ export interface MatrixHeatmapProps {
   legendMinLabel: string
   /** 범례의 "높음" 쪽 라벨. */
   legendMaxLabel: string
+  /** 행 머리글 열(좌상단 빈 칸)의 스크린리더 전용 이름. */
+  rowHeaderLabel?: string
   className?: string
 }
 
@@ -79,6 +81,7 @@ export function MatrixHeatmap({
   emptyLabel = "–",
   legendMinLabel,
   legendMaxLabel,
+  rowHeaderLabel = "행 머리글",
   className,
 }: Readonly<MatrixHeatmapProps>) {
   const cellMap = React.useMemo(() => {
@@ -105,7 +108,7 @@ export function MatrixHeatmap({
                 scope="col"
                 className="sticky left-0 z-10 border-b border-border bg-card p-2 text-left text-xs font-medium text-muted-foreground"
               >
-                <span className="sr-only">행 머리글</span>
+                <span className="sr-only">{rowHeaderLabel}</span>
               </th>
               {colKeys.map((colKey) => (
                 <th

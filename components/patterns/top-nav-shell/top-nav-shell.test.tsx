@@ -53,6 +53,45 @@ describe("TopNavShell", () => {
     }
   })
 
+  // 회귀(#111 finding 14①): 보이는 글자("더보기")와 접근명이 다르면 Label in Name 위반이다.
+  it("더보기 트리거의 접근명이 보이는 글자와 같다", () => {
+    const { container } = renderShell({ maxVisibleItems: 6 })
+    const trigger = within(container).getByRole("button", { name: "더보기" })
+    expect(trigger).not.toHaveAttribute("aria-label")
+  })
+
+  // 회귀(#111 finding 14②): 링크형 항목은 onSelect 가 없어 시트가 열린 채로 남았다.
+  it("모바일 시트에서 링크형 메뉴를 눌러도 시트가 닫힌다", () => {
+    const { container } = renderShell()
+    fireEvent.click(within(container).getByLabelText("메뉴 열기"))
+    const sheetNav = screen.getByLabelText("모바일 글로벌 내비게이션")
+    fireEvent.click(within(sheetNav).getByText("메뉴1"))
+    expect(screen.queryByLabelText("모바일 글로벌 내비게이션")).toBeNull()
+  })
+
+  it("버튼형 메뉴는 시트를 닫으면서 onSelect 도 호출한다", () => {
+    const onSelect = vi.fn()
+    const { container } = renderShell({
+      items: [{ key: "action", label: "액션", onSelect }],
+    })
+    fireEvent.click(within(container).getByLabelText("메뉴 열기"))
+    fireEvent.click(within(screen.getByLabelText("모바일 글로벌 내비게이션")).getByText("액션"))
+    expect(onSelect).toHaveBeenCalledTimes(1)
+    expect(screen.queryByLabelText("모바일 글로벌 내비게이션")).toBeNull()
+  })
+
+  // 회귀(#111 finding 14④): 랜드마크 이름·햄버거 라벨이 한국어로 박혀 있었다.
+  it("labels 로 랜드마크 이름과 더보기 글자를 덮을 수 있다", () => {
+    const { container } = renderShell({
+      labels: { globalNav: "Global navigation", openMenu: "Open menu", overflow: "More" },
+    })
+    expect(within(container).getByLabelText("Global navigation")).toBeInTheDocument()
+    expect(within(container).getByLabelText("Open menu")).toBeInTheDocument()
+    expect(within(container).getByRole("button", { name: "More" })).toBeInTheDocument()
+    // 덮지 않은 키는 기본값 그대로다.
+    expect(within(container).getByLabelText("화면 내 탭")).toBeInTheDocument()
+  })
+
   it("활성 메뉴·서브탭에 aria-current 를 붙인다", () => {
     const { container } = renderShell()
     expect(within(container).getByRole("link", { name: "메뉴3" })).toHaveAttribute("aria-current", "page")

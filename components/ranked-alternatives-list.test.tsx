@@ -95,4 +95,43 @@ describe("RankedAlternativesList", () => {
       screen.getByText("정책자금 대상 차주는 우선순위 대안을 먼저 소진해야 합니다."),
     ).toBeInTheDocument()
   })
+
+  it("labels 로 화면 문구를 부분 지정할 수 있고, 주지 않은 키는 한국어 기본값을 유지한다", () => {
+    render(
+      <RankedAlternativesList
+        title="Remediation options"
+        alternatives={alternatives}
+        adoptedId="loan-refinance"
+        history={history}
+        labels={{
+          noRank: "Unranked",
+          rank: "Rank {rank}",
+          rankTied: "Rank {rank} · tied",
+          adopted: "Adopted",
+          adopt: "Adopt",
+          readopt: "Re-adopt",
+        }}
+      />,
+    )
+
+    expect(screen.getByText("Rank 1")).toBeInTheDocument()
+    expect(screen.getByText("Rank 2 · tied")).toBeInTheDocument()
+    expect(screen.getByText("Unranked")).toBeInTheDocument()
+    expect(screen.getByText("Adopted")).toBeInTheDocument()
+    expect(screen.getByRole("button", { name: "Re-adopt" })).toBeInTheDocument()
+    expect(screen.getAllByRole("button", { name: "Adopt" }).length).toBeGreaterThan(0)
+    // 덮지 않은 키는 기본값 그대로다.
+    expect(screen.getByText("채택 이력")).toBeInTheDocument()
+    expect(screen.getByText("채택을 새로 해도 이전 기록은 지워지지 않습니다.")).toBeInTheDocument()
+  })
+
+  it("labels 를 주지 않으면 전 문구가 한국어 기본값이다", () => {
+    render(<RankedAlternativesList title="사후관리 조치 추천" alternatives={alternatives} adoptedId="loan-refinance" />)
+
+    expect(screen.getByText("1순위")).toBeInTheDocument()
+    expect(screen.getByText("2순위 · 동점")).toBeInTheDocument()
+    expect(screen.getByText("순위 없음")).toBeInTheDocument()
+    expect(screen.getByText("채택됨")).toBeInTheDocument()
+    expect(screen.getByRole("button", { name: "재채택" })).toBeInTheDocument()
+  })
 })

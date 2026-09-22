@@ -10,6 +10,7 @@ import {
   extractProfileDataAttrsFromDescription,
   extractRadiusFromDescription,
   PROFILE_CSS_VAR_KEYS,
+  withSyncedProfileAxesDescription,
 } from "@/lib/profile-registry-css-vars";
 import { getPersonalityPreset } from "@/personalities";
 import { BRAND_PROFILES } from "@/profiles";
@@ -118,4 +119,37 @@ describe("registry.json profile-* cssVars (#36)", () => {
       });
     });
   }
+});
+
+// 회귀(#111 finding 15b): 비전역 replace 는 첫 일치만 바꿔서, 같은 토큰을 두 번
+// 언급하는 설명 문장의 뒤쪽이 옛 값으로 남았다.
+describe("withSyncedProfileAxesDescription", () => {
+  const profile = BRAND_PROFILES[0]!;
+  const preset = getPersonalityPreset(profile.personality)!;
+
+  it("한 문장 안에 토큰이 두 번 나와도 전부 동기화한다", () => {
+    const description = [
+      `요약: radius=WRONG · density=wrong · personality=wrong`,
+      `설치: data-density="wrong" data-personality="wrong"`,
+      `다시: radius=WRONG · density=wrong · personality=wrong`,
+      `다시: data-density="wrong" data-personality="wrong"`,
+      `속성: data-personality-surface="wrong" data-personality-motion="wrong"`,
+      `속성: data-personality-surface="wrong" data-personality-motion="wrong"`,
+    ].join("\n");
+
+    const out = withSyncedProfileAxesDescription(description, profile);
+
+    expect(out).not.toMatch(/WRONG|wrong/);
+    expect(out.match(new RegExp(`radius=${profile.radius}`, "g"))).toHaveLength(2);
+    expect(out.match(new RegExp(`(?<!-)density=${profile.density}`, "g"))).toHaveLength(2);
+    expect(out.match(new RegExp(`data-density="${profile.density}"`, "g"))).toHaveLength(2);
+    expect(out.match(new RegExp(`data-personality="${profile.personality}"`, "g"))).toHaveLength(2);
+    expect(out.match(new RegExp(`data-personality-surface="${preset.surface}"`, "g"))).toHaveLength(2);
+    expect(out.match(new RegExp(`data-personality-motion="${preset.motion}"`, "g"))).toHaveLength(2);
+  });
+
+  it("패턴이 없으면 원본을 그대로 돌려준다", () => {
+    const description = "축 언급이 전혀 없는 설명";
+    expect(withSyncedProfileAxesDescription(description, profile)).toBe(description);
+  });
 });

@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import Link from "next/link"
 import { CaretDownIcon, ListIcon, MagnifyingGlassIcon } from "@phosphor-icons/react/dist/ssr"
 import type { Icon } from "@phosphor-icons/react"
 
@@ -46,6 +47,35 @@ export interface TopNavSubTab {
   onSelect?: () => void
 }
 
+/**
+ * 셸이 스스로 내는 문구 — 대부분 화면에 보이지 않는 접근성 이름이라 번역 대상이
+ * 아닌 것처럼 보이기 쉽지만, 스크린리더 사용자에게는 이게 유일한 목적지 이름이다.
+ * 전부 한국어 기본값을 갖고 `labels` 로 일부만 덮을 수 있다(부분 지정).
+ */
+export interface TopNavShellLabels {
+  /** 1단 글로벌 nav 랜드마크 이름. */
+  globalNav: string
+  /** 모바일 시트 안 nav 랜드마크 이름. */
+  mobileNav: string
+  /** 햄버거 버튼의 접근성 이름. */
+  openMenu: string
+  /** 모바일 시트 제목(화면에 보인다). */
+  menuTitle: string
+  /** 2단 서브탭 nav 랜드마크 이름. */
+  subTabNav: string
+  /** 접힌 메뉴를 여는 드롭다운 트리거에 보이는 글자. */
+  overflow: string
+}
+
+export const TOP_NAV_SHELL_DEFAULT_LABELS: TopNavShellLabels = {
+  globalNav: "글로벌 내비게이션",
+  mobileNav: "모바일 글로벌 내비게이션",
+  openMenu: "메뉴 열기",
+  menuTitle: "메뉴",
+  subTabNav: "화면 내 탭",
+  overflow: "더보기",
+}
+
 export interface TopNavShellProps {
   /** 좌측 브랜드 영역 — 로고 + 서비스명. */
   brand: React.ReactNode
@@ -68,8 +98,8 @@ export interface TopNavShellProps {
   ask?: React.ReactNode
   /** lg 이상에서 가로로 펼칠 메뉴 최대 개수. 그 뒤는 "더보기" 로 접힌다. */
   maxVisibleItems?: number
-  /** 접힌 메뉴를 여는 드롭다운 트리거 라벨. */
-  overflowLabel?: string
+  /** 셸이 내는 문구(랜드마크 이름·햄버거 라벨·더보기 글자) 덮어쓰기. 필요한 키만 준다. */
+  labels?: Partial<TopNavShellLabels>
   /** 셸 루트에 덧붙일 클래스. */
   className?: string
   children: React.ReactNode
@@ -86,29 +116,46 @@ function itemClass(active: boolean): string {
   )
 }
 
-/** href 유무로 링크/버튼을 고르는 공용 렌더러 — 목적지는 링크, 그 외는 버튼이 접근성 기본값이다. */
+/**
+ * href 유무로 링크/버튼을 고르는 공용 렌더러 — 목적지는 링크, 그 외는 버튼이 접근성
+ * 기본값이다. 링크는 `next/link` 로 낸다(앱 내 이동에서 전체 새로고침을 피한다).
+ *
+ * `onActivate` 는 목적지 이동과 무관한 셸 쪽 부수효과(모바일 시트 닫기) 전용이라
+ * 링크·버튼 양쪽 모두에서 발화한다 — `onSelect` 만 있으면 링크 항목은 아무것도
+ * 호출하지 않아 시트가 열린 채로 남는다.
+ */
 function NavAction({
   href,
   onSelect,
+  onActivate,
   active,
   className,
   children,
 }: Readonly<{
   href?: string
   onSelect?: () => void
+  onActivate?: () => void
   active: boolean
   className: string
   children: React.ReactNode
 }>) {
   if (href) {
     return (
-      <a href={href} aria-current={active ? "page" : undefined} className={className}>
+      <Link href={href} onClick={onActivate} aria-current={active ? "page" : undefined} className={className}>
         {children}
-      </a>
+      </Link>
     )
   }
   return (
-    <button type="button" onClick={onSelect} aria-current={active ? "page" : undefined} className={className}>
+    <button
+      type="button"
+      onClick={() => {
+        onActivate?.()
+        onSelect?.()
+      }}
+      aria-current={active ? "page" : undefined}
+      className={className}
+    >
       {children}
     </button>
   )
@@ -171,9 +218,9 @@ export function TopNavAskBar({
 
   if (href) {
     return (
-      <a ref={ref as React.Ref<HTMLAnchorElement>} href={href} aria-label={name} className={cls}>
+      <Link ref={ref as React.Ref<HTMLAnchorElement>} href={href} aria-label={name} className={cls}>
         {content}
-      </a>
+      </Link>
     )
   }
   return (
@@ -199,11 +246,15 @@ export function TopNavShell({
   activeSubTab,
   ask,
   maxVisibleItems = DEFAULT_MAX_VISIBLE_ITEMS,
-  overflowLabel = "더보기",
+  labels: labelOverrides,
   className,
   children,
 }: Readonly<TopNavShellProps>) {
   const [sheetOpen, setSheetOpen] = React.useState(false)
+  const labels = React.useMemo(
+    () => ({ ...TOP_NAV_SHELL_DEFAULT_LABELS, ...labelOverrides }),
+    [labelOverrides],
+  )
 
   const visible = items.slice(0, maxVisibleItems)
   const overflow = items.slice(maxVisibleItems)
@@ -216,7 +267,7 @@ export function TopNavShell({
         <div className="flex h-14 items-center gap-2 px-4">
           <div className="flex shrink-0 items-center gap-2">{brand}</div>
 
-          <nav className="ml-4 hidden min-w-0 items-center gap-0.5 lg:flex" aria-label="글로벌 내비게이션">
+          <nav className="ml-4 hidden min-w-0 items-center gap-0.5 lg:flex" aria-label={labels.globalNav}>
             {visible.map((item) => {
               const ItemIcon = item.icon
               const active = item.key === activeItem
@@ -236,11 +287,10 @@ export function TopNavShell({
 
             {overflow.length > 0 ? (
               <DropdownMenu>
-                <DropdownMenuTrigger
-                  className={itemClass(overflow.some((item) => item.key === activeItem))}
-                  aria-label="나머지 메뉴"
-                >
-                  {overflowLabel}
+                {/* aria-label 을 따로 두지 않는다 — 보이는 글자와 접근명이 달라지면
+                    음성 조작 사용자가 "더보기" 라고 말해도 걸리지 않는다(Label in Name). */}
+                <DropdownMenuTrigger className={itemClass(overflow.some((item) => item.key === activeItem))}>
+                  {labels.overflow}
                   <CaretDownIcon size={12} weight="bold" />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="start" className="w-52">
@@ -250,10 +300,10 @@ export function TopNavShell({
                     return (
                       <DropdownMenuItem key={item.key} asChild={Boolean(item.href)} onSelect={item.onSelect}>
                         {item.href ? (
-                          <a href={item.href} aria-current={active ? "page" : undefined}>
+                          <Link href={item.href} aria-current={active ? "page" : undefined}>
                             {ItemIcon ? <ItemIcon size={16} weight={active ? "duotone" : "regular"} /> : null}
                             {item.label}
-                          </a>
+                          </Link>
                         ) : (
                           <>
                             {ItemIcon ? <ItemIcon size={16} weight={active ? "duotone" : "regular"} /> : null}
@@ -273,13 +323,13 @@ export function TopNavShell({
             {/* lg 미만 — 글로벌 nav 전체를 시트로 접는다 */}
             <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" aria-label="메뉴 열기" className="lg:hidden">
+                <Button variant="ghost" size="icon" aria-label={labels.openMenu} className="lg:hidden">
                   <ListIcon size={20} />
                 </Button>
               </SheetTrigger>
               <SheetContent side="right" className="flex w-72 flex-col gap-3 overflow-y-auto px-3 py-4">
-                <SheetTitle className="px-2 text-sm font-semibold tracking-tight">메뉴</SheetTitle>
-                <nav className="flex flex-col gap-0.5" aria-label="모바일 글로벌 내비게이션">
+                <SheetTitle className="px-2 text-sm font-semibold tracking-tight">{labels.menuTitle}</SheetTitle>
+                <nav className="flex flex-col gap-0.5" aria-label={labels.mobileNav}>
                   {items.map((item) => {
                     const ItemIcon = item.icon
                     const active = item.key === activeItem
@@ -287,10 +337,8 @@ export function TopNavShell({
                       <NavAction
                         key={item.key}
                         href={item.href}
-                        onSelect={() => {
-                          setSheetOpen(false)
-                          item.onSelect?.()
-                        }}
+                        onSelect={item.onSelect}
+                        onActivate={() => setSheetOpen(false)}
                         active={active}
                         className={cn(itemClass(active), "w-full justify-start")}
                       >
@@ -314,7 +362,7 @@ export function TopNavShell({
             {(subTabs?.length ?? 0) > 0 ? (
               <nav
                 className="-mx-1 flex min-w-0 flex-1 items-center gap-0.5 overflow-x-auto px-1"
-                aria-label="화면 내 탭"
+                aria-label={labels.subTabNav}
               >
                 {subTabs?.map((tab) => {
                   const active = tab.key === activeSubTab

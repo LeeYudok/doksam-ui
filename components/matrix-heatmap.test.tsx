@@ -154,4 +154,20 @@ describe("MatrixHeatmap", () => {
     expect(style).toContain("var(--heatmap-text-0)")
     expect(style).not.toMatch(/#[0-9a-f]{3,8}\b/i)
   })
+
+  it("행 머리글 sr-only 문구를 prop 으로 덮을 수 있고, 주지 않으면 한국어 기본값이다", () => {
+    const baseProps = {
+      rowKeys: ["manufacturing"],
+      colKeys: ["low"],
+      cells: CELLS,
+      caption: "업종별 조기경보 건전성 매트릭스",
+      legendMinLabel: "적음",
+      legendMaxLabel: "많음",
+    }
+    const { container, rerender } = render(<MatrixHeatmap {...baseProps} />)
+    expect(container.querySelector("thead .sr-only")).toHaveTextContent("행 머리글")
+
+    rerender(<MatrixHeatmap {...baseProps} rowHeaderLabel="Row header" />)
+    expect(container.querySelector("thead .sr-only")).toHaveTextContent("Row header")
+  })
 })

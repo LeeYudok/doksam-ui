@@ -56,4 +56,23 @@ describe("AuditCodeTag", () => {
     fireEvent.click(screen.getByLabelText("감사코드 복사"))
     expect(onNavigate).not.toHaveBeenCalled()
   })
+
+  it("copyable + onNavigate 여도 복사 버튼이 태그 버튼 안에 중첩되지 않는다", () => {
+    const { container } = render(<AuditCodeTag code="EVD-2025-0518" onNavigate={() => {}} copyable />)
+    const tag = container.querySelector('[data-slot="audit-code-tag"]')!
+    const copy = container.querySelector('[data-slot="audit-code-tag-copy"]')!
+    expect(tag.tagName).toBe("BUTTON")
+    expect(copy.tagName).toBe("BUTTON")
+    expect(tag.contains(copy)).toBe(false)
+    expect(tag.querySelector("button, [role='button'], a, input")).toBeNull()
+    // 둘은 같은 래퍼의 형제다.
+    expect(copy.parentElement).toBe(tag.parentElement)
+    expect(container.querySelectorAll("button")).toHaveLength(2)
+  })
+
+  it("copyable 이면 className 은 래퍼에, 나머지 props 는 태그에 붙는다", () => {
+    const { container } = render(<AuditCodeTag code="EVD-2025-0518" copyable className="ml-auto" data-testid="tag" />)
+    expect(screen.getByTestId("tag").dataset.slot).toBe("audit-code-tag")
+    expect(container.querySelector('[data-slot="audit-code-tag-group"]')).toHaveClass("ml-auto")
+  })
 })

@@ -48,6 +48,41 @@ export interface AdoptionRecord {
   note?: string
 }
 
+/**
+ * 화면에 보이는 고정 문구 — 전부 한국어 기본값을 갖고, `labels` 로 일부만 덮을 수
+ * 있다(부분 지정). 카탈로그 컴포넌트는 소비 프로젝트의 도메인 용어("채택"→"승인")와
+ * 다국어를 모르므로 문구를 내부에 가둬 두지 않는다.
+ */
+export interface RankedAlternativesLabels {
+  /** `rank: null` 인 대안의 순위 배지 문구. */
+  noRank: string
+  /** 순위 배지 문구. `{rank}` 가 순위 숫자로 치환된다. */
+  rank: string
+  /** 동점(`tied`) 대안의 순위 배지 문구. `{rank}` 가 순위 숫자로 치환된다. */
+  rankTied: string
+  /** 현재 채택된 대안에 붙는 배지 문구. */
+  adopted: string
+  /** 채택 버튼 문구. */
+  adopt: string
+  /** 이미 채택된 대안의 버튼 문구(다시 누르면 재채택). */
+  readopt: string
+  /** 채택 이력 카드의 제목. */
+  historyTitle: string
+  /** 채택 이력 카드의 설명 — 이전 기록이 지워지지 않는다는 안내. */
+  historyDescription: string
+}
+
+export const RANKED_ALTERNATIVES_DEFAULT_LABELS: RankedAlternativesLabels = {
+  noRank: "순위 없음",
+  rank: "{rank}순위",
+  rankTied: "{rank}순위 · 동점",
+  adopted: "채택됨",
+  adopt: "채택",
+  readopt: "재채택",
+  historyTitle: "채택 이력",
+  historyDescription: "채택을 새로 해도 이전 기록은 지워지지 않습니다.",
+}
+
 export interface RankedAlternativesListProps
   extends Omit<React.ComponentProps<"div">, "children" | "title"> {
   /** 화면 맥락을 설명하는 제목. */
@@ -60,17 +95,16 @@ export interface RankedAlternativesListProps
   adoptedId?: string
   /** 채택 이력. 최신이 먼저 오도록 호출부가 정렬해 전달한다. */
   history?: AdoptionRecord[]
-  /** 이력 영역의 제목. history가 있을 때만 쓰인다. */
-  historyTitle?: string
-  /** 채택 버튼 문구. */
-  adoptLabel?: string
+  /** 화면 문구 덮어쓰기. 필요한 키만 골라 주면 나머지는 한국어 기본값을 쓴다. */
+  labels?: Partial<RankedAlternativesLabels>
   /** 대안을 채택했을 때 id와 원본 대안을 전달한다. 이력 기록·저장은 호출부가 소유한다. */
   onAdopt?: (id: string, alternative: RankedAlternative) => void
 }
 
-function rankBadgeLabel(alternative: RankedAlternative): string {
-  if (alternative.rank === null) return "순위 없음"
-  return alternative.tied ? `${alternative.rank}순위 · 동점` : `${alternative.rank}순위`
+function rankBadgeLabel(alternative: RankedAlternative, labels: RankedAlternativesLabels): string {
+  if (alternative.rank === null) return labels.noRank
+  const template = alternative.tied ? labels.rankTied : labels.rank
+  return template.replace("{rank}", String(alternative.rank))
 }
 
 /**
@@ -81,6 +115,9 @@ function rankBadgeLabel(alternative: RankedAlternative): string {
  * 순위는 장식이 아니라 모형이 계산한 값이므로 동점(`tied`)과 순위 없음(`rank: null`)을
  * 표현할 수 있어야 하고, 채택 순서를 모델링하지 않는 `evidence-decision-panel`의
  * `RadioGroup` 단일 선택 UI로는 그 두 상태를 감출 수 없다.
+ *
+ * 화면 문구는 전부 `labels` 로 열려 있다(부분 지정, 한국어 기본값) — 순위 배지·채택
+ * 배지·버튼·이력 안내 어느 것도 컴포넌트 안에 고정하지 않는다.
  */
 function RankedAlternativesList({
   title,
@@ -88,13 +125,16 @@ function RankedAlternativesList({
   alternatives,
   adoptedId,
   history,
-  historyTitle = "채택 이력",
-  adoptLabel = "채택",
+  labels: labelOverrides,
   onAdopt,
   className,
   ...props
 }: Readonly<RankedAlternativesListProps>) {
   const headingId = React.useId()
+  const labels = React.useMemo(
+    () => ({ ...RANKED_ALTERNATIVES_DEFAULT_LABELS, ...labelOverrides }),
+    [labelOverrides],
+  )
 
   return (
     <div data-slot="ranked-alternatives-list" className={cn("flex flex-col gap-4", className)} {...props}>
@@ -119,13 +159,13 @@ function RankedAlternativesList({
                   <div className="flex flex-wrap items-start justify-between gap-2">
                     <div className="flex min-w-0 flex-wrap items-center gap-2">
                       <Badge variant={alternative.rank === null ? "outline" : "secondary"}>
-                        {rankBadgeLabel(alternative)}
+                        {rankBadgeLabel(alternative, labels)}
                       </Badge>
                       <span className="text-sm font-medium">{alternative.label}</span>
                       {alternative.riskLevel && alternative.riskLabel ? (
                         <RiskGradeBadge level={alternative.riskLevel} label={alternative.riskLabel} />
                       ) : null}
-                      {isAdopted ? <Badge variant="default">채택됨</Badge> : null}
+                      {isAdopted ? <Badge variant="default">{labels.adopted}</Badge> : null}
                     </div>
                     <Button
                       type="button"
@@ -134,7 +174,7 @@ function RankedAlternativesList({
                       disabled={alternative.disabled}
                       onClick={() => onAdopt?.(alternative.id, alternative)}
                     >
-                      {isAdopted ? "재채택" : adoptLabel}
+                      {isAdopted ? labels.readopt : labels.adopt}
                     </Button>
                   </div>
                   <p className="mt-2 text-sm text-muted-foreground">{alternative.evidenceSummary}</p>
@@ -152,8 +192,8 @@ function RankedAlternativesList({
       {history && history.length > 0 ? (
         <Card>
           <CardHeader>
-            <CardTitle className="text-sm">{historyTitle}</CardTitle>
-            <CardDescription>채택을 새로 해도 이전 기록은 지워지지 않습니다.</CardDescription>
+            <CardTitle className="text-sm">{labels.historyTitle}</CardTitle>
+            <CardDescription>{labels.historyDescription}</CardDescription>
           </CardHeader>
           <CardContent>
             <ol className="flex flex-col gap-2">
