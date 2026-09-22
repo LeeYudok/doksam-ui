@@ -706,6 +706,14 @@ registryDependencies: https://ui.doksam.com/r/card.json
 
 npm dependencies: @phosphor-icons/react@^2.1.10
 
+### Page Header (`page-header`)
+
+페이지 상단 제목 + 우측 슬롯 + 설명 조합. 제목 옆 슬롯에는 상태 배지·기준시각 칩처럼 제목을 보충하는 표시를 둔다.
+
+```
+npx shadcn add https://ui.doksam.com/r/page-header.json
+```
+
 ### Sticky Actionbar (`sticky-actionbar`)
 
 화면(또는 스크롤 컨테이너) 하단에 sticky 로 붙는 주 액션 바. 안전영역·모바일 키보드를 고려해 fixed 대신 sticky 를 쓰고, 파괴적/보조/주 액션의 배치 순서를 고정한다.
@@ -1047,6 +1055,18 @@ npx shadcn add https://ui.doksam.com/r/template-trading.json
 registryDependencies: https://ui.doksam.com/r/activity-heatmap.json, https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/card.json, https://ui.doksam.com/r/diverging-bar.json, https://ui.doksam.com/r/finance-format-won.json, https://ui.doksam.com/r/finance-rate.json, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/return-curve.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json, https://ui.doksam.com/r/sparkline.json, https://ui.doksam.com/r/table-sortable.json
 
 npm dependencies: @tanstack/react-table@^8.21.3, @dnd-kit/core@^6.3.1, @dnd-kit/sortable@^10.0.0, @phosphor-icons/react@^2.1.10
+
+### EWS Dashboard 템플릿 (`template-ews-dashboard`)
+
+finance 프로필 · Ivory · Noto Sans KR · dashboard-grid 원형. 여신 조기경보 홈 대시보드 — top-nav 셸 아래로 규정 콜아웃·KPI 4장·등급 분포 도넛·긴급 처리 차주 표를 배치합니다. 등급 색은 --risk-* 토큰으로만 칠하고 등급 문구와 Tier 번호를 항상 함께 실어 색 외 두 번째 채널을 보장합니다.
+
+```
+npx shadcn add https://ui.doksam.com/r/template-ews-dashboard.json
+```
+
+registryDependencies: https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/card.json, https://ui.doksam.com/r/chart.json, https://ui.doksam.com/r/compliance-callout.json, https://ui.doksam.com/r/finance-format-won.json, https://ui.doksam.com/r/finance-rate.json, https://ui.doksam.com/r/page-header.json, https://ui.doksam.com/r/party-identity-cell.json, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/risk-grade-badge.json, https://ui.doksam.com/r/risk-table.json, https://ui.doksam.com/r/risk-tokens.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json, https://ui.doksam.com/r/section-panel-header.json, https://ui.doksam.com/r/top-nav-shell.json
+
+npm dependencies: @phosphor-icons/react@^2.1.10, recharts@3.8.0
 
 ## registry:file
 
