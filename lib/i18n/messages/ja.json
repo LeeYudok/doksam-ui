@@ -452,6 +452,8 @@
   "pattern.pipeline.title": "パイプラインパターン",
   "pattern.pricing.description": "3ティアの料金カード・月/年切り替え（割引）・機能比較・おすすめティアの強調表示です。",
   "pattern.pricing.title": "料金表",
+  "pattern.risk-table.description": "重大度に応じて行の背景ティントと左側アクセントバーが付く業務テーブルです。金額・折り返し・行アクションのセル規約を固定し、密度はプロファイルの data-density 層に委ねます。",
+  "pattern.risk-table.title": "重大度ハイライト表",
   "pattern.section-panel-header.description": "カードヘッダーに入るアイコン＋タイトル＋右側メタ/フィルタースロットの組み合わせです。狭い幅では右スロットがタイトルの下に折り返されます。",
   "pattern.section-panel-header.title": "セクションパネルヘッダー",
   "pattern.request-inspector.description": "リクエスト一覧 + Accordion 詳細（Headers/Query/Payload/Response） + cURL コピーを備えたリクエストインスペクターです。",

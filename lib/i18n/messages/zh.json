@@ -452,6 +452,8 @@
   "pattern.pipeline.title": "管道模式",
   "pattern.pricing.description": "3 档定价卡·月/年切换（折扣）·功能对比·推荐档位高亮。",
   "pattern.pricing.title": "价格表",
+  "pattern.risk-table.description": "按严重度为行添加背景色调和左侧强调条的业务表格。固定金额、换行与行内操作的单元格约定，密度交由品牌配置的 data-density 层决定。",
+  "pattern.risk-table.title": "风险高亮表格",
   "pattern.section-panel-header.description": "用于卡片标题位置的图标+标题+右侧元信息/筛选插槽组合；窄屏下右侧插槽会换行到标题下方。",
   "pattern.section-panel-header.title": "区块面板标题",
   "pattern.request-inspector.description": "具备请求列表 + Accordion 详情（Headers/Query/Payload/Response）+ cURL 复制的请求检查器模式。",

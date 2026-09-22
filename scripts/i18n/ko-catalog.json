@@ -447,6 +447,8 @@
   "pattern.pricing.title": "가격표",
   "pattern.request-inspector.description": "요청 목록 + Accordion 상세(Headers/Query/Payload/Response) + cURL 복사를 갖춘 요청 인스펙터입니다.",
   "pattern.request-inspector.title": "요청 인스펙터 패턴",
+  "pattern.risk-table.description": "심각도에 따라 행 배경 tint 와 좌측 accent bar 가 붙는 업무 테이블입니다. 금액·줄바꿈·행 액션 셀 규약을 고정하고 밀도는 프로필의 data-density 층에 맡깁니다.",
+  "pattern.risk-table.title": "위험 강조 테이블",
   "pattern.section-panel-header.description": "카드 헤더 자리에 들어가는 아이콘 + 제목 + 우측 메타/필터 슬롯이며, 좁은 폭에서는 우측 슬롯이 줄바꿈됩니다.",
   "pattern.section-panel-header.title": "섹션 패널 헤더",
   "pattern.state.description": "로딩 스켈레톤·에러·빈 상태·스피너 등 비동기 상태 표현 4종입니다.",

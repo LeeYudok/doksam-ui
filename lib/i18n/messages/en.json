@@ -454,6 +454,8 @@
   "pattern.pricing.title": "Pricing Table",
   "pattern.request-inspector.description": "A request inspector with a request list, Accordion detail (Headers/Query/Payload/Response), and cURL copy.",
   "pattern.request-inspector.title": "Request Inspector Pattern",
+  "pattern.risk-table.description": "A business table that tints a row's background and adds a left accent bar by severity. Money, wrapping, and row-action cell conventions are fixed, while density is left to the profile's data-density layer.",
+  "pattern.risk-table.title": "Risk-Highlighted Table",
   "pattern.section-panel-header.description": "An icon + title + right-side meta/filter slot combo that sits in a card header; the right slot wraps below the title on narrow widths.",
   "pattern.section-panel-header.title": "Section Panel Header",
   "pattern.state.description": "4 async state representations: loading skeleton, error, empty state, and spinner.",

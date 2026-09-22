@@ -472,6 +472,16 @@ npx shadcn add https://ui.doksam.com/r/risk-grade-badge.json
 
 registryDependencies: https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/risk-tokens.json
 
+### Risk Table (`risk-table`)
+
+심각도에 따라 행 배경 tint 와 좌측 accent bar 가 붙는 업무 테이블. 금액·줄바꿈·행 액션 셀 규약을 고정하고, 색은 --risk-* 토큰만 인라인 style 로 쓴다. 밀도는 프로필의 data-density 층이 소유한다.
+
+```
+npx shadcn add https://ui.doksam.com/r/risk-table.json
+```
+
+registryDependencies: https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/table.json
+
 ### Route Error (`route-error`)
 
 Next App Router 의 error.tsx 가 그대로 쓰는 오류 화면. 다시 시도 버튼과 digest 표기를 표준화한다.

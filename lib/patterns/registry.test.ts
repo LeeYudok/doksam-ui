@@ -8,10 +8,10 @@ describe("PATTERN_REGISTRY", () => {
     expect(new Set(slugs).size).toBe(slugs.length)
   })
 
-  it("registers all 34 patterns (25 common + 9 finance)", () => {
-    expect(PATTERN_REGISTRY.length).toBe(34)
+  it("registers all 35 patterns (25 common + 10 finance)", () => {
+    expect(PATTERN_REGISTRY.length).toBe(35)
     expect(PATTERN_REGISTRY.filter((entry) => entry.scope === "common").length).toBe(25)
-    expect(PATTERN_REGISTRY.filter((entry) => entry.scope === "finance").length).toBe(9)
+    expect(PATTERN_REGISTRY.filter((entry) => entry.scope === "finance").length).toBe(10)
   })
 
   it("registers the 13 common pattern slugs (srope/bizinfo ports + app-shell + content-feed trio + observability trio)", () => {
@@ -45,7 +45,7 @@ describe("PATTERN_REGISTRY", () => {
     const financeSlugs = PATTERN_REGISTRY.filter((entry) => entry.scope === "finance").map(
       (entry) => entry.slug,
     )
-    expect(financeSlugs).toEqual(expect.arrayContaining(["stock", "pipeline", "stock-portfolio", "admin-toolbar"]))
+    expect(financeSlugs).toEqual(expect.arrayContaining(["stock", "pipeline", "stock-portfolio", "admin-toolbar", "risk-table"]))
   })
 
   it("only uses known scope values", () => {

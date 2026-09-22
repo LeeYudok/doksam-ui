@@ -452,6 +452,8 @@
   "pattern.pipeline.title": "Patrón de pipeline",
   "pattern.pricing.description": "Tarjetas de precio en 3 niveles, toggle mensual/anual (con descuento), comparación de funciones y destaque del nivel recomendado.",
   "pattern.pricing.title": "Tabla de precios",
+  "pattern.risk-table.description": "Una tabla de trabajo que tiñe el fondo de la fila y añade una barra de acento a la izquierda según la severidad. Fija las convenciones de celda para importes, ajuste de línea y acciones de fila, y deja la densidad a la capa data-density del perfil.",
+  "pattern.risk-table.title": "Tabla con resalte de riesgo",
   "pattern.section-panel-header.description": "Una combinación de icono + título + espacio derecho para metadatos/filtros que se coloca en el encabezado de una tarjeta; el espacio derecho se envuelve debajo del título en anchos estrechos.",
   "pattern.section-panel-header.title": "Encabezado de panel de sección",
   "pattern.request-inspector.description": "Inspector de solicitudes con lista de requests + detalle en Accordion (Headers/Query/Payload/Response) + copiar como cURL.",
