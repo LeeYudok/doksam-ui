@@ -74,4 +74,16 @@ describe("PortalLoginPage", () => {
     fireEvent.click(within(card()).getByRole("button", { name: "인증서로 로그인" }))
     expect(within(card()).getByText(/IT지원팀\(내선 1544\)에 등록을 요청하세요/)).toBeInTheDocument()
   })
+  /** PR #111 finding 9 — SigninScreen 언마운트로 포커스가 body 로 떨어지지 않는다. */
+  it("로그인 성공 시 성공 화면 제목으로 포커스를 옮기고 live region 으로 알린다", () => {
+    render(<PortalLoginPage />)
+    fireEvent.change(within(card()).getByLabelText("사번"), { target: { value: "20261234" } })
+    fireEvent.change(within(card()).getByLabelText("비밀번호"), { target: { value: "pass1234" } })
+    fireEvent.click(within(card()).getByRole("button", { name: "로그인" }))
+
+    const heading = within(card()).getByRole("heading", { level: 3, name: "로그인했습니다" })
+    expect(heading).toHaveAttribute("tabindex", "-1")
+    expect(document.activeElement).toBe(heading)
+    expect(screen.getByText("로그인했습니다. 해당 화면으로 이동합니다.")).toHaveAttribute("aria-live", "polite")
+  })
 })

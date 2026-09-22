@@ -70,8 +70,16 @@ export interface EwsKpi {
   value?: string
   /** 원 단위 금액. 표시 형식은 화면이 `formatWon` 으로 정한다. */
   valueWon?: number
-  /** 전일 대비 증감률(%). 부호가 곧 방향이고 색은 rateColor 가 정한다. */
+  /** 전일 대비 증감률(%). 부호는 방향일 뿐이고, 좋고 나쁨은 `betterWhen` 이 정한다. */
   change: number
+  /**
+   * 값이 어느 쪽으로 움직여야 좋은 지표인지 — `metric-comparison-table` 의
+   * `betterWhen` 과 같은 의미다. 색을 부호가 아니라 이 값으로 정한다: 경보 차주가
+   * 늘어난 것은 악화지 이익이 아니다. 시세가 아니므로 한국식 등락 관례 토큰
+   * (`--gain`/`--loss`, `lib/finance/rate.ts`)이 아니라 `--success`/`--destructive`
+   * 로 칠한다.
+   */
+  betterWhen: "higher" | "lower"
   /** 증감의 의미를 색 없이도 읽게 하는 보조 문구. */
   caption: string
 }
@@ -103,6 +111,7 @@ export const EWS_KPIS: EwsKpi[] = [
     label: "모니터링 여신잔액",
     valueWon: EWS_TOTAL_EXPOSURE_WON,
     change: 1.4,
+    betterWhen: "lower",
     caption: "전일 대비 증가",
   },
   {
@@ -110,6 +119,7 @@ export const EWS_KPIS: EwsKpi[] = [
     label: "경보 등급 차주",
     value: "18개사",
     change: 5.9,
+    betterWhen: "lower",
     caption: "전일 대비 1개사 증가",
   },
   {
@@ -117,6 +127,7 @@ export const EWS_KPIS: EwsKpi[] = [
     label: "신규 경보 신호",
     value: "7건",
     change: -12.5,
+    betterWhen: "lower",
     caption: "전일 대비 1건 감소",
   },
   {
@@ -124,6 +135,7 @@ export const EWS_KPIS: EwsKpi[] = [
     label: "기한 임박 과제",
     value: "4건",
     change: 0,
+    betterWhen: "lower",
     caption: "전일과 동일",
   },
 ]
@@ -279,8 +291,11 @@ export interface EwsDiagnosis {
 /**
  * 차주별 경보 원인 진단 (#90). 홈 대시보드(#89) 의 긴급 처리 차주 5건과 같은 키를
  * 써서 두 화면이 한 시스템으로 읽히게 한다. 전부 가상 데이터다.
+ *
+ * 값 타입에 `| undefined` 를 명시한다 — 차주 목록과 진단 결과는 별개 배치라
+ * 키가 비는 경우가 실제로 생기고, 그때 화면이 빈 상태를 그리도록 타입이 강제한다.
  */
-export const EWS_DIAGNOSES: Record<string, EwsDiagnosis> = {
+export const EWS_DIAGNOSES: Record<string, EwsDiagnosis | undefined> = {
   "B-20260923-01": {
     borrowerId: "B-20260923-01",
     summary:

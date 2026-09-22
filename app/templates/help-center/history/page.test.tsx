@@ -26,4 +26,14 @@ describe("HelpCenterHistoryPage", () => {
     const answered = QUESTION_HISTORY.find((q) => q.status === "answered" && q.answer)!
     expect(screen.getByText(answered.answer!)).toBeInTheDocument()
   })
+  /** PR #111 finding 15c — 커넥터 선이 마지막 항목 아래로 꼬리를 남기지 않는다. */
+  it("커넥터 선을 항목 수보다 하나 적게 그린다", () => {
+    const { container } = render(<HelpCenterHistoryPage />)
+    const list = screen.getByRole("list", { name: "내 질문 이력" })
+    const connectors = list.querySelectorAll("span.w-px")
+    expect(connectors).toHaveLength(QUESTION_HISTORY.length - 1)
+    const lastItem = within(list).getAllByRole("listitem").at(-1) as HTMLElement
+    expect(lastItem.querySelectorAll("span.w-px")).toHaveLength(0)
+    expect(container).toBeTruthy()
+  })
 })
