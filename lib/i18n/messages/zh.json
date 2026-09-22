@@ -247,6 +247,7 @@
   "component.resizable.description": "可通过拖拽调整大小的面板布局。",
   "component.risk-core-map.description": "将风险等级(tier)从中心到外围按同心圆环带排列，通过节点大小与光晕表现敞口与风险的风险核心网络图。",
   "component.risk-grade-badge.description": "仅使用 --risk-* 令牌绘制四级有序风险等级的徽章，并将等级文案与 Tier 编号分开表示(#82)。",
+  "component.matrix-heatmap.description": "以强度面色搭配数值标签展示类别 × 类别分布的网格。颜色是从 --primary 派生的明度渐变，每个单元格都会标注数值(#103)。",
   "component.scenario-simulator.description": "根据参数选择即时重新计算当前/情景/增量 KPI 卡片的 what-if 情景模拟器。",
   "component.screen-help-dialog.description": "通过屏幕标题旁 (?) 按钮打开的屏幕操作手册对话框（从 bizinfo 移植，#8）。",
   "component.scroll-area.description": "带自定义滚动条的滚动区域。",

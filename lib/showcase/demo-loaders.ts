@@ -99,6 +99,7 @@ export const DEMO_LOADERS: Record<string, DemoLoader> = {
   "metric-comparison-table": () => import("@/components/demos/metric-comparison-table.demo"),
   "audit-trail": () => import("@/components/demos/audit-trail.demo"),
   "risk-core-map": () => import("@/components/demos/risk-core-map.demo"),
+  "matrix-heatmap": () => import("@/components/demos/matrix-heatmap.demo"),
   "scenario-simulator": () => import("@/components/demos/scenario-simulator.demo"),
   "evidence-decision-panel": () => import("@/components/demos/evidence-decision-panel.demo"),
   "pipeline-rail": () => import("@/components/demos/pipeline-rail.demo"),

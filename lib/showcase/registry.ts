@@ -509,6 +509,15 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
       "행마다 on/off Switch가 붙은 관리자용 테이블입니다. 낙관적 업데이트, 실패 롤백+사유 표시, 행 단위 진행 상태, data 재조정을 지원합니다(#69).",
     status: "done",
   },
+  {
+    slug: "matrix-heatmap",
+    title: "Matrix Heatmap",
+    category: "data",
+    layer: "composition",
+    description:
+      "범주 × 범주 분포를 강도 면색 + 값 텍스트로 함께 보여주는 격자입니다. 색은 --primary 에서 파생한 명도 램프이고 셀마다 수치가 병기됩니다(#103).",
+    status: "done",
+  },
 
   // ── Chat ──────────────────────────────────────────────
   {

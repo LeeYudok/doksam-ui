@@ -50,7 +50,17 @@
       "risk-high": "oklch(0.45 0.15 48)",
       "risk-high-foreground": "oklch(0.98 0.01 48)",
       "risk-severe": "oklch(0.45 0.2 27)",
-      "risk-severe-foreground": "oklch(0.98 0.01 27)"
+      "risk-severe-foreground": "oklch(0.98 0.01 27)",
+      "heatmap-l-0": "0.94",
+      "heatmap-l-1": "0.82",
+      "heatmap-l-2": "0.68",
+      "heatmap-l-3": "0.54",
+      "heatmap-l-4": "0.38",
+      "heatmap-text-0": "var(--foreground)",
+      "heatmap-text-1": "var(--foreground)",
+      "heatmap-text-2": "var(--foreground)",
+      "heatmap-text-3": "var(--primary-foreground)",
+      "heatmap-text-4": "var(--primary-foreground)"
     },
     "dark": {
       "background": "oklch(0.195 0.033 270)",
@@ -95,7 +105,17 @@
       "risk-high": "oklch(0.74 0.15 48)",
       "risk-high-foreground": "oklch(0.15 0.02 48)",
       "risk-severe": "oklch(0.74 0.18 27)",
-      "risk-severe-foreground": "oklch(0.15 0.02 27)"
+      "risk-severe-foreground": "oklch(0.15 0.02 27)",
+      "heatmap-l-0": "0.24",
+      "heatmap-l-1": "0.32",
+      "heatmap-l-2": "0.42",
+      "heatmap-l-3": "0.62",
+      "heatmap-l-4": "0.76",
+      "heatmap-text-0": "var(--foreground)",
+      "heatmap-text-1": "var(--foreground)",
+      "heatmap-text-2": "var(--foreground)",
+      "heatmap-text-3": "var(--background)",
+      "heatmap-text-4": "var(--background)"
     }
   },
   "type": "registry:theme"

@@ -247,6 +247,7 @@
   "component.resizable.description": "Layout de paneles cuyo tamaño se ajusta arrastrando.",
   "component.risk-core-map.description": "Mapa de red de núcleo de riesgo que coloca los niveles de riesgo en bandas concéntricas del centro al borde, expresando exposición y riesgo mediante el tamaño y el brillo de los nodos.",
   "component.risk-grade-badge.description": "Una insignia de grado de riesgo que pinta una escala ordenada de cuatro niveles usando solo los tokens --risk-*, manteniendo separados la etiqueta del grado y el número de Tier (#82).",
+  "component.matrix-heatmap.description": "Una cuadrícula de distribución categoría por categoría que combina el relleno de intensidad con una etiqueta de valor. El color es una rampa de luminosidad derivada de --primary, y cada celda muestra su número (#103).",
   "component.scenario-simulator.description": "Simulador de escenarios what-if cuyas tarjetas KPI de actual/escenario/variación se recalculan al instante según los parámetros seleccionados.",
   "component.screen-help-dialog.description": "Diálogo de manual de pantalla que se abre con el botón (?) junto al título de la pantalla (portado de bizinfo, #8).",
   "component.scroll-area.description": "Área de scroll con scrollbar personalizada.",

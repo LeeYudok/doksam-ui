@@ -220,6 +220,7 @@
   "component.label.description": "폼 컨트롤에 접근성 있게 연결되는 레이블입니다.",
   "component.live-indicator.description": "live/paused/stale/offline 상태를 펄스 도트와 갱신 시각으로 보여주는 실시간 상태 인디케이터입니다.",
   "component.marker.description": "타임라인·리스트에서 항목을 표시하는 마커입니다.",
+  "component.matrix-heatmap.description": "범주 × 범주 분포를 강도 면색 + 값 텍스트로 함께 보여주는 격자입니다. 색은 --primary 에서 파생한 명도 램프이고 셀마다 수치가 병기됩니다(#103).",
   "component.menubar.description": "데스크톱 앱 스타일의 상단 메뉴 바입니다.",
   "component.mermaid-viewer.description": "mermaid 코드를 동적 로드로 SVG 렌더링하는 다이어그램 뷰어입니다. 코드펜스 스트립과 다크모드, 로딩·에러 상태를 지원합니다.",
   "component.message-scroller.description": "새 메시지에 자동으로 스크롤을 따라가는 컨테이너입니다.",

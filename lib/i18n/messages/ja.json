@@ -247,6 +247,7 @@
   "component.resizable.description": "ドラッグでサイズを調整できるパネルレイアウトです。",
   "component.risk-core-map.description": "リスク等級(tier)を中心から外側への同心円バンドに配置し、ノードのサイズとグローでエクスポージャーとリスクを表現するリスクコアネットワークマップです。",
   "component.risk-grade-badge.description": "順序のある危険度4段階を --risk-* トークンのみで塗る等級バッジです。等級のラベルと Tier 番号の表記を分離します(#82)。",
+  "component.matrix-heatmap.description": "カテゴリ × カテゴリの分布を強度の面色と数値ラベルで一緒に示すグリッドです。色は --primary から派生した明度ランプで、各セルに数値を併記します(#103)。",
   "component.scenario-simulator.description": "パラメータの選択に応じて現在/シナリオ/増減のKPIカードが即座に再計算されるWhat-ifシナリオシミュレーターです。",
   "component.screen-help-dialog.description": "画面タイトル横の (?) ボタンで開く画面マニュアルダイアログです（bizinfo 移植、#8）。",
   "component.scroll-area.description": "カスタムスクロールバーを持つスクロール領域です。",
