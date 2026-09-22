@@ -248,6 +248,14 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
     status: "done",
   },
   {
+    slug: "coach-mark-tour",
+    title: "Coach Mark Tour",
+    category: "overlay",
+    layer: "composition",
+    description: "기존 화면 위에 덧씌우는 단계형 코치마크(제품 투어)입니다. 딤 오버레이·대상 하이라이트·팝오버·단계 이동을 한 세트로 제공합니다(#99).",
+    status: "done",
+  },
+  {
     slug: "menubar",
     title: "Menubar",
     category: "overlay",
@@ -501,6 +509,15 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
       "행마다 on/off Switch가 붙은 관리자용 테이블입니다. 낙관적 업데이트, 실패 롤백+사유 표시, 행 단위 진행 상태, data 재조정을 지원합니다(#69).",
     status: "done",
   },
+  {
+    slug: "matrix-heatmap",
+    title: "Matrix Heatmap",
+    category: "data",
+    layer: "composition",
+    description:
+      "범주 × 범주 분포를 강도 면색 + 값 텍스트로 함께 보여주는 격자입니다. 색은 --primary 에서 파생한 명도 램프이고 셀마다 수치가 병기됩니다(#103).",
+    status: "done",
+  },
 
   // ── Chat ──────────────────────────────────────────────
   {
@@ -678,6 +695,15 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
     status: "done",
   },
   {
+    slug: "audit-code-tag",
+    title: "Audit Code Tag",
+    category: "data",
+    layer: "composition",
+    description:
+      "판단 근거를 추적하는 감사코드를 등폭 글꼴 + 시맨틱 토큰 배경으로 표시하는 태그입니다. 색으로 의미를 나누지 않고, 클릭 이동·복사는 옵션입니다(#83).",
+    status: "done",
+  },
+  {
     slug: "tree-view",
     title: "Tree View",
     category: "data",
@@ -712,6 +738,42 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
     status: "done",
   },
   {
+    slug: "contribution-meter",
+    title: "Contribution Meter",
+    category: "finance",
+    layer: "composition",
+    description:
+      "기여도 % + Progress 게이지 + 감사코드(AuditCodeTag, #83)를 묶은 판단 근거 표기입니다. 방향(위험 상승/하락 요인)은 --gain/--loss 로 칠합니다(#84).",
+    status: "done",
+  },
+  {
+    slug: "metric-comparison-table",
+    title: "Metric Comparison Table",
+    category: "data",
+    layer: "composition",
+    description:
+      "행 = 지표, 열 = 대상 A·대상 B·델타로 A/B 성능을 비교하는 표입니다. 방향 색은 델타 부호가 아니라 지표별 betterWhen(higher/lower)으로 정해, 작을수록 좋은 지표에서 방향이 뒤집히지 않습니다(#102).",
+    status: "done",
+  },
+  {
+    slug: "party-identity-cell",
+    title: "Party Identity Cell",
+    category: "finance",
+    layer: "composition",
+    description:
+      "차주 식별 2줄 셀입니다 — 업체명(1행) / 업종·법인구분·마스킹 사업자번호(2행)을 표시하며 사업자번호 포맷은 formatBizNo를 그대로 씁니다(#83).",
+    status: "done",
+  },
+  {
+    slug: "audit-trail",
+    title: "Audit Trail",
+    category: "finance",
+    layer: "composition",
+    description:
+      "시각·주체(사람/시스템/모형)·행위·대상·감사코드로 고정된 감사 추적 이력입니다. 주체는 아이콘+라벨로 구분하고 감사코드는 AuditCodeTag(#83)를 재사용합니다(#106).",
+    status: "done",
+  },
+  {
     slug: "risk-core-map",
     title: "Risk Core Map",
     category: "finance",
@@ -733,6 +795,15 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
     category: "finance",
     layer: "composition",
     description: "근거의 출처·검증 상태와 연결된 조치 후보를 함께 보여주고, 사람의 선택만 상위 흐름으로 전달하는 의사결정 패널입니다.",
+    status: "done",
+  },
+  {
+    slug: "ranked-alternatives-list",
+    title: "Ranked Alternatives List",
+    category: "finance",
+    layer: "composition",
+    description:
+      "모형이 계산한 순위·동점·순위없음 상태를 보이는 대안 목록입니다. 채택해도 나머지 대안이 사라지지 않고 채택 이력이 누적됩니다(#105).",
     status: "done",
   },
   {
@@ -869,6 +940,14 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
     category: "data",
     layer: "composition",
     description: "이름 + 상태 배지 + 임계 기반 게이지 바 + 태그·원인 태그 카드입니다. 60/30 임계로 색이 자동 결정됩니다(srope 이식).",
+    status: "done",
+  },
+  {
+    slug: "inline-help-link",
+    title: "Inline Help Link",
+    category: "layout",
+    layer: "composition",
+    description: "섹션 제목(h2) 옆에 붙는 인라인 사용법 링크입니다. 화면 단위인 ScreenHelpDialog와 달리 섹션 하나만 가리킵니다(#97).",
     status: "done",
   },
   {

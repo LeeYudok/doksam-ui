@@ -5,9 +5,14 @@ import { describe, expect, it } from "vitest";
 
 import {
   computeProfileRegistryCssVars,
+  extractDensityFromDescription,
+  extractPersonalityFromDescription,
+  extractProfileDataAttrsFromDescription,
   extractRadiusFromDescription,
   PROFILE_CSS_VAR_KEYS,
+  withSyncedProfileAxesDescription,
 } from "@/lib/profile-registry-css-vars";
+import { getPersonalityPreset } from "@/personalities";
 import { BRAND_PROFILES } from "@/profiles";
 
 /**
@@ -85,5 +90,66 @@ describe("registry.json profile-* cssVars (#36)", () => {
       expect(mentioned).toBe(profile.radius);
       expect(item?.cssVars?.theme?.radius).toBe(profile.radius);
     });
+
+    it(`${itemName} 의 description 이 언급하는 density 가 profiles/index.ts 와 같다`, () => {
+      // #110 finding 2: sync 가 radius 만 재계산하던 동안 profile-docs 의 설명은
+      // density=comfortable 인데 실제 프로필은 spacious 였다. 기대값은
+      // profile.density(단일 진실원천)에서 가져온다.
+      const item = items.find((i) => i.name === itemName);
+      const mentioned = extractDensityFromDescription(item!.description!);
+      expect(mentioned, `${itemName} description 에 "density=" 패턴이 없다`).toBeDefined();
+      expect(mentioned).toBe(profile.density);
+      expect(extractProfileDataAttrsFromDescription(item!.description!).density).toBe(profile.density);
+    });
+
+    it(`${itemName} 의 description 이 data-personality 세 속성을 프로필 값으로 안내한다`, () => {
+      // #110 finding 3: personality 층은 속성이 없으면 아무 규칙도 걸리지 않는
+      // opt-in 이다 — 설명이 속성을 안내하지 않으면 설치만 한 소비 프로젝트가
+      // 성격 미적용으로 돌아간다.
+      const item = items.find((i) => i.name === itemName);
+      const preset = getPersonalityPreset(profile.personality);
+      expect(preset, `profile.personality "${profile.personality}" 이 personalities/index.ts 에 없다`).toBeDefined();
+
+      expect(extractPersonalityFromDescription(item!.description!)).toBe(profile.personality);
+      expect(extractProfileDataAttrsFromDescription(item!.description!)).toEqual({
+        density: profile.density,
+        personality: profile.personality,
+        surface: preset!.surface,
+        motion: preset!.motion,
+      });
+    });
   }
+});
+
+// 회귀(#111 finding 15b): 비전역 replace 는 첫 일치만 바꿔서, 같은 토큰을 두 번
+// 언급하는 설명 문장의 뒤쪽이 옛 값으로 남았다.
+describe("withSyncedProfileAxesDescription", () => {
+  const profile = BRAND_PROFILES[0]!;
+  const preset = getPersonalityPreset(profile.personality)!;
+
+  it("한 문장 안에 토큰이 두 번 나와도 전부 동기화한다", () => {
+    const description = [
+      `요약: radius=WRONG · density=wrong · personality=wrong`,
+      `설치: data-density="wrong" data-personality="wrong"`,
+      `다시: radius=WRONG · density=wrong · personality=wrong`,
+      `다시: data-density="wrong" data-personality="wrong"`,
+      `속성: data-personality-surface="wrong" data-personality-motion="wrong"`,
+      `속성: data-personality-surface="wrong" data-personality-motion="wrong"`,
+    ].join("\n");
+
+    const out = withSyncedProfileAxesDescription(description, profile);
+
+    expect(out).not.toMatch(/WRONG|wrong/);
+    expect(out.match(new RegExp(`radius=${profile.radius}`, "g"))).toHaveLength(2);
+    expect(out.match(new RegExp(`(?<!-)density=${profile.density}`, "g"))).toHaveLength(2);
+    expect(out.match(new RegExp(`data-density="${profile.density}"`, "g"))).toHaveLength(2);
+    expect(out.match(new RegExp(`data-personality="${profile.personality}"`, "g"))).toHaveLength(2);
+    expect(out.match(new RegExp(`data-personality-surface="${preset.surface}"`, "g"))).toHaveLength(2);
+    expect(out.match(new RegExp(`data-personality-motion="${preset.motion}"`, "g"))).toHaveLength(2);
+  });
+
+  it("패턴이 없으면 원본을 그대로 돌려준다", () => {
+    const description = "축 언급이 전혀 없는 설명";
+    expect(withSyncedProfileAxesDescription(description, profile)).toBe(description);
+  });
 });

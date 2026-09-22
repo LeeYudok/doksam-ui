@@ -12,6 +12,7 @@ import {
 import { FunnelIcon, GridFourIcon, TagIcon } from "@phosphor-icons/react/dist/ssr"
 import { NetworkIcon, TerminalWindowIcon, TreeStructureIcon } from "@phosphor-icons/react/dist/ssr"
 import { BookOpenTextIcon } from "@phosphor-icons/react/dist/ssr"
+import { NotePencilIcon } from "@phosphor-icons/react/dist/ssr"
 import {
   BankIcon,
   BriefcaseIcon,
@@ -27,6 +28,7 @@ import {
   TrayArrowUpIcon,
   WalletIcon,
 } from "@phosphor-icons/react/dist/ssr"
+import { AnchorIcon, GavelIcon, RowsIcon, WarningDiamondIcon } from "@phosphor-icons/react/dist/ssr"
 import type { Icon } from "@phosphor-icons/react"
 
 /**
@@ -56,7 +58,7 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
   {
     slug: "app-shell",
     title: "앱 셸 패턴",
-    description: "레이아웃 원형별 셸 5종(사이드바·헤더·분할 패인·피드·문서 리더)과 페이지 타이틀·여백 밀도·브레이크포인트 표준입니다.",
+    description: "레이아웃 원형별 셸 7종(사이드바·헤더·분할 패인·피드·문서 리더·집중형·글로벌 탑내비)과 페이지 타이틀·여백 밀도·브레이크포인트 표준입니다.",
     icon: AppWindowIcon,
     scope: "common",
   },
@@ -264,10 +266,45 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     scope: "finance",
   },
   {
+    slug: "compliance-callout",
+    title: "규정 콜아웃",
+    description: "근거 규정 번호 + 대상 조건 + 요구 행위 + 기한 + 액션 버튼을 한 덩어리로 보여주는 업무 규칙 안내 3단 심각도입니다.",
+    icon: GavelIcon,
+    scope: "common",
+  },
+  {
+    slug: "section-panel-header",
+    title: "섹션 패널 헤더",
+    description: "카드 헤더 자리에 들어가는 아이콘 + 제목 + 우측 메타/필터 슬롯이며, 좁은 폭에서는 우측 슬롯이 줄바꿈됩니다.",
+    icon: RowsIcon,
+    scope: "common",
+  },
+  {
+    slug: "sticky-actionbar",
+    title: "하단 고정 액션바",
+    description: "화면 하단에 고정되는 주 액션 바입니다. 안전영역과 모바일 키보드를 고려해 sticky로 구현하고, 파괴적/보조/주 액션의 배치 순서를 고정합니다.",
+    icon: AnchorIcon,
+    scope: "common",
+  },
+  {
+    slug: "draft-review-panel",
+    title: "섹션형 초안 검토·편집 패널",
+    description: "LLM이 섹션별로 생성한 초안을 사람이 검토·가필해 확정하는 화면 패턴입니다. 문서 종류는 탭으로, 섹션 편집은 인라인 토글로 전환하며 편집 상태를 잃지 않습니다.",
+    icon: NotePencilIcon,
+    scope: "common",
+  },
+  {
     slug: "evidence-decision",
     title: "근거 기반 의사결정",
     description: "근거의 출처·검증 상태를 먼저 확인하고, 연결된 대응 후보를 사람이 선택해 상위 승인 흐름으로 넘기는 금융 의사결정 패턴입니다.",
     icon: ScalesIcon,
+    scope: "finance",
+  },
+  {
+    slug: "risk-table",
+    title: "위험 강조 테이블",
+    description: "심각도에 따라 행 배경 tint 와 좌측 accent bar 가 붙는 업무 테이블입니다. 금액·줄바꿈·행 액션 셀 규약을 고정하고 밀도는 프로필의 data-density 층에 맡깁니다.",
+    icon: WarningDiamondIcon,
     scope: "finance",
   },
 ]

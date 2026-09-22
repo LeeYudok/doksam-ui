@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest";
 
 import { LAYOUT_ARCHETYPES } from "@/archetypes";
+import { CORNER_PRESETS } from "@/corners";
 import { PERSONALITY_PRESETS } from "@/personalities";
+import { BRAND_PROFILES } from "@/profiles";
 
 import {
   CONVERGENCE_ANTIPATTERNS_SECTION,
@@ -75,6 +77,60 @@ describe("규칙의 두 층(#28)", () => {
         section.items.filter((item) => item.startsWith("경계 —")).length,
         `"${section.title}" 절에 경계 항목이 없다`,
       ).toBeGreaterThan(0);
+    }
+  });
+});
+
+describe("레지스트리 파생 문장 (#110)", () => {
+  const corners = RULES_SECTIONS.find((s) => s.title.includes("모서리"));
+
+  it("모서리 절이 corner 프리셋과 프로필 고정값을 전부 이름으로 싣는다 (finding 4)", () => {
+    // 손으로 적던 시절 finance(#91) 프로필이 목록에서 빠졌다 —
+    // 문장은 corners/index.ts·profiles/index.ts 에서 파생돼야 한다.
+    expect(corners).toBeDefined();
+    const text = corners!.items.join("\n");
+    for (const preset of CORNER_PRESETS) {
+      expect(text, `corner 프리셋 ${preset.name} 이 규칙 문장에 없다`).toContain(preset.name);
+    }
+    for (const profile of BRAND_PROFILES) {
+      expect(text, `프로필 ${profile.name} 의 corner 고정값이 규칙 문장에 없다`).toContain(
+        `${profile.name}=${profile.corner}`,
+      );
+    }
+  });
+
+  it("모션 절의 소유자가 personality 하나로 정해져 있다 (finding 5)", () => {
+    // 브리프 절은 "personality 가 모션 강도를 정한다"고 쓰는데 모션 절이
+    // "프로젝트가 고른다"로 쓰면 소유권이 둘로 갈린다. 실제 강제자는
+    // app/globals.css 의 data-personality-motion 층이므로 personality 쪽으로 통일한다.
+    const motion = RULES_SECTIONS.find((s) => s.title.includes("모션"));
+    expect(motion).toBeDefined();
+    expect(motion!.items[0]).toContain("personality");
+    expect(motion!.items[0]).toContain("data-personality-motion");
+    for (const preset of PERSONALITY_PRESETS) {
+      expect(motion!.items[0], `personality ${preset.name} 의 motion 값이 문장에 없다`).toContain(
+        `${preset.name}=${preset.motion}`,
+      );
+    }
+  });
+
+  it("레지스트리 설치 절이 소비자가 볼 수 있는 주소로 프로필을 가리킨다 (finding 6)", () => {
+    const text = RULES_SECTIONS.flatMap((s) => s.items).join("\n");
+    const installItem = RULES_SECTIONS.flatMap((s) => s.items).find((item) =>
+      item.includes("doksam-ui 고유 자산"),
+    );
+    expect(installItem).toBeDefined();
+    expect(installItem, "소비자가 못 보는 내부 경로를 가리킨다").not.toContain("profiles/index.ts에 등록된");
+    expect(installItem).toContain("ui.doksam.com/profiles");
+    expect(installItem, "유틸리티 profile-scope 와의 구분이 없다").toContain("profile-scope");
+    expect(text).toContain("ui.doksam.com/profiles");
+  });
+
+  it("브리프의 성격 항목이 density 의 실제 소유 범위를 적는다 (finding 1)", () => {
+    const item = DESIGN_BRIEF_SECTION.items.find((i) => i.startsWith("성격(personality)"));
+    expect(item).toBeDefined();
+    for (const owned of ["--control-fs", "--stack-gap"]) {
+      expect(item, `density 가 소유한 ${owned} 가 문장에 없다`).toContain(owned);
     }
   });
 });

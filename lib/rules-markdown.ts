@@ -1,3 +1,10 @@
+// 상대 경로 + 명시적 확장자 — `@/` 별칭은 tsc/Next 번들러 전용이고,
+// scripts/gen-llms.mjs 가 이 파일을 plain `node --experimental-strip-types` 로
+// import 하면 해소되지 않는다(lib/profile-registry-css-vars.ts 와 같은 이유).
+import { CORNER_PRESETS } from "../corners/index.ts";
+import { PERSONALITY_PRESETS } from "../personalities/index.ts";
+import { BRAND_PROFILES } from "../profiles/index.ts";
+
 /** 규칙 절의 두 층(#28).
  *
  * - invariant(불변): 프로젝트가 달라도 답이 같다. 어기면 표준 위반이다.
@@ -15,6 +22,26 @@ export interface RulesSection {
   items: string[];
 }
 
+/** "모서리 · 밀도 · 타입 대비" 절이 인용하는 corner 프리셋 이름 목록 (#110 finding 4). */
+export const CORNER_PRESET_NAMES: string = CORNER_PRESETS.map((c) => c.name).join(", ");
+
+/**
+ * "모서리 · 밀도 · 타입 대비" 절이 인용하는 프로필별 corner 고정값 요약 (#110 finding 4).
+ *
+ * 손으로 적으면 프로필이 추가될 때마다 규칙 원문이 뒤처진다 — 실제로 finance 프로필
+ * (#91)이 추가된 뒤에도 목록은 5종에 머물러 있었다. profiles/index.ts 에서 파생하고,
+ * lib/rules-markdown.test.ts 가 전 프로필이 문장에 등장하는지 잠근다.
+ */
+export const PROFILE_CORNER_SUMMARY: string = BRAND_PROFILES.map((p) => `${p.name}=${p.corner}`).join(", ");
+
+/**
+ * "모션 · 애니메이션" 절이 인용하는 personality 별 motion 고정값 (#110 finding 5).
+ *
+ * 모션 강도의 소유자는 personality 프리셋이다 — app/globals.css 의
+ * data-personality-motion 층이 실제 강제자이고, 규칙 문장은 그 값을 인용만 한다.
+ */
+export const PERSONALITY_MOTION_SUMMARY: string = PERSONALITY_PRESETS.map((p) => `${p.name}=${p.motion}`).join(", ");
+
 /**
  * 사용 규칙 전문의 단일 진실원천.
  * /rules 페이지의 사람용 렌더링과 AI 프롬프트용 markdown 복사 버튼이
@@ -31,7 +58,7 @@ export const RULES_SECTIONS: RulesSection[] = [
     items: [
       "화면을 만들기 전에 저장소 루트에 DESIGN.md 를 만들고 원형·성격·배제 목록·이유 네 가지를 선언한다 — 선언 없이 생성을 시작하면 결과가 카탈로그의 기본 조합으로 수렴한다.",
       "원형(archetype): 이 제품의 화면 뼈대를 ui.doksam.com/archetypes 레지스트리의 원형 10종(sidebar-app, top-nav-site, split-pane, feed-timeline, dashboard-grid, wizard-flow, chat-workspace, canvas, doc-reader, focus-task) 중 하나로 반드시 고른다 — 자유 문자열(\"커머스 스토어프론트\" 같은 자기 발명 이름)은 불가하다. 둘 이상에 걸치면 주 원형 1개 + 보조 원형 1개를 레지스트리 이름으로 적고, 어느 화면이 보조 원형을 쓰는지 밝힌다. 고른 원형의 내비 방식과 본문 구조(레지스트리의 뼈대 한 줄)를 그대로 따른다.",
-      "성격(personality): 같은 원형도 성격에 따라 다르게 생긴다. ui.doksam.com/profiles 에서 제품에 맞는 프로필을 고르고, 그 프로필이 참조하는 ui.doksam.com/personalities 프리셋(neutral, crisp, elevated, statement)을 DESIGN.md 에 적는다 — personality는 타입·여백 배율, 표면(테두리/그림자/평면), 모션 강도를 정하고 컨트롤 밀도는 프로필의 density가 정한다. 프로젝트에서 두 값을 임의로 재정의하지 않는다.",
+      "성격(personality): 같은 원형도 성격에 따라 다르게 생긴다. ui.doksam.com/profiles 에서 제품에 맞는 프로필을 고르고, 그 프로필이 참조하는 ui.doksam.com/personalities 프리셋(neutral, crisp, elevated, statement)을 DESIGN.md 에 적는다 — personality는 타입·여백 배율, 표면(테두리/그림자/평면), 모션 강도를 정하고, density는 컨트롤 치수(높이·패딩·--control-fs 컨트롤 폰트 크기)와 섹션 세로 여백(--stack-gap)을 정한다. 프로젝트에서 두 값을 임의로 재정의하지 않는다.",
       "안 쓸 컴포넌트·패턴: 최소 세 개를 이름으로 배제하되, 그중 최소 하나는 고른 원형·과제에서 기본으로 쓰일 법한 것이어야 한다(모바일 커머스라면 \"하단 탭바 안 씀\"·\"카드 그리드 안 씀\"·\"sticky CTA 안 씀\" 같은 것). 어차피 안 쓸 것(\"모바일 앱에서 사이드바 안 씀\")만 나열한 배제 목록은 결정에 영향이 없으므로 무효다. 화면의 성격은 무엇을 쓰는가보다 무엇을 안 쓰는가에서 나온다.",
       "이유: 위 세 항목 각각에 한 줄 근거를 붙인다. 취향(\"깔끔해서\")이 아니라 사용 맥락(사용 빈도·체류 시간·입력 장치·데이터 밀도·조직의 기존 도구)으로 쓴다.",
       "DESIGN.md 는 화면 코드와 같은 저장소에 두고 같은 커밋 흐름으로 갱신한다. 구현이 브리프와 어긋나면 코드부터 고치지 말고 브리프를 갱신할지 먼저 판단한다 — 어긋남이 반복되면 원형 선택이 틀린 것이다.",
@@ -56,13 +83,14 @@ export const RULES_SECTIONS: RulesSection[] = [
     title: "컬러 · 토큰",
     kind: "invariant",
     items: [
-      "하드코딩 색(hex, rgb, 임의 OKLCH 값 등)을 직접 쓰지 않는다 — 항상 시맨틱 토큰만 사용한다: themes/ 의 프리셋 27키(bg-background, text-primary 등)와 globals.css 의 :root/.dark 가 소유한 보조 층(sidebar-*, risk-*)이다.",
+      "하드코딩 색(hex, rgb, 임의 OKLCH 값 등)을 직접 쓰지 않는다 — 항상 시맨틱 토큰만 사용한다: themes/ 의 프리셋 27키(bg-background, text-primary 등)와 globals.css 의 :root/.dark 가 소유한 보조 층(sidebar-*, risk-*, heatmap-l-*/heatmap-text-*)이다. 보조 층은 닫힌 목록이 아니라 확장되는 층이다 — 기존 토큰 중 어느 것으로도 표현할 수 없는 성격(연속 값 강도 등)이면 lib/<층>-tokens.ts 로 층을 새로 만들고 PROFILE_CSS_VAR_KEYS 에 합류시킨다.",
       "새 프리셋이 필요하면 themes/<name>.ts 파일을 추가하고 themes/index.ts 레지스트리에 등록한다. 기존 프리셋 파일이나 app/globals.css의 다른 프리셋 블록은 건드리지 않는다.",
       "시세 등락(이익/상승, 손실/하락)을 표시할 때는 text-red-600/text-blue-600 등을 직접 쓰지 않고 --gain/--loss 토큰(lib/finance/rate.ts의 rateColor/rateText)을 쓴다 — 한국식 관례로 이익=빨강, 손실=파랑이며 모든 프리셋에서 동일한 값을 쓴다(destructive/success/warning과 같은 방식).",
       "lightweight-charts·canvas 등 CSS를 직접 해석하지 못하는 렌더러에 색을 넘길 때는 CSS 변수/유틸리티 클래스 문자열을 그대로 주지 않고 lib/finance/normalize-color.ts의 normalizeColor(또는 readCssVar/readClassColor)로 hex 값을 해소해서 넘긴다. 프리셋·다크모드 전환 시 재해소가 필요하면 observeColorScheme로 <html>의 class/data-theme/data-font 변화를 구독한다.",
       "위험·심각도 등급(정상/관찰/주의/경보 같은 순서 있는 단계)을 chart-1~5로 표현하지 않는다 — chart 토큰은 계열을 나누는 범주 팔레트라 한 색상 띠 안에 모여 있고(기본 테마는 hue 262/220/200/290/235) 순서를 싣지 못한다. 등급에는 --risk-low/--risk-moderate/--risk-high/--risk-severe 와 각각의 -foreground 쌍(lib/risk-tokens.ts)을 쓴다. 같은 화면에서 등급 색과 계열 색이 같은 토큰을 쓰면 둘 중 하나는 반드시 오독된다.",
       "위험등급 토큰은 gain/loss와 같은 도메인 관례 토큰이지만 층의 위치가 다르다 — gain/loss는 프리셋 27키에 들어 있고 모든 프리셋이 같은 값을 적는 방식이고(themes/*.ts가 SSOT), risk-*는 sidebar-*처럼 프리셋 키에서 빠져 globals.css의 :root/.dark에만 정의된다(lib/risk-tokens.ts가 SSOT). 그래서 [data-theme=\"*\"] 블록에서 risk-*를 재정의하지 않는다 — 브랜드에 맞춰 경보를 초록으로 바꾸는 식의 오버라이드는 표준 위반이다.",
       "소비 프로젝트에서 bg-risk-severe·text-risk-low 같은 유틸리티를 쓰려면 globals.css의 @theme inline에 --color-risk-* 매핑을 함께 넣는다 — 프로필(profile-*) 설치는 cssVars로 값만 :root/.dark에 넣어 주므로 var(--risk-severe)는 바로 쓸 수 있지만 유틸리티 클래스는 생기지 않는다. gain/loss·sidebar-*도 같다.",
+      "값의 강도를 면색으로 얹는 격자(matrix-heatmap 등)는 chart-1~5 나 risk-* 를 빌려 쓰지 않고 --heatmap-l-0~4 / --heatmap-text-0~4 층(lib/heatmap-tokens.ts)을 쓴다 — 셀 배경은 oklch(from var(--primary) var(--heatmap-l-<n>) c h) 로 프로필의 --primary 에서 파생시키고 값(hue/chroma)을 이 층이 고정하지 않는다. risk-*·sidebar-* 와 같은 층이라 [data-theme=\"*\"] 블록에서 재정의하지 않는다.",
       "색 외의 시각 성격(타입/스페이싱 스케일, 표면 성향, 모션 강도)은 <html data-personality>/data-personality-surface/data-personality-motion 토큰 층을 쓴다 — personalities/index.ts 레지스트리의 프리셋을 profiles/index.ts의 BrandProfile.personality가 참조하며, 프로젝트에서 값을 임의로 재정의하지 않는다.",
     ],
   },
@@ -104,7 +132,7 @@ export const RULES_SECTIONS: RulesSection[] = [
     title: "모서리 · 밀도 · 타입 대비",
     kind: "decision",
     items: [
-      "모서리 계열을 고른다: corners/index.ts 의 CORNER_PRESETS(sharp, soft, rounded, pill) 중 하나다 — 대부분은 프로필이 이미 고정해 뒀으니(admin=sharp, service=pill, console=sharp, data=soft, docs=rounded) 화면마다 흔들지 않는다. 각 프리셋의 suitedFor·avoidWhen 을 근거로 고른 이유를 DESIGN.md 에 남긴다.",
+      `모서리 계열을 고른다: corners/index.ts 의 CORNER_PRESETS(${CORNER_PRESET_NAMES}) 중 하나다 — 대부분은 프로필이 이미 고정해 뒀으니(${PROFILE_CORNER_SUMMARY}) 화면마다 흔들지 않는다. 각 프리셋의 suitedFor·avoidWhen 을 근거로 고른 이유를 DESIGN.md 에 남긴다.`,
       "정보 밀도를 고른다: profiles/index.ts 의 ProfileDensity 3단(compact, comfortable, spacious) 중 프로필이 고정한 값을 쓴다 — compact 는 관리·데이터 화면, comfortable 은 일반 서비스 화면, spacious 는 문서·리더 화면이 기본값이다.",
       "경계 — compact 는 터치가 주 입력인 화면에서 쓰지 않는다: compact 의 컨트롤 높이는 기본 버튼 28px, 작은 버튼 24px, 아주 작은 버튼 22px 로 모바일 터치 타겟 권고(44px)에 못 미친다. 마우스·키보드가 주 입력인 관리 화면을 전제한 값이므로, 같은 화면을 모바일에서도 쓴다면 comfortable 이상을 고르거나 터치 대상 컨트롤만 크기를 키운다.",
       "타입 대비를 고른다: type-contrast/index.ts 의 TYPE_CONTRAST_PRESETS(flat, moderate, dramatic) 중 프로필이 고정한 값을 쓴다 — 제목과 본문의 비례를 이 축이 정하며, personality 의 균등 배율(html data-personality)과는 별개이므로 둘을 혼동해 이중으로 조정하지 않는다.",
@@ -149,7 +177,7 @@ export const RULES_SECTIONS: RulesSection[] = [
     title: "모션 · 애니메이션",
     kind: "decision",
     items: [
-      "모션의 양을 브리프의 성격이 정한다: (1) 없음 — 상태 변화를 즉시 반영한다, (2) 절제 — hover·focus 피드백과 오버레이 진입·퇴장에만 쓴다, (3) 표현적 — 페이지 전환·목록 재정렬까지 움직인다. 데이터 갱신이 잦고 오래 머무는 업무 화면일수록 (1)·(2) 쪽이고, 짧게 방문하는 소개형 화면일수록 (3)이 허용된다. 고른 값을 DESIGN.md 에 남긴다.",
+      `모션의 양은 화면마다 고르는 값이 아니라 personality 프리셋이 정한다 — 프로필이 고른 personality 의 motion 값(none = 상태 변화를 즉시 반영, subtle = hover·focus 피드백과 오버레이 진입·퇴장에만, expressive = 페이지 전환·목록 재정렬까지)이 <html data-personality-motion> 으로 걸리고 app/globals.css 의 모션 층이 그것을 소비한다(현재 값: ${PERSONALITY_MOTION_SUMMARY}). 고르는 지점은 프로필·personality 를 정하는 디자인 브리프 단계이며(데이터 갱신이 잦고 오래 머무는 업무 화면일수록 none·subtle, 짧게 방문하는 소개형 화면일수록 expressive 가 맞는다), 고른 값을 DESIGN.md 에 남긴다.`,
       "경계 — 애니메이션할 속성을 반드시 명시한다: transition-all을 쓰지 않는다. 상태 피드백은 transition-colors, 위치·크기 변화는 transition-transform, 페이드는 transition-opacity를 쓰고, 비레이아웃 속성 여러 개가 동시에 바뀌면 Tailwind 기본 transition 유틸이나 transition-[color,background-color,box-shadow]처럼 목록을 좁혀 적는다. transition-all은 레이아웃 속성까지 전환 대상에 넣어 예기치 않은 리플로우를 만든다(components/ui/ 는 상류 포맷을 따르는 영역이라 이 조항의 적용 대상이 아니다).",
       "경계 — 진행률 바처럼 레이아웃 속성 애니메이션이 불가피하면 transition-[width]처럼 그 속성만 명시한다: 리플로우를 감수하는 지점이 코드에 드러나야 한다. 그 외에는 합성 단계에서 끝나는 transform·opacity를 우선한다.",
       "경계 — duration은 100/200/300ms 스케일만 쓴다: hover·focus 등 즉각 피드백은 duration-100, 일반 상태 전환은 duration-200, 진입·퇴장이나 진행률처럼 눈으로 따라가는 변화는 duration-300. duration-[450ms] 같은 임의 값을 새로 만들지 않는다.",
@@ -225,7 +253,7 @@ export const RULES_SECTIONS: RulesSection[] = [
     title: "AI로 설치하기 (shadcn 커스텀 레지스트리)",
     kind: "invariant",
     items: [
-      "doksam-ui 고유 자산(shadcn/ui 프리미티브가 아닌 것 — badge-extended, tooltip-icon-button, table-sortable, screen-help-dialog, json-tree, log-viewer, request-inspector, finance-* 유틸, format-biz-no, profiles/index.ts에 등록된 profile-* 항목)은 코드를 복붙하지 않고 npx shadcn add https://ui.doksam.com/r/<name>.json 으로 설치한다.",
+      "doksam-ui 고유 자산(shadcn/ui 프리미티브가 아닌 것 — badge-extended, tooltip-icon-button, table-sortable, screen-help-dialog, json-tree, log-viewer, request-inspector, finance-* 유틸, format-biz-no, ui.doksam.com/profiles 의 브랜드 프로필 — profile-admin·profile-service 등 프로필 이름 하나당 한 항목이다. 같은 profile- 접두를 쓰는 profile-scope 는 프로필이 아니라 네 축을 data-* 속성으로 해소해 주는 유틸리티이므로 구분해서 고른다)은 코드를 복붙하지 않고 npx shadcn add https://ui.doksam.com/r/<name>.json 으로 설치한다.",
       "프리미티브(button·card·badge 등 components/ui/ 60종)도 이 레지스트리가 배포한다 — 항목 사이의 registryDependencies 는 전부 https://ui.doksam.com/r/<name>.json 이며 bare 이름을 쓰지 않는다. bare 이름은 상류 shadcn 에서 내려와 소비 프로젝트의 프리셋과 상류 버전에 따라 내용이 갈리므로, 설치본이 카탈로그와 같다는 보장이 사라진다(scripts/registry/ui-items.test.ts 가 막는다).",
       "설치 가능한 전체 목록과 각 install 명령은 ui.doksam.com/llms.txt(AI 발견용 카탈로그)에서 기계적으로 읽을 수 있다 — registry.json(레포 루트)이 단일 진실원천이며 pnpm gen:llms 로 동기화한다.",
       "이 레지스트리를 프로젝트에 상시 등록해두려면 components.json의 registries에 \"@doksam-ui\": \"https://ui.doksam.com/r/{name}.json\" 을 추가한다 — 이후 npx shadcn add @doksam-ui/<name> 으로 짧게 설치할 수 있다.",

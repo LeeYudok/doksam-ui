@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "empty-state",
+  "title": "Empty State",
+  "description": "데이터가 없거나 아직 생성되지 않은 자리에 놓는 빈 상태 블록. 아이콘·제목·설명·다음 행동 버튼을 한 묶음으로 배치한다.",
+  "registryDependencies": [
+    "https://ui.doksam.com/r/button.json"
+  ],
+  "files": [
+    {
+      "path": "components/empty-state.tsx",
+      "content": "import * as React from \"react\"\n\nimport { Button } from \"@/components/ui/button\"\nimport { cn } from \"@/lib/utils\"\n\nexport interface EmptyStateProps {\n  /** 안내 메시지. */\n  message: string\n  /** 아이콘 ReactNode(Phosphor 등). */\n  icon?: React.ReactNode\n  /** 보조 텍스트. */\n  subtext?: string\n  /** 액션 버튼 — 지정 시 outline 버튼이 붙는다. */\n  action?: { label: string; onClick: () => void }\n  className?: string\n}\n\n/**\n * 빈 상태 편의 컴포넌트 — message/icon/subtext/action prop API 한 개로 끝나는 래퍼.\n * 서브컴포넌트 조합이 필요하면 ui/empty 를 직접 쓰고, 리스트·패널 안 간단한\n * 빈 상태는 이걸 쓴다(srope customs/empty-state 이식).\n */\nexport function EmptyState({ message, icon, subtext, action, className }: EmptyStateProps) {\n  return (\n    <div className={cn(\"py-6 text-center text-muted-foreground\", className)}>\n      {icon ? <div className=\"mx-auto mb-1 flex justify-center\">{icon}</div> : null}\n      <p className=\"text-xs\">{message}</p>\n      {subtext ? <p className=\"mt-0.5 text-[11px] text-muted-foreground/70\">{subtext}</p> : null}\n      {action ? (\n        <Button size=\"sm\" variant=\"outline\" className=\"mt-2 text-xs\" onClick={action.onClick}>\n          {action.label}\n        </Button>\n      ) : null}\n    </div>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}

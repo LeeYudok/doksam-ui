@@ -2,8 +2,10 @@
 // scripts/registry/sync-profile-vars.ts 가 plain `node --experimental-strip-types`
 // 로 이 파일을 import 하면 해소되지 않는다(#36 작업 중 실측). tsconfig.json 의
 // allowImportingTsExtensions 덕에 tsc·vitest 쪽 해석도 그대로 유지된다.
+import { HEATMAP_TOKENS, HEATMAP_TOKEN_KEYS } from "./heatmap-tokens.ts";
 import { RISK_TOKENS, RISK_TOKEN_KEYS } from "./risk-tokens.ts";
 import { SIDEBAR_TOKEN_KEYS, SIDEBAR_TOKENS } from "./sidebar-tokens.ts";
+import { getPersonalityPreset } from "../personalities/index.ts";
 import type { BrandProfile } from "../profiles/index.ts";
 import { getThemePreset, THEME_TOKEN_KEYS } from "../themes/index.ts";
 
@@ -24,8 +26,13 @@ import { getThemePreset, THEME_TOKEN_KEYS } from "../themes/index.ts";
  * `registry.json` 의 실제 값과 이 계산 결과가 어긋나지 않는지 지킨다.
  */
 
-/** `profile-*` 항목의 `cssVars.light`/`dark` 가 반드시 가져야 할 키 전체 — THEME_TOKEN_KEYS ∪ SIDEBAR_TOKEN_KEYS ∪ RISK_TOKEN_KEYS. */
-export const PROFILE_CSS_VAR_KEYS: string[] = [...THEME_TOKEN_KEYS, ...SIDEBAR_TOKEN_KEYS, ...RISK_TOKEN_KEYS];
+/** `profile-*` 항목의 `cssVars.light`/`dark` 가 반드시 가져야 할 키 전체 — THEME_TOKEN_KEYS ∪ SIDEBAR_TOKEN_KEYS ∪ RISK_TOKEN_KEYS ∪ HEATMAP_TOKEN_KEYS. */
+export const PROFILE_CSS_VAR_KEYS: string[] = [
+  ...THEME_TOKEN_KEYS,
+  ...SIDEBAR_TOKEN_KEYS,
+  ...RISK_TOKEN_KEYS,
+  ...HEATMAP_TOKEN_KEYS,
+];
 
 export interface ProfileRegistryCssVars {
   theme: { radius: string };
@@ -41,8 +48,18 @@ export function computeProfileRegistryCssVars(profile: BrandProfile): ProfileReg
   const theme = getThemePreset(profile.theme);
   if (!theme) return undefined;
 
-  const light: Record<string, string> = { ...theme.light, ...SIDEBAR_TOKENS.light, ...RISK_TOKENS.light };
-  const dark: Record<string, string> = { ...theme.dark, ...SIDEBAR_TOKENS.dark, ...RISK_TOKENS.dark };
+  const light: Record<string, string> = {
+    ...theme.light,
+    ...SIDEBAR_TOKENS.light,
+    ...RISK_TOKENS.light,
+    ...HEATMAP_TOKENS.light,
+  };
+  const dark: Record<string, string> = {
+    ...theme.dark,
+    ...SIDEBAR_TOKENS.dark,
+    ...RISK_TOKENS.dark,
+    ...HEATMAP_TOKENS.dark,
+  };
 
   return {
     theme: { radius: profile.radius },
@@ -53,6 +70,16 @@ export function computeProfileRegistryCssVars(profile: BrandProfile): ProfileReg
 
 /** `description` 안에서 `radius=<값>` 을 찾는 패턴 — 두 곳(생성기·테스트)이 공유. */
 const RADIUS_IN_DESCRIPTION = /radius=([^\s+]+)/;
+
+/**
+ * 치환용 전역 패턴 — `String.replace` 는 비전역 정규식이면 **첫 번째 일치만** 바꾼다.
+ * 설명 문장이 같은 토큰을 두 번 언급하면(예: 요약 한 번 + 설치 안내 한 번) 뒤쪽이
+ * 옛 값으로 남아 드리프트가 다시 생긴다. 추출(`extract*`)·실존 확인은 캡처 그룹을
+ * 그대로 읽어야 하므로 비전역 쪽을 쓰고, 치환만 이 전역 쌍을 쓴다 (#111 finding 15b).
+ */
+function replaceAll(input: string, pattern: RegExp, replacement: string): string {
+  return input.replace(new RegExp(pattern.source, "g"), replacement);
+}
 
 /**
  * `registry.json` 의 `profile-*` 항목 `description` 은 손으로 쓴 문장이라
@@ -69,10 +96,82 @@ const RADIUS_IN_DESCRIPTION = /radius=([^\s+]+)/;
  */
 export function withSyncedRadiusDescription(description: string, radius: string): string {
   if (!RADIUS_IN_DESCRIPTION.test(description)) return description;
-  return description.replace(RADIUS_IN_DESCRIPTION, `radius=${radius}`);
+  return replaceAll(description, RADIUS_IN_DESCRIPTION, `radius=${radius}`);
 }
 
 /** `description` 에서 `radius=<값>` 부분을 추출한다. 없으면 undefined. */
 export function extractRadiusFromDescription(description: string): string | undefined {
   return description.match(RADIUS_IN_DESCRIPTION)?.[1];
+}
+
+/** `description` 안에서 `density=<값>` 을 찾는 패턴 (#110 finding 2). */
+const DENSITY_IN_DESCRIPTION = /density=([a-z]+)/;
+/** `description` 안에서 `data-density="<값>"` 을 찾는 패턴 (#110 finding 2). */
+const DATA_DENSITY_IN_DESCRIPTION = /data-density="([a-z]+)"/;
+/** `description` 안에서 `personality=<값>` 을 찾는 패턴 (#110 finding 3). */
+const PERSONALITY_IN_DESCRIPTION = /personality=([a-z]+)/;
+/** `description` 안에서 `data-personality(-surface|-motion)?="<값>"` 을 찾는 패턴 (#110 finding 3). */
+const DATA_PERSONALITY_IN_DESCRIPTION = /data-personality="([a-z]+)"/;
+const DATA_PERSONALITY_SURFACE_IN_DESCRIPTION = /data-personality-surface="([a-z]+)"/;
+const DATA_PERSONALITY_MOTION_IN_DESCRIPTION = /data-personality-motion="([a-z]+)"/;
+
+/**
+ * `profile-*` 항목 `description` 의 축 값(radius·density·personality)을 전부
+ * `profiles/index.ts` 로 다시 맞춘다 (#110 finding 2·3).
+ *
+ * radius 만 재계산하던 시절 `profile-docs` 의 설명이 `density=comfortable` 인데
+ * 실제 프로필은 `spacious` 인 드리프트를 아무도 잡지 못했다. density 와
+ * personality 도 같은 방식으로 문장 안에서 치환한다 — personality 는 속성이
+ * 없으면 아무 층도 걸리지 않는 opt-in 이라, 설명이 `data-personality*` 세 속성을
+ * 안내하지 않으면 설치만 한 프로젝트가 성격 미적용으로 돌아간다.
+ *
+ * 치환은 전역으로 한다 — 같은 토큰이 문장 안에 두 번 나오면 첫 개만 바뀌어
+ * 나머지가 옛 값으로 남는다(#111 finding 15b).
+ *
+ * 각 패턴은 없으면 그 부분만 건너뛴다 — 조용한 실패를 막기 위해
+ * `lib/profile-registry-css-vars.test.ts` 가 전 프로필에 모든 패턴이 실존하는지
+ * 함께 확인한다.
+ */
+export function withSyncedProfileAxesDescription(description: string, profile: BrandProfile): string {
+  let out = withSyncedRadiusDescription(description, profile.radius);
+  out = replaceAll(out, DENSITY_IN_DESCRIPTION, `density=${profile.density}`);
+  out = replaceAll(out, DATA_DENSITY_IN_DESCRIPTION, `data-density="${profile.density}"`);
+  out = replaceAll(out, PERSONALITY_IN_DESCRIPTION, `personality=${profile.personality}`);
+  out = replaceAll(out, DATA_PERSONALITY_IN_DESCRIPTION, `data-personality="${profile.personality}"`);
+
+  const personality = getPersonalityPreset(profile.personality);
+  if (personality) {
+    out = replaceAll(
+      out,
+      DATA_PERSONALITY_SURFACE_IN_DESCRIPTION,
+      `data-personality-surface="${personality.surface}"`,
+    );
+    out = replaceAll(out, DATA_PERSONALITY_MOTION_IN_DESCRIPTION, `data-personality-motion="${personality.motion}"`);
+  }
+  return out;
+}
+
+/** `description` 에서 `density=<값>` 부분을 추출한다. 없으면 undefined. */
+export function extractDensityFromDescription(description: string): string | undefined {
+  return description.match(DENSITY_IN_DESCRIPTION)?.[1];
+}
+
+/** `description` 에서 `personality=<값>` 부분을 추출한다. 없으면 undefined. */
+export function extractPersonalityFromDescription(description: string): string | undefined {
+  return description.match(PERSONALITY_IN_DESCRIPTION)?.[1];
+}
+
+/** `description` 에서 `data-*` 속성 안내 값을 추출한다. 없으면 undefined. */
+export function extractProfileDataAttrsFromDescription(description: string): {
+  density?: string;
+  personality?: string;
+  surface?: string;
+  motion?: string;
+} {
+  return {
+    density: description.match(DATA_DENSITY_IN_DESCRIPTION)?.[1],
+    personality: description.match(DATA_PERSONALITY_IN_DESCRIPTION)?.[1],
+    surface: description.match(DATA_PERSONALITY_SURFACE_IN_DESCRIPTION)?.[1],
+    motion: description.match(DATA_PERSONALITY_MOTION_IN_DESCRIPTION)?.[1],
+  };
 }

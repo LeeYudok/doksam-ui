@@ -20,6 +20,48 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "audit-code-tag",
+      "type": "registry:component",
+      "title": "Audit Code Tag",
+      "description": "판단 근거를 추적하는 감사코드를 등폭 글꼴 + 시맨틱 토큰 배경으로 표시하는 태그. 색으로 의미를 나누지 않고, 클릭 이동·복사는 옵션이다.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10",
+        "sonner@^2.0.7"
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/badge.json",
+        "https://ui.doksam.com/r/i18n-provider.json"
+      ],
+      "files": [
+        {
+          "path": "components/audit-code-tag.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "audit-trail",
+      "type": "registry:component",
+      "title": "Audit Trail",
+      "description": "시각·주체(사람/시스템/모형)·행위·대상·감사코드로 고정된 감사 추적 이력. 주체는 아이콘+라벨로 구분하고 감사코드는 AuditCodeTag를 재사용한다.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10"
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/audit-code-tag.json",
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/i18n-provider.json"
+      ],
+      "files": [
+        {
+          "path": "components/audit-trail.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "avatar-group",
       "type": "registry:component",
       "title": "Avatar Group",
@@ -79,6 +121,26 @@
       "files": [
         {
           "path": "components/circular-progress.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "coach-mark-tour",
+      "type": "registry:component",
+      "title": "Coach Mark Tour",
+      "description": "기존 화면 위에 덧씌우는 단계형 코치마크(제품 투어). 딤 오버레이·대상 하이라이트·설명 팝오버·단계 이동을 한 세트로 제공한다.",
+      "dependencies": [
+        "radix-ui@^1.6.7",
+        "@phosphor-icons/react@^2.1.10"
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "components/coach-mark-tour.tsx",
           "type": "registry:component"
         }
       ]
@@ -152,6 +214,27 @@
       "files": [
         {
           "path": "components/contribution-bars.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "contribution-meter",
+      "type": "registry:component",
+      "title": "Contribution Meter",
+      "description": "기여도 % + Progress 게이지 + 감사코드(AuditCodeTag)를 묶은 판단 근거 표기. 방향(위험 상승/하락 요인)은 --gain/--loss로 칠한다.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10"
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/audit-code-tag.json",
+        "https://ui.doksam.com/r/i18n-provider.json",
+        "https://ui.doksam.com/r/progress.json"
+      ],
+      "files": [
+        {
+          "path": "components/contribution-meter.tsx",
           "type": "registry:component"
         }
       ]
@@ -373,6 +456,26 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "inline-help-link",
+      "type": "registry:component",
+      "title": "Inline Help Link",
+      "description": "섹션 제목(h2) 옆에 붙는 인라인 사용법 링크. 화면 단위 ScreenHelpDialog 와 달리 섹션 하나만 가리키며, 같은 화면 도움말 다이얼로그를 특정 항목으로 열거나(onOpen) 별도 도움말 화면으로 이동한다(href).",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10"
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/tooltip.json"
+      ],
+      "files": [
+        {
+          "path": "components/inline-help-link.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "json-tree",
       "type": "registry:component",
       "title": "JSON Tree",
@@ -496,6 +599,26 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "metric-comparison-table",
+      "type": "registry:component",
+      "title": "Metric Comparison Table",
+      "description": "행 = 지표, 열 = 대상 A·대상 B·델타로 A/B 성능을 비교하는 표. 방향 색은 델타 부호가 아니라 지표별 betterWhen(higher/lower)으로 정한다.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10"
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/i18n-provider.json",
+        "https://ui.doksam.com/r/table.json"
+      ],
+      "files": [
+        {
+          "path": "components/metric-comparison-table.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "multi-select",
       "type": "registry:component",
       "title": "Multi Select",
@@ -531,6 +654,22 @@
       "files": [
         {
           "path": "components/number-input.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "party-identity-cell",
+      "type": "registry:component",
+      "title": "Party Identity Cell",
+      "description": "차주 식별 2줄 셀. 1행 업체명 / 2행 업종·법인구분·마스킹 사업자번호를 표시하며 사업자번호 포맷은 formatBizNo를 그대로 쓴다.",
+      "registryDependencies": [
+        "https://ui.doksam.com/r/format-biz-no.json"
+      ],
+      "files": [
+        {
+          "path": "components/party-identity-cell.tsx",
           "type": "registry:component"
         }
       ]
@@ -575,7 +714,7 @@
       "name": "profile-admin",
       "type": "registry:theme",
       "title": "Profile: Admin",
-      "description": "내부 관리자 도구·백오피스 화면 프로필. theme=slate(무채색 뉴트럴) + font=Geist + defaultMode=light + radius=2px + density=compact — <html>에 data-density=\"compact\"를 지정한다(밀도 토큰 층은 /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/geist/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응, next/font/google 미사용). 자세한 절차는 https://ui.doksam.com/rules 참고.",
+      "description": "내부 관리자 도구·백오피스 화면 프로필. theme=slate(무채색 뉴트럴) + font=Geist + defaultMode=light + radius=2px + density=compact + personality=crisp — <html>에 data-density=\"compact\" data-personality=\"crisp\" data-personality-surface=\"border\" data-personality-motion=\"none\" 네 속성을 지정한다(속성이 없으면 밀도·성격 토큰 층이 아예 걸리지 않는 opt-in 이다 — /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/geist/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응, next/font/google 미사용). 자세한 절차는 https://ui.doksam.com/rules 참고.",
       "cssVars": {
         "theme": {
           "radius": "2px"
@@ -623,7 +762,17 @@
           "risk-high": "oklch(0.45 0.15 48)",
           "risk-high-foreground": "oklch(0.98 0.01 48)",
           "risk-severe": "oklch(0.45 0.2 27)",
-          "risk-severe-foreground": "oklch(0.98 0.01 27)"
+          "risk-severe-foreground": "oklch(0.98 0.01 27)",
+          "heatmap-l-0": "0.94",
+          "heatmap-l-1": "0.82",
+          "heatmap-l-2": "0.68",
+          "heatmap-l-3": "0.54",
+          "heatmap-l-4": "0.38",
+          "heatmap-text-0": "var(--foreground)",
+          "heatmap-text-1": "var(--foreground)",
+          "heatmap-text-2": "var(--foreground)",
+          "heatmap-text-3": "var(--primary-foreground)",
+          "heatmap-text-4": "var(--primary-foreground)"
         },
         "dark": {
           "background": "oklch(0.19 0.005 240)",
@@ -668,7 +817,17 @@
           "risk-high": "oklch(0.74 0.15 48)",
           "risk-high-foreground": "oklch(0.15 0.02 48)",
           "risk-severe": "oklch(0.74 0.18 27)",
-          "risk-severe-foreground": "oklch(0.15 0.02 27)"
+          "risk-severe-foreground": "oklch(0.15 0.02 27)",
+          "heatmap-l-0": "0.24",
+          "heatmap-l-1": "0.32",
+          "heatmap-l-2": "0.42",
+          "heatmap-l-3": "0.62",
+          "heatmap-l-4": "0.76",
+          "heatmap-text-0": "var(--foreground)",
+          "heatmap-text-1": "var(--foreground)",
+          "heatmap-text-2": "var(--foreground)",
+          "heatmap-text-3": "var(--background)",
+          "heatmap-text-4": "var(--background)"
         }
       }
     },
@@ -677,7 +836,7 @@
       "name": "profile-console",
       "type": "registry:theme",
       "title": "Profile: Console",
-      "description": "모니터링·운영 콘솔류 화면 프로필. theme=ember(웜 오렌지) + font=Geist + defaultMode=dark + radius=2px + density=compact — <html>에 data-density=\"compact\"를 지정한다(밀도 토큰 층은 /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/geist/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응, next/font/google 미사용). 자세한 절차는 https://ui.doksam.com/rules 참고.",
+      "description": "모니터링·운영 콘솔류 화면 프로필. theme=ember(웜 오렌지) + font=Geist + defaultMode=dark + radius=2px + density=compact + personality=crisp — <html>에 data-density=\"compact\" data-personality=\"crisp\" data-personality-surface=\"border\" data-personality-motion=\"none\" 네 속성을 지정한다(속성이 없으면 밀도·성격 토큰 층이 아예 걸리지 않는 opt-in 이다 — /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/geist/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응, next/font/google 미사용). 자세한 절차는 https://ui.doksam.com/rules 참고.",
       "cssVars": {
         "theme": {
           "radius": "2px"
@@ -725,7 +884,17 @@
           "risk-high": "oklch(0.45 0.15 48)",
           "risk-high-foreground": "oklch(0.98 0.01 48)",
           "risk-severe": "oklch(0.45 0.2 27)",
-          "risk-severe-foreground": "oklch(0.98 0.01 27)"
+          "risk-severe-foreground": "oklch(0.98 0.01 27)",
+          "heatmap-l-0": "0.94",
+          "heatmap-l-1": "0.82",
+          "heatmap-l-2": "0.68",
+          "heatmap-l-3": "0.54",
+          "heatmap-l-4": "0.38",
+          "heatmap-text-0": "var(--foreground)",
+          "heatmap-text-1": "var(--foreground)",
+          "heatmap-text-2": "var(--foreground)",
+          "heatmap-text-3": "var(--primary-foreground)",
+          "heatmap-text-4": "var(--primary-foreground)"
         },
         "dark": {
           "background": "oklch(0.19 0.014 41)",
@@ -770,7 +939,17 @@
           "risk-high": "oklch(0.74 0.15 48)",
           "risk-high-foreground": "oklch(0.15 0.02 48)",
           "risk-severe": "oklch(0.74 0.18 27)",
-          "risk-severe-foreground": "oklch(0.15 0.02 27)"
+          "risk-severe-foreground": "oklch(0.15 0.02 27)",
+          "heatmap-l-0": "0.24",
+          "heatmap-l-1": "0.32",
+          "heatmap-l-2": "0.42",
+          "heatmap-l-3": "0.62",
+          "heatmap-l-4": "0.76",
+          "heatmap-text-0": "var(--foreground)",
+          "heatmap-text-1": "var(--foreground)",
+          "heatmap-text-2": "var(--foreground)",
+          "heatmap-text-3": "var(--background)",
+          "heatmap-text-4": "var(--background)"
         }
       }
     },
@@ -779,7 +958,7 @@
       "name": "profile-finance",
       "type": "registry:theme",
       "title": "Profile: Finance",
-      "description": "여신·리스크 모니터링 등 금융기관 업무 화면 프로필. theme=ivory(아이보리 종이톤 + 네이비 잉크 + 골드 포인트) + font=Noto Sans KR + defaultMode=light + radius=2px + density=compact — <html>에 data-density=\"compact\"를 지정한다(밀도 토큰 층은 /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/noto-sans-kr/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응, next/font/google 미사용). 자세한 절차는 https://ui.doksam.com/rules 참고.",
+      "description": "여신·리스크 모니터링 등 금융기관 업무 화면 프로필. theme=ivory(아이보리 종이톤 + 네이비 잉크 + 골드 포인트) + font=Noto Sans KR + defaultMode=light + radius=2px + density=compact + personality=crisp — <html>에 data-density=\"compact\" data-personality=\"crisp\" data-personality-surface=\"border\" data-personality-motion=\"none\" 네 속성을 지정한다(속성이 없으면 밀도·성격 토큰 층이 아예 걸리지 않는 opt-in 이다 — /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/noto-sans-kr/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응, next/font/google 미사용). 자세한 절차는 https://ui.doksam.com/rules 참고.",
       "cssVars": {
         "theme": {
           "radius": "2px"
@@ -827,7 +1006,17 @@
           "risk-high": "oklch(0.45 0.15 48)",
           "risk-high-foreground": "oklch(0.98 0.01 48)",
           "risk-severe": "oklch(0.45 0.2 27)",
-          "risk-severe-foreground": "oklch(0.98 0.01 27)"
+          "risk-severe-foreground": "oklch(0.98 0.01 27)",
+          "heatmap-l-0": "0.94",
+          "heatmap-l-1": "0.82",
+          "heatmap-l-2": "0.68",
+          "heatmap-l-3": "0.54",
+          "heatmap-l-4": "0.38",
+          "heatmap-text-0": "var(--foreground)",
+          "heatmap-text-1": "var(--foreground)",
+          "heatmap-text-2": "var(--foreground)",
+          "heatmap-text-3": "var(--primary-foreground)",
+          "heatmap-text-4": "var(--primary-foreground)"
         },
         "dark": {
           "background": "oklch(0.195 0.033 270)",
@@ -872,7 +1061,17 @@
           "risk-high": "oklch(0.74 0.15 48)",
           "risk-high-foreground": "oklch(0.15 0.02 48)",
           "risk-severe": "oklch(0.74 0.18 27)",
-          "risk-severe-foreground": "oklch(0.15 0.02 27)"
+          "risk-severe-foreground": "oklch(0.15 0.02 27)",
+          "heatmap-l-0": "0.24",
+          "heatmap-l-1": "0.32",
+          "heatmap-l-2": "0.42",
+          "heatmap-l-3": "0.62",
+          "heatmap-l-4": "0.76",
+          "heatmap-text-0": "var(--foreground)",
+          "heatmap-text-1": "var(--foreground)",
+          "heatmap-text-2": "var(--foreground)",
+          "heatmap-text-3": "var(--background)",
+          "heatmap-text-4": "var(--background)"
         }
       }
     },
@@ -881,7 +1080,7 @@
       "name": "profile-data",
       "type": "registry:theme",
       "title": "Profile: Data",
-      "description": "데이터 대시보드·시세/뉴스류 화면 프로필. theme=violet(대비 뚜렷한 퍼플) + font=Space Grotesk + defaultMode=dark + radius=6px + density=compact — <html>에 data-density=\"compact\"를 지정한다(밀도 토큰 층은 /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/space-grotesk/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응, 라틴 전용이라 한글은 Noto Sans KR 로 폴백 — assets/fonts/noto-sans-kr/ 도 함께 필요). 자세한 절차는 https://ui.doksam.com/rules 참고.",
+      "description": "데이터 대시보드·시세/뉴스류 화면 프로필. theme=violet(대비 뚜렷한 퍼플) + font=Space Grotesk + defaultMode=dark + radius=6px + density=compact + personality=crisp — <html>에 data-density=\"compact\" data-personality=\"crisp\" data-personality-surface=\"border\" data-personality-motion=\"none\" 네 속성을 지정한다(속성이 없으면 밀도·성격 토큰 층이 아예 걸리지 않는 opt-in 이다 — /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/space-grotesk/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응, 라틴 전용이라 한글은 Noto Sans KR 로 폴백 — assets/fonts/noto-sans-kr/ 도 함께 필요). 자세한 절차는 https://ui.doksam.com/rules 참고.",
       "cssVars": {
         "theme": {
           "radius": "6px"
@@ -929,7 +1128,17 @@
           "risk-high": "oklch(0.45 0.15 48)",
           "risk-high-foreground": "oklch(0.98 0.01 48)",
           "risk-severe": "oklch(0.45 0.2 27)",
-          "risk-severe-foreground": "oklch(0.98 0.01 27)"
+          "risk-severe-foreground": "oklch(0.98 0.01 27)",
+          "heatmap-l-0": "0.94",
+          "heatmap-l-1": "0.82",
+          "heatmap-l-2": "0.68",
+          "heatmap-l-3": "0.54",
+          "heatmap-l-4": "0.38",
+          "heatmap-text-0": "var(--foreground)",
+          "heatmap-text-1": "var(--foreground)",
+          "heatmap-text-2": "var(--foreground)",
+          "heatmap-text-3": "var(--primary-foreground)",
+          "heatmap-text-4": "var(--primary-foreground)"
         },
         "dark": {
           "background": "oklch(0.19 0.02 293)",
@@ -974,7 +1183,17 @@
           "risk-high": "oklch(0.74 0.15 48)",
           "risk-high-foreground": "oklch(0.15 0.02 48)",
           "risk-severe": "oklch(0.74 0.18 27)",
-          "risk-severe-foreground": "oklch(0.15 0.02 27)"
+          "risk-severe-foreground": "oklch(0.15 0.02 27)",
+          "heatmap-l-0": "0.24",
+          "heatmap-l-1": "0.32",
+          "heatmap-l-2": "0.42",
+          "heatmap-l-3": "0.62",
+          "heatmap-l-4": "0.76",
+          "heatmap-text-0": "var(--foreground)",
+          "heatmap-text-1": "var(--foreground)",
+          "heatmap-text-2": "var(--foreground)",
+          "heatmap-text-3": "var(--background)",
+          "heatmap-text-4": "var(--background)"
         }
       }
     },
@@ -983,7 +1202,7 @@
       "name": "profile-docs",
       "type": "registry:theme",
       "title": "Profile: Docs",
-      "description": "문서·위키·블로그류 화면 프로필. theme=forest(차분한 그린) + font=IBM Plex Sans KR + defaultMode=light + radius=12px + density=comfortable — <html>에 data-density=\"comfortable\"을 지정한다(밀도 토큰 층은 /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/ibm-plex-kr/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응). 자세한 절차는 https://ui.doksam.com/rules 참고.",
+      "description": "문서·위키·블로그류 화면 프로필. theme=forest(차분한 그린) + font=IBM Plex Sans KR + defaultMode=light + radius=12px + density=spacious + personality=statement — <html>에 data-density=\"spacious\" data-personality=\"statement\" data-personality-surface=\"flat\" data-personality-motion=\"subtle\" 네 속성을 지정한다(속성이 없으면 밀도·성격 토큰 층이 아예 걸리지 않는 opt-in 이다 — /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/ibm-plex-kr/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응). 자세한 절차는 https://ui.doksam.com/rules 참고.",
       "cssVars": {
         "theme": {
           "radius": "12px"
@@ -1031,7 +1250,17 @@
           "risk-high": "oklch(0.45 0.15 48)",
           "risk-high-foreground": "oklch(0.98 0.01 48)",
           "risk-severe": "oklch(0.45 0.2 27)",
-          "risk-severe-foreground": "oklch(0.98 0.01 27)"
+          "risk-severe-foreground": "oklch(0.98 0.01 27)",
+          "heatmap-l-0": "0.94",
+          "heatmap-l-1": "0.82",
+          "heatmap-l-2": "0.68",
+          "heatmap-l-3": "0.54",
+          "heatmap-l-4": "0.38",
+          "heatmap-text-0": "var(--foreground)",
+          "heatmap-text-1": "var(--foreground)",
+          "heatmap-text-2": "var(--foreground)",
+          "heatmap-text-3": "var(--primary-foreground)",
+          "heatmap-text-4": "var(--primary-foreground)"
         },
         "dark": {
           "background": "oklch(0.19 0.016 152)",
@@ -1076,7 +1305,17 @@
           "risk-high": "oklch(0.74 0.15 48)",
           "risk-high-foreground": "oklch(0.15 0.02 48)",
           "risk-severe": "oklch(0.74 0.18 27)",
-          "risk-severe-foreground": "oklch(0.15 0.02 27)"
+          "risk-severe-foreground": "oklch(0.15 0.02 27)",
+          "heatmap-l-0": "0.24",
+          "heatmap-l-1": "0.32",
+          "heatmap-l-2": "0.42",
+          "heatmap-l-3": "0.62",
+          "heatmap-l-4": "0.76",
+          "heatmap-text-0": "var(--foreground)",
+          "heatmap-text-1": "var(--foreground)",
+          "heatmap-text-2": "var(--foreground)",
+          "heatmap-text-3": "var(--background)",
+          "heatmap-text-4": "var(--background)"
         }
       }
     },
@@ -1122,7 +1361,7 @@
       "name": "profile-service",
       "type": "registry:theme",
       "title": "Profile: Service",
-      "description": "대외 서비스·고객 대면 화면 프로필. theme=ocean(신뢰감 있는 블루) + font=Noto Sans KR + defaultMode=light + radius=12px + density=comfortable — <html>에 data-density=\"comfortable\"을 지정한다(밀도 토큰 층은 /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/noto-sans-kr/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응). 자세한 절차는 https://ui.doksam.com/rules 참고.",
+      "description": "대외 서비스·고객 대면 화면 프로필. theme=ocean(신뢰감 있는 블루) + font=Noto Sans KR + defaultMode=light + radius=12px + density=comfortable + personality=elevated — <html>에 data-density=\"comfortable\" data-personality=\"elevated\" data-personality-surface=\"shadow\" data-personality-motion=\"expressive\" 네 속성을 지정한다(속성이 없으면 밀도·성격 토큰 층이 아예 걸리지 않는 opt-in 이다 — /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/noto-sans-kr/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응). 자세한 절차는 https://ui.doksam.com/rules 참고.",
       "cssVars": {
         "theme": {
           "radius": "12px"
@@ -1170,7 +1409,17 @@
           "risk-high": "oklch(0.45 0.15 48)",
           "risk-high-foreground": "oklch(0.98 0.01 48)",
           "risk-severe": "oklch(0.45 0.2 27)",
-          "risk-severe-foreground": "oklch(0.98 0.01 27)"
+          "risk-severe-foreground": "oklch(0.98 0.01 27)",
+          "heatmap-l-0": "0.94",
+          "heatmap-l-1": "0.82",
+          "heatmap-l-2": "0.68",
+          "heatmap-l-3": "0.54",
+          "heatmap-l-4": "0.38",
+          "heatmap-text-0": "var(--foreground)",
+          "heatmap-text-1": "var(--foreground)",
+          "heatmap-text-2": "var(--foreground)",
+          "heatmap-text-3": "var(--primary-foreground)",
+          "heatmap-text-4": "var(--primary-foreground)"
         },
         "dark": {
           "background": "oklch(0.19 0.018 262)",
@@ -1215,7 +1464,17 @@
           "risk-high": "oklch(0.74 0.15 48)",
           "risk-high-foreground": "oklch(0.15 0.02 48)",
           "risk-severe": "oklch(0.74 0.18 27)",
-          "risk-severe-foreground": "oklch(0.15 0.02 27)"
+          "risk-severe-foreground": "oklch(0.15 0.02 27)",
+          "heatmap-l-0": "0.24",
+          "heatmap-l-1": "0.32",
+          "heatmap-l-2": "0.42",
+          "heatmap-l-3": "0.62",
+          "heatmap-l-4": "0.76",
+          "heatmap-text-0": "var(--foreground)",
+          "heatmap-text-1": "var(--foreground)",
+          "heatmap-text-2": "var(--foreground)",
+          "heatmap-text-3": "var(--background)",
+          "heatmap-text-4": "var(--background)"
         }
       }
     },
@@ -1323,6 +1582,26 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "ranked-alternatives-list",
+      "type": "registry:component",
+      "title": "Ranked Alternatives List",
+      "description": "모형이 계산한 순위·동점·순위없음 상태를 보이는 대안 목록. 채택해도 나머지 대안이 사라지지 않고 채택 이력이 누적된다.",
+      "dependencies": [],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/badge.json",
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/card.json",
+        "https://ui.doksam.com/r/risk-grade-badge.json"
+      ],
+      "files": [
+        {
+          "path": "components/ranked-alternatives-list.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "risk-core-map",
       "type": "registry:component",
       "title": "Risk Core Map",
@@ -1357,6 +1636,24 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "risk-table",
+      "type": "registry:component",
+      "title": "Risk Table",
+      "description": "심각도에 따라 행 배경 tint 와 좌측 accent bar 가 붙는 업무 테이블. 금액·줄바꿈·행 액션 셀 규약을 고정하고, 색은 --risk-* 토큰만 인라인 style 로 쓴다. 밀도는 프로필의 data-density 층이 소유한다.",
+      "registryDependencies": [
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/risk-tokens.json",
+        "https://ui.doksam.com/r/table.json"
+      ],
+      "files": [
+        {
+          "path": "components/patterns/risk-table/risk-table.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "risk-tokens",
       "type": "registry:lib",
       "title": "Risk Tokens",
@@ -1365,6 +1662,36 @@
         {
           "path": "lib/risk-tokens.ts",
           "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "heatmap-tokens",
+      "type": "registry:lib",
+      "title": "Heatmap Tokens",
+      "description": "matrix-heatmap 강도 램프(명도 단계 + 셀 텍스트 토큰)의 단일 진실원천. 값 자체는 프로필 설치가 :root/.dark 에 넣고, 셀 배경은 oklch(from var(--primary) ...) 로 실행 시 파생한다.",
+      "files": [
+        {
+          "path": "lib/heatmap-tokens.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "matrix-heatmap",
+      "type": "registry:component",
+      "title": "Matrix Heatmap",
+      "description": "범주 × 범주 분포를 강도 면색 + 값 텍스트로 함께 보여주는 격자. 색은 --primary 에서 파생한 명도 램프이고, 데이터 없는 교차 칸은 빈 셀로, 행이 많으면 첫 열을 고정한 채 가로 스크롤된다.",
+      "dependencies": [],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/heatmap-tokens.json"
+      ],
+      "files": [
+        {
+          "path": "components/matrix-heatmap.tsx",
+          "type": "registry:component"
         }
       ]
     },
@@ -1494,6 +1821,28 @@
         "https://ui.doksam.com/r/badge.json",
         "https://ui.doksam.com/r/card.json",
         "https://ui.doksam.com/r/progress.json"
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "top-nav-shell",
+      "type": "registry:component",
+      "title": "Top Nav Shell",
+      "description": "1단 글로벌 nav + 2단 서브탭바(현재 화면명·하위 탭·상시 ask 바)를 한 몸으로 붙인 업무 시스템용 셸. 넘치는 메뉴는 더보기 드롭다운으로, 좁은 폭에서는 전체 nav 를 시트로 접는다.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10"
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/dropdown-menu.json",
+        "https://ui.doksam.com/r/kbd.json",
+        "https://ui.doksam.com/r/sheet.json"
+      ],
+      "files": [
+        {
+          "path": "components/patterns/top-nav-shell/top-nav-shell.tsx",
+          "type": "registry:component"
+        }
       ]
     },
     {
@@ -2215,6 +2564,139 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "template-help-center",
+      "type": "registry:block",
+      "title": "Help Center 템플릿",
+      "description": "admin 프로필(Slate·Geist) 질문 창구형 도움말 센터 — 물어보기·매뉴얼 색인·FAQ·질문 이력 4탭을 라우트로 딥링크.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10",
+        "cmdk@^1.1.1"
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/accordion.json",
+        "https://ui.doksam.com/r/badge.json",
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/command.json",
+        "https://ui.doksam.com/r/profile-scope.json",
+        "https://ui.doksam.com/r/route-error.json",
+        "https://ui.doksam.com/r/route-loading.json",
+        "https://ui.doksam.com/r/textarea.json"
+      ],
+      "files": [
+        {
+          "path": "app/templates/help-center/error.tsx",
+          "type": "registry:page",
+          "target": "app/templates/help-center/error.tsx"
+        },
+        {
+          "path": "app/templates/help-center/layout.tsx",
+          "type": "registry:page",
+          "target": "app/templates/help-center/layout.tsx"
+        },
+        {
+          "path": "app/templates/help-center/loading.tsx",
+          "type": "registry:page",
+          "target": "app/templates/help-center/loading.tsx"
+        },
+        {
+          "path": "app/templates/help-center/page.tsx",
+          "type": "registry:page",
+          "target": "app/templates/help-center/page.tsx"
+        },
+        {
+          "path": "app/templates/help-center/manual/error.tsx",
+          "type": "registry:page",
+          "target": "app/templates/help-center/manual/error.tsx"
+        },
+        {
+          "path": "app/templates/help-center/manual/loading.tsx",
+          "type": "registry:page",
+          "target": "app/templates/help-center/manual/loading.tsx"
+        },
+        {
+          "path": "app/templates/help-center/manual/page.tsx",
+          "type": "registry:page",
+          "target": "app/templates/help-center/manual/page.tsx"
+        },
+        {
+          "path": "app/templates/help-center/faq/error.tsx",
+          "type": "registry:page",
+          "target": "app/templates/help-center/faq/error.tsx"
+        },
+        {
+          "path": "app/templates/help-center/faq/loading.tsx",
+          "type": "registry:page",
+          "target": "app/templates/help-center/faq/loading.tsx"
+        },
+        {
+          "path": "app/templates/help-center/faq/page.tsx",
+          "type": "registry:page",
+          "target": "app/templates/help-center/faq/page.tsx"
+        },
+        {
+          "path": "app/templates/help-center/history/error.tsx",
+          "type": "registry:page",
+          "target": "app/templates/help-center/history/error.tsx"
+        },
+        {
+          "path": "app/templates/help-center/history/loading.tsx",
+          "type": "registry:page",
+          "target": "app/templates/help-center/history/loading.tsx"
+        },
+        {
+          "path": "app/templates/help-center/history/page.tsx",
+          "type": "registry:page",
+          "target": "app/templates/help-center/history/page.tsx"
+        },
+        {
+          "path": "app/templates/help-center/_components/help-center-nav.tsx",
+          "type": "registry:page",
+          "target": "app/templates/help-center/_components/help-center-nav.tsx"
+        },
+        {
+          "path": "app/templates/help-center/_components/ask-panel.tsx",
+          "type": "registry:page",
+          "target": "app/templates/help-center/_components/ask-panel.tsx"
+        },
+        {
+          "path": "app/templates/help-center/_components/manual-index.tsx",
+          "type": "registry:page",
+          "target": "app/templates/help-center/_components/manual-index.tsx"
+        },
+        {
+          "path": "app/templates/help-center/_components/faq-list.tsx",
+          "type": "registry:page",
+          "target": "app/templates/help-center/_components/faq-list.tsx"
+        },
+        {
+          "path": "app/templates/help-center/_components/question-history.tsx",
+          "type": "registry:page",
+          "target": "app/templates/help-center/_components/question-history.tsx"
+        },
+        {
+          "path": "app/templates/help-center/_data/suggested-questions.ts",
+          "type": "registry:page",
+          "target": "app/templates/help-center/_data/suggested-questions.ts"
+        },
+        {
+          "path": "app/templates/help-center/_data/manual.ts",
+          "type": "registry:page",
+          "target": "app/templates/help-center/_data/manual.ts"
+        },
+        {
+          "path": "app/templates/help-center/_data/faq.ts",
+          "type": "registry:page",
+          "target": "app/templates/help-center/_data/faq.ts"
+        },
+        {
+          "path": "app/templates/help-center/_data/questions.ts",
+          "type": "registry:page",
+          "target": "app/templates/help-center/_data/questions.ts"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "template-knowledge-base",
       "type": "registry:block",
       "title": "Knowledge Base 템플릿",
@@ -2443,6 +2925,60 @@
         "https://ui.doksam.com/r/route-loading.json",
         "https://ui.doksam.com/r/separator.json",
         "https://ui.doksam.com/r/spinner.json"
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "template-portal-login",
+      "type": "registry:block",
+      "title": "Portal Login 템플릿",
+      "description": "finance 프로필 · Ivory · Noto Sans KR · focus-task 원형. 시스템 상태바·공지사항·보안 고지를 더한 사내 업무포털 로그인 변형. 세 표시 모두 다른 화면으로 이동시키지 않는 정보성 표시라 원형의 내비게이션 없음 규칙을 지킵니다. 담당자·심사역·관리자 역할 분기는 로그인 후 서버가 판단하므로 화면에는 안내 문구로만 노출합니다.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10"
+      ],
+      "files": [
+        {
+          "path": "app/templates/portal-login/error.tsx",
+          "type": "registry:page",
+          "target": "app/templates/portal-login/error.tsx"
+        },
+        {
+          "path": "app/templates/portal-login/layout.tsx",
+          "type": "registry:page",
+          "target": "app/templates/portal-login/layout.tsx"
+        },
+        {
+          "path": "app/templates/portal-login/loading.tsx",
+          "type": "registry:page",
+          "target": "app/templates/portal-login/loading.tsx"
+        },
+        {
+          "path": "app/templates/portal-login/page.tsx",
+          "type": "registry:page",
+          "target": "app/templates/portal-login/page.tsx"
+        },
+        {
+          "path": "app/templates/portal-login/_components/portal-login.tsx",
+          "type": "registry:page",
+          "target": "app/templates/portal-login/_components/portal-login.tsx"
+        },
+        {
+          "path": "app/templates/portal-login/_data/portal-login-data.ts",
+          "type": "registry:page",
+          "target": "app/templates/portal-login/_data/portal-login-data.ts"
+        }
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/alert.json",
+        "https://ui.doksam.com/r/badge.json",
+        "https://ui.doksam.com/r/banner.json",
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/input.json",
+        "https://ui.doksam.com/r/label.json",
+        "https://ui.doksam.com/r/live-indicator.json",
+        "https://ui.doksam.com/r/profile-scope.json",
+        "https://ui.doksam.com/r/route-error.json",
+        "https://ui.doksam.com/r/route-loading.json"
       ]
     },
     {
@@ -2884,6 +3420,266 @@
           "type": "registry:file",
           "target": "tools/eslint-doksam/rules/require-route-boundaries.mjs"
         }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "compliance-callout",
+      "type": "registry:component",
+      "title": "Compliance Callout",
+      "description": "근거 규정 번호 + 대상 조건 + 요구 행위 + 기한 + 액션 버튼을 한 덩어리로 보여주는 업무 규칙 안내 콜아웃. 심각도 3단은 --warning/--destructive 시맨틱 토큰만 쓴다.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10"
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/alert.json",
+        "https://ui.doksam.com/r/badge.json",
+        "https://ui.doksam.com/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "components/compliance-callout.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "section-panel-header",
+      "type": "registry:component",
+      "title": "Section Panel Header",
+      "description": "카드 헤더 자리에 들어가는 아이콘 + 제목 + 우측 메타/필터 슬롯 조합. 좁은 폭에서는 우측 슬롯이 제목 아래로 줄바꿈된다.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10"
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/card.json"
+      ],
+      "files": [
+        {
+          "path": "components/section-panel-header.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "page-header",
+      "type": "registry:component",
+      "title": "Page Header",
+      "description": "페이지 상단 제목 + 우측 슬롯 + 설명 조합. 제목 옆 슬롯에는 상태 배지·기준시각 칩처럼 제목을 보충하는 표시를 둔다.",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/page-header.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "empty-state",
+      "type": "registry:component",
+      "title": "Empty State",
+      "description": "데이터가 없거나 아직 생성되지 않은 자리에 놓는 빈 상태 블록. 아이콘·제목·설명·다음 행동 버튼을 한 묶음으로 배치한다.",
+      "registryDependencies": [
+        "https://ui.doksam.com/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "components/empty-state.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "sticky-actionbar",
+      "type": "registry:component",
+      "title": "Sticky Actionbar",
+      "description": "화면(또는 스크롤 컨테이너) 하단에 sticky 로 붙는 주 액션 바. 안전영역·모바일 키보드를 고려해 fixed 대신 sticky 를 쓰고, 파괴적/보조/주 액션의 배치 순서를 고정한다.",
+      "dependencies": [],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "components/sticky-actionbar.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "draft-review-panel",
+      "type": "registry:component",
+      "title": "Draft Review Panel",
+      "description": "LLM이 섹션별로 생성한 초안을 사람이 검토·가필해 확정하는 패널. 문서 종류는 탭으로, 섹션 편집은 인라인 토글로 전환하며 편집 상태는 컴포넌트가 직접 소유해 섹션·탭 전환에도 유실되지 않는다.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10"
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/badge-extended.json",
+        "https://ui.doksam.com/r/badge.json",
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/card.json",
+        "https://ui.doksam.com/r/section-panel-header.json",
+        "https://ui.doksam.com/r/sticky-actionbar.json",
+        "https://ui.doksam.com/r/tabs.json",
+        "https://ui.doksam.com/r/textarea.json"
+      ],
+      "files": [
+        {
+          "path": "components/patterns/draft-review-panel/draft-review-panel.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "template-ews-dashboard",
+      "type": "registry:block",
+      "title": "EWS Dashboard 템플릿",
+      "description": "finance 프로필 · Ivory · Noto Sans KR · dashboard-grid 원형. 여신 조기경보 홈 대시보드 — top-nav 셸 아래로 규정 콜아웃·KPI 4장·등급 분포 도넛·긴급 처리 차주 표를 배치합니다. 등급 색은 --risk-* 토큰으로만 칠하고 등급 문구와 Tier 번호를 항상 함께 실어 색 외 두 번째 채널을 보장합니다.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10",
+        "recharts@3.8.0"
+      ],
+      "files": [
+        {
+          "path": "app/templates/ews-dashboard/error.tsx",
+          "type": "registry:page",
+          "target": "app/templates/ews-dashboard/error.tsx"
+        },
+        {
+          "path": "app/templates/ews-dashboard/layout.tsx",
+          "type": "registry:page",
+          "target": "app/templates/ews-dashboard/layout.tsx"
+        },
+        {
+          "path": "app/templates/ews-dashboard/loading.tsx",
+          "type": "registry:page",
+          "target": "app/templates/ews-dashboard/loading.tsx"
+        },
+        {
+          "path": "app/templates/ews-dashboard/page.tsx",
+          "type": "registry:page",
+          "target": "app/templates/ews-dashboard/page.tsx"
+        },
+        {
+          "path": "app/templates/ews-dashboard/_components/ews-kpi-row.tsx",
+          "type": "registry:page",
+          "target": "app/templates/ews-dashboard/_components/ews-kpi-row.tsx"
+        },
+        {
+          "path": "app/templates/ews-dashboard/_components/grade-distribution-card.tsx",
+          "type": "registry:page",
+          "target": "app/templates/ews-dashboard/_components/grade-distribution-card.tsx"
+        },
+        {
+          "path": "app/templates/ews-dashboard/_components/urgent-borrowers-card.tsx",
+          "type": "registry:page",
+          "target": "app/templates/ews-dashboard/_components/urgent-borrowers-card.tsx"
+        },
+        {
+          "path": "lib/templates/ews-data.ts",
+          "type": "registry:lib"
+        }
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/badge.json",
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/card.json",
+        "https://ui.doksam.com/r/chart.json",
+        "https://ui.doksam.com/r/compliance-callout.json",
+        "https://ui.doksam.com/r/finance-format-won.json",
+        "https://ui.doksam.com/r/finance-rate.json",
+        "https://ui.doksam.com/r/page-header.json",
+        "https://ui.doksam.com/r/party-identity-cell.json",
+        "https://ui.doksam.com/r/profile-scope.json",
+        "https://ui.doksam.com/r/risk-grade-badge.json",
+        "https://ui.doksam.com/r/risk-table.json",
+        "https://ui.doksam.com/r/risk-tokens.json",
+        "https://ui.doksam.com/r/route-error.json",
+        "https://ui.doksam.com/r/route-loading.json",
+        "https://ui.doksam.com/r/section-panel-header.json",
+        "https://ui.doksam.com/r/top-nav-shell.json"
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "template-ews-diagnosis",
+      "type": "registry:block",
+      "title": "EWS Diagnosis 템플릿",
+      "description": "finance 프로필 · Ivory · Noto Sans KR · split-pane 원형. 여신 조기경보 경보 원인 진단 상세 — 좌측 차주 목록이 곧 내비게이션이고 선택은 우측 상세만 교체합니다. 기여 변수 랭킹·근거 감사 추적·자료 수집 현황을 EWS Dashboard 와 같은 파츠 집합으로만 조립합니다.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10"
+      ],
+      "files": [
+        {
+          "path": "app/templates/ews-diagnosis/error.tsx",
+          "type": "registry:page",
+          "target": "app/templates/ews-diagnosis/error.tsx"
+        },
+        {
+          "path": "app/templates/ews-diagnosis/layout.tsx",
+          "type": "registry:page",
+          "target": "app/templates/ews-diagnosis/layout.tsx"
+        },
+        {
+          "path": "app/templates/ews-diagnosis/loading.tsx",
+          "type": "registry:page",
+          "target": "app/templates/ews-diagnosis/loading.tsx"
+        },
+        {
+          "path": "app/templates/ews-diagnosis/page.tsx",
+          "type": "registry:page",
+          "target": "app/templates/ews-diagnosis/page.tsx"
+        },
+        {
+          "path": "app/templates/ews-diagnosis/_components/borrower-list-pane.tsx",
+          "type": "registry:page",
+          "target": "app/templates/ews-diagnosis/_components/borrower-list-pane.tsx"
+        },
+        {
+          "path": "app/templates/ews-diagnosis/_components/collection-status-card.tsx",
+          "type": "registry:page",
+          "target": "app/templates/ews-diagnosis/_components/collection-status-card.tsx"
+        },
+        {
+          "path": "app/templates/ews-diagnosis/_components/evidence-trail-card.tsx",
+          "type": "registry:page",
+          "target": "app/templates/ews-diagnosis/_components/evidence-trail-card.tsx"
+        },
+        {
+          "path": "app/templates/ews-diagnosis/_components/factor-ranking-card.tsx",
+          "type": "registry:page",
+          "target": "app/templates/ews-diagnosis/_components/factor-ranking-card.tsx"
+        },
+        {
+          "path": "lib/templates/ews-data.ts",
+          "type": "registry:lib"
+        }
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/audit-code-tag.json",
+        "https://ui.doksam.com/r/badge.json",
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/card.json",
+        "https://ui.doksam.com/r/contribution-meter.json",
+        "https://ui.doksam.com/r/empty-state.json",
+        "https://ui.doksam.com/r/page-header.json",
+        "https://ui.doksam.com/r/party-identity-cell.json",
+        "https://ui.doksam.com/r/profile-scope.json",
+        "https://ui.doksam.com/r/progress.json",
+        "https://ui.doksam.com/r/risk-grade-badge.json",
+        "https://ui.doksam.com/r/risk-table.json",
+        "https://ui.doksam.com/r/risk-tokens.json",
+        "https://ui.doksam.com/r/route-error.json",
+        "https://ui.doksam.com/r/route-loading.json",
+        "https://ui.doksam.com/r/section-panel-header.json",
+        "https://ui.doksam.com/r/sticky-actionbar.json",
+        "https://ui.doksam.com/r/top-nav-shell.json"
       ]
     },
     {

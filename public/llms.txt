@@ -12,7 +12,7 @@ AI 에이전트/사람 모두를 위한 발견용 문서입니다. 아래 각 �
 
 - 화면을 만들기 전에 저장소 루트에 DESIGN.md 를 만들고 원형·성격·배제 목록·이유 네 가지를 선언한다 — 선언 없이 생성을 시작하면 결과가 카탈로그의 기본 조합으로 수렴한다.
 - 원형(archetype): 이 제품의 화면 뼈대를 ui.doksam.com/archetypes 레지스트리의 원형 10종(sidebar-app, top-nav-site, split-pane, feed-timeline, dashboard-grid, wizard-flow, chat-workspace, canvas, doc-reader, focus-task) 중 하나로 반드시 고른다 — 자유 문자열("커머스 스토어프론트" 같은 자기 발명 이름)은 불가하다. 둘 이상에 걸치면 주 원형 1개 + 보조 원형 1개를 레지스트리 이름으로 적고, 어느 화면이 보조 원형을 쓰는지 밝힌다. 고른 원형의 내비 방식과 본문 구조(레지스트리의 뼈대 한 줄)를 그대로 따른다.
-- 성격(personality): 같은 원형도 성격에 따라 다르게 생긴다. ui.doksam.com/profiles 에서 제품에 맞는 프로필을 고르고, 그 프로필이 참조하는 ui.doksam.com/personalities 프리셋(neutral, crisp, elevated, statement)을 DESIGN.md 에 적는다 — personality는 타입·여백 배율, 표면(테두리/그림자/평면), 모션 강도를 정하고 컨트롤 밀도는 프로필의 density가 정한다. 프로젝트에서 두 값을 임의로 재정의하지 않는다.
+- 성격(personality): 같은 원형도 성격에 따라 다르게 생긴다. ui.doksam.com/profiles 에서 제품에 맞는 프로필을 고르고, 그 프로필이 참조하는 ui.doksam.com/personalities 프리셋(neutral, crisp, elevated, statement)을 DESIGN.md 에 적는다 — personality는 타입·여백 배율, 표면(테두리/그림자/평면), 모션 강도를 정하고, density는 컨트롤 치수(높이·패딩·--control-fs 컨트롤 폰트 크기)와 섹션 세로 여백(--stack-gap)을 정한다. 프로젝트에서 두 값을 임의로 재정의하지 않는다.
 - 안 쓸 컴포넌트·패턴: 최소 세 개를 이름으로 배제하되, 그중 최소 하나는 고른 원형·과제에서 기본으로 쓰일 법한 것이어야 한다(모바일 커머스라면 "하단 탭바 안 씀"·"카드 그리드 안 씀"·"sticky CTA 안 씀" 같은 것). 어차피 안 쓸 것("모바일 앱에서 사이드바 안 씀")만 나열한 배제 목록은 결정에 영향이 없으므로 무효다. 화면의 성격은 무엇을 쓰는가보다 무엇을 안 쓰는가에서 나온다.
 - 이유: 위 세 항목 각각에 한 줄 근거를 붙인다. 취향("깔끔해서")이 아니라 사용 맥락(사용 빈도·체류 시간·입력 장치·데이터 밀도·조직의 기존 도구)으로 쓴다.
 - DESIGN.md 는 화면 코드와 같은 저장소에 두고 같은 커밋 흐름으로 갱신한다. 구현이 브리프와 어긋나면 코드부터 고치지 말고 브리프를 갱신할지 먼저 판단한다 — 어긋남이 반복되면 원형 선택이 틀린 것이다.
@@ -25,7 +25,7 @@ DESIGN.md 의 원형은 아래 `name` 값 중 하나여야 합니다. 같은 과
 | 원형(name) | 뼈대(내비 + 본문 구조) | 적합한 화면 | 피해야 할 경우 | 대표 템플릿 |
 | --- | --- | --- | --- | --- |
 | `sidebar-app` | 좌측 고정 사이드바(모바일은 드로어) → 본문은 페이지 타이틀 아래 한 칼럼 작업 영역. 하단 탭바 없음. | 관리자·백오피스 · 운영 콘솔 · 목적지 6개 이상인 내부 도구 | 목적지가 3개 이하 · 첫 방문 전환이 목적인 대외 랜딩 · 모바일이 주 사용 환경 | `admin`, `crawler-console`, `rag-search` |
-| `top-nav-site` | 상단 가로 메뉴 → 본문은 히어로·섹션이 세로로 흐르는 스크롤 페이지 → 푸터. 사이드바·하단 탭바 없음. | 마케팅·랜딩 사이트 · 제품 소개·가격 페이지 · 공개 포털 홈 | 목적지가 8개를 넘어 가로 메뉴가 접힘 · 화면당 조작이 많은 작업 도구 · 상시 컨텍스트 전환이 필요한 콘솔 | `marketing-site`, `saas`, `bank` |
+| `top-nav-site` | 상단 가로 메뉴 → 본문은 히어로·섹션이 세로로 흐르는 스크롤 페이지 → 푸터. 사이드바·하단 탭바 없음. | 마케팅·랜딩 사이트 · 제품 소개·가격 페이지 · 공개 포털 홈 | 목적지가 8개를 넘는데 오버플로 처리를 정하지 않음 — 그 경우 app-shell 의 글로벌 탑내비 셸 변형을 쓴다 · 화면당 조작이 많은 작업 도구 · 상시 컨텍스트 전환이 필요한 콘솔 | `marketing-site`, `saas`, `bank` |
 | `split-pane` | 화면을 좌우로 분할해 좌측 목록·우측 상세를 동시에 표시(모바일은 목록↔상세 2단 전환). 페이지 이동 대신 우측 교체. | 메일·메시지 처리함 · 이슈·티켓 트리아지 · 에디터 + 미리보기 | 상세가 목록보다 훨씬 짧아 우측이 비어 보임 · 모바일 전용 화면 · 항목을 하나만 열고 끝나는 흐름 | `mail-workspace`, `knowledge-base` |
 | `feed-timeline` | 상단 얇은 필터 바 → 단일 세로 스트림이 화면 전체(항목은 카드 그리드가 아니라 시간순 한 줄 행). 하단 탭바·사이드바 없음. | 활동·알림 피드 · 뉴스·공시 스트림 · 감사 로그·이벤트 타임라인 | 항목 간 비교가 목적인 화면 · 정렬·페이징이 핵심인 표 데이터 · 항목 수가 20개 미만으로 고정 | `activity-feed`, `market-report` |
 | `dashboard-grid` | 상단 기간·범위 필터 → 지표 카드·차트를 2~4열 격자로 배열. 카드 클릭이 상세 진입. | KPI 요약 대시보드 · 시세·모니터링 보드 · 경영 리포트 첫 화면 | 지표가 3개 이하 · 한 지표를 깊게 파는 분석 화면 · 카드마다 조작 폼이 붙는 경우 | `trading`, `brokerage`, `company-intel` |
@@ -33,7 +33,7 @@ DESIGN.md 의 원형은 아래 `name` 값 중 하나여야 합니다. 같은 과
 | `chat-workspace` | 좌측 대화 목록(모바일 드로어) → 중앙은 위로 쌓이는 메시지 스크롤러 → 하단 고정 입력 컴포저. | AI 어시스턴트 · 상담·문의 콘솔 · 협업 메시징 | 단발성 질의응답 한 번으로 끝나는 화면 · 대화 이력이 남지 않는 검색 · 출력이 표·차트 위주 | `chat` |
 | `canvas` | 좌측 도구 팔레트 → 중앙 팬·줌 무한 평면 → 우측 속성 패널. 페이지 내비 없이 평면 이동이 곧 탐색. | 와이어프레임·다이어그램 빌더 · 그래프·네트워크 탐색 · 보드형 편집기 | 읽기 전용 열람 화면 · 모바일 우선 화면 · 결과가 선형 문서로 충분한 경우 | `glossary`, `ontology` |
 | `doc-reader` | 좌측 문서 트리 → 중앙 max-w-prose 본문 한 칼럼 → 우측 스크롤 동기 목차. | 기술 문서·위키 · 규칙·정책 문서 · 블로그·아티클 | 본문이 한 화면에 들어오는 짧은 글 · 표·차트가 본문보다 많은 화면 · 조작이 주가 되는 도구 | `knowledge-base`, `kubernetes-firewall` |
-| `focus-task` | 상단 브랜드 표기 외 크롬 없음 → 화면 정중앙 카드 하나에 과제 하나(주 액션 1 + 보조 액션 1) → 하단 보조 링크. 사이드바·상단 메뉴·하단 탭바·푸터 내비 없음. | 로그인·OTP 등 인증 화면 · 결제·삭제처럼 되돌릴 수 없는 확인 화면 · 접근 차단·점검 안내·초대 수락 | 한 화면에서 과제를 둘 이상 처리해야 하는 경우 · 사용자가 머물며 계속 작업하는 화면(목록·편집·대시보드) · 다른 목적지로 자유롭게 오갈 수 있어야 하는 경우 · 단계가 여러 개라 진행률을 보여야 하는 절차 — wizard-flow 를 쓴다 | `passkey-auth` |
+| `focus-task` | 상단 브랜드 표기 외 크롬 없음(클릭해도 다른 화면으로 이동하지 않는 시스템 상태바·공지·보안 고지 같은 정보성 표시는 허용) → 화면 정중앙 카드 하나에 과제 하나(주 액션 1 + 보조 액션 1) → 하단 보조 링크. 사이드바·상단 메뉴·하단 탭바처럼 다른 목적지로 이동하는 내비게이션은 없다. | 로그인·OTP 등 인증 화면 · 결제·삭제처럼 되돌릴 수 없는 확인 화면 · 접근 차단·점검 안내·초대 수락 · 시스템 바·공지·보안 고지가 붙는 사내 업무포털 로그인 | 한 화면에서 과제를 둘 이상 처리해야 하는 경우 · 사용자가 머물며 계속 작업하는 화면(목록·편집·대시보드) · 다른 목적지로 자유롭게 오갈 수 있어야 하는 경우 · 단계가 여러 개라 진행률을 보여야 하는 절차 — wizard-flow 를 쓴다 · 상단·하단 정보 영역에 다른 화면으로 이동하는 링크(내비게이션)를 넣어야 하는 경우 — 그 순간부터는 정보성 표시가 아니라 내비게이션이라 focus-task 가 아니다 | `passkey-auth`, `portal-login` |
 
 ### 성격 레지스트리 (4종)
 
@@ -90,6 +90,30 @@ DESIGN.md 의 모서리는 아래 `name` 값 중 하나여야 합니다 — 픽�
 npx shadcn add https://ui.doksam.com/r/activity-heatmap.json
 ```
 
+### Audit Code Tag (`audit-code-tag`)
+
+판단 근거를 추적하는 감사코드를 등폭 글꼴 + 시맨틱 토큰 배경으로 표시하는 태그. 색으로 의미를 나누지 않고, 클릭 이동·복사는 옵션이다.
+
+```
+npx shadcn add https://ui.doksam.com/r/audit-code-tag.json
+```
+
+registryDependencies: https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/i18n-provider.json
+
+npm dependencies: @phosphor-icons/react@^2.1.10, sonner@^2.0.7
+
+### Audit Trail (`audit-trail`)
+
+시각·주체(사람/시스템/모형)·행위·대상·감사코드로 고정된 감사 추적 이력. 주체는 아이콘+라벨로 구분하고 감사코드는 AuditCodeTag를 재사용한다.
+
+```
+npx shadcn add https://ui.doksam.com/r/audit-trail.json
+```
+
+registryDependencies: https://ui.doksam.com/r/audit-code-tag.json, https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/i18n-provider.json
+
+npm dependencies: @phosphor-icons/react@^2.1.10
+
 ### Avatar Group (`avatar-group`)
 
 겹친 아바타 스택+N.
@@ -129,6 +153,18 @@ SVG 링 진행률.
 ```
 npx shadcn add https://ui.doksam.com/r/circular-progress.json
 ```
+
+### Coach Mark Tour (`coach-mark-tour`)
+
+기존 화면 위에 덧씌우는 단계형 코치마크(제품 투어). 딤 오버레이·대상 하이라이트·설명 팝오버·단계 이동을 한 세트로 제공한다.
+
+```
+npx shadcn add https://ui.doksam.com/r/coach-mark-tour.json
+```
+
+registryDependencies: https://ui.doksam.com/r/button.json
+
+npm dependencies: radix-ui@^1.6.7, @phosphor-icons/react@^2.1.10
 
 ### Code Block (`code-block`)
 
@@ -171,6 +207,18 @@ npm dependencies: @phosphor-icons/react@^2.1.10
 ```
 npx shadcn add https://ui.doksam.com/r/contribution-bars.json
 ```
+
+npm dependencies: @phosphor-icons/react@^2.1.10
+
+### Contribution Meter (`contribution-meter`)
+
+기여도 % + Progress 게이지 + 감사코드(AuditCodeTag)를 묶은 판단 근거 표기. 방향(위험 상승/하락 요인)은 --gain/--loss로 칠한다.
+
+```
+npx shadcn add https://ui.doksam.com/r/contribution-meter.json
+```
+
+registryDependencies: https://ui.doksam.com/r/audit-code-tag.json, https://ui.doksam.com/r/i18n-provider.json, https://ui.doksam.com/r/progress.json
 
 npm dependencies: @phosphor-icons/react@^2.1.10
 
@@ -248,6 +296,18 @@ npx shadcn add https://ui.doksam.com/r/i18n-provider.json
 
 registryDependencies: https://ui.doksam.com/r/theme-storage.json
 
+### Inline Help Link (`inline-help-link`)
+
+섹션 제목(h2) 옆에 붙는 인라인 사용법 링크. 화면 단위 ScreenHelpDialog 와 달리 섹션 하나만 가리키며, 같은 화면 도움말 다이얼로그를 특정 항목으로 열거나(onOpen) 별도 도움말 화면으로 이동한다(href).
+
+```
+npx shadcn add https://ui.doksam.com/r/inline-help-link.json
+```
+
+registryDependencies: https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/tooltip.json
+
+npm dependencies: @phosphor-icons/react@^2.1.10
+
 ### JSON Tree (`json-tree`)
 
 재귀 JSON 트리 뷰어 — 접기/펼치기, 타입별 색(chart-1~3 시맨틱 토큰), 대용량 배열은 20개씩 "더 보기"로 분할 렌더링한다. 관측성(observability) 패턴 코어.
@@ -322,6 +382,18 @@ registryDependencies: https://ui.doksam.com/r/spinner.json
 
 npm dependencies: mermaid@^11.16.0, @phosphor-icons/react@^2.1.10
 
+### Metric Comparison Table (`metric-comparison-table`)
+
+행 = 지표, 열 = 대상 A·대상 B·델타로 A/B 성능을 비교하는 표. 방향 색은 델타 부호가 아니라 지표별 betterWhen(higher/lower)으로 정한다.
+
+```
+npx shadcn add https://ui.doksam.com/r/metric-comparison-table.json
+```
+
+registryDependencies: https://ui.doksam.com/r/i18n-provider.json, https://ui.doksam.com/r/table.json
+
+npm dependencies: @phosphor-icons/react@^2.1.10
+
 ### Multi Select (`multi-select`)
 
 command 팝오버 다중 선택 + 칩.
@@ -345,6 +417,16 @@ npx shadcn add https://ui.doksam.com/r/number-input.json
 registryDependencies: https://ui.doksam.com/r/input-group.json
 
 npm dependencies: @phosphor-icons/react@^2.1.10
+
+### Party Identity Cell (`party-identity-cell`)
+
+차주 식별 2줄 셀. 1행 업체명 / 2행 업종·법인구분·마스킹 사업자번호를 표시하며 사업자번호 포맷은 formatBizNo를 그대로 쓴다.
+
+```
+npx shadcn add https://ui.doksam.com/r/party-identity-cell.json
+```
+
+registryDependencies: https://ui.doksam.com/r/format-biz-no.json
 
 ### Password Input (`password-input`)
 
@@ -418,6 +500,16 @@ registryDependencies: https://ui.doksam.com/r/badge.json, https://ui.doksam.com/
 
 npm dependencies: radix-ui@^1.6.7
 
+### Ranked Alternatives List (`ranked-alternatives-list`)
+
+모형이 계산한 순위·동점·순위없음 상태를 보이는 대안 목록. 채택해도 나머지 대안이 사라지지 않고 채택 이력이 누적된다.
+
+```
+npx shadcn add https://ui.doksam.com/r/ranked-alternatives-list.json
+```
+
+registryDependencies: https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/card.json, https://ui.doksam.com/r/risk-grade-badge.json
+
 ### Risk Core Map (`risk-core-map`)
 
 위험등급(tier)을 중심→외곽 동심원 밴드로 배치하고 노드 크기·글로우로 익스포저와 위험을 표현하는 리스크 코어 네트워크 맵.
@@ -437,6 +529,26 @@ npx shadcn add https://ui.doksam.com/r/risk-grade-badge.json
 ```
 
 registryDependencies: https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/risk-tokens.json
+
+### Risk Table (`risk-table`)
+
+심각도에 따라 행 배경 tint 와 좌측 accent bar 가 붙는 업무 테이블. 금액·줄바꿈·행 액션 셀 규약을 고정하고, 색은 --risk-* 토큰만 인라인 style 로 쓴다. 밀도는 프로필의 data-density 층이 소유한다.
+
+```
+npx shadcn add https://ui.doksam.com/r/risk-table.json
+```
+
+registryDependencies: https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/risk-tokens.json, https://ui.doksam.com/r/table.json
+
+### Matrix Heatmap (`matrix-heatmap`)
+
+범주 × 범주 분포를 강도 면색 + 값 텍스트로 함께 보여주는 격자. 색은 --primary 에서 파생한 명도 램프이고, 데이터 없는 교차 칸은 빈 셀로, 행이 많으면 첫 열을 고정한 채 가로 스크롤된다.
+
+```
+npx shadcn add https://ui.doksam.com/r/matrix-heatmap.json
+```
+
+registryDependencies: https://ui.doksam.com/r/heatmap-tokens.json
 
 ### Route Error (`route-error`)
 
@@ -512,6 +624,18 @@ registryDependencies: https://ui.doksam.com/r/badge.json, https://ui.doksam.com/
 
 npm dependencies: @phosphor-icons/react@^2.1.10
 
+### Top Nav Shell (`top-nav-shell`)
+
+1단 글로벌 nav + 2단 서브탭바(현재 화면명·하위 탭·상시 ask 바)를 한 몸으로 붙인 업무 시스템용 셸. 넘치는 메뉴는 더보기 드롭다운으로, 좁은 폭에서는 전체 nav 를 시트로 접는다.
+
+```
+npx shadcn add https://ui.doksam.com/r/top-nav-shell.json
+```
+
+registryDependencies: https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/dropdown-menu.json, https://ui.doksam.com/r/kbd.json, https://ui.doksam.com/r/sheet.json
+
+npm dependencies: @phosphor-icons/react@^2.1.10
+
 ### Table Sortable (`table-sortable`)
 
 고정 헤더 + 스크롤 바디를 가진 제네릭 데이터 그리드. 컬럼 헤더 클릭 정렬(@tanstack/react-table), 행 드래그 순서 변경(@dnd-kit), 컬럼 표시/숨김 토글을 지원한다.
@@ -555,6 +679,70 @@ npm dependencies: class-variance-authority@^0.7.1
 ```
 npx shadcn add https://ui.doksam.com/r/tree-view.json
 ```
+
+npm dependencies: @phosphor-icons/react@^2.1.10
+
+### Compliance Callout (`compliance-callout`)
+
+근거 규정 번호 + 대상 조건 + 요구 행위 + 기한 + 액션 버튼을 한 덩어리로 보여주는 업무 규칙 안내 콜아웃. 심각도 3단은 --warning/--destructive 시맨틱 토큰만 쓴다.
+
+```
+npx shadcn add https://ui.doksam.com/r/compliance-callout.json
+```
+
+registryDependencies: https://ui.doksam.com/r/alert.json, https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/button.json
+
+npm dependencies: @phosphor-icons/react@^2.1.10
+
+### Section Panel Header (`section-panel-header`)
+
+카드 헤더 자리에 들어가는 아이콘 + 제목 + 우측 메타/필터 슬롯 조합. 좁은 폭에서는 우측 슬롯이 제목 아래로 줄바꿈된다.
+
+```
+npx shadcn add https://ui.doksam.com/r/section-panel-header.json
+```
+
+registryDependencies: https://ui.doksam.com/r/card.json
+
+npm dependencies: @phosphor-icons/react@^2.1.10
+
+### Page Header (`page-header`)
+
+페이지 상단 제목 + 우측 슬롯 + 설명 조합. 제목 옆 슬롯에는 상태 배지·기준시각 칩처럼 제목을 보충하는 표시를 둔다.
+
+```
+npx shadcn add https://ui.doksam.com/r/page-header.json
+```
+
+### Empty State (`empty-state`)
+
+데이터가 없거나 아직 생성되지 않은 자리에 놓는 빈 상태 블록. 아이콘·제목·설명·다음 행동 버튼을 한 묶음으로 배치한다.
+
+```
+npx shadcn add https://ui.doksam.com/r/empty-state.json
+```
+
+registryDependencies: https://ui.doksam.com/r/button.json
+
+### Sticky Actionbar (`sticky-actionbar`)
+
+화면(또는 스크롤 컨테이너) 하단에 sticky 로 붙는 주 액션 바. 안전영역·모바일 키보드를 고려해 fixed 대신 sticky 를 쓰고, 파괴적/보조/주 액션의 배치 순서를 고정한다.
+
+```
+npx shadcn add https://ui.doksam.com/r/sticky-actionbar.json
+```
+
+registryDependencies: https://ui.doksam.com/r/button.json
+
+### Draft Review Panel (`draft-review-panel`)
+
+LLM이 섹션별로 생성한 초안을 사람이 검토·가필해 확정하는 패널. 문서 종류는 탭으로, 섹션 편집은 인라인 토글로 전환하며 편집 상태는 컴포넌트가 직접 소유해 섹션·탭 전환에도 유실되지 않는다.
+
+```
+npx shadcn add https://ui.doksam.com/r/draft-review-panel.json
+```
+
+registryDependencies: https://ui.doksam.com/r/badge-extended.json, https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/card.json, https://ui.doksam.com/r/section-panel-header.json, https://ui.doksam.com/r/sticky-actionbar.json, https://ui.doksam.com/r/tabs.json, https://ui.doksam.com/r/textarea.json
 
 npm dependencies: @phosphor-icons/react@^2.1.10
 
@@ -618,6 +806,14 @@ registryDependencies: https://ui.doksam.com/r/theme-storage.json
 npx shadcn add https://ui.doksam.com/r/risk-tokens.json
 ```
 
+### Heatmap Tokens (`heatmap-tokens`)
+
+matrix-heatmap 강도 램프(명도 단계 + 셀 텍스트 토큰)의 단일 진실원천. 값 자체는 프로필 설치가 :root/.dark 에 넣고, 셀 배경은 oklch(from var(--primary) ...) 로 실행 시 파생한다.
+
+```
+npx shadcn add https://ui.doksam.com/r/heatmap-tokens.json
+```
+
 ### Theme Storage (`theme-storage`)
 
 테마·프로필·로케일 선택을 localStorage 에 담을 때 쓰는 키와 안전한 읽기/쓰기 헬퍼. 서버 렌더와 클라이언트 하이드레이션 사이에서 값이 어긋나지 않도록 초기화 순서를 고정한다.
@@ -630,7 +826,7 @@ npx shadcn add https://ui.doksam.com/r/theme-storage.json
 
 ### Profile: Admin (`profile-admin`)
 
-내부 관리자 도구·백오피스 화면 프로필. theme=slate(무채색 뉴트럴) + font=Geist + defaultMode=light + radius=2px + density=compact — <html>에 data-density="compact"를 지정한다(밀도 토큰 층은 /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/geist/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응, next/font/google 미사용). 자세한 절차는 https://ui.doksam.com/rules 참고.
+내부 관리자 도구·백오피스 화면 프로필. theme=slate(무채색 뉴트럴) + font=Geist + defaultMode=light + radius=2px + density=compact + personality=crisp — <html>에 data-density="compact" data-personality="crisp" data-personality-surface="border" data-personality-motion="none" 네 속성을 지정한다(속성이 없으면 밀도·성격 토큰 층이 아예 걸리지 않는 opt-in 이다 — /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/geist/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응, next/font/google 미사용). 자세한 절차는 https://ui.doksam.com/rules 참고.
 
 ```
 npx shadcn add https://ui.doksam.com/r/profile-admin.json
@@ -638,7 +834,7 @@ npx shadcn add https://ui.doksam.com/r/profile-admin.json
 
 ### Profile: Console (`profile-console`)
 
-모니터링·운영 콘솔류 화면 프로필. theme=ember(웜 오렌지) + font=Geist + defaultMode=dark + radius=2px + density=compact — <html>에 data-density="compact"를 지정한다(밀도 토큰 층은 /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/geist/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응, next/font/google 미사용). 자세한 절차는 https://ui.doksam.com/rules 참고.
+모니터링·운영 콘솔류 화면 프로필. theme=ember(웜 오렌지) + font=Geist + defaultMode=dark + radius=2px + density=compact + personality=crisp — <html>에 data-density="compact" data-personality="crisp" data-personality-surface="border" data-personality-motion="none" 네 속성을 지정한다(속성이 없으면 밀도·성격 토큰 층이 아예 걸리지 않는 opt-in 이다 — /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/geist/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응, next/font/google 미사용). 자세한 절차는 https://ui.doksam.com/rules 참고.
 
 ```
 npx shadcn add https://ui.doksam.com/r/profile-console.json
@@ -646,7 +842,7 @@ npx shadcn add https://ui.doksam.com/r/profile-console.json
 
 ### Profile: Finance (`profile-finance`)
 
-여신·리스크 모니터링 등 금융기관 업무 화면 프로필. theme=ivory(아이보리 종이톤 + 네이비 잉크 + 골드 포인트) + font=Noto Sans KR + defaultMode=light + radius=2px + density=compact — <html>에 data-density="compact"를 지정한다(밀도 토큰 층은 /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/noto-sans-kr/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응, next/font/google 미사용). 자세한 절차는 https://ui.doksam.com/rules 참고.
+여신·리스크 모니터링 등 금융기관 업무 화면 프로필. theme=ivory(아이보리 종이톤 + 네이비 잉크 + 골드 포인트) + font=Noto Sans KR + defaultMode=light + radius=2px + density=compact + personality=crisp — <html>에 data-density="compact" data-personality="crisp" data-personality-surface="border" data-personality-motion="none" 네 속성을 지정한다(속성이 없으면 밀도·성격 토큰 층이 아예 걸리지 않는 opt-in 이다 — /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/noto-sans-kr/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응, next/font/google 미사용). 자세한 절차는 https://ui.doksam.com/rules 참고.
 
 ```
 npx shadcn add https://ui.doksam.com/r/profile-finance.json
@@ -654,7 +850,7 @@ npx shadcn add https://ui.doksam.com/r/profile-finance.json
 
 ### Profile: Data (`profile-data`)
 
-데이터 대시보드·시세/뉴스류 화면 프로필. theme=violet(대비 뚜렷한 퍼플) + font=Space Grotesk + defaultMode=dark + radius=6px + density=compact — <html>에 data-density="compact"를 지정한다(밀도 토큰 층은 /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/space-grotesk/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응, 라틴 전용이라 한글은 Noto Sans KR 로 폴백 — assets/fonts/noto-sans-kr/ 도 함께 필요). 자세한 절차는 https://ui.doksam.com/rules 참고.
+데이터 대시보드·시세/뉴스류 화면 프로필. theme=violet(대비 뚜렷한 퍼플) + font=Space Grotesk + defaultMode=dark + radius=6px + density=compact + personality=crisp — <html>에 data-density="compact" data-personality="crisp" data-personality-surface="border" data-personality-motion="none" 네 속성을 지정한다(속성이 없으면 밀도·성격 토큰 층이 아예 걸리지 않는 opt-in 이다 — /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/space-grotesk/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응, 라틴 전용이라 한글은 Noto Sans KR 로 폴백 — assets/fonts/noto-sans-kr/ 도 함께 필요). 자세한 절차는 https://ui.doksam.com/rules 참고.
 
 ```
 npx shadcn add https://ui.doksam.com/r/profile-data.json
@@ -662,7 +858,7 @@ npx shadcn add https://ui.doksam.com/r/profile-data.json
 
 ### Profile: Docs (`profile-docs`)
 
-문서·위키·블로그류 화면 프로필. theme=forest(차분한 그린) + font=IBM Plex Sans KR + defaultMode=light + radius=12px + density=comfortable — <html>에 data-density="comfortable"을 지정한다(밀도 토큰 층은 /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/ibm-plex-kr/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응). 자세한 절차는 https://ui.doksam.com/rules 참고.
+문서·위키·블로그류 화면 프로필. theme=forest(차분한 그린) + font=IBM Plex Sans KR + defaultMode=light + radius=12px + density=spacious + personality=statement — <html>에 data-density="spacious" data-personality="statement" data-personality-surface="flat" data-personality-motion="subtle" 네 속성을 지정한다(속성이 없으면 밀도·성격 토큰 층이 아예 걸리지 않는 opt-in 이다 — /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/ibm-plex-kr/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응). 자세한 절차는 https://ui.doksam.com/rules 참고.
 
 ```
 npx shadcn add https://ui.doksam.com/r/profile-docs.json
@@ -670,7 +866,7 @@ npx shadcn add https://ui.doksam.com/r/profile-docs.json
 
 ### Profile: Service (`profile-service`)
 
-대외 서비스·고객 대면 화면 프로필. theme=ocean(신뢰감 있는 블루) + font=Noto Sans KR + defaultMode=light + radius=12px + density=comfortable — <html>에 data-density="comfortable"을 지정한다(밀도 토큰 층은 /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/noto-sans-kr/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응). 자세한 절차는 https://ui.doksam.com/rules 참고.
+대외 서비스·고객 대면 화면 프로필. theme=ocean(신뢰감 있는 블루) + font=Noto Sans KR + defaultMode=light + radius=12px + density=comfortable + personality=elevated — <html>에 data-density="comfortable" data-personality="elevated" data-personality-surface="shadow" data-personality-motion="expressive" 네 속성을 지정한다(속성이 없으면 밀도·성격 토큰 층이 아예 걸리지 않는 opt-in 이다 — /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/noto-sans-kr/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응). 자세한 절차는 https://ui.doksam.com/rules 참고.
 
 ```
 npx shadcn add https://ui.doksam.com/r/profile-service.json
@@ -762,6 +958,18 @@ registryDependencies: https://ui.doksam.com/r/badge.json, https://ui.doksam.com/
 
 npm dependencies: @phosphor-icons/react@^2.1.10
 
+### Help Center 템플릿 (`template-help-center`)
+
+admin 프로필(Slate·Geist) 질문 창구형 도움말 센터 — 물어보기·매뉴얼 색인·FAQ·질문 이력 4탭을 라우트로 딥링크.
+
+```
+npx shadcn add https://ui.doksam.com/r/template-help-center.json
+```
+
+registryDependencies: https://ui.doksam.com/r/accordion.json, https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/command.json, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json, https://ui.doksam.com/r/textarea.json
+
+npm dependencies: @phosphor-icons/react@^2.1.10, cmdk@^1.1.1
+
 ### Knowledge Base 템플릿 (`template-knowledge-base`)
 
 admin 프로필 · Slate · Geist · doc-reader 원형. 위키 문서 트리·마크다운 본문·목차, 칸반풍 아이디어 보드, 날짜별 세션 타임라인을 탭으로 묶은 팀 지식관리 콘솔입니다.
@@ -810,6 +1018,18 @@ registryDependencies: https://ui.doksam.com/r/alert-dialog.json, https://ui.doks
 
 npm dependencies: @phosphor-icons/react@^2.1.10
 
+### Portal Login 템플릿 (`template-portal-login`)
+
+finance 프로필 · Ivory · Noto Sans KR · focus-task 원형. 시스템 상태바·공지사항·보안 고지를 더한 사내 업무포털 로그인 변형. 세 표시 모두 다른 화면으로 이동시키지 않는 정보성 표시라 원형의 내비게이션 없음 규칙을 지킵니다. 담당자·심사역·관리자 역할 분기는 로그인 후 서버가 판단하므로 화면에는 안내 문구로만 노출합니다.
+
+```
+npx shadcn add https://ui.doksam.com/r/template-portal-login.json
+```
+
+registryDependencies: https://ui.doksam.com/r/alert.json, https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/banner.json, https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/input.json, https://ui.doksam.com/r/label.json, https://ui.doksam.com/r/live-indicator.json, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json
+
+npm dependencies: @phosphor-icons/react@^2.1.10
+
 ### SaaS Landing + Dashboard 템플릿 (`template-saas`)
 
 service 프로필(Ocean·Noto Sans KR) 랜딩+대시보드+피드 — 히어로·가격·콘텐츠 피드.
@@ -845,6 +1065,30 @@ npx shadcn add https://ui.doksam.com/r/template-trading.json
 registryDependencies: https://ui.doksam.com/r/activity-heatmap.json, https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/card.json, https://ui.doksam.com/r/diverging-bar.json, https://ui.doksam.com/r/finance-format-won.json, https://ui.doksam.com/r/finance-rate.json, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/return-curve.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json, https://ui.doksam.com/r/sparkline.json, https://ui.doksam.com/r/table-sortable.json
 
 npm dependencies: @tanstack/react-table@^8.21.3, @dnd-kit/core@^6.3.1, @dnd-kit/sortable@^10.0.0, @phosphor-icons/react@^2.1.10
+
+### EWS Dashboard 템플릿 (`template-ews-dashboard`)
+
+finance 프로필 · Ivory · Noto Sans KR · dashboard-grid 원형. 여신 조기경보 홈 대시보드 — top-nav 셸 아래로 규정 콜아웃·KPI 4장·등급 분포 도넛·긴급 처리 차주 표를 배치합니다. 등급 색은 --risk-* 토큰으로만 칠하고 등급 문구와 Tier 번호를 항상 함께 실어 색 외 두 번째 채널을 보장합니다.
+
+```
+npx shadcn add https://ui.doksam.com/r/template-ews-dashboard.json
+```
+
+registryDependencies: https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/card.json, https://ui.doksam.com/r/chart.json, https://ui.doksam.com/r/compliance-callout.json, https://ui.doksam.com/r/finance-format-won.json, https://ui.doksam.com/r/finance-rate.json, https://ui.doksam.com/r/page-header.json, https://ui.doksam.com/r/party-identity-cell.json, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/risk-grade-badge.json, https://ui.doksam.com/r/risk-table.json, https://ui.doksam.com/r/risk-tokens.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json, https://ui.doksam.com/r/section-panel-header.json, https://ui.doksam.com/r/top-nav-shell.json
+
+npm dependencies: @phosphor-icons/react@^2.1.10, recharts@3.8.0
+
+### EWS Diagnosis 템플릿 (`template-ews-diagnosis`)
+
+finance 프로필 · Ivory · Noto Sans KR · split-pane 원형. 여신 조기경보 경보 원인 진단 상세 — 좌측 차주 목록이 곧 내비게이션이고 선택은 우측 상세만 교체합니다. 기여 변수 랭킹·근거 감사 추적·자료 수집 현황을 EWS Dashboard 와 같은 파츠 집합으로만 조립합니다.
+
+```
+npx shadcn add https://ui.doksam.com/r/template-ews-diagnosis.json
+```
+
+registryDependencies: https://ui.doksam.com/r/audit-code-tag.json, https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/card.json, https://ui.doksam.com/r/contribution-meter.json, https://ui.doksam.com/r/empty-state.json, https://ui.doksam.com/r/page-header.json, https://ui.doksam.com/r/party-identity-cell.json, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/progress.json, https://ui.doksam.com/r/risk-grade-badge.json, https://ui.doksam.com/r/risk-table.json, https://ui.doksam.com/r/risk-tokens.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json, https://ui.doksam.com/r/section-panel-header.json, https://ui.doksam.com/r/sticky-actionbar.json, https://ui.doksam.com/r/top-nav-shell.json
+
+npm dependencies: @phosphor-icons/react@^2.1.10
 
 ## registry:file
 

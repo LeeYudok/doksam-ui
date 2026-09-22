@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "profile-admin",
   "title": "Profile: Admin",
-  "description": "내부 관리자 도구·백오피스 화면 프로필. theme=slate(무채색 뉴트럴) + font=Geist + defaultMode=light + radius=2px + density=compact — <html>에 data-density=\"compact\"를 지정한다(밀도 토큰 층은 /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/geist/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응, next/font/google 미사용). 자세한 절차는 https://ui.doksam.com/rules 참고.",
+  "description": "내부 관리자 도구·백오피스 화면 프로필. theme=slate(무채색 뉴트럴) + font=Geist + defaultMode=light + radius=2px + density=compact + personality=crisp — <html>에 data-density=\"compact\" data-personality=\"crisp\" data-personality-surface=\"border\" data-personality-motion=\"none\" 네 속성을 지정한다(속성이 없으면 밀도·성격 토큰 층이 아예 걸리지 않는 opt-in 이다 — /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/geist/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응, next/font/google 미사용). 자세한 절차는 https://ui.doksam.com/rules 참고.",
   "cssVars": {
     "theme": {
       "radius": "2px"
@@ -50,7 +50,17 @@
       "risk-high": "oklch(0.45 0.15 48)",
       "risk-high-foreground": "oklch(0.98 0.01 48)",
       "risk-severe": "oklch(0.45 0.2 27)",
-      "risk-severe-foreground": "oklch(0.98 0.01 27)"
+      "risk-severe-foreground": "oklch(0.98 0.01 27)",
+      "heatmap-l-0": "0.94",
+      "heatmap-l-1": "0.82",
+      "heatmap-l-2": "0.68",
+      "heatmap-l-3": "0.54",
+      "heatmap-l-4": "0.38",
+      "heatmap-text-0": "var(--foreground)",
+      "heatmap-text-1": "var(--foreground)",
+      "heatmap-text-2": "var(--foreground)",
+      "heatmap-text-3": "var(--primary-foreground)",
+      "heatmap-text-4": "var(--primary-foreground)"
     },
     "dark": {
       "background": "oklch(0.19 0.005 240)",
@@ -95,7 +105,17 @@
       "risk-high": "oklch(0.74 0.15 48)",
       "risk-high-foreground": "oklch(0.15 0.02 48)",
       "risk-severe": "oklch(0.74 0.18 27)",
-      "risk-severe-foreground": "oklch(0.15 0.02 27)"
+      "risk-severe-foreground": "oklch(0.15 0.02 27)",
+      "heatmap-l-0": "0.24",
+      "heatmap-l-1": "0.32",
+      "heatmap-l-2": "0.42",
+      "heatmap-l-3": "0.62",
+      "heatmap-l-4": "0.76",
+      "heatmap-text-0": "var(--foreground)",
+      "heatmap-text-1": "var(--foreground)",
+      "heatmap-text-2": "var(--foreground)",
+      "heatmap-text-3": "var(--background)",
+      "heatmap-text-4": "var(--background)"
     }
   },
   "type": "registry:theme"

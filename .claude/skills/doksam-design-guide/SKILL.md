@@ -122,7 +122,9 @@ export const donts = ["...", "..."]  // 2~3개 권장
 6. i18n — `component.<slug>.description` 키를 `lib/i18n/messages/{en,ja,zh,es}.json` **4개 전부**에 추가
    (`node scripts/i18n/extract.mjs` 로 ko 원문 카탈로그 갱신)
 7. 다른 프로젝트가 설치할 자산이면 `registry.json` 에 item 추가 후
-   `pnpm registry:build && pnpm gen:llms`
+   `pnpm registry:sync && pnpm registry:build && pnpm gen:llms`
+   (`registry:sync` 가 항목의 `registryDependencies`·프로필 `cssVars` 를 다시 계산한다 —
+   빼먹으면 bare 이름·옛 토큰이 그대로 배포된다. `references/catalog-workflow.md` 와 같은 순서다.)
 8. 검증: `pnpm typecheck && pnpm lint && pnpm test && pnpm build`
 
 ---
@@ -160,7 +162,16 @@ radius 값을 새로 쓰지 않는다(레지스트리 프리셋 중에서만 고
 시맨틱 색 토큰: `background`/`foreground`, `card`, `popover`, `primary`, `secondary`,
 `muted`, `accent`, `destructive`, `success`, `warning`, `gain`/`loss`(한국식 등락 —
 상승 빨강/하락 파랑), `border`, `input`, `ring`, `chart-1~5`, `sidebar-*`,
-`risk-low`/`risk-moderate`/`risk-high`/`risk-severe`(+ 각 `-foreground`).
+`risk-low`/`risk-moderate`/`risk-high`/`risk-severe`(+ 각 `-foreground`),
+`heatmap-l-0~4`/`heatmap-text-0~4`.
+
+이 목록은 닫힌 목록이 아니다 — 기존 토큰 어느 것으로도 표현할 수 없는 성격이 나오면
+보조 층을 새로 만든다. `heatmap-*`(#103) 가 그 예다: 연속 값 강도는 `chart-1~5`(순서
+없는 범주 팔레트)로도 `risk-*`(4단 고정 심각도)로도 실을 수 없어
+`lib/heatmap-tokens.ts` 가 **명도(L)와 텍스트 채널만** 토큰화하고 셀 배경은
+`oklch(from var(--primary) var(--heatmap-l-<n>) c h)` 로 프로필의 `--primary` 에서
+파생시킨다. 새 층을 만들면 `lib/profile-registry-css-vars.ts` 의
+`PROFILE_CSS_VAR_KEYS` 에 합류시켜 프로필 배포에 실리게 한다.
 
 `gain`/`loss` 와 `risk-*` 는 둘 다 브랜드가 아니라 **도메인 관례**가 값을 정하는
 토큰인데 층의 위치가 다르다:
@@ -182,10 +193,11 @@ radius 값을 새로 쓰지 않는다(레지스트리 프리셋 중에서만 고
   **기존 프리셋 파일이나 globals.css 의 다른 프리셋 블록은 건드리지 않는다.**
 - `fonts/index.ts` — 폰트 프리셋 5종. 실 파일은 `assets/fonts/<name>/` 에 woff2 + LICENSE 커밋.
 - `profiles/index.ts` — **프로젝트가 고르는 단위는 프로필 하나**다. 테마·폰트·
-  `defaultMode`·`radius`·`corner`·`density`·`typeContrast` 를 미리 고정해 둔 층
-  (admin/service/data 등). 프로젝트가 프로필의 corner·radius·density·typeContrast 를
-  임의 재정의하면 표준이 발산한다 — 바꿀 필요가 생기면 doksam-ui 에 프로필을
-  추가/수정해서 반영한다.
+  `defaultMode`·`radius`·`corner`·`density`·`typeContrast`·`personality`(**필수**, #90)
+  와 선택 필드 `archetype`(레이아웃 원형, `archetypes/index.ts` 의 name)·`shell` 을
+  미리 고정해 둔 층(admin/service/data 등). 프로젝트가 프로필의
+  corner·radius·density·typeContrast·personality 를 임의 재정의하면 표준이 발산한다 —
+  바꿀 필요가 생기면 doksam-ui 에 프로필을 추가/수정해서 반영한다.
 
 ### 모서리 · 밀도 · 타입 대비
 
