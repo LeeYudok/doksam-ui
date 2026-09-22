@@ -714,6 +714,16 @@ npm dependencies: @phosphor-icons/react@^2.1.10
 npx shadcn add https://ui.doksam.com/r/page-header.json
 ```
 
+### Empty State (`empty-state`)
+
+데이터가 없거나 아직 생성되지 않은 자리에 놓는 빈 상태 블록. 아이콘·제목·설명·다음 행동 버튼을 한 묶음으로 배치한다.
+
+```
+npx shadcn add https://ui.doksam.com/r/empty-state.json
+```
+
+registryDependencies: https://ui.doksam.com/r/button.json
+
 ### Sticky Actionbar (`sticky-actionbar`)
 
 화면(또는 스크롤 컨테이너) 하단에 sticky 로 붙는 주 액션 바. 안전영역·모바일 키보드를 고려해 fixed 대신 sticky 를 쓰고, 파괴적/보조/주 액션의 배치 순서를 고정한다.
@@ -1076,7 +1086,7 @@ finance 프로필 · Ivory · Noto Sans KR · split-pane 원형. 여신 조기�
 npx shadcn add https://ui.doksam.com/r/template-ews-diagnosis.json
 ```
 
-registryDependencies: https://ui.doksam.com/r/audit-code-tag.json, https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/card.json, https://ui.doksam.com/r/contribution-meter.json, https://ui.doksam.com/r/page-header.json, https://ui.doksam.com/r/party-identity-cell.json, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/progress.json, https://ui.doksam.com/r/risk-grade-badge.json, https://ui.doksam.com/r/risk-table.json, https://ui.doksam.com/r/risk-tokens.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json, https://ui.doksam.com/r/section-panel-header.json, https://ui.doksam.com/r/sticky-actionbar.json, https://ui.doksam.com/r/top-nav-shell.json
+registryDependencies: https://ui.doksam.com/r/audit-code-tag.json, https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/card.json, https://ui.doksam.com/r/contribution-meter.json, https://ui.doksam.com/r/empty-state.json, https://ui.doksam.com/r/page-header.json, https://ui.doksam.com/r/party-identity-cell.json, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/progress.json, https://ui.doksam.com/r/risk-grade-badge.json, https://ui.doksam.com/r/risk-table.json, https://ui.doksam.com/r/risk-tokens.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json, https://ui.doksam.com/r/section-panel-header.json, https://ui.doksam.com/r/sticky-actionbar.json, https://ui.doksam.com/r/top-nav-shell.json
 
 npm dependencies: @phosphor-icons/react@^2.1.10
 

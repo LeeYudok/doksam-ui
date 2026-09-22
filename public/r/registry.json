@@ -3478,6 +3478,22 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "empty-state",
+      "type": "registry:component",
+      "title": "Empty State",
+      "description": "데이터가 없거나 아직 생성되지 않은 자리에 놓는 빈 상태 블록. 아이콘·제목·설명·다음 행동 버튼을 한 묶음으로 배치한다.",
+      "registryDependencies": [
+        "https://ui.doksam.com/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "components/empty-state.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "sticky-actionbar",
       "type": "registry:component",
       "title": "Sticky Actionbar",
@@ -3651,6 +3667,7 @@
         "https://ui.doksam.com/r/button.json",
         "https://ui.doksam.com/r/card.json",
         "https://ui.doksam.com/r/contribution-meter.json",
+        "https://ui.doksam.com/r/empty-state.json",
         "https://ui.doksam.com/r/page-header.json",
         "https://ui.doksam.com/r/party-identity-cell.json",
         "https://ui.doksam.com/r/profile-scope.json",
