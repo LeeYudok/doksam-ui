@@ -365,6 +365,8 @@
   "page.tokens.personality.table.scale": "타입/스페이싱 스케일",
   "page.tokens.personality.table.surface": "표면",
   "page.tokens.personality.title": "시각 성격 토큰",
+  "page.tokens.risk.description": "순서 있는 심각도 4단입니다(정상 → 관찰 → 주의 → 경보). 범주 구분용인 chart-1~5 와 달리 순서가 의미를 갖는 층이라 둘을 바꿔 쓰지 않습니다. gain/loss 와 같은 도메인 토큰이라 테마 프리셋을 바꿔도 값이 바뀌지 않으며, 몇 단계를 쓸지는 프로젝트가 고릅니다. 색만으로 등급을 전달하지 않도록 텍스트·아이콘을 함께 싣습니다.",
+  "page.tokens.risk.title": "위험등급 토큰",
   "page.tokens.sidebar.description": "shadcn sidebar 프리미티브가 쓰는 8종입니다. 테마 프리셋 27키에 포함되지 않고 globals.css의 :root/.dark에만 정의된 층이라, 프리셋을 바꿔도 값이 바뀌지 않습니다.",
   "page.tokens.sidebar.title": "Sidebar 토큰",
   "page.type-contrast.description": "시각 성격의 스케일이 제목과 본문을 같은 비율로 키우는 균등 배율이라면, 타입 대비는 제목만 키우거나 굵기 격차를 벌려 비례 자체를 바꿉니다. 프로젝트마다 제목 크기를 임의로 정하지 않고 아래 {count}종 중 하나를 명시적으로 고릅니다.",

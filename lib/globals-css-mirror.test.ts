@@ -3,8 +3,9 @@ import { join } from "node:path";
 
 import { describe, expect, it } from "vitest";
 
+import { RISK_TOKENS, RISK_TOKEN_KEYS } from "@/lib/risk-tokens";
 import { SIDEBAR_TOKEN_KEYS, SIDEBAR_TOKENS } from "@/lib/sidebar-tokens";
-import { THEME_TOKEN_KEYS } from "@/themes";
+import { THEME_PRESETS, THEME_TOKEN_KEYS } from "@/themes";
 import { ocean } from "@/themes/ocean";
 
 /**
@@ -75,6 +76,32 @@ describe("app/globals.css 미러 블록이 소스 파일과 일치한다 (#36)",
   it(".dark 의 사이드바 값이 lib/sidebar-tokens.ts SIDEBAR_TOKENS.dark 와 같다", () => {
     const decls = parseDeclarations(extractBlock(globalsCss, ".dark"));
     expect(pick(decls, SIDEBAR_TOKEN_KEYS)).toEqual(SIDEBAR_TOKENS.dark);
+  });
+
+  it(":root 의 위험등급 값이 lib/risk-tokens.ts RISK_TOKENS.light 와 같다 (#81)", () => {
+    const decls = parseDeclarations(extractBlock(globalsCss, ":root"));
+    expect(pick(decls, RISK_TOKEN_KEYS)).toEqual(RISK_TOKENS.light);
+  });
+
+  it(".dark 의 위험등급 값이 lib/risk-tokens.ts RISK_TOKENS.dark 와 같다 (#81)", () => {
+    const decls = parseDeclarations(extractBlock(globalsCss, ".dark"));
+    expect(pick(decls, RISK_TOKEN_KEYS)).toEqual(RISK_TOKENS.dark);
+  });
+
+  it("어떤 테마 프리셋 블록도 위험등급 토큰을 재정의하지 않는다 (#81)", () => {
+    // 심각도는 브랜드가 아니라 관례가 정하는 층이다 — 프리셋이 덮으면
+    // forest 에서 "경보" 가 초록이 되는 식으로 의미가 무너진다.
+    const presetBlocks = globalsCss.match(/^\[data-theme="[^"]+"\][^{]*\{[^}]*\}/gm) ?? [];
+    // 개수를 레지스트리에서 유도해 잠근다 — `> 0` 으로 두면 나중에 일부 블록을
+    // @layer/@media 로 감싸 들여쓰는 순간 그 블록만 조용히 검사에서 빠진다.
+    expect(presetBlocks.length, "프리셋 × 라이트/다크 블록을 전부 매치하지 못했다").toBe(
+      THEME_PRESETS.length * 2,
+    );
+    for (const block of presetBlocks) {
+      for (const key of RISK_TOKEN_KEYS) {
+        expect(block, `${key} 를 재정의하는 프리셋 블록이 있다`).not.toContain(`--${key}:`);
+      }
+    }
   });
 
   it(":root 의 ocean 폴백 시맨틱 토큰이 themes/ocean.ts ocean.light 와 같다", () => {

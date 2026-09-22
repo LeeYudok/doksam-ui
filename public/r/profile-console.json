@@ -42,7 +42,15 @@
       "sidebar-accent": "oklch(0.92 0.035 262)",
       "sidebar-accent-foreground": "oklch(0.28 0.03 262)",
       "sidebar-border": "oklch(0.9 0.015 262)",
-      "sidebar-ring": "oklch(0.53 0.21 262)"
+      "sidebar-ring": "oklch(0.53 0.21 262)",
+      "risk-low": "oklch(0.45 0.13 152)",
+      "risk-low-foreground": "oklch(0.98 0.01 152)",
+      "risk-moderate": "oklch(0.45 0.11 85)",
+      "risk-moderate-foreground": "oklch(0.98 0.01 85)",
+      "risk-high": "oklch(0.45 0.15 48)",
+      "risk-high-foreground": "oklch(0.98 0.01 48)",
+      "risk-severe": "oklch(0.45 0.2 27)",
+      "risk-severe-foreground": "oklch(0.98 0.01 27)"
     },
     "dark": {
       "background": "oklch(0.19 0.014 41)",
@@ -79,7 +87,15 @@
       "sidebar-accent": "oklch(0.31 0.03 262)",
       "sidebar-accent-foreground": "oklch(0.95 0.008 262)",
       "sidebar-border": "oklch(1 0 0 / 12%)",
-      "sidebar-ring": "oklch(0.68 0.18 262)"
+      "sidebar-ring": "oklch(0.68 0.18 262)",
+      "risk-low": "oklch(0.74 0.15 152)",
+      "risk-low-foreground": "oklch(0.15 0.02 152)",
+      "risk-moderate": "oklch(0.74 0.12 85)",
+      "risk-moderate-foreground": "oklch(0.15 0.02 85)",
+      "risk-high": "oklch(0.74 0.15 48)",
+      "risk-high-foreground": "oklch(0.15 0.02 48)",
+      "risk-severe": "oklch(0.74 0.18 27)",
+      "risk-severe-foreground": "oklch(0.15 0.02 27)"
     }
   },
   "type": "registry:theme"
