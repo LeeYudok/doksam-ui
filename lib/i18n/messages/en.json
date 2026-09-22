@@ -240,6 +240,7 @@
   "component.resizable.description": "A panel layout resizable by dragging.",
   "component.risk-core-map.description": "A risk core network map that places risk tiers in concentric bands from center to edge, expressing exposure and risk through node size and glow.",
   "component.risk-grade-badge.description": "A risk grade badge that paints an ordered four-step severity scale using only the --risk-* tokens, keeping the grade label and the tier number separate (#82).",
+  "component.matrix-heatmap.description": "A category-by-category distribution grid that pairs intensity fill with a value label. Color is a lightness ramp derived from --primary, and every cell shows its number (#103).",
   "component.scenario-simulator.description": "A what-if scenario simulator where current/scenario/delta KPI cards recalculate instantly as parameters change.",
   "component.screen-help-dialog.description": "A screen manual dialog opened via a (?) button next to the screen title (ported from bizinfo, #8).",
   "component.scroll-area.description": "A scroll area with a custom scrollbar.",

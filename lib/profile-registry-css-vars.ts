@@ -2,6 +2,7 @@
 // scripts/registry/sync-profile-vars.ts 가 plain `node --experimental-strip-types`
 // 로 이 파일을 import 하면 해소되지 않는다(#36 작업 중 실측). tsconfig.json 의
 // allowImportingTsExtensions 덕에 tsc·vitest 쪽 해석도 그대로 유지된다.
+import { HEATMAP_TOKENS, HEATMAP_TOKEN_KEYS } from "./heatmap-tokens.ts";
 import { RISK_TOKENS, RISK_TOKEN_KEYS } from "./risk-tokens.ts";
 import { SIDEBAR_TOKEN_KEYS, SIDEBAR_TOKENS } from "./sidebar-tokens.ts";
 import type { BrandProfile } from "../profiles/index.ts";
@@ -24,8 +25,13 @@ import { getThemePreset, THEME_TOKEN_KEYS } from "../themes/index.ts";
  * `registry.json` 의 실제 값과 이 계산 결과가 어긋나지 않는지 지킨다.
  */
 
-/** `profile-*` 항목의 `cssVars.light`/`dark` 가 반드시 가져야 할 키 전체 — THEME_TOKEN_KEYS ∪ SIDEBAR_TOKEN_KEYS ∪ RISK_TOKEN_KEYS. */
-export const PROFILE_CSS_VAR_KEYS: string[] = [...THEME_TOKEN_KEYS, ...SIDEBAR_TOKEN_KEYS, ...RISK_TOKEN_KEYS];
+/** `profile-*` 항목의 `cssVars.light`/`dark` 가 반드시 가져야 할 키 전체 — THEME_TOKEN_KEYS ∪ SIDEBAR_TOKEN_KEYS ∪ RISK_TOKEN_KEYS ∪ HEATMAP_TOKEN_KEYS. */
+export const PROFILE_CSS_VAR_KEYS: string[] = [
+  ...THEME_TOKEN_KEYS,
+  ...SIDEBAR_TOKEN_KEYS,
+  ...RISK_TOKEN_KEYS,
+  ...HEATMAP_TOKEN_KEYS,
+];
 
 export interface ProfileRegistryCssVars {
   theme: { radius: string };
@@ -41,8 +47,18 @@ export function computeProfileRegistryCssVars(profile: BrandProfile): ProfileReg
   const theme = getThemePreset(profile.theme);
   if (!theme) return undefined;
 
-  const light: Record<string, string> = { ...theme.light, ...SIDEBAR_TOKENS.light, ...RISK_TOKENS.light };
-  const dark: Record<string, string> = { ...theme.dark, ...SIDEBAR_TOKENS.dark, ...RISK_TOKENS.dark };
+  const light: Record<string, string> = {
+    ...theme.light,
+    ...SIDEBAR_TOKENS.light,
+    ...RISK_TOKENS.light,
+    ...HEATMAP_TOKENS.light,
+  };
+  const dark: Record<string, string> = {
+    ...theme.dark,
+    ...SIDEBAR_TOKENS.dark,
+    ...RISK_TOKENS.dark,
+    ...HEATMAP_TOKENS.dark,
+  };
 
   return {
     theme: { radius: profile.radius },

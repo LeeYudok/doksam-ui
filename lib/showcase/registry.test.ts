@@ -43,6 +43,7 @@ const MANUAL_ENTRY_SLUGS = [
   "relation-network",
   "risk-core-map",
   "risk-grade-badge",
+  "matrix-heatmap",
   "due-countdown-badge",
   "party-identity-cell",
   "contribution-meter",

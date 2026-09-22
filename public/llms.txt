@@ -506,6 +506,16 @@ npx shadcn add https://ui.doksam.com/r/risk-table.json
 
 registryDependencies: https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/risk-tokens.json, https://ui.doksam.com/r/table.json
 
+### Matrix Heatmap (`matrix-heatmap`)
+
+범주 × 범주 분포를 강도 면색 + 값 텍스트로 함께 보여주는 격자. 색은 --primary 에서 파생한 명도 램프이고, 데이터 없는 교차 칸은 빈 셀로, 행이 많으면 첫 열을 고정한 채 가로 스크롤된다.
+
+```
+npx shadcn add https://ui.doksam.com/r/matrix-heatmap.json
+```
+
+registryDependencies: https://ui.doksam.com/r/heatmap-tokens.json
+
 ### Route Error (`route-error`)
 
 Next App Router 의 error.tsx 가 그대로 쓰는 오류 화면. 다시 시도 버튼과 digest 표기를 표준화한다.
@@ -742,6 +752,14 @@ registryDependencies: https://ui.doksam.com/r/theme-storage.json
 
 ```
 npx shadcn add https://ui.doksam.com/r/risk-tokens.json
+```
+
+### Heatmap Tokens (`heatmap-tokens`)
+
+matrix-heatmap 강도 램프(명도 단계 + 셀 텍스트 토큰)의 단일 진실원천. 값 자체는 프로필 설치가 :root/.dark 에 넣고, 셀 배경은 oklch(from var(--primary) ...) 로 실행 시 파생한다.
+
+```
+npx shadcn add https://ui.doksam.com/r/heatmap-tokens.json
 ```
 
 ### Theme Storage (`theme-storage`)
