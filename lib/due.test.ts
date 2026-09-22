@@ -34,10 +34,11 @@ describe("resolveDue", () => {
   });
 
   it("defaults the threshold to DEFAULT_SOON_WITHIN_DAYS", () => {
-    const deadline = "2026-09-25";
-    expect(resolveDue(deadline, "2026-09-22").status).toBe(
-      resolveDue(deadline, "2026-09-22", { soonWithinDays: DEFAULT_SOON_WITHIN_DAYS }).status,
-    );
+    // 상수를 그대로 다시 넣어 비교하면 기본값이 무엇이든 통과한다 —
+    // 상수가 3 일 때만 갈리는 경계 두 개를 직접 박는다.
+    expect(DEFAULT_SOON_WITHIN_DAYS).toBe(3);
+    expect(resolveDue("2026-09-25", "2026-09-22").status).toBe("soon");
+    expect(resolveDue("2026-09-26", "2026-09-22").status).toBe("ahead");
   });
 
   it("crosses month and year boundaries", () => {

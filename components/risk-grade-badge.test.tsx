@@ -47,6 +47,9 @@ describe("RiskGradeBadge", () => {
   it("하드코딩 색 없이 토큰 var()만 쓴다", () => {
     render(<RiskGradeBadge level="severe" label="경보" data-testid="badge" />)
     const style = screen.getByTestId("badge").getAttribute("style") ?? ""
-    expect(style).not.toMatch(/#[0-9a-f]{3,8}\b|\brgba?\(|\bhsla?\(/i)
+    // 이 레포의 토큰 값은 oklch 라, hex/rgb/hsl 만 막으면 정작 이 레포에서
+    // 나올 법한 하드코딩을 놓친다.
+    expect(style).not.toMatch(/#[0-9a-f]{3,8}\b|\b(?:rgba?|hsla?|oklch|oklab|lab|lch|color)\(/i)
+    expect(style).toContain("var(--risk-severe)")
   })
 })
