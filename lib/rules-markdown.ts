@@ -31,7 +31,7 @@ export const RULES_SECTIONS: RulesSection[] = [
     items: [
       "화면을 만들기 전에 저장소 루트에 DESIGN.md 를 만들고 원형·성격·배제 목록·이유 네 가지를 선언한다 — 선언 없이 생성을 시작하면 결과가 카탈로그의 기본 조합으로 수렴한다.",
       "원형(archetype): 이 제품의 화면 뼈대를 ui.doksam.com/archetypes 레지스트리의 원형 10종(sidebar-app, top-nav-site, split-pane, feed-timeline, dashboard-grid, wizard-flow, chat-workspace, canvas, doc-reader, focus-task) 중 하나로 반드시 고른다 — 자유 문자열(\"커머스 스토어프론트\" 같은 자기 발명 이름)은 불가하다. 둘 이상에 걸치면 주 원형 1개 + 보조 원형 1개를 레지스트리 이름으로 적고, 어느 화면이 보조 원형을 쓰는지 밝힌다. 고른 원형의 내비 방식과 본문 구조(레지스트리의 뼈대 한 줄)를 그대로 따른다.",
-      "성격(personality): 같은 원형도 성격에 따라 다르게 생긴다. ui.doksam.com/personalities 레지스트리의 프리셋(neutral, crisp, elevated, statement) 중 하나를 고른다 — 밀도·모션의 양·표면(테두리/그림자/평면) 성향은 이 프리셋이 결정하며 프로젝트에서 값을 임의로 재정의하지 않는다.",
+      "성격(personality): 같은 원형도 성격에 따라 다르게 생긴다. ui.doksam.com/profiles 에서 제품에 맞는 프로필을 고르고, 그 프로필이 참조하는 ui.doksam.com/personalities 프리셋(neutral, crisp, elevated, statement)을 DESIGN.md 에 적는다 — personality는 타입·여백 배율, 표면(테두리/그림자/평면), 모션 강도를 정하고 컨트롤 밀도는 프로필의 density가 정한다. 프로젝트에서 두 값을 임의로 재정의하지 않는다.",
       "안 쓸 컴포넌트·패턴: 최소 세 개를 이름으로 배제하되, 그중 최소 하나는 고른 원형·과제에서 기본으로 쓰일 법한 것이어야 한다(모바일 커머스라면 \"하단 탭바 안 씀\"·\"카드 그리드 안 씀\"·\"sticky CTA 안 씀\" 같은 것). 어차피 안 쓸 것(\"모바일 앱에서 사이드바 안 씀\")만 나열한 배제 목록은 결정에 영향이 없으므로 무효다. 화면의 성격은 무엇을 쓰는가보다 무엇을 안 쓰는가에서 나온다.",
       "이유: 위 세 항목 각각에 한 줄 근거를 붙인다. 취향(\"깔끔해서\")이 아니라 사용 맥락(사용 빈도·체류 시간·입력 장치·데이터 밀도·조직의 기존 도구)으로 쓴다.",
       "DESIGN.md 는 화면 코드와 같은 저장소에 두고 같은 커밋 흐름으로 갱신한다. 구현이 브리프와 어긋나면 코드부터 고치지 말고 브리프를 갱신할지 먼저 판단한다 — 어긋남이 반복되면 원형 선택이 틀린 것이다.",
@@ -48,7 +48,7 @@ export const RULES_SECTIONS: RulesSection[] = [
       "모든 페이지를 같은 헤더(Badge + h1 + 설명 문단)로 시작하지 않는다 — 첫 화면에는 그 페이지에서 가장 자주 하는 행동이나 가장 먼저 봐야 하는 값이 온다.",
       "카탈로그를 훑으며 쓸 수 있는 컴포넌트를 모두 배치하지 않는다 — 브리프의 배제 목록이 먼저이고, 남은 것 중에서 고른다.",
       "강조를 primary 색 하나로만 처리하지 않는다 — 계열 구분이 필요한 데이터는 chart-1~5, 보조 강조는 accent·secondary 로 나눈다(색만으로 구분하지 않는 것은 접근성 절의 불변 규칙이다).",
-      "여백·타이포 스케일을 전부 기본값으로 두지 않는다 — 밀도는 성격이 결정하는 값이므로 프로필의 density 를 고르고, 그 안에서 섹션 간 여백을 의도적으로 차등한다.",
+      "여백·타이포 스케일을 전부 기본값으로 두지 않는다 — 프로필이 고정한 density와 personality의 배율을 적용하고, 그 안에서 섹션 간 여백을 의도적으로 차등한다.",
       "라이브러리 데모의 문구·아이콘·색 조합을 그대로 옮기지 않는다 — 데모 카피는 예시일 뿐이고, 화면의 언어는 도메인 용어여야 한다.",
     ],
   },
@@ -225,7 +225,7 @@ export const RULES_SECTIONS: RulesSection[] = [
     title: "AI로 설치하기 (shadcn 커스텀 레지스트리)",
     kind: "invariant",
     items: [
-      "doksam-ui 고유 자산(shadcn/ui 프리미티브가 아닌 것 — badge-extended, tooltip-icon-button, table-sortable, screen-help-dialog, json-tree, log-viewer, request-inspector, finance-* 유틸, format-biz-no, profile-admin/service/data/docs/console)은 코드를 복붙하지 않고 npx shadcn add https://ui.doksam.com/r/<name>.json 으로 설치한다.",
+      "doksam-ui 고유 자산(shadcn/ui 프리미티브가 아닌 것 — badge-extended, tooltip-icon-button, table-sortable, screen-help-dialog, json-tree, log-viewer, request-inspector, finance-* 유틸, format-biz-no, profiles/index.ts에 등록된 profile-* 항목)은 코드를 복붙하지 않고 npx shadcn add https://ui.doksam.com/r/<name>.json 으로 설치한다.",
       "프리미티브(button·card·badge 등 components/ui/ 60종)도 이 레지스트리가 배포한다 — 항목 사이의 registryDependencies 는 전부 https://ui.doksam.com/r/<name>.json 이며 bare 이름을 쓰지 않는다. bare 이름은 상류 shadcn 에서 내려와 소비 프로젝트의 프리셋과 상류 버전에 따라 내용이 갈리므로, 설치본이 카탈로그와 같다는 보장이 사라진다(scripts/registry/ui-items.test.ts 가 막는다).",
       "설치 가능한 전체 목록과 각 install 명령은 ui.doksam.com/llms.txt(AI 발견용 카탈로그)에서 기계적으로 읽을 수 있다 — registry.json(레포 루트)이 단일 진실원천이며 pnpm gen:llms 로 동기화한다.",
       "이 레지스트리를 프로젝트에 상시 등록해두려면 components.json의 registries에 \"@doksam-ui\": \"https://ui.doksam.com/r/{name}.json\" 을 추가한다 — 이후 npx shadcn add @doksam-ui/<name> 으로 짧게 설치할 수 있다.",
@@ -238,7 +238,7 @@ export const RULES_SECTIONS: RulesSection[] = [
     items: [
       "[ ] DESIGN.md 에 원형·성격·안 쓸 컴포넌트/패턴·이유 선언 (첫 화면 생성 전).",
       "[ ] 수렴 안티패턴 절의 항목을 화면별로 자가 점검.",
-      "[ ] 브랜드 프로필 지정 (admin/service/data/docs/console 중 1 — ui.doksam.com/profiles).",
+      "[ ] 브랜드 프로필 지정 (ui.doksam.com/profiles 의 현재 목록에서 선택).",
       "[ ] 프로필이 고정한 corner·radius·density(<html data-density>)·typeContrast(<html data-type-contrast>)를 프로젝트에서 임의 재정의하지 않는다 — 바꿀 필요가 생기면 doksam-ui에 프로필 추가/수정으로 반영.",
       "[ ] 셸 구조 선택 근거를 DESIGN.md 에 기록 — 사이드바 셸을 골랐다면 ui.doksam.com/patterns/app-shell 를 준수.",
       "[ ] 하드코딩 색 0건 — 시맨틱 색상 토큰만 사용.",
