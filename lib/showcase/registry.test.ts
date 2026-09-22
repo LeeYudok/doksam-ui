@@ -45,6 +45,7 @@ const MANUAL_ENTRY_SLUGS = [
   "risk-grade-badge",
   "due-countdown-badge",
   "party-identity-cell",
+  "contribution-meter",
   "scenario-simulator",
   "evidence-decision-panel",
   "pipeline-rail",

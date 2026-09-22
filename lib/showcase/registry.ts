@@ -721,6 +721,15 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
     status: "done",
   },
   {
+    slug: "contribution-meter",
+    title: "Contribution Meter",
+    category: "finance",
+    layer: "composition",
+    description:
+      "기여도 % + Progress 게이지 + 감사코드(AuditCodeTag, #83)를 묶은 판단 근거 표기입니다. 방향(위험 상승/하락 요인)은 --gain/--loss 로 칠합니다(#84).",
+    status: "done",
+  },
+  {
     slug: "party-identity-cell",
     title: "Party Identity Cell",
     category: "finance",

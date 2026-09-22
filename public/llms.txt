@@ -186,6 +186,18 @@ npx shadcn add https://ui.doksam.com/r/contribution-bars.json
 
 npm dependencies: @phosphor-icons/react@^2.1.10
 
+### Contribution Meter (`contribution-meter`)
+
+기여도 % + Progress 게이지 + 감사코드(AuditCodeTag)를 묶은 판단 근거 표기. 방향(위험 상승/하락 요인)은 --gain/--loss로 칠한다.
+
+```
+npx shadcn add https://ui.doksam.com/r/contribution-meter.json
+```
+
+registryDependencies: https://ui.doksam.com/r/audit-code-tag.json, https://ui.doksam.com/r/i18n-provider.json, https://ui.doksam.com/r/progress.json
+
+npm dependencies: @phosphor-icons/react@^2.1.10
+
 ### Copy Button (`copy-button`)
 
 navigator.clipboard로 텍스트를 복사하고 잠깐 "복사됨" 피드백을 보여주는 버튼.
