@@ -18,8 +18,14 @@ describe("AppShellPatternsPage", () => {
     }
   })
 
-  it("renders 9 samples", () => {
+  it("renders 10 samples — 셸 7종 + 타이틀·여백·브레이크포인트 3종", () => {
     render(<AppShellPatternsPage />)
-    expect(APP_SHELL_SAMPLES.length).toBe(9)
+    expect(APP_SHELL_SAMPLES.length).toBe(10)
+  })
+
+  it("글로벌 탑내비 셸 샘플이 메뉴 오버플로 표준을 노출한다", () => {
+    render(<AppShellPatternsPage />)
+    expect(screen.getByRole("heading", { level: 2, name: "글로벌 탑내비 셸" })).toBeInTheDocument()
+    expect(screen.getAllByText(/더보기/).length).toBeGreaterThan(0)
   })
 })

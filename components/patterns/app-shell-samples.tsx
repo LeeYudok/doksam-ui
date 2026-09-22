@@ -1,10 +1,15 @@
 import {
   AppWindowIcon,
   ArticleIcon,
+  BellIcon,
+  CaretDownIcon,
+  MagnifyingGlassIcon,
   TargetIcon,
   ColumnsIcon,
+  NavigationArrowIcon,
   NewspaperClippingIcon,
   SidebarSimpleIcon,
+  UserCircleIcon,
 } from "@phosphor-icons/react/dist/ssr"
 
 import { Badge } from "@/components/ui/badge"
@@ -18,6 +23,10 @@ const PANE_ITEMS = ["배포 승인 요청", "야간 배치 실패 알림", "주�
 const FEED_ITEMS = ["crawler-worker 재기동 완료", "일일 수집 12,480건 적재", "알림 규칙 3건 변경"]
 
 const DOC_TREE = ["규칙", "컬러 · 토큰", "아이콘", "레이아웃"]
+
+const TOP_NAV_MENUS = ["홈", "여신심사", "조기경보", "모니터링", "리포트", "기준정보"]
+
+const TOP_NAV_SUBTABS = ["요약", "차주별", "업종별", "이력"]
 
 const SPACING_SCALE = [
   { token: "gap-4", px: "16px", usage: "카드 내부 좁은 간격 (라벨-값 등)" },
@@ -324,6 +333,90 @@ export const APP_SHELL_SAMPLES: PatternSampleData[] = [
   },
   {
     num: 7,
+    title: "글로벌 탑내비 셸",
+    description:
+      "목적지가 많은 사내 업무 시스템의 셸입니다 — 1단 글로벌 nav + 2단 서브탭바(현재 화면명 · 하위 탭 · 상시 ask 바). 헤더형 셸의 업무 시스템 변형이고 원형은 top-nav-site 를 그대로 쓴다.",
+    demo: (
+      <div className="flex h-[160px] w-full flex-col overflow-hidden rounded-md border border-border">
+        {/* 1단 — 브랜드 · 글로벌 메뉴 · 도구 */}
+        <div className="flex h-8 shrink-0 items-center gap-1.5 border-b border-border bg-card px-2.5">
+          <NavigationArrowIcon size={11} weight="regular" className="text-primary" />
+          <span className="text-[8px] font-semibold tracking-tight">여신업무시스템</span>
+          <div className="ml-1.5 flex min-w-0 items-center gap-0.5">
+            {TOP_NAV_MENUS.map((label, i) => (
+              <span
+                key={label}
+                className={`hidden shrink-0 rounded px-1 py-0.5 text-[7px] sm:inline ${
+                  i === 2 ? "bg-accent text-accent-foreground" : "text-muted-foreground"
+                }`}
+              >
+                {label}
+              </span>
+            ))}
+            {/* 오버플로 표준: 넘치는 메뉴는 "더보기" 로 접는다 */}
+            <span className="hidden shrink-0 items-center gap-0.5 rounded px-1 py-0.5 text-[7px] text-muted-foreground sm:inline-flex">
+              더보기
+              <CaretDownIcon size={7} weight="bold" />
+            </span>
+          </div>
+          <div className="ml-auto flex shrink-0 items-center gap-1 text-muted-foreground">
+            <BellIcon size={10} weight="regular" />
+            <UserCircleIcon size={10} weight="regular" />
+          </div>
+        </div>
+        {/* 2단 — 현재 화면명 · 서브탭 · ask 바 */}
+        <div className="flex h-7 shrink-0 items-center gap-1.5 border-b border-border px-2.5">
+          <span className="hidden shrink-0 text-[8px] font-semibold tracking-tight sm:inline">조기경보</span>
+          <div className="flex min-w-0 flex-1 items-center gap-0.5 overflow-hidden">
+            {TOP_NAV_SUBTABS.map((tab, i) => (
+              <span
+                key={tab}
+                className={`shrink-0 rounded px-1 py-0.5 text-[7px] ${
+                  i === 0 ? "bg-secondary text-secondary-foreground" : "text-muted-foreground"
+                }`}
+              >
+                {tab}
+              </span>
+            ))}
+          </div>
+          <span className="flex h-4 shrink-0 items-center gap-1 rounded border border-border px-1 text-[7px] text-muted-foreground">
+            <MagnifyingGlassIcon size={8} weight="regular" />
+            <span className="hidden sm:inline">메뉴·기능 사용법을 물어보세요</span>
+            <span className="hidden rounded-sm bg-muted px-0.5 sm:inline">/</span>
+          </span>
+        </div>
+        <div className="flex-1 overflow-hidden px-2.5 py-2">
+          <div className="mx-auto flex h-full max-w-[240px] flex-col gap-1.5">
+            <p className="text-[9px] font-semibold tracking-tight">조기경보 요약</p>
+            <div className="h-[60px] rounded bg-muted/40" />
+          </div>
+        </div>
+      </div>
+    ),
+    code: `<TopNavShell
+  brand={<Brand />}
+  items={MENUS}              /* 9~12개여도 된다 — maxVisibleItems 뒤는 드롭다운으로 접힌다 */
+  activeItem="ews"
+  maxVisibleItems={6}
+  tools={<><NotificationButton /><ProfileMenu /></>}
+  screenTitle="조기경보"
+  subTabs={SUB_TABS}
+  activeSubTab="summary"
+  ask={<TopNavAskBar href="/help" />}   /* 링크 · 버튼 · 다이얼로그 트리거 무엇이든 */
+>
+  {children}
+</TopNavShell>`,
+    notes: [
+      "메뉴 오버플로 표준: lg 이상에서는 앞 maxVisibleItems(기본 6)개만 가로로 펼치고 나머지는 \"더보기\" 드롭다운으로 접는다. lg 미만에서는 글로벌 nav 전체를 Sheet 로 접고 헤더에 햄버거만 남긴다 — 가로 스크롤이나 줄바꿈으로 흘리지 않는다.",
+      "서브탭은 접지 않고 overflow-x-auto 로 둔다 — 화면 안 이동이라 목록이 짧고, 드롭다운으로 접으면 현재 위치가 보이지 않는다.",
+      "ask 바(TopNavAskBar)는 상시 노출하되 md 미만에서는 문구와 / 힌트를 감추고 아이콘만 남긴다 — 서브탭이 밀려나지 않아야 한다. aria-label 이 남으므로 이름은 유지된다.",
+      "ask 바는 진짜 입력이 아니라 슬롯이다 — 도움말 화면 링크, 다이얼로그 열기, chat-widget 호출 어디로든 연결한다. / 단축키는 입력·textarea·contenteditable 에 포커스가 있을 때는 동작하지 않는다.",
+      "목적지가 6개 이하이고 화면별 하위 탭이 없으면 이 셸이 아니라 헤더형 셸을 쓴다. 반대로 사용자가 하루 종일 한 화면에 머무는 내부 도구라면 사이드바형 셸이 낫다 — 이 셸은 목적지가 많고 화면 전환이 잦은 업무 시스템용이다.",
+      "sidebar 프리미티브를 쓰지 않는다 — 사이드바형 셸과는 별개 축이며 둘을 한 프로젝트에서 섞지 않는다.",
+    ],
+  },
+  {
+    num: 8,
     title: "페이지 타이틀 패턴",
     description: "셸 종류와 무관하게 모든 페이지 상단에 반복되는 타이틀 3요소 구조입니다.",
     demo: (
@@ -356,7 +449,7 @@ export const APP_SHELL_SAMPLES: PatternSampleData[] = [
     ],
   },
   {
-    num: 8,
+    num: 9,
     title: "여백 밀도 스케일",
     description: "섹션 간격과 카드 내부 간격에 쓰는 gap 토큰 4단계입니다 — 임의의 gap 값을 새로 만들지 않는다.",
     demo: (
@@ -384,7 +477,7 @@ export const APP_SHELL_SAMPLES: PatternSampleData[] = [
     ],
   },
   {
-    num: 9,
+    num: 10,
     title: "반응형 브레이크포인트 규칙",
     description: "셸·그리드가 열을 바꾸는 기준점을 sm/md/lg/xl 4단계로 고정합니다.",
     demo: (
