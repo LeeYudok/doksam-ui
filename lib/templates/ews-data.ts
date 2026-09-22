@@ -213,3 +213,429 @@ export const EWS_URGENT_BORROWERS: EwsBorrowerRow[] = [
     owner: "이한결 심사역",
   },
 ]
+
+/** 진단 상세(#90) 의 화면 내 탭. 홈과 목적이 달라 서브탭 집합을 따로 둔다. */
+export const EWS_DIAGNOSIS_SUB_TABS: EwsSubTab[] = [
+  { key: "diagnosis", label: "원인 진단" },
+  { key: "evidence", label: "근거 자료" },
+  { key: "history", label: "조치 이력" },
+]
+
+export interface EwsDiagnosisFactor {
+  key: string
+  /** 기여 변수명. */
+  label: string
+  /** 위험 점수 기여도(%). */
+  percent: number
+  /** 위험을 올리는 요인인지 내리는 요인인지. */
+  direction: "increase" | "decrease"
+  /** 근거 감사코드 — contribution-meter 가 AuditCodeTag 로 함께 렌더한다. */
+  code: string
+  /** 관측값 요약. 색 외 두 번째 채널로 수치의 의미를 글로 남긴다. */
+  note: string
+}
+
+export interface EwsEvidenceRow {
+  id: string
+  /** 근거 감사코드. */
+  code: string
+  /** 자료 출처(내부 시스템·외부 기관). */
+  source: string
+  /** 관측 내용. */
+  observation: string
+  level: RiskLevel
+  /** 등급 표기 문구 — 색 외 두 번째 채널. */
+  levelLabel: string
+  /** 수집 시각. 화면이 상대시간을 계산하지 않도록 문자열로 고정한다. */
+  collectedAt: string
+}
+
+export interface EwsCollectionItem {
+  key: string
+  /** 수집 대상 자료명. */
+  label: string
+  /** 수집 진척률(%). */
+  percent: number
+  /** 진척률을 색·게이지 외 문구로 다시 말해 주는 상태 표기. */
+  status: string
+}
+
+export interface EwsDiagnosis {
+  /** 대상 차주 id — EWS_URGENT_BORROWERS.id 와 같다. */
+  borrowerId: string
+  /** 진단 요약 한 문단. */
+  summary: string
+  /** 판단을 만든 모델·규정 버전. 감사 추적의 시작점이다. */
+  modelLabel: string
+  /** 종합 위험 점수 표기. */
+  scoreLabel: string
+  factors: EwsDiagnosisFactor[]
+  evidence: EwsEvidenceRow[]
+  collection: EwsCollectionItem[]
+  /** 다음 단계 안내 — 하단 고정 액션바의 보조 정보로 쓴다. */
+  nextStepLabel: string
+}
+
+/**
+ * 차주별 경보 원인 진단 (#90). 홈 대시보드(#89) 의 긴급 처리 차주 5건과 같은 키를
+ * 써서 두 화면이 한 시스템으로 읽히게 한다. 전부 가상 데이터다.
+ */
+export const EWS_DIAGNOSES: Record<string, EwsDiagnosis> = {
+  "B-20260923-01": {
+    borrowerId: "B-20260923-01",
+    summary:
+      "당좌 한도 초과가 3영업일 연속 관측되었고 같은 기간 주거래 입금 비중이 급락했습니다. 운전자금 경색이 매출 감소보다 먼저 나타난 유형입니다.",
+    modelLabel: "EWS 스코어링 v4.2 · 여신감리 준수 지침 제2026-42호",
+    scoreLabel: "종합 위험 점수 87 / 100",
+    factors: [
+      {
+        key: "overdraft",
+        label: "당좌 한도 초과 지속",
+        percent: 34,
+        direction: "increase",
+        code: "EVD-2026-0912",
+        note: "3영업일 연속 · 최대 초과액 8.2억원",
+      },
+      {
+        key: "main-bank",
+        label: "주거래 입금 비중 이탈",
+        percent: 27,
+        direction: "increase",
+        code: "EVD-2026-0914",
+        note: "68% → 31% (전월 대비)",
+      },
+      {
+        key: "tax",
+        label: "국세 체납 미발생",
+        percent: 12,
+        direction: "decrease",
+        code: "TAX-2026-0301",
+        note: "체납 이력 없음 · 최근 조회일 09-20",
+      },
+      {
+        key: "collateral",
+        label: "담보 인정가 하락",
+        percent: 18,
+        direction: "increase",
+        code: "COL-2026-0733",
+        note: "공장 부지 감정가 -11%",
+      },
+    ],
+    evidence: [
+      {
+        id: "E-01-1",
+        code: "EVD-2026-0912",
+        source: "내부 여신관리시스템",
+        observation: "당좌 한도 초과 3영업일 연속 발생",
+        level: "severe",
+        levelLabel: "경보",
+        collectedAt: "2026-09-23 05:40:00",
+      },
+      {
+        id: "E-01-2",
+        code: "EVD-2026-0914",
+        source: "내부 수신거래원장",
+        observation: "주거래 입금 비중 68% → 31% 하락",
+        level: "high",
+        levelLabel: "주의",
+        collectedAt: "2026-09-23 05:42:00",
+      },
+      {
+        id: "E-01-3",
+        code: "COL-2026-0733",
+        source: "담보평가 위탁기관",
+        observation: "공장 부지 감정가 11% 하향 조정",
+        level: "high",
+        levelLabel: "주의",
+        collectedAt: "2026-09-22 17:05:00",
+      },
+      {
+        id: "E-01-4",
+        code: "TAX-2026-0301",
+        source: "국세청 체납 조회",
+        observation: "체납 이력 없음",
+        level: "low",
+        levelLabel: "정상",
+        collectedAt: "2026-09-20 09:15:00",
+      },
+    ],
+    collection: [
+      { key: "financial", label: "최근 분기 재무제표", percent: 100, status: "수집 완료" },
+      { key: "bank", label: "타행 거래내역 동의서", percent: 45, status: "차주 회신 대기" },
+      { key: "site", label: "현장 실사 보고서", percent: 20, status: "실사 일정 조율 중" },
+    ],
+    nextStepLabel: "조치방안 수립 기한 D-1 · 2026-09-24 센터장 결재 필요",
+  },
+  "B-20260923-02": {
+    borrowerId: "B-20260923-02",
+    summary:
+      "분기 매출이 38% 급감한 상태에서 국세 체납이 새로 확인되었습니다. 업황 요인과 세무 요인이 함께 나타나 단일 지표 경보보다 우선순위가 높습니다.",
+    modelLabel: "EWS 스코어링 v4.2 · 여신감리 준수 지침 제2026-42호",
+    scoreLabel: "종합 위험 점수 82 / 100",
+    factors: [
+      {
+        key: "revenue",
+        label: "분기 매출 급감",
+        percent: 38,
+        direction: "increase",
+        code: "FIN-2026-0455",
+        note: "전년 동기 대비 -38%",
+      },
+      {
+        key: "tax-arrear",
+        label: "국세 체납 발생",
+        percent: 29,
+        direction: "increase",
+        code: "TAX-2026-0488",
+        note: "부가세 2기분 1.7억원",
+      },
+      {
+        key: "order",
+        label: "수주 잔고 회복",
+        percent: 15,
+        direction: "decrease",
+        code: "EVD-2026-0871",
+        note: "분기 수주 +12% · 2개 분기 연속",
+      },
+    ],
+    evidence: [
+      {
+        id: "E-02-1",
+        code: "FIN-2026-0455",
+        source: "외부감사 재무제표",
+        observation: "2026년 2분기 매출 전년 동기 대비 38% 감소",
+        level: "severe",
+        levelLabel: "경보",
+        collectedAt: "2026-09-22 14:20:00",
+      },
+      {
+        id: "E-02-2",
+        code: "TAX-2026-0488",
+        source: "국세청 체납 조회",
+        observation: "부가가치세 2기분 1.7억원 체납 확인",
+        level: "severe",
+        levelLabel: "경보",
+        collectedAt: "2026-09-23 05:10:00",
+      },
+      {
+        id: "E-02-3",
+        code: "EVD-2026-0871",
+        source: "산업 수주 통계",
+        observation: "석유화학 설비 수주 잔고 2개 분기 연속 증가",
+        level: "moderate",
+        levelLabel: "관찰",
+        collectedAt: "2026-09-19 11:00:00",
+      },
+    ],
+    collection: [
+      { key: "tax-doc", label: "체납 납부계획서", percent: 60, status: "차주 작성 중" },
+      { key: "financial", label: "반기 검토보고서", percent: 100, status: "수집 완료" },
+      { key: "plan", label: "자구계획서", percent: 0, status: "요청 전" },
+    ],
+    nextStepLabel: "조치방안 수립 기한 D-2 · 2026-09-25 센터장 결재 필요",
+  },
+  "B-20260923-03": {
+    borrowerId: "B-20260923-03",
+    summary:
+      "대표이사 변경 직후 담보 부동산에 후순위 근저당이 설정되었습니다. 재무 지표는 아직 악화되지 않아 지배구조·담보 요인만으로 등급이 내려간 사례입니다.",
+    modelLabel: "EWS 스코어링 v4.2 · 여신감리 준수 지침 제2026-42호",
+    scoreLabel: "종합 위험 점수 64 / 100",
+    factors: [
+      {
+        key: "ceo",
+        label: "대표이사 변경",
+        percent: 26,
+        direction: "increase",
+        code: "BIZ-2026-0219",
+        note: "등기 변경일 2026-09-05",
+      },
+      {
+        key: "junior-lien",
+        label: "담보 후순위 설정",
+        percent: 31,
+        direction: "increase",
+        code: "COL-2026-0741",
+        note: "타행 근저당 24억원 추가",
+      },
+      {
+        key: "cashflow",
+        label: "영업현금흐름 유지",
+        percent: 17,
+        direction: "decrease",
+        code: "FIN-2026-0502",
+        note: "4개 분기 연속 흑자",
+      },
+    ],
+    evidence: [
+      {
+        id: "E-03-1",
+        code: "BIZ-2026-0219",
+        source: "법인등기 변동 알림",
+        observation: "대표이사 변경 등기 접수",
+        level: "high",
+        levelLabel: "주의",
+        collectedAt: "2026-09-21 08:30:00",
+      },
+      {
+        id: "E-03-2",
+        code: "COL-2026-0741",
+        source: "부동산 등기 모니터링",
+        observation: "담보 부동산 후순위 근저당 24억원 설정",
+        level: "high",
+        levelLabel: "주의",
+        collectedAt: "2026-09-22 09:45:00",
+      },
+      {
+        id: "E-03-3",
+        code: "FIN-2026-0502",
+        source: "내부 재무분석",
+        observation: "영업현금흐름 4개 분기 연속 흑자 유지",
+        level: "low",
+        levelLabel: "정상",
+        collectedAt: "2026-09-18 16:00:00",
+      },
+    ],
+    collection: [
+      { key: "registry", label: "등기부 등본 재발급", percent: 100, status: "수집 완료" },
+      { key: "interview", label: "신임 대표 면담 기록", percent: 35, status: "일정 확정" },
+      { key: "collateral", label: "담보 재평가 의뢰", percent: 70, status: "평가기관 회신 대기" },
+    ],
+    nextStepLabel: "조치방안 수립 기한 D-4 · 2026-09-27 팀장 결재 필요",
+  },
+  "B-20260923-04": {
+    borrowerId: "B-20260923-04",
+    summary:
+      "차입금 의존도가 68%까지 올라 이자보상배율이 1 아래로 내려갔습니다. 외부 충격이 아니라 자본구조에서 비롯된 경보입니다.",
+    modelLabel: "EWS 스코어링 v4.2 · 여신감리 준수 지침 제2026-42호",
+    scoreLabel: "종합 위험 점수 58 / 100",
+    factors: [
+      {
+        key: "leverage",
+        label: "차입금 의존도 상승",
+        percent: 33,
+        direction: "increase",
+        code: "FIN-2026-0517",
+        note: "54% → 68% (2개 분기)",
+      },
+      {
+        key: "icr",
+        label: "이자보상배율 1 미만",
+        percent: 24,
+        direction: "increase",
+        code: "FIN-2026-0518",
+        note: "0.8배 · 2개 분기 연속",
+      },
+      {
+        key: "capex",
+        label: "설비 투자 마무리",
+        percent: 11,
+        direction: "decrease",
+        code: "EVD-2026-0903",
+        note: "증설 완료 · 추가 투자 계획 없음",
+      },
+    ],
+    evidence: [
+      {
+        id: "E-04-1",
+        code: "FIN-2026-0517",
+        source: "외부감사 재무제표",
+        observation: "차입금 의존도 68% (직전 분기 54%)",
+        level: "high",
+        levelLabel: "주의",
+        collectedAt: "2026-09-22 14:25:00",
+      },
+      {
+        id: "E-04-2",
+        code: "FIN-2026-0518",
+        source: "내부 재무분석",
+        observation: "이자보상배율 0.8배 2개 분기 연속",
+        level: "high",
+        levelLabel: "주의",
+        collectedAt: "2026-09-22 14:26:00",
+      },
+      {
+        id: "E-04-3",
+        code: "EVD-2026-0903",
+        source: "설비투자 집행 보고",
+        observation: "반도체 부품 라인 증설 완료 · 추가 집행 없음",
+        level: "moderate",
+        levelLabel: "관찰",
+        collectedAt: "2026-09-17 10:40:00",
+      },
+    ],
+    collection: [
+      { key: "loan", label: "타행 차입 약정서", percent: 80, status: "일부 미제출" },
+      { key: "forecast", label: "차기 연도 자금수지 계획", percent: 25, status: "차주 작성 중" },
+      { key: "financial", label: "반기 검토보고서", percent: 100, status: "수집 완료" },
+    ],
+    nextStepLabel: "조치방안 수립 기한 D-6 · 2026-09-29 팀장 결재 필요",
+  },
+  "B-20260923-05": {
+    borrowerId: "B-20260923-05",
+    summary:
+      "원재료 단가 급등과 재고회전율 하락이 동시에 관측되었습니다. 아직 관찰 등급이며 단가 안정 시 자동 해제 후보입니다.",
+    modelLabel: "EWS 스코어링 v4.2 · 여신감리 준수 지침 제2026-42호",
+    scoreLabel: "종합 위험 점수 41 / 100",
+    factors: [
+      {
+        key: "material",
+        label: "원재료 단가 급등",
+        percent: 29,
+        direction: "increase",
+        code: "MKT-2026-0344",
+        note: "주요 원당 단가 +22%",
+      },
+      {
+        key: "turnover",
+        label: "재고회전율 하락",
+        percent: 19,
+        direction: "increase",
+        code: "FIN-2026-0531",
+        note: "8.1회 → 5.6회",
+      },
+      {
+        key: "contract",
+        label: "대형 납품 계약 체결",
+        percent: 22,
+        direction: "decrease",
+        code: "BIZ-2026-0260",
+        note: "연 120억원 규모 · 3년 계약",
+      },
+    ],
+    evidence: [
+      {
+        id: "E-05-1",
+        code: "MKT-2026-0344",
+        source: "원자재 가격 지수",
+        observation: "주요 원당 단가 전월 대비 22% 상승",
+        level: "moderate",
+        levelLabel: "관찰",
+        collectedAt: "2026-09-21 07:00:00",
+      },
+      {
+        id: "E-05-2",
+        code: "FIN-2026-0531",
+        source: "내부 재무분석",
+        observation: "재고회전율 8.1회 → 5.6회 하락",
+        level: "moderate",
+        levelLabel: "관찰",
+        collectedAt: "2026-09-22 14:30:00",
+      },
+      {
+        id: "E-05-3",
+        code: "BIZ-2026-0260",
+        source: "공시 모니터링",
+        observation: "연 120억원 규모 급식업체 납품 계약 공시",
+        level: "low",
+        levelLabel: "정상",
+        collectedAt: "2026-09-16 13:20:00",
+      },
+    ],
+    collection: [
+      { key: "contract", label: "납품 계약서 사본", percent: 100, status: "수집 완료" },
+      { key: "inventory", label: "월별 재고 명세", percent: 55, status: "차주 회신 대기" },
+      { key: "price", label: "원재료 조달 계획", percent: 10, status: "요청 전" },
+    ],
+    nextStepLabel: "조치방안 수립 기한 D-9 · 2026-10-02 팀장 결재 필요",
+  },
+}

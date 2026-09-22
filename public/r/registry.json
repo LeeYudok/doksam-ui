@@ -3592,6 +3592,81 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "template-ews-diagnosis",
+      "type": "registry:block",
+      "title": "EWS Diagnosis 템플릿",
+      "description": "finance 프로필 · Ivory · Noto Sans KR · split-pane 원형. 여신 조기경보 경보 원인 진단 상세 — 좌측 차주 목록이 곧 내비게이션이고 선택은 우측 상세만 교체합니다. 기여 변수 랭킹·근거 감사 추적·자료 수집 현황을 EWS Dashboard 와 같은 파츠 집합으로만 조립합니다.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10"
+      ],
+      "files": [
+        {
+          "path": "app/templates/ews-diagnosis/error.tsx",
+          "type": "registry:page",
+          "target": "app/templates/ews-diagnosis/error.tsx"
+        },
+        {
+          "path": "app/templates/ews-diagnosis/layout.tsx",
+          "type": "registry:page",
+          "target": "app/templates/ews-diagnosis/layout.tsx"
+        },
+        {
+          "path": "app/templates/ews-diagnosis/loading.tsx",
+          "type": "registry:page",
+          "target": "app/templates/ews-diagnosis/loading.tsx"
+        },
+        {
+          "path": "app/templates/ews-diagnosis/page.tsx",
+          "type": "registry:page",
+          "target": "app/templates/ews-diagnosis/page.tsx"
+        },
+        {
+          "path": "app/templates/ews-diagnosis/_components/borrower-list-pane.tsx",
+          "type": "registry:page",
+          "target": "app/templates/ews-diagnosis/_components/borrower-list-pane.tsx"
+        },
+        {
+          "path": "app/templates/ews-diagnosis/_components/collection-status-card.tsx",
+          "type": "registry:page",
+          "target": "app/templates/ews-diagnosis/_components/collection-status-card.tsx"
+        },
+        {
+          "path": "app/templates/ews-diagnosis/_components/evidence-trail-card.tsx",
+          "type": "registry:page",
+          "target": "app/templates/ews-diagnosis/_components/evidence-trail-card.tsx"
+        },
+        {
+          "path": "app/templates/ews-diagnosis/_components/factor-ranking-card.tsx",
+          "type": "registry:page",
+          "target": "app/templates/ews-diagnosis/_components/factor-ranking-card.tsx"
+        },
+        {
+          "path": "lib/templates/ews-data.ts",
+          "type": "registry:lib"
+        }
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/audit-code-tag.json",
+        "https://ui.doksam.com/r/badge.json",
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/card.json",
+        "https://ui.doksam.com/r/contribution-meter.json",
+        "https://ui.doksam.com/r/page-header.json",
+        "https://ui.doksam.com/r/party-identity-cell.json",
+        "https://ui.doksam.com/r/profile-scope.json",
+        "https://ui.doksam.com/r/progress.json",
+        "https://ui.doksam.com/r/risk-grade-badge.json",
+        "https://ui.doksam.com/r/risk-table.json",
+        "https://ui.doksam.com/r/risk-tokens.json",
+        "https://ui.doksam.com/r/route-error.json",
+        "https://ui.doksam.com/r/route-loading.json",
+        "https://ui.doksam.com/r/section-panel-header.json",
+        "https://ui.doksam.com/r/sticky-actionbar.json",
+        "https://ui.doksam.com/r/top-nav-shell.json"
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "accordion",
       "type": "registry:ui",
       "title": "Accordion",

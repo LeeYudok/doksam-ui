@@ -1068,6 +1068,18 @@ registryDependencies: https://ui.doksam.com/r/badge.json, https://ui.doksam.com/
 
 npm dependencies: @phosphor-icons/react@^2.1.10, recharts@3.8.0
 
+### EWS Diagnosis 템플릿 (`template-ews-diagnosis`)
+
+finance 프로필 · Ivory · Noto Sans KR · split-pane 원형. 여신 조기경보 경보 원인 진단 상세 — 좌측 차주 목록이 곧 내비게이션이고 선택은 우측 상세만 교체합니다. 기여 변수 랭킹·근거 감사 추적·자료 수집 현황을 EWS Dashboard 와 같은 파츠 집합으로만 조립합니다.
+
+```
+npx shadcn add https://ui.doksam.com/r/template-ews-diagnosis.json
+```
+
+registryDependencies: https://ui.doksam.com/r/audit-code-tag.json, https://ui.doksam.com/r/badge.json, https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/card.json, https://ui.doksam.com/r/contribution-meter.json, https://ui.doksam.com/r/page-header.json, https://ui.doksam.com/r/party-identity-cell.json, https://ui.doksam.com/r/profile-scope.json, https://ui.doksam.com/r/progress.json, https://ui.doksam.com/r/risk-grade-badge.json, https://ui.doksam.com/r/risk-table.json, https://ui.doksam.com/r/risk-tokens.json, https://ui.doksam.com/r/route-error.json, https://ui.doksam.com/r/route-loading.json, https://ui.doksam.com/r/section-panel-header.json, https://ui.doksam.com/r/sticky-actionbar.json, https://ui.doksam.com/r/top-nav-shell.json
+
+npm dependencies: @phosphor-icons/react@^2.1.10
+
 ## registry:file
 
 ### ESLint Plugin (표준 준수 검사) (`eslint-plugin`)
