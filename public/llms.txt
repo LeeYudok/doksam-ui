@@ -102,6 +102,18 @@ registryDependencies: https://ui.doksam.com/r/badge.json, https://ui.doksam.com/
 
 npm dependencies: @phosphor-icons/react@^2.1.10, sonner@^2.0.7
 
+### Audit Trail (`audit-trail`)
+
+시각·주체(사람/시스템/모형)·행위·대상·감사코드로 고정된 감사 추적 이력. 주체는 아이콘+라벨로 구분하고 감사코드는 AuditCodeTag를 재사용한다.
+
+```
+npx shadcn add https://ui.doksam.com/r/audit-trail.json
+```
+
+registryDependencies: https://ui.doksam.com/r/audit-code-tag.json, https://ui.doksam.com/r/button.json, https://ui.doksam.com/r/i18n-provider.json
+
+npm dependencies: @phosphor-icons/react@^2.1.10
+
 ### Avatar Group (`avatar-group`)
 
 겹친 아바타 스택+N.

@@ -739,6 +739,15 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
     status: "done",
   },
   {
+    slug: "audit-trail",
+    title: "Audit Trail",
+    category: "finance",
+    layer: "composition",
+    description:
+      "시각·주체(사람/시스템/모형)·행위·대상·감사코드로 고정된 감사 추적 이력입니다. 주체는 아이콘+라벨로 구분하고 감사코드는 AuditCodeTag(#83)를 재사용합니다(#106).",
+    status: "done",
+  },
+  {
     slug: "risk-core-map",
     title: "Risk Core Map",
     category: "finance",
