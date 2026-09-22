@@ -5,6 +5,7 @@
 import { HEATMAP_TOKENS, HEATMAP_TOKEN_KEYS } from "./heatmap-tokens.ts";
 import { RISK_TOKENS, RISK_TOKEN_KEYS } from "./risk-tokens.ts";
 import { SIDEBAR_TOKEN_KEYS, SIDEBAR_TOKENS } from "./sidebar-tokens.ts";
+import { getPersonalityPreset } from "../personalities/index.ts";
 import type { BrandProfile } from "../profiles/index.ts";
 import { getThemePreset, THEME_TOKEN_KEYS } from "../themes/index.ts";
 
@@ -91,4 +92,69 @@ export function withSyncedRadiusDescription(description: string, radius: string)
 /** `description` 에서 `radius=<값>` 부분을 추출한다. 없으면 undefined. */
 export function extractRadiusFromDescription(description: string): string | undefined {
   return description.match(RADIUS_IN_DESCRIPTION)?.[1];
+}
+
+/** `description` 안에서 `density=<값>` 을 찾는 패턴 (#110 finding 2). */
+const DENSITY_IN_DESCRIPTION = /density=([a-z]+)/;
+/** `description` 안에서 `data-density="<값>"` 을 찾는 패턴 (#110 finding 2). */
+const DATA_DENSITY_IN_DESCRIPTION = /data-density="([a-z]+)"/;
+/** `description` 안에서 `personality=<값>` 을 찾는 패턴 (#110 finding 3). */
+const PERSONALITY_IN_DESCRIPTION = /personality=([a-z]+)/;
+/** `description` 안에서 `data-personality(-surface|-motion)?="<값>"` 을 찾는 패턴 (#110 finding 3). */
+const DATA_PERSONALITY_IN_DESCRIPTION = /data-personality="([a-z]+)"/;
+const DATA_PERSONALITY_SURFACE_IN_DESCRIPTION = /data-personality-surface="([a-z]+)"/;
+const DATA_PERSONALITY_MOTION_IN_DESCRIPTION = /data-personality-motion="([a-z]+)"/;
+
+/**
+ * `profile-*` 항목 `description` 의 축 값(radius·density·personality)을 전부
+ * `profiles/index.ts` 로 다시 맞춘다 (#110 finding 2·3).
+ *
+ * radius 만 재계산하던 시절 `profile-docs` 의 설명이 `density=comfortable` 인데
+ * 실제 프로필은 `spacious` 인 드리프트를 아무도 잡지 못했다. density 와
+ * personality 도 같은 방식으로 문장 안에서 치환한다 — personality 는 속성이
+ * 없으면 아무 층도 걸리지 않는 opt-in 이라, 설명이 `data-personality*` 세 속성을
+ * 안내하지 않으면 설치만 한 프로젝트가 성격 미적용으로 돌아간다.
+ *
+ * 각 패턴은 없으면 그 부분만 건너뛴다 — 조용한 실패를 막기 위해
+ * `lib/profile-registry-css-vars.test.ts` 가 전 프로필에 모든 패턴이 실존하는지
+ * 함께 확인한다.
+ */
+export function withSyncedProfileAxesDescription(description: string, profile: BrandProfile): string {
+  let out = withSyncedRadiusDescription(description, profile.radius);
+  out = out.replace(DENSITY_IN_DESCRIPTION, `density=${profile.density}`);
+  out = out.replace(DATA_DENSITY_IN_DESCRIPTION, `data-density="${profile.density}"`);
+  out = out.replace(PERSONALITY_IN_DESCRIPTION, `personality=${profile.personality}`);
+  out = out.replace(DATA_PERSONALITY_IN_DESCRIPTION, `data-personality="${profile.personality}"`);
+
+  const personality = getPersonalityPreset(profile.personality);
+  if (personality) {
+    out = out.replace(DATA_PERSONALITY_SURFACE_IN_DESCRIPTION, `data-personality-surface="${personality.surface}"`);
+    out = out.replace(DATA_PERSONALITY_MOTION_IN_DESCRIPTION, `data-personality-motion="${personality.motion}"`);
+  }
+  return out;
+}
+
+/** `description` 에서 `density=<값>` 부분을 추출한다. 없으면 undefined. */
+export function extractDensityFromDescription(description: string): string | undefined {
+  return description.match(DENSITY_IN_DESCRIPTION)?.[1];
+}
+
+/** `description` 에서 `personality=<값>` 부분을 추출한다. 없으면 undefined. */
+export function extractPersonalityFromDescription(description: string): string | undefined {
+  return description.match(PERSONALITY_IN_DESCRIPTION)?.[1];
+}
+
+/** `description` 에서 `data-*` 속성 안내 값을 추출한다. 없으면 undefined. */
+export function extractProfileDataAttrsFromDescription(description: string): {
+  density?: string;
+  personality?: string;
+  surface?: string;
+  motion?: string;
+} {
+  return {
+    density: description.match(DATA_DENSITY_IN_DESCRIPTION)?.[1],
+    personality: description.match(DATA_PERSONALITY_IN_DESCRIPTION)?.[1],
+    surface: description.match(DATA_PERSONALITY_SURFACE_IN_DESCRIPTION)?.[1],
+    motion: description.match(DATA_PERSONALITY_MOTION_IN_DESCRIPTION)?.[1],
+  };
 }

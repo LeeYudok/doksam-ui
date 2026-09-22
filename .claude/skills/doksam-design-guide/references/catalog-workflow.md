@@ -156,15 +156,24 @@ pnpm typecheck && pnpm lint && pnpm test && pnpm build
 ## F. 브랜드 프로필 추가
 
 1. `profiles/index.ts` 의 `BRAND_PROFILES` 에 항목 추가:
-   `{ name, label, description, theme, font, defaultMode, radius, corner, typeContrast, density, shell?, examples }`
+   `{ name, label, description, theme, font, defaultMode, radius, corner, typeContrast, density, personality, shell?, archetype?, examples }`
+   — `personality` 는 선택 필드가 아니라 **필수**다(#90). 빠뜨리면 `pnpm typecheck` 가 깨진다.
 2. `theme` 은 `themes/index.ts` 의, `font` 는 `fonts/index.ts` 의 실재하는 `name` 이어야 한다
    — `profiles/index.test.ts` 가 참조 무결성을 강제한다. `corner` 는 `corners/index.ts` 의,
    `typeContrast` 는 `type-contrast/index.ts` 의 실재하는 `name` 이어야 하고(#43), `radius`
    는 손으로 적지 말고 고른 `corner` 프리셋의 `surface` 값과 일치시킨다.
+   `personality` 는 `personalities/index.ts` 의 실재하는 `name`(#90), `archetype` 은
+   `archetypes/index.ts` 의 실재하는 `name` 이어야 한다.
 3. `density` 는 `compact`(관리·데이터 화면) / `comfortable`(대외 화면) / `spacious`(문서·
    리더 화면) 3단 중 하나다(#43).
 4. shadcn 레지스트리로 배포하려면 `registry.json` 에 `registry:theme` item 추가
-   (`profile-<name>`) 후 `pnpm registry:build && pnpm gen:llms`.
+   (`profile-<name>`) 후 `pnpm registry:sync && pnpm registry:build && pnpm gen:llms`.
+   `description` 에는 `radius=`·`density=`·`personality=` 토큰과 `data-density`/
+   `data-personality`/`data-personality-surface`/`data-personality-motion` 속성 안내를
+   포함시킨다 — `pnpm registry:sync` 가 그 값들을 `profiles/index.ts` 로 다시 맞추고
+   (`lib/profile-registry-css-vars.ts`), `lib/profile-registry-css-vars.test.ts` 가
+   패턴 실존과 일치를 강제한다(#110). 밀도·성격 층은 속성이 없으면 아무 규칙도 걸리지
+   않는 opt-in 이라, 이 안내가 빠지면 설치만 한 프로젝트가 미적용으로 돌아간다.
    **폰트는 registry item 으로 자동 설치되지 않는다** — cssVars 는 색·radius 만 담고,
    폰트는 수동 복사 + `next/font/local` 연결이라고 안내 문구에 남긴다.
 

@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "profile-data",
   "title": "Profile: Data",
-  "description": "데이터 대시보드·시세/뉴스류 화면 프로필. theme=violet(대비 뚜렷한 퍼플) + font=Space Grotesk + defaultMode=dark + radius=6px + density=compact — <html>에 data-density=\"compact\"를 지정한다(밀도 토큰 층은 /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/space-grotesk/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응, 라틴 전용이라 한글은 Noto Sans KR 로 폴백 — assets/fonts/noto-sans-kr/ 도 함께 필요). 자세한 절차는 https://ui.doksam.com/rules 참고.",
+  "description": "데이터 대시보드·시세/뉴스류 화면 프로필. theme=violet(대비 뚜렷한 퍼플) + font=Space Grotesk + defaultMode=dark + radius=6px + density=compact + personality=crisp — <html>에 data-density=\"compact\" data-personality=\"crisp\" data-personality-surface=\"border\" data-personality-motion=\"none\" 네 속성을 지정한다(속성이 없으면 밀도·성격 토큰 층이 아예 걸리지 않는 opt-in 이다 — /profiles의 적용 코드 참고). 폰트는 자동 설치되지 않는다 — assets/fonts/space-grotesk/의 woff2를 복사하고 next/font/local로 layout.tsx에 연결해야 한다(폐쇄망 대응, 라틴 전용이라 한글은 Noto Sans KR 로 폴백 — assets/fonts/noto-sans-kr/ 도 함께 필요). 자세한 절차는 https://ui.doksam.com/rules 참고.",
   "cssVars": {
     "theme": {
       "radius": "6px"
