@@ -5,7 +5,7 @@ import { describe, expect, it } from "vitest";
 
 import { RISK_TOKENS, RISK_TOKEN_KEYS } from "@/lib/risk-tokens";
 import { SIDEBAR_TOKEN_KEYS, SIDEBAR_TOKENS } from "@/lib/sidebar-tokens";
-import { DEFAULT_THEME_PRESET, THEME_PRESETS, THEME_TOKEN_KEYS } from "@/themes";
+import { DEFAULT_THEME_PRESET, getThemePreset, THEME_PRESETS, THEME_TOKEN_KEYS } from "@/themes";
 import type { ThemeTokens } from "@/themes/types";
 
 /**
@@ -72,12 +72,18 @@ function pick(decls: Record<string, string>, keys: readonly string[]): Record<st
   return out;
 }
 
-/** `ThemeTokens`(라이트 또는 다크 한 쪽)에서 `THEME_TOKEN_KEYS` 만 pick 한다 — ink-bulb 의 opt-in 확장 필드(camelCase)를 제외하고 `pick(decls, ...)` 결과와 같은 형태로 비교하기 위함. */
+/** `ThemeTokens`(라이트 또는 다크 한 쪽)에서 `THEME_TOKEN_KEYS` 만 pick 한다 — ink-bulb 의 opt-in 확장 필드(camelCase)를 제외하고 `pick(decls, ...)` 결과와 같은 형태로 비교하기 위함. 키가 비면 던진다(양쪽 `undefined` 로 통과하는 구멍 방지 — 리뷰 F17). */
 function pickThemeTokens(tokens: ThemeTokens): Record<string, string> {
   const out: Record<string, string> = {};
-  for (const key of THEME_TOKEN_KEYS) out[key] = tokens[key] as string;
+  for (const key of THEME_TOKEN_KEYS) {
+    const value = tokens[key] as string | undefined;
+    if (typeof value !== "string") throw new Error(`프리셋에 시맨틱 토큰 "${key}" 가 없다`);
+    out[key] = value;
+  }
   return out;
 }
+
+const OCEAN = getThemePreset(DEFAULT_THEME_PRESET);
 
 describe("app/globals.css 미러 블록이 소스 파일과 일치한다 (#36)", () => {
   it(":root 의 사이드바 값이 ocean 프리셋(themes/ocean.ts sidebar.light) 폴백과 같다", () => {
@@ -88,6 +94,21 @@ describe("app/globals.css 미러 블록이 소스 파일과 일치한다 (#36)",
   it(".dark 의 사이드바 값이 ocean 프리셋(themes/ocean.ts sidebar.dark) 폴백과 같다", () => {
     const decls = parseDeclarations(extractBlock(globalsCss, ".dark"));
     expect(pick(decls, SIDEBAR_TOKEN_KEYS)).toEqual(SIDEBAR_TOKENS.dark);
+  });
+
+  // #112 finding 2 의 parametrize 는 [data-theme] 블록만 훑는다 — 테마가 확정되기
+  // 전 첫 페인트에 실제로 쓰이는 `:root` 27키(ocean 폴백)는 그 밖이라 가드가
+  // 사라졌었다(리뷰 F6). 전 프리셋 parametrize 와 공존하는 별도 단언으로 되살린다.
+  it(":root 의 시맨틱 토큰이 themes/ocean.ts light 폴백과 같다 (#36)", () => {
+    const decls = parseDeclarations(extractBlock(globalsCss, ":root"));
+    expect(pick(decls, THEME_TOKEN_KEYS)).toEqual(pickThemeTokens(OCEAN.light));
+  });
+
+  // 미러 테스트는 "ocean 은 :root/.dark 폴백과 값이 같다" 를 근거로 ocean 을 아래
+  // 사이드바 검사에서 제외한다. 그 전제 자체를 잠근다 — themes/ocean.ts 의 sidebar
+  // 만 고치면 registry cssVars(새 값)와 :root 폴백(옛 값)이 조용히 갈라진다(리뷰 F7).
+  it("SIDEBAR_TOKENS(:root/.dark 폴백 SSOT)가 ocean 프리셋의 sidebar 와 같다", () => {
+    expect(OCEAN.sidebar).toEqual(SIDEBAR_TOKENS);
   });
 
   it(":root 의 위험등급 값이 lib/risk-tokens.ts RISK_TOKENS.light 와 같다 (#81)", () => {

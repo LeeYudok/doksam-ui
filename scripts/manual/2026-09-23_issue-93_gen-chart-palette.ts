@@ -150,16 +150,24 @@ for (const preset of THEME_PRESETS) {
 if (process.argv.includes("--apply")) {
   const { readFileSync, writeFileSync } = await import("node:fs");
 
-  /** 텍스트 안 `prefix` 로 시작하는 5줄(chart-1..5)을 순서대로 values 로 갈아끼운다. */
+  /**
+   * 텍스트 안 `prefix` 로 시작하는 5줄(chart-1..5)을 순서대로 values 로 갈아끼운다.
+   * 매치 수가 values 길이와 정확히 같지 않으면 던진다 — 예전에는 `index % values.length`
+   * 로 값을 순환 배정해서, 대상 파일에 chart 라인이 5개보다 많아지면 엉뚱한 값이
+   * 조용히 실렸다(리뷰 F18).
+   */
   function replaceRun(text: string, pattern: RegExp, values: string[]): string {
     let index = 0;
     const out = text.replace(pattern, (match, key: string) => {
-      const value = values[index % values.length];
+      const value = values[index];
       index += 1;
       void key;
-      return match.replace(/oklch\([^)]*\)/, value);
+      // 초과 매치는 아래에서 던지지만, 여기서 undefined 를 써 넣지는 않는다.
+      return value === undefined ? match : match.replace(/oklch\([^)]*\)/, value);
     });
-    if (index === 0) throw new Error(`치환 대상이 없다: ${pattern}`);
+    if (index !== values.length) {
+      throw new Error(`치환 대상 수가 다르다: ${pattern} — 매치 ${index}개, 기대 ${values.length}개`);
+    }
     return out;
   }
 
@@ -181,6 +189,8 @@ if (process.argv.includes("--apply")) {
   }
   for (const [selector, values] of cssBlocks) {
     const escaped = selector.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    // `[^}]*` 는 CSS 블록에 중첩 `}` 가 생기면 앞에서 잘린다 — 그러면 잘린 구간의
+    // chart 라인이 5개 미만이 되어 아래 replaceRun 이 매치 수 불일치로 던진다(리뷰 F18).
     const blockRe = new RegExp(`(^${escaped} \\{)([^}]*)(\\})`, "m");
     const match = css.match(blockRe);
     if (!match) throw new Error(`app/globals.css 에서 블록을 찾지 못했다: ${selector}`);
