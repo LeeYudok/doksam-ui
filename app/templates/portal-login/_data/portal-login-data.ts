@@ -70,4 +70,4 @@ export const ROLE_ROUTING_NOTE =
 
 export const CERTIFICATE_HELP_NOTE = "사설인증서 로그인은 IT지원팀(내선 1544)에 등록을 요청하세요."
 
-export const PASSWORD_RESET_NOTE = "비밀번호 재설정은 본인 확인 후 IT지원팀에서 처리합니다. 사번을 준비해 문의하세요."
+export const RESET_HELP_NOTE = "비밀번호 재설정은 본인 확인 후 IT지원팀에서 처리합니다. 사번을 준비해 문의하세요."
