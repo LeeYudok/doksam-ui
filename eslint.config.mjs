@@ -45,6 +45,8 @@ const eslintConfig = defineConfig([
     // 상류 드리프트 게이트(pnpm check:shadcn)가 만드는 프로브 프로젝트 (#62).
     // 남의 코드이며 우리 규칙의 대상이 아니다 — 대조용으로만 존재한다.
     ".shadcn-probe/**",
+    // 이슈 #70 실측용 프로브 Next 앱 — 남의 코드(create-next-app 산출물)이며 커밋 대상도 아니다.
+    "scratchpad/**",
   ]),
 ]);
 
