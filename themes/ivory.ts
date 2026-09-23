@@ -88,4 +88,26 @@ export const ivory: ThemePreset = {
     "chart-4": "oklch(0.7 0.1 40)",
     "chart-5": "oklch(0.689 0.098 161)",
   },
+  sidebar: {
+    light: {
+      sidebar: "oklch(0.985 0.004 267)",
+      "sidebar-foreground": "oklch(0.27 0.052 267)",
+      "sidebar-primary": "oklch(0.27 0.052 267)",
+      "sidebar-primary-foreground": "oklch(1 0 0)",
+      "sidebar-accent": "oklch(0.92 0.035 267)",
+      "sidebar-accent-foreground": "oklch(0.27 0.052 267)",
+      "sidebar-border": "oklch(0.9 0.015 267)",
+      "sidebar-ring": "oklch(0.27 0.052 267)",
+    },
+    dark: {
+      sidebar: "oklch(0.236 0.044 269)",
+      "sidebar-foreground": "oklch(0.939 0.009 100)",
+      "sidebar-primary": "oklch(0.92 0.024 273)",
+      "sidebar-primary-foreground": "oklch(0.195 0.033 270)",
+      "sidebar-accent": "oklch(0.3 0.039 86)",
+      "sidebar-accent-foreground": "oklch(0.939 0.009 100)",
+      "sidebar-border": "oklch(0.328 0.053 271)",
+      "sidebar-ring": "oklch(0.92 0.024 273)",
+    },
+  },
 };

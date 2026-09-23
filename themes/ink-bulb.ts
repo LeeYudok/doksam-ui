@@ -86,4 +86,26 @@ export const inkBulb: ThemePreset = {
     shellForeground: "oklch(0.93 0.008 250)",
     shellMuted: "oklch(0.66 0.02 252)",
   },
+  sidebar: {
+    light: {
+      sidebar: "oklch(0.985 0.004 155)",
+      "sidebar-foreground": "oklch(0.24 0.015 250)",
+      "sidebar-primary": "oklch(0.5 0.11 155)",
+      "sidebar-primary-foreground": "oklch(0.985 0.002 250)",
+      "sidebar-accent": "oklch(0.92 0.035 155)",
+      "sidebar-accent-foreground": "oklch(0.24 0.015 250)",
+      "sidebar-border": "oklch(0.9 0.015 155)",
+      "sidebar-ring": "oklch(0.5 0.11 155)",
+    },
+    dark: {
+      sidebar: "oklch(0.23 0.02 255)",
+      "sidebar-foreground": "oklch(0.93 0.008 250)",
+      "sidebar-primary": "oklch(0.75 0.11 155)",
+      "sidebar-primary-foreground": "oklch(0.19 0.02 255)",
+      "sidebar-accent": "oklch(0.29 0.02 255)",
+      "sidebar-accent-foreground": "oklch(0.93 0.008 250)",
+      "sidebar-border": "oklch(0.31 0.02 255)",
+      "sidebar-ring": "oklch(0.75 0.11 155)",
+    },
+  },
 };

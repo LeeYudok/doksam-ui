@@ -401,7 +401,7 @@
   "page.tokens.risk.level.moderate": "観察 — 推移を見守る段階",
   "page.tokens.risk.level.severe": "警報 — 直ちに対応が必要な最上位段階",
   "page.tokens.risk.title": "リスク等級トークン",
-  "page.tokens.sidebar.description": "shadcn sidebar プリミティブが使う 8 種です。テーマプリセット 27 キーには含まれず、globals.css の :root/.dark にのみ定義される層のため、プリセットを切り替えても値は変わりません。",
+  "page.tokens.sidebar.description": "shadcn sidebar プリミティブが使う 8 種です（#112）。テーマプリセット 27 キーには含まれませんが、プリセットごとに明示値を持ちます — プリセットを切り替えると sidebar-primary などもそのテーマの primary に追従します。",
   "page.tokens.sidebar.title": "Sidebar トークン",
   "page.type-contrast.description": "パーソナリティのスケールが見出しと本文を同じ比率で拡大する均等倍率であるのに対し、タイプコントラストは比例そのものを変えます — 見出しだけを拡大したり、太さの差を広げたりします。プロジェクトごとに見出しサイズを任意に決めるのではなく、以下の{count}種のうち1つを明示的に選びます。",
   "page.type-contrast.howto-description": "まず原型とプロファイルで骨格と色を決め、その次に画面の見出しが持つべき重みでコントラストを選びます。コントラストの値はプロファイルが参照する type-contrast/index.ts のプリセットが固定します — プロジェクトで見出しサイズ・太さを個別に再定義しません。",

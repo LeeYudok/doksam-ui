@@ -1,16 +1,20 @@
 /**
- * 사이드바 전용 시맨틱 토큰 — 단일 진실원천 (#36).
+ * 사이드바 전용 시맨틱 토큰 — `SidebarTokens` 타입과 키 목록의 단일 진실원천 (#36).
  *
- * `themes/*.ts` 의 `ThemeTokens` 과 달리 사이드바 chrome 은 선택된 테마 프리셋과
- * 무관하게 라이트/다크 각 한 쌍만 갖는다 — `app/globals.css` 를 봐도
- * `[data-theme="ocean"]` 등 프리셋별 블록은 이 값을 재정의하지 않고 `:root`/`.dark`
- * 의 값을 그대로 물려받는다. 이 파일이 그 두 값 쌍의 단일 진실원천이고,
- * `app/globals.css` 의 `:root`/`.dark` 사이드바 블록은 이 값을 손으로 그대로
- * 미러링한 것이다 — 여기를 고치면 반드시 거기도 같이 갱신한다.
+ * (#112 finding 3 이전) 사이드바 chrome 값 자체(hue 포함)는 선택된 테마
+ * 프리셋과 무관하게 이 파일의 `SIDEBAR_TOKENS` 전역 상수 하나(ocean hue=262
+ * 고정)를 모든 프리셋이 공유했다 — 어떤 `profile-*` 를 설치해도 사이드바만
+ * 파란 chrome 으로 남는 회귀였다. 지금은 프리셋마다 다른 사이드바 값을 갖고
+ * (`ThemePreset.sidebar`, `themes/<name>.ts` 가 단일 진실원천), 아래
+ * `SIDEBAR_TOKENS` 는 **ocean 프리셋의 값**이자 `app/globals.css` 의
+ * `:root`/`.dark`(테마 미확정 시 FOUC 방지 폴백) 사이드바 블록의 단일
+ * 진실원천으로만 남는다 — 값을 고치면 `app/globals.css` 와
+ * `themes/ocean.ts` 의 `sidebar` 필드도 같이 갱신한다.
  *
- * `scripts/registry/sync-profile-vars.ts` 가 이 값을 `registry.json` 의
- * `profile-*` 항목 `cssVars` 에 합성한다(#36) — profile-* 를 설치한 소비
- * 프로젝트도 사이드바 컴포넌트가 회색 기본값 대신 이 값을 받는다.
+ * `scripts/registry/sync-profile-vars.ts` 가 `ThemePreset.sidebar` 를
+ * `registry.json` 의 `profile-*` 항목 `cssVars` 에 합성한다(#36/#112) —
+ * profile-* 를 설치한 소비 프로젝트도 사이드바 컴포넌트가 회색 기본값 대신
+ * 해당 테마의 값을 받는다.
  */
 export interface SidebarTokens {
   sidebar: string;

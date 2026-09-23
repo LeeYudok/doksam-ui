@@ -82,9 +82,9 @@ function RiskSwatch({ level }: Readonly<{ level: (typeof RISK_LEVELS)[number] }>
 }
 
 /**
- * 시맨틱 27키 밖의 보조 토큰 층 문서(#66) — sidebar 8종(프리셋 무관,
- * globals.css :root/.dark 정의), 위험등급 4단(#81), 브랜드 확장 토큰(ink-bulb
- * 전용 opt-in).
+ * 시맨틱 27키 밖의 보조 토큰 층 문서(#66) — sidebar 8종(프리셋별 명시값,
+ * #112), 위험등급 4단(#81, 프리셋 무관), 브랜드 확장 토큰(ink-bulb 전용
+ * opt-in).
  */
 export function ExtendedTokensSection() {
   return (
@@ -97,7 +97,7 @@ export function ExtendedTokensSection() {
           <p className="max-w-prose text-sm text-muted-foreground">
             <TranslatedText
               k="page.tokens.sidebar.description"
-              ko="shadcn sidebar 프리미티브가 쓰는 8종입니다. 테마 프리셋 27키에 포함되지 않고 globals.css의 :root/.dark에만 정의된 층이라, 프리셋을 바꿔도 값이 바뀌지 않습니다."
+              ko="shadcn sidebar 프리미티브가 쓰는 8종입니다. 테마 프리셋 27키에는 포함되지 않지만 프리셋마다 명시값을 갖습니다(#112) — 프리셋을 바꾸면 sidebar-primary 등도 그 테마의 primary 를 따라 바뀝니다."
             />
           </p>
         </div>

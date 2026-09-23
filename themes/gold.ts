@@ -73,4 +73,26 @@ export const gold: ThemePreset = {
     "chart-4": "oklch(0.7 0.1 40)",
     "chart-5": "oklch(0.86 0.07 130)",
   },
+  sidebar: {
+    light: {
+      sidebar: "oklch(0.985 0.004 86)",
+      "sidebar-foreground": "oklch(0.27 0.052 267)",
+      "sidebar-primary": "oklch(0.637 0.111 86)",
+      "sidebar-primary-foreground": "oklch(0.99 0 0)",
+      "sidebar-accent": "oklch(0.92 0.035 86)",
+      "sidebar-accent-foreground": "oklch(0.4 0.078 86)",
+      "sidebar-border": "oklch(0.9 0.015 86)",
+      "sidebar-ring": "oklch(0.637 0.111 86)",
+    },
+    dark: {
+      sidebar: "oklch(0.236 0.044 269)",
+      "sidebar-foreground": "oklch(0.939 0.009 100)",
+      "sidebar-primary": "oklch(0.77 0.112 86)",
+      "sidebar-primary-foreground": "oklch(0.195 0.033 270)",
+      "sidebar-accent": "oklch(0.3 0.039 86)",
+      "sidebar-accent-foreground": "oklch(0.87 0.062 86)",
+      "sidebar-border": "oklch(0.328 0.053 271)",
+      "sidebar-ring": "oklch(0.77 0.112 86)",
+    },
+  },
 };
