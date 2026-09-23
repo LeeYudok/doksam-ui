@@ -16,10 +16,19 @@ import type { ThemeTokens } from "../themes/types.ts";
  * `shellForeground`/`shellMuted`)를 가진 프리셋을 통째로 spread 하면 그
  * camelCase 이름 그대로가 `registry.json` cssVars 에 실려 `--shellForeground`
  * 같은 잘못된 CSS 변수명으로 새어 나간다 (#112 finding 1).
+ *
+ * 키가 비어 있으면 던진다 — 조용히 `undefined` 를 실으면 `registry.json` cssVars 에
+ * `undefined` 가 들어가고, 미러 테스트에서는 양쪽 다 `undefined` 라 통과한다(리뷰 F17).
  */
 function pickThemeTokens(tokens: ThemeTokens): Record<string, string> {
   const out: Record<string, string> = {};
-  for (const key of THEME_TOKEN_KEYS) out[key] = tokens[key] as string;
+  for (const key of THEME_TOKEN_KEYS) {
+    const value = tokens[key] as string | undefined;
+    if (typeof value !== "string") {
+      throw new Error(`테마 프리셋에 시맨틱 토큰 "${key}" 가 없다 — THEME_TOKEN_KEYS 를 모두 채워야 한다`);
+    }
+    out[key] = value;
+  }
   return out;
 }
 

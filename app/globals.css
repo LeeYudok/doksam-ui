@@ -150,8 +150,9 @@
   --sidebar-ring: oklch(0.53 0.21 262);
   /*
    * 위험 심각도 4단 라이트값 — 단일 진실원천은 lib/risk-tokens.ts(#81).
-   * 사이드바 chrome 과 마찬가지로 [data-theme="*"] 블록이 재정의하지 않는다:
-   * 심각도는 브랜드가 아니라 관례가 정하는 층이다.
+   * [data-theme="*"] 블록이 재정의하지 않는다: 심각도는 브랜드가 아니라 관례가
+   * 정하는 층이다. (사이드바 chrome 은 #112 이후 프리셋마다 명시값을 갖고
+   * [data-theme] 블록이 재정의하므로 같은 층이 아니다.)
    */
   --risk-low: oklch(0.45 0.13 152);
   --risk-low-foreground: oklch(0.98 0.01 152);
@@ -163,8 +164,9 @@
   --risk-severe-foreground: oklch(0.98 0.01 27);
   /*
    * matrix-heatmap 강도 램프 라이트값 — 단일 진실원천은 lib/heatmap-tokens.ts(#103).
-   * risk-*·sidebar-* 와 같은 층: 프리셋(hue)과 무관하게 명도만 정하므로
-   * [data-theme="*"] 블록이 재정의하지 않는다. 셀 색 자체는 컴포넌트가
+   * risk-* 와 같은 층: 프리셋(hue)과 무관하게 명도만 정하므로
+   * [data-theme="*"] 블록이 재정의하지 않는다(sidebar-* 는 프리셋마다 값이
+   * 갈리는 다른 층이다 — #112). 셀 색 자체는 컴포넌트가
    * oklch(from var(--primary) var(--heatmap-l-N) c h) 로 실행 시 파생시킨다.
    */
   --heatmap-l-0: 0.94;
