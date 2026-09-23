@@ -38,7 +38,9 @@ describe("카탈로그 자신의 린트 dogfood (#79)", () => {
     return config.rules;
   }
 
-  it("일반 소스 파일에 전 규칙이 error 로 적용된다 — 불변 조항이므로 warn 이 아니다", async () => {
+  // 첫 calculateConfigForFile 이 설정·플러그인 전체를 콜드 로드해 CI 러너에서 5초를 넘긴 적이 있다
+  // (GitLab busan/doksam-ui MR !75 파이프라인 5150, 8.3초). 실패가 아니라 로드 시간이라 상한만 올린다.
+  it("일반 소스 파일에 전 규칙이 error 로 적용된다 — 불변 조항이므로 warn 이 아니다", { timeout: 30_000 }, async () => {
     const rules = await resolvedRules("components/relation-network.tsx");
     for (const name of ruleNames) {
       const entry = rules[`doksam-ui/${name}`];
