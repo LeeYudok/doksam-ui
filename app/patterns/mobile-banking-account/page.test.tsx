@@ -7,7 +7,7 @@ import { MOBILE_BANKING_ACCOUNT_SAMPLES } from "@/components/patterns/mobile-ban
 describe("MobileBankingAccountPatternsPage", () => {
   it("renders the page heading", () => {
     render(<MobileBankingAccountPatternsPage />)
-    expect(screen.getByRole("heading", { level: 1, name: "모바일뱅킹 계좌 패턴" })).toBeInTheDocument()
+    expect(screen.getByRole("heading", { level: 1, name: "모바일뱅킹 · 계좌" })).toBeInTheDocument()
   })
 
   it("renders every sample as a numbered section", () => {

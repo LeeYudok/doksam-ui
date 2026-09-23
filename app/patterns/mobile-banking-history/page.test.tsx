@@ -7,7 +7,7 @@ import { MOBILE_BANKING_HISTORY_SAMPLES } from "@/components/patterns/mobile-ban
 describe("MobileBankingHistoryPatternsPage", () => {
   it("renders the page heading and every sample section", () => {
     render(<MobileBankingHistoryPatternsPage />)
-    expect(screen.getByRole("heading", { level: 1, name: "모바일뱅킹 거래 내역 패턴" })).toBeInTheDocument()
+    expect(screen.getByRole("heading", { level: 1, name: "모바일뱅킹 · 거래내역" })).toBeInTheDocument()
     for (const sample of MOBILE_BANKING_HISTORY_SAMPLES) {
       expect(screen.getByRole("heading", { level: 2, name: sample.title })).toBeInTheDocument()
     }

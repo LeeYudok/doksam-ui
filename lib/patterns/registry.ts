@@ -45,6 +45,17 @@ export interface PatternEntry {
   description: string
   icon?: Icon
   scope: PatternScope
+  /**
+   * 이 패턴이 배포하는 registry.json 항목 이름들 — 상세의 설치 커맨드가 여기서 나온다.
+   * 비어 있으면(미지정) 상세는 "레지스트리 편입 예정" 배지를 보여준다.
+   */
+  registryNames?: string[]
+  /**
+   * 이 패턴을 구성하는 카탈로그 컴포넌트 slug (lib/showcase/registry.ts).
+   * 상세에서 /components/<slug> 로 내려가는 링크가 되고, 컴포넌트 상세는 역방향으로
+   * getPatternsUsingComponent 로 이 패턴을 되짚는다.
+   */
+  composedOf?: string[]
 }
 
 /**
@@ -61,6 +72,8 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "레이아웃 원형별 셸 7종(사이드바·헤더·분할 패인·피드·문서 리더·집중형·글로벌 탑내비)과 페이지 타이틀·여백 밀도·브레이크포인트 표준입니다.",
     icon: AppWindowIcon,
     scope: "common",
+    registryNames: ["top-nav-shell"],
+    composedOf: ["badge", "table"],
   },
   {
     slug: "layout",
@@ -68,6 +81,7 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "대시보드·목록·상세폼·탭·빈 페이지 등 페이지 단위 레이아웃 5종입니다.",
     icon: SquaresFourIcon,
     scope: "common",
+    composedOf: ["badge", "button", "card", "scroll-area", "skeleton", "table"],
   },
   {
     slug: "dataviz",
@@ -75,6 +89,8 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "recharts 기반 막대·영역·원형 차트와 CSS BarList 조합 6종입니다.",
     icon: ChartBarIcon,
     scope: "common",
+    registryNames: ["sparkline", "return-curve", "diverging-bar", "activity-heatmap", "region-map"],
+    composedOf: ["button", "card", "chart"],
   },
   {
     slug: "cards",
@@ -82,6 +98,7 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "요약·상세·상태·액션·카테고리 카드 등 자주 쓰는 카드 조합 5종입니다.",
     icon: CardsIcon,
     scope: "common",
+    composedOf: ["badge", "button", "card", "progress"],
   },
   {
     slug: "state",
@@ -89,6 +106,7 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "로딩 스켈레톤·에러·빈 상태·스피너 등 비동기 상태 표현 4종입니다.",
     icon: HourglassIcon,
     scope: "common",
+    composedOf: ["alert", "button", "card", "empty", "skeleton", "spinner"],
   },
   {
     slug: "form-input",
@@ -96,6 +114,7 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "기본 폼·검색+필터·다이얼로그 폼·파일 업로드 등 입력 UI 4종입니다.",
     icon: ListChecksIcon,
     scope: "common",
+    composedOf: ["badge", "button", "dialog", "input", "label", "progress", "select"],
   },
   {
     slug: "verified",
@@ -103,6 +122,7 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "프로덕션 서비스에서 검증된 테이블 헤더·자동 해제 메시지·그리드 자동완성·칩 입력 4종입니다.",
     icon: SealCheckIcon,
     scope: "common",
+    composedOf: ["badge", "button", "input", "label", "table"],
   },
   {
     slug: "content-feed",
@@ -110,6 +130,8 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "그리드·리스트·테이블 3종 뷰토글과 group-data variant 전환 기법입니다.",
     icon: GridFourIcon,
     scope: "common",
+    registryNames: ["content-feed"],
+    composedOf: ["badge", "table"],
   },
   {
     slug: "list-controls",
@@ -117,6 +139,8 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "URLSearchParams 기반 탭·필터·페이지네이션으로 SSR 상태를 유지하는 목록 컨트롤입니다.",
     icon: FunnelIcon,
     scope: "common",
+    registryNames: ["list-controls"],
+    composedOf: ["button", "input", "pagination"],
   },
   {
     slug: "faceted-filter",
@@ -131,6 +155,7 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "접기/펼치기·타입별 색·대용량 페이지네이션을 갖춘 재귀 JSON/객체 트리 뷰어입니다.",
     icon: TreeStructureIcon,
     scope: "common",
+    registryNames: ["json-tree"],
   },
   {
     slug: "log-viewer",
@@ -138,6 +163,7 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "레벨 색상+배경, 타임스탬프, 반복 카운트 배지, 그룹 들여쓰기를 갖춘 로그 뷰어입니다.",
     icon: TerminalWindowIcon,
     scope: "common",
+    registryNames: ["log-viewer"],
   },
   {
     slug: "request-inspector",
@@ -145,6 +171,7 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "요청 목록 + Accordion 상세(Headers/Query/Payload/Response) + cURL 복사를 갖춘 요청 인스펙터입니다.",
     icon: NetworkIcon,
     scope: "common",
+    registryNames: ["request-inspector"],
   },
   {
     slug: "concept-explainer",
@@ -152,6 +179,7 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "어려운 기술 개념을 비유로 풀어내는 교육용 조합 — 개념 설명 카드·아키텍처 흐름 도식·증상▶대응 대응표 3종입니다.",
     icon: BookOpenTextIcon,
     scope: "common",
+    composedOf: ["card"],
   },
   {
     slug: "stock",
@@ -159,6 +187,7 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "종목 시세·호가·포트폴리오 등 srope 주식 도메인 전용 UI 패턴입니다.",
     icon: TrendUpIcon,
     scope: "finance",
+    composedOf: ["badge", "button", "card", "chart", "progress", "scroll-area", "table"],
   },
   {
     slug: "pipeline",
@@ -166,6 +195,7 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "수집·처리 단계 진행 상황을 보여주는 srope 데이터 파이프라인 전용 UI 패턴입니다.",
     icon: FlowArrowIcon,
     scope: "finance",
+    composedOf: ["badge", "button", "card", "checkbox", "progress", "scroll-area", "table", "tooltip"],
   },
   {
     slug: "stock-portfolio",
@@ -173,6 +203,7 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "미니차트 포트폴리오 카드, 확신도 추천 카드, 옵티마이저 가격 5종, 비트 격자, 종목 뉴스 패널 등 srope 포트폴리오 화면 전용 UI 패턴입니다.",
     icon: BriefcaseIcon,
     scope: "finance",
+    composedOf: ["badge", "button", "card", "popover", "progress", "scroll-area", "tooltip"],
   },
   {
     slug: "admin-toolbar",
@@ -180,6 +211,7 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "JSON 내보내기/가져오기, 더미 생성 스피너, 파괴적 초기화 확인 등 srope 관리자 데이터 운영 툴바 패턴입니다.",
     icon: WrenchIcon,
     scope: "finance",
+    composedOf: ["alert-dialog", "button"],
   },
   {
     slug: "auth",
@@ -187,6 +219,7 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "로그인·회원가입·비밀번호 재설정 폼과 OAuth 버튼·검증 에러 상태입니다.",
     icon: SignInIcon,
     scope: "common",
+    composedOf: ["button", "checkbox", "input", "label", "separator"],
   },
   {
     slug: "stepper",
@@ -194,6 +227,7 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "다단계 온보딩 위저드 — 진행 인디케이터와 단계별 폼·요약 화면입니다.",
     icon: StepsIcon,
     scope: "common",
+    composedOf: ["button", "checkbox", "input", "label", "progress"],
   },
   {
     slug: "file-upload",
@@ -201,6 +235,7 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "드래그앤드롭 드롭존·업로드 진행률·파일 목록(완료/진행/실패 상태)입니다.",
     icon: TrayArrowUpIcon,
     scope: "common",
+    composedOf: ["badge", "button", "progress"],
   },
   {
     slug: "stats",
@@ -208,6 +243,7 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "값·전기대비 증감·미니 스파크라인을 담은 KPI 카드 그리드와 컴팩트 행입니다.",
     icon: GaugeIcon,
     scope: "common",
+    composedOf: ["card"],
   },
   {
     slug: "timeline",
@@ -222,6 +258,7 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "정렬·행 선택·일괄 액션 바·페이지네이션을 통합한 데이터 테이블입니다.",
     icon: TableIcon,
     scope: "common",
+    composedOf: ["badge", "button", "checkbox", "table"],
   },
   {
     slug: "pricing",
@@ -229,6 +266,7 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "3티어 가격 카드·월/연 토글(할인)·기능 비교·추천 티어 강조입니다.",
     icon: TagIcon,
     scope: "common",
+    composedOf: ["badge", "button", "card", "label", "switch"],
   },
   {
     slug: "kanban",
@@ -236,6 +274,7 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "드래그앤드롭 칸반 — 컬럼 간 카드 이동·라벨·담당자 아바타입니다.",
     icon: KanbanIcon,
     scope: "common",
+    composedOf: ["avatar", "badge", "card"],
   },
   {
     slug: "mobile-banking-account",
@@ -243,6 +282,7 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "대표계좌 잔액·계좌 목록·빠른메뉴 그리드. 모바일 우선 계좌 요약 화면입니다.",
     icon: WalletIcon,
     scope: "finance",
+    composedOf: ["badge", "card"],
   },
   {
     slug: "mobile-banking-transfer",
@@ -250,6 +290,7 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "받는사람 선택 → 금액 입력(키패드형) → 확인의 3단계 이체 플로우입니다.",
     icon: BankIcon,
     scope: "finance",
+    composedOf: ["badge", "button", "card"],
   },
   {
     slug: "mobile-banking-history",
@@ -257,6 +298,7 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "입금/출금 등락색·날짜 그룹 헤더·유형 필터 칩을 갖춘 거래 내역입니다.",
     icon: ClockCounterClockwiseIcon,
     scope: "finance",
+    composedOf: ["badge"],
   },
   {
     slug: "stock-order",
@@ -264,6 +306,7 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "매수/매도 탭·호가 클릭 가격 반영·수량/주문유형·예상 체결금액 주문 화면입니다.",
     icon: CurrencyKrwIcon,
     scope: "finance",
+    composedOf: ["button", "input", "label", "select", "tabs"],
   },
   {
     slug: "compliance-callout",
@@ -271,6 +314,7 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "근거 규정 번호 + 대상 조건 + 요구 행위 + 기한 + 액션 버튼을 한 덩어리로 보여주는 업무 규칙 안내 3단 심각도입니다.",
     icon: GavelIcon,
     scope: "common",
+    registryNames: ["compliance-callout"],
   },
   {
     slug: "section-panel-header",
@@ -278,6 +322,8 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "카드 헤더 자리에 들어가는 아이콘 + 제목 + 우측 메타/필터 슬롯이며, 좁은 폭에서는 우측 슬롯이 줄바꿈됩니다.",
     icon: RowsIcon,
     scope: "common",
+    registryNames: ["section-panel-header"],
+    composedOf: ["button", "card"],
   },
   {
     slug: "sticky-actionbar",
@@ -285,6 +331,7 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "화면 하단에 고정되는 주 액션 바입니다. 안전영역과 모바일 키보드를 고려해 sticky로 구현하고, 파괴적/보조/주 액션의 배치 순서를 고정합니다.",
     icon: AnchorIcon,
     scope: "common",
+    registryNames: ["sticky-actionbar"],
   },
   {
     slug: "draft-review-panel",
@@ -292,6 +339,8 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "LLM이 섹션별로 생성한 초안을 사람이 검토·가필해 확정하는 화면 패턴입니다. 문서 종류는 탭으로, 섹션 편집은 인라인 토글로 전환하며 편집 상태를 잃지 않습니다.",
     icon: NotePencilIcon,
     scope: "common",
+    registryNames: ["draft-review-panel"],
+    composedOf: ["badge", "badge-extended", "button", "tabs", "textarea"],
   },
   {
     slug: "evidence-decision",
@@ -299,6 +348,8 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "근거의 출처·검증 상태를 먼저 확인하고, 연결된 대응 후보를 사람이 선택해 상위 승인 흐름으로 넘기는 금융 의사결정 패턴입니다.",
     icon: ScalesIcon,
     scope: "finance",
+    registryNames: ["evidence-decision-panel", "ranked-alternatives-list"],
+    composedOf: ["evidence-decision-panel"],
   },
   {
     slug: "risk-table",
@@ -306,11 +357,26 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "심각도에 따라 행 배경 tint 와 좌측 accent bar 가 붙는 업무 테이블입니다. 금액·줄바꿈·행 액션 셀 규약을 고정하고 밀도는 프로필의 data-density 층에 맡깁니다.",
     icon: WarningDiamondIcon,
     scope: "finance",
+    registryNames: ["risk-table"],
+    composedOf: ["audit-code-tag", "button", "contribution-meter", "due-countdown-badge", "party-identity-cell", "risk-grade-badge", "table"],
   },
 ]
 
 export function getPatternEntry(slug: string): PatternEntry | undefined {
   return PATTERN_REGISTRY.find((entry) => entry.slug === slug)
+}
+
+/**
+ * composedOf 의 역방향 조회 — 이 컴포넌트를 구성 요소로 쓰는 패턴들.
+ * /components/<slug> 상세가 "이 컴포넌트를 쓰는 패턴" 링크를 그릴 때 쓴다.
+ */
+export function getPatternsUsingComponent(componentSlug: string): PatternEntry[] {
+  return PATTERN_REGISTRY.filter((entry) => entry.composedOf?.includes(componentSlug))
+}
+
+/** 패턴이 shadcn 레지스트리로 설치 가능한지 — registryNames 가 하나라도 있으면 true. */
+export function isPatternInRegistry(entry: PatternEntry): boolean {
+  return (entry.registryNames?.length ?? 0) > 0
 }
 
 export const PATTERN_SCOPE_LABEL: Record<PatternScope, string> = {
