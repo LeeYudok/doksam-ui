@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "trouble-table",
+  "title": "Trouble Table",
+  "description": "증상 ▶ 확인 지점의 3열 트러블슈팅 대응표. 좁은 화면에서는 화살표를 숨기고 세로로 스택한다.",
+  "dependencies": [
+    "@phosphor-icons/react@^2.1.10"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "components/patterns/concept-explainer/trouble-table.tsx",
+      "content": "import { CaretRightIcon } from \"@phosphor-icons/react/dist/ssr\"\n\n/** 증상 ▶ 대응 한 행. */\nexport interface TroubleRow {\n  symptom: string\n  where: string\n}\n\nexport interface TroubleTableData {\n  rows: TroubleRow[]\n}\n\n/**\n * 증상 ▶ 대응 대응표 — 왼쪽 증상, 가운데 화살표, 오른쪽 확인 지점의 3열 매트릭스.\n * \"문제 생겼을 때 어디부터 보라\"를 빠르게 훑게 하는 트러블슈팅 패턴. 모바일(sm 미만)에선\n * 화살표를 숨기고 세로로 스택한다.\n */\nexport function TroubleTable({ rows }: Readonly<TroubleTableData>) {\n  return (\n    <div className=\"flex flex-col gap-2\">\n      {rows.map((row) => (\n        <div\n          key={row.symptom}\n          className=\"grid grid-cols-[1fr_auto_1.2fr] items-center gap-3 rounded-md border border-border px-4 py-3 max-sm:grid-cols-1 max-sm:gap-1\"\n        >\n          <span className=\"text-sm font-medium\">{row.symptom}</span>\n          <CaretRightIcon\n            aria-hidden\n            size={16}\n            weight=\"bold\"\n            className=\"text-muted-foreground max-sm:hidden\"\n          />\n          <span className=\"text-sm font-medium text-primary max-sm:text-muted-foreground sm:text-right\">\n            {row.where}\n          </span>\n        </div>\n      ))}\n    </div>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}

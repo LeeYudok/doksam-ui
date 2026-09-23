@@ -114,6 +114,7 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "기본 폼·검색+필터·다이얼로그 폼·파일 업로드 등 입력 UI 4종입니다.",
     icon: ListChecksIcon,
     scope: "common",
+    registryNames: ["search-filter"],
     composedOf: ["badge", "button", "dialog", "input", "label", "progress", "select"],
   },
   {
@@ -122,6 +123,7 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "프로덕션 서비스에서 검증된 테이블 헤더·자동 해제 메시지·그리드 자동완성·칩 입력 4종입니다.",
     icon: SealCheckIcon,
     scope: "common",
+    registryNames: ["chip-input"],
     composedOf: ["badge", "button", "input", "label", "table"],
   },
   {
@@ -148,6 +150,7 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "2단계 카테고리 칩 + 카운트 배지 + 그룹 컬러로 구성하는 다면 필터입니다.",
     icon: TagIcon,
     scope: "common",
+    registryNames: ["faceted-filter"],
   },
   {
     slug: "json-tree",
@@ -179,6 +182,7 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "어려운 기술 개념을 비유로 풀어내는 교육용 조합 — 개념 설명 카드·아키텍처 흐름 도식·증상▶대응 대응표 3종입니다.",
     icon: BookOpenTextIcon,
     scope: "common",
+    registryNames: ["concept-card", "flow-diagram", "trouble-table"],
     composedOf: ["card"],
   },
   {
@@ -235,6 +239,7 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "드래그앤드롭 드롭존·업로드 진행률·파일 목록(완료/진행/실패 상태)입니다.",
     icon: TrayArrowUpIcon,
     scope: "common",
+    registryNames: ["upload-dropzone"],
     composedOf: ["badge", "button", "progress"],
   },
   {
@@ -243,6 +248,7 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "값·전기대비 증감·미니 스파크라인을 담은 KPI 카드 그리드와 컴팩트 행입니다.",
     icon: GaugeIcon,
     scope: "common",
+    registryNames: ["kpi-card-grid", "kpi-compact-row"],
     composedOf: ["card"],
   },
   {
@@ -251,6 +257,7 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "세로 활동 타임라인 — 아이콘 노드·시각·상태별 색과 날짜 그룹 헤더입니다.",
     icon: ClockCounterClockwiseIcon,
     scope: "common",
+    registryNames: ["activity-timeline", "compact-timeline"],
   },
   {
     slug: "data-table",
@@ -266,6 +273,7 @@ export const PATTERN_REGISTRY: PatternEntry[] = [
     description: "3티어 가격 카드·월/연 토글(할인)·기능 비교·추천 티어 강조입니다.",
     icon: TagIcon,
     scope: "common",
+    registryNames: ["pricing-table"],
     composedOf: ["badge", "button", "card", "label", "switch"],
   },
   {

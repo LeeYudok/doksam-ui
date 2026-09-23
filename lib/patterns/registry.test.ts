@@ -14,9 +14,9 @@ const REGISTRY_ITEM_NAMES = new Set((registryJson as { items: { name: string }[]
 const COMPONENT_SLUGS = new Set(COMPONENT_REGISTRY.map((entry) => entry.slug))
 
 /** registryNames 를 가진 패턴 수 — 패턴을 새로 편입하면 이 수가 올라간다. */
-const INSTALLABLE_PATTERN_COUNT = 13
+const INSTALLABLE_PATTERN_COUNT = 21
 /** 아직 코드 복사만 가능한 패턴 수. */
-const PENDING_PATTERN_COUNT = 23
+const PENDING_PATTERN_COUNT = 15
 
 describe("PATTERN_REGISTRY", () => {
   it("has a unique slug per entry", () => {

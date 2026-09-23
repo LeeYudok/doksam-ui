@@ -1,7 +1,7 @@
 import type { PatternSampleData } from "@/components/showcase/pattern-sample"
-import { ConceptCardDemo } from "@/components/patterns/concept-explainer/concept-card"
-import { FlowDiagram } from "@/components/patterns/concept-explainer/flow-diagram"
-import { TroubleTableDemo } from "@/components/patterns/concept-explainer/trouble-table"
+import { ConceptCardDemo } from "@/components/patterns/concept-explainer/concept-card-demo"
+import { FlowDiagramDemo } from "@/components/patterns/concept-explainer/flow-diagram-demo"
+import { TroubleTableDemo } from "@/components/patterns/concept-explainer/trouble-table-demo"
 
 export const CONCEPT_EXPLAINER_SAMPLES: PatternSampleData[] = [
   {
@@ -30,7 +30,7 @@ export const CONCEPT_EXPLAINER_SAMPLES: PatternSampleData[] = [
     num: 2,
     title: "아키텍처 흐름 도식",
     description: "진입점(점선 알약) → 관문(gate) → 실행 노드/유닛으로 이어지는 세로 플로우. 요청/데이터가 어떤 관문을 거쳐 어디로 도달하는지 보여줍니다.",
-    demo: <FlowDiagram />,
+    demo: <FlowDiagramDemo />,
     code: `<div className="flex flex-col items-center">
   <div className="rounded-full border border-dashed ...">Dockerfile · 레시피</div>
   <ArrowDownIcon />
