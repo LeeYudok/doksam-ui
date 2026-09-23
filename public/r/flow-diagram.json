@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "flow-diagram",
+  "title": "Flow Diagram",
+  "description": "진입점(점선 알약) → 관문(gate) → 실행 노드/유닛으로 이어지는 세로 아키텍처 흐름 도식. 단계 위계를 색이 아니라 tone 2단계의 강도로 표현한다.",
+  "dependencies": [
+    "@phosphor-icons/react@^2.1.10"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "components/patterns/concept-explainer/flow-diagram.tsx",
+      "content": "import { ArrowDownIcon, FileTextIcon } from \"@phosphor-icons/react/dist/ssr\"\n\nimport { cn } from \"@/lib/utils\"\n\n/** 흐름 도식의 관문(gate) 한 칸 — 진입점과 노드 사이 단계. */\nexport interface FlowGate {\n  /** 좌측 고정폭 모노 라벨(예: \"① docker build\"). */\n  label: string\n  title: string\n  /** primary=주 강조 관문, secondary=보조 관문. */\n  tone?: \"primary\" | \"secondary\"\n}\n\n/** 흐름의 종착 노드 한 칸과 그 안에서 도는 유닛들. */\nexport interface FlowNode {\n  name: string\n  units: string[]\n}\n\nexport interface FlowDiagramProps {\n  /** 최상단 점선 알약에 들어갈 진입점 라벨. */\n  entry: string\n  gates: FlowGate[]\n  nodes: FlowNode[]\n  className?: string\n}\n\nfunction Gate({ label, title, tone = \"primary\" }: Readonly<FlowGate>) {\n  return (\n    <div className=\"flex w-full max-w-md items-center gap-3\">\n      <span className=\"w-24 shrink-0 text-right font-mono text-[11px] text-muted-foreground\">{label}</span>\n      <div\n        className={cn(\n          \"flex-1 rounded-md border px-3 py-2 text-center text-sm font-medium\",\n          tone === \"primary\"\n            ? \"border-primary/30 bg-primary/10 text-foreground\"\n            : \"border-border bg-muted text-muted-foreground\",\n        )}\n      >\n        {title}\n      </div>\n    </div>\n  )\n}\n\nfunction FlowArrow() {\n  return <ArrowDownIcon aria-hidden size={16} weight=\"bold\" className=\"my-1 text-muted-foreground\" />\n}\n\n/**\n * 아키텍처 흐름 도식 — 진입점(점선 알약) → 관문(gate) → 실행 노드/유닛으로 이어지는\n * 세로 플로우. 어떤 요청/데이터가 어떤 관문을 거쳐 어디로 도달하는지를 한눈에 보여준다.\n * 단계 위계는 색이 아니라 tone 2단계(primary/secondary)의 강도로만 표현한다.\n */\nexport function FlowDiagram({ entry, gates, nodes, className }: Readonly<FlowDiagramProps>) {\n  return (\n    <div className={cn(\"flex flex-col items-center gap-0\", className)}>\n      <div className=\"mb-1 inline-flex items-center gap-1.5 rounded-full border border-dashed border-muted-foreground/50 px-3 py-1 font-mono text-[11px] text-muted-foreground\">\n        <FileTextIcon aria-hidden size={14} />\n        {entry}\n      </div>\n      {gates.map((gate) => (\n        <div key={gate.label} className=\"flex w-full flex-col items-center\">\n          <FlowArrow />\n          <Gate {...gate} />\n        </div>\n      ))}\n\n      {nodes.length > 0 ? (\n        <div className=\"mt-3 flex w-full max-w-md justify-center gap-3\">\n          {nodes.map((node) => (\n            <div key={node.name} className=\"flex-1 rounded-md border border-border p-2\">\n              <div className=\"border-b border-border pb-1.5 text-center font-mono text-[10px] text-muted-foreground\">\n                {node.name}\n              </div>\n              <div className=\"flex flex-col gap-1 pt-1.5\">\n                {node.units.map((unit) => (\n                  <div\n                    key={unit}\n                    className=\"rounded-sm bg-secondary px-1 py-1 text-center text-[10px] text-secondary-foreground\"\n                  >\n                    {unit}\n                  </div>\n                ))}\n              </div>\n            </div>\n          ))}\n        </div>\n      ) : null}\n    </div>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}

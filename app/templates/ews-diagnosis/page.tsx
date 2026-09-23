@@ -97,7 +97,7 @@ export default function EwsDiagnosisPage() {
       screenTitle="경보 원인 진단"
       subTabs={EWS_DIAGNOSIS_SUB_TABS}
       activeSubTab="diagnosis"
-      ask={<TopNavAskBar label="차주명 · 사업자번호로 물어보세요" href="/templates/help-center" />}
+      ask={<TopNavAskBar label="차주명 · 사업자번호로 물어보세요" />}
       tools={
         <>
           <Button type="button" variant="outline" size="sm">

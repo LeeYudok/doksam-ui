@@ -36,5 +36,6 @@
   // .shadcn-probe 는 상류 드리프트 게이트가 만드는 프로브 프로젝트다 (#62).
   // 자체 tsconfig 와 node_modules 를 가진 남의 프로젝트이며, 설치본에는 CLI 가 남긴
   // from "cn" 플레이스홀더가 있어 이 레포 기준으로는 해소되지 않는다 — 대상에서 뺀다.
-  "exclude": ["node_modules", ".shadcn-probe"]
+  // scratchpad 도 같은 이유 — 이슈 #70 실측용 프로브 Next 앱이 자체 tsconfig 를 가진다.
+  "exclude": ["node_modules", ".shadcn-probe", "scratchpad"]
 }

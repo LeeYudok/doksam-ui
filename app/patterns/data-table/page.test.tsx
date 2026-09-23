@@ -21,7 +21,7 @@ function getBodyRows() {
 describe("DataTablePatternsPage", () => {
   it("renders the page heading", () => {
     render(<DataTablePatternsPage />)
-    expect(screen.getByRole("heading", { level: 1, name: "데이터 테이블 패턴" })).toBeInTheDocument()
+    expect(screen.getByRole("heading", { level: 1, name: "데이터 테이블" })).toBeInTheDocument()
   })
 
   it("renders every data-table sample as a numbered section", () => {

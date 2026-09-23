@@ -81,6 +81,8 @@ public/r/       shadcn 레지스트리 배포 산출물(빌드 생성물)
 
 **다국어.** 카탈로그 설명문은 한국어가 기본이고 en·ja·zh·es 번역을 `lib/i18n/messages` 에 둡니다. 네 로케일의 키 집합이 어긋나면 테스트가 실패합니다.
 
+`i18n-provider` 항목을 설치하면 카탈로그 사이트 산문(`page.*`·`component.*`·`archetype.*`·`chrome.nav.*` 등)은 빠지고, 함께 설치되는 컴포넌트(`copy-button`, `audit-code-tag` 등)가 실제로 쓰는 키만 남은 축약 사전이 깔립니다(#113). `lib/i18n/messages/{en,ja,zh,es}.json` 은 그 시점부터 소비 프로젝트 소유 파일이므로, 자기 화면에서 `useI18n().t("내키", "한국어 원문")` 을 더 쓰고 싶으면 그 파일 네 개에 키를 직접 추가하면 됩니다 — 외부 조회 없이 정적 import 로 번들에 들어갑니다.
+
 ## 라이선스
 
 코드는 [MIT](./LICENSE). 벤더링한 폰트와 서드파티 자산의 라이선스는 [THIRD_PARTY_LICENSES.md](./THIRD_PARTY_LICENSES.md) 에 정리돼 있습니다(폰트는 대부분 SIL OFL).

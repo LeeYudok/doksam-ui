@@ -7,7 +7,7 @@ import { KANBAN_SAMPLES } from "@/components/patterns/kanban-samples"
 describe("KanbanPatternsPage", () => {
   it("renders the page heading", () => {
     render(<KanbanPatternsPage />)
-    expect(screen.getByRole("heading", { level: 1, name: "칸반 보드 패턴" })).toBeInTheDocument()
+    expect(screen.getByRole("heading", { level: 1, name: "칸반 보드" })).toBeInTheDocument()
   })
 
   it("renders every kanban sample as a numbered section", () => {

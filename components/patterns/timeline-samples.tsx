@@ -1,13 +1,13 @@
 import type { PatternSampleData } from "@/components/showcase/pattern-sample"
-import { ActivityTimeline } from "@/components/patterns/timeline/activity-timeline"
-import { CompactTimeline } from "@/components/patterns/timeline/compact-timeline"
+import { ActivityTimelineDemo } from "@/components/patterns/timeline/activity-timeline-demo"
+import { CompactTimelineDemo } from "@/components/patterns/timeline/compact-timeline-demo"
 
 export const TIMELINE_SAMPLES: PatternSampleData[] = [
   {
     num: 1,
     title: "날짜별 활동 타임라인",
     description: "아이콘 노드 + 시각 + 제목/설명을 세로로 나열하고, 날짜 헤더로 그룹을 구분하는 기본형입니다.",
-    demo: <ActivityTimeline />,
+    demo: <ActivityTimelineDemo />,
     code: `const NODE_CLASS: Record<ActivityStatus, string> = {
   success: "border-success/40 bg-success/10 text-success",
   warning: "border-warning/40 bg-warning/10 text-warning",
@@ -44,7 +44,7 @@ export const TIMELINE_SAMPLES: PatternSampleData[] = [
     num: 2,
     title: "컴팩트 타임라인",
     description: "날짜 그룹 없이 단일 프로세스의 진행 이력을 좁은 폭(사이드 패널·카드 내부)에 담는 축약 변형입니다.",
-    demo: <CompactTimeline />,
+    demo: <CompactTimelineDemo />,
     code: `const DOT_CLASS: Record<StepStatus, string> = {
   success: "bg-success",
   warning: "bg-warning",

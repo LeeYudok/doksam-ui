@@ -742,19 +742,19 @@
           "border": "oklch(0.9 0.006 240)",
           "input": "oklch(0.9 0.006 240)",
           "ring": "oklch(0.32 0.014 240)",
-          "chart-1": "oklch(0.32 0.014 240)",
-          "chart-2": "oklch(0.48 0.02 240)",
-          "chart-3": "oklch(0.6 0.02 210)",
-          "chart-4": "oklch(0.68 0.015 260)",
-          "chart-5": "oklch(0.75 0.01 230)",
-          "sidebar": "oklch(0.985 0.004 262)",
-          "sidebar-foreground": "oklch(0.21 0.02 262)",
-          "sidebar-primary": "oklch(0.53 0.21 262)",
-          "sidebar-primary-foreground": "oklch(0.98 0.01 262)",
-          "sidebar-accent": "oklch(0.92 0.035 262)",
-          "sidebar-accent-foreground": "oklch(0.28 0.03 262)",
-          "sidebar-border": "oklch(0.9 0.015 262)",
-          "sidebar-ring": "oklch(0.53 0.21 262)",
+          "chart-1": "oklch(0.546 0.07 240)",
+          "chart-2": "oklch(0.461 0.07 24)",
+          "chart-3": "oklch(0.346 0.07 168)",
+          "chart-4": "oklch(0.508 0.07 312)",
+          "chart-5": "oklch(0.404 0.07 96)",
+          "sidebar": "oklch(0.985 0.004 240)",
+          "sidebar-foreground": "oklch(0.21 0.006 240)",
+          "sidebar-primary": "oklch(0.32 0.014 240)",
+          "sidebar-primary-foreground": "oklch(0.98 0.002 240)",
+          "sidebar-accent": "oklch(0.92 0.035 240)",
+          "sidebar-accent-foreground": "oklch(0.28 0.01 240)",
+          "sidebar-border": "oklch(0.9 0.015 240)",
+          "sidebar-ring": "oklch(0.32 0.014 240)",
           "risk-low": "oklch(0.45 0.13 152)",
           "risk-low-foreground": "oklch(0.98 0.01 152)",
           "risk-moderate": "oklch(0.45 0.11 85)",
@@ -797,19 +797,19 @@
           "border": "oklch(1 0 0 / 12%)",
           "input": "oklch(1 0 0 / 16%)",
           "ring": "oklch(0.75 0.014 240)",
-          "chart-1": "oklch(0.75 0.014 240)",
-          "chart-2": "oklch(0.65 0.02 240)",
-          "chart-3": "oklch(0.7 0.02 210)",
-          "chart-4": "oklch(0.78 0.015 260)",
-          "chart-5": "oklch(0.82 0.01 230)",
-          "sidebar": "oklch(0.225 0.02 262)",
-          "sidebar-foreground": "oklch(0.95 0.008 262)",
-          "sidebar-primary": "oklch(0.68 0.18 262)",
-          "sidebar-primary-foreground": "oklch(0.15 0.02 262)",
-          "sidebar-accent": "oklch(0.31 0.03 262)",
-          "sidebar-accent-foreground": "oklch(0.95 0.008 262)",
+          "chart-1": "oklch(0.763 0.07 240)",
+          "chart-2": "oklch(0.692 0.07 24)",
+          "chart-3": "oklch(0.844 0.07 168)",
+          "chart-4": "oklch(0.731 0.07 312)",
+          "chart-5": "oklch(0.808 0.07 96)",
+          "sidebar": "oklch(0.225 0.006 240)",
+          "sidebar-foreground": "oklch(0.95 0.003 240)",
+          "sidebar-primary": "oklch(0.75 0.014 240)",
+          "sidebar-primary-foreground": "oklch(0.16 0.006 240)",
+          "sidebar-accent": "oklch(0.31 0.01 240)",
+          "sidebar-accent-foreground": "oklch(0.95 0.003 240)",
           "sidebar-border": "oklch(1 0 0 / 12%)",
-          "sidebar-ring": "oklch(0.68 0.18 262)",
+          "sidebar-ring": "oklch(0.75 0.014 240)",
           "risk-low": "oklch(0.74 0.15 152)",
           "risk-low-foreground": "oklch(0.15 0.02 152)",
           "risk-moderate": "oklch(0.74 0.12 85)",
@@ -864,19 +864,19 @@
           "border": "oklch(0.9 0.018 41)",
           "input": "oklch(0.9 0.018 41)",
           "ring": "oklch(0.64 0.19 41)",
-          "chart-1": "oklch(0.64 0.19 41)",
-          "chart-2": "oklch(0.7 0.17 65)",
-          "chart-3": "oklch(0.6 0.2 20)",
-          "chart-4": "oklch(0.75 0.14 85)",
-          "chart-5": "oklch(0.55 0.18 10)",
-          "sidebar": "oklch(0.985 0.004 262)",
-          "sidebar-foreground": "oklch(0.21 0.02 262)",
-          "sidebar-primary": "oklch(0.53 0.21 262)",
-          "sidebar-primary-foreground": "oklch(0.98 0.01 262)",
-          "sidebar-accent": "oklch(0.92 0.035 262)",
-          "sidebar-accent-foreground": "oklch(0.28 0.03 262)",
-          "sidebar-border": "oklch(0.9 0.015 262)",
-          "sidebar-ring": "oklch(0.53 0.21 262)",
+          "chart-1": "oklch(0.567 0.176 41)",
+          "chart-2": "oklch(0.443 0.078 185)",
+          "chart-3": "oklch(0.376 0.178 329)",
+          "chart-4": "oklch(0.496 0.112 113)",
+          "chart-5": "oklch(0.409 0.15 257)",
+          "sidebar": "oklch(0.985 0.004 41)",
+          "sidebar-foreground": "oklch(0.22 0.02 41)",
+          "sidebar-primary": "oklch(0.64 0.19 41)",
+          "sidebar-primary-foreground": "oklch(0.98 0.01 41)",
+          "sidebar-accent": "oklch(0.92 0.035 41)",
+          "sidebar-accent-foreground": "oklch(0.3 0.03 41)",
+          "sidebar-border": "oklch(0.9 0.015 41)",
+          "sidebar-ring": "oklch(0.64 0.19 41)",
           "risk-low": "oklch(0.45 0.13 152)",
           "risk-low-foreground": "oklch(0.98 0.01 152)",
           "risk-moderate": "oklch(0.45 0.11 85)",
@@ -919,19 +919,19 @@
           "border": "oklch(1 0 0 / 12%)",
           "input": "oklch(1 0 0 / 16%)",
           "ring": "oklch(0.7 0.17 41)",
-          "chart-1": "oklch(0.7 0.17 41)",
-          "chart-2": "oklch(0.75 0.15 65)",
-          "chart-3": "oklch(0.65 0.18 20)",
-          "chart-4": "oklch(0.8 0.13 85)",
-          "chart-5": "oklch(0.6 0.16 10)",
-          "sidebar": "oklch(0.225 0.02 262)",
-          "sidebar-foreground": "oklch(0.95 0.008 262)",
-          "sidebar-primary": "oklch(0.68 0.18 262)",
-          "sidebar-primary-foreground": "oklch(0.15 0.02 262)",
-          "sidebar-accent": "oklch(0.31 0.03 262)",
-          "sidebar-accent-foreground": "oklch(0.95 0.008 262)",
+          "chart-1": "oklch(0.779 0.134 41)",
+          "chart-2": "oklch(0.67 0.118 185)",
+          "chart-3": "oklch(0.867 0.118 329)",
+          "chart-4": "oklch(0.718 0.16 113)",
+          "chart-5": "oklch(0.809 0.096 257)",
+          "sidebar": "oklch(0.225 0.016 41)",
+          "sidebar-foreground": "oklch(0.95 0.008 41)",
+          "sidebar-primary": "oklch(0.7 0.17 41)",
+          "sidebar-primary-foreground": "oklch(0.16 0.02 41)",
+          "sidebar-accent": "oklch(0.31 0.026 41)",
+          "sidebar-accent-foreground": "oklch(0.95 0.008 41)",
           "sidebar-border": "oklch(1 0 0 / 12%)",
-          "sidebar-ring": "oklch(0.68 0.18 262)",
+          "sidebar-ring": "oklch(0.7 0.17 41)",
           "risk-low": "oklch(0.74 0.15 152)",
           "risk-low-foreground": "oklch(0.15 0.02 152)",
           "risk-moderate": "oklch(0.74 0.12 85)",
@@ -986,19 +986,19 @@
           "border": "oklch(0.883 0.023 90)",
           "input": "oklch(0.883 0.023 90)",
           "ring": "oklch(0.637 0.111 86)",
-          "chart-1": "oklch(0.27 0.052 267)",
-          "chart-2": "oklch(0.637 0.111 86)",
-          "chart-3": "oklch(0.5 0.07 267)",
-          "chart-4": "oklch(0.58 0.1 40)",
-          "chart-5": "oklch(0.6 0.07 160)",
-          "sidebar": "oklch(0.985 0.004 262)",
-          "sidebar-foreground": "oklch(0.21 0.02 262)",
-          "sidebar-primary": "oklch(0.53 0.21 262)",
-          "sidebar-primary-foreground": "oklch(0.98 0.01 262)",
-          "sidebar-accent": "oklch(0.92 0.035 262)",
-          "sidebar-accent-foreground": "oklch(0.28 0.03 262)",
-          "sidebar-border": "oklch(0.9 0.015 262)",
-          "sidebar-ring": "oklch(0.53 0.21 262)",
+          "chart-1": "oklch(0.55 0.07 267)",
+          "chart-2": "oklch(0.458 0.07 51)",
+          "chart-3": "oklch(0.347 0.062 195)",
+          "chart-4": "oklch(0.509 0.07 339)",
+          "chart-5": "oklch(0.4 0.07 123)",
+          "sidebar": "oklch(0.985 0.004 267)",
+          "sidebar-foreground": "oklch(0.27 0.052 267)",
+          "sidebar-primary": "oklch(0.27 0.052 267)",
+          "sidebar-primary-foreground": "oklch(1 0 0)",
+          "sidebar-accent": "oklch(0.92 0.035 267)",
+          "sidebar-accent-foreground": "oklch(0.27 0.052 267)",
+          "sidebar-border": "oklch(0.9 0.015 267)",
+          "sidebar-ring": "oklch(0.27 0.052 267)",
           "risk-low": "oklch(0.45 0.13 152)",
           "risk-low-foreground": "oklch(0.98 0.01 152)",
           "risk-moderate": "oklch(0.45 0.11 85)",
@@ -1041,19 +1041,19 @@
           "border": "oklch(0.328 0.053 271)",
           "input": "oklch(0.328 0.053 271)",
           "ring": "oklch(0.77 0.112 86)",
-          "chart-1": "oklch(0.82 0.05 270)",
-          "chart-2": "oklch(0.77 0.112 86)",
-          "chart-3": "oklch(0.62 0.08 267)",
-          "chart-4": "oklch(0.7 0.1 40)",
-          "chart-5": "oklch(0.689 0.098 161)",
-          "sidebar": "oklch(0.225 0.02 262)",
-          "sidebar-foreground": "oklch(0.95 0.008 262)",
-          "sidebar-primary": "oklch(0.68 0.18 262)",
-          "sidebar-primary-foreground": "oklch(0.15 0.02 262)",
-          "sidebar-accent": "oklch(0.31 0.03 262)",
-          "sidebar-accent-foreground": "oklch(0.95 0.008 262)",
-          "sidebar-border": "oklch(1 0 0 / 12%)",
-          "sidebar-ring": "oklch(0.68 0.18 262)",
+          "chart-1": "oklch(0.767 0.07 267)",
+          "chart-2": "oklch(0.69 0.07 51)",
+          "chart-3": "oklch(0.845 0.07 195)",
+          "chart-4": "oklch(0.733 0.07 339)",
+          "chart-5": "oklch(0.804 0.07 123)",
+          "sidebar": "oklch(0.236 0.044 269)",
+          "sidebar-foreground": "oklch(0.939 0.009 100)",
+          "sidebar-primary": "oklch(0.92 0.024 273)",
+          "sidebar-primary-foreground": "oklch(0.195 0.033 270)",
+          "sidebar-accent": "oklch(0.3 0.039 86)",
+          "sidebar-accent-foreground": "oklch(0.939 0.009 100)",
+          "sidebar-border": "oklch(0.328 0.053 271)",
+          "sidebar-ring": "oklch(0.92 0.024 273)",
           "risk-low": "oklch(0.74 0.15 152)",
           "risk-low-foreground": "oklch(0.15 0.02 152)",
           "risk-moderate": "oklch(0.74 0.12 85)",
@@ -1108,19 +1108,19 @@
           "border": "oklch(0.9 0.015 293)",
           "input": "oklch(0.9 0.015 293)",
           "ring": "oklch(0.51 0.23 293)",
-          "chart-1": "oklch(0.51 0.23 293)",
-          "chart-2": "oklch(0.6 0.19 320)",
-          "chart-3": "oklch(0.66 0.15 270)",
-          "chart-4": "oklch(0.56 0.2 330)",
-          "chart-5": "oklch(0.7 0.13 255)",
-          "sidebar": "oklch(0.985 0.004 262)",
-          "sidebar-foreground": "oklch(0.21 0.02 262)",
-          "sidebar-primary": "oklch(0.53 0.21 262)",
-          "sidebar-primary-foreground": "oklch(0.98 0.01 262)",
-          "sidebar-accent": "oklch(0.92 0.035 262)",
-          "sidebar-accent-foreground": "oklch(0.28 0.03 262)",
-          "sidebar-border": "oklch(0.9 0.015 262)",
-          "sidebar-ring": "oklch(0.53 0.21 262)",
+          "chart-1": "oklch(0.568 0.19 293)",
+          "chart-2": "oklch(0.456 0.098 77)",
+          "chart-3": "oklch(0.35 0.066 221)",
+          "chart-4": "oklch(0.525 0.19 5)",
+          "chart-5": "oklch(0.392 0.114 149)",
+          "sidebar": "oklch(0.985 0.004 293)",
+          "sidebar-foreground": "oklch(0.21 0.02 293)",
+          "sidebar-primary": "oklch(0.51 0.23 293)",
+          "sidebar-primary-foreground": "oklch(0.98 0.01 293)",
+          "sidebar-accent": "oklch(0.92 0.035 293)",
+          "sidebar-accent-foreground": "oklch(0.28 0.03 293)",
+          "sidebar-border": "oklch(0.9 0.015 293)",
+          "sidebar-ring": "oklch(0.51 0.23 293)",
           "risk-low": "oklch(0.45 0.13 152)",
           "risk-low-foreground": "oklch(0.98 0.01 152)",
           "risk-moderate": "oklch(0.45 0.11 85)",
@@ -1163,19 +1163,19 @@
           "border": "oklch(1 0 0 / 12%)",
           "input": "oklch(1 0 0 / 16%)",
           "ring": "oklch(0.68 0.19 293)",
-          "chart-1": "oklch(0.68 0.19 293)",
-          "chart-2": "oklch(0.72 0.16 320)",
-          "chart-3": "oklch(0.76 0.13 270)",
-          "chart-4": "oklch(0.66 0.17 330)",
-          "chart-5": "oklch(0.78 0.11 255)",
-          "sidebar": "oklch(0.225 0.02 262)",
-          "sidebar-foreground": "oklch(0.95 0.008 262)",
-          "sidebar-primary": "oklch(0.68 0.18 262)",
-          "sidebar-primary-foreground": "oklch(0.15 0.02 262)",
-          "sidebar-accent": "oklch(0.31 0.03 262)",
-          "sidebar-accent-foreground": "oklch(0.95 0.008 262)",
+          "chart-1": "oklch(0.776 0.126 293)",
+          "chart-2": "oklch(0.69 0.144 77)",
+          "chart-3": "oklch(0.844 0.112 221)",
+          "chart-4": "oklch(0.745 0.162 5)",
+          "chart-5": "oklch(0.788 0.19 149)",
+          "sidebar": "oklch(0.225 0.022 293)",
+          "sidebar-foreground": "oklch(0.95 0.008 293)",
+          "sidebar-primary": "oklch(0.68 0.19 293)",
+          "sidebar-primary-foreground": "oklch(0.15 0.02 293)",
+          "sidebar-accent": "oklch(0.31 0.032 293)",
+          "sidebar-accent-foreground": "oklch(0.95 0.008 293)",
           "sidebar-border": "oklch(1 0 0 / 12%)",
-          "sidebar-ring": "oklch(0.68 0.18 262)",
+          "sidebar-ring": "oklch(0.68 0.19 293)",
           "risk-low": "oklch(0.74 0.15 152)",
           "risk-low-foreground": "oklch(0.15 0.02 152)",
           "risk-moderate": "oklch(0.74 0.12 85)",
@@ -1230,19 +1230,19 @@
           "border": "oklch(0.9 0.015 152)",
           "input": "oklch(0.9 0.015 152)",
           "ring": "oklch(0.52 0.13 152)",
-          "chart-1": "oklch(0.52 0.13 152)",
-          "chart-2": "oklch(0.62 0.15 130)",
-          "chart-3": "oklch(0.68 0.13 175)",
-          "chart-4": "oklch(0.58 0.12 100)",
-          "chart-5": "oklch(0.72 0.12 190)",
-          "sidebar": "oklch(0.985 0.004 262)",
-          "sidebar-foreground": "oklch(0.21 0.02 262)",
-          "sidebar-primary": "oklch(0.53 0.21 262)",
-          "sidebar-primary-foreground": "oklch(0.98 0.01 262)",
-          "sidebar-accent": "oklch(0.92 0.035 262)",
-          "sidebar-accent-foreground": "oklch(0.28 0.03 262)",
-          "sidebar-border": "oklch(0.9 0.015 262)",
-          "sidebar-ring": "oklch(0.53 0.21 262)",
+          "chart-1": "oklch(0.534 0.13 152)",
+          "chart-2": "oklch(0.465 0.13 296)",
+          "chart-3": "oklch(0.357 0.078 80)",
+          "chart-4": "oklch(0.493 0.094 224)",
+          "chart-5": "oklch(0.422 0.13 8)",
+          "sidebar": "oklch(0.985 0.004 152)",
+          "sidebar-foreground": "oklch(0.21 0.02 152)",
+          "sidebar-primary": "oklch(0.52 0.13 152)",
+          "sidebar-primary-foreground": "oklch(0.98 0.01 152)",
+          "sidebar-accent": "oklch(0.92 0.035 152)",
+          "sidebar-accent-foreground": "oklch(0.28 0.03 152)",
+          "sidebar-border": "oklch(0.9 0.015 152)",
+          "sidebar-ring": "oklch(0.52 0.13 152)",
           "risk-low": "oklch(0.45 0.13 152)",
           "risk-low-foreground": "oklch(0.98 0.01 152)",
           "risk-moderate": "oklch(0.45 0.11 85)",
@@ -1285,19 +1285,19 @@
           "border": "oklch(1 0 0 / 12%)",
           "input": "oklch(1 0 0 / 16%)",
           "ring": "oklch(0.68 0.16 152)",
-          "chart-1": "oklch(0.68 0.16 152)",
-          "chart-2": "oklch(0.72 0.14 130)",
-          "chart-3": "oklch(0.76 0.12 175)",
-          "chart-4": "oklch(0.66 0.12 100)",
-          "chart-5": "oklch(0.78 0.11 190)",
-          "sidebar": "oklch(0.225 0.02 262)",
-          "sidebar-foreground": "oklch(0.95 0.008 262)",
-          "sidebar-primary": "oklch(0.68 0.18 262)",
-          "sidebar-primary-foreground": "oklch(0.15 0.02 262)",
-          "sidebar-accent": "oklch(0.31 0.03 262)",
-          "sidebar-accent-foreground": "oklch(0.95 0.008 262)",
+          "chart-1": "oklch(0.751 0.13 152)",
+          "chart-2": "oklch(0.696 0.13 296)",
+          "chart-3": "oklch(0.857 0.13 80)",
+          "chart-4": "oklch(0.715 0.13 224)",
+          "chart-5": "oklch(0.822 0.102 8)",
+          "sidebar": "oklch(0.225 0.018 152)",
+          "sidebar-foreground": "oklch(0.95 0.008 152)",
+          "sidebar-primary": "oklch(0.68 0.16 152)",
+          "sidebar-primary-foreground": "oklch(0.15 0.02 152)",
+          "sidebar-accent": "oklch(0.31 0.028 152)",
+          "sidebar-accent-foreground": "oklch(0.95 0.008 152)",
           "sidebar-border": "oklch(1 0 0 / 12%)",
-          "sidebar-ring": "oklch(0.68 0.18 262)",
+          "sidebar-ring": "oklch(0.68 0.16 152)",
           "risk-low": "oklch(0.74 0.15 152)",
           "risk-low-foreground": "oklch(0.15 0.02 152)",
           "risk-moderate": "oklch(0.74 0.12 85)",
@@ -1389,11 +1389,11 @@
           "border": "oklch(0.84 0.032 262)",
           "input": "oklch(0.84 0.032 262)",
           "ring": "oklch(0.53 0.21 262)",
-          "chart-1": "oklch(0.53 0.21 262)",
-          "chart-2": "oklch(0.62 0.17 220)",
-          "chart-3": "oklch(0.68 0.14 200)",
-          "chart-4": "oklch(0.58 0.19 290)",
-          "chart-5": "oklch(0.72 0.14 235)",
+          "chart-1": "oklch(0.556 0.19 262)",
+          "chart-2": "oklch(0.466 0.134 46)",
+          "chart-3": "oklch(0.347 0.062 190)",
+          "chart-4": "oklch(0.525 0.19 334)",
+          "chart-5": "oklch(0.4 0.096 118)",
           "sidebar": "oklch(0.985 0.004 262)",
           "sidebar-foreground": "oklch(0.21 0.02 262)",
           "sidebar-primary": "oklch(0.53 0.21 262)",
@@ -1444,11 +1444,11 @@
           "border": "oklch(1 0 0 / 12%)",
           "input": "oklch(1 0 0 / 16%)",
           "ring": "oklch(0.68 0.18 262)",
-          "chart-1": "oklch(0.68 0.18 262)",
-          "chart-2": "oklch(0.72 0.15 220)",
-          "chart-3": "oklch(0.76 0.12 200)",
-          "chart-4": "oklch(0.66 0.17 290)",
-          "chart-5": "oklch(0.78 0.12 235)",
+          "chart-1": "oklch(0.767 0.118 262)",
+          "chart-2": "oklch(0.703 0.19 46)",
+          "chart-3": "oklch(0.836 0.144 190)",
+          "chart-4": "oklch(0.748 0.19 334)",
+          "chart-5": "oklch(0.799 0.186 118)",
           "sidebar": "oklch(0.225 0.02 262)",
           "sidebar-foreground": "oklch(0.95 0.008 262)",
           "sidebar-primary": "oklch(0.68 0.18 262)",
@@ -3680,6 +3680,231 @@
         "https://ui.doksam.com/r/section-panel-header.json",
         "https://ui.doksam.com/r/sticky-actionbar.json",
         "https://ui.doksam.com/r/top-nav-shell.json"
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "concept-card",
+      "type": "registry:component",
+      "title": "Concept Card",
+      "description": "어려운 개념 하나를 순번 + 제목 + 등가물 헤더, 한 줄 비유, 주의 마커가 붙는 불릿 목록으로 풀어내는 교육용 카드.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10"
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/card.json"
+      ],
+      "files": [
+        {
+          "path": "components/patterns/concept-explainer/concept-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "flow-diagram",
+      "type": "registry:component",
+      "title": "Flow Diagram",
+      "description": "진입점(점선 알약) → 관문(gate) → 실행 노드/유닛으로 이어지는 세로 아키텍처 흐름 도식. 단계 위계를 색이 아니라 tone 2단계의 강도로 표현한다.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/patterns/concept-explainer/flow-diagram.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "trouble-table",
+      "type": "registry:component",
+      "title": "Trouble Table",
+      "description": "증상 ▶ 확인 지점의 3열 트러블슈팅 대응표. 좁은 화면에서는 화살표를 숨기고 세로로 스택한다.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/patterns/concept-explainer/trouble-table.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "kpi-card-grid",
+      "type": "registry:component",
+      "title": "KPI Card Grid",
+      "description": "값(금액/건수/비율) + 전기 대비 증감 + 미니 스파크라인을 담은 지표 카드 그리드. 증감 색은 한국식 관례를 따르는 gain/loss 토큰만 쓴다.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10"
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/card.json",
+        "https://ui.doksam.com/r/finance-format-won.json",
+        "https://ui.doksam.com/r/finance-rate.json",
+        "https://ui.doksam.com/r/sparkline.json"
+      ],
+      "files": [
+        {
+          "path": "components/patterns/stats/kpi-card-grid.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "kpi-compact-row",
+      "type": "registry:component",
+      "title": "KPI Compact Row",
+      "description": "스파크라인 없이 라벨·값·증감만 한 줄로 배치하는 밀도 높은 지표 행. 지표가 많거나 세로 공간이 좁은 운영 대시보드 상단용.",
+      "registryDependencies": [
+        "https://ui.doksam.com/r/card.json",
+        "https://ui.doksam.com/r/finance-rate.json"
+      ],
+      "files": [
+        {
+          "path": "components/patterns/stats/kpi-compact-row.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "activity-timeline",
+      "type": "registry:component",
+      "title": "Activity Timeline",
+      "description": "아이콘 노드 + 시각 + 제목/설명으로 구성하고 날짜로 그룹 짓는 세로 활동 타임라인. 상태 4종의 색은 같은 시맨틱 토큰으로 묶는다.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/patterns/timeline/activity-timeline.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "compact-timeline",
+      "type": "registry:component",
+      "title": "Compact Timeline",
+      "description": "날짜 그룹 없이 단일 프로세스의 진행 이력을 좁은 폭에 담는 축약 타임라인.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/patterns/timeline/compact-timeline.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "upload-dropzone",
+      "type": "registry:component",
+      "title": "Upload Dropzone",
+      "description": "클릭·드래그 두 진입 경로를 label + sr-only input 하나로 처리하는 드롭존과, 진행률·상태 배지·삭제를 갖춘 업로드 목록. 업로드 자체는 호출부가 수행한다.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10"
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/badge.json",
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/progress.json"
+      ],
+      "files": [
+        {
+          "path": "components/patterns/file-upload/upload-dropzone.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "faceted-filter",
+      "type": "registry:component",
+      "title": "Faceted Filter",
+      "description": "2단계(그룹 → 서브카테고리) 칩 필터. 카운트 배지와 그룹 강조색을 붙이고 선택 상태는 부모가 소유한다.",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/patterns/faceted-filter/faceted-filter.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "chip-input",
+      "type": "registry:component",
+      "title": "Chip Input",
+      "description": "자동 포맷팅 입력 → 펜딩 칩 변환 → 부모 제출 패턴. 붙여넣기로 여러 값을 한 번에 파싱하고 중복·형식 오류를 사전 검증해 몇 건이 왜 빠졌는지 알린다.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10"
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/input.json"
+      ],
+      "files": [
+        {
+          "path": "components/patterns/verified/chip-input.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "search-filter",
+      "type": "registry:component",
+      "title": "Search Filter",
+      "description": "검색어 + 드롭다운 필터로 구성하는 목록 상단 검색바. 상태를 부모가 소유하는 controlled 컴포넌트라 URL 동기화·서버 재조회에 그대로 얹는다.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10"
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/input.json",
+        "https://ui.doksam.com/r/select.json"
+      ],
+      "files": [
+        {
+          "path": "components/patterns/form-input/search-filter.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "pricing-table",
+      "type": "registry:component",
+      "title": "Pricing Table",
+      "description": "티어 가격 카드 + 월/연 결제 토글. 가격은 항상 월 환산으로 표기하고 추천 티어는 ring 강조 + 배지로 구분한다.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10"
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/badge.json",
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/card.json",
+        "https://ui.doksam.com/r/label.json",
+        "https://ui.doksam.com/r/switch.json"
+      ],
+      "files": [
+        {
+          "path": "components/patterns/pricing/pricing-table.tsx",
+          "type": "registry:component"
+        }
       ]
     },
     {

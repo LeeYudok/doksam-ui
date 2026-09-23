@@ -6,7 +6,7 @@ import PipelinePatternsPage from "@/app/patterns/pipeline/page"
 describe("PipelinePatternsPage", () => {
   it("renders the page heading and finance badge", () => {
     render(<PipelinePatternsPage />)
-    expect(screen.getByRole("heading", { level: 1, name: "파이프라인 UI 패턴" })).toBeInTheDocument()
+    expect(screen.getByRole("heading", { level: 1, name: "파이프라인 패턴" })).toBeInTheDocument()
     expect(screen.getByText("금융 도메인")).toBeInTheDocument()
   })
 

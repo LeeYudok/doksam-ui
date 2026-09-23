@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "kpi-compact-row",
+  "title": "KPI Compact Row",
+  "description": "스파크라인 없이 라벨·값·증감만 한 줄로 배치하는 밀도 높은 지표 행. 지표가 많거나 세로 공간이 좁은 운영 대시보드 상단용.",
+  "registryDependencies": [
+    "https://ui.doksam.com/r/card.json",
+    "https://ui.doksam.com/r/finance-rate.json"
+  ],
+  "files": [
+    {
+      "path": "components/patterns/stats/kpi-compact-row.tsx",
+      "content": "import { Card, CardContent } from \"@/components/ui/card\"\nimport { rateColor, rateText } from \"@/lib/finance/rate\"\nimport { cn } from \"@/lib/utils\"\n\nexport interface CompactKpi {\n  label: string\n  /** 이미 포맷된 표시 문자열 — 단위·자릿수 규칙은 호출부가 정한다. */\n  value: string\n  /** 전기 대비 증감률(%). */\n  change: number\n}\n\nexport interface KpiCompactRowProps {\n  items: CompactKpi[]\n  className?: string\n}\n\n/**\n * 압축 KPI 행 — 스파크라인 없이 라벨·값·증감만 한 줄로 배치하는 밀도 높은 변형.\n * 운영 대시보드 상단처럼 지표 개수가 많거나 세로 공간이 좁을 때 KpiCardGrid 대신 쓴다.\n */\nexport function KpiCompactRow({ items, className }: Readonly<KpiCompactRowProps>) {\n  return (\n    <div className={cn(\"grid grid-cols-2 gap-3 sm:grid-cols-4\", className)}>\n      {items.map((kpi) => (\n        <Card key={kpi.label} size=\"sm\">\n          <CardContent className=\"flex flex-col gap-1\">\n            <span className=\"text-[11px] text-muted-foreground\">{kpi.label}</span>\n            <div className=\"flex items-baseline gap-1.5\">\n              <span className=\"text-lg font-semibold tabular-nums\">{kpi.value}</span>\n              <span className={cn(\"text-[11px] font-medium tabular-nums\", rateColor(kpi.change))}>\n                {rateText(kpi.change)}%\n              </span>\n            </div>\n          </CardContent>\n        </Card>\n      ))}\n    </div>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}

@@ -4,10 +4,33 @@
 // allowImportingTsExtensions 덕에 tsc·vitest 쪽 해석도 그대로 유지된다.
 import { HEATMAP_TOKENS, HEATMAP_TOKEN_KEYS } from "./heatmap-tokens.ts";
 import { RISK_TOKENS, RISK_TOKEN_KEYS } from "./risk-tokens.ts";
-import { SIDEBAR_TOKEN_KEYS, SIDEBAR_TOKENS } from "./sidebar-tokens.ts";
+import { SIDEBAR_TOKEN_KEYS } from "./sidebar-tokens.ts";
 import { getPersonalityPreset } from "../personalities/index.ts";
 import type { BrandProfile } from "../profiles/index.ts";
 import { getThemePreset, THEME_TOKEN_KEYS } from "../themes/index.ts";
+import type { ThemeTokens } from "../themes/types.ts";
+
+/**
+ * `theme.light`/`theme.dark`(ThemeTokens) 에서 `THEME_TOKEN_KEYS` 27키만
+ * pick 한다. ink-bulb 처럼 opt-in 확장 필드(camelCase `bulb`/`shell`/
+ * `shellForeground`/`shellMuted`)를 가진 프리셋을 통째로 spread 하면 그
+ * camelCase 이름 그대로가 `registry.json` cssVars 에 실려 `--shellForeground`
+ * 같은 잘못된 CSS 변수명으로 새어 나간다 (#112 finding 1).
+ *
+ * 키가 비어 있으면 던진다 — 조용히 `undefined` 를 실으면 `registry.json` cssVars 에
+ * `undefined` 가 들어가고, 미러 테스트에서는 양쪽 다 `undefined` 라 통과한다(리뷰 F17).
+ */
+function pickThemeTokens(tokens: ThemeTokens): Record<string, string> {
+  const out: Record<string, string> = {};
+  for (const key of THEME_TOKEN_KEYS) {
+    const value = tokens[key] as string | undefined;
+    if (typeof value !== "string") {
+      throw new Error(`테마 프리셋에 시맨틱 토큰 "${key}" 가 없다 — THEME_TOKEN_KEYS 를 모두 채워야 한다`);
+    }
+    out[key] = value;
+  }
+  return out;
+}
 
 /**
  * `registry.json` 의 `profile-*` 항목이 실어야 할 `cssVars` 를 계산한다 (#36).
@@ -48,15 +71,25 @@ export function computeProfileRegistryCssVars(profile: BrandProfile): ProfileReg
   const theme = getThemePreset(profile.theme);
   if (!theme) return undefined;
 
+  // `theme.light`/`theme.dark` 를 통째로 spread 하지 않는다 — ink-bulb 처럼
+  // ThemeTokens 의 opt-in 확장 필드(camelCase `bulb`/`shell`/`shellForeground`/
+  // `shellMuted`)를 가진 프리셋이 오면, THEME_TOKEN_KEYS 27키 완전성 검사를
+  // 통과하는 키가 아닌 camelCase 이름 그대로 `registry.json` 에 실려
+  // `--shellForeground` 같은 잘못된 CSS 변수명으로 샌다(`app/globals.css` 는
+  // `--shell-foreground`). THEME_TOKEN_KEYS 로 pick 해서 필수 27키만 가져온다
+  // (#112 finding 1).
+  const themeLight = pickThemeTokens(theme.light);
+  const themeDark = pickThemeTokens(theme.dark);
+
   const light: Record<string, string> = {
-    ...theme.light,
-    ...SIDEBAR_TOKENS.light,
+    ...themeLight,
+    ...theme.sidebar.light,
     ...RISK_TOKENS.light,
     ...HEATMAP_TOKENS.light,
   };
   const dark: Record<string, string> = {
-    ...theme.dark,
-    ...SIDEBAR_TOKENS.dark,
+    ...themeDark,
+    ...theme.sidebar.dark,
     ...RISK_TOKENS.dark,
     ...HEATMAP_TOKENS.dark,
   };

@@ -1,8 +1,8 @@
 "use client"
 
-import { useState, type ReactNode } from "react"
+import { useState } from "react"
 
-import { cn } from "@/lib/utils"
+import { FacetedFilter, type FacetGroup } from "@/components/patterns/faceted-filter/faceted-filter"
 
 interface FacetItem {
   id: string
@@ -11,16 +11,10 @@ interface FacetItem {
   sub: string
 }
 
-interface FacetGroup {
-  key: string
-  label: string
-  color: string
-}
-
 const GROUPS: FacetGroup[] = [
-  { key: "design", label: "디자인", color: "bg-chart-1" },
-  { key: "engineering", label: "엔지니어링", color: "bg-chart-2" },
-  { key: "operations", label: "오퍼레이션", color: "bg-chart-3" },
+  { key: "design", label: "디자인", color: "var(--chart-1)" },
+  { key: "engineering", label: "엔지니어링", color: "var(--chart-2)" },
+  { key: "operations", label: "오퍼레이션", color: "var(--chart-3)" },
 ]
 
 const ITEMS: FacetItem[] = [
@@ -44,7 +38,7 @@ function subCatsOf(group: string): string[] {
   return Array.from(new Set(ITEMS.filter((item) => item.group === group).map((item) => item.sub)))
 }
 
-/** 2단계(그룹 → 서브카테고리) 칩 필터 + 카운트 배지 + 그룹 컬러 강조 데모. */
+/** /patterns/faceted-filter 데모용 — 업무 항목 10건에 2단계 필터를 얹는다. */
 export function FacetedFilterDemo() {
   const [group, setGroup] = useState("")
   const [sub, setSub] = useState("")
@@ -60,40 +54,18 @@ export function FacetedFilterDemo() {
     return true
   })
 
-  const activeGroup = GROUPS.find((g) => g.key === group)
-  const subCats = group ? subCatsOf(group) : []
-
   return (
     <div className="flex w-full flex-col gap-3">
-      <div className="flex flex-wrap items-center gap-1.5 overflow-x-auto pb-1">
-        <FacetChip active={group === ""} onClick={() => selectGroup("")}>
-          전체
-          <CountBadge active={group === ""}>{ITEMS.length}</CountBadge>
-        </FacetChip>
-        {GROUPS.map((g) => (
-          <FacetChip key={g.key} active={group === g.key} color={g.color} onClick={() => selectGroup(g.key)}>
-            {g.label}
-            <CountBadge active={group === g.key}>{countBy(g.key)}</CountBadge>
-          </FacetChip>
-        ))}
-      </div>
-
-      {subCats.length > 0 && (
-        <div
-          className="flex flex-wrap items-center gap-1.5 overflow-x-auto border-l-2 pb-1 pl-3"
-          style={{ borderColor: activeGroup?.color }}
-        >
-          <FacetChip active={sub === ""} onClick={() => setSub("")}>
-            전체
-          </FacetChip>
-          {subCats.map((s) => (
-            <FacetChip key={s} active={sub === s} onClick={() => setSub(s)}>
-              {s}
-              <CountBadge active={sub === s}>{countBy(group, s)}</CountBadge>
-            </FacetChip>
-          ))}
-        </div>
-      )}
+      <FacetedFilter
+        groups={GROUPS}
+        group={group}
+        onGroupChange={selectGroup}
+        sub={sub}
+        onSubChange={setSub}
+        subCategories={group ? subCatsOf(group) : []}
+        totalCount={ITEMS.length}
+        countOf={countBy}
+      />
 
       <ul className="flex flex-col gap-1.5">
         {filtered.map((item) => {
@@ -113,36 +85,5 @@ export function FacetedFilterDemo() {
         })}
       </ul>
     </div>
-  )
-}
-
-function FacetChip({
-  active,
-  color,
-  onClick,
-  children,
-}: Readonly<{ active: boolean; color?: string; onClick: () => void; children: ReactNode }>) {
-  return (
-    <button
-      type="button"
-      aria-pressed={active}
-      onClick={onClick}
-      className={cn(
-        "inline-flex shrink-0 items-center gap-1 rounded-full border px-3 py-1 text-[12px] font-medium transition-colors",
-        active
-          ? cn("border-transparent text-primary-foreground", color ?? "bg-primary")
-          : "border-border bg-card text-foreground hover:bg-accent",
-      )}
-    >
-      {children}
-    </button>
-  )
-}
-
-function CountBadge({ active, children }: Readonly<{ active: boolean; children: ReactNode }>) {
-  return (
-    <span className={cn("font-mono text-[10px]", active ? "text-primary-foreground/80" : "text-muted-foreground")}>
-      {children}
-    </span>
   )
 }

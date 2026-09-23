@@ -1,14 +1,25 @@
+import fs from "node:fs"
+import path from "node:path"
+
 import { describe, expect, it } from "vitest"
+
 
 import {
   collectSpecifiers,
   fileExists,
+  NEXT_CONVENTION_FILES,
+  hrefMatchesRoutes,
+  internalHrefs,
   packageNameOf,
   packageOfSpecifier,
   providedPaths,
+  providedRoutes,
   readRegistry,
+  REPO_ROOT,
   registryDependencyName,
   resolveSpecifier,
+  simulateShadcnRewrite,
+  routeFromPagePath,
   undeclaredPackages,
   unresolvedImports,
   upstreamComponentNames,
@@ -205,14 +216,13 @@ describe("파일 이름 충돌 — 이슈 #52", () => {
    * `index` 는 규약 파일이 아니고 실제 import 대상이므로(`@/profiles` 등) 제외하지 않는다 —
    * 확장자가 같은 동안에만 안전하다는 사실을 이 검사가 지킨다 (#54).
    */
-  const NEXT_CONVENTION = new Set(["page", "layout", "loading", "error", "not-found", "template", "default"])
 
   it("한 번의 설치가 까는 파일 중 이름이 같고 확장자가 다른 짝이 없다", () => {
     for (const item of registry.items) {
       const seen = new Map<string, string>()
       for (const filePath of [...providedPaths(item.name, registry)].sort()) {
         const stem = filePath.replace(/.*\//, "").replace(/\.[^.]+$/, "")
-        if (NEXT_CONVENTION.has(stem)) continue
+        if (NEXT_CONVENTION_FILES.has(stem)) continue
         const extension = filePath.slice(filePath.lastIndexOf("."))
         const previous = seen.get(stem)
         if (previous === undefined) {
@@ -225,5 +235,168 @@ describe("파일 이름 충돌 — 이슈 #52", () => {
         ).toBe(extension)
       }
     }
+  })
+
+  /**
+   * 위 확장자-다름 가드는 "같은 확장자면 안전하다"는 전제 위에 서 있다 — 이슈 #70 이전에는
+   * 이 전제가 실측된 적이 없었다.
+   *
+   * 2026-09-23 shadcn 4.21.0 을 디컴파일해 실제 재작성 알고리즘(`Il()`)을 확인하고
+   * (`scripts/registry/closure.ts` 의 `simulateShadcnRewrite`), 빈 Next 앱에 직접 설치해
+   * (`scripts/manual/2026-09-23_issue-70_same-ext-collision.mjs`) 실물 CLI 출력과 대조했다.
+   * 결론: 확장자가 같으면 CLI 는 지정자 자신의 경로를 prefix 로 정확히 매칭해 항상 올바른
+   * 파일을 고른다 — **단, 그 지정자가 실제로 그 파일의 진짜 경로를 가리킬 때만.** 그 전제는
+   * 위의 "배포 가능성 — 이슈 #52" 블록의 `unresolvedImports` 검사가 이미 강제하고 있다
+   * (지정자가 레포 안 실제 파일로 정확히 풀리지 않으면 그 자체로 실패한다).
+   *
+   * 이 테스트는 그 둘을 이어 붙여 전제를 고정한다: 설치본 안의 모든 `@/` import 에 대해
+   * "CLI 가 실제로 재작성할 대상"(`simulateShadcnRewrite`)과 "우리가 정적으로 해소한 대상"
+   * (`resolveSpecifier`)이 항상 같은 파일을 가리켜야 한다. 어긋나면 — 즉 같은 이름의 다른
+   * 파일이 끼어들면 — 실패한다.
+   */
+  it("같은 이름 + 같은 확장자 충돌이 있어도 shadcn 의 재작성 대상이 우리가 해소한 파일과 항상 일치한다 (이슈 #70)", () => {
+    for (const item of registry.items) {
+      const closure = providedPaths(item.name, registry)
+      const problems: string[] = []
+      for (const filePath of [...closure].sort()) {
+        if (!fileExists(filePath)) continue
+        const source = fs.readFileSync(path.join(REPO_ROOT, filePath), "utf8")
+        for (const spec of collectSpecifiers(source)) {
+          if (!spec.startsWith("@/")) continue
+          const resolution = resolveSpecifier(spec, filePath)
+          if (resolution.kind !== "resolved" || !closure.has(resolution.path)) continue
+          const rewritten = simulateShadcnRewrite(spec, closure)
+          if (rewritten !== resolution.path) {
+            problems.push(`${filePath}: "${spec}" → shadcn 은 ${rewritten ?? "(후보 없음)"} 를 고르지만 실제 파일은 ${resolution.path}`)
+          }
+        }
+      }
+      expect(problems, `${item.name} 설치:\n${problems.join("\n")}`).toEqual([])
+    }
+  })
+})
+
+describe("routeFromPagePath", () => {
+  it("app/ 경로를 라우트로 바꾼다", () => {
+    expect(routeFromPagePath("app/templates/admin/page.tsx")).toBe("/templates/admin")
+    expect(routeFromPagePath("app/page.tsx")).toBe("/")
+  })
+
+  it("라우트 그룹은 URL 에서 사라진다", () => {
+    expect(routeFromPagePath("app/(marketing)/about/page.tsx")).toBe("/about")
+  })
+
+  it("page.tsx 가 아니면 라우트가 아니다", () => {
+    expect(routeFromPagePath("app/templates/admin/layout.tsx")).toBeNull()
+    expect(routeFromPagePath("components/x.tsx")).toBeNull()
+  })
+})
+
+describe("simulateShadcnRewrite — 확장자 있는 지정자", () => {
+  /**
+   * 상류 `Il()` 은 `path.extname(지정자)` 가 비어 있지 않으면 후보 확장자 집합을 그 하나로
+   * 좁힌다(`d = c ? [a] : s`). 이 분기가 빠져 있으면 `.demo` 처럼 확장자로 해석되는 지정자에서
+   * 시뮬레이션이 실물 CLI 와 다른 파일을 고른다 (리뷰 F10).
+   */
+  it("확장자가 붙은 지정자는 그 확장자만 후보로 본다", () => {
+    const closure = new Set(["lib/theme.css", "lib/theme.ts", "lib/theme.tsx"])
+    expect(simulateShadcnRewrite("@/lib/theme.css", closure)).toBe("lib/theme.css")
+    // 확장자 없는 지정자는 우선순위(.tsx 먼저)를 그대로 탄다.
+    expect(simulateShadcnRewrite("@/lib/theme", closure)).toBe("lib/theme.tsx")
+  })
+
+  it("`.demo` 같은 비확장자 점도 상류와 같이 확장자로 취급한다", () => {
+    const closure = new Set(["components/demos/badge.demo.tsx", "components/demos/badge.tsx"])
+    // 상류는 base 를 "components/demos/badge", 후보 확장자를 [".demo"] 로 좁히므로
+    // `.demo` 로 끝나는 파일이 없어 해소되지 않는다.
+    expect(simulateShadcnRewrite("@/components/demos/badge.demo", closure)).toBeNull()
+  })
+
+  it("확장자를 좁힌 뒤 후보가 없으면 null 이다", () => {
+    expect(simulateShadcnRewrite("@/lib/theme.css", new Set(["lib/theme.ts"]))).toBeNull()
+  })
+})
+
+describe("internalHrefs", () => {
+  it("문자열 리터럴 href 만 잡는다", () => {
+    const source = [
+      `<Link href="/templates/shop">go</Link>`,
+      `<a href="https://example.com">외부</a>`,
+      `<a href="//cdn.example.com/x">프로토콜 상대</a>`,
+      `<a href="#anchor">해시</a>`,
+    ].join("\n")
+    expect(internalHrefs(source)).toEqual(["/templates/shop"])
+  })
+
+  it("템플릿 리터럴·표현식 href 는 정적으로 완결되지 않으므로 잡지 않는다", () => {
+    const source = [`<Link href={\`/templates/shop/product/\${id}\`}>go</Link>`, `<Link href={buildUrl()}>go</Link>`].join(
+      "\n",
+    )
+    expect(internalHrefs(source)).toEqual([])
+  })
+
+  it("내비 데이터 배열의 오브젝트 리터럴 href 도 잡는다", () => {
+    // 셸 컴포넌트(TopNavShell 등)가 `item.href` 를 그대로 <Link href> 로 렌더하므로
+    // JSX 속성과 같은 죽은 링크 위험이 있다 (#113 리뷰 F1).
+    const source = [
+      `export const NAV = [`,
+      `  { key: "home", label: "홈", href: "/templates/ews-dashboard" },`,
+      `  { key: "borrowers", label: "차주" },`,
+      `  { "href": "/templates/ews-diagnosis" },`,
+      `  { key: "ext", href: "https://example.com" },`,
+      `  { key: "hash", href: "#top" },`,
+      `  { key: "dyn", href: buildUrl() },`,
+      `]`,
+    ].join("\n")
+    expect(internalHrefs(source)).toEqual(["/templates/ews-dashboard", "/templates/ews-diagnosis"])
+  })
+})
+
+describe("hrefMatchesRoutes", () => {
+  it("정적 라우트와 일치한다", () => {
+    expect(hrefMatchesRoutes("/templates/shop", ["/templates/shop"])).toBe(true)
+    expect(hrefMatchesRoutes("/templates/other", ["/templates/shop"])).toBe(false)
+  })
+
+  it("동적 세그먼트를 와일드카드로 매칭한다", () => {
+    expect(hrefMatchesRoutes("/templates/shop/product/42", ["/templates/shop/product/[id]"])).toBe(true)
+  })
+
+  it("catch-all 은 세그먼트 1개 이상, 선택적 catch-all 은 0개도 매칭한다", () => {
+    expect(hrefMatchesRoutes("/docs/a/b", ["/docs/[...slug]"])).toBe(true)
+    expect(hrefMatchesRoutes("/docs", ["/docs/[...slug]"])).toBe(false)
+    expect(hrefMatchesRoutes("/docs", ["/docs/[[...slug]]"])).toBe(true)
+    expect(hrefMatchesRoutes("/docs/a/b", ["/docs/[[...slug]]"])).toBe(true)
+    expect(hrefMatchesRoutes("/other", ["/docs/[[...slug]]"])).toBe(false)
+  })
+
+  it("루트 라우트는 루트 href 에만 매칭한다", () => {
+    expect(hrefMatchesRoutes("/", ["/"])).toBe(true)
+    expect(hrefMatchesRoutes("/x", ["/"])).toBe(false)
+  })
+
+  it("쿼리·해시를 떼고 비교한다", () => {
+    expect(hrefMatchesRoutes("/templates/shop?x=1#y", ["/templates/shop"])).toBe(true)
+  })
+})
+
+describe("죽은 내부 링크 게이트 — GitHub #113", () => {
+  // 파일 축도 라우트 축과 같은 전이 폐포(`providedPaths`)로 잡는다. 자기 `files` 만 보면
+  // 의존 항목이 함께 깔아주는 파일(내비 데이터·셸)의 죽은 링크를 놓친다 (리뷰 F14).
+  it("설치 폐포 파일의 내부 href 는 그 폐포가 제공하는 라우트 안을 가리킨다", () => {
+    const broken: string[] = []
+    for (const item of registry.items) {
+      const routes = providedRoutes(item.name, registry)
+      for (const filePath of providedPaths(item.name, registry)) {
+        if (!/\.tsx?$/.test(filePath)) continue
+        const abs = path.join(REPO_ROOT, filePath)
+        if (!fs.existsSync(abs)) continue
+        const source = fs.readFileSync(abs, "utf8")
+        for (const href of internalHrefs(source)) {
+          if (!hrefMatchesRoutes(href, routes)) broken.push(`${item.name}: ${filePath} → ${href}`)
+        }
+      }
+    }
+    expect(broken, `설치본이 제공하지 않는 라우트를 가리키는 내부 링크:\n${broken.join("\n")}`).toEqual([])
   })
 })

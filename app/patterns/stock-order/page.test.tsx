@@ -7,7 +7,7 @@ import { STOCK_ORDER_SAMPLES } from "@/components/patterns/stock-order-samples"
 describe("StockOrderPatternsPage", () => {
   it("renders the page heading and every sample section", () => {
     render(<StockOrderPatternsPage />)
-    expect(screen.getByRole("heading", { level: 1, name: "주식 주문 패턴" })).toBeInTheDocument()
+    expect(screen.getByRole("heading", { level: 1, name: "주식 · 주문" })).toBeInTheDocument()
     for (const sample of STOCK_ORDER_SAMPLES) {
       expect(screen.getByRole("heading", { level: 2, name: sample.title })).toBeInTheDocument()
     }

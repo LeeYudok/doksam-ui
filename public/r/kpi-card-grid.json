@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "kpi-card-grid",
+  "title": "KPI Card Grid",
+  "description": "값(금액/건수/비율) + 전기 대비 증감 + 미니 스파크라인을 담은 지표 카드 그리드. 증감 색은 한국식 관례를 따르는 gain/loss 토큰만 쓴다.",
+  "dependencies": [
+    "@phosphor-icons/react@^2.1.10"
+  ],
+  "registryDependencies": [
+    "https://ui.doksam.com/r/card.json",
+    "https://ui.doksam.com/r/finance-format-won.json",
+    "https://ui.doksam.com/r/finance-rate.json",
+    "https://ui.doksam.com/r/sparkline.json"
+  ],
+  "files": [
+    {
+      "path": "components/patterns/stats/kpi-card-grid.tsx",
+      "content": "import { TrendDownIcon, TrendUpIcon } from \"@phosphor-icons/react/dist/ssr\"\n\nimport { Card, CardContent, CardHeader, CardTitle } from \"@/components/ui/card\"\nimport { Sparkline } from \"@/components/patterns/dataviz/sparkline\"\nimport { formatWon } from \"@/lib/finance/format-won\"\nimport { rateColor, rateText } from \"@/lib/finance/rate\"\nimport { cn } from \"@/lib/utils\"\n\nexport interface Kpi {\n  label: string\n  /** 원 단위 값이면 formatWon으로, 건수·비율 등이면 count/percent로 표시 단위를 고른다. */\n  unit: \"won\" | \"count\" | \"percent\"\n  value: number\n  /** 전기 대비 증감률(%). */\n  change: number\n  /** 미니 스파크라인에 그릴 추세값. 비우면 스파크라인을 그리지 않는다. */\n  trend?: number[]\n}\n\nexport interface KpiCardGridProps {\n  items: Kpi[]\n  className?: string\n}\n\nfunction kpiValueText(kpi: Kpi): string {\n  if (kpi.unit === \"won\") return formatWon(kpi.value)\n  if (kpi.unit === \"percent\") return `${kpi.value.toFixed(1)}%`\n  return kpi.value.toLocaleString()\n}\n\n/** KPI 카드 한 장 — 라벨 + 값 + 전기 대비 증감 + 미니 스파크라인. */\nexport function KpiCard({ kpi }: Readonly<{ kpi: Kpi }>) {\n  const colorClass = rateColor(kpi.change)\n  return (\n    <Card>\n      <CardHeader className=\"pb-1\">\n        <CardTitle className=\"text-xs font-medium text-muted-foreground\">{kpi.label}</CardTitle>\n      </CardHeader>\n      <CardContent className=\"flex flex-col gap-2\">\n        <div className=\"flex items-baseline justify-between gap-2\">\n          <span className=\"text-2xl font-semibold tabular-nums tracking-tight\">{kpiValueText(kpi)}</span>\n          <span className={cn(\"flex items-center gap-0.5 text-xs font-medium tabular-nums\", colorClass)}>\n            {kpi.change > 0 && <TrendUpIcon size={12} weight=\"bold\" />}\n            {kpi.change < 0 && <TrendDownIcon size={12} weight=\"bold\" />}\n            {rateText(kpi.change)}%\n          </span>\n        </div>\n        {kpi.trend && kpi.trend.length > 0 ? <Sparkline values={kpi.trend} height={32} /> : null}\n      </CardContent>\n    </Card>\n  )\n}\n\n/**\n * KPI 카드 그리드 — 값(formatWon/건수/비율) + 전기 대비 증감(rateColor/rateText) +\n * 미니 스파크라인. 증감 색은 한국식 시세 관례(상승=gain, 하락=loss)를 따르는\n * lib/finance/rate.ts 시맨틱 토큰만 사용한다.\n */\nexport function KpiCardGrid({ items, className }: Readonly<KpiCardGridProps>) {\n  return (\n    <div className={cn(\"grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3\", className)}>\n      {items.map((kpi) => (\n        <KpiCard key={kpi.label} kpi={kpi} />\n      ))}\n    </div>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}

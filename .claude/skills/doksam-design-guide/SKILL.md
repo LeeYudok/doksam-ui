@@ -165,6 +165,14 @@ radius 값을 새로 쓰지 않는다(레지스트리 프리셋 중에서만 고
 `risk-low`/`risk-moderate`/`risk-high`/`risk-severe`(+ 각 `-foreground`),
 `heatmap-l-0~4`/`heatmap-text-0~4`.
 
+`chart-1~5` 는 **범주형** 팔레트다(#93). `chart-1` 만 프리셋의 브랜드 hue 를 유지하고
+나머지는 색상환을 72°씩 돌며(인덱스 순서는 0/144/288/72/216 로 엇갈림), 상대휘도도
+계단식으로 벌어져 색각 이상·흑백에서 계열이 남는다. 라이트값은
+`text-primary-foreground` 대비 4.5:1 을 넘도록 명도를 잡아 `--chart-N-foreground` 짝을
+두지 않는다. 이 세 축은 `themes/chart-palette.test.ts` 가 프리셋 9종 × 라이트/다크로
+강제하므로, 프리셋을 추가·수정할 때 chart 값을 임의로 정하면 그 테스트가 먼저 깨진다.
+생성기는 `scripts/manual/2026-09-23_issue-93_gen-chart-palette.ts` 다.
+
 이 목록은 닫힌 목록이 아니다 — 기존 토큰 어느 것으로도 표현할 수 없는 성격이 나오면
 보조 층을 새로 만든다. `heatmap-*`(#103) 가 그 예다: 연속 값 강도는 `chart-1~5`(순서
 없는 범주 팔레트)로도 `risk-*`(4단 고정 심각도)로도 실을 수 없어
@@ -179,9 +187,13 @@ radius 값을 새로 쓰지 않는다(레지스트리 프리셋 중에서만 고
 - `gain`/`loss` — 프리셋 27키(`ThemeTokens`) 안에 있고 프리셋 8종이 **같은 값을
   각각 적는다**. SSOT 는 `themes/*.ts`, `globals.css` 의 `[data-theme]` 블록 16개가
   이 값을 미러링한다.
-- `risk-*` — `sidebar-*` 처럼 27키에서 **빠져** `globals.css` 의 `:root`/`.dark` 에만
-  정의된다. SSOT 는 `lib/risk-tokens.ts`, 프리셋 블록이 재정의하지 않는다
+- `risk-*` — 27키에서 **빠져** `globals.css` 의 `:root`/`.dark` 에만 정의된다.
+  SSOT 는 `lib/risk-tokens.ts`, 프리셋 블록이 재정의하지 않는다
   (`lib/globals-css-mirror.test.ts` 가 막는다).
+- `sidebar-*` — 27키 밖이지만 **프리셋마다 명시값을 갖는** 또 다른 층이다(#112).
+  SSOT 는 `themes/<name>.ts` 의 `sidebar` 필드이고 `[data-theme]` 블록 18개가
+  전부 재정의한다 — 같은 미러 테스트가 그 재정의를 **요구**한다. `:root`/`.dark`
+  는 테마 미확정 시 폴백(= ocean 값, `lib/sidebar-tokens.ts`)일 뿐이다.
 
 순서 있는 심각도는 `chart-1~5`(범주 팔레트)나 `success`/`warning`/`destructive`(3단
 상태색)로 대체하지 않는다. 값을 고칠 때는 `lib/risk-tokens.test.ts` 가 프리셋 8종

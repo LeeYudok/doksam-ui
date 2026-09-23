@@ -37,7 +37,7 @@ export default function EwsDashboardPage() {
       screenTitle="홈 대시보드"
       subTabs={EWS_HOME_SUB_TABS}
       activeSubTab="overview"
-      ask={<TopNavAskBar label="차주명 · 사업자번호로 물어보세요" href="/templates/help-center" />}
+      ask={<TopNavAskBar label="차주명 · 사업자번호로 물어보세요" />}
       tools={
         <>
           <Button type="button" variant="outline" size="sm">

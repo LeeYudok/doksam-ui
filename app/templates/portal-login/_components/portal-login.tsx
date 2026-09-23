@@ -23,7 +23,7 @@ import { LiveIndicator } from "@/components/live-indicator"
 import {
   CERTIFICATE_HELP_NOTE,
   NOTICES,
-  PASSWORD_RESET_NOTE,
+  RESET_HELP_NOTE,
   ROLE_ROUTING_NOTE,
   SECURITY_NOTICE,
   SYSTEM_STATUS,
@@ -265,7 +265,7 @@ function SigninScreen({
         <Alert>
           <BellIcon aria-hidden />
           <AlertTitle>비밀번호 재설정 안내</AlertTitle>
-          <AlertDescription>{PASSWORD_RESET_NOTE}</AlertDescription>
+          <AlertDescription>{RESET_HELP_NOTE}</AlertDescription>
         </Alert>
       ) : null}
     </form>

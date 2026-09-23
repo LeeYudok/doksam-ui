@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "compact-timeline",
+  "title": "Compact Timeline",
+  "description": "날짜 그룹 없이 단일 프로세스의 진행 이력을 좁은 폭에 담는 축약 타임라인.",
+  "dependencies": [
+    "@phosphor-icons/react@^2.1.10"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "components/patterns/timeline/compact-timeline.tsx",
+      "content": "import type { Icon } from \"@phosphor-icons/react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/** 단계 점 색 — 시맨틱 토큰 4종에만 대응한다. */\nexport type CompactStepStatus = \"success\" | \"warning\" | \"destructive\" | \"muted\"\n\nexport interface CompactStep {\n  time: string\n  status: CompactStepStatus\n  icon: Icon\n  title: string\n}\n\nexport interface CompactTimelineProps {\n  steps: CompactStep[]\n  className?: string\n}\n\nconst DOT_CLASS: Record<CompactStepStatus, string> = {\n  success: \"bg-success\",\n  warning: \"bg-warning\",\n  destructive: \"bg-destructive\",\n  muted: \"bg-muted-foreground/40\",\n}\n\n/**\n * 컴팩트 타임라인 — 날짜 그룹 없이 단일 프로세스(주문 처리 단계 등)의 진행 이력을\n * 좁은 폭(사이드 패널·카드 내부)에 담을 때 쓰는 축약 변형이다.\n */\nexport function CompactTimeline({ steps, className }: Readonly<CompactTimelineProps>) {\n  return (\n    <ol className={cn(\"flex max-w-sm flex-col\", className)}>\n      {steps.map((step, i) => {\n        const StepIcon = step.icon\n        return (\n          <li key={step.title} className=\"relative flex gap-2.5 pb-4 last:pb-0\">\n            {i < steps.length - 1 && <span aria-hidden className=\"absolute top-4 bottom-0 left-[5px] w-px bg-border\" />}\n            <span\n              className={cn(\n                \"relative z-10 mt-1 flex size-2.5 shrink-0 items-center justify-center rounded-full\",\n                DOT_CLASS[step.status]\n              )}\n            />\n            <div className=\"flex min-w-0 flex-1 items-baseline justify-between gap-2\">\n              <span className=\"flex items-center gap-1 text-sm\">\n                <StepIcon size={13} className=\"shrink-0 text-muted-foreground\" />\n                {step.title}\n              </span>\n              <span className=\"shrink-0 text-xs tabular-nums text-muted-foreground\">{step.time}</span>\n            </div>\n          </li>\n        )\n      })}\n    </ol>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}
