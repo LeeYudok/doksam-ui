@@ -153,3 +153,29 @@ describe("withSyncedProfileAxesDescription", () => {
     expect(withSyncedProfileAxesDescription(description, profile)).toBe(description);
   });
 });
+
+// 회귀(#112 finding 1): theme.light/dark 를 통째로 spread 하던 시절엔
+// ink-bulb 처럼 ThemeTokens 의 opt-in 확장 필드(camelCase `bulb`/`shell`/
+// `shellForeground`/`shellMuted`)를 가진 프리셋을 고른 프로필이 그 camelCase
+// 이름 그대로를 cssVars 에 실어 `--shellForeground` 같은 잘못된 CSS 변수명
+// (app/globals.css 는 `--shell-foreground`)으로 새어 나갔다. 필수 키
+// 완전성 테스트(위)는 "있어야 할 키가 있는가"만 보므로 이 초과 유출을 못
+// 잡는다 — 없어야 할 키가 없는지 따로 지킨다.
+describe("computeProfileRegistryCssVars — ink-bulb 확장 토큰 유출 방지 (#112 finding 1)", () => {
+  it("ink-bulb 테마를 고른 프로필도 camelCase 확장 키(bulb/shell*)를 cssVars 에 싣지 않는다", () => {
+    const inkBulbProfile = { ...BRAND_PROFILES[0]!, theme: "ink-bulb" };
+    const result = computeProfileRegistryCssVars(inkBulbProfile);
+    expect(result).toBeDefined();
+
+    const leakKeys = ["bulb", "shell", "shellForeground", "shellMuted"];
+    for (const key of leakKeys) {
+      expect(result!.light, `light 에 ${key} 가 새어 있다`).not.toHaveProperty(key);
+      expect(result!.dark, `dark 에 ${key} 가 새어 있다`).not.toHaveProperty(key);
+    }
+
+    // 키 집합은 PROFILE_CSS_VAR_KEYS(계약)와 정확히 같아야 한다 — 확장 키가
+    // 섞여도, 반대로 pick 이 과하게 걸러도 여기서 잡힌다.
+    expect(Object.keys(result!.light).sort()).toEqual([...PROFILE_CSS_VAR_KEYS].sort());
+    expect(Object.keys(result!.dark).sort()).toEqual([...PROFILE_CSS_VAR_KEYS].sort());
+  });
+});
