@@ -40,9 +40,17 @@ export interface EwsNavItem {
   href?: string
 }
 
-/** top-nav 셸(#86) 의 글로벌 메뉴. EWS 템플릿들이 같은 메뉴를 쓴다. */
+/**
+ * top-nav 셸(#86) 의 글로벌 메뉴. EWS 템플릿들이 같은 메뉴를 쓴다.
+ *
+ * 항목에 `href` 를 박지 않는다 — 이 배열은 여러 템플릿 항목의 설치 폐포에 함께 들어가므로,
+ * 특정 템플릿의 라우트를 가리키면 그 템플릿을 같이 설치하지 않은 소비 프로젝트에서 404 가
+ * 된다(예: `template-ews-diagnosis` 단독 설치 시 `/templates/ews-dashboard`). 셸은 href 가
+ * 없으면 `onSelect` 를 호출하는 버튼으로 렌더하므로, 목적지는 소비 프로젝트가 자신의
+ * 라우트에 맞춰 주입한다.
+ */
 export const EWS_NAV_ITEMS: EwsNavItem[] = [
-  { key: "home", label: "조기경보 홈", icon: BellRingingIcon, href: "/templates/ews-dashboard" },
+  { key: "home", label: "조기경보 홈", icon: BellRingingIcon },
   { key: "borrowers", label: "차주 관리", icon: UsersThreeIcon },
   { key: "audit", label: "여신감리", icon: ShieldCheckIcon },
   { key: "portfolio", label: "포트폴리오", icon: ChartDonutIcon },

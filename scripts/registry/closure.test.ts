@@ -292,6 +292,31 @@ describe("routeFromPagePath", () => {
   })
 })
 
+describe("simulateShadcnRewrite — 확장자 있는 지정자", () => {
+  /**
+   * 상류 `Il()` 은 `path.extname(지정자)` 가 비어 있지 않으면 후보 확장자 집합을 그 하나로
+   * 좁힌다(`d = c ? [a] : s`). 이 분기가 빠져 있으면 `.demo` 처럼 확장자로 해석되는 지정자에서
+   * 시뮬레이션이 실물 CLI 와 다른 파일을 고른다 (리뷰 F10).
+   */
+  it("확장자가 붙은 지정자는 그 확장자만 후보로 본다", () => {
+    const closure = new Set(["lib/theme.css", "lib/theme.ts", "lib/theme.tsx"])
+    expect(simulateShadcnRewrite("@/lib/theme.css", closure)).toBe("lib/theme.css")
+    // 확장자 없는 지정자는 우선순위(.tsx 먼저)를 그대로 탄다.
+    expect(simulateShadcnRewrite("@/lib/theme", closure)).toBe("lib/theme.tsx")
+  })
+
+  it("`.demo` 같은 비확장자 점도 상류와 같이 확장자로 취급한다", () => {
+    const closure = new Set(["components/demos/badge.demo.tsx", "components/demos/badge.tsx"])
+    // 상류는 base 를 "components/demos/badge", 후보 확장자를 [".demo"] 로 좁히므로
+    // `.demo` 로 끝나는 파일이 없어 해소되지 않는다.
+    expect(simulateShadcnRewrite("@/components/demos/badge.demo", closure)).toBeNull()
+  })
+
+  it("확장자를 좁힌 뒤 후보가 없으면 null 이다", () => {
+    expect(simulateShadcnRewrite("@/lib/theme.css", new Set(["lib/theme.ts"]))).toBeNull()
+  })
+})
+
 describe("internalHrefs", () => {
   it("문자열 리터럴 href 만 잡는다", () => {
     const source = [
@@ -309,6 +334,22 @@ describe("internalHrefs", () => {
     )
     expect(internalHrefs(source)).toEqual([])
   })
+
+  it("내비 데이터 배열의 오브젝트 리터럴 href 도 잡는다", () => {
+    // 셸 컴포넌트(TopNavShell 등)가 `item.href` 를 그대로 <Link href> 로 렌더하므로
+    // JSX 속성과 같은 죽은 링크 위험이 있다 (#113 리뷰 F1).
+    const source = [
+      `export const NAV = [`,
+      `  { key: "home", label: "홈", href: "/templates/ews-dashboard" },`,
+      `  { key: "borrowers", label: "차주" },`,
+      `  { "href": "/templates/ews-diagnosis" },`,
+      `  { key: "ext", href: "https://example.com" },`,
+      `  { key: "hash", href: "#top" },`,
+      `  { key: "dyn", href: buildUrl() },`,
+      `]`,
+    ].join("\n")
+    expect(internalHrefs(source)).toEqual(["/templates/ews-dashboard", "/templates/ews-diagnosis"])
+  })
 })
 
 describe("hrefMatchesRoutes", () => {
@@ -321,23 +362,38 @@ describe("hrefMatchesRoutes", () => {
     expect(hrefMatchesRoutes("/templates/shop/product/42", ["/templates/shop/product/[id]"])).toBe(true)
   })
 
+  it("catch-all 은 세그먼트 1개 이상, 선택적 catch-all 은 0개도 매칭한다", () => {
+    expect(hrefMatchesRoutes("/docs/a/b", ["/docs/[...slug]"])).toBe(true)
+    expect(hrefMatchesRoutes("/docs", ["/docs/[...slug]"])).toBe(false)
+    expect(hrefMatchesRoutes("/docs", ["/docs/[[...slug]]"])).toBe(true)
+    expect(hrefMatchesRoutes("/docs/a/b", ["/docs/[[...slug]]"])).toBe(true)
+    expect(hrefMatchesRoutes("/other", ["/docs/[[...slug]]"])).toBe(false)
+  })
+
+  it("루트 라우트는 루트 href 에만 매칭한다", () => {
+    expect(hrefMatchesRoutes("/", ["/"])).toBe(true)
+    expect(hrefMatchesRoutes("/x", ["/"])).toBe(false)
+  })
+
   it("쿼리·해시를 떼고 비교한다", () => {
     expect(hrefMatchesRoutes("/templates/shop?x=1#y", ["/templates/shop"])).toBe(true)
   })
 })
 
 describe("죽은 내부 링크 게이트 — GitHub #113", () => {
-  it("배포 블록 파일의 내부 href 는 그 항목이 제공하는 라우트 안을 가리킨다", () => {
+  // 파일 축도 라우트 축과 같은 전이 폐포(`providedPaths`)로 잡는다. 자기 `files` 만 보면
+  // 의존 항목이 함께 깔아주는 파일(내비 데이터·셸)의 죽은 링크를 놓친다 (리뷰 F14).
+  it("설치 폐포 파일의 내부 href 는 그 폐포가 제공하는 라우트 안을 가리킨다", () => {
     const broken: string[] = []
     for (const item of registry.items) {
       const routes = providedRoutes(item.name, registry)
-      for (const f of item.files ?? []) {
-        if (!/\.tsx?$/.test(f.path)) continue
-        const abs = path.join(REPO_ROOT, f.path)
+      for (const filePath of providedPaths(item.name, registry)) {
+        if (!/\.tsx?$/.test(filePath)) continue
+        const abs = path.join(REPO_ROOT, filePath)
         if (!fs.existsSync(abs)) continue
         const source = fs.readFileSync(abs, "utf8")
         for (const href of internalHrefs(source)) {
-          if (!hrefMatchesRoutes(href, routes)) broken.push(`${item.name}: ${f.path} → ${href}`)
+          if (!hrefMatchesRoutes(href, routes)) broken.push(`${item.name}: ${filePath} → ${href}`)
         }
       }
     }
