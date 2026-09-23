@@ -25,7 +25,7 @@
     "test:vision": "node scripts/vision-gate/run.mjs",
     "registry:sync": "node --experimental-strip-types scripts/registry/sync-ui-items.ts && node --experimental-strip-types scripts/registry/sync-profile-vars.ts",
     "registry:sync:profiles": "node --experimental-strip-types scripts/registry/sync-profile-vars.ts",
-    "registry:build": "shadcn build",
+    "registry:build": "shadcn build && node --experimental-strip-types scripts/registry/i18n-trim.ts",
     "gen:llms": "node scripts/gen-llms.mjs",
     "check:shadcn": "node scripts/shadcn-upstream.mjs",
     "check:gitlab-drift": "node scripts/check-gitlab-drift.mjs"
