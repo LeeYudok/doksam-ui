@@ -225,26 +225,40 @@ export function providedPaths(itemName: string, registry: Registry): Set<string>
  * `page.tsx` 가 아니면(레이아웃·컴포넌트 등) 라우트가 아니므로 null.
  */
 export function routeFromPagePath(filePath: string): string | null {
-  if (!filePath.startsWith("app/") || !filePath.endsWith("/page.tsx")) {
-    if (filePath === "app/page.tsx") return "/"
-    return null
-  }
+  // `app/page.tsx` 도 `app/` 로 시작하고 `/page.tsx` 로 끝나므로 이 가드를 통과한다
+  // (inner 가 빈 문자열이 되어 아래에서 "/" 로 처리된다).
+  if (!filePath.startsWith("app/") || !filePath.endsWith("/page.tsx")) return null
   const inner = filePath.slice("app/".length, -"/page.tsx".length)
-  const segments = inner.split("/").filter((s) => !/^\(.*\)$/.test(s))
+  const segments = inner.split("/").filter((s) => s !== "" && !/^\(.*\)$/.test(s))
   return segments.length === 0 ? "/" : `/${segments.join("/")}`
 }
 
-/** 라우트 패턴(동적 세그먼트 포함)을 href 매칭용 정규식으로 바꾼다. */
+/**
+ * 라우트 패턴(동적 세그먼트 포함)을 href 매칭용 정규식으로 바꾼다.
+ *
+ * 선택적 catch-all `[[...slug]]` 은 세그먼트 0개도 맞아야 하므로 앞의 `/` 까지
+ * 함께 선택적으로 만든다(`/docs/[[...slug]]` → `/docs` 와 `/docs/a/b` 둘 다 매칭).
+ * 필수 catch-all `[...slug]` 은 Next.js 규칙상 세그먼트가 최소 1개다.
+ */
 function routePatternToRegExp(pattern: string): RegExp {
-  const escaped = pattern
-    .split("/")
-    .map((segment) => {
-      if (/^\[\.\.\..+\]$/.test(segment)) return ".*" // catch-all
-      if (/^\[.+\]$/.test(segment)) return "[^/]+" // 동적 세그먼트
-      return segment.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
-    })
-    .join("/")
-  return new RegExp(`^${escaped}$`)
+  let source = ""
+  for (const segment of pattern.split("/")) {
+    if (segment === "") continue // 선행 "/" 가 만드는 빈 조각
+    if (/^\[\[\.\.\..+\]\]$/.test(segment)) {
+      source += "(?:/.+)?" // 선택적 catch-all
+      continue
+    }
+    if (/^\[\.\.\..+\]$/.test(segment)) {
+      source += "/.+" // catch-all (1개 이상)
+      continue
+    }
+    if (/^\[.+\]$/.test(segment)) {
+      source += "/[^/]+" // 동적 세그먼트
+      continue
+    }
+    source += `/${segment.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`
+  }
+  return new RegExp(`^${source === "" ? "/" : source}$`)
 }
 
 /** 항목 하나를 설치했을 때 소비 프로젝트에 실제로 존재하게 되는 라우트(page.tsx 기준) 목록. */
@@ -258,7 +272,16 @@ export function providedRoutes(itemName: string, registry: Registry): string[] {
 }
 
 /**
- * 소스 안의 내부 `href="/..."` **문자열 리터럴**만 모은다.
+ * 소스 안의 내부 `href` **문자열 리터럴**만 모은다.
+ *
+ * 두 가지 형태를 본다:
+ *  1. JSX 속성 — `href="/x"` · `href={"/x"}`
+ *  2. 오브젝트 리터럴 프로퍼티 — `{ key: "home", href: "/x" }`
+ *
+ * 2번이 필요한 이유는 doksam-ui 셸(`TopNavShell`·`AdminSidebar` 등)의 표준 관용구가
+ * **내비 데이터 배열**이기 때문이다. `{ href: "/x" }` 는 셸이 그대로 `<Link href>` 로
+ * 렌더하므로 JSX 속성과 똑같이 죽은 링크가 될 수 있는데, JSX 속성만 보던 이전 게이트는
+ * 이 형태를 전부 놓쳤다(GitHub #113 리뷰 F1 — `lib/templates/ews-data.ts` 의 실제 404).
  *
  * `href={\`/templates/${slug}\`}` 같은 템플릿 리터럴이나 `href={buildUrl()}` 같은
  * 표현식은 TS AST 상 StringLiteral 이 아니므로 애초에 잡히지 않는다 — 오탐 없이
@@ -269,15 +292,24 @@ export function internalHrefs(source: string): string[] {
   const file = ts.createSourceFile("probe.tsx", source, ts.ScriptTarget.Latest, false, ts.ScriptKind.TSX)
   const found: string[] = []
 
+  const push = (literal: ts.StringLiteralLike | undefined) => {
+    if (literal && literal.text.startsWith("/") && !literal.text.startsWith("//")) found.push(literal.text)
+  }
+
   const visit = (node: ts.Node) => {
     if (ts.isJsxAttribute(node) && node.name.getText(file) === "href" && node.initializer) {
       const init = node.initializer
-      let literal: ts.StringLiteralLike | undefined
-      if (ts.isStringLiteralLike(init)) literal = init
+      if (ts.isStringLiteralLike(init)) push(init)
       else if (ts.isJsxExpression(init) && init.expression && ts.isStringLiteralLike(init.expression)) {
-        literal = init.expression
+        push(init.expression)
       }
-      if (literal && literal.text.startsWith("/") && !literal.text.startsWith("//")) found.push(literal.text)
+    } else if (
+      ts.isPropertyAssignment(node) &&
+      (ts.isIdentifier(node.name) || ts.isStringLiteralLike(node.name)) &&
+      node.name.text === "href" &&
+      ts.isStringLiteralLike(node.initializer)
+    ) {
+      push(node.initializer)
     }
     ts.forEachChild(node, visit)
   }
@@ -421,15 +453,30 @@ export const SHADCN_EXTENSION_PRIORITY = [".tsx", ".ts", ".js", ".jsx", ".css"]
  *  1. `SHADCN_EXTENSION_PRIORITY` 순서 (확장자가 다르면 여기서 갈린다 — 위험한 경우).
  *  2. 확장자가 같으면, 후보 경로가 지정자 자신의 경로로 **시작하는지**(prefix) — 시작하면 이긴다.
  *
+ * 지정자에 이미 확장자가 있으면(`@/lib/x.css`) 상류는 후보 확장자를 그 하나로 좁힌다 —
+ * 아래 `extensions` 가 그 분기다.
+ *
+ * 재현하지 **않는** 한 가지: 상류는 `existsSync()` 로 설치 디렉터리 전체를 보므로 폐포 밖
+ * (소비 프로젝트가 이미 갖고 있던) 파일도 후보에 넣는다. 여기서는 설치 폐포만 알 수 있으므로
+ * 그 분기는 재현 대상이 아니다 — 폐포 안에서 결정되는 충돌만 잠근다.
+ *
  * 2026-09-23 `scripts/manual/2026-09-23_issue-70_same-ext-collision.mjs` 로 shadcn 4.21.0 에
  * 실제 설치해 이 재현이 실물 CLI 출력과 일치함을 확인했다 (이슈 #70).
  */
 export function simulateShadcnRewrite(specifier: string, closurePaths: ReadonlySet<string>): string | null {
   if (!specifier.startsWith("@/")) return null
-  const base = specifier.slice(2)
+  const raw = specifier.slice(2)
+  // 상류 `Il()`: `let a = path.extname(e), c = a !== "", f = c ? e.slice(0, -a.length) : e, ..., d = c ? [a] : s`
+  // — 지정자에 이미 확장자가 있으면 base 에서 그것을 떼고 **후보 확장자 집합도 그 하나로 좁힌다**.
+  // `@/components/demos/x.demo` 처럼 확장자가 아닌 점이 붙은 지정자도 상류는 똑같이
+  // `.demo` 를 확장자로 보므로 여기서도 같은 판단을 재현한다.
+  const rawExt = path.extname(raw)
+  const hasExt = rawExt !== ""
+  const base = hasExt ? raw.slice(0, -rawExt.length) : raw
+  const extensions = hasExt ? [rawExt] : SHADCN_EXTENSION_PRIORITY
   const candidates = new Set<string>()
 
-  for (const ext of SHADCN_EXTENSION_PRIORITY) {
+  for (const ext of extensions) {
     const exact = base + ext
     if (closurePaths.has(exact)) candidates.add(exact)
     const indexed = `${base}/index${ext}`
@@ -438,7 +485,7 @@ export function simulateShadcnRewrite(specifier: string, closurePaths: ReadonlyS
 
   const basename = base.slice(base.lastIndexOf("/") + 1)
   for (const candidate of closurePaths) {
-    for (const ext of SHADCN_EXTENSION_PRIORITY) {
+    for (const ext of extensions) {
       if (candidate.endsWith(`/${basename}${ext}`) || candidate === `${basename}${ext}`) {
         candidates.add(candidate)
       }
@@ -450,7 +497,7 @@ export function simulateShadcnRewrite(specifier: string, closurePaths: ReadonlyS
   return [...candidates].sort((a, b) => {
     const extA = a.slice(a.lastIndexOf("."))
     const extB = b.slice(b.lastIndexOf("."))
-    const rank = SHADCN_EXTENSION_PRIORITY.indexOf(extA) - SHADCN_EXTENSION_PRIORITY.indexOf(extB)
+    const rank = extensions.indexOf(extA) - extensions.indexOf(extB)
     if (rank !== 0) return rank
     const prefixA = a.startsWith(base) ? -1 : 1
     const prefixB = b.startsWith(base) ? -1 : 1

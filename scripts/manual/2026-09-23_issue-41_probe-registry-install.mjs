@@ -22,4 +22,5 @@
  *   로컬 registry.json·public/r/sparkline.json 은 이미 sparkline.tsx 로 올바르므로
  *   **배포만 하면 해소**된다. 실측에서는 로컬 sparkline.json 을 추가로 설치해 확인했다.
  */
+// 12항목 전수 실측(리뷰 F8)은 `2026-09-23_issue-41_install-probe.md` 에 있다.
 console.log("이 파일은 실행 스크립트가 아니라 실측 절차 기록이다. 위 주석의 명령을 순서대로 친다.")
