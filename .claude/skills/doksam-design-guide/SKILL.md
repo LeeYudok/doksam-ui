@@ -187,9 +187,13 @@ radius 값을 새로 쓰지 않는다(레지스트리 프리셋 중에서만 고
 - `gain`/`loss` — 프리셋 27키(`ThemeTokens`) 안에 있고 프리셋 8종이 **같은 값을
   각각 적는다**. SSOT 는 `themes/*.ts`, `globals.css` 의 `[data-theme]` 블록 16개가
   이 값을 미러링한다.
-- `risk-*` — `sidebar-*` 처럼 27키에서 **빠져** `globals.css` 의 `:root`/`.dark` 에만
-  정의된다. SSOT 는 `lib/risk-tokens.ts`, 프리셋 블록이 재정의하지 않는다
+- `risk-*` — 27키에서 **빠져** `globals.css` 의 `:root`/`.dark` 에만 정의된다.
+  SSOT 는 `lib/risk-tokens.ts`, 프리셋 블록이 재정의하지 않는다
   (`lib/globals-css-mirror.test.ts` 가 막는다).
+- `sidebar-*` — 27키 밖이지만 **프리셋마다 명시값을 갖는** 또 다른 층이다(#112).
+  SSOT 는 `themes/<name>.ts` 의 `sidebar` 필드이고 `[data-theme]` 블록 18개가
+  전부 재정의한다 — 같은 미러 테스트가 그 재정의를 **요구**한다. `:root`/`.dark`
+  는 테마 미확정 시 폴백(= ocean 값, `lib/sidebar-tokens.ts`)일 뿐이다.
 
 순서 있는 심각도는 `chart-1~5`(범주 팔레트)나 `success`/`warning`/`destructive`(3단
 상태색)로 대체하지 않는다. 값을 고칠 때는 `lib/risk-tokens.test.ts` 가 프리셋 8종
