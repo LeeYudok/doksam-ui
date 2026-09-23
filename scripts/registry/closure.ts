@@ -318,3 +318,68 @@ const FRAMEWORK_PACKAGES = new Set(["react", "react-dom", "next", "eslint"])
 export function readRegistry(): Registry {
   return JSON.parse(fs.readFileSync(path.join(REPO_ROOT, "registry.json"), "utf8")) as Registry
 }
+
+/**
+ * Next.js 라우트 규약 파일 — shadcn CLI 의 alias 재작성 대상(`@/` import)이 아니라
+ * 프레임워크가 파일 이름으로 직접 찾는 파일이므로, 이름 충돌 검사에서 제외한다.
+ */
+export const NEXT_CONVENTION_FILES = new Set(["page", "layout", "loading", "error", "not-found", "template", "default"])
+
+/**
+ * shadcn CLI(4.21.0)가 `@/` import 를 재작성할 때 쓰는 확장자 우선순위.
+ *
+ * `node_modules/shadcn/dist/chunk-B2MD6U5O.js` 의 `Il()` 함수(디컴파일 기준, 2026-09-23
+ * 실측)를 그대로 옮긴 값이다 — 기본값이 `[".tsx", ".ts", ".js", ".jsx", ".css"]`로,
+ * **`.tsx` 가 `.ts` 보다 먼저** 온다. 이슈 #52 의 template-bank 사고(`_data/product-categories.ts`
+ * import 가 `_components/product-categories.tsx` 를 가리키게 됨)가 정확히 이 순서 때문이었다.
+ */
+export const SHADCN_EXTENSION_PRIORITY = [".tsx", ".ts", ".js", ".jsx", ".css"]
+
+/**
+ * shadcn CLI 가 설치 시 `@/` import 하나를 어느 실제 파일로 재작성할지 그대로 흉내 낸다.
+ *
+ * 원본 알고리즘(`Il()`)은 두 단계로 후보를 모은다:
+ *  1. 지정자 자신의 경로 + 각 확장자(`base+ext`, `base/index+ext`)가 설치본에 있으면 후보.
+ *  2. 설치본 전체에서 **basename 이 같은** 파일도 무조건 후보에 넣는다 — 지정자의 디렉터리와
+ *     무관하다. 이것이 이름 충돌이 위험한 이유다: 같은 이름이면 엉뚱한 디렉터리의 파일도
+ *     일단 후보에 오른다.
+ * 그리고 후보를 정렬해 1순위를 고른다:
+ *  1. `SHADCN_EXTENSION_PRIORITY` 순서 (확장자가 다르면 여기서 갈린다 — 위험한 경우).
+ *  2. 확장자가 같으면, 후보 경로가 지정자 자신의 경로로 **시작하는지**(prefix) — 시작하면 이긴다.
+ *
+ * 2026-09-23 `scripts/manual/2026-09-23_issue-70_same-ext-collision.mjs` 로 shadcn 4.21.0 에
+ * 실제 설치해 이 재현이 실물 CLI 출력과 일치함을 확인했다 (이슈 #70).
+ */
+export function simulateShadcnRewrite(specifier: string, closurePaths: ReadonlySet<string>): string | null {
+  if (!specifier.startsWith("@/")) return null
+  const base = specifier.slice(2)
+  const candidates = new Set<string>()
+
+  for (const ext of SHADCN_EXTENSION_PRIORITY) {
+    const exact = base + ext
+    if (closurePaths.has(exact)) candidates.add(exact)
+    const indexed = `${base}/index${ext}`
+    if (closurePaths.has(indexed)) candidates.add(indexed)
+  }
+
+  const basename = base.slice(base.lastIndexOf("/") + 1)
+  for (const candidate of closurePaths) {
+    for (const ext of SHADCN_EXTENSION_PRIORITY) {
+      if (candidate.endsWith(`/${basename}${ext}`) || candidate === `${basename}${ext}`) {
+        candidates.add(candidate)
+      }
+    }
+  }
+
+  if (candidates.size === 0) return null
+
+  return [...candidates].sort((a, b) => {
+    const extA = a.slice(a.lastIndexOf("."))
+    const extB = b.slice(b.lastIndexOf("."))
+    const rank = SHADCN_EXTENSION_PRIORITY.indexOf(extA) - SHADCN_EXTENSION_PRIORITY.indexOf(extB)
+    if (rank !== 0) return rank
+    const prefixA = a.startsWith(base) ? -1 : 1
+    const prefixB = b.startsWith(base) ? -1 : 1
+    return prefixA - prefixB
+  })[0]
+}

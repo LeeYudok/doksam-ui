@@ -1,14 +1,20 @@
+import fs from "node:fs"
+import path from "node:path"
+
 import { describe, expect, it } from "vitest"
 
 import {
   collectSpecifiers,
   fileExists,
+  NEXT_CONVENTION_FILES,
   packageNameOf,
   packageOfSpecifier,
   providedPaths,
   readRegistry,
   registryDependencyName,
+  REPO_ROOT,
   resolveSpecifier,
+  simulateShadcnRewrite,
   undeclaredPackages,
   unresolvedImports,
   upstreamComponentNames,
@@ -205,14 +211,13 @@ describe("파일 이름 충돌 — 이슈 #52", () => {
    * `index` 는 규약 파일이 아니고 실제 import 대상이므로(`@/profiles` 등) 제외하지 않는다 —
    * 확장자가 같은 동안에만 안전하다는 사실을 이 검사가 지킨다 (#54).
    */
-  const NEXT_CONVENTION = new Set(["page", "layout", "loading", "error", "not-found", "template", "default"])
 
   it("한 번의 설치가 까는 파일 중 이름이 같고 확장자가 다른 짝이 없다", () => {
     for (const item of registry.items) {
       const seen = new Map<string, string>()
       for (const filePath of [...providedPaths(item.name, registry)].sort()) {
         const stem = filePath.replace(/.*\//, "").replace(/\.[^.]+$/, "")
-        if (NEXT_CONVENTION.has(stem)) continue
+        if (NEXT_CONVENTION_FILES.has(stem)) continue
         const extension = filePath.slice(filePath.lastIndexOf("."))
         const previous = seen.get(stem)
         if (previous === undefined) {
@@ -224,6 +229,44 @@ describe("파일 이름 충돌 — 이슈 #52", () => {
           `${item.name} 설치: ${previous} 와 ${filePath} 는 이름이 같고 확장자가 다르다 — shadcn 이 import 를 엉뚱한 쪽으로 다시 쓴다`,
         ).toBe(extension)
       }
+    }
+  })
+
+  /**
+   * 위 확장자-다름 가드는 "같은 확장자면 안전하다"는 전제 위에 서 있다 — 이슈 #70 이전에는
+   * 이 전제가 실측된 적이 없었다.
+   *
+   * 2026-09-23 shadcn 4.21.0 을 디컴파일해 실제 재작성 알고리즘(`Il()`)을 확인하고
+   * (`scripts/registry/closure.ts` 의 `simulateShadcnRewrite`), 빈 Next 앱에 직접 설치해
+   * (`scripts/manual/2026-09-23_issue-70_same-ext-collision.mjs`) 실물 CLI 출력과 대조했다.
+   * 결론: 확장자가 같으면 CLI 는 지정자 자신의 경로를 prefix 로 정확히 매칭해 항상 올바른
+   * 파일을 고른다 — **단, 그 지정자가 실제로 그 파일의 진짜 경로를 가리킬 때만.** 그 전제는
+   * 위의 "배포 가능성 — 이슈 #52" 블록의 `unresolvedImports` 검사가 이미 강제하고 있다
+   * (지정자가 레포 안 실제 파일로 정확히 풀리지 않으면 그 자체로 실패한다).
+   *
+   * 이 테스트는 그 둘을 이어 붙여 전제를 고정한다: 설치본 안의 모든 `@/` import 에 대해
+   * "CLI 가 실제로 재작성할 대상"(`simulateShadcnRewrite`)과 "우리가 정적으로 해소한 대상"
+   * (`resolveSpecifier`)이 항상 같은 파일을 가리켜야 한다. 어긋나면 — 즉 같은 이름의 다른
+   * 파일이 끼어들면 — 실패한다.
+   */
+  it("같은 이름 + 같은 확장자 충돌이 있어도 shadcn 의 재작성 대상이 우리가 해소한 파일과 항상 일치한다 (이슈 #70)", () => {
+    for (const item of registry.items) {
+      const closure = providedPaths(item.name, registry)
+      const problems: string[] = []
+      for (const filePath of [...closure].sort()) {
+        if (!fileExists(filePath)) continue
+        const source = fs.readFileSync(path.join(REPO_ROOT, filePath), "utf8")
+        for (const spec of collectSpecifiers(source)) {
+          if (!spec.startsWith("@/")) continue
+          const resolution = resolveSpecifier(spec, filePath)
+          if (resolution.kind !== "resolved" || !closure.has(resolution.path)) continue
+          const rewritten = simulateShadcnRewrite(spec, closure)
+          if (rewritten !== resolution.path) {
+            problems.push(`${filePath}: "${spec}" → shadcn 은 ${rewritten ?? "(후보 없음)"} 를 고르지만 실제 파일은 ${resolution.path}`)
+          }
+        }
+      }
+      expect(problems, `${item.name} 설치:\n${problems.join("\n")}`).toEqual([])
     }
   })
 })
