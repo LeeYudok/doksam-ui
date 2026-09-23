@@ -125,11 +125,11 @@
   --border: oklch(0.84 0.032 262);
   --input: oklch(0.84 0.032 262);
   --ring: oklch(0.53 0.21 262);
-  --chart-1: oklch(0.53 0.21 262);
-  --chart-2: oklch(0.62 0.17 220);
-  --chart-3: oklch(0.68 0.14 200);
-  --chart-4: oklch(0.58 0.19 290);
-  --chart-5: oklch(0.72 0.14 235);
+  --chart-1: oklch(0.556 0.19 262);
+  --chart-2: oklch(0.466 0.134 46);
+  --chart-3: oklch(0.347 0.062 190);
+  --chart-4: oklch(0.525 0.19 334);
+  --chart-5: oklch(0.4 0.096 118);
   /*
    * 사이드바 chrome — 선택된 테마 프리셋과 무관하게 라이트/다크 각 한 쌍뿐이다
    * (아래 [data-theme="*"] 블록들이 재정의하지 않는다). 단일 진실원천은
@@ -229,11 +229,11 @@
   --border: oklch(0.84 0.032 262);
   --input: oklch(0.84 0.032 262);
   --ring: oklch(0.53 0.21 262);
-  --chart-1: oklch(0.53 0.21 262);
-  --chart-2: oklch(0.62 0.17 220);
-  --chart-3: oklch(0.68 0.14 200);
-  --chart-4: oklch(0.58 0.19 290);
-  --chart-5: oklch(0.72 0.14 235);
+  --chart-1: oklch(0.556 0.19 262);
+  --chart-2: oklch(0.466 0.134 46);
+  --chart-3: oklch(0.347 0.062 190);
+  --chart-4: oklch(0.525 0.19 334);
+  --chart-5: oklch(0.4 0.096 118);
 }
 
 [data-theme="ocean"].dark {
@@ -259,11 +259,11 @@
   --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 16%);
   --ring: oklch(0.68 0.18 262);
-  --chart-1: oklch(0.68 0.18 262);
-  --chart-2: oklch(0.72 0.15 220);
-  --chart-3: oklch(0.76 0.12 200);
-  --chart-4: oklch(0.66 0.17 290);
-  --chart-5: oklch(0.78 0.12 235);
+  --chart-1: oklch(0.767 0.118 262);
+  --chart-2: oklch(0.703 0.19 46);
+  --chart-3: oklch(0.836 0.144 190);
+  --chart-4: oklch(0.748 0.19 334);
+  --chart-5: oklch(0.799 0.186 118);
 }
 
 [data-theme="forest"] {
@@ -289,11 +289,11 @@
   --border: oklch(0.9 0.015 152);
   --input: oklch(0.9 0.015 152);
   --ring: oklch(0.52 0.13 152);
-  --chart-1: oklch(0.52 0.13 152);
-  --chart-2: oklch(0.62 0.15 130);
-  --chart-3: oklch(0.68 0.13 175);
-  --chart-4: oklch(0.58 0.12 100);
-  --chart-5: oklch(0.72 0.12 190);
+  --chart-1: oklch(0.534 0.13 152);
+  --chart-2: oklch(0.465 0.13 296);
+  --chart-3: oklch(0.357 0.078 80);
+  --chart-4: oklch(0.493 0.094 224);
+  --chart-5: oklch(0.422 0.13 8);
 }
 
 [data-theme="forest"].dark {
@@ -319,11 +319,11 @@
   --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 16%);
   --ring: oklch(0.68 0.16 152);
-  --chart-1: oklch(0.68 0.16 152);
-  --chart-2: oklch(0.72 0.14 130);
-  --chart-3: oklch(0.76 0.12 175);
-  --chart-4: oklch(0.66 0.12 100);
-  --chart-5: oklch(0.78 0.11 190);
+  --chart-1: oklch(0.751 0.13 152);
+  --chart-2: oklch(0.696 0.13 296);
+  --chart-3: oklch(0.857 0.13 80);
+  --chart-4: oklch(0.715 0.13 224);
+  --chart-5: oklch(0.822 0.102 8);
 }
 
 [data-theme="violet"] {
@@ -349,11 +349,11 @@
   --border: oklch(0.9 0.015 293);
   --input: oklch(0.9 0.015 293);
   --ring: oklch(0.51 0.23 293);
-  --chart-1: oklch(0.51 0.23 293);
-  --chart-2: oklch(0.6 0.19 320);
-  --chart-3: oklch(0.66 0.15 270);
-  --chart-4: oklch(0.56 0.2 330);
-  --chart-5: oklch(0.7 0.13 255);
+  --chart-1: oklch(0.568 0.19 293);
+  --chart-2: oklch(0.456 0.098 77);
+  --chart-3: oklch(0.35 0.066 221);
+  --chart-4: oklch(0.525 0.19 5);
+  --chart-5: oklch(0.392 0.114 149);
 }
 
 [data-theme="violet"].dark {
@@ -379,11 +379,11 @@
   --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 16%);
   --ring: oklch(0.68 0.19 293);
-  --chart-1: oklch(0.68 0.19 293);
-  --chart-2: oklch(0.72 0.16 320);
-  --chart-3: oklch(0.76 0.13 270);
-  --chart-4: oklch(0.66 0.17 330);
-  --chart-5: oklch(0.78 0.11 255);
+  --chart-1: oklch(0.776 0.126 293);
+  --chart-2: oklch(0.69 0.144 77);
+  --chart-3: oklch(0.844 0.112 221);
+  --chart-4: oklch(0.745 0.162 5);
+  --chart-5: oklch(0.788 0.19 149);
 }
 
 [data-theme="ember"] {
@@ -409,11 +409,11 @@
   --border: oklch(0.9 0.018 41);
   --input: oklch(0.9 0.018 41);
   --ring: oklch(0.64 0.19 41);
-  --chart-1: oklch(0.64 0.19 41);
-  --chart-2: oklch(0.7 0.17 65);
-  --chart-3: oklch(0.6 0.2 20);
-  --chart-4: oklch(0.75 0.14 85);
-  --chart-5: oklch(0.55 0.18 10);
+  --chart-1: oklch(0.567 0.176 41);
+  --chart-2: oklch(0.443 0.078 185);
+  --chart-3: oklch(0.376 0.178 329);
+  --chart-4: oklch(0.496 0.112 113);
+  --chart-5: oklch(0.409 0.15 257);
 }
 
 [data-theme="ember"].dark {
@@ -439,11 +439,11 @@
   --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 16%);
   --ring: oklch(0.7 0.17 41);
-  --chart-1: oklch(0.7 0.17 41);
-  --chart-2: oklch(0.75 0.15 65);
-  --chart-3: oklch(0.65 0.18 20);
-  --chart-4: oklch(0.8 0.13 85);
-  --chart-5: oklch(0.6 0.16 10);
+  --chart-1: oklch(0.779 0.134 41);
+  --chart-2: oklch(0.67 0.118 185);
+  --chart-3: oklch(0.867 0.118 329);
+  --chart-4: oklch(0.718 0.16 113);
+  --chart-5: oklch(0.809 0.096 257);
 }
 
 [data-theme="rose"] {
@@ -469,11 +469,11 @@
   --border: oklch(0.9 0.018 16);
   --input: oklch(0.9 0.018 16);
   --ring: oklch(0.55 0.22 16);
-  --chart-1: oklch(0.55 0.22 16);
-  --chart-2: oklch(0.62 0.19 350);
-  --chart-3: oklch(0.68 0.16 30);
-  --chart-4: oklch(0.58 0.2 0);
-  --chart-5: oklch(0.7 0.14 340);
+  --chart-1: oklch(0.573 0.19 16);
+  --chart-2: oklch(0.44 0.102 160);
+  --chart-3: oklch(0.381 0.19 304);
+  --chart-4: oklch(0.502 0.104 88);
+  --chart-5: oklch(0.4 0.084 232);
 }
 
 [data-theme="rose"].dark {
@@ -499,11 +499,11 @@
   --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 16%);
   --ring: oklch(0.7 0.18 16);
-  --chart-1: oklch(0.7 0.18 16);
-  --chart-2: oklch(0.75 0.15 350);
-  --chart-3: oklch(0.78 0.13 30);
-  --chart-4: oklch(0.72 0.16 0);
-  --chart-5: oklch(0.8 0.11 340);
+  --chart-1: oklch(0.781 0.128 16);
+  --chart-2: oklch(0.667 0.15 160);
+  --chart-3: oklch(0.861 0.084 304);
+  --chart-4: oklch(0.726 0.148 88);
+  --chart-5: oklch(0.802 0.122 232);
 }
 
 [data-theme="slate"] {
@@ -529,11 +529,11 @@
   --border: oklch(0.9 0.006 240);
   --input: oklch(0.9 0.006 240);
   --ring: oklch(0.32 0.014 240);
-  --chart-1: oklch(0.32 0.014 240);
-  --chart-2: oklch(0.48 0.02 240);
-  --chart-3: oklch(0.6 0.02 210);
-  --chart-4: oklch(0.68 0.015 260);
-  --chart-5: oklch(0.75 0.01 230);
+  --chart-1: oklch(0.546 0.07 240);
+  --chart-2: oklch(0.461 0.07 24);
+  --chart-3: oklch(0.346 0.07 168);
+  --chart-4: oklch(0.508 0.07 312);
+  --chart-5: oklch(0.404 0.07 96);
 }
 
 [data-theme="slate"].dark {
@@ -559,11 +559,11 @@
   --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 16%);
   --ring: oklch(0.75 0.014 240);
-  --chart-1: oklch(0.75 0.014 240);
-  --chart-2: oklch(0.65 0.02 240);
-  --chart-3: oklch(0.7 0.02 210);
-  --chart-4: oklch(0.78 0.015 260);
-  --chart-5: oklch(0.82 0.01 230);
+  --chart-1: oklch(0.763 0.07 240);
+  --chart-2: oklch(0.692 0.07 24);
+  --chart-3: oklch(0.844 0.07 168);
+  --chart-4: oklch(0.731 0.07 312);
+  --chart-5: oklch(0.808 0.07 96);
 }
 
 [data-theme="gold"] {
@@ -589,11 +589,11 @@
   --border: oklch(0.883 0.023 90);
   --input: oklch(0.883 0.023 90);
   --ring: oklch(0.637 0.111 86 / 0.45);
-  --chart-1: oklch(0.637 0.111 86);
-  --chart-2: oklch(0.72 0.095 65);
-  --chart-3: oklch(0.78 0.08 110);
-  --chart-4: oklch(0.58 0.1 40);
-  --chart-5: oklch(0.82 0.07 130);
+  --chart-1: oklch(0.551 0.111 86);
+  --chart-2: oklch(0.447 0.091 230);
+  --chart-3: oklch(0.369 0.111 14);
+  --chart-4: oklch(0.487 0.111 158);
+  --chart-5: oklch(0.416 0.111 302);
 }
 
 [data-theme="gold"].dark {
@@ -619,11 +619,11 @@
   --border: oklch(0.328 0.053 271);
   --input: oklch(0.328 0.053 271);
   --ring: oklch(0.77 0.112 86 / 0.45);
-  --chart-1: oklch(0.77 0.112 86);
-  --chart-2: oklch(0.8 0.095 65);
-  --chart-3: oklch(0.84 0.08 110);
-  --chart-4: oklch(0.7 0.1 40);
-  --chart-5: oklch(0.86 0.07 130);
+  --chart-1: oklch(0.767 0.111 86);
+  --chart-2: oklch(0.678 0.111 230);
+  --chart-3: oklch(0.862 0.075 14);
+  --chart-4: oklch(0.711 0.111 158);
+  --chart-5: oklch(0.819 0.109 302);
 }
 
 /*
@@ -654,11 +654,11 @@
   --border: oklch(0.91 0.008 250);
   --input: oklch(0.91 0.008 250);
   --ring: oklch(0.5 0.11 155);
-  --chart-1: oklch(0.5 0.11 155);
-  --chart-2: oklch(0.72 0.13 75);
-  --chart-3: oklch(0.55 0.2 277);
-  --chart-4: oklch(0.6 0.12 200);
-  --chart-5: oklch(0.62 0.14 230);
+  --chart-1: oklch(0.536 0.11 155);
+  --chart-2: oklch(0.463 0.11 299);
+  --chart-3: oklch(0.357 0.078 83);
+  --chart-4: oklch(0.494 0.096 227);
+  --chart-5: oklch(0.419 0.11 11);
   --bulb: oklch(0.72 0.13 75);
   --shell: oklch(0.21 0.02 255);
   --shell-foreground: oklch(0.93 0.008 250);
@@ -688,11 +688,11 @@
   --border: oklch(0.31 0.02 255);
   --input: oklch(0.31 0.02 255);
   --ring: oklch(0.75 0.11 155);
-  --chart-1: oklch(0.75 0.11 155);
-  --chart-2: oklch(0.82 0.13 80);
-  --chart-3: oklch(0.7 0.18 277);
-  --chart-4: oklch(0.72 0.12 200);
-  --chart-5: oklch(0.74 0.14 230);
+  --chart-1: oklch(0.753 0.11 155);
+  --chart-2: oklch(0.694 0.11 299);
+  --chart-3: oklch(0.855 0.11 83);
+  --chart-4: oklch(0.717 0.11 227);
+  --chart-5: oklch(0.821 0.102 11);
   --bulb: oklch(0.82 0.13 80);
   --shell: oklch(0.165 0.018 255);
   --shell-foreground: oklch(0.93 0.008 250);
@@ -726,11 +726,11 @@
   --border: oklch(0.883 0.023 90);
   --input: oklch(0.883 0.023 90);
   --ring: oklch(0.637 0.111 86);
-  --chart-1: oklch(0.27 0.052 267);
-  --chart-2: oklch(0.637 0.111 86);
-  --chart-3: oklch(0.5 0.07 267);
-  --chart-4: oklch(0.58 0.1 40);
-  --chart-5: oklch(0.6 0.07 160);
+  --chart-1: oklch(0.55 0.07 267);
+  --chart-2: oklch(0.458 0.07 51);
+  --chart-3: oklch(0.347 0.062 195);
+  --chart-4: oklch(0.509 0.07 339);
+  --chart-5: oklch(0.4 0.07 123);
 }
 
 [data-theme="ivory"].dark {
@@ -756,11 +756,11 @@
   --border: oklch(0.328 0.053 271);
   --input: oklch(0.328 0.053 271);
   --ring: oklch(0.77 0.112 86);
-  --chart-1: oklch(0.82 0.05 270);
-  --chart-2: oklch(0.77 0.112 86);
-  --chart-3: oklch(0.62 0.08 267);
-  --chart-4: oklch(0.7 0.1 40);
-  --chart-5: oklch(0.689 0.098 161);
+  --chart-1: oklch(0.767 0.07 267);
+  --chart-2: oklch(0.69 0.07 51);
+  --chart-3: oklch(0.845 0.07 195);
+  --chart-4: oklch(0.733 0.07 339);
+  --chart-5: oklch(0.804 0.07 123);
 }
 
 /*
