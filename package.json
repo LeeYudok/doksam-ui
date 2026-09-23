@@ -27,6 +27,7 @@
     "registry:sync:profiles": "node --experimental-strip-types scripts/registry/sync-profile-vars.ts",
     "registry:build": "shadcn build",
     "gen:llms": "node scripts/gen-llms.mjs",
+    "gen:rules-mdx": "node scripts/gen-rules-mdx.mjs",
     "check:shadcn": "node scripts/shadcn-upstream.mjs",
     "check:gitlab-drift": "node scripts/check-gitlab-drift.mjs"
   },

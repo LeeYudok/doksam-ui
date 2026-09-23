@@ -20,6 +20,11 @@
  *
  * 결과는 참고용 목록이다 — 사람이 "이식 / 불필요 / GitLab 전용" 을 판단해야 한다
  * (#54 가 이미 그렇게 했다). 이 스크립트는 그 판단의 재료(어떤 파일이 다른가)만 만든다.
+ *
+ * 규칙 절 제목 집합 비교(#72): lib/rules-markdown.ts 의 RULES_SECTIONS 와 GitLab
+ * content/rules.mdx 의 "## 제목 [kind]" 헤더를 절 제목 집합으로 비교한다. #72 의
+ * gen-rules-mdx.mjs 로 GitLab MDX 를 재생성하면 이 드리프트는 구조적으로 사라지지만,
+ * 재생성을 깜빡하고 손으로 고친 경우를 잡는 안전망으로 남겨둔다.
  */
 import { readFileSync, existsSync, statSync, readdirSync } from "node:fs";
 import path from "node:path";
@@ -134,4 +139,38 @@ if (differs.length === 0 && onlyInGithub.length === 0) {
   console.log(
     "\n각 항목을 '이식 / 불필요(의도된 차이) / GitLab 전용' 으로 사람이 분류할 것 — 이 스크립트는 목록만 만든다.",
   );
+}
+
+// --- 규칙 절 제목 집합 비교 (#72) -----------------------------------------
+const { RULES_SECTIONS } = await import(path.join(GITHUB_ROOT, "lib/rules-markdown.ts"));
+const ssotTitles = RULES_SECTIONS.map((s) => `${s.title} [${s.kind}]`);
+
+const gitlabRulesPath = path.join(GITLAB_ROOT, "content/rules.mdx");
+if (existsSync(gitlabRulesPath)) {
+  const gitlabRulesContent = readFileSync(gitlabRulesPath, "utf8");
+  const gitlabTitles = [...gitlabRulesContent.matchAll(/^## (.+)$/gm)].map((m) => m[1].trim());
+
+  const ssotSet = new Set(ssotTitles);
+  const gitlabSet = new Set(gitlabTitles);
+  const missingInGitlab = ssotTitles.filter((t) => !gitlabSet.has(t));
+  const extraInGitlab = gitlabTitles.filter((t) => !ssotSet.has(t));
+
+  console.log(`\n규칙 절 제목 비교: SSOT ${ssotTitles.length}절, GitLab content/rules.mdx ${gitlabTitles.length}절`);
+  if (missingInGitlab.length === 0 && extraInGitlab.length === 0) {
+    console.log("  절 제목 집합 일치 — 드리프트 없음.");
+  } else {
+    if (missingInGitlab.length) {
+      console.log(`  SSOT 에는 있는데 GitLab 에 없음 (${missingInGitlab.length}개):`);
+      for (const t of missingInGitlab) console.log(`    - ${t}`);
+    }
+    if (extraInGitlab.length) {
+      console.log(`  GitLab 에는 있는데 SSOT 에 없음 (${extraInGitlab.length}개):`);
+      for (const t of extraInGitlab) console.log(`    - ${t}`);
+    }
+    console.log(
+      "  node scripts/gen-rules-mdx.mjs <gitlab 클론>/content 로 GitLab MDX 를 재생성하면 이 드리프트가 사라진다(#72).",
+    );
+  }
+} else {
+  console.log(`\n규칙 절 제목 비교: 건너뜀 — ${gitlabRulesPath} 없음.`);
 }
