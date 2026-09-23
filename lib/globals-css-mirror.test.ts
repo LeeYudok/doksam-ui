@@ -84,6 +84,7 @@ function pickThemeTokens(tokens: ThemeTokens): Record<string, string> {
 }
 
 const OCEAN = getThemePreset(DEFAULT_THEME_PRESET);
+if (!OCEAN) throw new Error(`기본 테마 프리셋 "${DEFAULT_THEME_PRESET}" 을 찾지 못했다`);
 
 describe("app/globals.css 미러 블록이 소스 파일과 일치한다 (#36)", () => {
   it(":root 의 사이드바 값이 ocean 프리셋(themes/ocean.ts sidebar.light) 폴백과 같다", () => {
