@@ -75,14 +75,18 @@ doksam-ui 에서 AI 에이전트가 작업할 때 먼저 읽는 문서입니다.
 `public/r/`, `public/llms.txt` 는 빌드 생성물입니다. 직접 편집하지 않고
 `pnpm registry:build && pnpm gen:llms` 로 재생성합니다.
 
-GitLab 클론의 `content/rules.mdx`/`rules.en.mdx` 도 생성물입니다(#72) — 규칙 절을 고쳤으면
-이 레포(SSOT, CI 가 Node 22)에서 `pnpm gen:rules-mdx <gitlab 클론>/content` 를 돌려 그
+GitLab 클론의 `content/rules.mdx` 도 생성물입니다(#72) — 규칙 절을 고쳤으면 이
+레포(SSOT, CI 가 Node 22)에서 `pnpm gen:rules-mdx <gitlab 클론>/content` 를 돌려 그
 산출물만 GitLab 레포로 옮깁니다. GitLab 러너는 Node 20 이라 `--experimental-strip-types`
 로 `lib/rules-markdown.ts` 를 직접 import 하지 못하므로 생성 자체는 이 레포에서 하고
-GitLab 은 완성된 MDX 파일만 받는 구조로 그 제약을 피합니다. en MDX 는 SSOT 에 영문
-본문이 없어 절 제목·마커만 채워지고 각 절 본문은 번역 대기 상태로 남으므로, 이관 후
-수동 번역이 필요합니다. `scripts/check-gitlab-drift.mjs` 가 두 레포의 절 제목 집합을
-비교해 이관을 깜빡한 경우를 잡습니다.
+GitLab 은 완성된 MDX 파일만 받는 구조로 그 제약을 피합니다.
+
+**`rules.en.mdx` 는 생성물이 아니라 수동 유지 파일입니다.** SSOT 에 영문 본문이 없어
+생성기가 낼 수 있는 것은 절 제목과 번역 대기 플레이스홀더뿐이고, 그것으로 GitLab 의
+손번역을 덮으면 번역이 전량 소실됩니다. 그래서 기본 실행은 ko 만 쓰고, en 골격은
+`--en`(기존 파일이 있으면 `--force` 까지)을 명시해야만 씁니다. 절이 추가됐는데 영문이
+비어 있는 상태는 `scripts/check-gitlab-drift.mjs` 가 두 레포의 절 제목 집합을 비교해
+잡습니다.
 
 ---
 

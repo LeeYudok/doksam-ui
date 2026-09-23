@@ -61,3 +61,6 @@ lastworks.resume
 
 # 수동 실측·스크래치용 프로브 — 커밋 대상 아님 (#70).
 /scratchpad/
+
+# pnpm gen:rules-mdx 의 기본 출력 — GitLab 이식용 참고 산출물이고 이 레포는 소비하지 않는다 (#72).
+/content/
