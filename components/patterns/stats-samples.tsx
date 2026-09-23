@@ -1,13 +1,13 @@
 import type { PatternSampleData } from "@/components/showcase/pattern-sample"
-import { KpiCardGrid } from "@/components/patterns/stats/kpi-card-grid"
-import { KpiCompactRow } from "@/components/patterns/stats/kpi-compact-row"
+import { KpiCardGridDemo } from "@/components/patterns/stats/kpi-card-grid-demo"
+import { KpiCompactRowDemo } from "@/components/patterns/stats/kpi-compact-row-demo"
 
 export const STATS_SAMPLES: PatternSampleData[] = [
   {
     num: 1,
     title: "KPI 카드 그리드",
     description: "값 + 전기 대비 증감 + 미니 스파크라인을 한 카드에 담은 지표 그리드 6종입니다.",
-    demo: <KpiCardGrid />,
+    demo: <KpiCardGridDemo />,
     code: `const colorClass = rateColor(kpi.change)   // change > 0 → text-gain, < 0 → text-loss, 0 → text-muted-foreground
 
 <Card>
@@ -37,7 +37,7 @@ export const STATS_SAMPLES: PatternSampleData[] = [
     num: 2,
     title: "압축 KPI 행",
     description: "스파크라인 없이 라벨·값·증감만 한 줄로 배치하는 밀도 높은 변형입니다.",
-    demo: <KpiCompactRow />,
+    demo: <KpiCompactRowDemo />,
     code: `<div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
   {kpis.map((kpi) => (
     <Card key={kpi.label} size="sm">

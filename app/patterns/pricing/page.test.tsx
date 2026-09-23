@@ -7,7 +7,7 @@ import { PRICING_SAMPLES } from "@/components/patterns/pricing-samples"
 describe("PricingPatternsPage", () => {
   it("renders the page heading", () => {
     render(<PricingPatternsPage />)
-    expect(screen.getByRole("heading", { level: 1, name: "가격 카드 패턴" })).toBeInTheDocument()
+    expect(screen.getByRole("heading", { level: 1, name: "가격표" })).toBeInTheDocument()
   })
 
   it("renders every pricing sample as a numbered section", () => {

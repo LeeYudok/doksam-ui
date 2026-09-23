@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "activity-timeline",
+  "title": "Activity Timeline",
+  "description": "아이콘 노드 + 시각 + 제목/설명으로 구성하고 날짜로 그룹 짓는 세로 활동 타임라인. 상태 4종의 색은 같은 시맨틱 토큰으로 묶는다.",
+  "dependencies": [
+    "@phosphor-icons/react@^2.1.10"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "components/patterns/timeline/activity-timeline.tsx",
+      "content": "import type { Icon } from \"@phosphor-icons/react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/** 노드 색 단계 — 시맨틱 토큰 4종에만 대응한다. */\nexport type ActivityStatus = \"success\" | \"warning\" | \"destructive\" | \"muted\"\n\nexport interface ActivityItem {\n  time: string\n  status: ActivityStatus\n  icon: Icon\n  title: string\n  description: string\n}\n\nexport interface ActivityGroup {\n  /** 날짜 그룹 헤더 문구. */\n  date: string\n  items: ActivityItem[]\n}\n\nexport interface ActivityTimelineProps {\n  groups: ActivityGroup[]\n  className?: string\n}\n\nconst NODE_CLASS: Record<ActivityStatus, string> = {\n  success: \"border-success/40 bg-success/10 text-success\",\n  warning: \"border-warning/40 bg-warning/10 text-warning\",\n  destructive: \"border-destructive/40 bg-destructive/10 text-destructive\",\n  muted: \"border-border bg-muted text-muted-foreground\",\n}\n\nfunction ActivityNode({ item }: Readonly<{ item: ActivityItem }>) {\n  const NodeIcon = item.icon\n  return (\n    <li className=\"relative flex gap-3 pb-6 last:pb-0\">\n      <span aria-hidden className=\"absolute top-6 bottom-0 left-[15px] w-px bg-border last:hidden\" />\n      <span\n        className={cn(\n          \"relative z-10 flex size-8 shrink-0 items-center justify-center rounded-full border\",\n          NODE_CLASS[item.status]\n        )}\n      >\n        <NodeIcon size={16} weight=\"fill\" />\n      </span>\n      <div className=\"flex min-w-0 flex-1 flex-col gap-0.5 pt-1\">\n        <div className=\"flex items-baseline gap-2\">\n          <p className=\"text-sm font-medium\">{item.title}</p>\n          <span className=\"shrink-0 text-xs tabular-nums text-muted-foreground\">{item.time}</span>\n        </div>\n        <p className=\"text-sm text-muted-foreground\">{item.description}</p>\n      </div>\n    </li>\n  )\n}\n\n/**\n * 세로 활동 타임라인 — 아이콘 노드 + 시각 + 제목/설명, 날짜별 그룹 구분.\n * 상태 4종(success/warning/destructive/muted)의 노드 테두리·배경·아이콘 색은\n * 같은 시맨틱 토큰으로 묶어 라이트/다크 양쪽에서 같은 위계를 유지한다.\n */\nexport function ActivityTimeline({ groups, className }: Readonly<ActivityTimelineProps>) {\n  return (\n    <div className={cn(\"flex flex-col gap-6\", className)}>\n      {groups.map((group) => (\n        <section key={group.date} className=\"flex flex-col gap-3\">\n          <h3 className=\"sticky top-0 text-xs font-semibold tracking-wide text-muted-foreground uppercase\">\n            {group.date}\n          </h3>\n          <ol className=\"flex flex-col\">\n            {group.items.map((item) => (\n              <ActivityNode key={`${group.date}-${item.time}-${item.title}`} item={item} />\n            ))}\n          </ol>\n        </section>\n      ))}\n    </div>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}

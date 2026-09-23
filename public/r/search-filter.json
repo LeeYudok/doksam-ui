@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "search-filter",
+  "title": "Search Filter",
+  "description": "검색어 + 드롭다운 필터로 구성하는 목록 상단 검색바. 상태를 부모가 소유하는 controlled 컴포넌트라 URL 동기화·서버 재조회에 그대로 얹는다.",
+  "dependencies": [
+    "@phosphor-icons/react@^2.1.10"
+  ],
+  "registryDependencies": [
+    "https://ui.doksam.com/r/button.json",
+    "https://ui.doksam.com/r/input.json",
+    "https://ui.doksam.com/r/select.json"
+  ],
+  "files": [
+    {
+      "path": "components/patterns/form-input/search-filter.tsx",
+      "content": "\"use client\"\n\nimport { MagnifyingGlassIcon } from \"@phosphor-icons/react/dist/ssr\"\n\nimport { Button } from \"@/components/ui/button\"\nimport { Input } from \"@/components/ui/input\"\nimport { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from \"@/components/ui/select\"\nimport { cn } from \"@/lib/utils\"\n\n/** 드롭다운 한 칸의 선택지. */\nexport interface SearchFilterOption {\n  value: string\n  label: string\n}\n\n/** 검색어 + 드롭다운 선택값들. 드롭다운 key 는 selects 의 key 와 1:1로 대응한다. */\nexport interface SearchFilterValue {\n  search: string\n  selects: Record<string, string>\n}\n\nexport interface SearchFilterSelect {\n  key: string\n  placeholder: string\n  options: SearchFilterOption[]\n  /** 트리거 폭 클래스. 기본 w-28. */\n  triggerClassName?: string\n}\n\nexport interface SearchFilterProps {\n  value: SearchFilterValue\n  onChange: (value: SearchFilterValue) => void\n  selects: SearchFilterSelect[]\n  /** 초기화 버튼이 되돌릴 기본값. */\n  defaultValue: SearchFilterValue\n  onReset?: () => void\n  /** 검색 버튼 클릭 — 생략하면 버튼을 그리지 않는다. */\n  onSearch?: () => void\n  searchPlaceholder?: string\n  resetLabel?: string\n  searchLabel?: string\n  className?: string\n}\n\n/**\n * 검색어 + 드롭다운 필터로 구성하는 목록 상단 검색바.\n * 상태를 컴포넌트가 스스로 들고 있지 않고 value/onChange 로 부모가 소유하는 controlled\n * 컴포넌트다 — 서버 재조회 트리거·URL 동기화에 그대로 얹어 재사용할 수 있다.\n */\nexport function SearchFilter({\n  value,\n  onChange,\n  selects,\n  defaultValue,\n  onReset,\n  onSearch,\n  searchPlaceholder = \"검색어를 입력하세요\",\n  resetLabel = \"초기화\",\n  searchLabel = \"검색\",\n  className,\n}: Readonly<SearchFilterProps>) {\n  function handleReset() {\n    if (onReset) {\n      onReset()\n      return\n    }\n    onChange(defaultValue)\n  }\n\n  return (\n    <div className={cn(\"flex w-full flex-wrap items-center gap-2\", className)}>\n      <div className=\"relative min-w-[180px] flex-1\">\n        <MagnifyingGlassIcon\n          size={14}\n          weight=\"regular\"\n          className=\"pointer-events-none absolute top-1/2 left-2.5 -translate-y-1/2 text-muted-foreground\"\n        />\n        <Input\n          value={value.search}\n          onChange={(e) => onChange({ ...value, search: e.target.value })}\n          placeholder={searchPlaceholder}\n          className=\"h-8 pl-8 text-xs\"\n        />\n      </div>\n      {selects.map((select) => (\n        <Select\n          key={select.key}\n          value={value.selects[select.key]}\n          onValueChange={(next) => onChange({ ...value, selects: { ...value.selects, [select.key]: next } })}\n        >\n          <SelectTrigger className={cn(\"h-8 text-xs\", select.triggerClassName ?? \"w-28\")}>\n            <SelectValue placeholder={select.placeholder} />\n          </SelectTrigger>\n          <SelectContent>\n            {select.options.map((option) => (\n              <SelectItem key={option.value} value={option.value}>\n                {option.label}\n              </SelectItem>\n            ))}\n          </SelectContent>\n        </Select>\n      ))}\n      <Button size=\"sm\" variant=\"outline\" onClick={handleReset}>\n        {resetLabel}\n      </Button>\n      {onSearch ? (\n        <Button size=\"sm\" onClick={onSearch}>\n          {searchLabel}\n        </Button>\n      ) : null}\n    </div>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}

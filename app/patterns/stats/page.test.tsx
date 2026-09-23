@@ -7,7 +7,7 @@ import { STATS_SAMPLES } from "@/components/patterns/stats-samples"
 describe("StatsPatternsPage", () => {
   it("renders the page heading", () => {
     render(<StatsPatternsPage />)
-    expect(screen.getByRole("heading", { level: 1, name: "통계/KPI 패턴" })).toBeInTheDocument()
+    expect(screen.getByRole("heading", { level: 1, name: "지표·KPI 카드" })).toBeInTheDocument()
   })
 
   it("renders every stats sample as a numbered section", () => {

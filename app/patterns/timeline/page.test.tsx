@@ -7,7 +7,7 @@ import { TIMELINE_SAMPLES } from "@/components/patterns/timeline-samples"
 describe("TimelinePatternsPage", () => {
   it("renders the page heading", () => {
     render(<TimelinePatternsPage />)
-    expect(screen.getByRole("heading", { level: 1, name: "타임라인 패턴" })).toBeInTheDocument()
+    expect(screen.getByRole("heading", { level: 1, name: "활동 타임라인" })).toBeInTheDocument()
   })
 
   it("renders every timeline sample as a numbered section", () => {

@@ -3684,6 +3684,231 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "concept-card",
+      "type": "registry:component",
+      "title": "Concept Card",
+      "description": "어려운 개념 하나를 순번 + 제목 + 등가물 헤더, 한 줄 비유, 주의 마커가 붙는 불릿 목록으로 풀어내는 교육용 카드.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10"
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/card.json"
+      ],
+      "files": [
+        {
+          "path": "components/patterns/concept-explainer/concept-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "flow-diagram",
+      "type": "registry:component",
+      "title": "Flow Diagram",
+      "description": "진입점(점선 알약) → 관문(gate) → 실행 노드/유닛으로 이어지는 세로 아키텍처 흐름 도식. 단계 위계를 색이 아니라 tone 2단계의 강도로 표현한다.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/patterns/concept-explainer/flow-diagram.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "trouble-table",
+      "type": "registry:component",
+      "title": "Trouble Table",
+      "description": "증상 ▶ 확인 지점의 3열 트러블슈팅 대응표. 좁은 화면에서는 화살표를 숨기고 세로로 스택한다.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/patterns/concept-explainer/trouble-table.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "kpi-card-grid",
+      "type": "registry:component",
+      "title": "KPI Card Grid",
+      "description": "값(금액/건수/비율) + 전기 대비 증감 + 미니 스파크라인을 담은 지표 카드 그리드. 증감 색은 한국식 관례를 따르는 gain/loss 토큰만 쓴다.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10"
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/card.json",
+        "https://ui.doksam.com/r/finance-format-won.json",
+        "https://ui.doksam.com/r/finance-rate.json",
+        "https://ui.doksam.com/r/sparkline.json"
+      ],
+      "files": [
+        {
+          "path": "components/patterns/stats/kpi-card-grid.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "kpi-compact-row",
+      "type": "registry:component",
+      "title": "KPI Compact Row",
+      "description": "스파크라인 없이 라벨·값·증감만 한 줄로 배치하는 밀도 높은 지표 행. 지표가 많거나 세로 공간이 좁은 운영 대시보드 상단용.",
+      "registryDependencies": [
+        "https://ui.doksam.com/r/card.json",
+        "https://ui.doksam.com/r/finance-rate.json"
+      ],
+      "files": [
+        {
+          "path": "components/patterns/stats/kpi-compact-row.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "activity-timeline",
+      "type": "registry:component",
+      "title": "Activity Timeline",
+      "description": "아이콘 노드 + 시각 + 제목/설명으로 구성하고 날짜로 그룹 짓는 세로 활동 타임라인. 상태 4종의 색은 같은 시맨틱 토큰으로 묶는다.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/patterns/timeline/activity-timeline.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "compact-timeline",
+      "type": "registry:component",
+      "title": "Compact Timeline",
+      "description": "날짜 그룹 없이 단일 프로세스의 진행 이력을 좁은 폭에 담는 축약 타임라인.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/patterns/timeline/compact-timeline.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "upload-dropzone",
+      "type": "registry:component",
+      "title": "Upload Dropzone",
+      "description": "클릭·드래그 두 진입 경로를 label + sr-only input 하나로 처리하는 드롭존과, 진행률·상태 배지·삭제를 갖춘 업로드 목록. 업로드 자체는 호출부가 수행한다.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10"
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/badge.json",
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/progress.json"
+      ],
+      "files": [
+        {
+          "path": "components/patterns/file-upload/upload-dropzone.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "faceted-filter",
+      "type": "registry:component",
+      "title": "Faceted Filter",
+      "description": "2단계(그룹 → 서브카테고리) 칩 필터. 카운트 배지와 그룹 강조색을 붙이고 선택 상태는 부모가 소유한다.",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/patterns/faceted-filter/faceted-filter.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "chip-input",
+      "type": "registry:component",
+      "title": "Chip Input",
+      "description": "자동 포맷팅 입력 → 펜딩 칩 변환 → 부모 제출 패턴. 붙여넣기로 여러 값을 한 번에 파싱하고 중복·형식 오류를 사전 검증해 몇 건이 왜 빠졌는지 알린다.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10"
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/input.json"
+      ],
+      "files": [
+        {
+          "path": "components/patterns/verified/chip-input.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "search-filter",
+      "type": "registry:component",
+      "title": "Search Filter",
+      "description": "검색어 + 드롭다운 필터로 구성하는 목록 상단 검색바. 상태를 부모가 소유하는 controlled 컴포넌트라 URL 동기화·서버 재조회에 그대로 얹는다.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10"
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/input.json",
+        "https://ui.doksam.com/r/select.json"
+      ],
+      "files": [
+        {
+          "path": "components/patterns/form-input/search-filter.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "pricing-table",
+      "type": "registry:component",
+      "title": "Pricing Table",
+      "description": "티어 가격 카드 + 월/연 결제 토글. 가격은 항상 월 환산으로 표기하고 추천 티어는 ring 강조 + 배지로 구분한다.",
+      "dependencies": [
+        "@phosphor-icons/react@^2.1.10"
+      ],
+      "registryDependencies": [
+        "https://ui.doksam.com/r/badge.json",
+        "https://ui.doksam.com/r/button.json",
+        "https://ui.doksam.com/r/card.json",
+        "https://ui.doksam.com/r/label.json",
+        "https://ui.doksam.com/r/switch.json"
+      ],
+      "files": [
+        {
+          "path": "components/patterns/pricing/pricing-table.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "accordion",
       "type": "registry:ui",
       "title": "Accordion",

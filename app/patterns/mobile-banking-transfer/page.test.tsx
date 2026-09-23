@@ -7,7 +7,7 @@ import { MOBILE_BANKING_TRANSFER_SAMPLES } from "@/components/patterns/mobile-ba
 describe("MobileBankingTransferPatternsPage", () => {
   it("renders the page heading and every sample section", () => {
     render(<MobileBankingTransferPatternsPage />)
-    expect(screen.getByRole("heading", { level: 1, name: "모바일뱅킹 이체 패턴" })).toBeInTheDocument()
+    expect(screen.getByRole("heading", { level: 1, name: "모바일뱅킹 · 이체" })).toBeInTheDocument()
     for (const sample of MOBILE_BANKING_TRANSFER_SAMPLES) {
       expect(screen.getByRole("heading", { level: 2, name: sample.title })).toBeInTheDocument()
     }

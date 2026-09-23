@@ -1,6 +1,7 @@
 "use client"
 
 import type { ReactNode } from "react"
+import Link from "next/link"
 
 import { useI18n } from "@/components/i18n-provider"
 
@@ -20,6 +21,8 @@ interface ComponentDetailProps {
   inRegistry: boolean
   /** 있으면 이름 붙은 예제 그리드로 렌더, 없으면 단일 demo 폴백. */
   examples?: DemoExample[]
+  /** 이 컴포넌트를 구성 요소로 쓰는 패턴들 — /patterns/<slug> 로 올라가는 역참조 링크. */
+  usedByPatterns?: { slug: string; title: string }[]
 }
 
 /** /components/<slug> 상세 페이지 본문 — 제목·설명 / 가져다쓰기 바 / 데모 / 코드 / do·don't. */
@@ -31,6 +34,7 @@ export function ComponentDetail({
   donts,
   inRegistry,
   examples,
+  usedByPatterns = [],
 }: Readonly<ComponentDetailProps>) {
   const { t } = useI18n()
   const description = t(`component.${entry.slug}.description`, entry.description)
@@ -51,6 +55,23 @@ export function ComponentDetail({
         donts={donts}
         inRegistry={inRegistry}
       />
+
+      {usedByPatterns.length > 0 ? (
+        <div className="flex flex-wrap items-center gap-1.5">
+          <span className="text-xs text-muted-foreground">
+            {t("chrome.detail.usedByPatterns", "이 컴포넌트를 쓰는 패턴")}
+          </span>
+          {usedByPatterns.map((pattern) => (
+            <Link
+              key={pattern.slug}
+              href={`/patterns/${pattern.slug}`}
+              className="rounded-md border border-border px-2 py-0.5 text-xs text-foreground hover:bg-accent"
+            >
+              {pattern.title}
+            </Link>
+          ))}
+        </div>
+      ) : null}
 
       <section className="flex flex-col gap-3">
         <h2 className="text-sm font-medium text-muted-foreground">{t("chrome.detail.demo", "데모")}</h2>

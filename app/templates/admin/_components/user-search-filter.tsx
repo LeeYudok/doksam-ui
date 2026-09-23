@@ -26,7 +26,7 @@ interface UserSearchFilterProps {
 }
 
 /**
- * components/patterns/form-input/search-filter-demo.tsx의 controlled 검색바
+ * components/patterns/form-input/search-filter.tsx 의 controlled 검색바
  * 패턴을 이 템플릿의 사용자 데이터(역할/상태)에 맞춰 적용한 버전.
  */
 export function UserSearchFilter({ value, onChange }: Readonly<UserSearchFilterProps>) {

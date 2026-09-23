@@ -7,6 +7,8 @@ export interface LlmMarkdownInput {
   donts: string[]
   /** registry.json 편입 여부 — 설치 안내 문구 분기용. */
   inRegistry: boolean
+  /** 설치 커맨드를 만들 registry.json 항목 이름들. 생략하면 slug 하나를 쓴다. */
+  installNames?: string[]
 }
 
 /** slug → shadcn CLI 설치 커맨드. */
@@ -22,7 +24,8 @@ export function buildLlmMarkdown(input: LlmMarkdownInput): string {
   const lines: string[] = [`# ${input.title} (${input.slug})`, "", input.description, "", "## 설치"]
 
   if (input.inRegistry) {
-    lines.push(shadcnAddCommand(input.slug))
+    const names = input.installNames?.length ? input.installNames : [input.slug]
+    for (const name of names) lines.push(shadcnAddCommand(name))
   } else {
     lines.push(`아직 레지스트리 미편입 — components/${input.slug}.tsx 를 수동 복사한다.`)
   }

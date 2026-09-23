@@ -3,7 +3,7 @@ import { FileCsvIcon, FileImageIcon, FilePdfIcon } from "@phosphor-icons/react/d
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import type { PatternSampleData } from "@/components/showcase/pattern-sample"
-import { UploadDropzone } from "@/components/patterns/file-upload/upload-dropzone"
+import { UploadDropzoneDemo } from "@/components/patterns/file-upload/upload-dropzone-demo"
 
 const STATE_FILES = [
   { name: "product_photo.png", pct: 100, status: "완료" as const, icon: FileImageIcon },
@@ -22,7 +22,7 @@ export const FILE_UPLOAD_SAMPLES: PatternSampleData[] = [
     num: 1,
     title: "드래그앤드롭 업로드",
     description: "드롭존에 파일을 놓거나 클릭해 선택하면 진행률과 함께 목록에 추가되는 업로드 위젯입니다.",
-    demo: <UploadDropzone />,
+    demo: <UploadDropzoneDemo />,
     code: `function UploadDropzone() {
   const [files, setFiles] = useState<UploadFile[]>([])
 

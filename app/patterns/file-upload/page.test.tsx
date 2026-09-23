@@ -22,7 +22,7 @@ describe("FileUploadPatternsPage", () => {
 
   it("renders the page heading", () => {
     render(<FileUploadPatternsPage />)
-    expect(screen.getByRole("heading", { level: 1, name: "파일 업로드 패턴" })).toBeInTheDocument()
+    expect(screen.getByRole("heading", { level: 1, name: "파일 업로드" })).toBeInTheDocument()
   })
 
   it("renders every file-upload sample as a numbered section", () => {

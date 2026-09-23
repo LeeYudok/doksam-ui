@@ -5,6 +5,7 @@ import { TodoNotice } from "@/components/showcase/todo-notice"
 import { DEMO_LOADERS } from "@/lib/showcase/demo-loaders"
 import { COMPONENT_REGISTRY, getComponentEntry } from "@/lib/showcase/registry"
 import { isInRegistry } from "@/lib/showcase/registry-membership"
+import { getPatternsUsingComponent } from "@/lib/patterns/registry"
 
 interface ComponentPageProps {
   params: Promise<{ slug: string }>
@@ -39,6 +40,10 @@ export default async function ComponentPage({ params }: Readonly<ComponentPagePr
       donts={donts}
       examples={examples}
       inRegistry={isInRegistry(slug)}
+      usedByPatterns={getPatternsUsingComponent(slug).map((pattern) => ({
+        slug: pattern.slug,
+        title: pattern.title,
+      }))}
     />
   )
 }

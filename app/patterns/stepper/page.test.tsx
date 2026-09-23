@@ -7,7 +7,7 @@ import { STEPPER_SAMPLES } from "@/components/patterns/stepper-samples"
 describe("StepperPatternsPage", () => {
   it("renders the page heading", () => {
     render(<StepperPatternsPage />)
-    expect(screen.getByRole("heading", { level: 1, name: "스텝퍼 패턴" })).toBeInTheDocument()
+    expect(screen.getByRole("heading", { level: 1, name: "스텝퍼·위저드" })).toBeInTheDocument()
   })
 
   it("renders every stepper sample as a numbered section", () => {
