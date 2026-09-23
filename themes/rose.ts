@@ -68,4 +68,26 @@ export const rose: ThemePreset = {
     "chart-4": "oklch(0.72 0.16 0)",
     "chart-5": "oklch(0.8 0.11 340)",
   },
+  sidebar: {
+    light: {
+      sidebar: "oklch(0.985 0.004 16)",
+      "sidebar-foreground": "oklch(0.22 0.02 16)",
+      "sidebar-primary": "oklch(0.55 0.22 16)",
+      "sidebar-primary-foreground": "oklch(0.98 0.01 16)",
+      "sidebar-accent": "oklch(0.92 0.035 16)",
+      "sidebar-accent-foreground": "oklch(0.3 0.03 16)",
+      "sidebar-border": "oklch(0.9 0.015 16)",
+      "sidebar-ring": "oklch(0.55 0.22 16)",
+    },
+    dark: {
+      sidebar: "oklch(0.225 0.018 16)",
+      "sidebar-foreground": "oklch(0.95 0.008 16)",
+      "sidebar-primary": "oklch(0.7 0.18 16)",
+      "sidebar-primary-foreground": "oklch(0.16 0.02 16)",
+      "sidebar-accent": "oklch(0.31 0.028 16)",
+      "sidebar-accent-foreground": "oklch(0.95 0.008 16)",
+      "sidebar-border": "oklch(1 0 0 / 12%)",
+      "sidebar-ring": "oklch(0.7 0.18 16)",
+    },
+  },
 };

@@ -68,4 +68,26 @@ export const forest: ThemePreset = {
     "chart-4": "oklch(0.66 0.12 100)",
     "chart-5": "oklch(0.78 0.11 190)",
   },
+  sidebar: {
+    light: {
+      sidebar: "oklch(0.985 0.004 152)",
+      "sidebar-foreground": "oklch(0.21 0.02 152)",
+      "sidebar-primary": "oklch(0.52 0.13 152)",
+      "sidebar-primary-foreground": "oklch(0.98 0.01 152)",
+      "sidebar-accent": "oklch(0.92 0.035 152)",
+      "sidebar-accent-foreground": "oklch(0.28 0.03 152)",
+      "sidebar-border": "oklch(0.9 0.015 152)",
+      "sidebar-ring": "oklch(0.52 0.13 152)",
+    },
+    dark: {
+      sidebar: "oklch(0.225 0.018 152)",
+      "sidebar-foreground": "oklch(0.95 0.008 152)",
+      "sidebar-primary": "oklch(0.68 0.16 152)",
+      "sidebar-primary-foreground": "oklch(0.15 0.02 152)",
+      "sidebar-accent": "oklch(0.31 0.028 152)",
+      "sidebar-accent-foreground": "oklch(0.95 0.008 152)",
+      "sidebar-border": "oklch(1 0 0 / 12%)",
+      "sidebar-ring": "oklch(0.68 0.16 152)",
+    },
+  },
 };

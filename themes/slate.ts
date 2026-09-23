@@ -68,4 +68,26 @@ export const slate: ThemePreset = {
     "chart-4": "oklch(0.78 0.015 260)",
     "chart-5": "oklch(0.82 0.01 230)",
   },
+  sidebar: {
+    light: {
+      sidebar: "oklch(0.985 0.004 240)",
+      "sidebar-foreground": "oklch(0.21 0.006 240)",
+      "sidebar-primary": "oklch(0.32 0.014 240)",
+      "sidebar-primary-foreground": "oklch(0.98 0.002 240)",
+      "sidebar-accent": "oklch(0.92 0.035 240)",
+      "sidebar-accent-foreground": "oklch(0.28 0.01 240)",
+      "sidebar-border": "oklch(0.9 0.015 240)",
+      "sidebar-ring": "oklch(0.32 0.014 240)",
+    },
+    dark: {
+      sidebar: "oklch(0.225 0.006 240)",
+      "sidebar-foreground": "oklch(0.95 0.003 240)",
+      "sidebar-primary": "oklch(0.75 0.014 240)",
+      "sidebar-primary-foreground": "oklch(0.16 0.006 240)",
+      "sidebar-accent": "oklch(0.31 0.01 240)",
+      "sidebar-accent-foreground": "oklch(0.95 0.003 240)",
+      "sidebar-border": "oklch(1 0 0 / 12%)",
+      "sidebar-ring": "oklch(0.75 0.014 240)",
+    },
+  },
 };

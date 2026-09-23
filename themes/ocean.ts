@@ -68,4 +68,26 @@ export const ocean: ThemePreset = {
     "chart-4": "oklch(0.66 0.17 290)",
     "chart-5": "oklch(0.78 0.12 235)",
   },
+  sidebar: {
+    light: {
+      sidebar: "oklch(0.985 0.004 262)",
+      "sidebar-foreground": "oklch(0.21 0.02 262)",
+      "sidebar-primary": "oklch(0.53 0.21 262)",
+      "sidebar-primary-foreground": "oklch(0.98 0.01 262)",
+      "sidebar-accent": "oklch(0.92 0.035 262)",
+      "sidebar-accent-foreground": "oklch(0.28 0.03 262)",
+      "sidebar-border": "oklch(0.9 0.015 262)",
+      "sidebar-ring": "oklch(0.53 0.21 262)",
+    },
+    dark: {
+      sidebar: "oklch(0.225 0.02 262)",
+      "sidebar-foreground": "oklch(0.95 0.008 262)",
+      "sidebar-primary": "oklch(0.68 0.18 262)",
+      "sidebar-primary-foreground": "oklch(0.15 0.02 262)",
+      "sidebar-accent": "oklch(0.31 0.03 262)",
+      "sidebar-accent-foreground": "oklch(0.95 0.008 262)",
+      "sidebar-border": "oklch(1 0 0 / 12%)",
+      "sidebar-ring": "oklch(0.68 0.18 262)",
+    },
+  },
 };

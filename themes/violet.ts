@@ -68,4 +68,26 @@ export const violet: ThemePreset = {
     "chart-4": "oklch(0.66 0.17 330)",
     "chart-5": "oklch(0.78 0.11 255)",
   },
+  sidebar: {
+    light: {
+      sidebar: "oklch(0.985 0.004 293)",
+      "sidebar-foreground": "oklch(0.21 0.02 293)",
+      "sidebar-primary": "oklch(0.51 0.23 293)",
+      "sidebar-primary-foreground": "oklch(0.98 0.01 293)",
+      "sidebar-accent": "oklch(0.92 0.035 293)",
+      "sidebar-accent-foreground": "oklch(0.28 0.03 293)",
+      "sidebar-border": "oklch(0.9 0.015 293)",
+      "sidebar-ring": "oklch(0.51 0.23 293)",
+    },
+    dark: {
+      sidebar: "oklch(0.225 0.022 293)",
+      "sidebar-foreground": "oklch(0.95 0.008 293)",
+      "sidebar-primary": "oklch(0.68 0.19 293)",
+      "sidebar-primary-foreground": "oklch(0.15 0.02 293)",
+      "sidebar-accent": "oklch(0.31 0.032 293)",
+      "sidebar-accent-foreground": "oklch(0.95 0.008 293)",
+      "sidebar-border": "oklch(1 0 0 / 12%)",
+      "sidebar-ring": "oklch(0.68 0.19 293)",
+    },
+  },
 };

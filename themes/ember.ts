@@ -68,4 +68,26 @@ export const ember: ThemePreset = {
     "chart-4": "oklch(0.8 0.13 85)",
     "chart-5": "oklch(0.6 0.16 10)",
   },
+  sidebar: {
+    light: {
+      sidebar: "oklch(0.985 0.004 41)",
+      "sidebar-foreground": "oklch(0.22 0.02 41)",
+      "sidebar-primary": "oklch(0.64 0.19 41)",
+      "sidebar-primary-foreground": "oklch(0.98 0.01 41)",
+      "sidebar-accent": "oklch(0.92 0.035 41)",
+      "sidebar-accent-foreground": "oklch(0.3 0.03 41)",
+      "sidebar-border": "oklch(0.9 0.015 41)",
+      "sidebar-ring": "oklch(0.64 0.19 41)",
+    },
+    dark: {
+      sidebar: "oklch(0.225 0.016 41)",
+      "sidebar-foreground": "oklch(0.95 0.008 41)",
+      "sidebar-primary": "oklch(0.7 0.17 41)",
+      "sidebar-primary-foreground": "oklch(0.16 0.02 41)",
+      "sidebar-accent": "oklch(0.31 0.026 41)",
+      "sidebar-accent-foreground": "oklch(0.95 0.008 41)",
+      "sidebar-border": "oklch(1 0 0 / 12%)",
+      "sidebar-ring": "oklch(0.7 0.17 41)",
+    },
+  },
 };

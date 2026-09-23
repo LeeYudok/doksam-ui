@@ -401,7 +401,7 @@
   "page.tokens.risk.level.moderate": "Observación — conviene seguir la tendencia",
   "page.tokens.risk.level.severe": "Alerta — el nivel máximo, actuar de inmediato",
   "page.tokens.risk.title": "Tokens de nivel de riesgo",
-  "page.tokens.sidebar.description": "Los 8 tokens que usa el primitivo sidebar de shadcn. No forman parte de las 27 claves del preset de tema — solo se definen en :root/.dark de globals.css, por lo que cambiar de preset no los altera.",
+  "page.tokens.sidebar.description": "Los 8 tokens que usa el primitivo sidebar de shadcn (#112). No forman parte de las 27 claves del preset de tema, pero cada preset tiene valores explícitos — cambiar de preset hace que sidebar-primary y el resto sigan al primary de ese tema.",
   "page.tokens.sidebar.title": "Tokens de sidebar",
   "page.type-contrast.description": "Si la escala de personality agranda título y cuerpo en la misma proporción uniforme, el contraste tipográfico cambia la proporción misma — agrandando solo el título o ampliando la diferencia de peso. Los proyectos no eligen el tamaño del título de forma arbitraria; eligen explícitamente uno de los {count} contrastes siguientes.",
   "page.type-contrast.howto-description": "Primero elige el arquetipo y el perfil para el esqueleto y el color, luego elige el contraste según el peso que deban tener los títulos de la pantalla. Los valores de contraste los fija el preset de type-contrast/index.ts que referencia el perfil — los proyectos no redefinen el tamaño o peso del título de forma individual.",

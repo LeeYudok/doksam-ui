@@ -401,7 +401,7 @@
   "page.tokens.risk.level.moderate": "Watch — keep an eye on the trend",
   "page.tokens.risk.level.severe": "Alert — the top step, act immediately",
   "page.tokens.risk.title": "Risk-grade tokens",
-  "page.tokens.sidebar.description": "The 8 tokens used by the shadcn sidebar primitive. They are not part of the 27 theme-preset keys — they are only defined in :root/.dark in globals.css, so switching presets does not change them.",
+  "page.tokens.sidebar.description": "The 8 tokens used by the shadcn sidebar primitive (#112). They are not part of the 27 theme-preset keys, but each preset has explicit values — switching presets changes sidebar-primary and the rest to follow that theme's primary.",
   "page.tokens.sidebar.title": "Sidebar tokens",
   "page.type-contrast.description": "If personality's scale enlarges heading and body at the same uniform ratio, type contrast changes the proportion itself — enlarging headings alone or widening the weight gap. Projects don't pick heading size arbitrarily; they pick one of the {count} contrasts below explicitly.",
   "page.type-contrast.howto-description": "Pick the archetype and profile for skeleton and color first, then pick the contrast for the weight the screen's headings should carry. Contrast values are fixed by the preset in type-contrast/index.ts that the profile references — projects do not redefine heading size or weight individually.",

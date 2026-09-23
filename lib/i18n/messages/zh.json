@@ -401,7 +401,7 @@
   "page.tokens.risk.level.moderate": "观察 — 需关注趋势的阶段",
   "page.tokens.risk.level.severe": "警报 — 需立即处理的最高等级",
   "page.tokens.risk.title": "风险等级令牌",
-  "page.tokens.sidebar.description": "shadcn sidebar 原语使用的 8 个令牌。它们不属于主题预设的 27 个键，仅在 globals.css 的 :root/.dark 中定义，因此切换预设不会改变其值。",
+  "page.tokens.sidebar.description": "shadcn sidebar 原语使用的 8 个令牌（#112）。它们不属于主题预设的 27 个键，但每个预设都有各自的明确值——切换预设时 sidebar-primary 等也会随该主题的 primary 变化。",
   "page.tokens.sidebar.title": "Sidebar 令牌",
   "page.type-contrast.description": "如果说 personality 的 scale 以相同比例统一放大标题与正文,那么标题对比度改变的是比例本身 — 仅放大标题,或拉开粗细差异。项目不再随意决定标题大小,而是从下方 {count} 种对比度中明确选择一种。",
   "page.type-contrast.howto-description": "先用原型和配置文件确定骨架与颜色,再根据界面标题应具有的分量选择对比度。对比度值由配置文件引用的 type-contrast/index.ts 预设固定 — 项目不会单独重新定义标题大小或粗细。",

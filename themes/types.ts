@@ -2,13 +2,14 @@
  * 테마 프리셋 타입 정의.
  *
  * 새 프리셋을 추가하려면:
- *   1. themes/<name>.ts 에 ThemePreset 객체를 정의 (OKLCH 컬러만 사용)
+ *   1. themes/<name>.ts 에 ThemePreset 객체를 정의 (OKLCH 컬러만 사용, sidebar 축 포함)
  *   2. themes/index.ts 의 THEME_PRESETS 배열에 등록
  *   3. app/globals.css 에 [data-theme="<name>"] / [data-theme="<name>"].dark 블록 동기화
  *      (themes/*.ts 가 단일 진실원천 — CSS 는 동일 값을 손으로 미러링한다)
  *
  * 그러면 테마 스위처와 사이트 전체에 자동으로 반영된다.
  */
+import type { SidebarTokens } from "../lib/sidebar-tokens.ts";
 
 /** shadcn 시맨틱 토큰 세트 (라이트 또는 다크 한 쪽) — 값은 전부 OKLCH 문자열. */
 export interface ThemeTokens {
@@ -68,6 +69,16 @@ export interface ThemePreset {
   swatch: string;
   light: ThemeTokens;
   dark: ThemeTokens;
+  /**
+   * 사이드바 chrome 토큰 — 프리셋별 명시값 (#112 finding 3).
+   *
+   * 이전에는 `lib/sidebar-tokens.ts` 의 전역 상수 하나를 모든 프리셋이
+   * 공유해서(ocean hue=262 고정) 어떤 프로필을 설치해도 사이드바만 파란
+   * chrome 으로 남았다. 런타임에 `primary` 에서 파생시키지 않고 프리셋마다
+   * 여기에 명시값을 둔다 — `lib/globals-css-mirror.test.ts` 가 `app/globals.css`
+   * 의 `[data-theme="<name>"]` 블록과 이 값이 어긋나지 않는지 잠근다.
+   */
+  sidebar: { light: SidebarTokens; dark: SidebarTokens };
 }
 
 /** ThemeTokens 의 키 목록 — 테스트에서 토큰 완전성 검증에 사용. */
