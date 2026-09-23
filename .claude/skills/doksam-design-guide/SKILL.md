@@ -165,6 +165,14 @@ radius 값을 새로 쓰지 않는다(레지스트리 프리셋 중에서만 고
 `risk-low`/`risk-moderate`/`risk-high`/`risk-severe`(+ 각 `-foreground`),
 `heatmap-l-0~4`/`heatmap-text-0~4`.
 
+`chart-1~5` 는 **범주형** 팔레트다(#93). `chart-1` 만 프리셋의 브랜드 hue 를 유지하고
+나머지는 색상환을 72°씩 돌며(인덱스 순서는 0/144/288/72/216 로 엇갈림), 상대휘도도
+계단식으로 벌어져 색각 이상·흑백에서 계열이 남는다. 라이트값은
+`text-primary-foreground` 대비 4.5:1 을 넘도록 명도를 잡아 `--chart-N-foreground` 짝을
+두지 않는다. 이 세 축은 `themes/chart-palette.test.ts` 가 프리셋 9종 × 라이트/다크로
+강제하므로, 프리셋을 추가·수정할 때 chart 값을 임의로 정하면 그 테스트가 먼저 깨진다.
+생성기는 `scripts/manual/2026-09-23_issue-93_gen-chart-palette.ts` 다.
+
 이 목록은 닫힌 목록이 아니다 — 기존 토큰 어느 것으로도 표현할 수 없는 성격이 나오면
 보조 층을 새로 만든다. `heatmap-*`(#103) 가 그 예다: 연속 값 강도는 `chart-1~5`(순서
 없는 범주 팔레트)로도 `risk-*`(4단 고정 심각도)로도 실을 수 없어
