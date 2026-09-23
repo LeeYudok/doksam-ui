@@ -3,18 +3,23 @@ import path from "node:path"
 
 import { describe, expect, it } from "vitest"
 
+
 import {
   collectSpecifiers,
   fileExists,
   NEXT_CONVENTION_FILES,
+  hrefMatchesRoutes,
+  internalHrefs,
   packageNameOf,
   packageOfSpecifier,
   providedPaths,
+  providedRoutes,
   readRegistry,
-  registryDependencyName,
   REPO_ROOT,
+  registryDependencyName,
   resolveSpecifier,
   simulateShadcnRewrite,
+  routeFromPagePath,
   undeclaredPackages,
   unresolvedImports,
   upstreamComponentNames,
@@ -268,5 +273,74 @@ describe("파일 이름 충돌 — 이슈 #52", () => {
       }
       expect(problems, `${item.name} 설치:\n${problems.join("\n")}`).toEqual([])
     }
+  })
+})
+
+describe("routeFromPagePath", () => {
+  it("app/ 경로를 라우트로 바꾼다", () => {
+    expect(routeFromPagePath("app/templates/admin/page.tsx")).toBe("/templates/admin")
+    expect(routeFromPagePath("app/page.tsx")).toBe("/")
+  })
+
+  it("라우트 그룹은 URL 에서 사라진다", () => {
+    expect(routeFromPagePath("app/(marketing)/about/page.tsx")).toBe("/about")
+  })
+
+  it("page.tsx 가 아니면 라우트가 아니다", () => {
+    expect(routeFromPagePath("app/templates/admin/layout.tsx")).toBeNull()
+    expect(routeFromPagePath("components/x.tsx")).toBeNull()
+  })
+})
+
+describe("internalHrefs", () => {
+  it("문자열 리터럴 href 만 잡는다", () => {
+    const source = [
+      `<Link href="/templates/shop">go</Link>`,
+      `<a href="https://example.com">외부</a>`,
+      `<a href="//cdn.example.com/x">프로토콜 상대</a>`,
+      `<a href="#anchor">해시</a>`,
+    ].join("\n")
+    expect(internalHrefs(source)).toEqual(["/templates/shop"])
+  })
+
+  it("템플릿 리터럴·표현식 href 는 정적으로 완결되지 않으므로 잡지 않는다", () => {
+    const source = [`<Link href={\`/templates/shop/product/\${id}\`}>go</Link>`, `<Link href={buildUrl()}>go</Link>`].join(
+      "\n",
+    )
+    expect(internalHrefs(source)).toEqual([])
+  })
+})
+
+describe("hrefMatchesRoutes", () => {
+  it("정적 라우트와 일치한다", () => {
+    expect(hrefMatchesRoutes("/templates/shop", ["/templates/shop"])).toBe(true)
+    expect(hrefMatchesRoutes("/templates/other", ["/templates/shop"])).toBe(false)
+  })
+
+  it("동적 세그먼트를 와일드카드로 매칭한다", () => {
+    expect(hrefMatchesRoutes("/templates/shop/product/42", ["/templates/shop/product/[id]"])).toBe(true)
+  })
+
+  it("쿼리·해시를 떼고 비교한다", () => {
+    expect(hrefMatchesRoutes("/templates/shop?x=1#y", ["/templates/shop"])).toBe(true)
+  })
+})
+
+describe("죽은 내부 링크 게이트 — GitHub #113", () => {
+  it("배포 블록 파일의 내부 href 는 그 항목이 제공하는 라우트 안을 가리킨다", () => {
+    const broken: string[] = []
+    for (const item of registry.items) {
+      const routes = providedRoutes(item.name, registry)
+      for (const f of item.files ?? []) {
+        if (!/\.tsx?$/.test(f.path)) continue
+        const abs = path.join(REPO_ROOT, f.path)
+        if (!fs.existsSync(abs)) continue
+        const source = fs.readFileSync(abs, "utf8")
+        for (const href of internalHrefs(source)) {
+          if (!hrefMatchesRoutes(href, routes)) broken.push(`${item.name}: ${f.path} → ${href}`)
+        }
+      }
+    }
+    expect(broken, `설치본이 제공하지 않는 라우트를 가리키는 내부 링크:\n${broken.join("\n")}`).toEqual([])
   })
 })

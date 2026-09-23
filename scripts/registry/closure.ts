@@ -217,6 +217,80 @@ export function providedPaths(itemName: string, registry: Registry): Set<string>
   return out
 }
 
+/**
+ * `app/` 경로(`page.tsx` 하나)를 Next.js 라우트 패턴으로 바꾼다.
+ *
+ * 라우트 그룹 `(group)` 세그먼트는 URL 에 나타나지 않으므로 제거하고, 동적
+ * 세그먼트(`[id]`, `[...slug]`)는 정규식 매칭용 자리표시자로 남긴다.
+ * `page.tsx` 가 아니면(레이아웃·컴포넌트 등) 라우트가 아니므로 null.
+ */
+export function routeFromPagePath(filePath: string): string | null {
+  if (!filePath.startsWith("app/") || !filePath.endsWith("/page.tsx")) {
+    if (filePath === "app/page.tsx") return "/"
+    return null
+  }
+  const inner = filePath.slice("app/".length, -"/page.tsx".length)
+  const segments = inner.split("/").filter((s) => !/^\(.*\)$/.test(s))
+  return segments.length === 0 ? "/" : `/${segments.join("/")}`
+}
+
+/** 라우트 패턴(동적 세그먼트 포함)을 href 매칭용 정규식으로 바꾼다. */
+function routePatternToRegExp(pattern: string): RegExp {
+  const escaped = pattern
+    .split("/")
+    .map((segment) => {
+      if (/^\[\.\.\..+\]$/.test(segment)) return ".*" // catch-all
+      if (/^\[.+\]$/.test(segment)) return "[^/]+" // 동적 세그먼트
+      return segment.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+    })
+    .join("/")
+  return new RegExp(`^${escaped}$`)
+}
+
+/** 항목 하나를 설치했을 때 소비 프로젝트에 실제로 존재하게 되는 라우트(page.tsx 기준) 목록. */
+export function providedRoutes(itemName: string, registry: Registry): string[] {
+  const routes: string[] = []
+  for (const filePath of providedPaths(itemName, registry)) {
+    const route = routeFromPagePath(filePath)
+    if (route) routes.push(route)
+  }
+  return routes
+}
+
+/**
+ * 소스 안의 내부 `href="/..."` **문자열 리터럴**만 모은다.
+ *
+ * `href={\`/templates/${slug}\`}` 같은 템플릿 리터럴이나 `href={buildUrl()}` 같은
+ * 표현식은 TS AST 상 StringLiteral 이 아니므로 애초에 잡히지 않는다 — 오탐 없이
+ * 정적으로 완결된 링크만 검사 대상이 된다. 외부 링크(`https://...`)·프로토콜
+ * 상대(`//...`)·해시(`#...`)는 내부 라우트가 아니므로 제외한다.
+ */
+export function internalHrefs(source: string): string[] {
+  const file = ts.createSourceFile("probe.tsx", source, ts.ScriptTarget.Latest, false, ts.ScriptKind.TSX)
+  const found: string[] = []
+
+  const visit = (node: ts.Node) => {
+    if (ts.isJsxAttribute(node) && node.name.getText(file) === "href" && node.initializer) {
+      const init = node.initializer
+      let literal: ts.StringLiteralLike | undefined
+      if (ts.isStringLiteralLike(init)) literal = init
+      else if (ts.isJsxExpression(init) && init.expression && ts.isStringLiteralLike(init.expression)) {
+        literal = init.expression
+      }
+      if (literal && literal.text.startsWith("/") && !literal.text.startsWith("//")) found.push(literal.text)
+    }
+    ts.forEachChild(node, visit)
+  }
+  ts.forEachChild(file, visit)
+  return found
+}
+
+/** href(쿼리·해시 제거)가 제공된 라우트 패턴 중 하나와 일치하는지. */
+export function hrefMatchesRoutes(href: string, routes: string[]): boolean {
+  const path = href.split(/[?#]/)[0]
+  return routes.some((route) => routePatternToRegExp(route).test(path))
+}
+
 /** 항목 하나를 설치했을 때 함께 깔리는 npm 패키지. */
 export function providedPackages(itemName: string, registry: Registry): Set<string> {
   const out = new Set<string>()
