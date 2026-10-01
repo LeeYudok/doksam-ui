@@ -183,7 +183,8 @@ pnpm typecheck && pnpm lint && pnpm test && pnpm build
    (`lib/profile-registry-css-vars.ts`), `lib/profile-registry-css-vars.test.ts` 가
    패턴 실존과 일치를 강제한다(#110). 밀도·성격 층은 속성이 없으면 아무 규칙도 걸리지
    않는 opt-in 이라, 이 안내가 빠지면 설치만 한 프로젝트가 미적용으로 돌아간다.
-   **폰트는 registry item 으로 자동 설치되지 않는다** — cssVars 는 색·radius 만 담고,
+   **폰트는 registry item 으로 자동 설치되지 않는다** — cssVars 는 테마 색·sidebar·risk·heatmap 토큰 값을 담고 radius는 cssVars.theme에 둔다.
+   Tailwind @theme inline 매핑과 프로필 data-* 축 속성은 별도로 연결하며,
    폰트는 수동 복사 + `next/font/local` 연결이라고 안내 문구에 남긴다.
 
 ---
@@ -201,8 +202,7 @@ pnpm typecheck && pnpm lint && pnpm test && pnpm build
   쓰고, 나머지 항목은 `경계 — ...` 로 시작해 어느 선택지를 골라도 지켜야 할 것을 적는다.
   `lib/rules-markdown.test.ts` 가 이 구조를 강제한다.
 
-첫 두 절("디자인 브리프", "수렴 안티패턴")의 자리는 바꾸지 않는다 — 생성 전에 무엇을
-안 쓸지 고르게 하는 단계이고, `scripts/gen-llms.mjs` 가 `DESIGN_BRIEF_SECTION` 을
+첫 두 절("디자인 브리프", "수렴 안티패턴")의 자리는 바꾸지 않는다 — 사용자 과업과 설계 방향을 정하고 기본 조합의 반복을 점검하는 단계이고, `scripts/gen-llms.mjs` 가 `DESIGN_BRIEF_SECTION` 을
 `public/llms.txt` 맨 앞에 싣는다(절 순서가 바뀌면 그 블록도 함께 확인한다).
 
 규칙을 추가했으면 이 스킬(`.claude/skills/doksam-design-guide/`)이 그 규칙과 모순되지 않는지

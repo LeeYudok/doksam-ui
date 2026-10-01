@@ -43,15 +43,15 @@ describe("규칙의 두 층(#28)", () => {
     }
   });
 
-  it("브리프의 원형 항목은 레지스트리 원형을 전부 이름으로 열거하고 자유 문자열을 금지한다 (#34)", () => {
+  it("브리프의 원형 항목은 레지스트리 원형을 참고로 제시하고 새 구조 설계를 허용한다 (#34)", () => {
     const archetypeItem = DESIGN_BRIEF_SECTION.items.find((item) => item.startsWith("원형(archetype)"));
     expect(archetypeItem).toBeDefined();
     for (const archetype of LAYOUT_ARCHETYPES) {
       expect(archetypeItem).toContain(archetype.name);
     }
-    expect(archetypeItem).toContain("자유 문자열");
-    expect(archetypeItem).toContain("불가");
-    expect(archetypeItem).not.toMatch(/없으면 자유 문자열/);
+    expect(archetypeItem).toContain("조합·변형");
+    expect(archetypeItem).toContain("새 구조를 설계");
+    expect(archetypeItem).not.toContain("반드시 고른다");
   });
 
   it("브리프의 성격 항목은 personality 프리셋을 전부 이름으로 열거한다 (#34)", () => {
@@ -99,7 +99,7 @@ describe("레지스트리 파생 문장 (#110)", () => {
     }
   });
 
-  it("모션 절의 소유자가 personality 하나로 정해져 있다 (finding 5)", () => {
+  it("모션 절이 personality 기본값과 프로젝트 조정 범위를 설명한다 (finding 5)", () => {
     // 브리프 절은 "personality 가 모션 강도를 정한다"고 쓰는데 모션 절이
     // "프로젝트가 고른다"로 쓰면 소유권이 둘로 갈린다. 실제 강제자는
     // app/globals.css 의 data-personality-motion 층이므로 personality 쪽으로 통일한다.
@@ -132,6 +132,18 @@ describe("레지스트리 파생 문장 (#110)", () => {
     for (const owned of ["--control-fs", "--stack-gap"]) {
       expect(item, `density 가 소유한 ${owned} 가 문장에 없다`).toContain(owned);
     }
+  });
+});
+
+describe("design latitude", () => {
+  it("allows custom structure and project styles without exclusion quotas or registration gates", () => {
+    const brief = DESIGN_BRIEF_SECTION.items.join("\n");
+    expect(brief).toContain("새 구조를 설계");
+    expect(brief).toContain("배제 개수는 강제하지 않는다");
+    expect(brief).toContain("별도 승인이나 카탈로그 등록을 기다리지 않는다");
+    const shape = RULES_SECTIONS.find((section) => section.title.includes("모서리"))!.items.join("\n");
+    expect(shape).toContain("프로필 기본값과 다르게 쓸 수 있다");
+    expect(shape).toContain("프로젝트 범위");
   });
 });
 
