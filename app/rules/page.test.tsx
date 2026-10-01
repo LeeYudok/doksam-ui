@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
 import RulesPage from "@/app/rules/page";
@@ -40,6 +40,7 @@ describe("RulesPage", () => {
 
   it("mentions the semantic-token-only rule", () => {
     render(<RulesPage />);
-    expect(screen.getByText(/시맨틱 토큰/)).toBeInTheDocument();
+    const section = screen.getByRole("heading", { name: "컬러 · 토큰" }).closest("section")!;
+    expect(within(section).getByText(/하드코딩 색.*항상 시맨틱 토큰만 사용한다/)).toBeInTheDocument();
   });
 });
