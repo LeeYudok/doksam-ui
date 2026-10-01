@@ -23,7 +23,9 @@ const HOMEPAGE = "https://ui.doksam.com";
  *
  * Node 22.18+ 는 .ts 를 타입 스트리핑으로 그대로 import 한다(CI 도 node 22).
  */
-const { DESIGN_BRIEF_SECTION, CONVERGENCE_ANTIPATTERNS_SECTION } = await import("../lib/rules-markdown.ts");
+const { DESIGN_BRIEF_SECTION, CONVERGENCE_ANTIPATTERNS_SECTION, RULES_SECTIONS } = await import("../lib/rules-markdown.ts");
+const componentRules = RULES_SECTIONS.find((section) => section.title === "컴포넌트");
+if (!componentRules) throw new Error("규칙 원문에서 컴포넌트 절을 찾지 못했습니다.");
 // 원형·성격 메뉴는 링크가 아니라 표로 인라인한다(#34) — llms.txt 하나만 읽는 에이전트가
 // 레지스트리를 따라가지 않고도 등록된 원형 중에서 고를 수 있어야 한다. 항목 원천은 각 레지스트리.
 const { LAYOUT_ARCHETYPES } = await import("../archetypes/index.ts");
@@ -186,6 +188,10 @@ function main() {
   }
   lines.push("");
   lines.push(`두 층의 전체 조항은 ${HOMEPAGE}/rules.md 에 있습니다.`);
+  lines.push("");
+  lines.push(`## ${componentRules.title} 구현 규칙`);
+  lines.push("");
+  for (const item of componentRules.items) lines.push(`- ${item}`);
   lines.push("");
 
   for (const [label, items] of groups) {
