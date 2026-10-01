@@ -145,12 +145,11 @@ function main() {
     lines.push(`- ${item}`);
   }
   lines.push("");
-  lines.push(`### 원형 레지스트리 (${LAYOUT_ARCHETYPES.length}종 — 이 중에서만 고른다)`);
+  lines.push(`### 원형 레지스트리 (${LAYOUT_ARCHETYPES.length}종 — 참고 출발점)`);
   lines.push("");
   lines.push(
-    "DESIGN.md 의 원형은 아래 `name` 값 중 하나여야 합니다. 같은 과제라도 원형이 다르면 내비 방식과 " +
-      "본문 구조가 달라야 하며, 뼈대 열이 그 최소 요구입니다. 어느 원형에도 맞지 않으면 가장 가까운 것을 " +
-      "주 원형으로 두고 보조 원형을 하나 더 적습니다 — 새 이름을 만들지 않습니다.",
+    "아래 원형은 참고 출발점입니다. 사용자 과업에 맞게 채택·조합·변형하거나 새 구조를 설계할 수 있습니다. " +
+      "표의 뼈대는 예시이며 목록 밖 구조도 DESIGN.md 에 사용자 흐름과 선택 이유를 설명하면 됩니다.",
   );
   lines.push("");
   lines.push(...archetypeTable());
@@ -162,7 +161,7 @@ function main() {
   lines.push(`### 모서리 레지스트리 (${CORNER_PRESETS.length}종)`);
   lines.push("");
   lines.push(
-    "DESIGN.md 의 모서리는 아래 `name` 값 중 하나여야 합니다 — 픽셀 숫자를 직접 적지 않습니다. " +
+    "아래 모서리 계열은 기본값의 참고 자료입니다. 제품에 맞게 선택·조정하고 반복 값은 프로젝트 토큰으로 관리합니다. " +
       "표면(카드·팝오버)과 컨트롤(버튼·입력)의 반경은 같은 계열 안에서도 다를 수 있습니다.",
   );
   lines.push("");
@@ -180,7 +179,7 @@ function main() {
   lines.push("");
   lines.push(`## ${CONVERGENCE_ANTIPATTERNS_SECTION.title}`);
   lines.push("");
-  lines.push("브리프의 배제 목록을 쓰기 전에 읽습니다 — 아래는 근거 없이 채택되면 모든 결과물이 같아지는 기본값입니다.");
+  lines.push("구조와 조합을 정할 때 참고합니다 — 기본 조합의 관성적 반복을 점검하되 유용한 패턴을 일부러 버릴 필요는 없습니다.");
   lines.push("");
   for (const item of CONVERGENCE_ANTIPATTERNS_SECTION.items) {
     lines.push(`- ${item}`);

@@ -32,8 +32,12 @@ UI 코드를 쓰기 전에 그 파일을 읽는다. 이 스킬은 규칙을 복�
 **규칙은 불변(`kind: "invariant"`)과 선택(`kind: "decision"`) 두 층이다.** 불변은
 프로젝트가 달라도 답이 같고, 선택은 프로젝트마다 정답이 다르다 — 선택 절은 명령이
 아니라 선택지·고르는 기준·경계를 준다. 소비 프로젝트에서 화면을 만들기 전에
-`RULES_SECTIONS` 의 첫 절("디자인 브리프")대로 원형·성격·안 쓸 컴포넌트/패턴·이유를
-`DESIGN.md` 에 선언하고, 둘째 절("수렴 안티패턴")로 기본값 채택을 자가 점검한다.
+`RULES_SECTIONS` 의 첫 절("디자인 브리프")대로 사용자 과업·구조·성격·조합과 이유를
+`DESIGN.md` 에 짧게 기록하고, 둘째 절("수렴 안티패턴")로 기본값 채택을 자가 점검한다.
+
+원형·프로필·패턴은 참고 출발점이다. 소비 프로젝트는 과업에 맞게 조합·변형하거나
+새 구조와 프로젝트 범위의 시각 토큰을 설계할 수 있다. 배제 개수·사전 카탈로그 등록·
+기존 셸의 외형 복제는 요구하지 않는다.
 
 절대 어기지 않는 것 4가지만 여기 요약해 둔다(나머지는 위 파일 참조):
 
@@ -155,9 +159,9 @@ export const donts = ["...", "..."]  // 2~3개 권장
 
 `app/globals.css` 가 소유한다. 색은 OKLCH, `--radius` 는 `corners/index.ts` 의
 `CORNER_PRESETS`(sharp=2px, soft=6px, rounded=12px, pill=컨트롤만 9999px)에서 파생되고
-radius 파생값은 `--radius-sm ~ --radius-4xl` 이 `calc()` 로 만든다 — 화면 코드에서 임의
-radius 값을 새로 쓰지 않는다(레지스트리 프리셋 중에서만 고른다. `lib/rules-markdown.ts`
-"모서리 · 밀도 · 타입 대비" 섹션, #43).
+radius 파생값은 `--radius-sm ~ --radius-4xl` 이 `calc()` 로 만든다. 카탈로그의 공통
+프리셋은 이 관계를 유지한다. 소비 프로젝트는 별도 범위의 이름 있는 토큰·스타일로
+모서리를 조정할 수 있다(`lib/rules-markdown.ts` "모서리 · 밀도 · 타입 대비" 섹션).
 
 시맨틱 색 토큰: `background`/`foreground`, `card`, `popover`, `primary`, `secondary`,
 `muted`, `accent`, `destructive`, `success`, `warning`, `gain`/`loss`(한국식 등락 —
@@ -204,12 +208,12 @@ radius 값을 새로 쓰지 않는다(레지스트리 프리셋 중에서만 고
 - `themes/<name>.ts` — 색 프리셋 8종. 추가 시 `themes/index.ts` 레지스트리 등록,
   **기존 프리셋 파일이나 globals.css 의 다른 프리셋 블록은 건드리지 않는다.**
 - `fonts/index.ts` — 폰트 프리셋 5종. 실 파일은 `assets/fonts/<name>/` 에 woff2 + LICENSE 커밋.
-- `profiles/index.ts` — **프로젝트가 고르는 단위는 프로필 하나**다. 테마·폰트·
+- `profiles/index.ts` — **프로필은 조합의 출발점**이다. 테마·폰트·
   `defaultMode`·`radius`·`corner`·`density`·`typeContrast`·`personality`(**필수**, #90)
   와 선택 필드 `archetype`(레이아웃 원형, `archetypes/index.ts` 의 name)·`shell` 을
-  미리 고정해 둔 층(admin/service/data 등). 프로젝트가 프로필의
-  corner·radius·density·typeContrast·personality 를 임의 재정의하면 표준이 발산한다 —
-  바꿀 필요가 생기면 doksam-ui 에 프로필을 추가/수정해서 반영한다.
+  기본값으로 제공하는 층(admin/service/data 등). 소비 프로젝트는 과업에 맞게
+  corner·radius·density·typeContrast·personality 를 프로젝트 범위에서 조정할 수 있다.
+  공통 프리셋·프리미티브 원본은 유지하고, 재사용 가치가 생기면 카탈로그로 환류한다.
 
 ### 모서리 · 밀도 · 타입 대비
 
@@ -236,7 +240,8 @@ FOUC(테마 깜빡임)가 난다. 자세한 조항은 `lib/rules-markdown.ts` "�
 
 ## 7. 레이아웃 표준
 
-- 콘텐츠 컨테이너 **`max-w-[1300px] mx-auto`**, 소유자는 **세그먼트 `layout.tsx`** —
+- 관리·데이터의 참고 폭은 **`max-w-[1300px] mx-auto`** 이며 제품별 폭은 과업에 맞게 고른다.
+  컨테이너 소유자는 **세그먼트 `layout.tsx`** —
   페이지 컴포넌트에서 max-width 를 하드코딩하지 않는다.
 - `main` 랜드마크는 layout 이 렌더한다. 페이지·`loading.tsx`·`error.tsx` 에서
   `main` 중복 렌더 금지(중첩은 invalid HTML). 에러 UI 는 `div role="alert"`.
