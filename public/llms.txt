@@ -80,6 +80,19 @@ AI 에이전트/사람 모두를 위한 발견용 문서입니다. 아래 각 �
 
 두 층의 전체 조항은 https://ui.doksam.com/rules.md 에 있습니다.
 
+## 컴포넌트 구현 규칙
+
+- UI 프리미티브는 shadcn/ui를 쓴다 — components/ui/ 는 components.json 의 style(radix-nova)로 설치한 상류 원본이며, 그 스타일 자체가 컨트롤 높이·--radius 파생 토큰·has-data-[icon=...] 슬롯 규약을 담고 있다. 빈 프로젝트에 같은 프리셋으로 설치해 대조하면 60개 중 6개만 다르고, 그 6개는 상류가 더 앞선 것이다(#57 실측). 파일 단위 기록은 components/ui/upstream.manifest.json 에 있으며, 그 파일의 customized 는 CLI 가 설치 시 치환하는 자리까지 포함한 값이라 그대로 "하우스 포크" 로 읽지 않는다.
+- components/ui/ 를 손으로 고치지 않는다 — 프로필의 모서리·밀도 축은 radix-nova 가 쓰는 --radius 파생 토큰과 컨트롤 스케일을 전제로 계산되므로, 파일을 임의로 고치거나 다른 스타일의 프리미티브로 갈아끼우면 축이 어긋난다. 상류를 재설치·업그레이드할 때는 node scripts/shadcn-upstream.mjs 로 components.json 의 style 기준 상류와 대조하고, 차이가 나면 upstream.manifest.json 에 기록한다.
+- 프리미티브도 상류가 아니라 이 카탈로그에서 설치한다 — npx shadcn add https://ui.doksam.com/r/badge.json 을 쓴다. bare 이름(npx shadcn add badge)으로 받으면 무엇이 깔릴지가 소비 프로젝트의 init 프리셋(style·base·아이콘 라이브러리)과 상류의 현재 버전에 달리게 되어, 카탈로그가 렌더한 것과 같다고 보장할 수 없다. 실제로 상류 radix-nova 는 이미 6개 파일(checkbox·radio-group·switch·field·command·message-scroller)에서 카탈로그보다 앞서 있다.
+- 커스텀 동작이 필요하면 components/ui/ 밖에 별도 컴포넌트를 만들어 shadcn 프리미티브를 조합한다 — components/ui/customs 같은 하위 폴더를 만들어 components/ui/ 안에 끼워 넣지 않는다. shadcn 유래 프리미티브와 커스텀 조합은 디렉터리 레벨에서 분리한다(예: components/<feature>/ 또는 components/patterns/).
+- UI 표현과 업무 로직의 책임을 분리한다 — 화면 구성·타이포·스타일·접근성을 바꾸는 작업이 업무 계산·검증·권한 판정·API 계약의 변경을 요구하지 않도록 경계를 둔다. 화면 전체의 JSX·데이터 조회·저장·업무 규칙을 하나의 React 파일에 몰아넣지 않는다.
+- UI 컴포넌트는 표시할 데이터와 사용자 행동 콜백을 받아 렌더링한다. 조회·저장·로딩·오류·상태 전이의 연결은 기능별 훅이나 서버 컴포넌트 등 조정 계층에 두고, API·외부 시스템 접근은 별도 모듈에 둔다. 서버 전용 코드와 비밀값이 UI나 클라이언트 훅으로 넘어가지 않게 한다.
+- 계산·변환·업무 검증은 React·DOM·네트워크에 의존하지 않는 순수 함수로 분리한다. React 상태·Effect가 필요한 로직만 커스텀 훅으로 만들고, 일반 계산 함수를 use 접두사의 훅으로 감싸지 않는다. 업무 규칙은 브라우저 렌더링 없이 검증할 수 있어야 한다.
+- 작은 컴포넌트의 표시 조건·클릭 처리와 모달 열림·선택된 탭 같은 지역 UI 상태는 JSX·스타일과 같은 파일에 둘 수 있다. 단순한 화면은 한 파일로 시작해도 되며, 독립적인 변경·검증·재사용이 필요하거나 서로 다른 책임이 얽히면 분리한다. 모든 화면에 View·Hook·Model·API 파일을 의무적으로 만들거나 파일 수·줄 수에 맞춰 쪼개지 않는다.
+- 분리한 파일은 기능 가까이에 모은다(예: features/orders/ 안의 orders-view.tsx·use-orders.ts·orders-model.ts·orders-api.ts — 필요할 때만 생성). page.tsx는 페이지 진입·서버 데이터·화면 연결을, layout.tsx는 공통 셸을 맡는다. 재사용할 토큰·스타일은 프로젝트 테마나 스타일 모듈로 모으되 작은 화면의 Tailwind 클래스까지 별도 파일로 옮기도록 강제하지 않는다. 디자인을 바꿀 때 업무 로직을 수정하지 않고도 같은 데이터와 행동으로 새 UI를 구성할 수 있는지 확인한다.
+- 테이블 헤더(thead th)는 app/globals.css의 전역 규칙으로 항상 볼드로 렌더링된다 — 컴포넌트마다 font-bold를 개별 지정하지 않는다.
+
 ## 컴포넌트
 
 ### Activity Heatmap (`activity-heatmap`)

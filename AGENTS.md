@@ -18,7 +18,7 @@ doksam-ui 에서 AI 에이전트가 작업할 때 먼저 읽는 문서입니다.
 
 규칙 조항은 `lib/rules-markdown.ts` 에만 존재합니다. 이 문서를 포함해 어디에도
 규칙 문장을 복제하지 않습니다 — 복제본과 원문이 어긋나면 원문이 옳습니다.
-`/rules` 페이지, `/rules.md`, `public/llms.txt` 의 디자인 브리프 블록이 모두 그 파일에서
+`/rules` 페이지, `/rules.md`, `public/llms.txt` 의 디자인 브리프·수렴 안티패턴·컴포넌트 구현 규칙이 모두 그 파일에서
 파생됩니다.
 
 규칙은 두 층입니다(#28). 각 `RulesSection` 의 `kind` 가 층을 정하고, markdown 에는
