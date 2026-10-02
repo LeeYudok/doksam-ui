@@ -64,3 +64,7 @@ lastworks.resume
 
 # pnpm gen:rules-mdx 의 기본 출력 — GitLab 이식용 참고 산출물이고 이 레포는 소비하지 않는다 (#72).
 /content/
+
+# local scratch
+/.playwright-mcp/
+/_home.png
